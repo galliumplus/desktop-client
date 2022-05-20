@@ -68,7 +68,7 @@
             <Setter Property="Background" Value="#F6711A" />
             <Setter Property="FontSize" Value="18" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Height" Value="45" />
+            <Setter Property="Height" Value="35" />
 
             <Setter Property="Template">
                 <Setter.Value>
