@@ -1,0 +1,73 @@
+﻿<Window x:Class="Gallium_v1.Vue.GalliumFenetre"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gallium_v1.Vue"
+        mc:Ignorable="d"
+        Title="Gallium+" 
+        Height="1000" 
+        Width="1920" 
+        Background="White" 
+        WindowState="Maximized"
+        
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="85*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="#252422" >
+            <Grid Margin="20,25"  >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4.6*" Tag="Nom app"/>
+                    <RowDefinition Height="2*" Tag="Entre deux"/>
+                    <RowDefinition Height="20*" Tag="Bouton"/>
+                    <RowDefinition Height="5*" Tag="Autre choix"/>
+                </Grid.RowDefinitions>
+
+                <Image Tag="Logo de Gallium+"/>
+                <Rectangle Tag="Séparation" Grid.Row="1" Margin="0,0,0,5" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Content="GALLIUM+" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" FontStyle="Oblique" Foreground="White"/>
+                
+
+                <StackPanel Grid.Row="2" Margin="5"  >
+                    <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 20, 0, 30" HorizontalContentAlignment="Left" Click="AccueilFrame_Click_1"/>
+                    <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="CaisseFrame_Click" />
+                    <Button Tag="Acompte" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="AcompteFrame_Click"/>
+                    <Button Tag="Compte" x:Name="CompteFrame" Content="Compte" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="CompteFrame_Click"/>
+                    <Button Tag="Administration" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="AdministrationFrame_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <Button Tag="Vue client" x:Name="VueClientFrame" Content="Vue Client" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20"  Click="VueClientFrame_Click"/>
+                    <Button Tag="Déconnexion" x:Name="DéconnexionFrame" Content="Déconnexion" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20" Click="DéconnexionFrame_Click"/>
+                </StackPanel>
+                
+
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="30" Grid.Row="0">
+                <Label Name="Test" Content="AAAAAAH" FontSize="30" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                <Rectangle Width="1600" Height="2" Fill="#252422" VerticalAlignment="Bottom" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Frame x:Name="Frame" Margin="50,0" Grid.Row="1" NavigationUIVisibility="Hidden" Source="Frame/AccueilFrame.xaml"/>
+            </Grid>
+            
+        </Grid>
+        
+    </Grid>
+</Window>
