@@ -56,6 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logique\IHM\UserIhm.cs" />
+    <Compile Include="Vue\DriveFenetre.xaml.cs">
+      <DependentUpon>DriveFenetre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vue\Frame\AccueilFrame.xaml.cs">
       <DependentUpon>AccueilFrame.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Compile Include="Vue\ConnexionFenetre.xaml.cs">
       <DependentUpon>ConnexionFenetre.xaml</DependentUpon>
     </Compile>
+    <Page Include="Vue\DriveFenetre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vue\Frame\AccueilFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\logoTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vue\Assets\drive.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Gallium_v1.Vue.Frame
+namespace Gallium_v1.Vue
 {
     /// <summary>
-    /// Logique d'interaction pour AccueilFrame.xaml
+    /// Logique d'interaction pour DriveFenetre.xaml
     /// </summary>
-    public partial class AccueilFrame : Page
+    public partial class DriveFenetre : Window
     {
-        public AccueilFrame()
+        public DriveFenetre()
         {
             InitializeComponent();
-        }
-
-        private void IsClicked(object sender, MouseEventArgs e)
-        {
-            Flo.Content = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH";
         }
     }
 }
