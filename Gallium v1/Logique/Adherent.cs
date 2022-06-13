@@ -17,9 +17,9 @@ namespace Gallium_v1.Logique
         /// Permet d'ajouter un utilisateur
         /// </summary>
         /// <param name="nom"></param>
-        public static void ajoutUser(String nom,string prenom,string compte,double balance)
+        public static void ajoutUser(String nom,string prenom,string compte,double balance,string password)
         {
-            users.Add(new User(nom,prenom,compte,balance));
+            users.Add(new User(nom,prenom,compte,balance,password));
         }
 
         /// <summary>
@@ -32,8 +32,7 @@ namespace Gallium_v1.Logique
             User u = null;
             foreach (User p in users)
             {
-                string nomUpper = p.Nom.ToUpper();
-                if (nomUpper.Contains(nomUser.ToUpper()))
+                if (p.Nom.ToUpper().Contains(nomUser.ToUpper()) || nomUser.ToUpper() == p.Compte.ToUpper())
                 {
                     u = p;
                     break;

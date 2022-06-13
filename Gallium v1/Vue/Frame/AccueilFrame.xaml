@@ -31,7 +31,7 @@
             <Image MouseDown="IsTwitterClicked" Name="BouttonTwitter" Grid.Row="1" Source="/Vue/Assets/logoTwitter.png"  Width="120" Height="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 
-        
+
 
 
     </Grid>
