@@ -81,7 +81,7 @@
             <!-- Information utilsiateur -->
             <Grid>
 
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Visible">
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden">
 
                     <StackPanel>
                         <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
