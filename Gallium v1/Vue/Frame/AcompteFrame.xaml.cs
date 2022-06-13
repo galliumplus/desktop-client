@@ -48,9 +48,13 @@ namespace Gallium_v1.Vue.Frame
         private void afficheUser(string nomUser)
         {
             User user = Adherent.findUser(nomUser);
-            this.compte.Text = user.Compte;
-            this.balance.Text = Convert.ToString(user.Balance);
-            this.infouser.Text = user.Nom;
+            if(user != null)
+            {
+                this.compte.Text = user.Compte;
+                this.balance.Text = Convert.ToString(user.Balance);
+                this.infouser.Text = user.Nom;
+            }
+            
         }
     }
 }
