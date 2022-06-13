@@ -98,7 +98,7 @@ namespace Gallium_v1.Vue.Frame
             Product u = this.stocklist.SelectedItem as Product;
 
             // Message demandant si vous voulez vraiment supprimer le produit
-            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", $"Supression de {u.NomProduit}", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {u.NomProduit}", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
             {
