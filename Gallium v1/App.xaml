@@ -63,7 +63,7 @@
 
         </Style>
 
-        <!-- Boutons de connexion -->
+        <!-- Boutons original  -->
         <Style TargetType="Button" x:Key="boutonAcompteStock">
             <Setter Property="Height" Value="30" />
             <Setter Property="Width" Value="150" />
@@ -78,7 +78,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" />
+                            <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="Black"/>
                             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </Grid>
                     </ControlTemplate>
