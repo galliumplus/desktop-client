@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>G.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -179,6 +182,10 @@
     <Resource Include="Vue\Assets\LogoInstagram.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vue\Assets\G.ico" />
+    <Resource Include="Vue\Assets\LogoGalliumGrand.png" />
+    <Resource Include="Vue\Assets\LogoGalliumMini.png" />
+    <Resource Include="G.ico" />
     <Resource Include="Vue\Assets\driveIcon.png" />
     <Resource Include="Vue\Assets\instaIcon.png" />
     <Resource Include="Vue\Assets\twitterIcon.png" />

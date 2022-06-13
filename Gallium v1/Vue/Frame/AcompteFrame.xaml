@@ -38,8 +38,8 @@
                                 <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom et prénom</Label>
                                 <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
 
-                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2"/>
-                                <Rectangle Height="20" Grid.Row="2"/>
+                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+                                
                             </Grid>
                             <ItemsPresenter></ItemsPresenter>
                         </DockPanel>
@@ -81,20 +81,32 @@
             <!-- Information utilsiateur -->
             <Grid>
 
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden">
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" CornerRadius="3" Opacity="0.7" >
 
-                    <StackPanel>
-                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="infouser" Text="" FontSize="13" Margin="10,0,0,0"/>
+                    <StackPanel Background="Orange">
+                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="infouser" Text="" FontSize="20" Margin="10,0,0,0"/>
 
-                        <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="compte" Text="" FontSize="13" Margin="10,0,0,0" />
+                        <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" FontWeight="Bold" Foreground="White">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="compte" Text="" FontSize="20" Margin="10,0,0,0" />
 
-                        <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold" />
-                        <TextBlock x:Name="balance" Text="" FontSize="13" Margin="10,0,0,0" />
+                        <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" >
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="balance" Text="" FontSize="20" Margin="10,0,0,0" />
 
-                        <Button Name="modifUser" Content="Modifier"  Width="150" Margin="10" />
-                        <Button Name="delete" Content="Supprimer" Width="150" Margin="10" Click="BoutonDelete" />
+                        <Button Name="modifUser" Content="Modifier"  Width="150" Margin="10"  Style="{StaticResource boutonAcompteStock}" HorizontalAlignment="Center"  />
+                        <Button Name="delete" Content="Supprimer" Width="150" Margin="10" Click="BoutonDelete"  Style="{StaticResource boutonAcompteStock}" HorizontalAlignment="Center" Background="White" Foreground="Black"/>
                     </StackPanel>
                 </Border>
             </Grid>

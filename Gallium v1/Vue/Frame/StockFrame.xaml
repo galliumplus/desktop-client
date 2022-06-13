@@ -18,7 +18,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <ListBox x:Name="stocklist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="selectItem" >
                 <ListBox.Template>
                     <ControlTemplate>
@@ -37,9 +37,9 @@
                                 <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom</Label>
                                 <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Stock</Label>
                                 <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Prix adhérent</Label>
-
-                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2"/>
-                                <Rectangle Height="20" Grid.Row="2"/>
+              
+                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+                              
                             </Grid>
                             <ItemsPresenter></ItemsPresenter>
                         </DockPanel>

@@ -32,7 +32,7 @@ namespace Gallium_v1.Vue
         private void AccueilFrame_Click_1(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AccueilFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Accueil";
+            this.NomFrame.Text = "Accueil";
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Gallium_v1.Vue
         private void CaisseFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/CaisseFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Caisse";
+            this.NomFrame.Text = "Caisse";
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Gallium_v1.Vue
         private void StockFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/StockFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Stock";
+            this.NomFrame.Text = "Stock";
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Gallium_v1.Vue
         private void AcompteFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AcompteFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Acompte";
+            this.NomFrame.Text = "Acompte";
         }
 
         /// <summary>
@@ -68,13 +68,13 @@ namespace Gallium_v1.Vue
         private void CompteFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/CompteFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Compte";
+            this.NomFrame.Text = "Compte";
         }
 
         private void AdministrationFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AdministrationFrame.xaml", UriKind.Relative);
-            this.NomFrame.Content = "Administration";
+            this.NomFrame.Text = "Administration";
         }
 
         private void VueClientFrame_Click(object sender, RoutedEventArgs e)
