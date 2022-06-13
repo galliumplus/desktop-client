@@ -158,7 +158,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vue\Assets\DogoPp.png" />
+    <Resource Include="Vue\Assets\PhotoProfil\DogoPp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\logoTest.png" />

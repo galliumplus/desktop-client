@@ -71,12 +71,18 @@ namespace Gallium_v1.Vue
             this.NomFrame.Text = "Compte";
         }
 
+        /// <summary>
+        /// Affiche la vue d'administration 
+        /// </summary>
         private void AdministrationFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AdministrationFrame.xaml", UriKind.Relative);
             this.NomFrame.Text = "Administration";
         }
 
+        /// <summary>
+        /// Affiche la vue client
+        /// </summary>
         private void VueClientFrame_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=LYG7sMtb6u8t");
@@ -90,9 +96,9 @@ namespace Gallium_v1.Vue
             ConnexionFenetre connexion = new ConnexionFenetre();
             this.Close();
             connexion.Show();
-            
-
         }
+
+
 
     }
 }

@@ -73,7 +73,7 @@
                         <ColumnDefinition Width="20*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Source="Assets/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Image Grid.Column="0" Source="Assets/PhotoProfil/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <StackPanel Grid.Column="1">
                         <Label Content="Nom prénom" FontSize="15" FontWeight="Bold"/>
                         <Label  Content="Arabe" FontSize="15" FontWeight="DemiBold" />
