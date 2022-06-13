@@ -32,8 +32,7 @@ namespace Gallium_v1.Logique
             User u = null;
             foreach (User p in users)
             {
-                string nomUpper = p.Nom.ToUpper();
-                if (nomUpper.Contains(nomUser.ToUpper()))
+                if (p.Nom.ToUpper().Contains(nomUser.ToUpper()) || nomUser.ToUpper() == p.Compte.ToUpper())
                 {
                     u = p;
                     break;

@@ -32,7 +32,7 @@ namespace Gallium_v1.Vue.Frame
         {
             if (e.Key == Key.Enter)
             {
-                if (this.rechercheAcompte.IsFocused == true)
+                if (this.rechercheAcompte.IsFocused == true && this.rechercheAcompte.Text != "")
                 {
                     afficheUser(this.rechercheAcompte.Text);
                 }
