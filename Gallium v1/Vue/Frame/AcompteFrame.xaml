@@ -57,49 +57,55 @@
                             <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding Compte}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding Balance}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
-                            
+
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-        
-        
+
+
         <StackPanel Grid.Column="1"  Grid.Row="0" Margin="30">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                
-                
+
+
                 <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                
+
             </Grid>
-            
+
             <!-- Information utilsiateur -->
             <Grid>
 
+           
 
                 <Border BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" >
-                    <StackPanel>
+                   
+                     
+                        <StackPanel >
 
-                        <Label Content="Nom et prénom" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="infouser" Text=""/>
-                        <Label  Content="Compte" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="compte" Text=""/>
-                        <Label Content="Balance" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="balance" Text=""/>
+                            <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                            <TextBlock x:Name="infouser" Text="" FontSize="13" />
 
-                        <Button Content="Changer de mdp" Margin="10,20,10,10" Width="150"/>
-                        <Button Content="Modifier balance" Margin="10" Width="150"/>
-                    </StackPanel>
+                            <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                            <TextBlock x:Name="compte" Text="" FontSize="13" />
+
+                            <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold" />
+                            <TextBlock x:Name="balance" Text="" FontSize="13" />
+
+                            <Button Content="Changer de mdp" Margin="10,20,10,10" Width="150" Grid.Column="1" />
+                            <Button Content="Modifier balance" Margin="10" Width="150" />
+                        </StackPanel>
+
                 </Border>
             </Grid>
-           
+
         </StackPanel>
         <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
     </Grid>
-    
+
 </Page>
