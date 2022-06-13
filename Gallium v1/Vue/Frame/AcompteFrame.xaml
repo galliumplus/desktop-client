@@ -77,7 +77,9 @@
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
                 
             </Grid>
-            <Grid   >
+            
+            <!-- Information utilsiateur -->
+            <Grid>
 
 
                 <Border BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" >
@@ -89,11 +91,13 @@
                         <TextBlock x:Name="compte" Text=""/>
                         <Label Content="Balance" HorizontalAlignment="Left" Margin="10"/>
                         <TextBlock x:Name="balance" Text=""/>
+
+                        <Button Content="Changer de mdp" Margin="10,20,10,10" Width="150"/>
+                        <Button Content="Modifier balance" Margin="10" Width="150"/>
                     </StackPanel>
                 </Border>
             </Grid>
-            <Button Content="Changer de mdp" Margin="10,20,10,10"/>
-            <Button Content="Modifier balance" Margin="10"/>
+           
         </StackPanel>
         <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
     </Grid>
