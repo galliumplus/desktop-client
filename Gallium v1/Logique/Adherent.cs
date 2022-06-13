@@ -27,7 +27,7 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        private static User findUser(string nomUser)
+        public static User findUser(string nomUser)
         {
             User u = null;
             foreach (User p in users)

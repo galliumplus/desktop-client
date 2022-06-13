@@ -24,7 +24,30 @@ namespace Gallium_v1.Vue.Frame
         public AcompteFrame()
         {
             InitializeComponent();
+            Adherent.ajoutUser("Florian");
             acomptelist.ItemsSource = Adherent.Users;
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (this.rechercheAcompte.IsFocused == true)
+                {
+                    afficheUser(this.rechercheAcompte.Text);
+                }
+            }
+            
+        }
+
+
+        /// <summary>
+        /// Permet d'afficher les informations d'un user
+        /// </summary>
+        /// <param name="nomUser"></param>
+        private void afficheUser(string nomUser)
+        {
+            User user = Adherent.findUser(nomUser);
         }
     }
 }

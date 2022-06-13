@@ -34,9 +34,10 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom du compte</Label>
-                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
-                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Action</Label>
+                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Compte</Label>
+                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom et prénom</Label>
+                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
+
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2"/>
                                 <Rectangle Height="20" Grid.Row="2"/>
                             </Grid>
@@ -55,21 +56,7 @@
                             <!-- Content -->
                             <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
 
-                            <StackPanel Orientation="Horizontal" Grid.Column="2">
-                                <Button Content="Ajouter"  Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18" />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button  Content="Retirer" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18" />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button  Content="Modifier" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18"  />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button Content="Supprimer" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18"  />
-                            </StackPanel>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -81,14 +68,14 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Name="rechercheAcompte"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+                <TextBox Name="rechercheAcompte"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
             
 
-            <Button Content="Ajouter" x:Name="addButton"  Width="120"   />
+            
         </StackPanel>
-        
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
     </Grid>
     
 </Page>
