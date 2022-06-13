@@ -25,6 +25,7 @@ namespace Gallium_v1.Vue.Frame
         {
             InitializeComponent();
             Adherent.ajoutUser("Florian");
+            Adherent.ajoutUser("Damien");
             acomptelist.ItemsSource = Adherent.Users;
         }
 
