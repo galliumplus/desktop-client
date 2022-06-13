@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\Product.cs" />
+    <Compile Include="Logique\Stock.cs" />
     <Compile Include="Logique\Utilsateur\User.cs" />
     <Compile Include="Vue\DriveFenetre.xaml.cs">
       <DependentUpon>DriveFenetre.xaml</DependentUpon>

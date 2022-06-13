@@ -13,6 +13,7 @@ namespace Gallium_v1.Logique
         private double prixProduitAdhérent;
         private string imageProduit;
         private Category categorie;
+        private int stock;
 
         // Prix du produit pour les non adhérents
         public double prixProduitNonAdhérent { get => prixProduitAdhérent + 0.2; }
@@ -26,6 +27,9 @@ namespace Gallium_v1.Logique
         // Categorie du produit
         public Category Categorie { get => categorie; set => categorie = value; }
 
+        // Stock restant du produit
+        public int Stock { get => stock; set => stock = value; }
+
 
         /// <summary>
         /// Constructuer de la classe Product
@@ -34,14 +38,16 @@ namespace Gallium_v1.Logique
         /// <param name="prixProduitAdhérent"> Prix pour les adhérents</param>
         /// <param name="pathImage"> Chemin vers l'image du produit</param>
         /// <param name="category"> Categorie du produit </param>
-        public Product(string nomProduit, double prixProduitAdhérent , string pathImage,Category category)
+        public Product(string nomProduit, double prixProduitAdhérent , string pathImage,Category category,int stock)
         {
             this.nomProduit = nomProduit;
             this.prixProduitAdhérent = prixProduitAdhérent;
             this.imageProduit = pathImage;
             this.categorie = category;
+            this.Stock = stock;
         }
 
+        
 
 
 
