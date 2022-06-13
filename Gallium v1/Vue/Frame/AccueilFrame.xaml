@@ -8,6 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AccueilFrame">
 
+    <!-- Grid principale --> 
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -18,6 +19,9 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
+        
+
+        <!-- Logo redirecteur -->
         <Grid Grid.Column="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
@@ -26,7 +30,7 @@
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
 
-
+            
             <Image MouseDown="IsDriveClicked" Name="BoutonDrive" Grid.Row="0" Source="/Vue/Assets/drive.png"  Width="192" Height="194" VerticalAlignment="Center" HorizontalAlignment="Center" />
             <Image MouseDown="IsTwitterClicked" Name="BouttonTwitter" Grid.Row="1" Source="/Vue/Assets/logoTwitter.png"  Width="120" Height="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>

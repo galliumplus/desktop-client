@@ -96,8 +96,8 @@
                         <TextBlock Text="Stock" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
                         <TextBlock x:Name="stock" Text="" Margin="10,0,0,0"/>
 
-                        <Button Content="Modifier" Margin="10,20,10,10" Width="150"/>
-                        <Button Content="Supprimer" Margin="10" Width="150"/>
+                        <Button Content="Modifier"  Width="150" Margin="10" />
+                        <Button Content="Supprimer" Width="150" Margin="10" />
                     </StackPanel>
                 </Border>
             </Grid>
