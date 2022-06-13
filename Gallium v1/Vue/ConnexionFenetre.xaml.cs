@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gallium_v1.Logique;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace Gallium_v1.Vue
         {
             InitializeComponent();
             Username.Focus();
+            Adherent.ajoutUser("MARTEAU", "Florian", "fm427410", 100, "caca");
+            Adherent.ajoutUser("CHABRET", "Damien", "dc393609", 10, "caca");
+            Adherent.ajoutUser("MATTEO", "Badet", "petitemerde", 0, "caca");
+            Adherent.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca");
+            Adherent.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca");
+            Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
 
         }
 

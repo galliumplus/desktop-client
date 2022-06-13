@@ -25,12 +25,7 @@ namespace Gallium_v1.Vue.Frame
         {
             InitializeComponent();
 
-            Adherent.ajoutUser("MARTEAU", "Florian", "fm427410", 100 ,"caca");
-            Adherent.ajoutUser("CHABRET", "Damien", "dc393609", 10, "caca" );
-            Adherent.ajoutUser("MATTEO", "Badet", "petitemerde", 0, "caca" );
-            Adherent.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca" );
-            Adherent.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca" );
-            Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
+
 
             acomptelist.ItemsSource = Adherent.Users;
             this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
@@ -45,7 +40,7 @@ namespace Gallium_v1.Vue.Frame
                     afficheUser(this.rechercheAcompte.Text);
                 }
             }
-            
+
         }
 
 
@@ -56,13 +51,15 @@ namespace Gallium_v1.Vue.Frame
         private void afficheUser(string nomUser)
         {
             User user = Adherent.findUser(nomUser);
-            if(user != null)
+            if (user != null)
             {
                 this.compte.Text = user.Compte;
                 this.balance.Text = Convert.ToString(user.Balance);
                 this.infouser.Text = user.Nom;
             }
-            
+
         }
+
+
     }
 }
