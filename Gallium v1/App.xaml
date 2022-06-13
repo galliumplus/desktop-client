@@ -6,6 +6,7 @@
 
     <Application.Resources>
 
+        <!-- Watermark pour connexion -->
         <Style x:Key="WaterMarkTextBox" TargetType="TextBox" >
             <Setter Property="Template">
                 <Setter.Value>
@@ -32,7 +33,7 @@
         </Style>
         
         
-
+        <!-- Boutons de connexion -->
         <Style TargetType="Button" x:Key="BoutonConnexion">
             <Setter Property="Height" Value="30" />
             <Setter Property="Width" Value="150" />
@@ -64,7 +65,7 @@
 
 
 
-
+        <!-- Bouton de l'écran principale -->
         <Style TargetType="Button" x:Key="BoutonEcranprincipale">
             <Setter Property="Foreground" Value="#F2F1F0" />
             <Setter Property="Background" Value="#F6711A" />
@@ -95,6 +96,12 @@
             </Style.Triggers>
             
          </Style>
+        
+        <!-- Bouton modiffication menu principale -->
+        <Style TargetType="Button" x:Key="BoutonModification">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="White" />
+        </Style>
         
     </Application.Resources>
 </Application>
