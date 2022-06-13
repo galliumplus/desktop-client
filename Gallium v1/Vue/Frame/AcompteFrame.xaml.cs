@@ -33,6 +33,7 @@ namespace Gallium_v1.Vue.Frame
             Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
 
             acomptelist.ItemsSource = Adherent.Users;
+            this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
