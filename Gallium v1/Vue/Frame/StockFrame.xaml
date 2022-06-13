@@ -73,7 +73,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Name="rechercheProduit" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
+                <TextBox Name="rechercheProduit" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="search"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
             </Grid>

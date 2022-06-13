@@ -34,18 +34,7 @@ namespace Gallium_v1.Vue.Frame
             this.stocklist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Stock", System.ComponentModel.ListSortDirection.Descending));
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (this.rechercheProduit.IsFocused == true  && this.rechercheProduit.Text != "")
-                {
-                    InfoProduct.Visibility = Visibility.Visible;
-                    afficheStock(this.rechercheProduit.Text);
-                }
-            }
 
-        }
 
         /// <summary>
         /// Permet d'afficher les informations d'un user
@@ -81,6 +70,17 @@ namespace Gallium_v1.Vue.Frame
             this.prix.Text = Convert.ToString(u.PrixProduitAdhérent);
             InfoProduct.Visibility = Visibility.Visible;
 
+        }
+
+        /// <summary>
+        /// Permet de rechercher un produit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void search(object sender, TextChangedEventArgs e)
+        {
+            InfoProduct.Visibility = Visibility.Visible;
+            afficheStock(this.rechercheProduit.Text);
         }
     }
 }
