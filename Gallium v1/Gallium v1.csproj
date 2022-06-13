@@ -171,6 +171,9 @@
     <Resource Include="Vue\Assets\drive.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vue\Assets\logoTwitter.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Logique\Utilsateur\" />
   </ItemGroup>
   <ItemGroup>

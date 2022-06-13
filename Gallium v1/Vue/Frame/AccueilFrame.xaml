@@ -18,7 +18,9 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <Image MouseDown="IsClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Grid.Column="5" Width="200" Height="200" VerticalAlignment="TOp" HorizontalAlignment="Center"/>
+        <Image MouseDown="IsTwitterClicked" Name="BouttonTwitter" Source="/Vue/Assets/logoTwitter.png" Grid.Column="3" Width="120" Height="120" VerticalAlignment="TOp" HorizontalAlignment="Center" Margin="20,46,20,0"/>
+        <Image MouseDown="IsDriveClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Grid.Column="4" Width="200" Height="200" VerticalAlignment="TOp" HorizontalAlignment="Center"/>
+        
 
     </Grid>
 </Page>
