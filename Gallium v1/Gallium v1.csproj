@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Logique\IHM\UserIhm.cs" />
+    <Compile Include="Logique\Utilsateur\User.cs" />
     <Compile Include="Vue\DriveFenetre.xaml.cs">
       <DependentUpon>DriveFenetre.xaml</DependentUpon>
     </Compile>
