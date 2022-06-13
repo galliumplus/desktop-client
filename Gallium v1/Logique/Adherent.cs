@@ -63,5 +63,19 @@ namespace Gallium_v1.Logique
         {
             Users.Remove(user);
         }
+
+        public static User calculPlusGrosAcompte()
+        {
+            User user = null;
+
+            foreach(User p in users)
+            {
+                if (user == null || p.Balance > user.Balance )
+                {
+                    user = p;
+                }
+            }
+            return user;
+        }
     }
 }
