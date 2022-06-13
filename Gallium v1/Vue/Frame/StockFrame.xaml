@@ -99,7 +99,7 @@
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" />
     </Grid>
 
 </Page>
