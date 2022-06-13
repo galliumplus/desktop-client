@@ -83,7 +83,7 @@
 
            
 
-                <Border BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" >
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden">
                    
                      
                         <StackPanel >

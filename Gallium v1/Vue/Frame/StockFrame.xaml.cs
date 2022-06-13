@@ -40,7 +40,12 @@ namespace Gallium_v1.Vue.Frame
             {
                 if (this.rechercheProduit.IsFocused == true  && this.rechercheProduit.Text != "")
                 {
+                    InfoProduct.Visibility = Visibility.Visible;
                     afficheStock(this.rechercheProduit.Text);
+                }
+                else
+                {
+                    infoUser.Visibility = Visibility.Hidden;
                 }
             }
 
