@@ -40,7 +40,7 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        private static Product findProduit(string nomProduit)
+        public static Product findProduit(string nomProduit)
         {
             Product product = null;
             foreach ( Product p in stockProduits)
