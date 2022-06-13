@@ -45,7 +45,7 @@ namespace Gallium_v1.Vue.Frame
                 }
                 else
                 {
-                    infoUser.Visibility = Visibility.Hidden;
+                    InfoProduct.Visibility = Visibility.Hidden;
                 }
             }
 
