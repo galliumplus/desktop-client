@@ -65,6 +65,19 @@
             <Grid Margin="40" Grid.Row="0">
                 <Label x:Name="NomFrame" Content="Accueil" FontSize="30" VerticalAlignment="Center" Margin="40,0,0,0"/>
                 <Rectangle Width="1600" Height="2" Fill="#252422" VerticalAlignment="Bottom" Grid.Column="1"/>
+                <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="20*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="Assets/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Nom prénom" FontSize="15" FontWeight="Bold"/>
+                        <Label  Content="Arabe" FontSize="15" FontWeight="DemiBold" />
+                    </StackPanel>
+
+                </Grid>
             </Grid>
 
             <!-- Frame où s'affiche les éléments des boutons-->
@@ -72,18 +85,6 @@
                 <Frame x:Name="Frame" Margin="50,0" Grid.Row="1" NavigationUIVisibility="Hidden" Source="Frame/AccueilFrame.xaml"/>
             </Grid>
 
-            <!-- Information utilisateur -->
-            <Grid Grid.Row="0" Margin="0,50,30,53" Width="300" HorizontalAlignment="Right">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="20*" />
-                </Grid.ColumnDefinitions>
-
-                <Image Grid.Column="0" Source="Assets/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-                <Label Grid.Column="1" Content="Nom prénom" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25"/>
-                <Label Grid.Column="1" Content="Arabe" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"/>
-            </Grid>
 
         </Grid>
 
