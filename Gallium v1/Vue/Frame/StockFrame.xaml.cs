@@ -66,5 +66,21 @@ namespace Gallium_v1.Vue.Frame
             }
             
         }
+
+        /// <summary>
+        /// Permet de sélectionner un produit en cliquant dessus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void selectItem(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox l = sender as ListBox;
+            Product u = l.SelectedItem as Product;
+            this.stock.Text = Convert.ToString(u.Stock);
+            this.infoproduit.Text = u.NomProduit;
+            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent);
+            InfoProduct.Visibility = Visibility.Visible;
+
+        }
     }
 }
