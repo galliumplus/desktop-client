@@ -81,9 +81,6 @@
     <Compile Include="Vue\Frame\StockFrame.xaml.cs">
       <DependentUpon>StockFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\Frame\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vue\GalliumFenetre.xaml.cs">
       <DependentUpon>GalliumFenetre.xaml</DependentUpon>
     </Compile>
@@ -119,10 +116,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue\Frame\StockFrame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vue\Frame\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
