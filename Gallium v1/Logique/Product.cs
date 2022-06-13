@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -18,6 +19,28 @@ namespace Gallium_v1.Logique
         // Prix du produit pour les non adhérents
         public double prixProduitNonAdhérent { get => prixProduitAdhérent + 0.2; }
 
+        // Prix en format string
+        public string prixString 
+        {
+            get
+            {
+                string ret = "" + Math.Round(prixProduitAdhérent, 2);
+                // 1 => 1,00
+                if (new Regex("^[0-9]+$").IsMatch(ret))
+                {
+                    ret += ",00";
+                }
+
+                // 1,2 => 1,20
+                if (new Regex("^[0-9]+,[0-9]$").IsMatch(ret))
+                {
+                    ret += "0";
+                }
+
+                ret += " €";
+                return ret;
+            }
+        }
         // Nom du produit
         public string NomProduit { get => nomProduit; set => nomProduit = value; }
 

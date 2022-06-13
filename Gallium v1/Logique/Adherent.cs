@@ -8,9 +8,18 @@ namespace Gallium_v1.Logique
 {
     public static class Adherent
     {
-        // Liste des différents utilisateurs 
+        
         private static List<User> users = new List<User>();
-        public static List<User> Users { get { return users; } }
+        /// <summary>
+        /// Liste des utilisateurs
+        /// </summary>
+        public static List<User> Users 
+        { 
+            get 
+            { 
+                return users; 
+            } 
+        }
 
 
         /// <summary>
@@ -44,6 +53,11 @@ namespace Gallium_v1.Logique
                 }
             }
             return u;
+        }
+
+        public static void removeUser(User user)
+        {
+            Users.Remove(user);
         }
     }
 }

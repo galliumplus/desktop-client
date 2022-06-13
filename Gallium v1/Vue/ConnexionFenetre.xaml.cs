@@ -30,10 +30,10 @@ namespace Gallium_v1.Vue
             Adherent.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca");
             Adherent.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca");
             Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
-            Stock.ajoutProduit("Cafe", 35, "test", Category.BOISSON, 100);
-            Stock.ajoutProduit("Chips", 35, "test", Category.SNACKS, 10);
-            Stock.ajoutProduit("Monster", 35, "test", Category.BOISSON, 1);
-            Stock.ajoutProduit("Kit Kat", 35, "test", Category.SNACKS, 35);
+            Stock.ajoutProduit("Cafe", 35.00, "test", Category.BOISSON, 100);
+            Stock.ajoutProduit("Chips", 0.80, "test", Category.SNACKS, 10);
+            Stock.ajoutProduit("Monster", 3.50, "test", Category.BOISSON, 1);
+            Stock.ajoutProduit("Kit Kat", 7.00, "test", Category.SNACKS, 35);
 
         }
 

@@ -64,7 +64,7 @@ namespace Gallium_v1.Vue.Frame
             Product u = l.SelectedItem as Product;
             this.stock.Text = Convert.ToString(u.Stock);
             this.infoproduit.Text = u.NomProduit;
-            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent);
+            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
             InfoProduct.Visibility = Visibility.Visible;
 
         }
@@ -76,8 +76,15 @@ namespace Gallium_v1.Vue.Frame
         /// <param name="e"></param>
         private void search(object sender, TextChangedEventArgs e)
         {
-            InfoProduct.Visibility = Visibility.Visible;
-            afficheStock(this.rechercheProduit.Text);
+            if (this.rechercheProduit.Text != "" && this.rechercheProduit.Text != " ")
+            {
+                InfoProduct.Visibility = Visibility.Visible;
+                afficheStock(this.rechercheProduit.Text);
+            }
+            else
+            {
+                InfoProduct.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

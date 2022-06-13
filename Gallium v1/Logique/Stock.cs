@@ -8,9 +8,16 @@ namespace Gallium_v1.Logique
 {
     public static class Stock
     {
-        // Liste des produits
+        
         private static List<Product> stockProduits = new List<Product>();
-        public static List<Product> StockProduits { get => stockProduits;}
+
+        /// <summary>
+        /// Liste des produits
+        /// </summary>
+        public static List<Product> StockProduits 
+        { 
+            get => stockProduits;
+        }
 
 
         /// <summary>
@@ -46,13 +53,18 @@ namespace Gallium_v1.Logique
             Product product = null;
             foreach ( Product p in stockProduits)
             {
-                if (p.NomProduit.ToUpper() == nomProduit.ToUpper())
+                if (p.NomProduit.ToUpper().Contains( nomProduit.ToUpper()))
                 {
                     product = p;
                     break;
                 }
             }
             return product;
+        }
+
+        public static void removeProduit(Product produit)
+        {
+            StockProduits.Remove(produit);
         }
 
     }

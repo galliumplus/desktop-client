@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Gallium_v1.Logique
@@ -20,6 +21,26 @@ namespace Gallium_v1.Logique
     
         public string Compte { get => compte; set => compte = value; }
         public double Balance { get => balance; set => balance = value; }
+        public string BalanceString 
+        { 
+            get{
+                string ret = "" + Math.Round(Balance, 2);
+                // 1 => 1,00
+                if (new Regex("^[0-9]+$").IsMatch(ret))
+                {
+                    ret += ",00";
+                }
+
+                // 1,2 => 1,20
+                if (new Regex("^[0-9]+,[0-9]$").IsMatch(ret))
+                {
+                    ret += "0";
+                }
+
+                ret += " €";
+                return ret;
+            } 
+        }
         public string Nom { get => nom; set => nom = value; }
 
 
