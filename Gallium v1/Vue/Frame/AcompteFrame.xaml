@@ -75,6 +75,8 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
+        
+        
         <StackPanel Grid.Column="1"  Grid.Row="0" Margin="30">
             <Grid>
                 <Grid.ColumnDefinitions>

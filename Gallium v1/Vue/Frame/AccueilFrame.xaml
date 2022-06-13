@@ -18,9 +18,21 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <Image MouseDown="IsTwitterClicked" Name="BouttonTwitter" Source="/Vue/Assets/logoTwitter.png" Grid.Column="3" Width="120" Height="120" VerticalAlignment="TOp" HorizontalAlignment="Center" Margin="20,46,20,0"/>
-        <Image MouseDown="IsDriveClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Grid.Column="4" Width="200" Height="200" VerticalAlignment="TOp" HorizontalAlignment="Center"/>
-        
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+
+            <Image MouseDown="IsDriveClicked" Name="BoutonDrive" Grid.Row="0" Source="/Vue/Assets/drive.png"  Width="192" Height="194" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <Image MouseDown="IsTwitterClicked" Name="BouttonTwitter" Grid.Row="1" Source="/Vue/Assets/logoTwitter.png"  Width="120" Height="120" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+
+
+
 
     </Grid>
 </Page>
