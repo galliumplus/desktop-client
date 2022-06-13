@@ -91,7 +91,6 @@ namespace Gallium_v1.Vue
             this.Close();
             connexion.Show();
             
-            
 
         }
 
