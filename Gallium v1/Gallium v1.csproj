@@ -158,9 +158,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vue\Assets\PhotoProfil\DogoPp.png">
+    <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\logoTest.png" />
@@ -178,15 +178,21 @@
     <Resource Include="Vue\Assets\loupe.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vue\Assets\Logo\Gallium+.png" />
+    <Content Include="Vue\Assets\Logo\Gallium+.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\LogoInstagram.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\G.ico" />
-    <Resource Include="Vue\Assets\Logo\LogoGalliumGrand.png" />
-    <Resource Include="Vue\Assets\Logo\LogoGalliumMini.png" />
+    <Content Include="Vue\Assets\Logo\LogoGalliumGrand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Vue\Assets\Logo\LogoGalliumMini.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="G.ico" />
     <Resource Include="Vue\Assets\driveIcon.png" />
     <Resource Include="Vue\Assets\instaIcon.png" />
@@ -200,12 +206,12 @@
     <Resource Include="Vue\Assets\compteIcon.png" />
     <Resource Include="Vue\Assets\evenementIcon.png" />
     <Resource Include="Vue\Assets\stockIcon.png" />
-    <Resource Include="Vue\Assets\PhotoProfil\HackerPp.png">
+    <Content Include="Vue\Assets\PhotoProfil\HackerPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Vue\Assets\PhotoProfil\CarlosPp.png">
+    </Content>
+    <Content Include="Vue\Assets\PhotoProfil\CarlosPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="Vue\Assets\Son\son1.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
