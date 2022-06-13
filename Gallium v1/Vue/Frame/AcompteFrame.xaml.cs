@@ -40,12 +40,9 @@ namespace Gallium_v1.Vue.Frame
                     infoUser.Visibility = Visibility.Visible;
                     afficheUser(this.rechercheAcompte.Text);
                 }
-                else
-                {
-                    infoUser.Visibility = Visibility.Hidden;
-                }
+                
             }
-
+            
         }
 
 
@@ -61,8 +58,12 @@ namespace Gallium_v1.Vue.Frame
                 this.compte.Text = user.Compte;
                 this.balance.Text = Convert.ToString(user.Balance);
                 this.infouser.Text = user.Nom;
+               
             }
-
+            else
+            {
+                infoUser.Visibility = Visibility.Hidden;
+            }
         }
 
         /// <summary>
