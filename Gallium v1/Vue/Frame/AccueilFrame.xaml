@@ -10,7 +10,15 @@
 
     <Grid>
 
-        <Image MouseDown="IsClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Margin="553,211,0,0" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Image MouseDown="IsClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Grid.Column="5" Width="200" Height="200" VerticalAlignment="TOp" HorizontalAlignment="Center"/>
 
     </Grid>
 </Page>
