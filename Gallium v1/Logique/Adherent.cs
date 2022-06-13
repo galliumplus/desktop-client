@@ -55,6 +55,10 @@ namespace Gallium_v1.Logique
             return u;
         }
 
+        /// <summary>
+        /// Permet de supprimer un utilisateur
+        /// </summary>
+        /// <param name="user"></param>
         public static void removeUser(User user)
         {
             Users.Remove(user);

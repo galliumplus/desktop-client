@@ -26,9 +26,6 @@ namespace Gallium_v1.Vue.Frame
         public AcompteFrame()
         {
             InitializeComponent();
-
-
-
             acomptelist.ItemsSource = Adherent.Users;
             this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
         }
@@ -38,7 +35,7 @@ namespace Gallium_v1.Vue.Frame
         /// Permet d'afficher les informations d'un user
         /// </summary>
         /// <param name="nomUser"></param>
-        private void afficheUser(string nomUser)
+        private void AfficheUser(string nomUser)
         {
             User user = Adherent.findUser(nomUser);
             if (user != null)
@@ -59,14 +56,18 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void selectItem(object sender, SelectionChangedEventArgs e)
+        private void SelectItem(object sender, SelectionChangedEventArgs e)
         {
             ListBox l = sender as ListBox;
             User u = l.SelectedItem as User;
-            this.compte.Text = u.Compte;
-            this.balance.Text = Convert.ToString(u.Balance) + "€";
-            this.infouser.Text = u.Nom;
-            infoUser.Visibility = Visibility.Visible;
+            if (u != null)
+            {
+                this.compte.Text = u.Compte;
+                this.balance.Text = Convert.ToString(u.Balance) + "€";
+                this.infouser.Text = u.Nom;
+                infoUser.Visibility = Visibility.Visible;
+            }
+            
 
         }
 
@@ -75,12 +76,12 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void search(object sender, TextChangedEventArgs e)
+        private void Search(object sender, TextChangedEventArgs e)
         {
             if(this.rechercheAcompte.Text !="" && this.rechercheAcompte.Text != " ")
             {
                 infoUser.Visibility = Visibility.Visible;
-                afficheUser(this.rechercheAcompte.Text);
+                AfficheUser(this.rechercheAcompte.Text);
             }
             else
             {
@@ -89,18 +90,30 @@ namespace Gallium_v1.Vue.Frame
             
         }
 
-        private void deleteUser_Click(object sender, RoutedEventArgs e)
+      
+        /// <summary>
+        /// Permet de supprimer un utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BoutonDelete(object sender, RoutedEventArgs e)
         {
-
-            //MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", "supprimer compte", MessageBoxButton.YesNo);
+            
+            // Utilisateur 
             User u = this.acomptelist.SelectedItem as User;
-            Adherent.removeUser(u);
-            this.acomptelist.Items.Refresh();
 
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                Adherent.removeUser(u);
+                this.acomptelist.UnselectAll();
+                this.acomptelist.ItemsSource = null;
+                this.acomptelist.ItemsSource = Adherent.Users;
+                infoUser.Visibility = Visibility.Hidden;
+            }
 
-
-
+            
         }
     }
 }

@@ -25,7 +25,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Tag="Nom de l'application" Text="Gallium+" Foreground="White" FontSize="50" HorizontalAlignment="Center" />
-                        <TextBlock Text="Basé sur l'application Gallium" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="-5"/>
+                        <TextBlock Text="Basé sur l'application Gallium" Foreground="White" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="-5" MouseDown="Mysterious"/>
                         <TextBox Tag="Votre adresse mail" x:Name="Username" BorderBrush="White" Foreground="Black" Grid.Row="1" Margin="0,60,0,0" Width="350" Height="30" VerticalContentAlignment="Center" FontSize="18" Style="{StaticResource WaterMarkTextBox}" />
                         <PasswordBox Tag="Votre mot de passe" x:Name="Password" BorderBrush="White" Foreground="Black" Grid.Row="2" Margin="0,20,0,0" Width="350" Height="30" VerticalContentAlignment="Center" FontSize="18" KeyDown="EntreeDown" />
 

@@ -62,10 +62,18 @@ namespace Gallium_v1.Vue.Frame
         {
             ListBox l = sender as ListBox;
             Product u = l.SelectedItem as Product;
-            this.stock.Text = Convert.ToString(u.Stock);
-            this.infoproduit.Text = u.NomProduit;
-            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
-            InfoProduct.Visibility = Visibility.Visible;
+            if (u != null)
+            {
+                this.stock.Text = Convert.ToString(u.Stock);
+                this.infoproduit.Text = u.NomProduit;
+                this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
+                InfoProduct.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                InfoProduct.Visibility = Visibility.Hidden;
+            }
+
 
         }
 
@@ -81,10 +89,30 @@ namespace Gallium_v1.Vue.Frame
                 InfoProduct.Visibility = Visibility.Visible;
                 afficheStock(this.rechercheProduit.Text);
             }
-            else
-            {
-                InfoProduct.Visibility = Visibility.Hidden;
-            }
+            
         }
+
+
+        private void DeleteProduct(object sender, RoutedEventArgs e)
+        {
+
+            Product u = this.stocklist.SelectedItem as Product;
+
+            // Message demandant si vous voulez vraiment supprimer le produit
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {u.NomProduit}", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Stock.removeProduit(u);
+                this.stocklist.UnselectAll();
+                this.stocklist.ItemsSource = null;
+                this.stocklist.ItemsSource = Stock.StockProduits;
+                this.InfoProduct.Visibility = Visibility.Hidden;
+            }
+            
+            
+        }
+
+    
     }
 }
