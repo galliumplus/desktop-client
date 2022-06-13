@@ -64,7 +64,7 @@ namespace Gallium_v1.Logique
             Users.Remove(user);
         }
 
-        public static User calculPlusGrosAcompte()
+        public static string calculPlusGrosAcompte()
         {
             User user = null;
 
@@ -75,7 +75,7 @@ namespace Gallium_v1.Logique
                     user = p;
                 }
             }
-            return user;
+            return $"{user.Nom} : {user.Balance}€";
         }
     }
 }

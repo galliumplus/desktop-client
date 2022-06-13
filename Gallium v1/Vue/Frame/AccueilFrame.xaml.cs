@@ -24,8 +24,7 @@ namespace Gallium_v1.Vue.Frame
         public AccueilFrame()
         {
             InitializeComponent();
-            AcompteName.Content = Adherent.calculPlusGrosAcompte().Nom;
-            AcompteBalance.Content = $"{Adherent.calculPlusGrosAcompte().Balance} €";
+            Acompte.Content = Adherent.calculPlusGrosAcompte();
         }
 
         private void IsDriveClicked(object sender, MouseEventArgs e)
