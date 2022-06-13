@@ -64,7 +64,7 @@ namespace Gallium_v1.Vue.Frame
             ListBox l = sender as ListBox;
             User u = l.SelectedItem as User;
             this.compte.Text = u.Compte;
-            this.balance.Text = Convert.ToString(u.Balance);
+            this.balance.Text = Convert.ToString(u.Balance) + "€";
             this.infouser.Text = u.Nom;
             infoUser.Visibility = Visibility.Visible;
 
