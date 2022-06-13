@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-            <ListBox x:Name="stocklist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="selectItem">
+            <ListBox x:Name="stocklist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="selectItem" >
                 <ListBox.Template>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
@@ -73,7 +73,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Name="rechercheProduit" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
+                <TextBox Name="rechercheProduit" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="search"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
             </Grid>
@@ -89,12 +89,12 @@
                 <Border Name="InfoProduct" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
                     <StackPanel>
 
-                        <Label Content="Nom du produit" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="infoproduit" Text=""/>
-                        <Label  Content="Prix Adhérent" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="prix" Text=""/>
-                        <Label Content="Stock" HorizontalAlignment="Left" Margin="10"/>
-                        <TextBlock x:Name="stock" Text=""/>
+                        <TextBlock Text="Nom du produit" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="infoproduit" Text="" Margin="10,0,0,0"/>
+                        <TextBlock  Text="Prix Adhérent" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="prix" Text="" Margin="10,0,0,0"/>
+                        <TextBlock Text="Stock" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="stock" Text="" Margin="10,0,0,0"/>
 
                         <Button Content="Modifier" Margin="10,20,10,10" Width="150"/>
                         <Button Content="Supprimer" Margin="10" Width="150"/>

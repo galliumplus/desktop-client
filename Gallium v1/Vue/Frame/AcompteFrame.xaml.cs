@@ -31,20 +31,6 @@ namespace Gallium_v1.Vue.Frame
             this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
         }
 
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (this.rechercheAcompte.IsFocused == true && this.rechercheAcompte.Text != "")
-                {
-                    infoUser.Visibility = Visibility.Visible;
-                    afficheUser(this.rechercheAcompte.Text);
-                }
-                
-            }
-            
-        }
-
 
         /// <summary>
         /// Permet d'afficher les informations d'un user
@@ -80,6 +66,25 @@ namespace Gallium_v1.Vue.Frame
             this.infouser.Text = u.Nom;
             infoUser.Visibility = Visibility.Visible;
 
+        }
+
+        /// <summary>
+        /// Permet de rechercher un utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void search(object sender, TextChangedEventArgs e)
+        {
+            if(this.rechercheAcompte.Text !="" && this.rechercheAcompte.Text != " ")
+            {
+                infoUser.Visibility = Visibility.Visible;
+                afficheUser(this.rechercheAcompte.Text);
+            }
+            else
+            {
+                infoUser.Visibility = Visibility.Hidden;
+            }
+            
         }
     }
 }
