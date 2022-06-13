@@ -63,10 +63,14 @@ namespace Gallium_v1.Vue.Frame
         {
             ListBox l = sender as ListBox;
             User u = l.SelectedItem as User;
-            this.compte.Text = u.Compte;
-            this.balance.Text = Convert.ToString(u.Balance) + "€";
-            this.infouser.Text = u.Nom;
-            infoUser.Visibility = Visibility.Visible;
+            if (u != null)
+            {
+                this.compte.Text = u.Compte;
+                this.balance.Text = Convert.ToString(u.Balance) + "€";
+                this.infouser.Text = u.Nom;
+                infoUser.Visibility = Visibility.Visible;
+            }
+            
 
         }
 
@@ -89,13 +93,21 @@ namespace Gallium_v1.Vue.Frame
             
         }
 
-        private void deleteUser_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Permet de supprimer un utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteUser(object sender, RoutedEventArgs e)
         {
 
             //MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", "supprimer compte", MessageBoxButton.YesNo);
             User u = this.acomptelist.SelectedItem as User;
             Adherent.removeUser(u);
-            this.acomptelist.Items.Refresh();
+            this.acomptelist.UnselectAll();
+            this.acomptelist.ItemsSource = null;
+            this.acomptelist.ItemsSource = Adherent.Users;
+            infoUser.Visibility = Visibility.Hidden;
 
 
 
