@@ -37,7 +37,12 @@ namespace Gallium_v1.Vue.Frame
             {
                 if (this.rechercheAcompte.IsFocused == true && this.rechercheAcompte.Text != "")
                 {
+                    infoUser.Visibility = Visibility.Visible;
                     afficheUser(this.rechercheAcompte.Text);
+                }
+                else
+                {
+                    infoUser.Visibility = Visibility.Hidden;
                 }
             }
 

@@ -60,9 +60,6 @@
     <Compile Include="Logique\Product.cs" />
     <Compile Include="Logique\Stock.cs" />
     <Compile Include="Logique\User.cs" />
-    <Compile Include="Vue\DriveFenetre.xaml.cs">
-      <DependentUpon>DriveFenetre.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vue\Frame\AccueilFrame.xaml.cs">
       <DependentUpon>AccueilFrame.xaml</DependentUpon>
     </Compile>
@@ -98,10 +95,6 @@
     <Compile Include="Vue\ConnexionFenetre.xaml.cs">
       <DependentUpon>ConnexionFenetre.xaml</DependentUpon>
     </Compile>
-    <Page Include="Vue\DriveFenetre.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Vue\Frame\AccueilFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

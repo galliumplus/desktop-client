@@ -79,7 +79,7 @@ namespace Gallium_v1.Vue
 
         private void VueClientFrame_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=LYG7sMtb6u8t");
         }
 
         /// <summary>

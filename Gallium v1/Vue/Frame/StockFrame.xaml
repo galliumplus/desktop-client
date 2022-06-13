@@ -80,9 +80,13 @@
 
             <!-- Information utilsiateur -->
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="170*"/>
+                </Grid.ColumnDefinitions>
 
 
-                <Border BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" >
+                <Border Name="InfoProduct" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
                     <StackPanel>
 
                         <Label Content="Nom du produit" HorizontalAlignment="Left" Margin="10"/>
@@ -99,7 +103,7 @@
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" />
     </Grid>
 
 </Page>

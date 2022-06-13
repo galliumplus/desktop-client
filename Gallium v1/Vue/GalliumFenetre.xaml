@@ -30,7 +30,6 @@
                 </Grid.RowDefinitions>
 
                 <!-- Logo Gallium+-->
-                <Image Tag="Logo de Gallium+" Source="Assets/logoTest.png"/>
                 <Rectangle Tag="Séparation" Grid.Row="1" Margin="0,0,0,5" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="GALLIUM+" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="35" FontStyle="Oblique" Foreground="White"/>
 
