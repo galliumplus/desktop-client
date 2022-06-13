@@ -92,16 +92,24 @@ namespace Gallium_v1.Vue.Frame
         }
 
 
-        private void deleteProduct(object sender, RoutedEventArgs e)
+        private void DeleteProduct(object sender, RoutedEventArgs e)
         {
 
-            //MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", "supprimer compte", MessageBoxButton.YesNo);
             Product u = this.stocklist.SelectedItem as Product;
-            Stock.removeProduit(u);
-            this.stocklist.UnselectAll();
-            this.stocklist.ItemsSource = null;
-            this.stocklist.ItemsSource = Stock.StockProduits;
-            this.InfoProduct.Visibility = Visibility.Hidden;
+
+            // Message demandant si vous voulez vraiment supprimer le produit
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", $"Supression de {u.NomProduit}", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Stock.removeProduit(u);
+                this.stocklist.UnselectAll();
+                this.stocklist.ItemsSource = null;
+                this.stocklist.ItemsSource = Stock.StockProduits;
+                this.InfoProduct.Visibility = Visibility.Hidden;
+            }
+            
+            
         }
 
     
