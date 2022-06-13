@@ -17,9 +17,9 @@ namespace Gallium_v1.Logique
         /// Permet d'ajouter un utilisateur
         /// </summary>
         /// <param name="nom"></param>
-        public static void ajoutUser(String nom,string prenom,string compte,double balance)
+        public static void ajoutUser(String nom,string prenom,string compte,double balance,string password)
         {
-            users.Add(new User(nom,prenom,compte,balance));
+            users.Add(new User(nom,prenom,compte,balance,password));
         }
 
         /// <summary>

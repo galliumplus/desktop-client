@@ -11,6 +11,8 @@ namespace Gallium_v1.Logique
         private string nom;
         private string compte;
         private double balance;
+        private string password;
+
 
         /// <summary>
         /// Nom de l'utilisateur
@@ -27,11 +29,12 @@ namespace Gallium_v1.Logique
         /// <param name="nom"></param>
         /// <param name="prenom"></param>
         /// <param name="compte"></param>
-        public User(String nom,string prenom,string compte,double balance)
+        public User(String nom,string prenom,string compte,double balance,string password)
         {
             this.Nom = $"{nom} {prenom}";
             this.Compte = compte;
             this.balance = balance;
+            this.password = password;
 
         }
 
