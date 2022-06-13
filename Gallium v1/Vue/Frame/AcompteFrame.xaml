@@ -115,8 +115,8 @@
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Name="modifUser" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonAcompteStock}" Click="ModificationUser"/>
-                            <Button Name="deleteUser" Content="Supprimer" Width="150" Margin="10" HorizontalAlignment="Left"  Grid.Column="1" Style="{StaticResource boutonAcompteStock}" Click="DeleteUser" />
+                            <Button Name="modifUserBouton" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonAcompteStock}" Click="ModificationUser"/>
+                            <Button Name="deleteUserBouton" Content="Supprimer" Width="150" Margin="10" HorizontalAlignment="Left"  Grid.Column="1" Style="{StaticResource boutonAcompteStock}" Click="DeleteUser" />
                         </Grid>
                     </StackPanel>
                 </Border>

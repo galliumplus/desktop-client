@@ -200,25 +200,26 @@
     <Resource Include="Vue\Assets\compteIcon.png" />
     <Resource Include="Vue\Assets\evenementIcon.png" />
     <Resource Include="Vue\Assets\stockIcon.png" />
-    <Content Include="Vue\Son\son1.wav">
+    <Resource Include="Vue\Assets\PhotoProfil\HackerPp.png" />
+    <Content Include="Vue\Assets\Son\son1.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son2.wav">
+    <Content Include="Vue\Assets\Son\son2.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son3.wav">
+    <Content Include="Vue\Assets\Son\son3.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son4.wav">
+    <Content Include="Vue\Assets\Son\son4.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son5.wav">
+    <Content Include="Vue\Assets\Son\son5.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son6.wav">
+    <Content Include="Vue\Assets\Son\son6.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Vue\Son\son7.wav">
+    <Content Include="Vue\Assets\Son\son7.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -23,6 +23,7 @@ namespace Gallium_v1.Vue
         {
             InitializeComponent();
             this.AccueilFrame.Focus();
+            ChargementPhotoDeProfil();
         }
 
 
@@ -98,6 +99,15 @@ namespace Gallium_v1.Vue
             connexion.Show();
         }
 
+        private void ChargementPhotoDeProfil()
+        {
+            Uri urlImage = new Uri("Assets/PhotoProfil/HackerPp.png", UriKind.Relative);
+            BitmapImage sourceImage = new BitmapImage(urlImage);
+            PhotoDeProfil.Source = sourceImage;
+            
+
+
+        }
 
 
     }

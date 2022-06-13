@@ -77,7 +77,7 @@ namespace Gallium_v1.Vue
             Random random = new Random();
 
 
-            string[] files = Directory.GetFiles(@".\Vue\Son", "*.wav");
+            string[] files = Directory.GetFiles(@".\Vue\Assets\Son", "*.wav");
             int msc = random.Next(files.Count());
 
             SoundPlayer soundPlayer = new SoundPlayer(files[msc]);

@@ -31,7 +31,7 @@
 
                 <!-- Logo Gallium+-->
                 <Rectangle Tag="Séparation" Grid.Row="1" Margin="0,0,0,5" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Image Source="/Vue/Assets/Gallium+.png" Grid.Row="0"/>
+                <Image Source="/Vue/Assets/Logo/Gallium+.png" Grid.Row="0"/>
                 <!-- Liste des boutons par frame -->
                 <StackPanel Grid.Row="2" Margin="5">
                     <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 20, 0, 30" Click="AccueilFrame_Click_1" />
@@ -67,14 +67,14 @@
                     </TextBlock.Effect>
                 </TextBlock>
                 <Rectangle Width="1600" Height="2" Fill="#252422" VerticalAlignment="Bottom" Grid.Column="1"/>
-                <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,10">
+                <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,0,0,10" Width="300">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*" />
                         <ColumnDefinition Width="20*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Source="Assets/PhotoProfil/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <StackPanel Grid.Column="1">
+                    <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="Assets/PhotoProfil/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <StackPanel Grid.Column="1" Margin="10">
                         <Label Content="Nom prénom" FontSize="15" FontWeight="Bold"/>
                         <Label  Content="Arabe" FontSize="15" FontWeight="DemiBold" />
                     </StackPanel>
