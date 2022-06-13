@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-            <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
+            <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="selectItem" >
                 <ListBox.Template>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
