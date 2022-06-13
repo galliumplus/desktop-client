@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
-            <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="selectItem" >
+            <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="SelectItem" >
                 <ListBox.Template>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
@@ -73,7 +73,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="search"  />
+                <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="Search"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
 
             </Grid>
@@ -94,7 +94,7 @@
                         <TextBlock x:Name="balance" Text="" FontSize="13" Margin="10,0,0,0" />
 
                         <Button Name="modifUser" Content="Modifier"  Width="150" Margin="10" />
-                        <Button Name="deleteUser" Content="Supprimer" Width="150" Margin="10" Click="deleteUser" />
+                        <Button Name="deleteUser" Content="Supprimer" Width="150" Margin="10" Click="BoutonDelete" />
                     </StackPanel>
                 </Border>
             </Grid>
