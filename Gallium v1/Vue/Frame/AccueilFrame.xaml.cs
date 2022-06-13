@@ -25,9 +25,14 @@ namespace Gallium_v1.Vue.Frame
             InitializeComponent();
         }
 
-        private void IsClicked(object sender, MouseEventArgs e)
+        private void IsDriveClicked(object sender, MouseEventArgs e)
         {
             System.Diagnostics.Process.Start("https://docs.google.com/document/d/1Bkuc-J_cueaCw7v5Wg68-nqqEbfaM76i/edit");
+        }
+
+        private void IsTwitterClicked(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://twitter.com/Etiq_Dijon");
         }
     }
 }
