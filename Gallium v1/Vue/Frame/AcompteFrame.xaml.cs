@@ -24,7 +24,14 @@ namespace Gallium_v1.Vue.Frame
         public AcompteFrame()
         {
             InitializeComponent();
-            Adherent.ajoutUser("MARTEAU","Florian","fm427410",100) ;
+
+            Adherent.ajoutUser("MARTEAU", "Florian", "fm427410", 100);
+            Adherent.ajoutUser("CHABRET", "Damien", "dc393609", 10);
+            Adherent.ajoutUser("MATTEO", "Badet", "petitemerde", 0);
+            Adherent.ajoutUser("ROURAT", "Aimeric", "ar00000", 30);
+            Adherent.ajoutUser("Resin", "Nicos", "rn000000", 10000);
+            Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30);
+
             acomptelist.ItemsSource = Adherent.Users;
         }
 
