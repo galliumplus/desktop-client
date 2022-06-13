@@ -24,7 +24,7 @@ namespace Gallium_v1.Vue.Frame
         public AcompteFrame()
         {
             InitializeComponent();
-            Adherent.ajoutUser("Florian");
+            Adherent.ajoutUser("MARTEAU","Florian","fm427410",100) ;
             acomptelist.ItemsSource = Adherent.Users;
         }
 
@@ -48,6 +48,9 @@ namespace Gallium_v1.Vue.Frame
         private void afficheUser(string nomUser)
         {
             User user = Adherent.findUser(nomUser);
+            this.compte.Text = user.Compte;
+            this.balance.Text = Convert.ToString(user.Balance);
+            this.infouser.Text = user.Nom;
         }
     }
 }

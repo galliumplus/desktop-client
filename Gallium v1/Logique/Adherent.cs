@@ -17,9 +17,9 @@ namespace Gallium_v1.Logique
         /// Permet d'ajouter un utilisateur
         /// </summary>
         /// <param name="nom"></param>
-        public static void ajoutUser(String nom)
+        public static void ajoutUser(String nom,string prenom,string compte,double balance)
         {
-            users.Add(new User(nom));
+            users.Add(new User(nom,prenom,compte,balance));
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Gallium_v1.Logique
             User u = null;
             foreach (User p in users)
             {
-                if (p.Nom == nomUser)
+                if (p.Nom.Contains(nomUser))
                 {
                     u = p;
                     break;

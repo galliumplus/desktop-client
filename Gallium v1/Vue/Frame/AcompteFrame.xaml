@@ -55,7 +55,8 @@
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
                             <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
-
+                            <Label Content="{Binding Compte}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding Balance}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             
                         </Grid>
                     </DataTemplate>
@@ -70,10 +71,16 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Name="rechercheAcompte"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                
             </Grid>
-            
+            <Label Content="Nom et prénom" HorizontalAlignment="Center" Margin="10"/>
+            <TextBlock x:Name="infouser" Text=""/>
+            <Label Content="Compte" HorizontalAlignment="Center" Margin="10"/>
+            <TextBlock x:Name="compte" Text=""/>
+            <Label Content="Balance" HorizontalAlignment="Center" Margin="10"/>
+            <TextBlock x:Name="balance" Text=""/>
 
-            
+
         </StackPanel>
         <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
     </Grid>

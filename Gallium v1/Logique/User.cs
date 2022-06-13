@@ -9,18 +9,30 @@ namespace Gallium_v1.Logique
     public class User
     {
         private string nom;
+        private string compte;
+        private double balance;
 
         /// <summary>
         /// Nom de l'utilisateur
         /// </summary>
-        public string Nom
-        {
-            get => nom;
-        }
+    
+        public string Compte { get => compte; set => compte = value; }
+        public double Balance { get => balance; set => balance = value; }
+        public string Nom { get => nom; set => nom = value; }
 
-        public User(String nom)
+
+        /// <summary>
+        /// Constructeur de la classe User
+        /// </summary>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <param name="compte"></param>
+        public User(String nom,string prenom,string compte,double balance)
         {
-            this.nom = nom;
+            this.Nom = $"{nom} {prenom}";
+            this.Compte = compte;
+            this.balance = balance;
+
         }
 
 
