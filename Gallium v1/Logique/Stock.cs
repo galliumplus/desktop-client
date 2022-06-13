@@ -62,6 +62,7 @@ namespace Gallium_v1.Logique
             return product;
         }
 
+
         public static void removeProduit(Product produit)
         {
             StockProduits.Remove(produit);

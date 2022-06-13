@@ -108,11 +108,6 @@ namespace Gallium_v1.Vue.Frame
             this.acomptelist.ItemsSource = null;
             this.acomptelist.ItemsSource = Adherent.Users;
             infoUser.Visibility = Visibility.Hidden;
-
-
-
-
-
         }
     }
 }

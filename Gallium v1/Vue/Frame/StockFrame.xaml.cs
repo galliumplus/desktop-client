@@ -62,10 +62,14 @@ namespace Gallium_v1.Vue.Frame
         {
             ListBox l = sender as ListBox;
             Product u = l.SelectedItem as Product;
-            this.stock.Text = Convert.ToString(u.Stock);
-            this.infoproduit.Text = u.NomProduit;
-            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
-            InfoProduct.Visibility = Visibility.Visible;
+            if (u != null)
+            {
+                this.stock.Text = Convert.ToString(u.Stock);
+                this.infoproduit.Text = u.NomProduit;
+                this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
+                InfoProduct.Visibility = Visibility.Visible;
+            }
+            
 
         }
 
@@ -86,5 +90,20 @@ namespace Gallium_v1.Vue.Frame
                 InfoProduct.Visibility = Visibility.Hidden;
             }
         }
+
+
+        private void deleteProduct(object sender, RoutedEventArgs e)
+        {
+
+            //MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", "supprimer compte", MessageBoxButton.YesNo);
+            Product u = this.stocklist.SelectedItem as Product;
+            Stock.removeProduit(u);
+            this.stocklist.UnselectAll();
+            this.stocklist.ItemsSource = null;
+            this.stocklist.ItemsSource = Stock.StockProduits;
+            this.InfoProduct.Visibility = Visibility.Hidden;
+        }
+
+    
     }
 }

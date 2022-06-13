@@ -97,7 +97,7 @@
                         <TextBlock x:Name="stock" Text="" Margin="10,0,0,0"/>
 
                         <Button Content="Modifier"  Width="150" Margin="10" />
-                        <Button Content="Supprimer" Width="150" Margin="10" />
+                        <Button Content="Supprimer" Width="150" Margin="10" Click="deleteProduct" />
                     </StackPanel>
                 </Border>
             </Grid>
