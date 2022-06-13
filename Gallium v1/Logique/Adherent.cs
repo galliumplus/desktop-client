@@ -37,6 +37,11 @@ namespace Gallium_v1.Logique
                     u = p;
                     break;
                 }
+                else if (p.Compte.ToUpper().Contains(nomUser.ToUpper()))
+                {
+                    u = p;
+                    break;
+                }
             }
             return u;
         }
