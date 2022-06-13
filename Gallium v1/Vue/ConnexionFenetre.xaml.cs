@@ -1,6 +1,7 @@
 ﻿using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -68,9 +69,20 @@ namespace Gallium_v1.Vue
             gallium.Show();
         }
 
+        /// <summary>
+        /// Fonction mystère
+        /// </summary>
         private void Mysterious(Object sender, MouseEventArgs e)
         {
-            SystemSounds.Beep.Play();
+            Random random = new Random();
+
+
+            string[] files = Directory.GetFiles(@".\Vue\Son", "*.wav");
+            int msc = random.Next(files.Count());
+
+            SoundPlayer soundPlayer = new SoundPlayer(files[msc]);
+            soundPlayer.Play();
         }
+
     }
 }

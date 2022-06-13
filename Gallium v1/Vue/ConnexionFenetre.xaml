@@ -9,8 +9,7 @@
         Height="1000" 
         Width="1920" 
         Background="White" 
-        WindowState="Maximized"
-        ResizeMode="CanMinimize">
+        WindowState="Maximized">
 
     <Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
