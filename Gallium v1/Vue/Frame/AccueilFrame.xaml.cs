@@ -27,7 +27,7 @@ namespace Gallium_v1.Vue.Frame
 
         private void IsClicked(object sender, MouseEventArgs e)
         {
-            Flo.Content = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH";
+            System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
     }
 }

@@ -10,8 +10,7 @@
 
     <Grid>
 
-        <Image Name="BoutonDrive" Source="/Vue/Assets/drive.png" MouseDown="IsClicked" Margin="464,261,0,0" />
-        <Label Name="Flo" Content="BBBBBBB" />
+        <Image MouseDown="IsClicked" Name="BoutonDrive" Source="/Vue/Assets/drive.png" Margin="553,211,0,0" />
 
     </Grid>
 </Page>
