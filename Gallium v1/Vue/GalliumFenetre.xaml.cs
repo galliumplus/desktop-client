@@ -100,23 +100,27 @@ namespace Gallium_v1.Vue
             connexion.Show();
         }
 
+
         private void ChargementPhotoDeProfil()
         {
             Random random = new Random();
 
-            // Enregistre dans une liste tous les éléments présent dans le dossier PhotoProfil
-            string[] files = Directory.GetFiles(@".\Vue\Assets\PhotoProfil", "*.png");
+            // Recupère toutes les photos du dossier PhotoProfil
+            string[] files = Directory.GetFiles("./Vue/Assets/PhotoProfil", "*.png");
             int msc = random.Next(files.Count());
 
-            // Sélectionne une photo de profil aléatoirement selon la liste
-            Uri urlImage = new Uri(files[msc], UriKind.Relative);
+            // Photo de profile tiré aléatoirement
+            string photoProfile = files[msc].Split('.')[1] + ".png";
+
+            // Change source de l'image par la nouvelle photo
+            Uri urlImage = new Uri(photoProfile, UriKind.Relative);
             BitmapImage sourceImage = new BitmapImage(urlImage);
             PhotoDeProfil.Source = sourceImage;
-            
+
 
 
         }
+       
 
-
+        }
     }
-}
