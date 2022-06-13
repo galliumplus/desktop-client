@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,7 +102,14 @@ namespace Gallium_v1.Vue
 
         private void ChargementPhotoDeProfil()
         {
-            Uri urlImage = new Uri("Assets/PhotoProfil/HackerPp.png", UriKind.Relative);
+            Random random = new Random();
+
+            // Enregistre dans une liste tous les éléments présent dans le dossier PhotoProfil
+            string[] files = Directory.GetFiles(@".\Vue\Assets\PhotoProfil", "*.png");
+            int msc = random.Next(files.Count());
+
+            // Sélectionne une photo de profil aléatoirement selon la liste
+            Uri urlImage = new Uri(files[msc], UriKind.Relative);
             BitmapImage sourceImage = new BitmapImage(urlImage);
             PhotoDeProfil.Source = sourceImage;
             
