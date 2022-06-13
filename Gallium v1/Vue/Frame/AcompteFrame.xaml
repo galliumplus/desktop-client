@@ -18,7 +18,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
             <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False">
                 <ListBox.Template>
                     <ControlTemplate>
@@ -34,9 +34,10 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom du compte</Label>
-                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
-                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Action</Label>
+                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Compte</Label>
+                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom et prénom</Label>
+                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
+
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2"/>
                                 <Rectangle Height="20" Grid.Row="2"/>
                             </Grid>
@@ -54,22 +55,9 @@
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
                             <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
-
-                            <StackPanel Orientation="Horizontal" Grid.Column="2">
-                                <Button Content="Ajouter"  Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18" />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button  Content="Retirer" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18" />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button  Content="Modifier" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18"  />
-                                <Rectangle Width="5"/>
-                                <TextBlock Text="|" VerticalAlignment="Center"/>
-                                <Rectangle Width="5"/>
-                                <Button Content="Supprimer" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" FontWeight="Medium" FontFamily="Roboto" FontSize="18"  />
-                            </StackPanel>
+                            <Label Content="{Binding Compte}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding Balance}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -83,14 +71,32 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Name="rechercheAcompte"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+                
+                
+                <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                
             </Grid>
+            <Grid   >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
             
-
-            <Button Content="Ajouter" x:Name="addButton"  Width="120"   />
+            <Border BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" >
+                <StackPanel>
+                
+                <Label Content="Nom et prénom" HorizontalAlignment="Left" Margin="10"/>
+                <TextBlock x:Name="infouser" Text=""/>
+                <Label  Content="Compte" HorizontalAlignment="Left" Margin="10"/>
+                <TextBlock x:Name="compte" Text=""/>
+                <Label Content="Balance" HorizontalAlignment="Left" Margin="10"/>
+                <TextBlock x:Name="balance" Text=""/>
+                </StackPanel>
+            </Border>
+            </Grid>
         </StackPanel>
-        
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
     </Grid>
     
 </Page>
