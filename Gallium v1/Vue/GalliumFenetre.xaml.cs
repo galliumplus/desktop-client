@@ -87,6 +87,11 @@ namespace Gallium_v1.Vue
         /// </summary>
         private void DéconnexionFrame_Click(object sender, RoutedEventArgs e)
         {
+            ConnexionFenetre connexion = new ConnexionFenetre();
+            this.Close();
+            connexion.Show();
+            
+            
 
         }
 
