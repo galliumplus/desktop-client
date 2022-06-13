@@ -10,6 +10,7 @@ namespace Gallium_v1.Logique
     {
         // Liste des produits
         private static List<Product> stockProduits = new List<Product>();
+        public static List<Product> StockProduits { get => stockProduits;}
 
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Gallium_v1.Logique
             Product product = null;
             foreach ( Product p in stockProduits)
             {
-                if (p.NomProduit == nomProduit)
+                if (p.NomProduit.ToUpper() == nomProduit.ToUpper())
                 {
                     product = p;
                     break;
