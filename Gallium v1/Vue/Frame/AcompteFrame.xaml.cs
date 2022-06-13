@@ -101,11 +101,19 @@ namespace Gallium_v1.Vue.Frame
             
             // Utilisateur 
             User u = this.acomptelist.SelectedItem as User;
-            Adherent.removeUser(u);
-            this.acomptelist.UnselectAll();
-            this.acomptelist.ItemsSource = null;
-            this.acomptelist.ItemsSource = Adherent.Users;
-            infoUser.Visibility = Visibility.Hidden;
+
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Adherent.removeUser(u);
+                this.acomptelist.UnselectAll();
+                this.acomptelist.ItemsSource = null;
+                this.acomptelist.ItemsSource = Adherent.Users;
+                infoUser.Visibility = Visibility.Hidden;
+            }
+
+            
         }
     }
 }
