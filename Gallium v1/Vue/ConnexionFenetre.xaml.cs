@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -65,6 +66,11 @@ namespace Gallium_v1.Vue
             GalliumFenetre gallium = new GalliumFenetre();
             this.Close();
             gallium.Show();
+        }
+
+        private void Mysterious(Object sender, MouseEventArgs e)
+        {
+            SystemSounds.Beep.Play();
         }
     }
 }
