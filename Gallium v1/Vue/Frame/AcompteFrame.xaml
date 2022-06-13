@@ -9,6 +9,7 @@
       Title="AcompteFrame">
 
     <Grid>
+        <!-- Définition des éléments grids -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
@@ -18,6 +19,8 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+
+        <!-- Liste des accomptes -->
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
             <ListBox x:Name="acomptelist" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="SelectItem" >
                 <ListBox.Template>
@@ -39,7 +42,7 @@
                                 <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Label>
 
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
-                                
+
                             </Grid>
                             <ItemsPresenter></ItemsPresenter>
                         </DockPanel>
@@ -53,6 +56,7 @@
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
+
                             <!-- Content -->
                             <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding Compte}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
@@ -64,7 +68,7 @@
             </ListBox>
         </ScrollViewer>
 
-
+        <!-- Information utilisateur -->
         <StackPanel Grid.Column="1"  Grid.Row="0" Margin="30">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -72,16 +76,15 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-
                 <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="Search"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
-
             </Grid>
 
-            <!-- Information utilsiateur -->
-            <Grid>
 
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" CornerRadius="3" Opacity="0.7" >
+            <Grid>
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2">
+
+                    <StackPanel>
 
                     <StackPanel Background="Orange">
                         <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White">
@@ -116,12 +119,10 @@
                         
                     </StackPanel>
                 </Border>
-                
-
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120"   />
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" Style="{StaticResource BoutonEcranprincipale}"  />
     </Grid>
 
 </Page>

@@ -21,8 +21,6 @@ namespace Gallium_v1.Vue.Frame
     /// </summary>
     public partial class AcompteFrame : Page
     {
-        
-
         public AcompteFrame()
         {
             InitializeComponent();
@@ -30,32 +28,9 @@ namespace Gallium_v1.Vue.Frame
             this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
         }
 
-
-        /// <summary>
-        /// Permet d'afficher les informations d'un user
-        /// </summary>
-        /// <param name="nomUser"></param>
-        private void AfficheUser(string nomUser)
-        {
-            User user = Adherent.findUser(nomUser);
-            if (user != null)
-            {
-                this.compte.Text = user.Compte;
-                this.balance.Text = Convert.ToString(user.Balance);
-                this.infouser.Text = user.Nom;
-               
-            }
-            else
-            {
-                infoUser.Visibility = Visibility.Hidden;
-            }
-        }
-
         /// <summary>
         /// Permet de sélectionner un produit en cliquant dessus
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SelectItem(object sender, SelectionChangedEventArgs e)
         {
             ListBox l = sender as ListBox;
@@ -67,15 +42,11 @@ namespace Gallium_v1.Vue.Frame
                 this.infouser.Text = u.Nom;
                 infoUser.Visibility = Visibility.Visible;
             }
-            
-
         }
 
         /// <summary>
         /// Permet de rechercher un utilisateur
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Search(object sender, TextChangedEventArgs e)
         {
             if(this.rechercheAcompte.Text !="" && this.rechercheAcompte.Text != " ")
@@ -87,16 +58,20 @@ namespace Gallium_v1.Vue.Frame
             {
                 infoUser.Visibility = Visibility.Hidden;
             }
-            
         }
 
-      
+        /// <summary>
+        /// Permet de modifier un utilisateur
+        /// </summary>
+        private void ModificationUser(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// Permet de supprimer un utilisateur
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BoutonDelete(object sender, RoutedEventArgs e)
+        private void DeleteUser(object sender, RoutedEventArgs e)
         {
             
             // Utilisateur 
@@ -114,6 +89,26 @@ namespace Gallium_v1.Vue.Frame
             }
 
             
+        }
+
+        /// <summary>
+        /// Permet d'afficher les informations d'un user
+        /// </summary>
+        /// <param name="nomUser"> Nom de l'utilisateur </param>
+        private void AfficheUser(string nomUser)
+        {
+            User user = Adherent.findUser(nomUser);
+            if (user != null)
+            {
+                this.compte.Text = user.Compte;
+                this.balance.Text = Convert.ToString(user.Balance);
+                this.infouser.Text = user.Nom;
+
+            }
+            else
+            {
+                infoUser.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

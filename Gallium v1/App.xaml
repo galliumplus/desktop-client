@@ -116,17 +116,44 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Background" Value="#F2F1F0" />
                     <Setter Property="Foreground" Value="Black" />
                 </Trigger>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Background" Value="#F2F1F0" />
                     <Setter Property="Foreground" Value="Black" />
                 </Trigger>
             </Style.Triggers>
             
          </Style>
 
+        <!-- Bouton autre -->
+        <Style TargetType="Button" x:Key="BoutonModif">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="#F2F1F0" />
+            <Setter Property="Height" Value="25" />
+
+            <!-- Modification -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="Black"  />
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Conditions -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray" />
+
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
         
 
     </Application.Resources>
