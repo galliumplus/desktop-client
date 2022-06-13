@@ -175,5 +175,8 @@
   <ItemGroup>
     <Resource Include="Vue\Assets\Gallium+.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vue\Assets\LogoInstagram.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
