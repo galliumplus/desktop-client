@@ -21,6 +21,8 @@ namespace Gallium_v1.Vue.Frame
     /// </summary>
     public partial class AcompteFrame : Page
     {
+        
+
         public AcompteFrame()
         {
             InitializeComponent();
@@ -85,6 +87,20 @@ namespace Gallium_v1.Vue.Frame
                 infoUser.Visibility = Visibility.Hidden;
             }
             
+        }
+
+        private void deleteUser_Click(object sender, RoutedEventArgs e)
+        {
+
+            //MessageBox.Show("Êtes-vous sur de vouloir supprimer ce compte ?", "supprimer compte", MessageBoxButton.YesNo);
+            User u = this.acomptelist.SelectedItem as User;
+            Adherent.removeUser(u);
+            this.acomptelist.Items.Refresh();
+
+
+
+
+
         }
     }
 }
