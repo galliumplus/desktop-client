@@ -64,7 +64,7 @@ namespace Gallium_v1.Vue.Frame
             Product u = l.SelectedItem as Product;
             this.stock.Text = Convert.ToString(u.Stock);
             this.infoproduit.Text = u.NomProduit;
-            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent);
+            this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
             InfoProduct.Visibility = Visibility.Visible;
 
         }

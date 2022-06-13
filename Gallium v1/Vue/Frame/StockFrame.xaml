@@ -56,7 +56,7 @@
                             <!-- Content -->
                             <Label Content="{Binding NomProduit}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding Stock}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
-                            <Label Content="{Binding PrixProduitAdhérent}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding prixString}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
 
                         </Grid>
                     </DataTemplate>
