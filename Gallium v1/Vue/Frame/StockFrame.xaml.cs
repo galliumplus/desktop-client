@@ -24,13 +24,21 @@ namespace Gallium_v1.Vue.Frame
         public StockFrame()
         {
             InitializeComponent();
+            Stock.ajoutProduit("Cafe",35,"test",Category.BOISSON,100);
+            Stock.ajoutProduit("Chips", 35, "test", Category.SNACKS, 10);
+            Stock.ajoutProduit("Monster", 35, "test", Category.BOISSON, 1);
+            Stock.ajoutProduit("Kit Kat", 35, "test", Category.SNACKS, 35);
+
+
+            stocklist.ItemsSource = Stock.StockProduits;
+            this.stocklist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Stock", System.ComponentModel.ListSortDirection.Descending));
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                if (this.rechercheProduit.IsFocused == true)
+                if (this.rechercheProduit.IsFocused == true  && this.rechercheProduit.Text != "")
                 {
                     afficheStock(this.rechercheProduit.Text);
                 }
@@ -45,6 +53,13 @@ namespace Gallium_v1.Vue.Frame
         private void afficheStock(string stock)
         {
             Product produit = Stock.findProduit(stock);
+            if (produit != null)
+            {
+                this.stock.Text = Convert.ToString(produit.Stock);
+                this.infoproduit.Text = produit.NomProduit;
+                this.prix.Text = Convert.ToString(produit.PrixProduitAdhérent);
+            }
+            
         }
     }
 }
