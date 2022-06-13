@@ -11,7 +11,7 @@
         Background="White" 
         WindowState="Maximized"
         >
-    
+
     <!-- grille principale -->
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                 <Image Tag="Logo de Gallium+" Source="Assets/logoTest.png"/>
                 <Rectangle Tag="Séparation" Grid.Row="1" Margin="0,0,0,5" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="GALLIUM+" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="35" FontStyle="Oblique" Foreground="White"/>
-                
+
                 <!-- Liste des boutons par frame -->
                 <StackPanel Grid.Row="2" Margin="5">
                     <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 20, 0, 30" Click="AccueilFrame_Click_1" />
@@ -61,7 +61,7 @@
                 <RowDefinition Height="80*"/>
             </Grid.RowDefinitions>
 
-             <!-- Nom de la frame avec séparation -->
+            <!-- Nom de la frame avec séparation -->
             <Grid Margin="40" Grid.Row="0">
                 <Label x:Name="NomFrame" Content="Accueil" FontSize="30" VerticalAlignment="Center" Margin="40,0,0,0"/>
                 <Rectangle Width="1600" Height="2" Fill="#252422" VerticalAlignment="Bottom" Grid.Column="1"/>
@@ -73,18 +73,19 @@
             </Grid>
 
             <!-- Information utilisateur -->
-            <Grid Grid.Row="0" Margin="30,50,30,70" Width="300" HorizontalAlignment="Right">
+            <Grid Grid.Row="0" Margin="0,50,30,53" Width="300" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*" />
                     <ColumnDefinition Width="20*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Image Grid.Column="0" Source="Assets/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                 <Label Grid.Column="1" Content="Nom prénom" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25"/>
+                <Label Grid.Column="1" Content="Arabe" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="15"/>
             </Grid>
-            
+
         </Grid>
-        
+
     </Grid>
 </Window>

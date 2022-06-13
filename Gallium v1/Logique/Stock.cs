@@ -6,26 +6,18 @@ using System.Threading.Tasks;
 
 namespace Gallium_v1.Logique
 {
-    public class Stock
+    public static class Stock
     {
         // Liste des produits
-        private List<Product> stockProduits = new List<Product>();
+        private static List<Product> stockProduits = new List<Product>();
 
-
-
-        /// <summary>
-        /// Constructeur de la classe Stock
-        /// </summary>
-        public Stock()
-        {
-        }
 
         /// <summary>
         /// Permet de récupérer le stock d'un produit à partir de son nom
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        public int stockProduit(string nomProduit)
+        public static int stockProduit(string nomProduit)
         {
             return findProduit(nomProduit).Stock;
         }
@@ -38,7 +30,7 @@ namespace Gallium_v1.Logique
         /// <param name="pathImage"> Chemin vers l'image </param>
         /// <param name="category"> Categorie du produit </param>
         /// <param name="stock"> Stock restant du produit </param>
-        public void ajoutProduit(string nomProduit, double prixProduitAdhérent, string pathImage, Category category, int stock)
+        public static void ajoutProduit(string nomProduit, double prixProduitAdhérent, string pathImage, Category category, int stock)
         {
             stockProduits.Add(new Product(nomProduit, prixProduitAdhérent, pathImage, category, stock));
         }
@@ -48,7 +40,7 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        private Product findProduit(string nomProduit)
+        private static Product findProduit(string nomProduit)
         {
             Product product = null;
             foreach ( Product p in stockProduits)

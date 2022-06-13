@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gallium_v1.Logique.IHM
+namespace Gallium_v1.Logique
 {
-    public class UserIhm
+    public class User
     {
         private string nom;
 
@@ -18,7 +18,7 @@ namespace Gallium_v1.Logique.IHM
             get => nom;
         }
 
-        public UserIhm(String nom)
+        public User(String nom)
         {
             this.nom = nom;
         }

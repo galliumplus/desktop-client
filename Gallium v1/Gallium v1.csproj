@@ -55,10 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logique\Adherent.cs" />
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\Product.cs" />
     <Compile Include="Logique\Stock.cs" />
-    <Compile Include="Logique\Utilsateur\User.cs" />
+    <Compile Include="Logique\User.cs" />
     <Compile Include="Vue\DriveFenetre.xaml.cs">
       <DependentUpon>DriveFenetre.xaml</DependentUpon>
     </Compile>
@@ -168,6 +169,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\drive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logique\Utilsateur\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vue\Assets\loupe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
