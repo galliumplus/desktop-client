@@ -46,7 +46,7 @@ namespace Gallium_v1.Logique
             Product product = null;
             foreach ( Product p in stockProduits)
             {
-                if (p.NomProduit.ToUpper() == nomProduit.ToUpper())
+                if (p.NomProduit.ToUpper().Contains( nomProduit.ToUpper()))
                 {
                     product = p;
                     break;
