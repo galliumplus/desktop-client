@@ -69,7 +69,11 @@ namespace Gallium_v1.Vue.Frame
                 this.prix.Text = Convert.ToString(u.PrixProduitAdhérent) + "€";
                 InfoProduct.Visibility = Visibility.Visible;
             }
-            
+            else
+            {
+                InfoProduct.Visibility = Visibility.Hidden;
+            }
+
 
         }
 
@@ -85,10 +89,7 @@ namespace Gallium_v1.Vue.Frame
                 InfoProduct.Visibility = Visibility.Visible;
                 afficheStock(this.rechercheProduit.Text);
             }
-            else
-            {
-                InfoProduct.Visibility = Visibility.Hidden;
-            }
+            
         }
 
 
