@@ -80,12 +80,6 @@
 
             <!-- Information utilsiateur -->
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="37*"/>
-                    <ColumnDefinition Width="170*"/>
-                </Grid.ColumnDefinitions>
-
-
                 <Border Name="InfoProduct" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
                     <StackPanel>
 
@@ -96,8 +90,15 @@
                         <TextBlock Text="Stock" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
                         <TextBlock x:Name="stock" Text="" Margin="10,0,0,0"/>
 
-                        <Button Content="Modifier"  Width="150" Margin="10" />
-                        <Button Content="Supprimer" Width="150" Margin="10" Click="DeleteProduct"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right"/>  
+                            <Button Content="Supprimer" Style="{StaticResource BoutonModif}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteProduct"/>
+                        </Grid>
+                       
                     </StackPanel>
                 </Border>
             </Grid>
