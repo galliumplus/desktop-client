@@ -133,7 +133,7 @@ namespace Gallium_v1.Vue.Frame
             Stock.removeProduit(p);
             this.stocklist.UnselectAll();
             this.stocklist.ItemsSource = null;
-            this.stocklist.ItemsSource = Adherent.Users;
+            this.stocklist.ItemsSource = Stock.StockProduits;
             InfoProduct.Visibility = Visibility.Hidden;
         }
 
