@@ -98,17 +98,27 @@ namespace Gallium_v1.Vue.Frame
 
             Product p = this.stocklist.SelectedItem as Product;
 
-            // Message demandant si vous voulez vraiment supprimer le produit
-            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {u.NomProduit}", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.Yes && p != null)
+            if (p != null)
             {
-                Stock.removeProduit(p);
-                DeleteProductFromStocklist(p);
+                // Message demandant si vous voulez vraiment supprimer le produit
+                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {p.NomProduit}", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Stock.removeProduit(p);
+                    DeleteProductFromStocklist(p);
+                }
             }
             else
             {
+                p = Stock.findProduit(this.rechercheProduit.Text);
+                
+                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {p.NomProduit}", MessageBoxButton.YesNo);
 
+                if (result == MessageBoxResult.Yes)
+                {
+                    DeleteProductFromStocklist(p);
+                }
+                
             }
             
             

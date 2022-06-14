@@ -77,13 +77,18 @@ namespace Gallium_v1.Vue.Frame
             User u = this.acomptelist.SelectedItem as User;
 
             // Demande si l'on veut vraiment supprimer
-            if (u != null && result == MessageBoxResult.Yes)
+            if (u != null)
             {
                 // Message pour vérifier l'envie de supprimer 
                 MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
-                // Suprimme l'utilisateur
-                Adherent.removeUser(u);
-                DeleteUserFromAcomptelist(u);
+                
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Suprimme l'utilisateur
+                    Adherent.removeUser(u);
+                    DeleteUserFromAcomptelist(u);
+                }
+               
                 
             }
             else
@@ -93,7 +98,11 @@ namespace Gallium_v1.Vue.Frame
                 // Message pour vérifier l'envie de supprimer 
                 MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
 
-                DeleteUserFromAcomptelist(u);
+                if (result == MessageBoxResult.Yes)
+                {
+                    DeleteUserFromAcomptelist(u);
+                }
+                
             }
             
 
@@ -101,9 +110,9 @@ namespace Gallium_v1.Vue.Frame
         }
 
         /// <summary>
-        /// Supprime l'utilisateur de l'acompte et de la liste
+        /// Supprime l'utilisateur de l'
         /// </summary>
-        /// <param name="u"> utilisateur </param>
+        /// <param name="u"></param>
         private void DeleteUserFromAcomptelist(User u)
         {
             Adherent.removeUser(u);
