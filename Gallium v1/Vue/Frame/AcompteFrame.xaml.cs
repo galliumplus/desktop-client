@@ -73,22 +73,44 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void DeleteUser(object sender, RoutedEventArgs e)
         {
-            
             // Utilisateur 
             User u = this.acomptelist.SelectedItem as User;
 
-            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.Yes)
+            // Demande si l'on veut vraiment supprimer
+            if (u != null && result == MessageBoxResult.Yes)
             {
+                // Message pour vérifier l'envie de supprimer 
+                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
+                // Suprimme l'utilisateur
                 Adherent.removeUser(u);
-                this.acomptelist.UnselectAll();
-                this.acomptelist.ItemsSource = null;
-                this.acomptelist.ItemsSource = Adherent.Users;
-                infoUser.Visibility = Visibility.Hidden;
+                DeleteUserFromAcomptelist(u);
+                
             }
+            else
+            {
+                u = Adherent.findUser(this.rechercheAcompte.Text);
+
+                // Message pour vérifier l'envie de supprimer 
+                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
+
+                DeleteUserFromAcomptelist(u);
+            }
+            
 
             
+        }
+
+        /// <summary>
+        /// Supprime l'utilisateur de l'acompte et de la liste
+        /// </summary>
+        /// <param name="u"> utilisateur </param>
+        private void DeleteUserFromAcomptelist(User u)
+        {
+            Adherent.removeUser(u);
+            this.acomptelist.UnselectAll();
+            this.acomptelist.ItemsSource = null;
+            this.acomptelist.ItemsSource = Adherent.Users;
+            infoUser.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
