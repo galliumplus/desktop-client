@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gallium_v1.Vue"
         mc:Ignorable="d"
-        Title="Modfifier l'utilisateur" Height="300" Width="450">
+        Title="Modfifier l'utilisateur" 
+        Height="300" 
+        Width="450"
+        Icon="">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*" />
