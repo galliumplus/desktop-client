@@ -75,7 +75,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 
-                <!-- Barre de recherched -->
+                <!-- Barre de recherche -->
                 <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="Search"  />
                 <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
@@ -115,7 +115,7 @@
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Name="modifUserBouton" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonAcompteStock}" Click="ModificationUser"/>
+                            <Button Name="modifUserBouton" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonAcompteStock}" Click="ModifUser"/>
                             <Button Name="deleteUserBouton" Content="Supprimer" Width="150" Margin="10" HorizontalAlignment="Left"  Grid.Column="1" Style="{StaticResource boutonAcompteStock}" Click="DeleteUser" />
                         </Grid>
                     </StackPanel>

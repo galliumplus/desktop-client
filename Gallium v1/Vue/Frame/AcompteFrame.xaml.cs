@@ -1,4 +1,5 @@
 ﻿using Gallium_v1.Logique;
+using Gallium_v1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,9 +64,10 @@ namespace Gallium_v1.Vue.Frame
         /// <summary>
         /// Permet de modifier un utilisateur
         /// </summary>
-        private void ModificationUser(object sender, RoutedEventArgs e)
+        private void ModifUser(object sender, RoutedEventArgs e)
         {
-
+            ModificationUser mod = new ModificationUser();
+            mod.ShowDialog();
         }
 
         /// <summary>
