@@ -21,7 +21,19 @@ namespace Gallium_v1.Vue
     {
         public ModificationUser()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            
+        }
+
+        private void ValiderModif(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AnnulerModif(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

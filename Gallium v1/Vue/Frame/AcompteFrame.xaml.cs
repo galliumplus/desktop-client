@@ -66,6 +66,7 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void ModifUser(object sender, RoutedEventArgs e)
         {
+            // Fenetre de modification en mode modale
             ModificationUser mod = new ModificationUser();
             mod.ShowDialog();
         }
