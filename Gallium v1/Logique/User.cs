@@ -32,7 +32,7 @@ namespace Gallium_v1.Logique
         /// </summary>
         public string Nom
         {
-            get => nom;
+            get => nom.ToUpper();
             set => nom = value;
         }
         
