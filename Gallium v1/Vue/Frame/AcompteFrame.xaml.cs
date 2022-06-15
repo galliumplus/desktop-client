@@ -66,8 +66,15 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void ModifUser(object sender, RoutedEventArgs e)
         {
+            User u = this.acomptelist.SelectedItem as User;
+
+            if (u == null)
+            {
+                u = Adherent.findUser(this.rechercheAcompte.Text);
+            }
+
             // Fenetre de modification en mode modale
-            ModificationUser mod = new ModificationUser();
+            ModificationUser mod = new ModificationUser(u);
             mod.ShowDialog();
         }
 
@@ -79,51 +86,26 @@ namespace Gallium_v1.Vue.Frame
             // Utilisateur 
             User u = this.acomptelist.SelectedItem as User;
 
-            // Demande si l'on veut vraiment supprimer
-            if (u != null)
-            {
-                // Message pour vérifier l'envie de supprimer 
-                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
-                
-                if (result == MessageBoxResult.Yes)
-                {
-                    // Suprimme l'utilisateur
-                    Adherent.removeUser(u);
-                    DeleteUserFromAcomptelist(u);
-                }
-               
-                
-            }
-            else
+            if (u == null)
             {
                 u = Adherent.findUser(this.rechercheAcompte.Text);
-
-                // Message pour vérifier l'envie de supprimer 
-                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    DeleteUserFromAcomptelist(u);
-                }
-                
             }
-            
 
-            
+            // Message pour vérifier l'envie de supprimer 
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
+                
+            if (result == MessageBoxResult.Yes)
+            {
+                // Suprimme l'utilisateur
+                //Adherent.removeUser(u);
+                Adherent.removeUser(u);
+                this.acomptelist.UnselectAll();
+                this.acomptelist.ItemsSource = null;
+                this.acomptelist.ItemsSource = Adherent.Users;
+                infoUser.Visibility = Visibility.Hidden;
+            }
         }
 
-        /// <summary>
-        /// Supprime l'utilisateur de l'
-        /// </summary>
-        /// <param name="u"></param>
-        private void DeleteUserFromAcomptelist(User u)
-        {
-            Adherent.removeUser(u);
-            this.acomptelist.UnselectAll();
-            this.acomptelist.ItemsSource = null;
-            this.acomptelist.ItemsSource = Adherent.Users;
-            infoUser.Visibility = Visibility.Hidden;
-        }
 
         /// <summary>
         /// Permet d'afficher les informations d'un user

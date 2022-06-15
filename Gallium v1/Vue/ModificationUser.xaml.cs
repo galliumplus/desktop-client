@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gallium_v1.Logique;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,9 @@ namespace Gallium_v1.Vue
     /// </summary>
     public partial class ModificationUser : Window
     {
-        public ModificationUser()
+        User user;
+
+        public ModificationUser(User u)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();

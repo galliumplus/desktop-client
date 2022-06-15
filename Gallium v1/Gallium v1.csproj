@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\modifIcon.jpg" />
+    <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -174,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logique\Utilsateur\" />
-    <Folder Include="Vue\Assets\Icone\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Vue\Assets\loupe.png" />
