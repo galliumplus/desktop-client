@@ -58,7 +58,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Content -->
-                            <Label Content="{Binding Nom}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding NomComplet}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding Compte}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding BalanceString}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                         </Grid>

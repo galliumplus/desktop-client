@@ -118,7 +118,7 @@ namespace Gallium_v1.Vue.Frame
             {
                 this.compte.Text = user.Compte;
                 this.balance.Text = Convert.ToString(user.Balance);
-                this.infouser.Text = $"{user.Nom} {user.Prenom}";
+                this.infouser.Text = user.NomComplet;
 
             }
             else

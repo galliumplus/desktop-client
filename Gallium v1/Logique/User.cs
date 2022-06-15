@@ -28,6 +28,14 @@ namespace Gallium_v1.Logique
         }
 
         /// <summary>
+        /// Nom complet de l'utilisateur
+        /// </summary>
+        public string NomComplet
+        {
+            get => $"{Nom} {Prenom}";
+        }
+
+        /// <summary>
         /// Nom de l'utilisateur
         /// </summary>
         public string Nom
@@ -44,6 +52,7 @@ namespace Gallium_v1.Logique
             get => prenom;
             set => prenom = value;
         }
+
 
        
 
