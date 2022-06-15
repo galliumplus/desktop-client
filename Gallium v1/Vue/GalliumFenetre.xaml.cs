@@ -119,8 +119,6 @@ namespace Gallium_v1.Vue
             BitmapImage sourceImage = new BitmapImage(urlImage);
             PhotoDeProfil.Source = sourceImage;
 
-
-
         }
        
 

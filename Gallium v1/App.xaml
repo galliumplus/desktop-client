@@ -145,7 +145,7 @@
                 </Setter.Value>
             </Setter>
 
-            <!-- Conditions -->
+            
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="LightGray" />
@@ -155,6 +155,69 @@
             
         </Style>
         
+        <!-- Bouton de modification -->
+
+        <Style TargetType="Button" x:Key="ModificationButton">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="150" />
+
+            <!-- Modification -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="Black" />
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Conditions -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F6711A" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        
+        
+        <!-- TexteBox modification -->
+        <Style x:Key="ModificationTextBox" TargetType="TextBox" >
+            <Setter Property="Background" Value="#85827D" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="CaretBrush" Value="White" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="White"  />
+                            <Label x:Name="label" Content="{TemplateBinding Text}" Visibility="Visible" Foreground="Black" FontSize="15" />
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!-- Forme curseur -->
+                    <Setter Property="Cursor" Value="IBeam"/>
+                    <!-- Couleur curseur-->
+                    <Setter Property="CaretBrush" Value="White" />
+                    
+                </Trigger>
+                <Trigger Property="">
+                    
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
     </Application.Resources>
 </Application>
