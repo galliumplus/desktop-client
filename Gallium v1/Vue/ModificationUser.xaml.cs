@@ -22,6 +22,14 @@ namespace Gallium_v1.Vue
     {
         private User user;
 
+        /// <summary>
+        /// Utilisateur en cours de modification
+        /// </summary>
+        public User User 
+        { 
+            get => user; 
+    
+        }
 
         public ModificationUser(User u)
         {
@@ -36,11 +44,22 @@ namespace Gallium_v1.Vue
         }
 
         /// <summary>
-        /// Permet de valider les modifications faite
+        /// Valide les modifications faite et de mettre à jour l'utilisateur
         /// </summary>
         private void ValiderModif(object sender, RoutedEventArgs e)
         {
-
+            // demande si l'utilisateur est sur de la modification
+            MessageBoxResult validation = MessageBox.Show("Vous allez modifier cet utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            
+            if (validation.Equals(MessageBoxResult.OK))
+            {
+                double balance = Convert.ToDouble(this.balanceUser.Text);
+                user.Compte = this.acompteUser.Text;
+                user.Nom = this.nomUser.Text;
+                user.Prenom = this.prénomUser.Text;
+                user.Balance = balance;
+                this.Close();
+            }
         }
 
         /// <summary>
@@ -59,7 +78,8 @@ namespace Gallium_v1.Vue
             this.acompteUser.Text = this.user.Compte;
             this.nomUser.Text = this.user.Nom;
             this.prénomUser.Text = this.user.Prenom;
-            this.balanceUser.Text = this.user.BalanceString;
+            this.balanceUser.Text = this.user.Balance.ToString();
         }
+
     }
 }

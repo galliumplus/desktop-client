@@ -66,6 +66,7 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void ModifUser(object sender, RoutedEventArgs e)
         {
+            // Initialise l'utilisateur
             User u = this.acomptelist.SelectedItem as User;
 
             if (u == null)
@@ -76,6 +77,13 @@ namespace Gallium_v1.Vue.Frame
             // Fenetre de modification en mode modale
             ModificationUser mod = new ModificationUser(u);
             mod.ShowDialog();
+
+            // Modification de l'utilisateur
+            this.acomptelist.SelectedItem = mod.User;
+            this.UpageListAcomptes();
+
+
+
         }
 
         /// <summary>
@@ -99,9 +107,7 @@ namespace Gallium_v1.Vue.Frame
                 // Suprimme l'utilisateur
                 //Adherent.removeUser(u);
                 Adherent.removeUser(u);
-                this.acomptelist.UnselectAll();
-                this.acomptelist.ItemsSource = null;
-                this.acomptelist.ItemsSource = Adherent.Users;
+                this.UpageListAcomptes();
                 infoUser.Visibility = Visibility.Hidden;
             }
         }
@@ -125,6 +131,16 @@ namespace Gallium_v1.Vue.Frame
             {
                 infoUser.Visibility = Visibility.Hidden;
             }
+        }
+
+        /// <summary>
+        /// Met à jour la liste des acomptes
+        /// </summary>
+        private void UpageListAcomptes()
+        {
+            this.acomptelist.UnselectAll();
+            this.acomptelist.ItemsSource = null;
+            this.acomptelist.ItemsSource = Adherent.Users;
         }
     }
 }
