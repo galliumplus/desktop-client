@@ -184,14 +184,26 @@
             </Style.Triggers>
 
         </Style>
-        
+
+
+        <!-- Gradiant couleur -->
+        <LinearGradientBrush x:Key="CouleurGradient">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Color="White"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
         
         <!-- TexteBox modification -->
         <Style x:Key="ModificationTextBox" TargetType="TextBox" >
             <Setter Property="Background" Value="#85827D" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="CaretBrush" Value="White" />
+
+            <Setter Property="CaretBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="White" />
+                </Setter.Value>
+            </Setter>
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -199,10 +211,12 @@
                         <Grid>
                             <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="White"  />
                             <Label x:Name="label" Content="{TemplateBinding Text}" Visibility="Visible" Foreground="Black" FontSize="15" />
+                            <ContentPresenter />
                         </Grid>
 
                     </ControlTemplate>
                 </Setter.Value>
+
             </Setter>
 
             <Style.Triggers>
@@ -211,12 +225,13 @@
                     <Setter Property="Cursor" Value="IBeam"/>
                     <!-- Couleur curseur-->
                     <Setter Property="CaretBrush" Value="White" />
-                    
-                </Trigger>
-                <Trigger Property="">
-                    
+
                 </Trigger>
             </Style.Triggers>
+
+
+
+
         </Style>
 
     </Application.Resources>

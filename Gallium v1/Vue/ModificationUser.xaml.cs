@@ -37,10 +37,20 @@ namespace Gallium_v1.Vue
             InitializeComponent();
             this.user = u;
             this.chargeUser();
-            
+            acompteUser.Focus();
 
-            
-            
+
+            // Fixe le curseur à la fin de la textebox
+            acompteUser.CaretIndex = acompteUser.Text.Length;
+            nomUser.CaretIndex = nomUser.Text.Length;
+            prénomUser.CaretIndex = prénomUser.Text.Length;
+            balanceUser.CaretIndex = balanceUser.Text.Length;
+            mdpUser.CaretIndex = mdpUser.Text.Length;
+
+
+
+
+
         }
 
         /// <summary>
