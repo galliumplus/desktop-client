@@ -42,7 +42,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Lance la méthode pour se connecter quand on appuie sur une touche 
         /// </summary>
-        /// <param name="key"></param>
+        /// <Author> Damien.C </Author>
         private void EntreeDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -54,6 +54,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Connecte au compte si le bouton est cliqué
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.ConnexionToAccount();
@@ -62,6 +63,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Méthode qui permet de se connecter et d'ouvrir une nouvelle fenêtre si la connection est réussi
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void ConnexionToAccount()
         {
             GalliumFenetre gallium = new GalliumFenetre();

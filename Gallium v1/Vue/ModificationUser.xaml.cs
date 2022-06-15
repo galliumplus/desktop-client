@@ -56,6 +56,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Valide les modifications faite et de mettre à jour l'utilisateur
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void ValiderModif(object sender, RoutedEventArgs e)
         {
             // demande si l'utilisateur est sur de la modification
@@ -75,6 +76,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Permet d'annuler les modifications
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void AnnulerModif(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -83,6 +85,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Méthode qui charge les informations de l'acompte
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void chargeUser()
         {
             this.acompteUser.Text = this.user.Compte;

@@ -31,6 +31,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui affiche l'accueil
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void AccueilFrame_Click_1(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AccueilFrame.xaml", UriKind.Relative);
@@ -40,6 +41,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui affiche la caisse
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void CaisseFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/CaisseFrame.xaml", UriKind.Relative);
@@ -49,6 +51,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui affiche la caisse
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void StockFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/StockFrame.xaml", UriKind.Relative);
@@ -58,6 +61,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui affiche les acomptes
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void AcompteFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AcompteFrame.xaml", UriKind.Relative);
@@ -67,6 +71,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui affiche les comptes utilisateurs
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void CompteFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/CompteFrame.xaml", UriKind.Relative);
@@ -76,6 +81,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Affiche la vue d'administration 
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void AdministrationFrame_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Source = new Uri("Frame/AdministrationFrame.xaml", UriKind.Relative);
@@ -85,6 +91,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Affiche la vue client
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void VueClientFrame_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=LYG7sMtb6u8t");
@@ -93,6 +100,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Bouton qui permet la déconnexion
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void DéconnexionFrame_Click(object sender, RoutedEventArgs e)
         {
             ConnexionFenetre connexion = new ConnexionFenetre();
@@ -103,6 +111,7 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// méthode qui permet de charger aléatoirement une photo de profil
         /// </summary>
+        /// <Author> Damien.C </Author>
         private void ChargementPhotoDeProfil()
         {
             Random random = new Random();
@@ -118,8 +127,9 @@ namespace Gallium_v1.Vue
             Uri urlImage = new Uri(photoProfile, UriKind.Relative);
             BitmapImage sourceImage = new BitmapImage(urlImage);
             PhotoDeProfil.Source = sourceImage;
-
         }
+
+
        
 
         }
