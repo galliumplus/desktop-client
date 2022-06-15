@@ -100,7 +100,9 @@ namespace Gallium_v1.Vue
             connexion.Show();
         }
 
-
+        /// <summary>
+        /// méthode qui permet de charger aléatoirement une photo de profil
+        /// </summary>
         private void ChargementPhotoDeProfil()
         {
             Random random = new Random();

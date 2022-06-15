@@ -22,22 +22,16 @@ namespace Gallium_v1.Vue
     {
         private User user;
 
-        private string acompte;
-        private string nom;
-        private string prenom;
-        private double balance;
-        private string mdp;
-
 
         public ModificationUser(User u)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.user = u;
-            this.nom = this.user.Nom.Split(' ')[0];
-            this.prenom = this.user.Nom.Split(' ')[1];
-            this.acompte = this.user.Compte;
-            this.balance = this.user.Balance;
+            this.chargeUser();
+            
+
+            
             
         }
 
@@ -55,6 +49,17 @@ namespace Gallium_v1.Vue
         private void AnnulerModif(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// Méthode qui charge les informations de l'acompte
+        /// </summary>
+        private void chargeUser()
+        {
+            this.acompteUser.Text = this.user.Compte;
+            this.nomUser.Text = this.user.Nom;
+            this.prénomUser.Text = this.user.Prenom;
+            this.balanceUser.Text = this.user.BalanceString;
         }
     }
 }

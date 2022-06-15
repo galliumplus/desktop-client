@@ -40,7 +40,7 @@ namespace Gallium_v1.Vue.Frame
             {
                 this.compte.Text = u.Compte;
                 this.balance.Text = Convert.ToString(u.Balance) + "€";
-                this.infouser.Text = u.Nom;
+                this.infouser.Text = $"{u.Nom} {u.Prenom}";
                 infoUser.Visibility = Visibility.Visible;
             }
         }
@@ -118,7 +118,7 @@ namespace Gallium_v1.Vue.Frame
             {
                 this.compte.Text = user.Compte;
                 this.balance.Text = Convert.ToString(user.Balance);
-                this.infouser.Text = user.Nom;
+                this.infouser.Text = $"{user.Nom} {user.Prenom}";
 
             }
             else

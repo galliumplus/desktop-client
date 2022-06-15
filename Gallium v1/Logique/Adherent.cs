@@ -75,7 +75,7 @@ namespace Gallium_v1.Logique
                     user = p;
                 }
             }
-            return $"{user.Nom} : {user.Balance}€";
+            return $"{user.Nom} {user.Prenom} : {user.Balance}€";
         }
     }
 }

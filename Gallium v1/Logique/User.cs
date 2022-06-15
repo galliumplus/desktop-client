@@ -7,23 +7,62 @@ using System.Threading.Tasks;
 
 namespace Gallium_v1.Logique
 {
+    /// <summary>
+    /// Classe qui représente l'utilisateur
+    /// </summary>
     public class User
     {
-        private string nom;
         private string compte;
+        private string nom;
+        private string prenom;
         private double balance;
         private string password;
 
+        /// <summary>
+        /// ID de l'utilisateur
+        /// </summary>
+        public string Compte
+        {
+            get => compte;
+            set => compte = value;
+        }
 
         /// <summary>
         /// Nom de l'utilisateur
         /// </summary>
-    
-        public string Compte { get => compte; set => compte = value; }
-        public double Balance { get => balance; set => balance = value; }
+        public string Nom
+        {
+            get => nom;
+            set => nom = value;
+        }
+        
+        /// <summary>
+        /// prénom de l'utilisateur
+        /// </summary>
+        public string Prenom
+        {
+            get => prenom;
+            set => prenom = value;
+        }
+
+       
+
+        /// <summary>
+        /// Balance de l'utilisateur qui renvoie un double
+        /// </summary>
+        public double Balance 
+        { 
+            get => balance; 
+            set => balance = value; 
+        }
+
+        /// <summary>
+        /// Balance de l'utilisateur qui renvoie un string
+        /// </summary>
         public string BalanceString 
         { 
-            get{
+            get
+            {
                 string ret = "" + Math.Round(Balance, 2);
                 // 1 => 1,00
                 if (new Regex("^[0-9]+$").IsMatch(ret))
@@ -41,7 +80,7 @@ namespace Gallium_v1.Logique
                 return ret;
             } 
         }
-        public string Nom { get => nom; set => nom = value; }
+        
 
 
         /// <summary>
@@ -52,14 +91,13 @@ namespace Gallium_v1.Logique
         /// <param name="compte"></param>
         public User(String nom,string prenom,string compte,double balance,string password)
         {
-            this.Nom = $"{nom} {prenom}";
+            this.Nom = nom;
+            this.Prenom = prenom;
             this.Compte = compte;
             this.balance = balance;
             this.password = password;
 
         }
-
-
 
     }
 }
