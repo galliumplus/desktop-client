@@ -198,19 +198,18 @@
             </Style.Triggers>
         </Style>
 
- 
 
-     
+        <!-- Bouton transparent-->
+        <Style x:Key="BoutonTransparent" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
 
-        <!-- 
-        <Grid>
-            <TextBox HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     VerticalContentAlignment="Center"
-                     Margin="5"
-                     Style="{DynamicResource TextBoxStyle}" />
-        </Grid>
-        -->
+            <Style.Triggers >
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         
         
         

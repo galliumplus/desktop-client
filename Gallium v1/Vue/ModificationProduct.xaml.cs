@@ -20,16 +20,24 @@ namespace Gallium_v1.Vue
     /// </summary>
     public partial class ModificationProduct : Window
     {
+
+        private Product oldProduct;
         private Product produit;
+
+        /// <summary>
+        /// Produit modifié
+        /// </summary>
         public Product Produit
         {
             get => produit;
+            private set => produit = value;
         }
 
         public ModificationProduct(Product p)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            this.oldProduct = p;
             this.produit = p;
             this.ChargeListCategorie();
             this.ChargeProduct();
@@ -61,6 +69,7 @@ namespace Gallium_v1.Vue
         /// <Author> Damien.C </Author>
         private void AnnulerModif(object sender, RoutedEventArgs e)
         {
+            this.Produit = oldProduct;
             this.Close();
         }
 
@@ -87,6 +96,27 @@ namespace Gallium_v1.Vue
         }
 
 
+
+        
+        /// <summary>
+        /// Ajout 1 produit 
+        /// </summary>
+        private void AddProduct(object sender, RoutedEventArgs e)
+        {
+            produit.Stock++;
+            this.stock.Text = produit.Stock.ToString();
+        }
+
+        /// <summary>
+        /// Enlève un produit
+        /// </summary>
+        private void RemoveProduct(object sender, RoutedEventArgs e)
+        {
+            produit.Stock--;
+            this.stock.Text = produit.Stock.ToString();
+        }
+
+
         /// <summary>
         /// Charge dans la comboBox tous les élements de l'énumration Catagégorie produit 
         /// </summary>
@@ -98,19 +128,9 @@ namespace Gallium_v1.Vue
             }
         }
 
-        
-        private void AddProduct(object sender, RoutedEventArgs e)
-        {
-            produit.Stock++;
-            this.stock.Text = produit.Stock.ToString();
-        }
-
-        private void RemoveProduct(object sender, RoutedEventArgs e)
-        {
-            produit.Stock--;
-            this.stock.Text = produit.Stock.ToString();
-        }
-
+        /// <summary>
+        /// Initialise position du Caret
+        /// </summary>
         private void PositionCaretIndex()
         {
 
@@ -118,5 +138,7 @@ namespace Gallium_v1.Vue
             prixAdherent.CaretIndex = prixAdherent.Text.Length;
             stock.CaretIndex = stock.Text.Length;
         }
+
+      
     }
 }
