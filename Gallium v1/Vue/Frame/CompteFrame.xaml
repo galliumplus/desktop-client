@@ -10,5 +10,6 @@
 
     <Grid>
         <Label Content="Compte" HorizontalAlignment="Left" Margin="214,184,0,0"  Height="108" Width="348" HorizontalContentAlignment="Center"/>
+        <Button Content="APPUIE PAS !!!!!!!" HorizontalAlignment="Left" Margin="293,82,0,0" VerticalAlignment="Top" Height="131" Width="241" Click="Button_Click"/>
     </Grid>
 </Page>
