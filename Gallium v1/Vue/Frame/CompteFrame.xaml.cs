@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Speech;
+using System.Speech.Synthesis;
 
 namespace Gallium_v1.Vue.Frame
 {
@@ -23,6 +25,15 @@ namespace Gallium_v1.Vue.Frame
         public CompteFrame()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SpeechSynthesizer speech;
+
+            speech = new SpeechSynthesizer();
+            speech.Volume = 100;
+            speech.Speak("Je pète ma bière, ma libulule. 6 morts, 8 blessés, 3 camions, deux nains, un homme content, marc qui aboie : wouaf wouaf wouaf wouaf wouaf wouaaaaaaaaf");
         }
     }
 }
