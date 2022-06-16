@@ -33,7 +33,7 @@ namespace Gallium_v1.Vue.Frame
 
             speech = new SpeechSynthesizer();
             speech.Volume = 100;
-            speech.Speak("Je pète ma bière, ma libulule. 6 morts, 8 blessés, 3 camions, deux nains, un homme content, marc qui aboie : wouaf wouaf wouaf wouaf wouaf wouaaaaaaaaf");
+            speech.SpeakAsync("Je pète ma bière, ma libulule. 6 morts, 8 blessés, 3 camions, deux nains, un homme content, marc qui aboie : wouaf wouaf wouaf wouaf wouaf wouaaaaaaaaf");
         }
     }
 }
