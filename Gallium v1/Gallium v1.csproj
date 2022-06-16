@@ -167,6 +167,7 @@
   <ItemGroup>
     <Resource Include="Vue\Assets\modifIcon.jpg" />
     <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
+    <Resource Include="caisseIcon.png" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

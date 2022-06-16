@@ -23,29 +23,29 @@
         <Grid Grid.Column="0" Background="#252422" >
             <Grid Margin="20,25">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4.6*" Tag="Nom app"/>
-                    <RowDefinition Height="2*" Tag="Entre deux"/>
+                    <RowDefinition Height="5*" Tag="Nom app"/>
+                    <RowDefinition Height="3*" Tag="Entre deux"/>
                     <RowDefinition Height="20*" Tag="Bouton"/>
                     <RowDefinition Height="5*" Tag="Autre choix"/>
                 </Grid.RowDefinitions>
 
                 <!-- Logo Gallium+-->
-                <Rectangle Tag="Séparation" Grid.Row="1" Margin="0,0,0,5" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Image Source="/Vue/Assets/Logo/Gallium+.png" Grid.Row="0"/>
+                <Rectangle Tag="Séparation" Grid.Row="1" Fill="White" StrokeThickness="20" Height="2" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Image Source="/Vue/Assets/Logo/Gallium+.png" Grid.Row="0" Margin="0,0,0,84" Grid.RowSpan="2"/>
                 <!-- Liste des boutons par frame -->
-                <StackPanel Grid.Row="2" Margin="5">
-                    <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 20, 0, 30" Click="AccueilFrame_Click_1" />
-                    <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="CaisseFrame_Click" />
-                    <Button Tag="Acompte" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="AcompteFrame_Click"/>
-                    <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="StockFrame_Click"/>
-                    <Button Tag="Compte" x:Name="CompteFrame" Content="Compte" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="CompteFrame_Click"/>
-                    <Button Tag="Administration" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource BoutonEcranprincipale}" Margin="0, 0, 0, 30" Click="AdministrationFrame_Click"/>
+                <StackPanel Grid.Row="2" Margin="-20">
+                    <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource BoutonEcranprincipale}"  Click="AccueilFrame_Click_1" Width="Auto"  />
+                    <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource BoutonEcranprincipale}" Click="CaisseFrame_Click"/>
+                    <Button Tag="Acompte" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource BoutonEcranprincipale}" Click="AcompteFrame_Click"/>
+                    <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource BoutonEcranprincipale}" Click="StockFrame_Click" />
+                    <Button Tag="Compte" x:Name="CompteFrame" Content="Compte" Style="{StaticResource BoutonEcranprincipale}" Click="CompteFrame_Click" />
+                    <Button Tag="Administration" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource BoutonEcranprincipale}" Click="AdministrationFrame_Click"/>
                 </StackPanel>
 
                 <!-- Autre options-->
                 <StackPanel Grid.Row="3">
-                    <Button Tag="Vue client" x:Name="VueClientFrame" Content="Vue Client" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20"  Click="VueClientFrame_Click"/>
-                    <Button Tag="Déconnexion" x:Name="DéconnexionFrame" Content="Déconnexion" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20" Click="DéconnexionFrame_Click"/>
+                    <Button Tag="Vue client" x:Name="VueClientFrame" Content="Vue Client" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20"  Click="VueClientFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
+                    <Button Tag="Déconnexion" x:Name="DéconnexionFrame" Content="Déconnexion" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20" Click="DéconnexionFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
                 </StackPanel>
             </Grid>
         </Grid>
