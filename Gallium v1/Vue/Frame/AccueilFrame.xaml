@@ -33,27 +33,27 @@
         <!-- Case Type pour menu -->
         <Grid Grid.Column="0" Grid.Row="0" Name="B_Caisse">
             <Rectangle Margin="10,15,10,15" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/caisseIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/caisseIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Caisse" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0" Name="B_Stock">
             <Rectangle Margin="10,15,10,15" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/stockIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/stockIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Stock" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="0" Name="B_Compte">
             <Rectangle Margin="10,15,10,15" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/compteIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/compteIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Compte" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="0" Name="B_Acompte">
             <Rectangle Margin="10,15,10,15" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/acompteIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/acompteIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Acompte" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         </Grid>
         <Grid Grid.Column="4" Grid.Row="0" Name="B_Event">
             <Rectangle Margin="10,15,10,15" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/statIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/statIcon.png"  Width="40" Margin="40,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Statistiques" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         </Grid>
 
@@ -65,14 +65,14 @@
         <!-- Cases de la section -->
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Name="Stat_Vente">
             <Rectangle Margin="10,10,10,5" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/venteIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/venteIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Vente de la semaine" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>
             <Label Content="Total : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" FontSize="20"/>
         </Grid>
         
         <Grid Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Name="Stat_Argent">
             <Rectangle Margin="10,10,10,5" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/argentIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/argentIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Argent utilisable" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>
             <Label Content="Total : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" FontSize="20"/>
         </Grid>
@@ -83,13 +83,13 @@
         <Rectangle Fill="#302F2F" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Margin="0,70,0,0"/>
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Name="Record_GrosAcc">
             <Rectangle Margin="10,10,10,5" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/banqueIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/banqueIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Plus gros acompte" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>
             <Label Name="Acompte" Content="Damien Cabret : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" FontSize="20"/>
         </Grid>
         <Grid Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" Name="Record_GrosNote">
             <Rectangle Margin="10,10,10,5" Fill="#302F2F"/>
-            <Image Source="/Vue/Assets/euroIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Image Source="/Vue/Assets/Icone/euroIcon.png"  Width="70" Margin="50,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Label Content="Plus grosse note" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>
             <Label Content="Damien Cabret : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" FontSize="20"/>
         </Grid>
@@ -108,17 +108,17 @@
 
             <Grid Grid.Column="0" Name="Res_Drive">
                 <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
-                <Image MouseDown="IsDriveClicked" Source="/Vue/Assets/driveIcon.png"  Width="70"  VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image MouseDown="IsDriveClicked" Source="/Vue/Assets/Icone/driveIcon.png"  Width="70"  VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <!-- <Label Content="Drive" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
             </Grid>
             <Grid Grid.Column="1" Grid.Row="4" Name="Res_Twitter">
                 <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
-                <Image MouseDown="IsTwitterClicked" Source="/Vue/Assets/twitterIcon.png"  Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image MouseDown="IsTwitterClicked" Source="/Vue/Assets/Icone/twitterIcon.png"  Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <!-- <Label Content="Twitter" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/> -->
             </Grid>
             <Grid Grid.Column="2" Grid.Row="4" Name="Res_Insta">
                 <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
-                <Image Source="/Vue/Assets/instaIcon.png"  Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <Image MouseDown="IsInstagramClicked"  Source="/Vue/Assets/Icone/instaIcon.png"  Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
             </Grid>
 

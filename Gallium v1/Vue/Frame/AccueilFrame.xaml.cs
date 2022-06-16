@@ -36,5 +36,11 @@ namespace Gallium_v1.Vue.Frame
         {
             System.Diagnostics.Process.Start("https://twitter.com/Etiq_Dijon");
         }
+
+        private void IsInstagramClicked(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://instagram.com/etiq_dijon");
+        }
+
     }
 }

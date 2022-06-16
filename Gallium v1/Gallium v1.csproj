@@ -165,7 +165,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vue\Assets\statIcon.png" />
+    <Resource Include="Vue\Assets\Icone\statIcon.png" />
     <Resource Include="Vue\Assets\modifIcon.jpg" />
     <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
@@ -204,18 +204,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="G.ico" />
-    <Resource Include="Vue\Assets\driveIcon.png" />
-    <Resource Include="Vue\Assets\instaIcon.png" />
-    <Resource Include="Vue\Assets\twitterIcon.png" />
-    <Resource Include="Vue\Assets\argentIcon.png" />
-    <Resource Include="Vue\Assets\venteIcon.png" />
-    <Resource Include="Vue\Assets\banqueIcon.png" />
-    <Resource Include="Vue\Assets\euroIcon.png" />
-    <Resource Include="Vue\Assets\acompteIcon.png" />
-    <Resource Include="Vue\Assets\caisseIcon.png" />
-    <Resource Include="Vue\Assets\compteIcon.png" />
+    <Resource Include="Vue\Assets\Icone\driveIcon.png" />
+    <Resource Include="Vue\Assets\Icone\instaIcon.png" />
+    <Resource Include="Vue\Assets\Icone\twitterIcon.png" />
+    <Resource Include="Vue\Assets\Icone\argentIcon.png" />
+    <Resource Include="Vue\Assets\Icone\venteIcon.png" />
+    <Resource Include="Vue\Assets\Icone\banqueIcon.png" />
+    <Resource Include="Vue\Assets\Icone\euroIcon.png" />
+    <Resource Include="Vue\Assets\Icone\acompteIcon.png" />
+    <Resource Include="Vue\Assets\Icone\caisseIcon.png" />
+    <Resource Include="Vue\Assets\Icone\compteIcon.png" />
     <Resource Include="Vue\Assets\evenementIcon.png" />
-    <Resource Include="Vue\Assets\stockIcon.png" />
+    <Resource Include="Vue\Assets\Icone\stockIcon.png" />
     <Content Include="Vue\Assets\PhotoProfil\HackerPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
