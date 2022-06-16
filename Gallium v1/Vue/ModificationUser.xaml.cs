@@ -37,7 +37,10 @@ namespace Gallium_v1.Vue
             InitializeComponent();
             this.user = u;
             this.chargeUser();
+            this.positionCaretIndex();
             acompteUser.Focus();
+
+            
 
         }
 
@@ -82,5 +85,27 @@ namespace Gallium_v1.Vue
             this.balanceUser.Text = this.user.Balance.ToString();
         }
 
+        /// <summary>
+        /// Empêche l'utilisateur de mettre des lettres dans la textebox
+        /// </summary>
+        /// <Author> Damien.C</Author>
+        private void balanceUserTextChanged(object sender, TextCompositionEventArgs e)
+        {
+            var tb = sender as TextBox;
+            e.Handled = !double.TryParse(tb.Text + e.Text, out double d);
+        }
+
+        /// <summary>
+        /// Position du caret dans le texte
+        /// </summary>
+        private void positionCaretIndex()
+        {
+           
+            acompteUser.CaretIndex = acompteUser.Text.Length;
+            nomUser.CaretIndex = nomUser.Text.Length;
+            prénomUser.CaretIndex = prénomUser.Text.Length;
+            balanceUser.CaretIndex = balanceUser.Text.Length;
+            mdpUser.CaretIndex = mdpUser.Text.Length;
+        }
     }
 }

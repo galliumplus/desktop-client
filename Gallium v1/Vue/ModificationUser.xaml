@@ -72,7 +72,7 @@
 
         <!-- Balance -->
         <TextBlock Text="Balance :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Foreground="White"/>
-        <TextBox x:Name="balanceUser" Text="200€" Grid.Row="3" Grid.Column="3" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15">
+        <TextBox x:Name="balanceUser" Text="200€" Grid.Row="3" Grid.Column="3" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" PreviewTextInput="balanceUserTextChanged">
 
             <!-- Change Caret couleur-->
             <TextBox.CaretBrush>

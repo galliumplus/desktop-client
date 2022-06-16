@@ -106,6 +106,7 @@ namespace Gallium_v1.Vue.Frame
             if (result == MessageBoxResult.Yes)
             {
                 Stock.removeProduit(p);
+                this.stocklist.UnselectAll();
                 this.UpdateListProduits();
                 InfoProduct.Visibility = Visibility.Hidden;
             }
@@ -137,7 +138,6 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void UpdateListProduits()
         {
-            this.stocklist.UnselectAll();
             this.stocklist.ItemsSource = null;
             this.stocklist.ItemsSource = Stock.StockProduits;
         }

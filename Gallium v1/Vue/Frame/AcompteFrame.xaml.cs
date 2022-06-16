@@ -106,6 +106,7 @@ namespace Gallium_v1.Vue.Frame
                 // Suprimme l'utilisateur
                 //Adherent.removeUser(u);
                 Adherent.removeUser(u);
+                           this.acomptelist.UnselectAll();
                 this.UpdateListAcomptes();
                 infoUser.Visibility = Visibility.Hidden;
             }
@@ -137,7 +138,7 @@ namespace Gallium_v1.Vue.Frame
         /// </summary>
         private void UpdateListAcomptes()
         {
-            this.acomptelist.UnselectAll();
+
             this.acomptelist.ItemsSource = null;
             this.acomptelist.ItemsSource = Adherent.Users;
         }

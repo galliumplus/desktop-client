@@ -28,12 +28,13 @@ namespace Gallium_v1.Vue
 
         public ModificationProduct(Product p)
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.produit = p;
             this.ChargeListCategorie();
-            this.chargeProduct();
+            this.ChargeProduct();
+            this.PositionCaretIndex();
             produitName.Focus();
-
         }
 
         /// <summary>
@@ -67,13 +68,24 @@ namespace Gallium_v1.Vue
         /// Méthode qui charge les informations de l'acompte
         /// </summary>
         /// <Author> Damien.C </Author>
-        private void chargeProduct()
+        private void ChargeProduct()
         {
             this.produitName.Text = this.produit.NomProduit;
             this.choixCatégorie.SelectedItem = this.produit.Categorie.ToString();
             this.stock.Text = this.produit.Stock.ToString();
             this.prixAdherent.Text = this.produit.PrixProduitAdhérent.ToString();
         }
+
+        /// <summary>
+        /// Empêche de mettre des lettres dans la textebox
+        /// </summary>
+        /// <Author> Damien.C </Author>
+        private void NoLetterTextChanged(object sender, TextCompositionEventArgs e)
+        {
+            var tb = sender as TextBox;
+            e.Handled = !double.TryParse(tb.Text + e.Text, out double d);
+        }
+
 
         /// <summary>
         /// Charge dans la comboBox tous les élements de l'énumration Catagégorie produit 
@@ -86,6 +98,25 @@ namespace Gallium_v1.Vue
             }
         }
 
-       
+        
+        private void AddProduct(object sender, RoutedEventArgs e)
+        {
+            produit.Stock++;
+            this.stock.Text = produit.Stock.ToString();
+        }
+
+        private void RemoveProduct(object sender, RoutedEventArgs e)
+        {
+            produit.Stock--;
+            this.stock.Text = produit.Stock.ToString();
+        }
+
+        private void PositionCaretIndex()
+        {
+
+            produitName.CaretIndex = produitName.Text.Length;
+            prixAdherent.CaretIndex = prixAdherent.Text.Length;
+            stock.CaretIndex = stock.Text.Length;
+        }
     }
 }
