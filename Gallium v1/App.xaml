@@ -8,6 +8,8 @@
 
         <!-- Watermark pour connexion -->
         <Style x:Key="WaterMarkTextBox" TargetType="TextBox" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -27,9 +29,15 @@
                                 <Setter Property="Foreground" Value="DimGray"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="IBeam" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         
         
@@ -40,7 +48,7 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="White" />
             <Setter Property="FontSize" Value="18" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Padding" Value="5" />
 
             <Setter Property="Template">
@@ -56,6 +64,10 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True" >
                     <Setter Property="Background" Value="LightGray" />
                     <Setter Property="Foreground" Value="Black" />
                 </Trigger>
