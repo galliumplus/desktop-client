@@ -33,28 +33,28 @@
 
             <!-- Case Type pour menu -->
 
-            <Grid Grid.Column="0" Grid.Row="0" Name="B_Caisse" Margin="5,10,5,10">
+            <Grid Grid.Column="0" Grid.Row="0" Name="B_Caisse" Margin="5,10,5,10" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                 <Rectangle  Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/caisseIcon.png"  Width="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Caisse" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
             </Grid>
 
-            <Grid Grid.Column="2" Grid.Row="0" Name="B_Stock" Margin="5,10,5,10">
+            <Grid Grid.Column="2" Grid.Row="0" Name="B_Stock" Margin="5,10,5,10" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                 <Rectangle Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/stockIcon.png"  Width="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Stock" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="15,0,0,0"/>
             </Grid>
-            <Grid Grid.Column="3" Grid.Row="0" Name="B_Compte" Margin="5,10,5,10">
+            <Grid Grid.Column="3" Grid.Row="0" Name="B_Compte" Margin="5,10,5,10" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                 <Rectangle Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/compteIcon.png"  Width="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Compte" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="20,0,0,0"/>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="0" Name="B_Acompte" Margin="5,10,5,10">
+            <Grid Grid.Column="1" Grid.Row="0" Name="B_Acompte" Margin="5,10,5,10" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                 <Rectangle Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/acompteIcon.png"  Width="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Acompte" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="25,0,0,0"/>
             </Grid>
-            <Grid Grid.Column="4" Grid.Row="0" Name="B_Stats" Margin="5,10,5,10">
+            <Grid Grid.Column="4" Grid.Row="0" Name="B_Stats" Margin="5,10,5,10" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                 <Rectangle Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/statIcon.png"  Width="25" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Statistiques" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Margin="30,0,0,0"/>
@@ -110,17 +110,17 @@
                     <ColumnDefinition Width="33*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Name="Res_Drive">
+                <Grid Grid.Column="0" Name="Res_Drive" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                     <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
                     <Image MouseDown="IsDriveClicked" Source="/Vue/Assets/Icone/driveIcon.png"  Width="40"  VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Drive" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="4" Name="Res_Twitter">
+                <Grid Grid.Column="1" Grid.Row="4" Name="Res_Twitter" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                     <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
                     <Image MouseDown="IsTwitterClicked" Source="/Vue/Assets/Icone/twitterIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Twitter" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/> -->
                 </Grid>
-                <Grid Grid.Column="2" Grid.Row="4" Name="Res_Insta">
+                <Grid Grid.Column="2" Grid.Row="4" Name="Res_Insta" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                     <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
                     <Image MouseDown="IsInstagramClicked"  Source="/Vue/Assets/Icone/instaIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->

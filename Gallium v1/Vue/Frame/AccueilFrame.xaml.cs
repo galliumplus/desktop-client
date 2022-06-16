@@ -42,5 +42,18 @@ namespace Gallium_v1.Vue.Frame
             System.Diagnostics.Process.Start("https://instagram.com/etiq_dijon");
         }
 
+        private void B_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Grid gd = sender as Grid;
+            Rectangle rect = gd.Children[0] as Rectangle;
+            rect.Fill = Brushes.Gray;
+        }
+
+        private void B_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Grid gd = sender as Grid;
+            Rectangle rect = gd.Children[0] as Rectangle;
+            rect.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#302F2F");
+        }
     }
 }
