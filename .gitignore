@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 .csproj
+/Gallium v1/Data/ConnexionDAO.cs

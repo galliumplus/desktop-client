@@ -102,6 +102,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\ConnexionDAO.cs" />
+    <Compile Include="Data\ProductDAO.cs" />
+    <Compile Include="Data\UserDAO.cs" />
     <Compile Include="Logique\Adherent.cs" />
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\Product.cs" />
