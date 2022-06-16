@@ -30,74 +30,24 @@
         
         <!-- Information utilisateur -->
         <TextBlock Text="Acompte :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Foreground="White"/>
-        <TextBox x:Name="acompteUser" Text="rn000000" Grid.Row="0" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" >
-
-            <!-- Change Caret couleur-->
-            <TextBox.CaretBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </TextBox.CaretBrush>
-        </TextBox>
+        <TextBox x:Name="acompteUser" Text="rn000000" Grid.Row="0" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" />
 
         <!-- Nom -->
         <TextBlock Text="Nom :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Foreground="White"/>
-        <TextBox x:Name="nomUser" Text="LEGRAND" Grid.Row="1" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15">
+            <TextBox x:Name="nomUser" Text="LEGRAND" Grid.Row="1" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" />
 
-            <!-- Change Caret couleur-->
-            <TextBox.CaretBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </TextBox.CaretBrush>
-        </TextBox>
 
-        <!-- Prénom -->
+            <!-- Prénom -->
         <TextBlock Text="Prénom :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Foreground="White"/>
-        <TextBox x:Name="prénomUser" Text="JD" Grid.Row="2" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" >
-
-            <!-- Change Caret couleur-->
-            <TextBox.CaretBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </TextBox.CaretBrush>
-        </TextBox>
-
-        <!-- Balance -->
+            <TextBox x:Name="prénomUser" Text="JD" Grid.Row="2" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" />
+            <!-- Balance -->
         <TextBlock Text="Balance :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Foreground="White"/>
-        <TextBox x:Name="balanceUser" Text="200€" Grid.Row="3" Grid.Column="3" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" PreviewTextInput="balanceUserTextChanged">
+        <TextBox x:Name="balanceUser" Text="200€" Grid.Row="3" Grid.Column="3" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" PreviewTextInput="balanceUserTextChanged" />
 
-            <!-- Change Caret couleur-->
-            <TextBox.CaretBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </TextBox.CaretBrush>
-            
-        </TextBox>
-        
+
         <!-- Mot de passe -->
         <TextBlock Text="Mot de passe :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="4" Foreground="White"/>
-        <TextBox x:Name="mdpUser" Text="" Grid.Row="4" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15">
-            
-            <!-- Change Caret couleur-->
-            <TextBox.CaretBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Color="White" />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </TextBox.CaretBrush>
-        </TextBox>
+        <TextBox x:Name="mdpUser" Text="" Grid.Row="4" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15"/>
 
         <!-- Bouton de validation -->
         <Button Content="Valider" Grid.Column="0" Grid.Row="5" Click="ValiderModif" Style="{StaticResource ModificationButton}" />

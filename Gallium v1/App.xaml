@@ -200,7 +200,29 @@
 
  
 
+     
 
+        <!-- 
+        <Grid>
+            <TextBox HorizontalAlignment="Left"
+                     VerticalAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     Margin="5"
+                     Style="{DynamicResource TextBoxStyle}" />
+        </Grid>
+        -->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
         <!-- TexteBox modification / Abandonné pour le moment -->
