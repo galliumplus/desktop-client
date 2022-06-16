@@ -95,7 +95,7 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right"/>  
+                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifProduct"/>  
                             <Button Content="Supprimer" Style="{StaticResource BoutonModif}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteProduct"/>
                         </Grid>
                        

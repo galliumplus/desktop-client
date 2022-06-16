@@ -80,7 +80,7 @@ namespace Gallium_v1.Vue.Frame
 
             // Modification de l'utilisateur
             this.acomptelist.SelectedItem = mod.User;
-            this.UpageListAcomptes();
+            this.UpdateListAcomptes();
 
 
 
@@ -101,13 +101,12 @@ namespace Gallium_v1.Vue.Frame
 
             // Message pour vérifier l'envie de supprimer 
             MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utilisateur ?", $"Supression de {u.Nom}", MessageBoxButton.YesNo);
-                
             if (result == MessageBoxResult.Yes)
             {
                 // Suprimme l'utilisateur
                 //Adherent.removeUser(u);
                 Adherent.removeUser(u);
-                this.UpageListAcomptes();
+                this.UpdateListAcomptes();
                 infoUser.Visibility = Visibility.Hidden;
             }
         }
@@ -136,7 +135,7 @@ namespace Gallium_v1.Vue.Frame
         /// <summary>
         /// Met à jour la liste des acomptes
         /// </summary>
-        private void UpageListAcomptes()
+        private void UpdateListAcomptes()
         {
             this.acomptelist.UnselectAll();
             this.acomptelist.ItemsSource = null;

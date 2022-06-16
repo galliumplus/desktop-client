@@ -178,22 +178,36 @@
             <!-- Conditions -->
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#F6711A" />
+                    <Setter Property="Background" Value="#F8A252" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#F8A252" />
                     <Setter Property="Foreground" Value="White" />
                 </Trigger>
             </Style.Triggers>
-
+            
         </Style>
 
 
-        <!-- Gradiant couleur -->
-        <LinearGradientBrush x:Key="CouleurGradient">
-            <LinearGradientBrush.GradientStops>
-                <GradientStop Color="White"/>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
-        
-        <!-- TexteBox modification -->
+        <Style x:Key="TextSurvol" TargetType="TextBlock" >
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F8A252" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+
+
+
+
+
+
+
+        <!-- TexteBox modification / Abandonné pour le moment -->
         <Style x:Key="ModificationTextBox" TargetType="TextBox" >
             <Setter Property="Background" Value="#85827D" />
             <Setter Property="Margin" Value="5" />

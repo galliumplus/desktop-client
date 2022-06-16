@@ -84,6 +84,9 @@
     <Compile Include="Vue\GalliumFenetre.xaml.cs">
       <DependentUpon>GalliumFenetre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vue\ModificationProduct.xaml.cs">
+      <DependentUpon>ModificationProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vue\ModificationUser.xaml.cs">
       <DependentUpon>ModificationUser.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue\GalliumFenetre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue\ModificationProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

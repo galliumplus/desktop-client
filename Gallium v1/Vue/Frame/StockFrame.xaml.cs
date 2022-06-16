@@ -93,7 +93,7 @@ namespace Gallium_v1.Vue.Frame
 
         private void DeleteProduct(object sender, RoutedEventArgs e)
         {
-
+            // Initialise le produit
             Product p = this.stocklist.SelectedItem as Product;
 
             if (p == null)
@@ -101,28 +101,45 @@ namespace Gallium_v1.Vue.Frame
                 p = Stock.findProduit(this.rechercheProduit.Text);
             }
 
-            if (p != null)
+            // Message demandant si vous voulez vraiment supprimer le produit
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {p.NomProduit}", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
             {
-                // Message demandant si vous voulez vraiment supprimer le produit
-                MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {p.NomProduit}", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
-                {
-                    Stock.removeProduit(p);
-                    this.stocklist.UnselectAll();
-                    this.stocklist.ItemsSource = null;
-                    this.stocklist.ItemsSource = Stock.StockProduits;
-                    InfoProduct.Visibility = Visibility.Hidden;
-                }
+                Stock.removeProduit(p);
+                this.UpdateListProduits();
+                InfoProduct.Visibility = Visibility.Hidden;
             }
+            
         }
 
-        /// <summary>
-        /// Supprime le produit de l'acompte et de la liste
-        /// </summary>
-        /// <param name="u"> produit </param>
-        private void DeleteProductFromStocklist(Product p)
+        private void ModifProduct(object sender, RoutedEventArgs e)
         {
-            
+            // Initialise le produit
+            Product p = this.stocklist.SelectedItem as Product;
+
+            if (p == null)
+            {
+                p = Stock.findProduit(this.rechercheProduit.Text);
+            }
+
+            // Fenetre de modification en mode modale
+            ModificationProduct modificationProduct = new ModificationProduct(p);
+            modificationProduct.ShowDialog();
+
+            // Modification de l'utilisateur
+            this.stocklist.SelectedItem = modificationProduct.Produit;
+            this.UpdateListProduits();
+        }
+
+
+        /// <summary>
+        /// Met à jour la liste des stocks
+        /// </summary>
+        private void UpdateListProduits()
+        {
+            this.stocklist.UnselectAll();
+            this.stocklist.ItemsSource = null;
+            this.stocklist.ItemsSource = Stock.StockProduits;
         }
 
     }
