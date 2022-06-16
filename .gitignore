@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 .csproj
 /Gallium v1/Data/ConnexionDAO.cs
+/Gallium v1/Data/InformatioConnexion.cs
