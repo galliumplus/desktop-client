@@ -8,5 +8,6 @@ namespace Gallium_v1.Data
 {
     public class ProductDAO
     {
+
     }
 }

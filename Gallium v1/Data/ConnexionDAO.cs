@@ -50,7 +50,7 @@ namespace Gallium_v1.Data
         {
             try
             {
-                sql = new MySqlConnection($"SERVER={InformatioConnexion.Databases};PORT={InformatioConnexion.Port};DATABASE={InformatioConnexion.Databases};UID={InformatioConnexion.Uid};PWD={InformatioConnexion.Pwd}");
+                sql = new MySqlConnection($"SERVER={InformationConnexion.Databases};PORT={InformationConnexion.Port};DATABASE={InformationConnexion.Databases};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd}");
             }
             catch(Exception ex)
             {

@@ -103,7 +103,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\ConnexionDAO.cs" />
-    <Compile Include="Data\InformatioConnexion.cs" />
+    <Compile Include="Data\InformationConnexion.cs" />
     <Compile Include="Data\ProductDAO.cs" />
     <Compile Include="Data\UserDAO.cs" />
     <Compile Include="Logique\Adherent.cs" />
