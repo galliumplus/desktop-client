@@ -1,6 +1,7 @@
 ﻿using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Gallium_v1.Vue.Frame
         public AccueilFrame()
         {
             InitializeComponent();
-            Acompte.Content = Adherent.calculPlusGrosAcompte();
+            Acompte.Content = Adherents.calculPlusGrosAcompte();
         }
 
         private void IsDriveClicked(object sender, MouseEventArgs e)

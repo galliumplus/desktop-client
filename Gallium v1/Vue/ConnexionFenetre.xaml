@@ -25,7 +25,6 @@
                     
                     <!-- Bouton connexion -->
                     <Button Content="Connexion" Style="{StaticResource BoutonConnexion}" Click="Button_Click"/>
-
                 </StackPanel>
             </Border>
 
