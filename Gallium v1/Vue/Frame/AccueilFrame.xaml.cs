@@ -55,5 +55,14 @@ namespace Gallium_v1.Vue.Frame
             Rectangle rect = gd.Children[0] as Rectangle;
             rect.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#302F2F");
         }
+
+        private void AllumerGaliumMethode(object sender, RoutedEventArgs e)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = @"/C node C:\Users\ETIQ\Documents\bot\bot\index.js"; // Commande à exécuter
+            process.StartInfo.UseShellExecute = false;
+            process.Start();
+        }
     }
 }
