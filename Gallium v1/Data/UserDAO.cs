@@ -13,30 +13,40 @@ namespace Gallium_v1.Data
     /// </summary>
     public class UserDAO
     {
-        private dbsDAO dao = dbsDAO.Instance;
-        
         /// <summary>
         /// Permet la connexion de l'utilisateur sur gallium
         /// </summary>
         /// <param name="identifiant"> Identifiant de connexion </param>
         /// <param name="mdp"> mot de passe de l'identifiant </param>
-        public static Acompte ConnexionUser(string identifiant, string mdp)
+        public static User ConnexionUser(string identifiant, string mdp)
         {
-            Acompte user = null;
-            try
-            {
-                dbsDAO.Instance.FetchSQL($"select identifiantUser, motdepasseUser from user where identifiantUser = \"{identifiant}\" and motdepasseUser = \"{mdp}\")");
-                dbsDAO.Reader = dbsDAO.Instance.CMD.ExecuteReader();
-                if(dbsDAO.Reader.HasRows == true)
-                {
-                    user = new User(
-                }
+            User user = null;
 
-            }
-            catch(Exception ex)
+            // Requêtes
+            dbsDAO.Instance.RequeteSQL($"select identifiantUser, nomUser, prenomUser, motdepasseUser from `UserTest` where identifiantUser = \"{identifiant}\" and motdepasseUser = \"{mdp}\";");
+            dbsDAO.Reader = dbsDAO.Instance.CMD.ExecuteReader();
+
+            // Vérifie s'il y a des résultats
+            if (dbsDAO.Reader.HasRows == true)
             {
-                MessageBox.Show(ex.Message);
+                string nom = "";
+                string prenom = "";
+                while (dbsDAO.Reader.Read()) // Tant qu'il lit
+                {
+                    nom = dbsDAO.Reader.GetString("nomUser");
+                    prenom = dbsDAO.Reader.GetString("prenomUser");
+                }
+                user = new User(nom, prenom);
             }
+            else
+            {
+                MessageBox.Show("Mauvais identifiant ou mot de passe");
+            }
+                
+            
+            
+            
+            return user;
         }
 
         public static void CreateUser()

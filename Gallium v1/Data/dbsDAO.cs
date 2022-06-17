@@ -18,7 +18,7 @@ namespace Gallium_v1.Data
 
         
 
-        private static dbsDAO instance;
+        private static dbsDAO instance = null;
         /// <summary>
         /// Singleton qui permet d'avoir qu'une connexion
         /// </summary>
@@ -55,6 +55,16 @@ namespace Gallium_v1.Data
             set => reader = value;
         }
 
+        private static bool isConnected;
+        
+        /// <summary>
+        /// Vérifie si la connexion à la bdd existe 
+        /// </summary>
+        public static bool IsConnected
+        {
+            get => isConnected;
+        }
+
         /// <summary>
         /// Permet la connexion
         /// </summary>
@@ -62,14 +72,18 @@ namespace Gallium_v1.Data
         {
             try
             {
-                sql = new MySqlConnection($"SERVER={InformationConnexion.Databases};PORT={InformationConnexion.Port};DATABASE={InformationConnexion.Databases};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd}");
+                sql = new MySqlConnection($"SERVER={InformationConnexion.Server};PORT={InformationConnexion.Port};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd};DATABASE={InformationConnexion.Databases};SSLMODE=NONE");
+                this.sql.Open();
+                isConnected = true;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Problème connexion à database");
             }
+
         }
         
+
         /// <summary>
         /// Permet de faire une requête SQL avec la base de donnée et d'intéragir avec 
         /// </summary>
@@ -94,6 +108,10 @@ namespace Gallium_v1.Data
             return cmd.ToString();
         }
 
+        private void test()
+        {
+            int test = 10;
+        }
 
     }
 }

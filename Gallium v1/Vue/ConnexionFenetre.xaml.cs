@@ -1,4 +1,5 @@
-﻿using Gallium_v1.Logique;
+﻿using Gallium_v1.Data;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -66,9 +67,14 @@ namespace Gallium_v1.Vue
         /// <Author> Damien.C </Author>
         private void ConnexionToAccount()
         {
-            GalliumFenetre gallium = new GalliumFenetre();
-            this.Close();
-            gallium.Show();
+           
+            if (UserDAO.ConnexionUser(Username.Text, Password.Password) != null)
+            {
+                GalliumFenetre gallium = new GalliumFenetre();
+                this.Close();
+                gallium.Show();
+            }
+
         }
 
         /// <summary>
