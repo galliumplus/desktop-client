@@ -46,7 +46,10 @@ namespace Gallium_v1.Data
             set => cmd = value;
         }
 
-        public ConnexionDAO()
+        /// <summary>
+        /// Permet la connexion
+        /// </summary>
+        private ConnexionDAO()
         {
             try
             {
@@ -58,6 +61,14 @@ namespace Gallium_v1.Data
             }
         }
         
+        /// <summary>
+        /// Permet de faire une requête SQL avec la base de donnée et d'intéragir avec 
+        /// </summary>
+        /// <param name="requete"> requete sql </param>
+        public void RequeteSQL(string requete)
+        {
+            cmd = new MySqlCommand();
+        }
 
 
     }
