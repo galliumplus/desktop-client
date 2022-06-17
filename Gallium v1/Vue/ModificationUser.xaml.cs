@@ -20,18 +20,18 @@ namespace Gallium_v1.Vue
     /// </summary>
     public partial class ModificationUser : Window
     {
-        private User user;
+        private Acompte user;
 
         /// <summary>
         /// Utilisateur en cours de modification
         /// </summary>
-        public User User 
+        public Acompte User 
         { 
             get => user; 
     
         }
 
-        public ModificationUser(User u)
+        public ModificationUser(Acompte u)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();

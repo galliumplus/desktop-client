@@ -25,7 +25,7 @@ namespace Gallium_v1.Vue.Frame
         public AcompteFrame()
         {
             InitializeComponent();
-            acomptelist.ItemsSource = Adherent.Users;
+            acomptelist.ItemsSource = Adherents.Users;
             this.acomptelist.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Balance", System.ComponentModel.ListSortDirection.Descending));
         }
 
@@ -35,7 +35,7 @@ namespace Gallium_v1.Vue.Frame
         private void SelectItem(object sender, SelectionChangedEventArgs e)
         {
             ListBox l = sender as ListBox;
-            User u = l.SelectedItem as User;
+            Acompte u = l.SelectedItem as Acompte;
             if (u != null)
             {
                 this.compte.Text = u.Compte;
@@ -67,11 +67,11 @@ namespace Gallium_v1.Vue.Frame
         private void ModifUser(object sender, RoutedEventArgs e)
         {
             // Initialise l'utilisateur
-            User u = this.acomptelist.SelectedItem as User;
+            Acompte u = this.acomptelist.SelectedItem as Acompte;
 
             if (u == null)
             {
-                u = Adherent.findUser(this.rechercheAcompte.Text);
+                u = Adherents.findUser(this.rechercheAcompte.Text);
             }
 
             // Fenetre de modification en mode modale
@@ -92,11 +92,11 @@ namespace Gallium_v1.Vue.Frame
         private void DeleteUser(object sender, RoutedEventArgs e)
         {
             // Utilisateur 
-            User u = this.acomptelist.SelectedItem as User;
+            Acompte u = this.acomptelist.SelectedItem as Acompte;
 
             if (u == null)
             {
-                u = Adherent.findUser(this.rechercheAcompte.Text);
+                u = Adherents.findUser(this.rechercheAcompte.Text);
             }
 
             // Message pour vérifier l'envie de supprimer 
@@ -105,7 +105,7 @@ namespace Gallium_v1.Vue.Frame
             {
                 // Suprimme l'utilisateur
                 //Adherent.removeUser(u);
-                Adherent.removeUser(u);
+                Adherents.removeUser(u);
                            this.acomptelist.UnselectAll();
                 this.UpdateListAcomptes();
                 infoUser.Visibility = Visibility.Hidden;
@@ -119,7 +119,7 @@ namespace Gallium_v1.Vue.Frame
         /// <param name="nomUser"> Nom de l'utilisateur </param>
         private void AfficheUser(string nomUser)
         {
-            User user = Adherent.findUser(nomUser);
+            Acompte user = Adherents.findUser(nomUser);
             if (user != null)
             {
                 this.compte.Text = user.Compte;
@@ -140,7 +140,7 @@ namespace Gallium_v1.Vue.Frame
         {
 
             this.acomptelist.ItemsSource = null;
-            this.acomptelist.ItemsSource = Adherent.Users;
+            this.acomptelist.ItemsSource = Adherents.Users;
         }
     }
 }

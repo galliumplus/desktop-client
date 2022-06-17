@@ -43,9 +43,9 @@
                 </StackPanel>
 
                 <!-- Autre options-->
-                <StackPanel Grid.Row="3">
-                    <Button Tag="Statistique" x:Name="StatistiqueButton" Content="Statistique" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20"  Click="VueClientFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
-                    <Button Tag="Déconnexion" x:Name="DéconnexionFrame" Content="Déconnexion" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20" Click="DéconnexionFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
+                <StackPanel Grid.Row="3" Margin="-20">
+                    <Button Tag="Statistique" x:Name="StatistiqueButton" Content="Statistique"  Width="Auto" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20"  Click="VueClientFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
+                    <Button Tag="Déconnexion" x:Name="DéconnexionFrame" Content="Déconnexion"  Width="Auto" Style="{StaticResource BoutonEcranprincipale}" Margin="0,0,0,20" Click="DéconnexionFrame_Click" HorizontalContentAlignment="Center" Padding="0"/>
                 </StackPanel>
             </Grid>
         </Grid>

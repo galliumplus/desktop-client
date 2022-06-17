@@ -11,24 +11,24 @@ namespace Gallium_v1.Data
     /// <summary>
     /// Classe qui permet de créer une connexion avec la database
     /// </summary>
-    public class ConnexionDAO
+    public class dbsDAO
     {
 
         private MySqlConnection sql;
 
         
 
-        private static ConnexionDAO instance;
+        private static dbsDAO instance;
         /// <summary>
         /// Singleton qui permet d'avoir qu'une connexion
         /// </summary>
-        public static ConnexionDAO Instance
+        public static dbsDAO Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ConnexionDAO();
+                    instance = new dbsDAO();
                     
                 }
                 return instance;
@@ -43,10 +43,22 @@ namespace Gallium_v1.Data
         public MySqlCommand CMD
         {
             get => cmd;
-            set => cmd = value;
         }
 
-        public ConnexionDAO()
+        private static MySqlDataReader reader;
+        /// <summary>
+        /// permet de lire les données
+        /// </summary>
+        public static MySqlDataReader Reader
+        {
+            get => reader;
+            set => reader = value;
+        }
+
+        /// <summary>
+        /// Permet la connexion
+        /// </summary>
+        private dbsDAO()
         {
             try
             {
@@ -58,6 +70,29 @@ namespace Gallium_v1.Data
             }
         }
         
+        /// <summary>
+        /// Permet de faire une requête SQL avec la base de donnée et d'intéragir avec 
+        /// </summary>
+        /// <param name="requete"> requete sql </param>
+        public void RequeteSQL(string requete)
+        {
+            cmd = new MySqlCommand(requete, sql);
+            cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear(); 
+        }
+
+        /// <summary>
+        /// Renvoie des éléments de la base de donnée
+        /// </summary>
+        /// <param name="requete"></param>
+       public string FetchSQL(string requete)
+       {
+            cmd = new MySqlCommand(requete, sql);
+            cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+
+            return cmd.ToString();
+        }
 
 
     }

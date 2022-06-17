@@ -58,7 +58,7 @@ namespace Gallium_v1.Vue
             {
                 this.produit.NomProduit = this.produitName.Text;
                 this.produit.Stock = Convert.ToInt32(this.stock.Text);
-                this.produit.PrixProduitAdhérent = Convert.ToInt32(this.prixAdherent.Text);
+                this.produit.PrixProduitAdhérent = Convert.ToDouble(this.prixAdherent.Text);
                 this.Close();
             }
         }
@@ -114,6 +114,11 @@ namespace Gallium_v1.Vue
         {
             produit.Stock--;
             this.stock.Text = produit.Stock.ToString();
+
+            while (this.stock.Equals(ClickMode.Press))
+            {
+                produit.Stock--;
+            }
         }
 
 
@@ -138,6 +143,7 @@ namespace Gallium_v1.Vue
             prixAdherent.CaretIndex = prixAdherent.Text.Length;
             stock.CaretIndex = stock.Text.Length;
         }
+
 
       
     }

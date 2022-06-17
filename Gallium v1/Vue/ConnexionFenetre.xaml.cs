@@ -26,12 +26,12 @@ namespace Gallium_v1.Vue
         {
             InitializeComponent();
             Username.Focus();
-            Adherent.ajoutUser("MARTEAU", "Florian", "fm427410", 100, "caca");
-            Adherent.ajoutUser("CHABRET", "Damien", "dc393609", 10, "caca");
-            Adherent.ajoutUser("BADET", "matteo", "petitemerde", 0, "caca");
-            Adherent.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca");
-            Adherent.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca");
-            Adherent.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
+            Adherents.ajoutUser("MARTEAU", "Florian", "fm427410", 100, "caca");
+            Adherents.ajoutUser("CHABRET", "Damien", "dc393609", 10, "caca");
+            Adherents.ajoutUser("BADET", "matteo", "petitemerde", 0, "caca");
+            Adherents.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca");
+            Adherents.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca");
+            Adherents.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
             Stock.ajoutProduit("Cafe", 35.00, "test", Category.BOISSON, 100);
             Stock.ajoutProduit("Chips", 0.80, "test", Category.SNACKS, 10);
             Stock.ajoutProduit("Monster", 3.50, "test", Category.BOISSON, 1);

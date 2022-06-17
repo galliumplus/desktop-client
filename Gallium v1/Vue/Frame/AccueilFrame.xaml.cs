@@ -1,6 +1,7 @@
 ﻿using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Gallium_v1.Vue.Frame
         public AccueilFrame()
         {
             InitializeComponent();
-            Acompte.Content = Adherent.calculPlusGrosAcompte();
+            Acompte.Content = Adherents.calculPlusGrosAcompte();
         }
 
         private void IsDriveClicked(object sender, MouseEventArgs e)
@@ -54,6 +55,15 @@ namespace Gallium_v1.Vue.Frame
             Grid gd = sender as Grid;
             Rectangle rect = gd.Children[0] as Rectangle;
             rect.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#302F2F");
+        }
+
+        private void AllumerGaliumMethode(object sender, RoutedEventArgs e)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.Arguments = @"/C node C:\Users\ETIQ\Documents\bot\bot\index.js"; // Commande à exécuter
+            process.StartInfo.UseShellExecute = false;
+            process.Start();
         }
     }
 }

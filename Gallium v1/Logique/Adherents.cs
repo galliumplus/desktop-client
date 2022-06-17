@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Gallium_v1.Logique
 {
-    public static class Adherent
+    public static class Adherents
     {
         
-        private static List<User> users = new List<User>();
+        private static List<Acompte> users = new List<Acompte>();
         /// <summary>
         /// Liste des utilisateurs
         /// </summary>
-        public static List<User> Users 
+        public static List<Acompte> Users 
         { 
             get 
             { 
@@ -28,7 +28,7 @@ namespace Gallium_v1.Logique
         /// <param name="nom"></param>
         public static void ajoutUser(String nom,string prenom,string compte,double balance,string password)
         {
-            users.Add(new User(nom,prenom,compte,balance,password));
+            users.Add(new Acompte(nom,prenom,compte,balance,password));
         }
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        public static User findUser(string nomUser)
+        public static Acompte findUser(string nomUser)
         {
-            User u = null;
-            foreach (User p in users)
+            Acompte u = null;
+            foreach (Acompte p in users)
             {
                 if (p.Nom.ToUpper().Contains(nomUser.ToUpper()) || nomUser.ToUpper() == p.Compte.ToUpper())
                 {
@@ -59,16 +59,16 @@ namespace Gallium_v1.Logique
         /// Permet de supprimer un utilisateur
         /// </summary>
         /// <param name="user"></param>
-        public static void removeUser(User user)
+        public static void removeUser(Acompte user)
         {
             Users.Remove(user);
         }
 
         public static string calculPlusGrosAcompte()
         {
-            User user = null;
+            Acompte user = null;
 
-            foreach(User p in users)
+            foreach(Acompte p in users)
             {
                 if (user == null || p.Balance > user.Balance )
                 {

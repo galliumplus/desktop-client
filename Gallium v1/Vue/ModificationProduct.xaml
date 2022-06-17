@@ -12,7 +12,6 @@
         Background="#252422"
         ResizeMode="NoResize">
     <Grid>
-
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*" />
@@ -27,7 +26,6 @@
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
-
 
             <!-- Produit -->
             <TextBlock Text="Produit :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="0" Foreground="White"/>
@@ -56,10 +54,12 @@
             <!-- Prix -->
             <TextBlock Text="Prix adhérent :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Foreground="White"/>
             <TextBox x:Name="prixAdherent" Text="1,40" Grid.Row="2" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" PreviewTextInput="NoLetterTextChanged" />
+            
             <!-- Stock -->
             <TextBlock Text="Stock :" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="3" Foreground="White"/>
             <TextBox x:Name="stock" Text="1" Grid.Row="3" Grid.Column="1" Margin="5" Background="#85827D" BorderBrush="White" BorderThickness="2" VerticalContentAlignment="Center" FontSize="15" PreviewTextInput="NoLetterTextChanged"/>
             
+            <!-- Modif Stock rapide -->
             <Grid Grid.Column="1" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
@@ -68,15 +68,11 @@
 
                 <Button Content="+" FontSize="40" Grid.Column="0" Foreground="White" VerticalAlignment="Center" Click="AddProduct" BorderThickness="0" Width="60" Style="{StaticResource BoutonTransparent}" />
                 <Button Content="-" FontSize="40" Grid.Column="1" Foreground="White" VerticalAlignment="Center" Click="RemoveProduct" BorderThickness="0" Width="60" Style="{StaticResource BoutonTransparent}" />
-
             </Grid>
-
 
             <!-- Bouton de validation -->
             <Button Content="Valider" Grid.Column="0" Grid.Row="5" Click="ValiderModif" Style="{StaticResource ModificationButton}" />
             <Button Content="Annuler" Grid.Column="1" Grid.Row="5" Click="AnnulerModif" Style="{StaticResource ModificationButton}" />
-
-
         </Grid>
 
     </Grid>

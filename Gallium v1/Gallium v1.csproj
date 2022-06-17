@@ -108,14 +108,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\ConnexionDAO.cs" />
+    <Compile Include="Data\dbsDAO.cs" />
     <Compile Include="Data\InformationConnexion.cs" />
     <Compile Include="Data\ProductDAO.cs" />
     <Compile Include="Data\UserDAO.cs" />
-    <Compile Include="Logique\Adherent.cs" />
+    <Compile Include="Logique\Adherents.cs" />
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\Product.cs" />
     <Compile Include="Logique\Stock.cs" />
+    <Compile Include="Logique\Acompte.cs" />
     <Compile Include="Logique\User.cs" />
     <Compile Include="Vue\Frame\AccueilFrame.xaml.cs">
       <DependentUpon>AccueilFrame.xaml</DependentUpon>
