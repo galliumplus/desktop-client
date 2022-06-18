@@ -70,14 +70,31 @@ namespace Gallium_v1.Data
             try
             {
                 sql = new MySqlConnection($"SERVER={InformationConnexion.Server};PORT={InformationConnexion.Port};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd};DATABASE={InformationConnexion.Databases};SSLMODE=NONE");
-                this.sql.Open();
-                isConnected = true;
+                
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Problème connexion à database");
             }
 
+        }
+
+        /// <summary>
+        /// Ouvre la connexion
+        /// </summary>
+        public void OpenDataBase()
+        {
+            sql.Open();
+            isConnected = true;
+        }
+
+        /// <summary>
+        /// Ferme la connexion 
+        /// </summary>
+        public void CloseDatabase()
+        {
+            sql.Close();
+            isConnected = false;
         }
 
         /// <summary>

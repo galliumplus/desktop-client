@@ -70,7 +70,7 @@ namespace Gallium_v1.Vue
         /// <Author> Damien.C </Author>
         private void ConnexionToAccount()
         {
-           
+            dbsDAO.Instance.OpenDataBase();
             if (UserDAO.ConnexionUser(Username.Text, Password.Password) != null)
             {
                 GalliumFenetre gallium = new GalliumFenetre();
