@@ -18,6 +18,7 @@ namespace Gallium_v1.Data
         /// </summary>
         /// <param name="identifiant"> Identifiant de connexion </param>
         /// <param name="mdp"> mot de passe de l'identifiant </param>
+        /// <Author> Damien C.</Author>
         public static User ConnexionUser(string identifiant, string mdp)
         {
             User user = null;
@@ -43,22 +44,29 @@ namespace Gallium_v1.Data
                 MessageBox.Show("Mauvais identifiant ou mot de passe");
             }
                 
-            
-            
-            
             return user;
         }
 
+        /// <summary>
+        /// Créer l'utilisateur
+        /// </summary>
         public static void CreateUser()
         {
 
         }
 
+
+        /// <summary>
+        /// Suprimme l'utilisateur
+        /// </summary>
         public static void DeleteUser()
         {
 
         }
 
+        /// <summary>
+        /// Modifie l'utilisateur
+        /// </summary>
         public static void UpdateUser()
         {
 

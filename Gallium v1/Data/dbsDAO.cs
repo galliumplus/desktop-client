@@ -13,12 +13,14 @@ namespace Gallium_v1.Data
     /// </summary>
     public class dbsDAO
     {
-
+        #region attribut
         private MySqlConnection sql;
-
-        
-
         private static dbsDAO instance = null;
+        private MySqlCommand cmd;
+        private static MySqlDataReader reader;
+        private static bool isConnected;
+        #endregion
+
         /// <summary>
         /// Singleton qui permet d'avoir qu'une connexion
         /// </summary>
@@ -34,18 +36,15 @@ namespace Gallium_v1.Data
                 return instance;
             }
         }
-
         
-        private MySqlCommand cmd;
         /// <summary>
-        /// Commande SQL 
+        /// Permet de faire des requêtes
         /// </summary>
         public MySqlCommand CMD
         {
             get => cmd;
         }
 
-        private static MySqlDataReader reader;
         /// <summary>
         /// permet de lire les données
         /// </summary>
@@ -54,8 +53,6 @@ namespace Gallium_v1.Data
             get => reader;
             set => reader = value;
         }
-
-        private static bool isConnected;
         
         /// <summary>
         /// Vérifie si la connexion à la bdd existe 
@@ -82,10 +79,9 @@ namespace Gallium_v1.Data
             }
 
         }
-        
 
         /// <summary>
-        /// Permet de faire une requête SQL avec la base de donnée et d'intéragir avec 
+        /// Modifie la base de donnée
         /// </summary>
         /// <param name="requete"> requete sql </param>
         public void RequeteSQL(string requete)
@@ -96,9 +92,9 @@ namespace Gallium_v1.Data
         }
 
         /// <summary>
-        /// Renvoie des éléments de la base de donnée
+        /// Interroge la base de donnée
         /// </summary>
-        /// <param name="requete"></param>
+        /// <param name="requete"> reuqete sql </param>
        public string FetchSQL(string requete)
        {
             cmd = new MySqlCommand(requete, sql);
@@ -107,11 +103,5 @@ namespace Gallium_v1.Data
 
             return cmd.ToString();
         }
-
-        private void test()
-        {
-            int test = 10;
-        }
-
     }
 }
