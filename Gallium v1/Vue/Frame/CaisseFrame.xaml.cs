@@ -21,21 +21,46 @@ namespace Gallium_v1.Vue.Frame
     /// </summary>
     public partial class CaisseFrame : Page
     {
+        List<Product> orderedItem = new List<Product>(); 
         public CaisseFrame()
         {
             InitializeComponent();
 
             productHandler.ItemsSource = Stock.StockProduits;
+            Order.ItemsSource = orderedItem;
         }
 
-        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        private void Mouse_Enter(object sender, MouseEventArgs e)
         {
-            Background = Brushes.Gray;
+            Grid gd = sender as Grid;
+            gd.Background = Brushes.Gray;
         }
 
-        private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
+        private void Mouse_Leave(object sender, MouseEventArgs e)
         {
-            Background = Brushes.Transparent;
+            Grid gd = sender as Grid;
+            gd.Background = Brushes.Transparent;
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Grid gd = sender as Grid;
+            Label lab = gd.Children[1] as Label;
+            string prodName = (string)lab.Content;
+            foreach (Product p in Stock.StockProduits)
+            {
+                if (p.NomProduit == prodName)
+                {
+                    orderedItem.Add(p);
+                }
+            }
+            UpdateListProduitsOrder();
+        }
+
+        private void UpdateListProduitsOrder()
+        {
+            this.Order.ItemsSource = null;
+            this.Order.ItemsSource = orderedItem;
         }
     }
 }
