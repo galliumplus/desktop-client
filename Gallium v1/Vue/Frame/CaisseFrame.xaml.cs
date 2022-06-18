@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gallium_v1.Logique;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace Gallium_v1.Vue.Frame
         public CaisseFrame()
         {
             InitializeComponent();
+
+            productHandler.ItemsSource = Stock.StockProduits;
+        }
+
+        private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Background = Brushes.Gray;
+        }
+
+        private void StackPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Background = Brushes.Transparent;
         }
     }
 }

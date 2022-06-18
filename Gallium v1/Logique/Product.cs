@@ -52,6 +52,7 @@ namespace Gallium_v1.Logique
 
         // Stock restant du produit
         public int Stock { get => stock; set => stock = value; }
+        public string ImageProduit { get => imageProduit; set => imageProduit = value; }
 
 
         /// <summary>

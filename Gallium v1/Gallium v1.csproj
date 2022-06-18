@@ -232,6 +232,7 @@
     <Resource Include="Vue\Assets\modifIcon.jpg" />
     <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
     <Resource Include="caisseIcon.png" />
+    <Resource Include="Vue\Assets\ImageProduit\bounty.png" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

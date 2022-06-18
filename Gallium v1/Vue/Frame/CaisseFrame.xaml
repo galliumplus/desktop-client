@@ -8,7 +8,27 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CaisseFrame">
 
-    <Grid>
-        <Label Content="Caisse" HorizontalAlignment="Left" Margin="214,184,0,0"  Height="108" Width="348" HorizontalContentAlignment="Center"/>
-    </Grid>
+    <Viewbox Stretch="UniformToFill">
+        <Grid Width="800" Height="450">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <ItemsControl Name="productHandler" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Grid.Row="0" ItemWidth="100"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel MouseEnter="StackPanel_MouseEnter" MouseLeave="StackPanel_MouseLeave">
+                            <Image Source="{Binding ImageProduit}"/>
+                            <Label Content="{Binding NomProduit}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Viewbox>
 </Page>
