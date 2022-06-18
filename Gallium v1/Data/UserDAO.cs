@@ -93,6 +93,7 @@ namespace Gallium_v1.Data
                 users.Add(new User(dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom")));
                 
             }
+            dbsDAO.Reader.Close();
 
             return users;
         }

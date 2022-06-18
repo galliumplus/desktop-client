@@ -25,7 +25,8 @@ namespace Gallium_v1.Vue.Frame
         public AdministrationFrame()
         {
             InitializeComponent();
-            userList.ItemsSource = UserDAO.ReadAllUser(); 
+            ListUser.UsersList = UserDAO.ReadAllUser();
+            userList.ItemsSource = ListUser.UsersList;
             //this.userList.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Role", System.ComponentModel.ListSortDirection.Descending));
         }
 
