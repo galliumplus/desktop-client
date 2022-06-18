@@ -28,6 +28,7 @@ namespace Gallium_v1.Vue
 
         public ModificationUser(User u)
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             PositionCaretIndex();
             this.oldUser = u;

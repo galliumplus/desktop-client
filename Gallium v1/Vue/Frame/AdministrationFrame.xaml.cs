@@ -29,6 +29,20 @@ namespace Gallium_v1.Vue.Frame
         }
 
         /// <summary>
+        /// Permet de sélectionner un utilisateur en cliquant dessus
+        /// </summary>
+        private void SelectItem(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox l = sender as ListBox;
+            User u = l.SelectedItem as User;
+            if (u != null)
+            {
+                this.ChargeUser(u);
+                InfoUser.Visibility = Visibility.Visible;
+            }
+        }
+
+        /// <summary>
         /// Permet de rechercher un utilisateur
         /// </summary>
         private void Search(object sender, TextChangedEventArgs e)
@@ -53,10 +67,7 @@ namespace Gallium_v1.Vue.Frame
             User user = ListUser.findUser(nomUser);
             if (user != null)
             {
-                this.nomUser.Text = user.NomUser;
-                this.prénomUser.Text = user.PrenomUser;
-                this.identifiantUser.Text = user.IdentifiantUser;
-                this.roleUser.Text = user.RangUser.ToString();
+                this.ChargeUser(user);
 
             }
             else
@@ -116,6 +127,14 @@ namespace Gallium_v1.Vue.Frame
         {
             this.userList.ItemsSource = null;
             this.userList.ItemsSource = Stock.StockProduits;
+        }
+
+        private void ChargeUser(User user)
+        {
+            this.nomUser.Text = user.NomUser;
+            this.prénomUser.Text = user.PrenomUser;
+            this.identifiantUser.Text = user.IdentifiantUser;
+            this.roleUser.Text = user.RangUser.ToString();
         }
     }
 }

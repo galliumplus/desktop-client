@@ -144,13 +144,13 @@
     <Compile Include="Vue\GalliumFenetre.xaml.cs">
       <DependentUpon>GalliumFenetre.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\FenetreModification\ModificationProduct.xaml.cs">
+    <Compile Include="Vue\ModificationProduct.xaml.cs">
       <DependentUpon>ModificationProduct.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\FenetreModification\ModificationAcompte.xaml.cs">
+    <Compile Include="Vue\ModificationAcompte.xaml.cs">
       <DependentUpon>ModificationAcompte.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\FenetreModification\ModificationUser.xaml.cs">
+    <Compile Include="Vue\ModificationUser.xaml.cs">
       <DependentUpon>ModificationUser.xaml</DependentUpon>
     </Compile>
     <Page Include="Vue\ConnexionFenetre.xaml">
@@ -196,15 +196,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\FenetreModification\ModificationProduct.xaml">
+    <Page Include="Vue\ModificationProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\FenetreModification\ModificationAcompte.xaml">
+    <Page Include="Vue\ModificationAcompte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\FenetreModification\ModificationUser.xaml">
+    <Page Include="Vue\ModificationUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,6 +237,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Vue\caisseIcon.png" />
     <Resource Include="Vue\Assets\Icone\statIcon.png" />
     <Resource Include="Vue\Assets\modifIcon.jpg" />
     <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
