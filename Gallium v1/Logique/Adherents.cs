@@ -8,7 +8,15 @@ namespace Gallium_v1.Logique
 {
     public static class Adherents
     {
-        
+
+        private static double plusGrosseNote;
+        public static double PlusGrosseNote
+        {
+            get => plusGrosseNote;
+            set => plusGrosseNote = value;
+        }
+
+
         private static List<Acompte> acomptes = new List<Acompte>();
         /// <summary>
         /// Liste des utilisateurs
@@ -66,16 +74,18 @@ namespace Gallium_v1.Logique
 
         public static string calculPlusGrosAcompte()
         {
-            Acompte user = null;
+            Acompte acompte = null;
 
             foreach(Acompte p in acomptes)
             {
-                if (user == null || p.Balance > user.Balance )
+                if (acompte == null || p.Balance > acompte.Balance )
                 {
-                    user = p;
+                    acompte = p;
                 }
             }
-            return $"{user.Nom} {user.Prenom} : {user.Balance}€";
+            return $"{acompte.Nom} {acompte.Prenom} : {acompte.Balance}€";
         }
     }
+
+   
 }

@@ -95,7 +95,7 @@
                 <Rectangle Margin="10,10,10,5" Fill="#302F2F"/>
                 <Image Source="/Vue/Assets/Icone/euroIcon.png"  Width="40" Margin="30,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
                 <Label Content="Plus grosse note" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Heavy" FontSize="18" Margin="0,15,0,0"/>
-                <Label Content="Damien Cabret : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" Margin="0,0,0,15"/>
+                <Label Name="plusGrosAcompte" Content="Damien Cabret : 00.00€" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="15" Margin="0,0,0,15"/>
             </Grid>
 
             <!-- Réseaux -->
