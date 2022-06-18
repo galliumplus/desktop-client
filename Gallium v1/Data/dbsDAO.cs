@@ -69,8 +69,9 @@ namespace Gallium_v1.Data
         {
             try
             {
-                sql = new MySqlConnection($"SERVER={InformationConnexion.Server};PORT={InformationConnexion.Port};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd};DATABASE={InformationConnexion.Databases};SSLMODE=NONE");
-                
+                //sql = new MySqlConnection($"SERVER={InformationConnexion.Server};PORT={InformationConnexion.Port};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd};DATABASE={InformationConnexion.Databases};SSLMODE=NONE");
+                sql = new MySqlConnection(Environment.GetEnvironmentVariable("ServeurGallium", EnvironmentVariableTarget.User));
+                    
             }
             catch(Exception ex)
             {
