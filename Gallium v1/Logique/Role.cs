@@ -25,6 +25,11 @@ namespace Gallium_v1.Logique
             get => role;
         }
 
+        /// <summary>
+        /// Permet d'avoir la valeur du rôle
+        /// </summary>
+        /// <param name="role"> role de l'utilisateur </param>
+        /// <returns> un entier qui vaut la valeur du rôle </returns>
         public static int RoleValue(string role)
         {
             int value = 0;

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Gallium_v1.Vue
+namespace Gallium_v1.Vue.Modification
 {
     /// <summary>
     /// Logique d'interaction pour ModificationUser.xaml
@@ -25,10 +25,10 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Utilisateur en cours de modification
         /// </summary>
-        public Acompte Acompte 
-        { 
-            get => acompte; 
-    
+        public Acompte Acompte
+        {
+            get => acompte;
+
         }
 
         public ModificationAcompte(Acompte u)
@@ -40,7 +40,7 @@ namespace Gallium_v1.Vue
             this.positionCaretIndex();
             acompteUser.Focus();
 
-            
+
 
         }
 
@@ -52,7 +52,7 @@ namespace Gallium_v1.Vue
         {
             // demande si l'utilisateur est sur de la modification
             MessageBoxResult validation = MessageBox.Show("Vous allez modifier cet utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            
+
             if (validation.Equals(MessageBoxResult.OK))
             {
                 double balance = Convert.ToDouble(this.balanceUser.Text);
@@ -100,7 +100,7 @@ namespace Gallium_v1.Vue
         /// </summary>
         private void positionCaretIndex()
         {
-           
+
             acompteUser.CaretIndex = acompteUser.Text.Length;
             nomUser.CaretIndex = nomUser.Text.Length;
             prénomUser.CaretIndex = prénomUser.Text.Length;

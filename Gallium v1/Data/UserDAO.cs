@@ -59,6 +59,7 @@ namespace Gallium_v1.Data
         public static void CreateUser(string identifiant, string password, string nom, string prenom, int idRole)
         {
             string requete = $"Insert into User values(null, \"{identifiant}\", \"{password}\", \"{nom}\", \"{prenom}\",{idRole})";
+            dbsDAO.Instance.RequeteSQL(requete);
         }
 
 

@@ -1,0 +1,39 @@
+﻿<Window x:Class="Gallium_v1.Vue.Modification.AjoutUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gallium_v1.Vue.Modification"
+        mc:Ignorable="d"
+        Title="Ajout utilisateur" 
+        Height="350" 
+        Width="500"
+        Background="#252422"
+        ResizeMode="NoResize">
+    <Grid>
+
+        <StackPanel  >
+            <TextBlock Text="Identifiant :" Foreground="White" />
+            <TextBox Name="identifiant"  Margin="0,0,0,10"/>
+
+            <TextBlock Text="Nom :" Foreground="White" />
+            <TextBox Name="nom"  Margin="0,0,0,10"/>
+
+            <TextBlock Text="Prénom :" Foreground="White" />
+            <TextBox Name="prénom"  Margin="0,0,0,10"/>
+
+            <TextBlock Text="Rôle :" Foreground="White" />
+            <ComboBox Name="roleUser" Height="20" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Mot de passe :" Foreground="White" />
+            <PasswordBox Name="mdp1" Margin="0,0,0,10" />
+
+            <TextBlock Text="Re Mot de passe :" Foreground="White" />
+            <PasswordBox Name="mdp2" Margin="0,0,0,10" />
+
+            <Button Name="Ajouter" Content="Ajouter" Height="30" Width="200" Margin="0,20,0,-5" Click="AddUser"/>
+            <Label Name="error" Foreground="IndianRed" HorizontalAlignment="Center"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

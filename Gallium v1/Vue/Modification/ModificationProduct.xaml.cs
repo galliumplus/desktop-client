@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Gallium_v1.Vue
+namespace Gallium_v1.Vue.Modification
 {
     /// <summary>
     /// Logique d'interaction pour ModificationProduct.xaml
@@ -98,7 +98,7 @@ namespace Gallium_v1.Vue
 
 
 
-        
+
         /// <summary>
         /// Ajout 1 produit 
         /// </summary>
@@ -146,6 +146,6 @@ namespace Gallium_v1.Vue
         }
 
 
-      
+
     }
 }

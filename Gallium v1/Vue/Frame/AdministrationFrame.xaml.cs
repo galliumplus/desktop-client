@@ -1,5 +1,6 @@
 ﻿using Gallium_v1.Data;
 using Gallium_v1.Logique;
+using Gallium_v1.Vue.Modification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -139,6 +140,13 @@ namespace Gallium_v1.Vue.Frame
             this.prénomUser.Text = user.PrenomUser;
             this.identifiantUser.Text = user.IdentifiantUser;
             this.roleUser.Text = user.RangUser.ToString();
+        }
+
+        private void AddUser(object sender, RoutedEventArgs e)
+        {
+            AjoutUser ajoutUser = new AjoutUser();
+            ajoutUser.ShowDialog();
+            UpdateListUsers();
         }
     }
 }
