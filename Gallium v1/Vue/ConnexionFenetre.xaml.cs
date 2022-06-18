@@ -37,9 +37,6 @@ namespace Gallium_v1.Vue
             Stock.ajoutProduit("Chips", 0.80, "/Vue/Assets/ImageProduit/bounty.png", Category.SNACKS, 10);
             Stock.ajoutProduit("Monster", 3.50, "/Vue/Assets/ImageProduit/bounty.png", Category.BOISSON, 1);
             Stock.ajoutProduit("Kit Kat", 7.00, "/Vue/Assets/ImageProduit/bounty.png", Category.SNACKS, 35);
-            ListUser.AjouteUser("Damien", "Chabret", "damienchab.p@gmail.com", Rang.ADMINISTRATEUR);
-            ListUser.AjouteUser("Flo", "dzdz", "feur", Rang.ADMINISTRATEUR);
-            ListUser.AjouteUser("matteo", "badet", "quoi ?", Rang.ADMINISTRATEUR);
 
         }
 

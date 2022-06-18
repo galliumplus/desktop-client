@@ -25,8 +25,8 @@ namespace Gallium_v1.Vue.Frame
         public AdministrationFrame()
         {
             InitializeComponent();
-            ListUser.UsersList = UserDAO.ReadAllUser();
-            userList.ItemsSource = ListUser.UsersList;
+            UpdateListUsers();
+            
             //this.userList.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Role", System.ComponentModel.ListSortDirection.Descending));
         }
 
@@ -92,9 +92,10 @@ namespace Gallium_v1.Vue.Frame
             MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {u.PrenomUser}", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                ListUser.RemoveUser(u);
+                UserDAO.DeleteUser(u.IdentifiantUser);
+                MessageBox.Show("Utilisateur supprimé !", $"Supression de {u.PrenomUser}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 this.userList.UnselectAll();
-                this.UpdateListProduits();
+                this.UpdateListUsers();
                 InfoUser.Visibility = Visibility.Hidden;
             }
 
@@ -117,7 +118,7 @@ namespace Gallium_v1.Vue.Frame
             // Modification de l'utilisateur
             
             this.userList.SelectedItem = modificationUser.User;
-            this.UpdateListProduits();
+            this.UpdateListUsers();
             
         }
 
@@ -125,10 +126,11 @@ namespace Gallium_v1.Vue.Frame
         /// <summary>
         /// Met à jour la liste des stocks
         /// </summary>
-        private void UpdateListProduits()
+        private void UpdateListUsers()
         {
             this.userList.ItemsSource = null;
-            this.userList.ItemsSource = Stock.StockProduits;
+            ListUser.UsersList = UserDAO.ReadAllUser();
+            userList.ItemsSource = ListUser.UsersList;
         }
 
         private void ChargeUser(User user)

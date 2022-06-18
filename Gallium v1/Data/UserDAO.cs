@@ -61,9 +61,10 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Suprimme l'utilisateur
         /// </summary>
-        public static void DeleteUser()
+        public static void DeleteUser(string identifiant)
         {
-
+            string requete = $"Delete from User where identifiant = \"{identifiant}\"";
+            dbsDAO.Instance.RequeteSQL(requete);
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace Gallium_v1.Data
 
             while (dbsDAO.Reader.Read())
             {
-                users.Add(new User(dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom")));
+                users.Add(new User(dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"),dbsDAO.Reader.GetString("identifiant")));
                 
             }
             dbsDAO.Reader.Close();
