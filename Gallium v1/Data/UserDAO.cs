@@ -24,7 +24,7 @@ namespace Gallium_v1.Data
             User user = null;
 
             // Requêtes
-            dbsDAO.Instance.RequeteSQL($"select identifiantUser, nomUser, prenomUser, motdepasseUser from `UserTest` where identifiantUser = \"{identifiant}\" and motdepasseUser = \"{mdp}\";");
+            dbsDAO.Instance.RequeteSQL($"select identifiant, nom, prenom, password from `User` where identifiant = \"{identifiant}\" and password = \"{mdp}\";");
             dbsDAO.Reader = dbsDAO.Instance.CMD.ExecuteReader();
 
             // Vérifie s'il y a des résultats
@@ -34,8 +34,8 @@ namespace Gallium_v1.Data
                 string prenom = "";
                 while (dbsDAO.Reader.Read()) // Tant qu'il lit
                 {
-                    nom = dbsDAO.Reader.GetString("nomUser");
-                    prenom = dbsDAO.Reader.GetString("prenomUser");
+                    nom = dbsDAO.Reader.GetString("nom");
+                    prenom = dbsDAO.Reader.GetString("prenom");
                 }
                 user = new User(nom, prenom, identifiant);
             }
@@ -70,6 +70,18 @@ namespace Gallium_v1.Data
         public static void UpdateUser()
         {
 
+        }
+
+        /// <summary>
+        /// Lis tous les utilisateurs de la base de donnée
+        /// </summary>
+        public static List<String> ReadAllUser()
+        {
+            List<String> users = new List<String>();
+
+
+
+            return users;
         }
 
     }

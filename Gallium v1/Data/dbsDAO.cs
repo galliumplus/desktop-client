@@ -109,10 +109,11 @@ namespace Gallium_v1.Data
             cmd.Parameters.Clear(); 
         }
 
-        /// <summary>
-        /// Interroge la base de donnée
-        /// </summary>
-        /// <param name="requete"> reuqete sql </param>
+       /// <summary>
+       /// Interoge la base de donnée
+       /// </summary>
+       /// <param name="requete"> requête sql </param>
+       /// <returns> une ligne </returns>
        public string FetchSQL(string requete)
        {
             cmd = new MySqlCommand(requete, sql);
@@ -120,6 +121,21 @@ namespace Gallium_v1.Data
             cmd.Parameters.Clear();
 
             return cmd.ToString();
+       }
+
+
+
+        public List<String> FetchAllSQL(string requete)
+        {
+            List<String> list = new List<String>(); 
+
+            this.FetchSQL(requete);
+            while (reader.Read())
+            {
+                list.Add(reader.ToString());
+            }
+
+            return list;
         }
     }
 }
