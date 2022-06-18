@@ -122,7 +122,7 @@
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="4" Name="Res_Insta" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                     <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
-                    <Image MouseDown="IsInstagramClicked"  Source="/Vue/Assets/Icone/instaIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Image MouseDown="IsDiscordClicked"  Source="/Vue/Assets/Icone/IconDiscordProvisoire.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
                 </Grid>
 

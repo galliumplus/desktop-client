@@ -1,4 +1,5 @@
 ﻿using Gallium_v1.Logique;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Gallium_v1.Data
 
             // Requêtes
             dbsDAO.Instance.RequeteSQL($"select identifiant, nom, prenom, password from `User` where identifiant = \"{identifiant}\" and password = \"{mdp}\";");
-            dbsDAO.Reader = dbsDAO.Instance.CMD.ExecuteReader();
+            dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
 
             // Vérifie s'il y a des résultats
             if (dbsDAO.Reader.HasRows == true)
@@ -43,7 +44,8 @@ namespace Gallium_v1.Data
             {
                 MessageBox.Show("Mauvais identifiant ou mot de passe");
             }
-                
+
+            dbsDAO.Reader.Close();
             return user;
         }
 
@@ -75,11 +77,22 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Lis tous les utilisateurs de la base de donnée
         /// </summary>
-        public static List<String> ReadAllUser()
+        public static List<User> ReadAllUser()
         {
-            List<String> users = new List<String>();
+            List<User> users = new List<User>();
 
+            // Requête
+            string requete = "Select * from User";
 
+            // Lecture de la requête
+            dbsDAO.CMD = new MySqlCommand(requete, dbsDAO.Instance.Sql);
+            dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
+
+            while (dbsDAO.Reader.Read())
+            {
+                users.Add(new User(dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom")));
+                
+            }
 
             return users;
         }

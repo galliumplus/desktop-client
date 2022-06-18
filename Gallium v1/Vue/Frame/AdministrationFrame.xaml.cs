@@ -1,4 +1,5 @@
-﻿using Gallium_v1.Logique;
+﻿using Gallium_v1.Data;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Gallium_v1.Vue.Frame
         public AdministrationFrame()
         {
             InitializeComponent();
-            userList.ItemsSource = ListUser.UsersList;
+            userList.ItemsSource = UserDAO.ReadAllUser(); 
             //this.userList.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Role", System.ComponentModel.ListSortDirection.Descending));
         }
 

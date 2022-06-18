@@ -152,6 +152,9 @@
     <Compile Include="Vue\ModificationUser.xaml.cs">
       <DependentUpon>ModificationUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vue\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
     <Page Include="Vue\ConnexionFenetre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vue\Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -242,6 +249,7 @@
     <Resource Include="Vue\Assets\Icone\modifIcon.jpg" />
     <Resource Include="caisseIcon.png" />
     <Resource Include="Vue\Assets\ImageProduit\bounty.png" />
+    <Resource Include="Vue\Assets\Icone\IconDiscordProvisoire.png" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

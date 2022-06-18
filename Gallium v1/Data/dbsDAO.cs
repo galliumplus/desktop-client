@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Gallium_v1.Data
         #region attribut
         private MySqlConnection sql;
         private static dbsDAO instance = null;
-        private MySqlCommand cmd;
+        private static MySqlCommand cmd;
         private static MySqlDataReader reader;
         private static bool isConnected;
         #endregion
@@ -40,9 +41,10 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Permet de faire des requêtes
         /// </summary>
-        public MySqlCommand CMD
+        public static MySqlCommand CMD
         {
             get => cmd;
+            set => cmd = value; 
         }
 
         /// <summary>
@@ -61,6 +63,7 @@ namespace Gallium_v1.Data
         {
             get => isConnected;
         }
+        public MySqlConnection Sql { get => sql; set => sql = value; }
 
         /// <summary>
         /// Permet la connexion
@@ -116,9 +119,11 @@ namespace Gallium_v1.Data
        /// <returns> une ligne </returns>
        public string FetchSQL(string requete)
        {
+            
             cmd = new MySqlCommand(requete, sql);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
+
 
             return cmd.ToString();
        }
@@ -127,13 +132,14 @@ namespace Gallium_v1.Data
 
         public List<String> FetchAllSQL(string requete)
         {
-            List<String> list = new List<String>(); 
+            List<String> list = new List<String>();
 
             this.FetchSQL(requete);
-            while (reader.Read())
-            {
-                list.Add(reader.ToString());
-            }
+            reader = cmd.ExecuteReader();
+            
+            
+
+            reader.Close();
 
             return list;
         }
