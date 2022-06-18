@@ -40,11 +40,11 @@ namespace Gallium_v1.Logique
             set => prenom = value; 
         }
 
-        private Rang rang;
+        private string rang;
         /// <summary>
         /// Rang de l'utilisateur
         /// </summary>
-        public Rang RangUser
+        public string RangUser
         {
             get => rang;
             set => rang = value;
@@ -55,11 +55,12 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nom"> nom de l'utilisateur </param>
         /// <param name="prenom"> prénom de l'utilisateur </param>
-        public User(string nom, string prenom, string identifiant) // manque un rôle
+        public User(string nom, string prenom, string identifiant, string role) // manque un rôle
         {
             this.nom = nom;
             this.prenom = prenom;
             this.identifiant = identifiant;
+            this.rang = role;
 
         }
 

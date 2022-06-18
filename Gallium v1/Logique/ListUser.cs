@@ -13,9 +13,9 @@ namespace Gallium_v1.Logique
         public static List<User> UsersList { get { return usersList; } set { usersList = value; } }
 
 
-        public static void AjouteUser(string nom, string prénom, string identifiant, Rang role)
+        public static void AjouteUser(string nom, string prénom, string identifiant, string role)
         {
-            usersList.Add(new User(nom, prénom, identifiant));
+            usersList.Add(new User(nom, prénom, identifiant, role));
         }
 
         /// <summary>

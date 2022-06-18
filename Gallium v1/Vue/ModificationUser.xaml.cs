@@ -30,6 +30,8 @@ namespace Gallium_v1.Vue
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            ChargeListRole();
+            roleUser.SelectedIndex = 1;//u.RangUser;
             PositionCaretIndex();
             this.oldUser = u;
             this.user = u;
@@ -39,9 +41,9 @@ namespace Gallium_v1.Vue
         /// <summary>
         /// Charge dans la comboBox tous les élements de l'énumration rang utilisatuer
         /// </summary>
-        private void ChargeListCategorie()
+        private void ChargeListRole()
         {
-            foreach (Rang element in Enum.GetValues(typeof(Rang)))
+            foreach (String element in Role.Roles)
             {
                 roleUser.Items.Add(element);
             }

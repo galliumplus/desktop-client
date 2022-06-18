@@ -115,7 +115,7 @@
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\ListUser.cs" />
     <Compile Include="Logique\Product.cs" />
-    <Compile Include="Logique\Rang.cs" />
+    <Compile Include="Logique\Role.cs" />
     <Compile Include="Logique\Stock.cs" />
     <Compile Include="Logique\Acompte.cs" />
     <Compile Include="Logique\User.cs" />
