@@ -53,6 +53,12 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.29.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.29\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -127,6 +133,9 @@
     <Compile Include="Vue\Frame\CompteFrame.xaml.cs">
       <DependentUpon>CompteFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vue\Frame\StatFrame.xaml.cs">
+      <DependentUpon>StatFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vue\Frame\StockFrame.xaml.cs">
       <DependentUpon>StockFrame.xaml</DependentUpon>
     </Compile>
@@ -167,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue\Frame\CompteFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue\Frame\StatFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +246,7 @@
     <Resource Include="Vue\Assets\logoTwitter.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Logique\Graphique\" />
     <Folder Include="Logique\Utilsateur\" />
   </ItemGroup>
   <ItemGroup>
