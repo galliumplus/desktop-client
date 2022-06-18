@@ -37,7 +37,7 @@ namespace Gallium_v1.Data
                     nom = dbsDAO.Reader.GetString("nomUser");
                     prenom = dbsDAO.Reader.GetString("prenomUser");
                 }
-                user = new User(nom, prenom);
+                user = new User(nom, prenom, identifiant);
             }
             else
             {

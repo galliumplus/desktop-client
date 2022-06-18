@@ -12,7 +12,7 @@ namespace Gallium_v1.Logique
         /// <summary>
         /// Identifiant de l'utilisateur
         /// </summary>
-        public string Identifiant
+        public string IdentifiantUser
         { 
             get => identifiant; 
             set => identifiant = value; 
@@ -23,16 +23,31 @@ namespace Gallium_v1.Logique
         /// <summary>
         /// Nom de l'utilisateur
         /// </summary>
-        public string Nom { get => nom; set => nom = value; }
+        public string NomUser 
+        { 
+            get => nom; 
+            set => nom = value; 
+        }
+
 
         private string prenom;
         /// <summary>
         /// Prénom de l'utilisateur
         /// </summary>
-        public string Prenom 
+        public string PrenomUser 
         { 
             get => prenom; 
             set => prenom = value; 
+        }
+
+        private Rang rang;
+        /// <summary>
+        /// Rang de l'utilisateur
+        /// </summary>
+        public Rang RangUser
+        {
+            get => rang;
+            set => rang = value;
         }
 
         /// <summary>
@@ -40,10 +55,11 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nom"> nom de l'utilisateur </param>
         /// <param name="prenom"> prénom de l'utilisateur </param>
-        public User(string nom, string prenom) // manque un rôle
+        public User(string nom, string prenom, string identifiant) // manque un rôle
         {
             this.nom = nom;
             this.prenom = prenom;
+            this.identifiant = identifiant;
 
         }
 

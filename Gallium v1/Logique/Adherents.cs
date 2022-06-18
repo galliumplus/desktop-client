@@ -9,15 +9,15 @@ namespace Gallium_v1.Logique
     public static class Adherents
     {
         
-        private static List<Acompte> users = new List<Acompte>();
+        private static List<Acompte> acomptes = new List<Acompte>();
         /// <summary>
         /// Liste des utilisateurs
         /// </summary>
-        public static List<Acompte> Users 
+        public static List<Acompte> Acomptes
         { 
             get 
             { 
-                return users; 
+                return acomptes; 
             } 
         }
 
@@ -26,9 +26,9 @@ namespace Gallium_v1.Logique
         /// Permet d'ajouter un utilisateur
         /// </summary>
         /// <param name="nom"></param>
-        public static void ajoutUser(String nom,string prenom,string compte,double balance,string password)
+        public static void ajoutAcompte(String nom,string prenom,string compte,double balance,string password)
         {
-            users.Add(new Acompte(nom,prenom,compte,balance,password));
+            acomptes.Add(new Acompte(nom,prenom,compte,balance,password));
         }
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nomProduit"></param>
         /// <returns></returns>
-        public static Acompte findUser(string nomUser)
+        public static Acompte findAcompte(string nomUser)
         {
             Acompte u = null;
-            foreach (Acompte p in users)
+            foreach (Acompte p in acomptes)
             {
                 if (p.Nom.ToUpper().Contains(nomUser.ToUpper()) || nomUser.ToUpper() == p.Compte.ToUpper())
                 {
@@ -59,16 +59,16 @@ namespace Gallium_v1.Logique
         /// Permet de supprimer un utilisateur
         /// </summary>
         /// <param name="user"></param>
-        public static void removeUser(Acompte user)
+        public static void removeAcompte(Acompte user)
         {
-            Users.Remove(user);
+            Acomptes.Remove(user);
         }
 
         public static string calculPlusGrosAcompte()
         {
             Acompte user = null;
 
-            foreach(Acompte p in users)
+            foreach(Acompte p in acomptes)
             {
                 if (user == null || p.Balance > user.Balance )
                 {

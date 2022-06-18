@@ -9,6 +9,111 @@
       Title="AdministrationFrame">
 
     <Grid>
-        <Label Content="Administration" HorizontalAlignment="Left" Margin="214,184,0,0"  Height="108" Width="348" HorizontalContentAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <ListBox x:Name="userList" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" >
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Nom des colonnes -->
+                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom</Label>
+                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Prénom</Label>
+                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Mail</Label>
+                                <Label Grid.Column="3" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Rang</Label>
+
+                                <!-- Intersection -->
+                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+
+                            </Grid>
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Content -->
+                            <Label Content="{Binding NomUser}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding PrenomUser}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding IdentifiantUser}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding RangUser}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+
+        <StackPanel Grid.Column="1"  Grid.Row="0" Margin="30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <TextBox Name="rechercheUser" Height="28"  Tag="Recherche..." Style="{StaticResource WaterMarkTextBox}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="Search"  />
+                <Image Source="/Vue/Assets/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
+
+            </Grid>
+
+            <!-- Information utilsiateur -->
+            <Grid>
+                <Border Name="InfoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
+                    <StackPanel>
+
+                        <TextBlock Text="Nom Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="nomUser" Text="" Margin="10,0,0,0"/>
+                        <TextBlock  Text="Prénom Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="prénomUser" Text="" Margin="10,0,0,0"/>
+                        <TextBlock Text="Identifiant Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="identifiantUser" Text="" Margin="10,0,0,0"/>
+                        <TextBlock Text="Rôle utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
+                        <TextBlock x:Name="roleUser" Text="" Margin="10,0,0,0"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifUser"/>
+                            <Button Content="Supprimer" Style="{StaticResource BoutonModif}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteUser"/>
+                        </Grid>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" />
     </Grid>
+
 </Page>

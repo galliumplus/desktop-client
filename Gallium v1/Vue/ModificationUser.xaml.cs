@@ -20,92 +20,63 @@ namespace Gallium_v1.Vue
     /// </summary>
     public partial class ModificationUser : Window
     {
-        private Acompte user;
+        private User oldUser;
+        private User user;
+        public User User { get => user; set => user = value; }
 
-        /// <summary>
-        /// Utilisateur en cours de modification
-        /// </summary>
-        public Acompte User 
-        { 
-            get => user; 
-    
-        }
 
-        public ModificationUser(Acompte u)
+
+        public ModificationUser(User u)
         {
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            PositionCaretIndex();
+            this.oldUser = u;
             this.user = u;
-            this.chargeUser();
-            this.positionCaretIndex();
-            acompteUser.Focus();
-
-            
 
         }
 
         /// <summary>
-        /// Valide les modifications faite et de mettre à jour l'utilisateur
+        /// Charge dans la comboBox tous les élements de l'énumration rang utilisatuer
         /// </summary>
-        /// <Author> Damien.C </Author>
-        private void ValiderModif(object sender, RoutedEventArgs e)
+        private void ChargeListCategorie()
         {
-            // demande si l'utilisateur est sur de la modification
-            MessageBoxResult validation = MessageBox.Show("Vous allez modifier cet utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-            
-            if (validation.Equals(MessageBoxResult.OK))
+            foreach (Rang element in Enum.GetValues(typeof(Rang)))
             {
-                double balance = Convert.ToDouble(this.balanceUser.Text);
-                user.Compte = this.acompteUser.Text;
-                user.Nom = this.nomUser.Text;
-                user.Prenom = this.prénomUser.Text;
-                user.Balance = balance;
-                this.Close();
+                roleUser.Items.Add(element);
             }
         }
 
         /// <summary>
-        /// Permet d'annuler les modifications
+        /// Initialise position du Caret
         /// </summary>
-        /// <Author> Damien.C </Author>
-        private void AnnulerModif(object sender, RoutedEventArgs e)
+        private void PositionCaretIndex()
         {
-            this.Close();
-        }
 
-        /// <summary>
-        /// Méthode qui charge les informations de l'acompte
-        /// </summary>
-        /// <Author> Damien.C </Author>
-        private void chargeUser()
-        {
-            this.acompteUser.Text = this.user.Compte;
-            this.nomUser.Text = this.user.Nom;
-            this.prénomUser.Text = this.user.Prenom;
-            this.balanceUser.Text = this.user.Balance.ToString();
-        }
-
-        /// <summary>
-        /// Empêche l'utilisateur de mettre des lettres dans la textebox
-        /// </summary>
-        /// <Author> Damien.C</Author>
-        private void balanceUserTextChanged(object sender, TextCompositionEventArgs e)
-        {
-            var tb = sender as TextBox;
-            e.Handled = !double.TryParse(tb.Text + e.Text, out double d);
-        }
-
-        /// <summary>
-        /// Position du caret dans le texte
-        /// </summary>
-        private void positionCaretIndex()
-        {
-           
-            acompteUser.CaretIndex = acompteUser.Text.Length;
+            identifiantUser.CaretIndex = identifiantUser.Text.Length;
             nomUser.CaretIndex = nomUser.Text.Length;
             prénomUser.CaretIndex = prénomUser.Text.Length;
-            balanceUser.CaretIndex = balanceUser.Text.Length;
             mdpUser.CaretIndex = mdpUser.Text.Length;
+        }
+
+        private void ValiderModif(object sender, RoutedEventArgs e)
+        {
+            // demande si l'utilisateur est sur de la modification
+            MessageBoxResult validation = MessageBox.Show("Vous allez modifier ct utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+
+            if (validation.Equals(MessageBoxResult.OK))
+            {
+                user.IdentifiantUser = identifiantUser.Text;
+                user.PrenomUser = prénomUser.Text;
+                // manque rang
+                user.NomUser = nomUser.Text;
+                this.Close();
+            }
+        }
+
+        private void AnnulerModif(object sender, RoutedEventArgs e)
+        {
+            this.User = this.oldUser;
+            this.Close();
         }
     }
 }

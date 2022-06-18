@@ -59,6 +59,7 @@ namespace Gallium_v1.Vue
                 this.produit.NomProduit = this.produitName.Text;
                 this.produit.Stock = Convert.ToInt32(this.stock.Text);
                 this.produit.PrixProduitAdhérent = Convert.ToDouble(this.prixAdherent.Text);
+                // manque catégorie
                 this.Close();
             }
         }
