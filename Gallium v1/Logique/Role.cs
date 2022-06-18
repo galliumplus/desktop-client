@@ -25,6 +25,41 @@ namespace Gallium_v1.Logique
             get => role;
         }
 
+        public static int RoleValue(string role)
+        {
+            int value = 0;
+
+            switch (role)
+            {
+                case "Administrateur":
+                    value = 0;
+                    break;
+                case "Président":
+                    value = 1;
+                    break ;
+                case "Vice-Président":
+                    value = 2;
+                    break;
+                case "Secrétaire":
+                    value = 3;
+                    break;
+                case "Responsable Communication":
+                    value = 4;
+                    break;
+                case "Vice-Responsable Communication":
+                    value = 5;
+                    break;
+                case "Trésorier":
+                    value = 6;
+                    break;
+                case "Vice-Trésorier":
+                    value = 7;
+                    break;
+
+            }
+
+            return value;
+        }
 
     }
 }
