@@ -1,4 +1,5 @@
-﻿using Gallium_v1.Logique;
+﻿using Gallium_v1.Data;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,16 +27,19 @@ namespace Gallium_v1.Vue
         {
             InitializeComponent();
             Username.Focus();
-            Adherents.ajoutUser("MARTEAU", "Florian", "fm427410", 100, "caca");
-            Adherents.ajoutUser("CHABRET", "Damien", "dc393609", 10, "caca");
-            Adherents.ajoutUser("BADET", "matteo", "petitemerde", 0, "caca");
-            Adherents.ajoutUser("ROURAT", "Aimeric", "ar00000", 30, "caca");
-            Adherents.ajoutUser("Resin", "Nicos", "rn000000", 10000, "caca");
-            Adherents.ajoutUser("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
+            Adherents.ajoutAcompte("MARTEAU", "Florian", "fm427410", 100, "caca");
+            Adherents.ajoutAcompte("CHABRET", "Damien", "dc393609", 10, "caca");
+            Adherents.ajoutAcompte("BADET", "matteo", "petitemerde", 0, "caca");
+            Adherents.ajoutAcompte("ROURAT", "Aimeric", "ar00000", 30, "caca");
+            Adherents.ajoutAcompte("Resin", "Nicos", "rn000000", 10000, "caca");
+            Adherents.ajoutAcompte("Legrand", "Simonax", "pitiemonsieur", -30, "caca");
             Stock.ajoutProduit("Cafe", 35.00, "test", Category.BOISSON, 100);
             Stock.ajoutProduit("Chips", 0.80, "test", Category.SNACKS, 10);
             Stock.ajoutProduit("Monster", 3.50, "test", Category.BOISSON, 1);
             Stock.ajoutProduit("Kit Kat", 7.00, "test", Category.SNACKS, 35);
+            ListUser.AjouteUser("Damien", "Chabret", "damienchab.p@gmail.com", Rang.ADMINISTRATEUR);
+            ListUser.AjouteUser("Flo", "dzdz", "feur", Rang.ADMINISTRATEUR);
+            ListUser.AjouteUser("matteo", "badet", "quoi ?", Rang.ADMINISTRATEUR);
 
         }
 
@@ -66,9 +70,14 @@ namespace Gallium_v1.Vue
         /// <Author> Damien.C </Author>
         private void ConnexionToAccount()
         {
-            GalliumFenetre gallium = new GalliumFenetre();
-            this.Close();
-            gallium.Show();
+            dbsDAO.Instance.OpenDataBase();
+            if (UserDAO.ConnexionUser(Username.Text, Password.Password) != null)
+            {
+                GalliumFenetre gallium = new GalliumFenetre();
+                this.Close();
+                gallium.Show();
+            }
+
         }
 
         /// <summary>

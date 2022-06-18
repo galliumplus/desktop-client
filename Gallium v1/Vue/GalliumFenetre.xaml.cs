@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gallium_v1.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -105,6 +106,7 @@ namespace Gallium_v1.Vue
         private void DéconnexionFrame_Click(object sender, RoutedEventArgs e)
         {
             ConnexionFenetre connexion = new ConnexionFenetre();
+            dbsDAO.Instance.CloseDatabase();
             this.Close();
             connexion.Show();
         }
