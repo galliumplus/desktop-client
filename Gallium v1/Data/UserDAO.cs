@@ -23,9 +23,10 @@ namespace Gallium_v1.Data
         public static User ConnexionUser(string identifiant, string mdp)
         {
             User user = null;
+            string requete = $"SELECT identifiant, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identifiant}\" and password = \"{mdp}\";";
 
             // Requêtes
-            dbsDAO.Instance.RequeteSQL($"select identifiant, nom, prenom, password from `User` where identifiant = \"{identifiant}\" and password = \"{mdp}\";");
+            dbsDAO.Instance.RequeteSQL(requete);
             dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
 
             // Vérifie s'il y a des résultats
@@ -33,12 +34,15 @@ namespace Gallium_v1.Data
             {
                 string nom = "";
                 string prenom = "";
+                string role = "";
                 while (dbsDAO.Reader.Read()) // Tant qu'il lit
                 {
                     nom = dbsDAO.Reader.GetString("nom");
                     prenom = dbsDAO.Reader.GetString("prenom");
+                    role = dbsDAO.Reader.GetString("nomrole");
+                    
                 }
-                user = new User(nom, prenom, identifiant);
+                user = new User(nom, prenom, identifiant, role);
             }
             else
             {
@@ -52,9 +56,10 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Créer l'utilisateur
         /// </summary>
-        public static void CreateUser()
+        public static void CreateUser(string identifiant, string password, string nom, string prenom, int idRole)
         {
-
+            string requete = $"Insert into User values(null, \"{identifiant}\", \"{password}\", \"{nom}\", \"{prenom}\",{idRole})";
+            dbsDAO.Instance.RequeteSQL(requete);
         }
 
 
@@ -83,7 +88,7 @@ namespace Gallium_v1.Data
             List<User> users = new List<User>();
 
             // Requête
-            string requete = "Select * from User";
+            string requete = "SELECT idUser, identifiant, nom, prenom, nomRole FROM User INNER join Role on User.idRole = Role.idRole";
 
             // Lecture de la requête
             dbsDAO.CMD = new MySqlCommand(requete, dbsDAO.Instance.Sql);
@@ -91,7 +96,7 @@ namespace Gallium_v1.Data
 
             while (dbsDAO.Reader.Read())
             {
-                users.Add(new User(dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"),dbsDAO.Reader.GetString("identifiant")));
+                users.Add(new User(dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"),dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nomRole")));
                 
             }
             dbsDAO.Reader.Close();

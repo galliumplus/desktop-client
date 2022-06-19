@@ -13,35 +13,43 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Gallium_v1.Vue
+namespace Gallium_v1.Vue.Modification
 {
     /// <summary>
     /// Logique d'interaction pour ModificationUser.xaml
     /// </summary>
     public partial class ModificationUser : Window
     {
-        private User oldUser;
+        private User oldUser; // Mémorise les informations de base de l'utilisateur en cas de modification qui soit annulés
         private User user;
+
+        /// <summary>
+        /// Utilisateur 
+        /// </summary>
         public User User { get => user; set => user = value; }
-
-
 
         public ModificationUser(User u)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            PositionCaretIndex();
+
+            // Initialise l'utilisateur 
             this.oldUser = u;
             this.user = u;
+
+            ChargeListRole();
+            ChargeUser();
+            PositionCaretIndex();
+
 
         }
 
         /// <summary>
         /// Charge dans la comboBox tous les élements de l'énumration rang utilisatuer
         /// </summary>
-        private void ChargeListCategorie()
+        private void ChargeListRole()
         {
-            foreach (Rang element in Enum.GetValues(typeof(Rang)))
+            foreach (String element in Role.Roles)
             {
                 roleUser.Items.Add(element);
             }
@@ -79,5 +87,14 @@ namespace Gallium_v1.Vue
             this.User = this.oldUser;
             this.Close();
         }
+
+        private void ChargeUser()
+        {
+            identifiantUser.Text = user.IdentifiantUser;
+            nomUser.Text = user.NomUser;
+            prénomUser.Text = user.PrenomUser;
+            roleUser.SelectedIndex = Role.RoleValue(user.RangUser);
+        }
+
     }
 }

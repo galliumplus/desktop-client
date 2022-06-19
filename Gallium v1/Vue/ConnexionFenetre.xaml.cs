@@ -74,6 +74,10 @@ namespace Gallium_v1.Vue
                 this.Close();
                 gallium.Show();
             }
+            else
+            {
+                dbsDAO.Instance.CloseDatabase();
+            }
 
         }
 

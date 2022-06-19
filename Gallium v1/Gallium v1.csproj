@@ -115,7 +115,7 @@
     <Compile Include="Logique\Category.cs" />
     <Compile Include="Logique\ListUser.cs" />
     <Compile Include="Logique\Product.cs" />
-    <Compile Include="Logique\Rang.cs" />
+    <Compile Include="Logique\Role.cs" />
     <Compile Include="Logique\Stock.cs" />
     <Compile Include="Logique\Acompte.cs" />
     <Compile Include="Logique\User.cs" />
@@ -143,13 +143,16 @@
     <Compile Include="Vue\GalliumFenetre.xaml.cs">
       <DependentUpon>GalliumFenetre.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\ModificationProduct.xaml.cs">
-      <DependentUpon>ModificationProduct.xaml</DependentUpon>
+    <Compile Include="Vue\Modification\AjoutUser.xaml.cs">
+      <DependentUpon>AjoutUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\ModificationAcompte.xaml.cs">
+    <Compile Include="Vue\Modification\ModificationAcompte.xaml.cs">
       <DependentUpon>ModificationAcompte.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\ModificationUser.xaml.cs">
+    <Compile Include="Vue\Modification\ModificationProduct.xaml.cs">
+      <DependentUpon>ModificationProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vue\Modification\ModificationUser.xaml.cs">
       <DependentUpon>ModificationUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vue\Test.xaml.cs">
@@ -198,15 +201,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\ModificationProduct.xaml">
+    <Page Include="Vue\Modification\AjoutUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\ModificationAcompte.xaml">
+    <Page Include="Vue\Modification\ModificationAcompte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\ModificationUser.xaml">
+    <Page Include="Vue\Modification\ModificationProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue\Modification\ModificationUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

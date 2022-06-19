@@ -1,4 +1,5 @@
 ﻿using Gallium_v1.Logique;
+using Gallium_v1.Vue.Modification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
