@@ -37,12 +37,17 @@ namespace Gallium_v1.Vue.Modification
             this.pasword = pwd;
         }
 
+        /// <summary>
+        /// Vérifie que l'utilisateur est le bon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void VérificationUser(object sender, RoutedEventArgs e)
         {
             // si l'utiliateur modifié à le même identifiant et même mdp qu'entrée alors modification possible, sinon niet
             string actualIdentifiant = identifiant.Text;
-            string actualPassword = mdp.Text;
-            if (pasword == "") pasword = mdp.Text;
+            string actualPassword = mdp.Password;
+            if (pasword == "") pasword = mdp.Password;
 
             // Si l'utilisateur et le mdp est bon
             if (UserDAO.ReadUser(actualIdentifiant, actualPassword) != null)
@@ -56,6 +61,11 @@ namespace Gallium_v1.Vue.Modification
             {
                 MessageBox.Show("Mauvais mot de passe ou mauvais identifiant");
             }
+        }
+
+        private void Annuler(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
             
     }

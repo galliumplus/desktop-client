@@ -75,16 +75,13 @@ namespace Gallium_v1.Vue.Modification
             user.NomUser = nomUser.Text;
 
             Validation modif = new Validation(user, mdpUser.Password);
+            this.Hide();
             modif.ShowDialog();
+            this.Show();
             if (modif.Réel == true)
             {
-
                 this.Close();
-                
-            }
-            else
-            {
-                MessageBox.Show("Vous ne pouvez pas modifier cet utilisateur.", "Modifier l'utilisateur", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("L'utilisateur à été modifié !", "Utilisateur modifié", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             
         }
