@@ -1,5 +1,4 @@
-﻿using Gallium_v1.Data;
-using Gallium_v1.Logique;
+﻿using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +28,10 @@ namespace Gallium_v1.Vue.Modification
         /// <summary>
         /// Utilisateur en cours de modification
         /// </summary>
-        public User User 
-        { 
+        public User User
+        {
             get => user;
-            set => user = value; 
+            set => user = value;
         }
 
         public ModificationUser(User u)
@@ -83,10 +82,10 @@ namespace Gallium_v1.Vue.Modification
             // manque rang
             user.NomUser = nomUser.Text;
 
-            Validation modif = new Validation(user, mdpUser.Password);
+            ValidationUser modif = new ValidationUser(user, mdpUser.Password, "Update");
             this.Hide();
             modif.ShowDialog();
-            
+
             if (modif.Réel == true)
             {
                 this.Close();
@@ -96,7 +95,7 @@ namespace Gallium_v1.Vue.Modification
             {
                 this.ShowDialog();
             }
-            
+
         }
 
         /// <summary>

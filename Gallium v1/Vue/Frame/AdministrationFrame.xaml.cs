@@ -93,8 +93,12 @@ namespace Gallium_v1.Vue.Frame
             MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utiliateur ?", $"Supression de {u.PrenomUser}", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                UserDAO.DeleteUser(u.IdentifiantUser);
-                MessageBox.Show("Utilisateur supprimé !", $"Supression de {u.PrenomUser}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                ValidationUser validation = new ValidationUser(u,"Delete");
+                validation.ShowDialog();
+                if (validation.Réel == true)
+                {
+                    MessageBox.Show("Utilisateur supprimé !", $"Supression de {u.PrenomUser}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
                 this.userList.UnselectAll();
                 this.UpdateListUsers();
                 InfoUser.Visibility = Visibility.Hidden;

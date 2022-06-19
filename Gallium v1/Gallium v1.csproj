@@ -155,8 +155,8 @@
     <Compile Include="Vue\Modification\ModificationUser.xaml.cs">
       <DependentUpon>ModificationUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\Modification\Validation.cs.xaml.cs">
-      <DependentUpon>Validation.cs.xaml</DependentUpon>
+    <Compile Include="Vue\Modification\ValidationUser.cs.xaml.cs">
+      <DependentUpon>ValidationUser.cs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vue\Test.xaml.cs">
       <DependentUpon>Test.xaml</DependentUpon>
@@ -220,7 +220,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vue\Modification\Validation.cs.xaml">
+    <Page Include="Vue\Modification\ValidationUser.cs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
