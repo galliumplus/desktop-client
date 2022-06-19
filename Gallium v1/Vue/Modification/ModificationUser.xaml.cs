@@ -69,23 +69,18 @@ namespace Gallium_v1.Vue.Modification
 
         private void ValiderModif(object sender, RoutedEventArgs e)
         {
+            user.IdentifiantUser = identifiantUser.Text;
+            user.PrenomUser = prénomUser.Text;
+            // manque rang
+            user.NomUser = nomUser.Text;
 
             Validation modif = new Validation(user);
             modif.ShowDialog();
             if (modif.Réel == true)
             {
-                // demande si l'utilisateur est sur de la modification
-                MessageBoxResult validation = MessageBox.Show("Vous allez modifier cet utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
-                if (validation.Equals(MessageBoxResult.OK))
-                {
-                    user.IdentifiantUser = identifiantUser.Text;
-                    user.PrenomUser = prénomUser.Text;
-                    // manque rang
-                    user.NomUser = nomUser.Text;
-                    user = UserDAO.UpdateUser("", "", identifiantUser.Text, mdpUser.Password, nomUser.Text, prénomUser.Text, roleUser.SelectedIndex);
-                    this.Close();
-                }
+                this.Close();
+                
             }
             else
             {

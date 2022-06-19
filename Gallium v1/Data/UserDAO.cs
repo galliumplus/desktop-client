@@ -29,7 +29,7 @@ namespace Gallium_v1.Data
             // Requêtes
             dbsDAO.Instance.RequeteSQL(requete);
 
-            if (ReadUser(identifiant, mdp).Count != 0)
+            if (ReadUser(identifiant, mdp) != null)
             {
                 infoUser = ReadUser(identifiant, mdp);
                 user = new User(infoUser[0], infoUser[2], infoUser[3], infoUser[4]);
@@ -81,7 +81,7 @@ namespace Gallium_v1.Data
         /// <param name="mdp"> mot de passe de l'utilisateur </param>
         public static List<string> ReadUser(string identif, string mdp)
         {
-            List<String> user = new List<string>();
+            List<String> user = null;
             string requete = $"SELECT identifiant, password, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identif}\" and password = \"{mdp}\";";
 
             dbsDAO.Instance.RequeteSQL(requete);
@@ -103,11 +103,16 @@ namespace Gallium_v1.Data
                     prenom = dbsDAO.Reader.GetString("prenom");
                     role = dbsDAO.Reader.GetString("nomrole");
                 }
-                user.Add(identifiant);
-                user.Add(password);
-                user.Add(nom);
-                user.Add(prenom);
-                user.Add(role);
+
+                // Information de l'utilisateur
+                user = new List<string>()
+                {
+                    identifiant,
+                    password,
+                    nom,
+                    prenom,
+                    role
+                };
             }
             dbsDAO.Reader.Close();
 
@@ -130,7 +135,7 @@ namespace Gallium_v1.Data
 
             while (dbsDAO.Reader.Read())
             {
-                users.Add(new User(dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"),dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nomRole")));
+                users.Add(new User(dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"), dbsDAO.Reader.GetString("nomRole")));
                 
             }
             dbsDAO.Reader.Close();

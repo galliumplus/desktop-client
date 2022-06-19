@@ -10,13 +10,13 @@
         Background="#252422"
         ResizeMode="NoResize">
     <Grid>
-        <Label Content="Pour valider, entre identifiant et mdp" HorizontalAlignment="Left" Margin="143,58,0,0" VerticalAlignment="Top"/>
-        <TextBlock Width="100" Height="20" Text="identifiant" Margin="45,117,305,147"/>
+        <Label Content="Pour valider, entre identifiant et mdp" HorizontalAlignment="Left" Margin="143,58,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock Width="100" Height="20" Text="identifiant" Margin="45,117,305,147" Foreground="White"/>
         <TextBox Name="identifiant" HorizontalAlignment="Left" Margin="45,142,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
 
-        <TextBlock Width="100" Height="20" Text="mdp" Margin="245,114,105,150"/>
+        <TextBlock Width="100" Height="20" Text="mdp" Margin="245,114,105,150" Foreground="White"/>
         <TextBox Name="mdp" HorizontalAlignment="Left" Margin="235,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="60,249,0,0" VerticalAlignment="Top" Height="25" Width="175" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Height="25" Width="174" Click="VérificationUser"/>
 
     </Grid>
 </Window>
