@@ -17,13 +17,19 @@ using System.Windows.Shapes;
 namespace Gallium_v1.Vue.Modification
 {
     /// <summary>
-    /// Logique d'interaction pour Validation.xaml
+    /// Fenetre pour valider la modification
     /// </summary>
+    /// <Author> Damien.C </Author>
     public partial class Validation : Window
     {
+        // Information utilisateur
         User user;
         string pasword;
+
         private bool réel;
+        /// <summary>
+        /// Permet de savoir si l'utilisateur a été modifié ou non
+        /// </summary>
         public bool Réel
         {
             get => réel;
@@ -38,24 +44,22 @@ namespace Gallium_v1.Vue.Modification
         }
 
         /// <summary>
-        /// Vérifie que l'utilisateur est le bon
+        /// Modifie l'utilisateur si il a le bon mot de passe et identifiant
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void VérificationUser(object sender, RoutedEventArgs e)
         {
-            // si l'utiliateur modifié à le même identifiant et même mdp qu'entrée alors modification possible, sinon niet
             string actualIdentifiant = identifiant.Text;
             string actualPassword = mdp.Password;
+            // Si le mot de passe est vide alors garder l'actuel
             if (pasword == "") pasword = mdp.Password;
 
-            // Si l'utilisateur et le mdp est bon
+            // Si l'utilisateur & mdp est bon faire modif
             if (UserDAO.ReadUser(actualIdentifiant, actualPassword) != null)
             {
+                // Modifie l'utilisateur
                 user = UserDAO.UpdateUser(actualIdentifiant, actualPassword, user.IdentifiantUser, pasword , user.NomUser, user.PrenomUser, Role.RoleValue(user.RangUser) + 1);
                 this.réel = true;
                 this.Close();
-                
             }
             else
             {
@@ -63,10 +67,23 @@ namespace Gallium_v1.Vue.Modification
             }
         }
 
+        /// <summary>
+        /// Ferme la fenêtre
+        /// </summary>
         private void Annuler(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-            
+
+        /// <summary>
+        /// Lance la méthode pour se connecter quand on appuie sur une touche 
+        /// </summary>
+        private void EntreeDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.VérificationUser(sender, e);
+            }
+        }
     }
 }

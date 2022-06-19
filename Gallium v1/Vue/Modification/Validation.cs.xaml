@@ -24,7 +24,7 @@
             <TextBox Name="identifiant" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Margin="0,0,0,20"/>
 
             <TextBlock HorizontalAlignment="Center" Text="mdp"  Foreground="White"/>
-            <PasswordBox Name="mdp" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+            <PasswordBox Name="mdp" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" KeyDown="EntreeDown"/>
             
         </StackPanel>
 
