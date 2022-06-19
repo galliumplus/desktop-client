@@ -127,7 +127,6 @@
                 </Grid>
 
             </Grid>
-            <Button x:Name="AllumerGallium" Content="Allumer BOT ETIQ" Click="AllumerGaliumMethode" Grid.Column="4" Grid.Row="4"/>
         </Grid>
     </Viewbox>
 </Page>

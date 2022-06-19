@@ -264,8 +264,6 @@
 
 
 
-
-
         <!-- TexteBox modification / Abandonné pour le moment -->
         <Style x:Key="ModificationTextBox" TargetType="TextBox" >
             <Setter Property="Background" Value="#85827D" />
