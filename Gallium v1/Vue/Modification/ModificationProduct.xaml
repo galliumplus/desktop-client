@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Height="300" 
         Width="450"
-        Icon="Assets/Icone/modifIcon.jpg"
         Background="#252422"
         ResizeMode="NoResize">
     <Grid>

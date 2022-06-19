@@ -1,4 +1,5 @@
-﻿using Gallium_v1.Logique;
+﻿using Gallium_v1.Data;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,22 +65,33 @@ namespace Gallium_v1.Vue.Modification
             identifiantUser.CaretIndex = identifiantUser.Text.Length;
             nomUser.CaretIndex = nomUser.Text.Length;
             prénomUser.CaretIndex = prénomUser.Text.Length;
-            mdpUser.CaretIndex = mdpUser.Text.Length;
         }
 
         private void ValiderModif(object sender, RoutedEventArgs e)
         {
-            // demande si l'utilisateur est sur de la modification
-            MessageBoxResult validation = MessageBox.Show("Vous allez modifier ct utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Information);
 
-            if (validation.Equals(MessageBoxResult.OK))
+            Validation modif = new Validation(user);
+            modif.ShowDialog();
+            if (modif.Réel == true)
             {
-                user.IdentifiantUser = identifiantUser.Text;
-                user.PrenomUser = prénomUser.Text;
-                // manque rang
-                user.NomUser = nomUser.Text;
-                this.Close();
+                // demande si l'utilisateur est sur de la modification
+                MessageBoxResult validation = MessageBox.Show("Vous allez modifier cet utilisateur.", "Modifier l'utilisateur ?", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+                if (validation.Equals(MessageBoxResult.OK))
+                {
+                    user.IdentifiantUser = identifiantUser.Text;
+                    user.PrenomUser = prénomUser.Text;
+                    // manque rang
+                    user.NomUser = nomUser.Text;
+                    user = UserDAO.UpdateUser("", "", identifiantUser.Text, mdpUser.Password, nomUser.Text, prénomUser.Text, roleUser.SelectedIndex);
+                    this.Close();
+                }
             }
+            else
+            {
+                MessageBox.Show("Vous ne pouvez pas modifier cet utilisateur.", "Modifier l'utilisateur", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            
         }
 
         private void AnnulerModif(object sender, RoutedEventArgs e)

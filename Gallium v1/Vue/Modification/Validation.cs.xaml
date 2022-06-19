@@ -1,0 +1,22 @@
+﻿<Window x:Class="Gallium_v1.Vue.Modification.Validation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gallium_v1.Vue.Modification"
+        mc:Ignorable="d"
+        Height="300" 
+        Width="450"
+        Background="#252422"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Pour valider, entre identifiant et mdp" HorizontalAlignment="Left" Margin="143,58,0,0" VerticalAlignment="Top"/>
+        <TextBlock Width="100" Height="20" Text="identifiant" Margin="45,117,305,147"/>
+        <TextBox Name="identifiant" HorizontalAlignment="Left" Margin="45,142,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+
+        <TextBlock Width="100" Height="20" Text="mdp" Margin="245,114,105,150"/>
+        <TextBox Name="mdp" HorizontalAlignment="Left" Margin="235,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="60,249,0,0" VerticalAlignment="Top" Height="25" Width="175" Click="Button_Click"/>
+
+    </Grid>
+</Window>
