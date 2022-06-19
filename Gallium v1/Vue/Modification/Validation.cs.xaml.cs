@@ -22,17 +22,19 @@ namespace Gallium_v1.Vue.Modification
     public partial class Validation : Window
     {
         User user;
+        string pasword;
         private bool réel;
         public bool Réel
         {
             get => réel;
         }
 
-        public Validation(User user)
+        public Validation(User user, string pwd)
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
             this.user = user;
+            this.pasword = pwd;
         }
 
         private void VérificationUser(object sender, RoutedEventArgs e)
@@ -40,11 +42,12 @@ namespace Gallium_v1.Vue.Modification
             // si l'utiliateur modifié à le même identifiant et même mdp qu'entrée alors modification possible, sinon niet
             string actualIdentifiant = identifiant.Text;
             string actualPassword = mdp.Text;
+            if (pasword == "") pasword = mdp.Text;
 
             // Si l'utilisateur et le mdp est bon
             if (UserDAO.ReadUser(actualIdentifiant, actualPassword) != null)
             {
-                user = UserDAO.UpdateUser(actualIdentifiant, actualPassword, user.IdentifiantUser, "" , user.NomUser, user.PrenomUser, Role.RoleValue(user.RangUser) + 1);
+                user = UserDAO.UpdateUser(actualIdentifiant, actualPassword, user.IdentifiantUser, pasword , user.NomUser, user.PrenomUser, Role.RoleValue(user.RangUser) + 1);
                 this.réel = true;
                 this.Close();
                 

@@ -74,7 +74,7 @@ namespace Gallium_v1.Vue.Modification
             // manque rang
             user.NomUser = nomUser.Text;
 
-            Validation modif = new Validation(user);
+            Validation modif = new Validation(user, mdpUser.Password);
             modif.ShowDialog();
             if (modif.Réel == true)
             {
