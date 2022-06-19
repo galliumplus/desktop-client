@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="90*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
             <ListBox x:Name="userList" HorizontalContentAlignment="Stretch" Margin="0" VerticalContentAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="False" SelectionChanged="SelectItem" >
@@ -113,7 +113,7 @@
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" Margin="5" Click="AddUser"/>
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Click="AddUser" Style="{StaticResource BoutonAjoutStyle}"/>
     </Grid>
 
 </Page>

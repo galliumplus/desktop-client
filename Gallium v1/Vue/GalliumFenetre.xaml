@@ -38,8 +38,8 @@
                     <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource BoutonEcranprincipale}" Click="CaisseFrame_Click"/>
                     <Button Tag="Acompte" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource BoutonEcranprincipale}" Click="AcompteFrame_Click"/>
                     <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource BoutonEcranprincipale}" Click="StockFrame_Click" />
-                    <Button Tag="Compte" x:Name="CompteFrame" Content="Compte" Style="{StaticResource BoutonEcranprincipale}" Click="CompteFrame_Click" />
                     <Button Tag="Administration" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource BoutonEcranprincipale}" Click="AdministrationFrame_Click"/>
+                    <Button Tag="Compte" x:Name="CompteFrame" Content="Compte" Style="{StaticResource BoutonEcranprincipale}" Click="CompteFrame_Click" />
                     <Button x:Name="Test" Content="Test" Click="TestPage" />
                 </StackPanel>
 

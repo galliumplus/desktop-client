@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
@@ -104,7 +104,7 @@
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Width="120" />
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Style="{StaticResource BoutonAjoutStyle}"  />
     </Grid>
 
 </Page>

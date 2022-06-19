@@ -185,7 +185,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="Black" />
+                            <Border x:Name="border21" CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="Black" />
                             <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </Grid>
                     </ControlTemplate>
@@ -228,17 +228,42 @@
             </Style.Triggers>
         </Style>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        <!-- Bouton ajout -->
+        <Style x:Key="BoutonAjoutStyle" TargetType="Button" >
+            <Setter Property="Background" Value="#252422" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Height" Value="45" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="borderButton" BorderBrush="#252422" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="10,30,10,0" />
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+                
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="#252422" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+
+
+
+
+
+
 
 
         <!-- TexteBox modification / Abandonné pour le moment -->
