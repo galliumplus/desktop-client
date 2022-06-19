@@ -113,7 +113,7 @@
             </Grid>
 
         </StackPanel>
-        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton"  Click="AddUser" Style="{StaticResource BoutonAjoutStyle}"/>
+        <Button Content="Ajouter" Grid.Row="2" x:Name="addButton" Click="AddUser" Style="{StaticResource BoutonAjoutStyle}"/>
     </Grid>
 
 </Page>

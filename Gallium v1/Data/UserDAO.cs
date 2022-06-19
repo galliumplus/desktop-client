@@ -75,9 +75,10 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Modifie l'utilisateur
         /// </summary>
-        public static void UpdateUser()
+        public static void UpdateUser(string actualIdentifiant, string actualMdp, string newidentifiant, string password, string nom, string prénom, int idRole)
         {
-
+            string requete = $"UPDATE User SET identifiant=\"{newidentifiant}\",password=\"{password}\",nom=\"{nom}\",prenom=\"{prénom}\",idRole={idRole} WHERE identifiant = \"{actualIdentifiant}\" and password = \"{actualMdp}\"";
+            dbsDAO.Instance.RequeteSQL(requete);
         }
 
         /// <summary>
