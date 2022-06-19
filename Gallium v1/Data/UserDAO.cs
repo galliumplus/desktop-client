@@ -23,26 +23,16 @@ namespace Gallium_v1.Data
         public static User ConnexionUser(string identifiant, string mdp)
         {
             User user = null;
+            List<string> infoUser = null;
             string requete = $"SELECT identifiant, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identifiant}\" and password = \"{mdp}\";";
 
             // Requêtes
             dbsDAO.Instance.RequeteSQL(requete);
-            dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
 
-            // Vérifie s'il y a des résultats
-            if (dbsDAO.Reader.HasRows == true)
+            if (ReadUser(identifiant, mdp).Count != 0)
             {
-                string nom = "";
-                string prenom = "";
-                string role = "";
-                while (dbsDAO.Reader.Read()) // Tant qu'il lit
-                {
-                    nom = dbsDAO.Reader.GetString("nom");
-                    prenom = dbsDAO.Reader.GetString("prenom");
-                    role = dbsDAO.Reader.GetString("nomrole");
-                    
-                }
-                user = new User(nom, prenom, identifiant, role);
+                infoUser = ReadUser(identifiant, mdp);
+                user = new User(infoUser[0], infoUser[2], infoUser[3], infoUser[4]);
             }
             else
             {
@@ -81,6 +71,46 @@ namespace Gallium_v1.Data
             dbsDAO.Instance.RequeteSQL(requete);
 
             User user = new User(nom, prénom, newidentifiant, Role.Roles[idRole]);
+            return user;
+        }
+
+        /// <summary>
+        /// lis l'utilisateur souhaité
+        /// </summary>
+        /// <param name="identifiant"> identifiant de l'utilisateur </param>
+        /// <param name="mdp"> mot de passe de l'utilisateur </param>
+        public static List<string> ReadUser(string identif, string mdp)
+        {
+            List<String> user = new List<string>();
+            string requete = $"SELECT identifiant, password, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identif}\" and password = \"{mdp}\";";
+
+            dbsDAO.Instance.RequeteSQL(requete);
+            dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
+
+            // Vérifie s'il y a des résultats
+            if (dbsDAO.Reader.HasRows == true)
+            {
+                string identifiant = "";
+                string password = "";
+                string nom = "";
+                string prenom = "";
+                string role = "";
+                while (dbsDAO.Reader.Read()) // Tant qu'il lit
+                {
+                    identifiant = dbsDAO.Reader.GetString("identifiant");
+                    password = dbsDAO.Reader.GetString("password");
+                    nom = dbsDAO.Reader.GetString("nom");
+                    prenom = dbsDAO.Reader.GetString("prenom");
+                    role = dbsDAO.Reader.GetString("nomrole");
+                }
+                user.Add(identifiant);
+                user.Add(password);
+                user.Add(nom);
+                user.Add(prenom);
+                user.Add(role);
+            }
+            dbsDAO.Reader.Close();
+
             return user;
         }
 

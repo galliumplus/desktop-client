@@ -63,7 +63,7 @@ namespace Gallium_v1.Logique
         /// </summary>
         /// <param name="nom"> nom de l'utilisateur </param>
         /// <param name="prenom"> prénom de l'utilisateur </param>
-        public User(string nom, string prenom, string identifiant, string role) // manque un rôle
+        public User(string identifiant, string nom, string prenom, string role) // manque un rôle
         {
             this.nom = nom;
             this.prenom = prenom;
