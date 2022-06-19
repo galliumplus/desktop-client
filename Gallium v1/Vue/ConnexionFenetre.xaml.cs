@@ -68,9 +68,10 @@ namespace Gallium_v1.Vue
         private void ConnexionToAccount()
         {
             dbsDAO.Instance.OpenDataBase();
-            if (UserDAO.ConnexionUser(Username.Text, Password.Password) != null)
+            User u = UserDAO.ConnexionUser(Username.Text, Password.Password);
+            if (u != null)
             {
-                GalliumFenetre gallium = new GalliumFenetre();
+                GalliumFenetre gallium = new GalliumFenetre(u);
                 this.Close();
                 gallium.Show();
             }

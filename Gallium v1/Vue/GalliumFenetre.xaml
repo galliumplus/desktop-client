@@ -76,8 +76,8 @@
 
                     <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="Assets/PhotoProfil/DogoPp.png" Width="auto" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <StackPanel Grid.Column="1" Margin="10">
-                        <Label Content="Nom prénom" FontSize="15" FontWeight="Bold"/>
-                        <Label  Content="Arabe" FontSize="15" FontWeight="DemiBold" />
+                        <Label Name="NomUtilisateur" Content="Nom prénom" FontSize="15" FontWeight="Bold"/>
+                        <Label Name="RoleUtilisateur" Content="Arabe" FontSize="15" FontWeight="DemiBold" />
                     </StackPanel>
 
                 </Grid>

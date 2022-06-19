@@ -51,6 +51,14 @@ namespace Gallium_v1.Logique
         }
 
         /// <summary>
+        /// Nom complet de l'utilisateur
+        /// </summary>
+        public string NomComplet
+        {
+            get => $"{NomUser} {PrenomUser}";
+        }
+
+        /// <summary>
         /// Constructeur de l'utilisateur
         /// </summary>
         /// <param name="nom"> nom de l'utilisateur </param>

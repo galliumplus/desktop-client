@@ -1,4 +1,5 @@
 ﻿using Gallium_v1.Data;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,11 +22,15 @@ namespace Gallium_v1.Vue
     /// </summary>
     public partial class GalliumFenetre : Window
     {
-        public GalliumFenetre()
+        // Utilisateur connecté à gallium
+        private User actualUser;
+
+        public GalliumFenetre(User u)
         {
             InitializeComponent();
             this.AccueilFrame.Focus();
-            ChargementPhotoDeProfil();
+            actualUser = u;
+            ChargementProfil();
         }
 
 
@@ -112,12 +117,14 @@ namespace Gallium_v1.Vue
         }
 
         /// <summary>
-        /// méthode qui permet de charger aléatoirement une photo de profil
+        /// Charge le profil
         /// </summary>
         /// <Author> Damien.C </Author>
-        private void ChargementPhotoDeProfil()
+        private void ChargementProfil()
         {
             Random random = new Random();
+            NomUtilisateur.Content = actualUser.NomComplet;
+            RoleUtilisateur.Content = actualUser.RangUser; 
 
             // Recupère toutes les photos du dossier PhotoProfil
             string[] files = Directory.GetFiles("./Vue/Assets/PhotoProfil", "*.png");
