@@ -64,7 +64,8 @@
                     <Label Content="0" Foreground="White" FontSize="13" Margin="60,45,0,0" Name="QuantityOrdered"/>
                     <Label Content="Prix TTC :" Foreground="White" Margin="0,60,0,0" FontSize="13"/>
                     <Label Content="0.00 €" Foreground="White" FontSize="13" Margin="60,60,0,0" Name="Price"/>
-                    <Grid Height="30" Margin="0,70,0,0" MouseEnter="Buy_MouseEnter" MouseLeave="Buy_MouseLeave">
+                    <CheckBox Name="AdherCheck" Content="Adhérent ?" Foreground="White" Margin="10,80,0,0" Click="AdherCheck_Click"/>
+                    <Grid Height="30" Margin="0,90,0,0" MouseEnter="Buy_MouseEnter" MouseLeave="Buy_MouseLeave">
                         <Rectangle Fill="Black"/>
                         <Label Content="Payer" HorizontalAlignment="Center" Foreground="White"/>
                     </Grid>

@@ -21,7 +21,14 @@ namespace Gallium_v1.Vue.Frame
     /// </summary>
     public partial class CaisseFrame : Page
     {
-        List<Product> orderedItem = new List<Product>(); 
+        private List<Product> orderedItem = new List<Product>();
+        private int quantityO =0;
+        private double priceO =0.00;
+
+        public int QuantityO { get => quantityO; set => quantityO = value; }
+        public string PriceAdher { get => priceO+"€";}
+        public string PriceNanAdher { get => priceO - (0.20 * quantityO) + "€"; }
+
         public CaisseFrame()
         {
             InitializeComponent();
@@ -72,10 +79,14 @@ namespace Gallium_v1.Vue.Frame
             {
                 if (orderedItem[i].NomProduit == (string)gd.Tag)
                 {
+                    priceO -= orderedItem[i].PrixProduitAdhérent;
                     orderedItem.RemoveAt(i);
+                    quantityO--;
                 }
             }
-
+            this.QuantityOrdered.Content = Convert.ToString(QuantityO);
+            if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
+            else this.Price.Content = PriceNanAdher;
             UpdateListProduitsOrder();
         }
 
@@ -89,8 +100,13 @@ namespace Gallium_v1.Vue.Frame
                 if (p.NomProduit == prodName)
                 {
                     orderedItem.Add(p);
+                    quantityO++;
+                    priceO += p.PrixProduitAdhérent;
                 }
             }
+            this.QuantityOrdered.Content = Convert.ToString(QuantityO);
+            if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
+            else this.Price.Content = PriceNanAdher;
             UpdateListProduitsOrder();
         }
 
@@ -98,6 +114,12 @@ namespace Gallium_v1.Vue.Frame
         {
             this.Order.ItemsSource = null;
             this.Order.ItemsSource = orderedItem;
+        }
+
+        private void AdherCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
+            else this.Price.Content = PriceNanAdher;
         }
     }
 }
