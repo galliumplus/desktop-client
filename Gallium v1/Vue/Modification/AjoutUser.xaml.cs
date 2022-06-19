@@ -41,18 +41,24 @@ namespace Gallium_v1.Vue.Modification
 
         private void AddUser(object sender, RoutedEventArgs e)
         {
-            if (identifiant.Text != "" && nom.Text != "" && prénom.Text != "" && mdp1.Password != "" && mdp1.Password == mdp2.Password)
+            if (identifiant.Text != "" && nom.Text != "" && prénom.Text != "" && roleUser.ItemsSource != null && mdp1.Password != "" && mdp1.Password == mdp2.Password)
             {
                 error.Content = "";
                 int role = roleUser.SelectedIndex + 1;
                 UserDAO.CreateUser(identifiant.Text, mdp1.Password, nom.Text, prénom.Text, role);
+                this.Close();
             }
             else if (mdp1.Password != mdp2.Password)
             {
-                error.Content = "Mdp 1 et mdp2 pas pareil";
+                error.Content = "Les mots de passe doivent être identiques";
             }
+            else if (identifiant.Text == "" || nom.Text == "" || prénom.Text == "" || mdp1.Password != "")
+            {
+                error.Content = "Les champs ne peuvent pas être vide";
+            }
+            
 
-            this.Close();
+            
             
         }
     }

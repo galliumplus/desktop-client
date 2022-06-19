@@ -90,7 +90,7 @@ namespace Gallium_v1.Vue.Frame
             }
 
             // Message demandant si vous voulez vraiment supprimer le produit
-            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer ce produit ?", $"Supression de {u.PrenomUser}", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet utiliateur ?", $"Supression de {u.PrenomUser}", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 UserDAO.DeleteUser(u.IdentifiantUser);
