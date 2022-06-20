@@ -43,6 +43,11 @@ namespace Gallium_v1.Vue.Frame
             System.Diagnostics.Process.Start("https://discord.com/login");
         }
 
+        private void IsInstaClicked(object sender, MouseEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://instagram.com/etiq_dijon/");
+        }
+
         private void B_MouseEnter(object sender, MouseEventArgs e)
         {
             Grid gd = sender as Grid;

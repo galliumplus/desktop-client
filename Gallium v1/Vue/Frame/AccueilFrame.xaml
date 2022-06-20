@@ -105,9 +105,10 @@
             <!-- Séparation en trois de la case -->
             <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4">
                 <Grid.ColumnDefinitions >
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0" Name="Res_Drive" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
@@ -120,9 +121,14 @@
                     <Image MouseDown="IsTwitterClicked" Source="/Vue/Assets/Icone/twitterIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Twitter" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/> -->
                 </Grid>
-                <Grid Grid.Column="2" Grid.Row="4" Name="Res_Insta" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
+                <Grid Grid.Column="2" Grid.Row="4" Name="Res_Discord" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
                     <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
-                    <Image MouseDown="IsDiscordClicked"  Source="/Vue/Assets/Icone/IconDiscordProvisoire.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Image MouseDown="IsDiscordClicked"  Source="/Vue/Assets/Icone/discordIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
+                </Grid>
+                <Grid Grid.Column="3" Grid.Row="4" Name="Res_Insta" MouseEnter="B_MouseEnter" MouseLeave="B_MouseLeave">
+                    <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
+                    <Image MouseDown="IsInstaClicked"  Source="/Vue/Assets/Icone/instaIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
                 </Grid>
 
