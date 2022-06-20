@@ -1,5 +1,4 @@
-﻿using Gallium_v1.Data;
-using Gallium_v1.Logique;
+﻿using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +16,23 @@ using System.Windows.Shapes;
 namespace Gallium_v1.Vue.Modification
 {
     /// <summary>
-    /// Logique d'interaction pour ModificationUser.xaml
+    /// Fenetre de modification de l'utilisateur
     /// </summary>
+    /// <Author> Damien C.</Author>
     public partial class ModificationUser : Window
     {
-        private User oldUser; // Mémorise les informations de base de l'utilisateur en cas de modification qui soit annulés
-        private User user;
+        // Mémorise les informations de base de l'utilisateur en cas de modification qui soit annulés
+        private User oldUser;
 
+        private User user;
         /// <summary>
-        /// Utilisateur 
+        /// Utilisateur en cours de modification
         /// </summary>
-        public User User { get => user; set => user = value; }
+        public User User
+        {
+            get => user;
+            set => user = value;
+        }
 
         public ModificationUser(User u)
         {
@@ -46,7 +51,7 @@ namespace Gallium_v1.Vue.Modification
         }
 
         /// <summary>
-        /// Charge dans la comboBox tous les élements de l'énumration rang utilisatuer
+        /// Charge dans la comboBox tous les roles existants
         /// </summary>
         private void ChargeListRole()
         {
@@ -67,6 +72,9 @@ namespace Gallium_v1.Vue.Modification
             prénomUser.CaretIndex = prénomUser.Text.Length;
         }
 
+        /// <summary>
+        /// Evènement qui se lance quand l'utilisateur veut valider ses modifications
+        /// </summary>
         private void ValiderModif(object sender, RoutedEventArgs e)
         {
             user.IdentifiantUser = identifiantUser.Text;
@@ -74,24 +82,34 @@ namespace Gallium_v1.Vue.Modification
             // manque rang
             user.NomUser = nomUser.Text;
 
-            Validation modif = new Validation(user, mdpUser.Password);
+            ValidationUser modif = new ValidationUser(user, mdpUser.Password, "Update");
             this.Hide();
             modif.ShowDialog();
-            this.Show();
+
             if (modif.Réel == true)
             {
                 this.Close();
                 MessageBox.Show("L'utilisateur à été modifié !", "Utilisateur modifié", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            
+            else
+            {
+                this.ShowDialog();
+            }
+
         }
 
+        /// <summary>
+        /// Evenement qui se passe quand l'utilisateur veut annuler les modifications
+        /// </summary>
         private void AnnulerModif(object sender, RoutedEventArgs e)
         {
             this.User = this.oldUser;
             this.Close();
         }
 
+        /// <summary>
+        /// Charge l'utilisateur 
+        /// </summary>
         private void ChargeUser()
         {
             identifiantUser.Text = user.IdentifiantUser;

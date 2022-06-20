@@ -12,6 +12,7 @@ namespace Gallium_v1.Data
     /// <summary>
     /// Classe qui permet de créer une connexion avec la database
     /// </summary>
+    /// <Author> Damien C.</Author>
     public class dbsDAO
     {
         #region attribut
@@ -66,13 +67,12 @@ namespace Gallium_v1.Data
         public MySqlConnection Sql { get => sql; set => sql = value; }
 
         /// <summary>
-        /// Permet la connexion
+        /// Permet la connexion au serveur
         /// </summary>
         private dbsDAO()
         {
             try
             {
-                //sql = new MySqlConnection($"SERVER={InformationConnexion.Server};PORT={InformationConnexion.Port};UID={InformationConnexion.Uid};PWD={InformationConnexion.Pwd};DATABASE={InformationConnexion.Databases};SSLMODE=NONE");
                 sql = new MySqlConnection(Environment.GetEnvironmentVariable("ServeurGallium", EnvironmentVariableTarget.User));
                     
             }
@@ -101,44 +101,32 @@ namespace Gallium_v1.Data
             isConnected = false;
         }
 
-        /// <summary>
-        /// Modifie la base de donnée
-        /// </summary>
-        /// <param name="requete"> requete sql </param>
-        public void RequeteSQL(string requete)
-        {
-            cmd = new MySqlCommand(requete, sql);
-            cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear(); 
-        }
-
        /// <summary>
        /// Interoge la base de donnée
        /// </summary>
        /// <param name="requete"> requête sql </param>
-       /// <returns> une ligne </returns>
+       /// <returns> résultat de la requête </returns>
        public string FetchSQL(string requete)
        {
             
             cmd = new MySqlCommand(requete, sql);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
-
-
             return cmd.ToString();
        }
 
 
-
+        /// <summary>
+        /// Intéroge la base de donnée / Risque de ne pas être fonctionnel
+        /// </summary>
+        /// <param name="requete"></param>
+        /// <returns> les résultats de la requêtes </returns>
         public List<String> FetchAllSQL(string requete)
         {
             List<String> list = new List<String>();
 
             this.FetchSQL(requete);
             reader = cmd.ExecuteReader();
-            
-            
-
             reader.Close();
 
             return list;

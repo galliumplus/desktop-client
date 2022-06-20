@@ -1,4 +1,4 @@
-﻿<Window x:Class="Gallium_v1.Vue.Modification.Validation"
+﻿<Window x:Class="Gallium_v1.Vue.Modification.ValidationUser"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -24,7 +24,7 @@
             <TextBox Name="identifiant" HorizontalAlignment="Center"  TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Margin="0,0,0,20"/>
 
             <TextBlock HorizontalAlignment="Center" Text="mdp"  Foreground="White"/>
-            <PasswordBox Name="mdp" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+            <PasswordBox Name="mdp" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" KeyDown="EntreeDown"/>
             
         </StackPanel>
 

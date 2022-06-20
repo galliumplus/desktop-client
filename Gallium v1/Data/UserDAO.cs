@@ -12,14 +12,14 @@ namespace Gallium_v1.Data
     /// <summary>
     /// Interaction avec l'utilisateur sur la base de donnée
     /// </summary>
-    public class UserDAO
+    /// <Author> Damien.C </Author>
+    public static class UserDAO
     {
         /// <summary>
         /// Permet la connexion de l'utilisateur sur gallium
         /// </summary>
         /// <param name="identifiant"> Identifiant de connexion </param>
         /// <param name="mdp"> mot de passe de l'identifiant </param>
-        /// <Author> Damien C.</Author>
         public static User ConnexionUser(string identifiant, string mdp)
         {
             User user = null;
@@ -27,7 +27,7 @@ namespace Gallium_v1.Data
             string requete = $"SELECT identifiant, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identifiant}\" and password = \"{mdp}\";";
 
             // Requêtes
-            dbsDAO.Instance.RequeteSQL(requete);
+            dbsDAO.Instance.FetchSQL(requete);
 
             if (ReadUser(identifiant, mdp) != null)
             {
@@ -49,42 +49,52 @@ namespace Gallium_v1.Data
         public static void CreateUser(string identifiant, string password, string nom, string prenom, int idRole)
         {
             string requete = $"Insert into User values(null, \"{identifiant}\", \"{password}\", \"{nom}\", \"{prenom}\",{idRole})";
-            dbsDAO.Instance.RequeteSQL(requete);
+            dbsDAO.Instance.FetchSQL(requete);
         }
-
 
         /// <summary>
         /// Suprimme l'utilisateur
         /// </summary>
-        public static void DeleteUser(string identifiant)
+        /// <param name="identifiant"> Identifiant de l'utilisateur </param>
+        /// <param name="password"> Mot de passe de l'utilisateur </param>
+        public static void DeleteUser(string identifiant, string password)
         {
-            string requete = $"Delete from User where identifiant = \"{identifiant}\"";
-            dbsDAO.Instance.RequeteSQL(requete);
+            string requete = $"Delete from User where identifiant = \"{identifiant}\" and password = \"{password}\"";
+            dbsDAO.Instance.FetchSQL(requete);
         }
 
         /// <summary>
         /// Modifie l'utilisateur
         /// </summary>
-        public static User UpdateUser(string actualIdentifiant, string actualMdp, string newidentifiant, string password, string nom, string prénom, int idRole)
+        /// <param name="actualIdentifiant"> Identifiant actuel de l'utilisateur </param>
+        /// <param name="actualMdp"> Mot de passe actuel de l'utilisateur</param>
+        /// <param name="newIdentifiant"> Nouvelle identifiant</param>
+        /// <param name="newPassword"> Nouveau mot de passe</param>
+        /// <param name="newName"> Nouveau nom </param>
+        /// <param name="newNickname"> Nouveau prénom</param>
+        /// <param name="newIdRole"> Nouveau rôle </param>
+        /// <returns> L'utilisateur modifié </returns>
+        public static User UpdateUser(string actualIdentifiant, string actualMdp, string newIdentifiant, string newPassword, string newName, string newNickname, int newIdRole)
         {
-            string requete = $"UPDATE User SET identifiant=\"{newidentifiant}\",password=\"{password}\", nom=\"{nom}\",prenom=\"{prénom}\",idRole={idRole++} WHERE identifiant = \"{actualIdentifiant}\" and password = \"{actualMdp}\"";
-            dbsDAO.Instance.RequeteSQL(requete);
+            string requete = $"UPDATE User SET identifiant=\"{newIdentifiant}\",password=\"{newPassword}\", nom=\"{newName}\",prenom=\"{newNickname}\",idRole={newIdRole++} WHERE identifiant = \"{actualIdentifiant}\" and password = \"{actualMdp}\"";
+            dbsDAO.Instance.FetchSQL(requete);
 
-            User user = new User(nom, prénom, newidentifiant, Role.Roles[idRole]);
+            User user = new User(newIdentifiant, newName, newNickname, Role.Roles[newIdRole]);
             return user;
         }
 
         /// <summary>
         /// lis l'utilisateur souhaité
         /// </summary>
-        /// <param name="identifiant"> identifiant de l'utilisateur </param>
+        /// <param name="identif"> identifiant de l'utilisateur </param>
         /// <param name="mdp"> mot de passe de l'utilisateur </param>
+        /// <returns> Information de l'utilisateur </returns>
         public static List<string> ReadUser(string identif, string mdp)
         {
             List<String> user = null;
             string requete = $"SELECT identifiant, password, nom, prenom, nomrole FROM User INNER join Role on User.idRole = Role.idRole where identifiant = \"{identif}\" and password = \"{mdp}\";";
 
-            dbsDAO.Instance.RequeteSQL(requete);
+            dbsDAO.Instance.FetchSQL(requete);
             dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
 
             // Vérifie s'il y a des résultats
@@ -95,8 +105,11 @@ namespace Gallium_v1.Data
                 string nom = "";
                 string prenom = "";
                 string role = "";
-                while (dbsDAO.Reader.Read()) // Tant qu'il lit
+
+                // Tant qu'il lit
+                while (dbsDAO.Reader.Read()) 
                 {
+                    // Donne les résultats aux variables selon les noms de colonnes
                     identifiant = dbsDAO.Reader.GetString("identifiant");
                     password = dbsDAO.Reader.GetString("password");
                     nom = dbsDAO.Reader.GetString("nom");
@@ -122,8 +135,10 @@ namespace Gallium_v1.Data
         /// <summary>
         /// Lis tous les utilisateurs de la base de donnée
         /// </summary>
+        /// <returns> Tous les utilisateurs </returns>
         public static List<User> ReadAllUser()
         {
+            // Liste des utilisateurs
             List<User> users = new List<User>();
 
             // Requête
@@ -133,10 +148,10 @@ namespace Gallium_v1.Data
             dbsDAO.CMD = new MySqlCommand(requete, dbsDAO.Instance.Sql);
             dbsDAO.Reader = dbsDAO.CMD.ExecuteReader();
 
+            // Tant qu'il lit
             while (dbsDAO.Reader.Read())
             {
                 users.Add(new User(dbsDAO.Reader.GetString("identifiant"), dbsDAO.Reader.GetString("nom"), dbsDAO.Reader.GetString("prenom"), dbsDAO.Reader.GetString("nomRole")));
-                
             }
             dbsDAO.Reader.Close();
 
