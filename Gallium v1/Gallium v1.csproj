@@ -264,6 +264,7 @@
     <Resource Include="caisseIcon.png" />
     <Resource Include="Vue\Assets\ImageProduit\bounty.png" />
     <Resource Include="Vue\Assets\Icone\IconDiscordProvisoire.png" />
+    <Resource Include="Vue\Assets\Icone\discordIcon.png" />
     <Content Include="Vue\Assets\PhotoProfil\DogoPp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
