@@ -35,6 +35,9 @@ namespace Gallium_v1.Vue.Frame
 
             productHandler.ItemsSource = Stock.StockProduits;
             Order.ItemsSource = orderedItem;
+
+            string[] moyenPayement = { "Acompte", "Paypal", "Carte" };
+            listeMoyenPayement.ItemsSource = moyenPayement;
         }
 
         private void Mouse_Enter(object sender, MouseEventArgs e)
@@ -74,15 +77,17 @@ namespace Gallium_v1.Vue.Frame
         private void Drop_Item_Order(object sender, MouseEventArgs e)
         {
             Grid gd = sender as Grid;
-
-            for(int i = 0; i < orderedItem.Count; i++)
+            int i = 0;
+            while(i < orderedItem.Count)
             {
                 if (orderedItem[i].NomProduit == (string)gd.Tag)
                 {
                     priceO -= orderedItem[i].PrixProduitAdhérent;
                     orderedItem.RemoveAt(i);
                     quantityO--;
+                    i=orderedItem.Count;
                 }
+                i++;
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);
             if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
@@ -95,6 +100,7 @@ namespace Gallium_v1.Vue.Frame
             Grid gd = sender as Grid;
             Label lab = gd.Children[1] as Label;
             string prodName = (string)lab.Content;
+
             foreach (Product p in Stock.StockProduits)
             {
                 if (p.NomProduit == prodName)
