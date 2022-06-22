@@ -131,8 +131,24 @@
                     <Image MouseDown="IsInstaClicked"  Source="/Vue/Assets/Icone/instaIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     <!-- <Label Content="Instagram" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Heavy" FontSize="25"/>-->
                 </Grid>
-
             </Grid>
+
+            <GroupBox Grid.Row="2" Grid.Column="4" Grid.RowSpan="4" Background="GhostWhite" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="2">
+                <GroupBox.Header>
+                    <Label Content="Bot Discord" HorizontalAlignment="Center" FontWeight="Thin"/>
+                </GroupBox.Header>
+                <GroupItem>
+                    <StackPanel>
+                        <Label Content=""/>
+                        <RadioButton Name="StateBot" Content="Etat du bot" HorizontalAlignment="Center" Foreground="Black" IsChecked="False" />
+                        <Label Content="" Name="errLabel" Foreground="Red"/>
+                        <Button Content="Allumer le bot" Click="Alu_Bot"/>
+                        <Button Content="Redémmarer le bot" Click="Redem_Bot"/>
+                        <Button Content="Eteindre le bot" Click="Etein_Bot"/>
+                    </StackPanel>
+                </GroupItem>
+            </GroupBox>
+
         </Grid>
     </Viewbox>
 </Page>

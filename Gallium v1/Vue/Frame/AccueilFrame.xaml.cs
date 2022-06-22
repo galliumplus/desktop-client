@@ -1,4 +1,5 @@
-﻿using Gallium_v1.Logique;
+﻿using BotETIQ;
+using Gallium_v1.Logique;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,6 +61,20 @@ namespace Gallium_v1.Vue.Frame
             Grid gd = sender as Grid;
             Rectangle rect = gd.Children[0] as Rectangle;
             rect.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#302F2F");
+        }
+        private void Alu_Bot(object sender, RoutedEventArgs e)
+        {
+            ConfigBot.BotState = true;
+            StateBot.IsChecked = ConfigBot.BotState;
+        }
+        private void Etein_Bot(object sender, RoutedEventArgs e)
+        {
+            ConfigBot.BotState = false;
+            StateBot.IsChecked = ConfigBot.BotState;
+        }
+        private void Redem_Bot(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

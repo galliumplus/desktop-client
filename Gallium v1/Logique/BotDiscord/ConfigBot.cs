@@ -15,7 +15,12 @@ namespace BotETIQ
         private static string token = "OTg0ODU1Nzg1NTY3ODM0MjA1.G3YaLS.w3xlYieXP9UI_CWf3TQRrZWfyCkOrxPJ7__XBw";
         private static string channelETIQ = "957715276139479223";
         private static string channelPersonnel = "986048980729348096";
+        private static string database = "";
+        private static string host = "";
+        private static string user = "";
+        private static string password = "";
         private static int port = 3306;
+        private static bool botState = false;
 
         /// <summary>
         /// Identifiant du bot discord
@@ -24,6 +29,11 @@ namespace BotETIQ
         { 
             get => token; 
             set => token = value; 
+        }
+        public static bool BotState
+        {
+            get => botState;
+            set => botState = value;
         }
 
         #region salon discord
