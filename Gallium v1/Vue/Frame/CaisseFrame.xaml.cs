@@ -27,7 +27,7 @@ namespace Gallium_v1.Vue.Frame
 
         public int QuantityO { get => quantityO; set => quantityO = value; }
         public string PriceAdher { get => priceO+"€";}
-        public string PriceNanAdher { get => priceO - (0.20 * quantityO) + "€"; }
+        public string PriceNanAdher { get => priceO + (0.20 * quantityO) + "€"; }
 
         public CaisseFrame()
         {
@@ -90,8 +90,10 @@ namespace Gallium_v1.Vue.Frame
                 i++;
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);
+            if (quantityO == 0) priceO = 0.00;
             if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
             else this.Price.Content = PriceNanAdher;
+            
             UpdateListProduitsOrder();
         }
 
