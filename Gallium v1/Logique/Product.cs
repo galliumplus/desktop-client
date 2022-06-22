@@ -54,6 +54,15 @@ namespace Gallium_v1.Logique
         public int Stock { get => stock; set => stock = value; }
         public string ImageProduit { get => imageProduit; set => imageProduit = value; }
 
+        public string StockAffichage { get {
+                if(stock == 0)
+                {
+                    return "Stock : RUPTURE";
+                } else return "Stock : " + stock; 
+            } }
+        public string PrixProduitAdherentAffichage { get => "Prix A : " + prixProduitAdhérent + "€"; }
+        public string PrixProduitNonAdherentAffichage { get => $"Prix NA : " + prixProduitNonAdhérent + "€"; }
+
 
         /// <summary>
         /// Constructuer de la classe Product
@@ -70,10 +79,5 @@ namespace Gallium_v1.Logique
             this.categorie = category;
             this.Stock = stock;
         }
-
-        
-
-
-
     }
 }

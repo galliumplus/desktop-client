@@ -24,11 +24,16 @@
                     <DataTemplate>
                         <Grid MouseEnter="Mouse_Enter" MouseLeave="Mouse_Leave" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="90*"/>
+                                <RowDefinition Height="50*"/>
                                 <RowDefinition Height="10*"/>
+                                <RowDefinition Height="40*"/>
                             </Grid.RowDefinitions>
                             <Image Source="{Binding ImageProduit}" Grid.Row="0"/>
-                            <Label Content="{Binding NomProduit}" HorizontalAlignment="Center" Grid.Row="1"/>
+                            <Label Content="{Binding NomProduit}" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"/>
+
+                            <Label Content="{Binding StockAffichage}" HorizontalAlignment="Left" FontSize="8" Grid.Row="2" Margin="0,-10,0,0"/>
+                            <Label Content="{Binding PrixProduitAdherentAffichage}" HorizontalAlignment="Left" FontSize="8" Grid.Row="2"/>
+                            <Label Content="{Binding PrixProduitNonAdherentAffichage}" HorizontalAlignment="Left" FontSize="8" Grid.Row="2" Margin="0,10,0,0"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
