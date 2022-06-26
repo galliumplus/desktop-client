@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Fenetre de sélection des pages -->
-        <Grid Grid.Column="0" Background="#252422" >
+        <Grid Grid.Column="0" Background="#252422">
             <Grid Margin="20,25">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*" Tag="Nom app"/>

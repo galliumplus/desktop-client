@@ -127,5 +127,7 @@ namespace Gallium_v1.Vue.Frame
             if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
             else this.Price.Content = PriceNanAdher;
         }
+
+       
     }
 }
