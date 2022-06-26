@@ -87,25 +87,47 @@
 
             <!-- Information utilsiateur -->
             <Grid>
-                <Border Name="InfoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
-                    <StackPanel>
+                <Border Name="InfoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
+                    <StackPanel >
+                        <!-- Nom -->
+                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="nomUser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
-                        <TextBlock Text="Nom Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="nomUser" Text="" Margin="10,0,0,0"/>
-                        <TextBlock  Text="Prénom Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="prénomUser" Text="" Margin="10,0,0,0"/>
-                        <TextBlock Text="Identifiant Utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="identifiantUser" Text="" Margin="10,0,0,0"/>
-                        <TextBlock Text="Rôle utilisateur" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="roleUser" Text="" Margin="10,0,0,0"/>
+                        <!-- Prénom -->
+                        <TextBlock Text="Prénom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="prénomUser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
+
+                        <!-- Identifiant -->
+                        <TextBlock Text="Identifiant" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="identifiantUser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
+
+                        <!-- Role utilisateur-->
+                        <TextBlock Text="Rôle" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="roleUser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifUser"/>
-                            <Button Content="Supprimer" Style="{StaticResource BoutonModif}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteUser"/>
+                            <Button Content="Modifier"  Style="{StaticResource boutonInfoItem}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifUser"/>
+                            <Button Content="Supprimer" Style="{StaticResource boutonInfoItem}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteUser"/>
                         </Grid>
 
                     </StackPanel>

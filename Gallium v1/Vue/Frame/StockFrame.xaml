@@ -78,25 +78,42 @@
 
             </Grid>
 
-            <!-- Information utilsiateur -->
+            <!-- Information stock -->
             <Grid>
-                <Border Name="InfoProduct" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2">
+                <Border Name="InfoProduct" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
                     <StackPanel>
 
-                        <TextBlock Text="Nom du produit" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="infoproduit" Text="" Margin="10,0,0,0"/>
-                        <TextBlock  Text="Prix Adhérent" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="prix" Text="" Margin="10,0,0,0"/>
-                        <TextBlock Text="Stock" HorizontalAlignment="Left" Margin="10" FontSize="20" TextDecorations="Underline" FontWeight="Bold"/>
-                        <TextBlock x:Name="stock" Text="" Margin="10,0,0,0"/>
+                        <!-- Nom utilisateur -->
+                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="infoproduit" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White"/>
+
+                        <!-- Nom utilisateur -->
+                        <TextBlock Text="Prix adhérent" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="prix" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
+
+                        <!-- Nom utilisateur -->
+                        <TextBlock Text="Stock" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="stock" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White"/>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            <Button Content="Modifier"  Style="{StaticResource BoutonModif}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifProduct"/>  
-                            <Button Content="Supprimer" Style="{StaticResource BoutonModif}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteProduct"/>
+                            <Button Content="Modifier"  Style="{StaticResource boutonInfoItem}" Grid.Column="0" Grid.Row="3" Width="150" Margin="20" HorizontalAlignment="Right" Click="ModifProduct"/>
+                            <Button Content="Supprimer" Style="{StaticResource boutonInfoItem}" Grid.Column="1" Grid.Row="3" Width="150" HorizontalAlignment="Left" Click="DeleteProduct"/>
                         </Grid>
                        
                     </StackPanel>
