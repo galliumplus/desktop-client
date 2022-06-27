@@ -113,13 +113,13 @@ namespace Gallium_v1.Vue.Modification
         /// </summary>
         private void RemoveProduct(object sender, RoutedEventArgs e)
         {
-            produit.Stock--;
-            this.stock.Text = produit.Stock.ToString();
-
-            while (this.stock.Equals(ClickMode.Press))
+            if (produit.Stock != 0)
             {
                 produit.Stock--;
+                this.stock.Text = produit.Stock.ToString();
             }
+            
+            
         }
 
 

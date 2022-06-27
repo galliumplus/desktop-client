@@ -76,7 +76,7 @@
         </Style>
 
         <!-- Boutons original  -->
-        <Style TargetType="Button" x:Key="boutonAcompteStock">
+        <Style TargetType="Button" x:Key="boutonInfoItem">
             <Setter Property="Height" Value="30" />
             <Setter Property="Width" Value="150" />
             <Setter Property="Foreground" Value="Black" />
@@ -100,7 +100,7 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
 
-                    <Setter Property="Foreground" Value="Orange" />
+                    <Setter Property="Background" Value="LightGray" />
                 </Trigger>
             </Style.Triggers>
 

@@ -81,32 +81,33 @@
             </Grid>
 
 
+            <!-- Info -->
             <Grid>
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2">
-                    <StackPanel Background="#F6711A">
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
+                    <StackPanel >
                         <!-- Nom utilisateur -->
-                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White">
+                        <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
                             <TextBlock.Effect>
                                 <DropShadowEffect Color="Black" ShadowDepth="2"/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="infouser" Text="" FontSize="20" Margin="10,0,0,0"/>
+                        <TextBlock x:Name="infouser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
                         <!-- Compte utilisateur -->
-                        <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" FontWeight="Bold" Foreground="White">
+                        <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" FontWeight="Bold" Foreground="White" TextDecorations="Underline">
                             <TextBlock.Effect>
                                 <DropShadowEffect Color="Black" ShadowDepth="2"/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="compte" Text="" FontSize="20" Margin="10,0,0,0" />
+                        <TextBlock x:Name="compte" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White"/>
 
                         <!-- Balance utilisateur -->
-                        <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" >
+                        <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
                             <TextBlock.Effect>
-                                <DropShadowEffect Color="Black" ShadowDepth="2"/>
+                                <DropShadowEffect Color="Black" ShadowDepth="2" />
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="balance" Text="" FontSize="20" Margin="10,0,0,0" />
+                        <TextBlock x:Name="balance" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
                         <!-- Définition colonne -->
                         <Grid>
@@ -115,8 +116,8 @@
                                 <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Name="modifAcompteBouton" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonAcompteStock}" Click="ModifAcompte"/>
-                            <Button Name="deleteAcompteBouton" Content="Supprimer" Width="150" Margin="10" HorizontalAlignment="Left"  Grid.Column="1" Style="{StaticResource boutonAcompteStock}" Click="DeleteAcompte" />
+                            <Button Name="modifAcompteBouton" Content="Modifier"  Width="150" Margin="10" HorizontalAlignment="Right" Grid.Column="0" Style="{StaticResource boutonInfoItem}" Click="ModifAcompte"/>
+                            <Button Name="deleteAcompteBouton" Content="Supprimer" Width="150" Margin="10" HorizontalAlignment="Left"  Grid.Column="1" Style="{StaticResource boutonInfoItem}" Click="DeleteAcompte" />
                         </Grid>
                     </StackPanel>
                 </Border>
