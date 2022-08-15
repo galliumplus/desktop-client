@@ -139,11 +139,7 @@ namespace Gallium_v1.Vue
             PhotoDeProfil.Source = sourceImage;
         }
 
-        private void TestPage(object sender, RoutedEventArgs e)
-        {
-            Test test = new Test();
-            test.Show();
-        }
+    
        
 
     }
