@@ -208,9 +208,6 @@
     <Compile Include="Vue\Modification\ValidationUser.cs.xaml.cs">
       <DependentUpon>ValidationUser.cs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vue\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
     <Page Include="Vue\ConnexionFenetre.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,10 +268,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue\Modification\ValidationUser.cs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vue\Test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
