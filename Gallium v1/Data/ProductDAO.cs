@@ -49,7 +49,7 @@ namespace Gallium_v1.Data
         /// Lis le produit voulu
         /// </summary>
         /// <returns> le produit voulu </returns>
-        public static List<string> ReadProduct()
+        public static List<string> ReadProduct(string identif, string mdp)
         {
             List<String> produit = null;
 
