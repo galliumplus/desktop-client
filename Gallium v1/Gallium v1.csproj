@@ -193,6 +193,9 @@
     <Compile Include="Vue\GalliumFenetre.xaml.cs">
       <DependentUpon>GalliumFenetre.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vue\Modification\AjoutAcompte.xaml.cs">
+      <DependentUpon>AjoutAcompte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vue\Modification\AjoutUser.xaml.cs">
       <DependentUpon>AjoutUser.xaml</DependentUpon>
     </Compile>
@@ -248,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vue\GalliumFenetre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vue\Modification\AjoutAcompte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,10 +328,7 @@
   <ItemGroup>
     <Resource Include="Vue\Assets\logoTwitter.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logique\Graphique\" />
-    <Folder Include="Logique\Utilsateur\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Vue\Assets\loupe.png" />
   </ItemGroup>
