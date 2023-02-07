@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Couche Métier\Couche Métier.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Frames\" />
-  </ItemGroup>
-
 </Project>

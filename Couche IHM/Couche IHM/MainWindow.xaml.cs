@@ -32,7 +32,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToAccueil(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameAccueil.xaml", UriKind.Relative);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameCaisse.xaml", UriKind.Relative);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToAdhérent(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameAdherent.xaml", UriKind.Relative);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameStock.xaml", UriKind.Relative);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToCompte(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameComptes.xaml", UriKind.Relative);
         }
         /// <summary>
         /// Permet d'aller sur la fenêtre des statistiques
@@ -81,7 +81,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToStatistique(object sender, RoutedEventArgs e)
         {
-
+            this.mainFrame.Source = new Uri("Frames/FrameStatistique.xaml", UriKind.Relative);
         }
     }
 }

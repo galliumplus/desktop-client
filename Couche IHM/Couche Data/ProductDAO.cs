@@ -1,4 +1,4 @@
-﻿using Gallium_v1.Logique;
+﻿
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Gallium_v1.Data
     /// </summary>
     public static class ProductDAO
     {
-
+        /*
         /// <summary>
         /// Créer un produit
         /// </summary>
@@ -115,5 +115,7 @@ namespace Gallium_v1.Data
 
             return produits;
         }
+    }
+        */
     }
 }
