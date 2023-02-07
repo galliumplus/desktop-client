@@ -1,0 +1,42 @@
+﻿<Window x:Class="Couche_IHM.ConnexionIHM"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Couche_IHM"
+        mc:Ignorable="d"
+        Title="Gallium - Connexion" 
+        Height="450" 
+        Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <!-- Connexion -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Background="Gray">
+            <!-- Nom de l'application -->
+            <TextBlock Text="Gallium" HorizontalAlignment="Center" Margin="10"/>
+            
+            <!-- Identifiant -->
+            <TextBlock Text="Identifiant" />
+            <TextBox x:Name="identifiantBox" Height="20" Margin="0, 0, 0, 10"/>
+            
+            <!-- Mot de passe -->
+            <TextBlock Text="Mot de passe" />
+            <TextBox x:Name="passwordBox" Height="20"/>
+
+            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10"/>
+        </StackPanel>
+    </Grid>
+
+   
+    
+</Window>
