@@ -10,11 +10,11 @@ namespace Gallium_v1.Data
     {
         
         // Information of database
-        private static string server = "45.90.160.99";
-        private static string databases = "c3TestDev";
-        private static string port = "3306";
-        private static string uid = "c3_gallium";
-        private static string pwd = "hb2T_GvhJ";
+        private static string server = "";
+        private static string databases = "";
+        private static string port = "";
+        private static string uid = "";
+        private static string pwd = "";
         
         public static string Server { get => server; set => server = value; }
         public static string Databases { get => databases; set => databases = value; }
