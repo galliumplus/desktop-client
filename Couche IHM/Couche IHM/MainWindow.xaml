@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Background="Black">
+            <Image />
+            <Separator Height="110" Background="Transparent"/>
 
+            <Button Content="Accueil" Margin="15" Click="GoToAccueil" />
+
+            <Button Content="Caisse" Margin="15" Click="GoToCaisse"/>
+            <Button Content="Adhérents" Margin="15" Click="GoToAdhérent"/>
+            <Button Content="Stock" Margin="15" Click="GoToStock"/>
+            <Button Content="Compte" Margin="15" Click="GoToCompte" />
+            <Button Content="Statistiques" Margin="15" Click="GoToStatistique" />
+        </StackPanel>
     </Grid>
 </Window>
