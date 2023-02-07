@@ -24,5 +24,64 @@ namespace Couche_IHM
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Permet d'aller sur la fenêtre de l'accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToAccueil(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Permet d'aller sur la fenêtre de la caisse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToCaisse(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Permet d'aller sur la fenêtre des adhérents
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToAdhérent(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Permet d'aller sur la fenêtre du stock
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToStock(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Permet d'aller sur la fenêtre des comptes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToCompte(object sender, RoutedEventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// Permet d'aller sur la fenêtre des statistiques
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GoToStatistique(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
