@@ -1,4 +1,4 @@
-﻿using Gallium_v1.Logique;
+﻿
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.Windows;
 
 namespace Gallium_v1.Data
 {
+    /*
     /// <summary>
     /// Interaction avec l'utilisateur sur la base de donnée
     /// </summary>
@@ -159,4 +160,5 @@ namespace Gallium_v1.Data
         }
 
     }
+    */
 }

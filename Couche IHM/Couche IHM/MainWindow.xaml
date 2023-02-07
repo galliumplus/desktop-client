@@ -8,10 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
+        
         <StackPanel Grid.Column="0" Background="Black">
             <Image />
             <Separator Height="110" Background="Transparent"/>
@@ -24,5 +24,7 @@
             <Button Content="Compte" Margin="15" Click="GoToCompte" />
             <Button Content="Statistiques" Margin="15" Click="GoToStatistique" />
         </StackPanel>
+
+        <Frame x:Name="mainFrame" Grid.Column="1" Source="Frames/FrameAccueil.xaml"/>
     </Grid>
 </Window>
