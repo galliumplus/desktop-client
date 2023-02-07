@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Couche_Métier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,32 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameAdherent : Page
     {
-        public FrameAdherent()
+        // Représente le manager des adhérents
+        private AdhérentManager adhérentManager;
+
+        
+
+        /// <summary>
+        /// Cosntructeur du frame adhérent
+        /// </summary>
+        /// <param name="adhérentManager">manager des adhérents</param>
+        public FrameAdherent(AdhérentManager adhérentManager)
         {
             InitializeComponent();
+            this.adhérentManager = adhérentManager;
+
+            // Met à jour l'affichage
+            UpdateView();
+        }
+
+
+        /// <summary>
+        /// Permet de mettre à jour la liste des adhérents
+        /// </summary>
+        private void UpdateView()
+        {
+            listAdhérents.ItemsSource = null;
+            listAdhérents.ItemsSource = adhérentManager.GetAdhérents();
         }
     }
 }

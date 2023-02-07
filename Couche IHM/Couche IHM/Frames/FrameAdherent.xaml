@@ -11,5 +11,6 @@
 
     <Grid>
         <TextBlock Text="Adherent" />
+        <ListView x:Name="listAdhérents" />
     </Grid>
 </Page>

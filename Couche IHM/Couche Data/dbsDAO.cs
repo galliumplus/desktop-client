@@ -102,34 +102,23 @@ namespace Gallium_v1.Data
         }
 
        /// <summary>
-       /// Interoge la base de donnée
+       /// Permet de récupérer des informations de la bdd
        /// </summary>
-       /// <param name="requete"> requête sql </param>
-       /// <returns> résultat de la requête </returns>
-       public string FetchSQL(string requete)
+       /// <param name="requete"></param>
+       /// <returns></returns>
+       public string Fetch(string requete)
        {
-            
-            cmd = new MySqlCommand(requete, sql);
-            cmd.ExecuteNonQuery();
-            cmd.Parameters.Clear();
-            return cmd.ToString();
+            return "";
        }
 
 
         /// <summary>
-        /// Intéroge la base de donnée / Risque de ne pas être fonctionnel
+        /// Permet d'executer une requête sur la bdd
         /// </summary>
-        /// <param name="requete"></param>
-        /// <returns> les résultats de la requêtes </returns>
-        public List<String> FetchAllSQL(string requete)
+        /// <param name="requete">requette en string</param>
+        public void Execute(string requete)
         {
-            List<String> list = new List<String>();
 
-            this.FetchSQL(requete);
-            reader = cmd.ExecuteReader();
-            reader.Close();
-
-            return list;
         }
     }
 }
