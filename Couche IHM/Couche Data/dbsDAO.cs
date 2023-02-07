@@ -71,16 +71,16 @@ namespace Gallium_v1.Data
         /// </summary>
         private dbsDAO()
         {
-            try
-            {
-                sql = new MySqlConnection(Environment.GetEnvironmentVariable("ServeurGallium", EnvironmentVariableTarget.User));
-                    
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Problème connexion à database");
-            }
+            this.ConnexionToBdd();
 
+        }
+
+        /// <summary>
+        /// Se connecte à la base de donnée
+        /// </summary>
+        private void ConnexionToBdd()
+        {
+            sql = new MySqlConnection("balb alba");
         }
 
         /// <summary>

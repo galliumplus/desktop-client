@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.32" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Couche Métier\Couche Métier.csproj" />
   </ItemGroup>
 
