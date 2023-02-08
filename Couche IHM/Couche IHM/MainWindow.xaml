@@ -25,6 +25,6 @@
             <Button Content="Statistiques" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToStatistique" />
         </StackPanel>
 
-        <Frame x:Name="mainFrame" Grid.Column="1" Source="Frames/FrameAccueil.xaml"/>
+        <Frame x:Name="mainFrame" Grid.Column="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

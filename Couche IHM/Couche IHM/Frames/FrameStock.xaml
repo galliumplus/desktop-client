@@ -12,10 +12,32 @@
       ShowsNavigationUI="False">
 
     <Grid>
-        <ListView x:Name="listStock">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Ligne 0 : Recherche -->
+        <TextBox x:Name="searchStock" Text="Place de recherche" Grid.Row="0" Margin="5" BorderBrush="Black" BorderThickness="2"/>
+
+        <!-- Ligne 1 - Colonne 0: Liste des stocks-->
+        <ListView x:Name="listStock" Grid.Row="1" Grid.Column="0">
             <ListView.View>
                 <GridView x:Name="GridViewStockControl" />
             </ListView.View>
         </ListView>
+        
+        <!-- Ligne 1 - Colonne 2 : Stock sélectionné -->
+        <StackPanel x:Name="productDetails" Grid.Row="1" Grid.Column="1">
+            <TextBlock x:Name="productName" Text="Nom produit" />
+            <TextBlock x:Name="productPrice" Text="Prix Produit Adhérent" />
+            <TextBlock x:Name="productQuantity" Text="Quantité produit" />
+            <TextBox x:Name="productCategory" Text="CategorieProduit" />
+        </StackPanel>
     </Grid>
 </Page>
