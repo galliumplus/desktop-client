@@ -25,11 +25,14 @@ namespace Couche_IHM
     {
         // Représente le manager des adhérents
         private AdhérentManager adherentManager;
+        // Manager de produits
+        private ProductManager productManager;
 
         public MainWindow()
         {
             InitializeComponent();
             this.adherentManager = new AdhérentManager(new FakeAdherentDao());
+            this.productManager = new ProductManager(new FakeProduitsDAO());
         }
 
         /// <summary>
@@ -69,7 +72,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Source = new Uri("Frames/FrameStock.xaml", UriKind.Relative);
+            this.mainFrame.Navigate(new FrameStock(this.productManager));
         }
 
         /// <summary>

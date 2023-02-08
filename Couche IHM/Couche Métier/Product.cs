@@ -75,6 +75,11 @@ namespace Couche_Métier
             this.categorie = categorie;
         }
 
-       
+        public override string ToString()
+        {
+            return $"{this.nomProduit} {this.quantite} {this.PrixAdherent} {categorie}";
+        }
+
+
     }
 }

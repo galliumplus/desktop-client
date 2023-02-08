@@ -6,13 +6,28 @@ using System.Threading.Tasks;
 
 namespace Couche_Métier
 {
+    /// <summary>
+    /// Manager de produit qui gère la DATA et le METIER
+    /// </summary>
     public class ProductManager
     {
         private List<Product> products;
+        /// <summary>
+        /// Liste des produits
+        /// </summary>
+        public List<Product> Products
+        {
+            get => products;
+            set => products = value;
+        }
 
-        public ProductManager()
+        private IProductDAO productDAO;
+
+        public ProductManager(IProductDAO productDAO)
         {
             this.products = new List<Product>();
+            this.productDAO = productDAO;
+            products = this.productDAO.GetProducts();
         }
 
         /// <summary>
@@ -21,6 +36,7 @@ namespace Couche_Métier
         public void CreateProduct(Product p)
         {
             products.Add(p);
+            productDAO.CreateProduct(p);
         }
 
         /// <summary>
@@ -29,13 +45,18 @@ namespace Couche_Métier
         public void RemoveProduct(Product p)
         {
             products.Remove(p); 
+            productDAO.RemoveProduct(p);
         }
 
         /// <summary>
         /// Update un produit
         /// </summary>
-        public void UpdateProduct()
+        public void UpdateProduct(Product p)
         {
+            Product actalProduit = this.GetProduct(p.NomProduit);
+            actalProduit = p;
+
+            productDAO.UpdateProduct(p);
 
         }
 

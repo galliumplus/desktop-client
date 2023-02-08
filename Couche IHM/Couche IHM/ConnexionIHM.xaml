@@ -23,17 +23,17 @@
         <!-- Connexion -->
         <StackPanel Grid.Column="1" Grid.Row="1" Background="Gray">
             <!-- Nom de l'application -->
-            <TextBlock Text="Gallium" HorizontalAlignment="Center" Margin="10"/>
+            <TextBlock Text="Gallium" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10"/>
             
             <!-- Identifiant -->
             <TextBlock Text="Identifiant" />
-            <TextBox x:Name="identifiantBox" Height="20" Margin="0, 0, 0, 10"/>
+            <TextBox x:Name="identifiantBox" Height="20" Margin="0, 0, 0, 10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             
             <!-- Mot de passe -->
-            <TextBlock Text="Mot de passe" />
-            <TextBox x:Name="passwordBox" Height="20"/>
+            <TextBlock Text="Mot de passe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <TextBox x:Name="passwordBox" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10"/>
+            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 
