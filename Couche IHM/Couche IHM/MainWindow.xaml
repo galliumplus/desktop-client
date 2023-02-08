@@ -8,21 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0" Background="Black">
+
+        <StackPanel Grid.Column="0" Background="#2e2e2a">
             <Image />
-            <Separator Height="110" Background="Transparent"/>
+            <Separator Height="90" Background="Transparent"/>
 
-            <Button Content="Accueil" Margin="15" Click="GoToAccueil" />
+            <Button Content="Accueil"  Style="{StaticResource buttonNavBar}"   Height="25" Margin="10,7,10,7"  Click="GoToAccueil"  />
 
-            <Button Content="Caisse" Margin="15" Click="GoToCaisse"/>
-            <Button Content="Adhérents" Margin="15" Click="GoToAdhérent"/>
-            <Button Content="Stock" Margin="15" Click="GoToStock"/>
-            <Button Content="Compte" Margin="15" Click="GoToCompte" />
-            <Button Content="Statistiques" Margin="15" Click="GoToStatistique" />
+            <Button Content="Caisse" Style="{StaticResource buttonNavBar}"   Height="25" Margin="10,7,10,7" Click="GoToCaisse"/>
+            <Button Content="Adherents" Style="{StaticResource buttonNavBar}" Height="25" Margin="10,7,10,7" Click="GoToAdhérent"/>
+            <Button Content="Stock" Style="{StaticResource buttonNavBar}"  Height="25" Margin="10,7,10,7" Click="GoToStock"/>
+            <Button Content="Compte" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToCompte" />
+            <Button Content="Statistiques" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToStatistique" />
         </StackPanel>
 
         <Frame x:Name="mainFrame" Grid.Column="1" Source="Frames/FrameAccueil.xaml"/>

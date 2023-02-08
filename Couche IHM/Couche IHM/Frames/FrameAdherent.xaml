@@ -11,6 +11,6 @@
 
     <Grid>
         <TextBlock Text="Adherent" />
-        <ListView x:Name="listAdhérents" />
+        <ListView x:Name="listAdhérents" Margin="161,41,10,103" />
     </Grid>
 </Page>

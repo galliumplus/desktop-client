@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Gallium_v1.Data
+namespace Couche_Data
 {
     /// <summary>
     /// Classe qui permet de créer une connexion avec la database

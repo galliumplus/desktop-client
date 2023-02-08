@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Couche_Data;
+using Couche_IHM.Frames;
+using Couche_Métier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,13 @@ namespace Couche_IHM
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Représente le manager des adhérents
+        private AdhérentManager adherentManager;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.adherentManager = new AdhérentManager(new FakeAdherentDao());
         }
 
         /// <summary>
@@ -52,7 +59,9 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToAdhérent(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Source = new Uri("Frames/FrameAdherent.xaml", UriKind.Relative);
+            Frame f = new Frame();
+            f.Content = new FrameAdherent(this.adherentManager);
+            this.mainFrame = f;
         }
 
         /// <summary>
