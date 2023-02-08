@@ -37,7 +37,7 @@
             <TextBlock x:Name="productName" Text="Nom produit" />
             <TextBlock x:Name="productPrice" Text="Prix Produit Adhérent" />
             <TextBlock x:Name="productQuantity" Text="Quantité produit" />
-            <TextBox x:Name="productCategory" Text="CategorieProduit" />
+            <TextBox x:Name="productCategory" Text="CategorieProduits" />
         </StackPanel>
     </Grid>
 </Page>
