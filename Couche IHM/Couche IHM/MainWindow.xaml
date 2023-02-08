@@ -11,8 +11,12 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Background="#2e2e2a">
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Background="#2e2e2a">
             <Image />
             <Separator Height="90" Background="Transparent"/>
 
@@ -25,6 +29,6 @@
             <Button Content="Statistiques" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToStatistique" />
         </StackPanel>
 
-        <Frame x:Name="mainFrame" Grid.Column="1" Source="Frames/FrameAccueil.xaml"/>
+        <Frame x:Name="mainFrame" Grid.Row="1" Grid.Column="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

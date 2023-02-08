@@ -13,7 +13,7 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Border x:Name="bordure" Background="White" CornerRadius="4" />
-                            <TextBlock Margin="5,0,0,0" x:Name="texte" FontFamily="{StaticResource Riberio}" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                            <TextBlock Margin="5,0,0,0" FontSize="11" x:Name="texte" FontFamily="{StaticResource Riberio}" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"  />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger  Property="IsMouseOver" Value="True">

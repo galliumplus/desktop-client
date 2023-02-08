@@ -10,7 +10,12 @@
       Background="White">
 
     <Grid>
-        <TextBlock Text="Adherent" />
-        <ListView x:Name="listAdhérents" Margin="161,41,10,103" />
+        <ListView x:Name="listAdhérents">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

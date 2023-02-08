@@ -55,5 +55,10 @@ namespace Couche_Métier
         /// Argent de l'adhérent
         /// </summary>
         public float Argent { get => argent; set => argent = value; }
+
+        public override string ToString()
+        {
+            return $"{Id} {Nom} {Prenom} {Argent}€";
+        }
     }
 }

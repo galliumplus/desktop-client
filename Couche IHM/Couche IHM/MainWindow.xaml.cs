@@ -59,9 +59,7 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void GoToAdhérent(object sender, RoutedEventArgs e)
         {
-            Frame f = new Frame();
-            f.Content = new FrameAdherent(this.adherentManager);
-            this.mainFrame = f;
+            this.mainFrame.Navigate(new FrameAdherent(this.adherentManager));
         }
 
         /// <summary>
