@@ -40,9 +40,6 @@ namespace Couche_IHM.Frames
 
             // Créer les headers de la listView
             ListViewStockHeader();
-
-            // ListView groupement de donnée
-            ListViewStockCategory();
         }
 
         /// <summary>
@@ -61,29 +58,19 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// permet de faire des catégories (marche selon une énumération)
-        /// </summary>
-        private void ListViewStockCategory()
-        {
-            // https://wpf-tutorial.com/fr/79/le-controle-listview/listview-et-groupement-de-donnees/
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(this.listStock.ItemsSource);
-            foreach(string category in this.productManager.Categoryproduct)
-            {
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription(category);
-                view.GroupDescriptions.Add(groupDescription);
-            }
-           
-            
-        }
-
-        /// <summary>
         /// Charge détails du produit selectionné
         /// </summary>
         private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
         {
             this.productDetails.Visibility = Visibility.Visible;
-            Product p = (Product)sender;
-            this.productName.Text = p.NomProduit;
+            Product p = (Product)this.listStock.SelectedItem;
+            if(p != null)
+            {
+                this.productName.Text = p.NomProduit;
+                this.productPrice.Text = p.PrixAdherent.ToString();
+                this.productCategory.Text = p.Categorie;
+            }
+            
         }
     }
 }

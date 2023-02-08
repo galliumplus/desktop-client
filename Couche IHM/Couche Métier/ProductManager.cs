@@ -22,7 +22,7 @@ namespace Couche_Métier
         }
 
         private List<string> categoryProduct;
-        public List<string> Categoryproduct
+        public List<string> CategoryProduct
         {
             get => categoryProduct;
             set => categoryProduct = value;
