@@ -9,10 +9,21 @@ namespace Couche_Métier
     public class ProductManager
     {
         private List<Product> products;
+        /// <summary>
+        /// Liste des produits
+        /// </summary>
+        public List<Product> Products
+        {
+            get => products;
+            set => products = value;
+        }
+        private IProductDAO productDAO;
 
-        public ProductManager()
+        public ProductManager(IProductDAO productDAO)
         {
             this.products = new List<Product>();
+            this.productDAO = productDAO;
+            products = this.productDAO.GetProducts();
         }
 
         /// <summary>
