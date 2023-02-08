@@ -30,20 +30,19 @@ namespace Couche_IHM.Frames
         public FrameStock(ProductManager productManager)
         {
             InitializeComponent();
-            
+            this.productDetails.Visibility = Visibility.Hidden; // Cache détails du produit
+
+            // Récupère le manager 
             this.productManager = productManager;
 
             // Remplis listView
             this.listStock.ItemsSource = this.productManager.Products;
 
-            // ListView groupement de donnée = https://wpf-tutorial.com/fr/79/le-controle-listview/listview-et-groupement-de-donnees/
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(this.listStock.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("CATEGORIE");
-            view.GroupDescriptions.Add(groupDescription);
-
-
-            // Je suis trop con
+            // Créer les headers de la listView
             ListViewStockHeader();
+
+            // ListView groupement de donnée
+            ListViewStockCategory();
         }
 
         /// <summary>
@@ -61,5 +60,30 @@ namespace Couche_IHM.Frames
             }
         }
 
+        /// <summary>
+        /// permet de faire des catégories (marche selon une énumération)
+        /// </summary>
+        private void ListViewStockCategory()
+        {
+            // https://wpf-tutorial.com/fr/79/le-controle-listview/listview-et-groupement-de-donnees/
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(this.listStock.ItemsSource);
+            foreach(string category in this.productManager.Categoryproduct)
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription(category);
+                view.GroupDescriptions.Add(groupDescription);
+            }
+           
+            
+        }
+
+        /// <summary>
+        /// Charge détails du produit selectionné
+        /// </summary>
+        private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
+        {
+            this.productDetails.Visibility = Visibility.Visible;
+            Product p = (Product)sender;
+            this.productName.Text = p.NomProduit;
+        }
     }
 }
