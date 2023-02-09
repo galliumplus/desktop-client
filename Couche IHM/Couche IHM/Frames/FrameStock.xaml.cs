@@ -1,6 +1,7 @@
 ﻿using Couche_Data;
 using Couche_Métier;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -68,9 +69,11 @@ namespace Couche_IHM.Frames
             {
                 this.productName.Text = p.NomProduit;
                 this.productPrice.Text = p.PrixAdherent.ToString();
+                this.productQuantity.Text = p.Quantite.ToString();
                 this.productCategory.Text = p.Categorie;
             }
-            
         }
+
+       
     }
 }

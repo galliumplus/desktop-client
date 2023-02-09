@@ -11,5 +11,10 @@
 
     <Grid>
         <TextBlock Text="Comptes" />
+        <ListView x:Name="listUser">
+            <ListView.View>
+                <GridView x:Name="GridViewUserControl" />
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

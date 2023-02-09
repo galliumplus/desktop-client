@@ -22,6 +22,9 @@ namespace Couche_Métier
         }
 
         private List<string> categoryProduct;
+        /// <summary>
+        /// Catégorie de produits
+        /// </summary>
         public List<string> CategoryProduct
         {
             get => categoryProduct;

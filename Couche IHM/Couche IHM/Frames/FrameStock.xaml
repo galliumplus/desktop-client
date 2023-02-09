@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Ligne 0 : Recherche -->
-        <TextBox x:Name="searchStock" Text="Place de recherche" Grid.Row="0" Margin="5" BorderBrush="Black" BorderThickness="2"/>
+        <TextBox x:Name="searchStock" Text="" Grid.Row="0" Margin="5" BorderBrush="Black" BorderThickness="2" />
 
         <!-- Ligne 1 - Colonne 0: Liste des stocks-->
         <ListView x:Name="listStock" Grid.Row="1" Grid.Column="0" SelectionChanged="ShowProductDetails">
@@ -31,7 +31,7 @@
                 <GridView x:Name="GridViewStockControl" />
             </ListView.View>
         </ListView>
-        
+
         <!-- Ligne 1 - Colonne 2 : Stock sélectionné -->
         <StackPanel x:Name="productDetails" Grid.Row="1" Grid.Column="1" >
             <TextBlock x:Name="productName" Text="Nom produit" />

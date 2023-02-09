@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Couche_Métier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameComptes : Page
     {
-        public FrameComptes()
+        public FrameComptes(UserManager userManager)
         {
             InitializeComponent();
+            this.listUser.ItemsSource = userManager.Comptes;
         }
     }
 }
