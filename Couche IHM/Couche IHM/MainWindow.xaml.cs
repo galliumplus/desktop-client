@@ -27,19 +27,20 @@ namespace Couche_IHM
         private AdhérentManager adherentManager;
         // Manager de produits
         private ProductManager productManager;
+        // Manager utilisateurs
+        private UserManager userManager;
 
         public MainWindow()
         {
             InitializeComponent();
             this.adherentManager = new AdhérentManager(new FakeAdherentDao());
             this.productManager = new ProductManager(new FakeProduitsDAO());
+            this.userManager = new UserManager(new FakeUserDAO());
         }
 
         /// <summary>
         /// Permet d'aller sur la fenêtre de l'accueil
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GoToAccueil(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Source = new Uri("Frames/FrameAccueil.xaml", UriKind.Relative);
@@ -49,8 +50,6 @@ namespace Couche_IHM
         /// <summary>
         /// Permet d'aller sur la fenêtre de la caisse
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Source = new Uri("Frames/FrameCaisse.xaml", UriKind.Relative);
@@ -71,8 +70,6 @@ namespace Couche_IHM
         /// <summary>
         /// Permet d'aller sur la fenêtre du stock
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Navigate(new FrameStock(this.productManager));
@@ -82,18 +79,14 @@ namespace Couche_IHM
         /// <summary>
         /// Permet d'aller sur la fenêtre des comptes
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GoToCompte(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Source = new Uri("Frames/FrameComptes.xaml", UriKind.Relative);
+            this.mainFrame.Navigate(new FrameComptes(this.userManager));
             this.namePage.Text = "Comptes";
         }
         /// <summary>
         /// Permet d'aller sur la fenêtre des statistiques
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GoToStatistique(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Source = new Uri("Frames/FrameStatistique.xaml", UriKind.Relative);

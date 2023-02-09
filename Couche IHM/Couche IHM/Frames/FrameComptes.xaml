@@ -11,5 +11,6 @@
 
     <Grid>
         <TextBlock Text="Comptes" />
+        <ListView x:Name="listUser" FontSize="10" />
     </Grid>
 </Page>
