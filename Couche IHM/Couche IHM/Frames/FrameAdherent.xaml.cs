@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,6 +38,9 @@ namespace Couche_IHM.Frames
 
             // Met à jour l'affichage
             UpdateView();
+
+
+
         }
 
 
@@ -45,8 +49,8 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void UpdateView()
         {
-            listAdhérents.ItemsSource = null;
-            listAdhérents.ItemsSource = adhérentManager.GetAdhérents();
+            listadherents.ItemsSource = null;
+            listadherents.ItemsSource = adhérentManager.GetAdhérents();
         }
     }
 }

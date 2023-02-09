@@ -6,24 +6,45 @@
     <Application.Resources>
         <FontFamily x:Key="ThereBrat">pack://application:,,,/Fonts/#There Brat</FontFamily>
         <FontFamily x:Key="Riberio">pack://application:,,,/Fonts/#Riberio</FontFamily>
+
+
         
-        <Style x:Key="buttonNavBar" TargetType="Button" >
+       
+
+
+        <!-- Bouton Nav Barre-->
+        <Style TargetType="Button" x:Key="buttonNavBarre">
+            <Setter Property="Foreground" Value="#F2F1F0" />
+            <Setter Property="Background" Value="#252422" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Height" Value="55" />
+            <Setter Property="Padding" Value="30,0,0,0" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Border x:Name="bordure" Background="White" CornerRadius="4" />
-                            <TextBlock Margin="5,0,0,0" FontSize="11" x:Name="texte" FontFamily="{StaticResource Riberio}" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                            <Border x:Name="border" CornerRadius="0" Background="{TemplateBinding Background}" />
+                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"/>
                         </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger  Property="IsMouseOver" Value="True">
-                                <Setter  Property="Background" Value="#1f1f1d" TargetName="bordure"/>
-                                <Setter Property="Foreground" Value="White" TargetName="texte"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Application.Resources>
 </Application>

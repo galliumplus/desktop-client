@@ -5,30 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Couche_IHM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="9*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="11*"/>
-        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.RowSpan="2" Background="#2e2e2a">
-            <Image />
-            <Separator Height="90" Background="Transparent"/>
+        <!-- PREMIERE COLONNE -->
+        <Grid Grid.Column="0" Background="#252422">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" Tag="Nom app"/>
+                <RowDefinition Height="20*" Tag="Bouton"/>
+                <RowDefinition Height="3*" Tag="Autre choix"/>
+            </Grid.RowDefinitions>
 
-            <Button Content="Accueil"  Style="{StaticResource buttonNavBar}"   Height="25" Margin="10,7,10,7"  Click="GoToAccueil"  />
+            <!-- Icone Gallium -->
+            <Image Source="/Images/Gallium+.png"  VerticalAlignment="Top" Margin="20"/>
 
-            <Button Content="Caisse" Style="{StaticResource buttonNavBar}"   Height="25" Margin="10,7,10,7" Click="GoToCaisse"/>
-            <Button Content="Adherents" Style="{StaticResource buttonNavBar}" Height="25" Margin="10,7,10,7" Click="GoToAdhérent"/>
-            <Button Content="Stock" Style="{StaticResource buttonNavBar}"  Height="25" Margin="10,7,10,7" Click="GoToStock"/>
-            <Button Content="Compte" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToCompte" />
-            <Button Content="Statistiques" Style="{StaticResource buttonNavBar}" Height="25"  Margin="10,7,10,7" Click="GoToStatistique" />
-        </StackPanel>
+            <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="10" VerticalAlignment="Bottom" />
 
-        <Frame x:Name="mainFrame" Grid.Row="1" Grid.Column="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+            <!-- Choix Pages -->
+            <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Uniform">
+                <StackPanel >
+                    <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource buttonNavBarre}"  Click="GoToAccueil" Width="185"  />
+                    <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource buttonNavBarre}" Click="GoToCaisse"/>
+                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
+                    <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
+                    <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
+                    <Button Tag="Statistiques" x:Name="CompteFrame" Content="Compte" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+
+
+        <!-- DEUXIEME COLONNE -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox>
+                <Grid  Grid.Row="0" Width="921">
+                <!-- Nom de la frame  -->
+                <TextBlock x:Name="namePage" Text="Accueil" FontSize="30" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
+
+
+
+                <Grid Grid.Row="0" HorizontalAlignment="Right" Width="300">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Image du compte  -->
+                    <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
+                    <StackPanel Grid.Column="1" Margin="10">
+                        <Label Name="NomUtilisateur" Content="Marteau Florian" FontSize="14" FontWeight="Bold"/>
+                        <Label Name="RoleUtilisateur" Content="Arabe" FontSize="11" FontWeight="DemiBold" />
+                    </StackPanel>
+                </Grid>
+                
+                
+            </Grid>
+            </Viewbox>
+            <Frame x:Name="mainFrame" Margin="0,30,0,0" Grid.Row="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+        </Grid>
+        
     </Grid>
 </Window>
