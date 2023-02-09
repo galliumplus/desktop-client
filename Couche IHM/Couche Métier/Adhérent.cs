@@ -23,7 +23,7 @@ namespace Couche_Métier
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(string id, string nom, string prenom, bool canPass, float argent)
+        public Adhérent(string id, string nom, string prenom, float argent, bool canPass = false)
         {
             this.id = id;
             this.nom = nom;
