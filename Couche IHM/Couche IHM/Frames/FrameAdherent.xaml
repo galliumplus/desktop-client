@@ -91,7 +91,7 @@
                     <ColumnDefinition Width="109*"/>
                     <ColumnDefinition Width="97*"/>
                 </Grid.ColumnDefinitions>
-                <Border Name="infoAdherent" BorderBrush="Black" BorderThickness="2" Visibility="Hidden" Margin="0,30,0,0" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
+                <Border Name="infoAdherent" BorderBrush="Black" BorderThickness="2" Visibility="Visible" Margin="0,30,0,0" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
                     <StackPanel >
                         <!-- Nom utilisateur -->
                         <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
