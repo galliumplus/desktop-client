@@ -39,6 +39,7 @@ namespace Couche_IHM.Frames
             // Met à jour l'affichage
             UpdateView();
 
+            this.rechercheAcompte.Focus();
 
 
         }
@@ -52,5 +53,72 @@ namespace Couche_IHM.Frames
             listadherents.ItemsSource = null;
             listadherents.ItemsSource = adhérentManager.GetAdhérents();
         }
+
+
+        /// <summary>
+        /// Permet d'afficher les informations d'un adhérent 
+        /// </summary>
+        /// <param name="infoUser"> Information de l'utilisateur </param>
+        private void AfficheAcompte(string infoUser)
+        {
+            Adhérent adhérent = this.adhérentManager.GetAdhérent(infoUser);
+            if (adhérent != null)
+            {
+                this.id.Text = adhérent.Id;
+                this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
+                this.name.Text = adhérent.NomCompletIHM;
+
+            }
+            else
+            {
+                infoAdherent.Visibility = Visibility.Hidden;
+                this.listadherents.SelectedItem = null;
+            }
+        }
+
+
+        /// <summary>
+        /// Permet de sélectionner un adhérent quand l'utilisateur clique sur une ligne de la liste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectAdherent(object sender, SelectionChangedEventArgs e)
+        {
+            Adhérent adhérent =  (Adhérent)this.listadherents.SelectedItem;
+            if (adhérent != null)
+            {
+                this.id.Text = adhérent.Id;
+                this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
+                this.name.Text = adhérent.NomCompletIHM;
+                infoAdherent.Visibility = Visibility.Visible;
+                
+            }
+         
+            
+        }
+
+
+        /// <summary>
+        /// Permet d'afficher un accompte en le recherchant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchAdherent(object sender, TextChangedEventArgs e)
+        {
+            if(this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
+            {
+                infoAdherent.Visibility = Visibility.Visible;
+                AfficheAcompte(this.rechercheAcompte.Text);
+            }
+            else
+            {
+                infoAdherent.Visibility = Visibility.Hidden;
+                this.listadherents.SelectedItem = null;
+            }
+        }
+
+
+
+
     }
 }

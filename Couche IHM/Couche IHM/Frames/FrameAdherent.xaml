@@ -10,8 +10,8 @@
       Background="White">
 
     <Grid>
-        
-            <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
+
+        <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
@@ -21,10 +21,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <!-- ScrollViewer des adhérents-->
         <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" >
-            <ListView x:Name="listadherents" HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top"   >
+            <ListView x:Name="listadherents"  HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" SelectionChanged="SelectAdherent"   >
                 <ListView.Template>
                     <ControlTemplate>
                         <!-- Header des colonnes -->
@@ -69,8 +69,8 @@
                 </ListBox.ItemTemplate>
             </ListView>
         </ScrollViewer>
-        
-        
+
+
         <!-- Information utilisateur sélectionner -->
         <StackPanel Grid.Column="1"  Grid.Row="0" Margin="30">
             <Grid>
@@ -80,14 +80,18 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Barre de recherche -->
-                <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..."  Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2"   />
+                <TextBox Name="rechercheAcompte" Height="28"  Tag="Recherche..."  Grid.Column="0" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="SearchAdherent"   />
                 <Image Source="/Images/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,10,0" />
             </Grid>
 
 
             <!-- Info -->
             <Grid>
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="109*"/>
+                    <ColumnDefinition Width="97*"/>
+                </Grid.ColumnDefinitions>
+                <Border Name="infoAdherent" BorderBrush="Black" BorderThickness="2" Visibility="Hidden" Margin="0,30,0,0" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
                     <StackPanel >
                         <!-- Nom utilisateur -->
                         <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
@@ -95,7 +99,7 @@
                                 <DropShadowEffect Color="Black" ShadowDepth="2"/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="infouser" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
+                        <TextBlock x:Name="name" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
                         <!-- Compte utilisateur -->
                         <TextBlock  Text="Compte" HorizontalAlignment="Left" Margin="10" FontSize="20" FontWeight="Bold" Foreground="White" TextDecorations="Underline">
@@ -103,7 +107,7 @@
                                 <DropShadowEffect Color="Black" ShadowDepth="2"/>
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="compte" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White"/>
+                        <TextBlock x:Name="id" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White"/>
 
                         <!-- Balance utilisateur -->
                         <TextBlock Text="Balance" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">
@@ -111,7 +115,7 @@
                                 <DropShadowEffect Color="Black" ShadowDepth="2" />
                             </TextBlock.Effect>
                         </TextBlock>
-                        <TextBlock x:Name="balance" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
+                        <TextBlock x:Name="argent" Text="" FontSize="20" Margin="10,0,0,0" Foreground="White" />
 
                         <!-- Définition colonne -->
                         <Grid>
