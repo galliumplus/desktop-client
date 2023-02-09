@@ -26,14 +26,14 @@
         <TextBox x:Name="searchStock" Text="Place de recherche" Grid.Row="0" Margin="5" BorderBrush="Black" BorderThickness="2"/>
 
         <!-- Ligne 1 - Colonne 0: Liste des stocks-->
-        <ListView x:Name="listStock" Grid.Row="1" Grid.Column="0">
+        <ListView x:Name="listStock" Grid.Row="1" Grid.Column="0" SelectionChanged="ShowProductDetails">
             <ListView.View>
                 <GridView x:Name="GridViewStockControl" />
             </ListView.View>
         </ListView>
         
         <!-- Ligne 1 - Colonne 2 : Stock sélectionné -->
-        <StackPanel x:Name="productDetails" Grid.Row="1" Grid.Column="1">
+        <StackPanel x:Name="productDetails" Grid.Row="1" Grid.Column="1" >
             <TextBlock x:Name="productName" Text="Nom produit" />
             <TextBlock x:Name="productPrice" Text="Prix Produit Adhérent" />
             <TextBlock x:Name="productQuantity" Text="Quantité produit" />
