@@ -87,7 +87,7 @@
 
             <!-- Info -->
             <Grid>
-                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Hidden" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
+                <Border Name="infoUser" BorderBrush="Black" BorderThickness="2" Margin="0,30,0,0" Visibility="Visible" Grid.RowSpan="4" Grid.ColumnSpan="2" CornerRadius="10" Background="#252422">
                     <StackPanel >
                         <!-- Nom utilisateur -->
                         <TextBlock Text="Nom" HorizontalAlignment="Left" Margin="10" FontSize="20"  FontWeight="Bold" Foreground="White" TextDecorations="Underline">

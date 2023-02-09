@@ -35,6 +35,7 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.adhérentManager = adhérentManager;
+            infoUser.Visibility = Visibility.Hidden;
 
             // Met à jour l'affichage
             UpdateView();
