@@ -30,10 +30,10 @@
                 <StackPanel >
                     <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource buttonNavBarre}"  Click="GoToAccueil" Width="185"  />
                     <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource buttonNavBarre}" Click="GoToCaisse"/>
-                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
+                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Adhérents" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
                     <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
-                    <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Administration" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
-                    <Button Tag="Statistiques" x:Name="CompteFrame" Content="Compte" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
+                    <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
+                    <Button Tag="Statistiques" x:Name="CompteFrame" Content="Statistiques" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
                 </StackPanel>
             </Viewbox>
         </Grid>
@@ -49,7 +49,7 @@
             <Viewbox>
                 <Grid  Grid.Row="0" Width="921">
                 <!-- Nom de la frame  -->
-                <TextBlock x:Name="namePage" Text="Accueil" FontSize="30" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
+                <TextBlock x:Name="namePage" Text="Accueil" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
 
 
 
