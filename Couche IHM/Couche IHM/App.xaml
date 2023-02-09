@@ -6,7 +6,7 @@
     <Application.Resources>
         <FontFamily x:Key="ThereBrat">pack://application:,,,/Fonts/#There Brat</FontFamily>
         <FontFamily x:Key="Riberio">pack://application:,,,/Fonts/#Riberio</FontFamily>
-        
+
         <Style x:Key="buttonNavBar" TargetType="Button" >
             <Setter Property="Template">
                 <Setter.Value>
@@ -25,5 +25,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
     </Application.Resources>
 </Application>
