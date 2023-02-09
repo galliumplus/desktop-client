@@ -37,25 +37,13 @@ namespace Couche_IHM.Frames
             this.productManager = productManager;
 
             // Remplis listView
-            this.listStock.ItemsSource = this.productManager.Products;
-
-            // Créer les headers de la listView
-            ListViewStockHeader();
+            UpdateView();
         }
 
-        /// <summary>
-        /// Affiche les header selon les proprietés du Produit
-        /// </summary>
-        private void ListViewStockHeader()
+        private void UpdateView()
         {
-            foreach(PropertyInfo p in typeof(Product).GetProperties())
-            {
-                GridViewColumn column = new GridViewColumn();
-                column.Header = p.Name;
-
-                column.DisplayMemberBinding = new Binding(p.Name);
-                this.GridViewStockControl.Columns.Add(column);
-            }
+            this.listStock.ItemsSource = null;
+            this.listStock.ItemsSource = this.productManager.Products;
         }
 
         /// <summary>

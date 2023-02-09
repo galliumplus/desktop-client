@@ -39,9 +39,6 @@ namespace Couche_IHM.Frames
 
             // Met à jour l'affichage
             UpdateView();
-
-
-
         }
 
 

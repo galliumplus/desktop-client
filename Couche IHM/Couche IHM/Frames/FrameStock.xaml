@@ -12,25 +12,64 @@
       ShowsNavigationUI="False">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Ligne 0 : Recherche -->
-        <TextBox x:Name="searchStock" Text="" Grid.Row="0" Margin="5" BorderBrush="Black" BorderThickness="2" />
+        <!-- ScrollViewer des produits -->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+            <ListView x:Name="listStock" HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" SelectionChanged="ShowProductDetails">
+                <ListView.Template>
+                    <ControlTemplate>
+                        <!-- Header des colonnes -->
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" > Produit </Label>
+                                <Label Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" > Quantité </Label>
+                                <Label Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" > Prix Adhérent </Label>
+                                <Label Grid.Column="3" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" > Categorie </Label>
 
-        <!-- Ligne 1 - Colonne 0: Liste des stocks-->
-        <ListView x:Name="listStock" Grid.Row="1" Grid.Column="0" SelectionChanged="ShowProductDetails">
-            <ListView.View>
-                <GridView x:Name="GridViewStockControl" />
-            </ListView.View>
-        </ListView>
+                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+
+                            </Grid>
+                            <!-- items de la listview -->
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Content -->
+                            <Label Content="{Binding NomProduit}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding Quantite}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding PrixAdherent}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding Categorie}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
 
         <!-- Ligne 1 - Colonne 2 : Stock sélectionné -->
         <StackPanel x:Name="productDetails" Grid.Row="1" Grid.Column="1" >
