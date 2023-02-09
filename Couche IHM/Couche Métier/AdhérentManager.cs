@@ -70,11 +70,27 @@ namespace Couche_Métier
         /// <summary>
         /// Permet de récupérer un adhérent
         /// </summary>
-        /// <param name="id">id de l'adhérent</param>
+        /// <param name="id">info de l'adhérent</param>
         /// <returns>un adhérent</returns>
-        public Adhérent GetAdhérent(string id)
+        public Adhérent GetAdhérent(string infoAdherent)
         {
-            return this.adhérents[id];
+            Adhérent a = null;
+            if (this.adhérents.Keys.Contains(infoAdherent))
+            {
+                a = this.adhérents[infoAdherent];
+            }
+            else
+            {
+                foreach (Adhérent adhérent in this.adhérents.Values)
+                {
+                    if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Id.ToUpper().Contains(infoAdherent.ToUpper()))
+                    {
+                        a = adhérent;
+                        break;
+                    }
+                }
+            }
+            return a;
         }
 
 
