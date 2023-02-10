@@ -83,7 +83,7 @@ namespace Couche_Métier
             {
                 foreach (Adhérent adhérent in this.adhérents.Values)
                 {
-                    if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Id.ToUpper().Contains(infoAdherent.ToUpper()))
+                    if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
                     {
                         a = adhérent;
                         break;
