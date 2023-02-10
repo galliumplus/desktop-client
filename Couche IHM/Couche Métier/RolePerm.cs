@@ -8,7 +8,7 @@ namespace Couche_Métier
 {
     public enum RolePerm
     {
-        BUREAU,
-        CA
+        BUREAU = 0,
+        CA = 1
     }
 }

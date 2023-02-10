@@ -43,7 +43,7 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.adhérentManager = adhérentManager;
-            infoAdherent.Visibility = Visibility.Hidden;
+            infoUser.Visibility = Visibility.Hidden;
 
             // Met à jour l'affichage
             UpdateView();
@@ -79,7 +79,7 @@ namespace Couche_IHM.Frames
             }
             else
             {
-                infoAdherent.Visibility = Visibility.Hidden;
+                this.infoUser.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
@@ -122,7 +122,7 @@ namespace Couche_IHM.Frames
             if (adhérent != null)
             {
                 AfficheAcompte(adhérent);
-                infoAdherent.Visibility = Visibility.Visible;
+                infoUser.Visibility = Visibility.Visible;
             }
         }
 
@@ -136,12 +136,12 @@ namespace Couche_IHM.Frames
         {
             if(this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
             {
-                infoAdherent.Visibility = Visibility.Visible;
+                infoUser.Visibility = Visibility.Visible;
                 AfficheAcompte(this.rechercheAcompte.Text);
             }
             else
             {
-                infoAdherent.Visibility = Visibility.Hidden;
+                infoUser.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
@@ -225,7 +225,7 @@ namespace Couche_IHM.Frames
 
                 // Refresh vue
                 UpdateView();
-                infoAdherent.Visibility = Visibility.Hidden;
+                infoUser.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
@@ -367,9 +367,12 @@ namespace Couche_IHM.Frames
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
 
+        /// <summary>
+        /// Ajoute un nouvelle adhérent
+        /// </summary>
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
-            infoAdherent.Visibility = Visibility.Visible;
+            infoUser.Visibility = Visibility.Visible;
         }
     }
 }

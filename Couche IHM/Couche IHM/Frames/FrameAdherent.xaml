@@ -10,7 +10,6 @@
       Background="White">
 
     <Grid>
-
         <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -100,7 +99,7 @@
 
                 <!-- Info -->
                 <Grid >
-                    <Border Name="infoAdherent" BorderBrush="Black" BorderThickness="1" Visibility="Visible"    CornerRadius="8" Background="DarkSlateGray" Width="136" Margin="0,20,0,45" >
+                    <Border Name="infoUser" BorderBrush="Black" BorderThickness="1" Visibility="Visible"    CornerRadius="8" Background="DarkSlateGray" Width="136" Margin="0,20,0,45" >
 
                         <StackPanel Margin="0,0,0,8" >
 
