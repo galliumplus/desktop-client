@@ -8,7 +8,9 @@
         Title="Gallium - Connexion" 
         Height="450" 
         Width="800"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        MinWidth="800"
+        MinHeight="450">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" />

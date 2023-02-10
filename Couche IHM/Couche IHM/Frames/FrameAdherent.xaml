@@ -71,7 +71,7 @@
         </ScrollViewer>
 
         <!-- Bouton Ajouter -->
-        <Button x:Name="addAdherent" Content="Ajouter" Height="50" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50" Background="#252422" Foreground="White" Click="AddAdherentButton"/>
+        <Button x:Name="addAdherent" Content="Ajouter" Height="50" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Background="#252422" Foreground="White" Click="AddAdherentButton"/>
 
         <!-- Information utilisateur sélectionner -->
         <Viewbox Stretch="Uniform" Grid.Column="1"  Grid.Row="0" >
