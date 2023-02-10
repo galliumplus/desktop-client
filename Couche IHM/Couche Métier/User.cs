@@ -11,10 +11,16 @@ namespace Couche_Métier
     /// </summary>
     public class User
     {
+        private int id;
         private string nom;
         private string prenom;
         private string mail;
         private RolePerm role;
+
+        public int ID
+        {
+            get => id;
+        }
 
         /// <summary>
         /// Nom de l'utilisateur
@@ -59,8 +65,9 @@ namespace Couche_Métier
         /// <param name="prenom"> prénom de l'utilisateur </param>
         /// <param name="mail"> mail de l'utilisateur </param>
         /// <param name="role"> role de l'utilisateur </param>
-        public User(string nom, string prenom, string mail, RolePerm role)
+        public User(int id, string nom, string prenom, string mail, RolePerm role)
         {
+            this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.mail = mail;

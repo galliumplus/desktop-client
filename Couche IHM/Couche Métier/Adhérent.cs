@@ -9,7 +9,8 @@ namespace Couche_Métier
 {
     public class Adhérent
     {
-        private string id;
+        private string idAdherent;
+        private string identifiant;
         private string nom;
         private string prenom;
         private bool canPass;
@@ -25,17 +26,22 @@ namespace Couche_Métier
         /// <param name="argent">argent de l'adhérent</param>
         public Adhérent(string id, string nom, string prenom, float argent, bool canPass = false)
         {
-            this.id = id;
+            this.identifiant = id;
             this.nom = nom;
             this.prenom = prenom;
             this.canPass = canPass;
             this.argent = argent;
         }
 
+        public string Id
+        {
+            get => idAdherent;
+        }
+
         /// <summary>
         /// Id de l'adhérent
         /// </summary>
-        public string Id { get => id; set => id = value; }
+        public string Identifiant { get => identifiant; set => identifiant = value; }
 
         /// <summary>
         /// Nom de l'adhérent
@@ -94,7 +100,7 @@ namespace Couche_Métier
 
         public override string ToString()
         {
-            return $"{Id} {Nom} {Prenom} {Argent}€";
+            return $"{Identifiant} {Nom} {Prenom} {Argent}€";
         }
     }
 }

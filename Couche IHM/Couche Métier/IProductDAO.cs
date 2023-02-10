@@ -40,6 +40,6 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="name"> Nom du produit </param>
         /// <returns> Un produit </returns>
-        public Product GetProduct(string name);
+        public Product GetProduct(int name);
     }
 }

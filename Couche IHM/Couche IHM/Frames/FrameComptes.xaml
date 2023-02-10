@@ -11,6 +11,12 @@
 
     <Grid>
         <TextBlock Text="Comptes" />
-        <ListView x:Name="listUser" FontSize="10" />
+        <ListView x:Name="listUser" FontSize="10" Style="{StaticResource onsenfou}">
+            <ListView.View>
+                <GridView x:Name="GridViewStockControl">
+                    <GridViewColumn HeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

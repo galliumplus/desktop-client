@@ -11,10 +11,10 @@ namespace Couche_Data
     {
         private List<User> users = new List<User>()
         {
-            new User("Damien", "Chabret", "damienchab.p@gmail.com", RolePerm.BUREAU),
-            new User("Florian", "Marteau", "flo21p@gmail.com", RolePerm.CA),
-            new User("Lucas", "Pupats", "lucapupat@gmail.com", RolePerm.BUREAU),
-            new User("Prout", "Pipi", "pipicaca@gmail.com", RolePerm.CA)
+            new User(1, "Damien", "Chabret", "damienchab.p@gmail.com", RolePerm.BUREAU),
+            new User(2, "Florian", "Marteau", "flo21p@gmail.com", RolePerm.CA),
+            new User(3, "Lucas", "Pupats", "lucapupat@gmail.com", RolePerm.BUREAU),
+            new User(4, "Prout", "Pipi", "pipicaca@gmail.com", RolePerm.CA)
         };
 
         public void CreateCompte(User compte)
@@ -22,17 +22,9 @@ namespace Couche_Data
             users.Add(compte);
         }
 
-        public User GetCompte(string mail)
+        public User GetCompte(int id)
         {
-            User user = null;
-            foreach(User u in users)
-            {
-                if(u.Mail == mail)
-                {
-                    user = u;
-                }
-            }
-            return user;
+            return null;
         }
 
         public List<User> GetComptes()
@@ -47,7 +39,7 @@ namespace Couche_Data
 
         public User UpdateCompte(User compte)
         {
-            User newUser = GetCompte(compte.Mail);
+            User newUser = GetCompte(compte.ID);
             newUser = compte;
             return newUser;
         }

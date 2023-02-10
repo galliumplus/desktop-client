@@ -14,7 +14,7 @@ namespace Couche_Data
             throw new NotImplementedException();
         }
 
-        public Product GetProduct(string name)
+        public Product GetProduct(int id)
         {
             throw new NotImplementedException();
         }

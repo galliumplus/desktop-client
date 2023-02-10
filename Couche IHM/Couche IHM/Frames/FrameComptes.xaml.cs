@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,19 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.listUser.ItemsSource = userManager.Comptes;
+            ListViewStockHeader();
+        }
+
+        private void ListViewStockHeader()
+        {
+            foreach (PropertyInfo p in typeof(User).GetProperties())
+            {
+                GridViewColumn column = new GridViewColumn();
+                column.Header = p.Name;
+
+                column.DisplayMemberBinding = new Binding(p.Name);
+                this.GridViewStockControl.Columns.Add(column);
+            }
         }
     }
 }

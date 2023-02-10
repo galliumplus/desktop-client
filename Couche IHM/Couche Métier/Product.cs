@@ -11,10 +11,16 @@ namespace Couche_Métier
     /// </summary>
     public class Product
     {
+        private int id;
         private string nomProduit;
         private int quantite;
         private float prixAdherent;
         private string categorie;
+
+        public int ID
+        {
+            get { return id; }
+        }
 
         /// <summary>
         /// Nom du produit

@@ -70,7 +70,7 @@
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
                             <Label Content="{Binding NomCompletIHM}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
-                            <Label Content="{Binding Id}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
+                            <Label Content="{Binding Identifiant}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                             <Label Content="{Binding ArgentIHM}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="18"/>
                         </Grid>
                     </DataTemplate>
@@ -78,6 +78,9 @@
             </ListView>
         </ScrollViewer>
         </Viewbox>
+
+        <!-- Bouton Ajouter -->
+        <Button x:Name="addAdherent" Content="Ajouter" Height="50" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Background="#252422" Foreground="White" Click="AddAdherentButton"/>
 
         <!-- Information utilisateur sélectionner -->
         <Viewbox Stretch="Uniform" Grid.Column="1"  Grid.Row="0" >
