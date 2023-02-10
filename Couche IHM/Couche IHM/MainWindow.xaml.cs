@@ -52,7 +52,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Source = new Uri("Frames/FrameCaisse.xaml", UriKind.Relative);
+            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager));
             this.namePage.Text = "Caisse";
         }
 
