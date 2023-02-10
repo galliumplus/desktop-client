@@ -23,12 +23,13 @@
         </Grid.RowDefinitions>
 
         <!-- ScrollViewer des adhérents-->
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" >
-            <ListView x:Name="listadherents"  HorizontalContentAlignment="Stretch" Margin="50,0,50,50" VerticalContentAlignment="Top" SelectionChanged="SelectAdherent"   >
+        <Viewbox Stretch="Uniform" >
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Width="763" >
+            <ListView x:Name="listadherents"  HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" SelectionChanged="SelectAdherent"   >
                 <ListView.Template>
                     <ControlTemplate>
                         <!-- Header des colonnes -->
-                        <DockPanel LastChildFill="True">
+                        <DockPanel   LastChildFill="True">
                             <Grid DockPanel.Dock="Top">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
@@ -40,9 +41,16 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
-                                <Button BorderThickness="0" Background="Transparent" Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Nom et prénom</Button>
-                                <Button BorderThickness="0" Background="Transparent" Grid.Column="1" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Compte</Button>
-                                <Button BorderThickness="0" Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" >Argent disponible</Button>
+
+
+                                <Button  BorderThickness="0"  Width="200" Margin="-20,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="18" Click="SortIdentite" Content="Nom et prénom" />
+                                <Image Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
+
+                                <Button BorderThickness="0"   Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="18" Click="SortId" Content="Acompte" />
+                                <Image Name="idTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
+
+                                <Button BorderThickness="0" Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="18" Click="SortArgent" Content="Argent disponible"/>
+                                <Image x:Name="argentTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
 
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
 
@@ -69,6 +77,7 @@
                 </ListBox.ItemTemplate>
             </ListView>
         </ScrollViewer>
+        </Viewbox>
 
         <!-- Bouton Ajouter -->
         <Button x:Name="addAdherent" Content="Ajouter" Height="50" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20" Background="#252422" Foreground="White" Click="AddAdherentButton"/>

@@ -1,6 +1,7 @@
 ﻿using Couche_Métier;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,7 +28,33 @@ namespace Couche_IHM.Frames
         private AdhérentManager adhérentManager;
         private bool createAdherent;
 
+        // Attributs qui gèrent si la liste est triée
+        private int isSortingArgent = 0;
+        private int isSortingId = 0;
+        private int isSortingIdentite = 0;
+
+        /// <summary>
+        /// Permet d'avoir le chemin de l'image de l'icone de tri
+        /// </summary>
+        public string argentTri
+        {
+            get
+            {
+                string lien = "";
+                switch (isSortingArgent)
+                {
+                    case 0:
+                        lien = "/Images/triAsc";
+                        break;
+                    case 1:
+                        lien = "/Images/triDesc";
+                        break;
+                }
+                return lien;
+            }
+        }
         
+
         /// <summary>
         /// Cosntructeur du frame adhérent
         /// </summary>
@@ -43,8 +70,6 @@ namespace Couche_IHM.Frames
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
-
-            this.listadherents.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("Id", System.ComponentModel.ListSortDirection.Ascending));
 
 
         }
@@ -177,7 +202,7 @@ namespace Couche_IHM.Frames
 
                 // Mise à jour de l'id
                 string id;
-                if (this.id.Text[0] == prenomAdherent.ToLower()[0] && this.id.Text[1] == nomAdherent.ToLower()[0])
+                if (this.id.Text.Length == 8 && this.id.Text[0] == prenomAdherent.ToLower()[0] && this.id.Text[1] == nomAdherent.ToLower()[0])
                 {
                     id = this.id.Text;
                 }
@@ -234,6 +259,9 @@ namespace Couche_IHM.Frames
                     case "IdentiteFormat":
                         this.identiteWarning.Visibility = Visibility.Visible;
                         break;
+                    default:
+                        MessageBox.Show(ex.Message);
+                        break;
                 }
             }
             
@@ -258,6 +286,102 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
+            
+        }
+
+
+        /// <summary>
+        /// Permet de trier les adhérents selon leur argent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortArgent(object sender, RoutedEventArgs e)
+        {
+
+            ControlTemplate template = this.listadherents.Template;
+            Image myImage = template.FindName("argentTri", this.listadherents) as Image;
+          
+            switch (isSortingArgent)
+            {
+                case 0:
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Argent", ListSortDirection.Ascending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
+                    break;
+                case 1:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Argent", ListSortDirection.Ascending));
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Argent", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
+                    break;
+                case 2:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Argent", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Hidden;
+                    break;
+            }
+            isSortingArgent = (isSortingArgent + 1) % 3;
+            
+        }
+
+        /// <summary>
+        /// Permet de trier les adhérents selon leur id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortId(object sender, RoutedEventArgs e)
+        {
+            ControlTemplate template = this.listadherents.Template;
+            Image myImage = template.FindName("idTri", this.listadherents) as Image;
+            switch (isSortingId)
+            {
+                case 0:
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
+                    break;
+                case 1:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Id", ListSortDirection.Ascending));
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
+                    break;
+                case 2:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Id", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Hidden;
+                    break;
+            }
+            isSortingId = (isSortingId + 1) % 3;
+        }
+
+
+        /// <summary>
+        /// Permet de trier les adhérents selon leur identité
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortIdentite(object sender, RoutedEventArgs e)
+        {
+            ControlTemplate template = this.listadherents.Template;
+            Image myImage = template.FindName("identiteTri", this.listadherents) as Image;
+            switch (isSortingIdentite)
+            {
+                case 0:
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("NomCompletIHM", ListSortDirection.Ascending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
+                    break;
+                case 1:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("NomCompletIHM", ListSortDirection.Ascending));
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("NomCompletIHM", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
+                    break;
+                case 2:
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("NomCompletIHM", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Hidden;
+                    break;
+            }
+            isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
 
         private void AddAdherentButton(object sender, RoutedEventArgs e)
