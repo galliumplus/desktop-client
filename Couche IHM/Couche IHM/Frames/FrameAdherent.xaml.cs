@@ -111,6 +111,7 @@ namespace Couche_IHM.Frames
         /// <param name="adhérent">adhérent à détailler</param>
         private void AfficheAcompte(Adhérent adhérent)
         {
+           
             this.id.Text = adhérent.Identifiant;
             this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
             this.name.Text = adhérent.NomCompletIHM;
@@ -125,6 +126,8 @@ namespace Couche_IHM.Frames
 
             this.buttonValidate.Visibility = Visibility.Hidden;
             ResetWarnings();
+            
+          
         }
 
 

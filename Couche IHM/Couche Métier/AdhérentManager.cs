@@ -33,7 +33,7 @@ namespace Couche_Métier
         public void CreateAdhérent(Adhérent adhérent)
         {
             adhérentDao.CreateAdhérent(adhérent);
-            adhérents.Add(adhérent.Id,adhérent);
+            adhérents.Add(adhérent.Identifiant, adhérent);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Couche_Métier
         public void RemoveAdhérent(Adhérent adhérent)
         {
             adhérentDao.RemoveAdhérent(adhérent);
-            adhérents.Remove(adhérent.Id);
+            adhérents.Remove(adhérent.Identifiant);
         }
 
 
@@ -54,7 +54,7 @@ namespace Couche_Métier
         public void UpdateAdhérent(Adhérent adhérent)
         {
             adhérentDao.UpdateAdhérent(adhérent);
-            adhérents[adhérent.Id] = adhérent;
+            adhérents[adhérent.Identifiant] = adhérent;
         }
 
 

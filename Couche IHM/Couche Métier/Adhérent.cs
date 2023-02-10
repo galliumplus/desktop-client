@@ -9,7 +9,7 @@ namespace Couche_Métier
 {
     public class Adhérent
     {
-        private string idAdherent;
+        private int idAdherent;
         private string identifiant;
         private string nom;
         private string prenom;
@@ -24,18 +24,19 @@ namespace Couche_Métier
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(string id, string nom, string prenom, float argent, bool canPass = false)
+        public Adhérent(string identifiant, string nom, string prenom, float argent, bool canPass = false)
         {
-            this.identifiant = id;
+            this.identifiant = identifiant;
             this.nom = nom;
             this.prenom = prenom;
             this.canPass = canPass;
             this.argent = argent;
         }
 
-        public string Id
+        public int Id
         {
             get => idAdherent;
+            set => idAdherent = value;
         }
 
         /// <summary>
