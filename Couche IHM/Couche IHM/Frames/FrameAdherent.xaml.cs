@@ -318,18 +318,18 @@ namespace Couche_IHM.Frames
             switch (isSortingId)
             {
                 case 0:
-                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Ascending));
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Identifiant", ListSortDirection.Ascending));
                     myImage.Visibility = Visibility.Visible;
                     myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
                     break;
                 case 1:
-                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Id", ListSortDirection.Ascending));
-                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Id", ListSortDirection.Descending));
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Identifiant", ListSortDirection.Ascending));
+                    this.listadherents.Items.SortDescriptions.Add(new SortDescription("Identifiant", ListSortDirection.Descending));
                     myImage.Visibility = Visibility.Visible;
                     myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
                     break;
                 case 2:
-                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Id", ListSortDirection.Descending));
+                    this.listadherents.Items.SortDescriptions.Remove(new SortDescription("Identifiant", ListSortDirection.Descending));
                     myImage.Visibility = Visibility.Hidden;
                     break;
             }
