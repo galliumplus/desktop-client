@@ -20,7 +20,7 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="id">id de l'adhérent</param>
         /// <returns>un adhérent</returns>
-        public Adhérent GetAdhérent(string id);
+        public Adhérent GetAdhérent(int id);
 
 
         /// <summary>

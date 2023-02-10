@@ -65,6 +65,12 @@
             <Setter Property="FontSize" Value="12" />
         </Style>
 
+        <!-- Personaliser listView -->
+        <Style x:Key="onsenfou" TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListBox}}">
+            <Setter Property="DockPanel.LastChildFill" Value="True" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="DockPanel.LastChildFill" Value="True" />
+        </Style>
         
     </Application.Resources>
 </Application>

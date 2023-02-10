@@ -25,6 +25,7 @@ namespace Couche_IHM.Frames
     {
         // Représente le manager des adhérents
         private AdhérentManager adhérentManager;
+        private bool createAdherent;
 
         
         /// <summary>
@@ -85,7 +86,7 @@ namespace Couche_IHM.Frames
         /// <param name="adhérent">adhérent à détailler</param>
         private void AfficheAcompte(Adhérent adhérent)
         {
-            this.id.Text = adhérent.Id;
+            this.id.Text = adhérent.Identifiant;
             this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
             this.name.Text = adhérent.NomCompletIHM;
             if (adhérent.CanPass == true)
@@ -203,8 +204,16 @@ namespace Couche_IHM.Frames
                     throw new Exception("ArgentFormat");
                 }
 
-                // Mise à jour de l'adhérent
-                this.adhérentManager.UpdateAdhérent(new Adhérent(id, nomAdherent, prenomAdherent, argentFinal, adherentCanPass));
+                
+                if (createAdherent) // Ajout d'un adhérent
+                {
+                    this.adhérentManager.CreateAdhérent(new Adhérent(id, nomAdherent, prenomAdherent, argentFinal, adherentCanPass));
+                }
+                else // Mise à jour de l'adhérent
+                {
+                    this.adhérentManager.UpdateAdhérent(new Adhérent(id, nomAdherent, prenomAdherent, argentFinal, adherentCanPass));
+                }
+                
 
                 // Refresh vue
                 UpdateView();
@@ -249,6 +258,11 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
+        }
+
+        private void AddAdherentButton(object sender, RoutedEventArgs e)
+        {
+            infoAdherent.Visibility = Visibility.Visible;
         }
     }
 }

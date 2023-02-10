@@ -14,7 +14,7 @@ namespace Couche_Data
             dbsDAO.Instance.Execute("");
         }
 
-        public Adhérent GetAdhérent(string id)
+        public Adhérent GetAdhérent(int id)
         {
             dbsDAO.Instance.Fetch("");
             return null;

@@ -23,12 +23,13 @@ namespace Couche_Data
         };
         public void CreateAdhérent(Adhérent adhérent)
         {
-            this.adherents.Add(adhérent.Id,adhérent);
+            this.adherents.Add(adhérent.Identifiant, adhérent);
         }
 
-        public Adhérent GetAdhérent(string id)
+        public Adhérent GetAdhérent(int id)
         {
-            return this.adherents[id];
+            // return this.adherents[id];
+            return null;
         }
 
         public Dictionary<string, Adhérent> GetAdhérents()
@@ -38,12 +39,12 @@ namespace Couche_Data
 
         public void RemoveAdhérent(Adhérent adhérent)
         {
-            this.adherents.Remove(adhérent.Id);
+            this.adherents.Remove(adhérent.Identifiant);
         }
 
         public void UpdateAdhérent(Adhérent adhérent)
         {
-            this.adherents[adhérent.Id] = adhérent;
+            this.adherents[adhérent.Identifiant] = adhérent;
         }
     }
 }

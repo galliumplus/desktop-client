@@ -29,7 +29,7 @@ namespace Couche_Métier
         /// <summary>
         /// Récupère un compte
         /// </summary>
-        public User GetCompte(string mail);
+        public User GetCompte(int id);
 
         /// <summary>
         /// Récupère tous les comptes 
