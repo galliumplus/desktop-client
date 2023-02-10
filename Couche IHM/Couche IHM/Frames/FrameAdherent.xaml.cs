@@ -33,26 +33,6 @@ namespace Couche_IHM.Frames
         private int isSortingId = 0;
         private int isSortingIdentite = 0;
 
-        /// <summary>
-        /// Permet d'avoir le chemin de l'image de l'icone de tri
-        /// </summary>
-        public string argentTri
-        {
-            get
-            {
-                string lien = "";
-                switch (isSortingArgent)
-                {
-                    case 0:
-                        lien = "/Images/triAsc";
-                        break;
-                    case 1:
-                        lien = "/Images/triDesc";
-                        break;
-                }
-                return lien;
-            }
-        }
         
 
         /// <summary>
