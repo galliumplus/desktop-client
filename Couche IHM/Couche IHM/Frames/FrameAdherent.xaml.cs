@@ -82,6 +82,7 @@ namespace Couche_IHM.Frames
                 infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
+                this.buttonSupprime.Visibility = Visibility.Hidden;
             }
         }
 
@@ -105,47 +106,15 @@ namespace Couche_IHM.Frames
             }
 
             this.buttonValidate.Visibility = Visibility.Hidden;
+            this.buttonSupprime.Visibility= Visibility.Visible;
             ResetWarnings();
             
           
         }
 
 
-        /// <summary>
-        /// Permet de sélectionner un adhérent quand l'utilisateur clique sur une ligne de la liste
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectAdherent(object sender, SelectionChangedEventArgs e)
-        {
-            Adhérent adhérent =  (Adhérent)this.listadherents.SelectedItem;
-            if (adhérent != null)
-            {
-                AfficheAcompte(adhérent);
-                infoAdherent.Visibility = Visibility.Visible;
-            }
-        }
 
-
-        /// <summary>
-        /// Permet d'afficher un accompte en le recherchant
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchAdherent(object sender, TextChangedEventArgs e)
-        {
-            if(this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
-            {
-                infoAdherent.Visibility = Visibility.Visible;
-                AfficheAcompte(this.rechercheAcompte.Text);
-            }
-            else
-            {
-                infoAdherent.Visibility = Visibility.Hidden;
-                this.listadherents.SelectedItem = null;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-            }
-        }
+        
 
         /// <summary>
         /// Permet de cacher les warnings
@@ -155,6 +124,33 @@ namespace Couche_IHM.Frames
             this.compteWarning.Visibility = Visibility.Hidden;
             this.identiteWarning.Visibility = Visibility.Hidden;
             this.argentWarning.Visibility = Visibility.Hidden;
+        }
+
+
+
+
+
+        #region events
+
+        /// <summary>
+        /// Permet d'afficher un accompte en le recherchant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchAdherent(object sender, TextChangedEventArgs e)
+        {
+            if (this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
+            {
+                infoAdherent.Visibility = Visibility.Visible;
+                AfficheAcompte(this.rechercheAcompte.Text);
+            }
+            else
+            {
+                infoAdherent.Visibility = Visibility.Hidden;
+                this.listadherents.SelectedItem = null;
+                this.buttonValidate.Visibility = Visibility.Hidden;
+                this.buttonSupprime.Visibility = Visibility.Hidden;
+            }
         }
 
         /// <summary>
@@ -212,7 +208,7 @@ namespace Couche_IHM.Frames
                     throw new Exception("ArgentFormat");
                 }
 
-                
+
                 if (createAdherent) // Ajout d'un adhérent
                 {
                     this.adhérentManager.CreateAdhérent(new Adhérent(id, nomAdherent, prenomAdherent, argentFinal, adherentCanPass));
@@ -221,7 +217,7 @@ namespace Couche_IHM.Frames
                 {
                     this.adhérentManager.UpdateAdhérent(new Adhérent(id, nomAdherent, prenomAdherent, argentFinal, adherentCanPass));
                 }
-                
+
 
                 // Refresh vue
                 UpdateView();
@@ -229,7 +225,7 @@ namespace Couche_IHM.Frames
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 switch (ex.Message)
                 {
@@ -247,7 +243,7 @@ namespace Couche_IHM.Frames
                         break;
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -258,6 +254,7 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, TextChangedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
+            this.buttonSupprime.Visibility = Visibility.Hidden;
         }
 
 
@@ -269,7 +266,8 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
-            
+            this.buttonSupprime.Visibility = Visibility.Hidden;
+
         }
 
 
@@ -283,7 +281,7 @@ namespace Couche_IHM.Frames
 
             ControlTemplate template = this.listadherents.Template;
             Image myImage = template.FindName("argentTri", this.listadherents) as Image;
-          
+
             switch (isSortingArgent)
             {
                 case 0:
@@ -303,7 +301,7 @@ namespace Couche_IHM.Frames
                     break;
             }
             isSortingArgent = (isSortingArgent + 1) % 3;
-            
+
         }
 
         /// <summary>
@@ -367,9 +365,50 @@ namespace Couche_IHM.Frames
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
 
+        /// <summary>
+        /// Permet de supprimer l'adhérent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteAdherent(object sender, RoutedEventArgs e)
+        {
+            Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
+            this.adhérentManager.RemoveAdhérent(adhérentSelect);
+            infoAdherent.Visibility = Visibility.Hidden;
+            this.buttonSupprime.Visibility = Visibility.Hidden;
+            UpdateView();
+        }
+
+        /// <summary>
+        /// Permet d'ajouter un adhérent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
             infoAdherent.Visibility = Visibility.Visible;
+            this.buttonSupprime.Visibility = Visibility.Hidden;
+        }
+
+ 
+        #endregion
+
+        /// <summary>
+        /// Permet de selectionner un adhérent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SelectAdherent(object sender, SelectionChangedEventArgs e)
+        {
+            Adhérent adhérent = this.listadherents.SelectedItem as Adhérent;
+            if (adhérent != null)
+            {
+                
+                infoAdherent.Visibility = Visibility.Visible;
+                AfficheAcompte(adhérent);
+                this.buttonSupprime.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }

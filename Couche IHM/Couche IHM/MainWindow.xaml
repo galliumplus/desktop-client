@@ -42,16 +42,16 @@
                 </StackPanel>
             </Viewbox>
         </Grid>
+        <Viewbox Grid.Column="1">
 
-
-        <!-- DEUXIEME COLONNE -->
-        <Grid Grid.Column="1">
+            <!-- DEUXIEME COLONNE -->
+        <Grid Height="607" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
-            <Viewbox>
+            
                 <Grid  Grid.Row="0" Width="921">
                 <!-- Nom de la frame  -->
                 <TextBlock x:Name="namePage" Text="Accueil" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
@@ -73,9 +73,11 @@
                 
                 
             </Grid>
-            </Viewbox>
-            <Frame x:Name="mainFrame" Margin="0,30,0,0" Grid.Row="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+
+
+            <Frame x:Name="mainFrame" Margin="20,30,0,0" Grid.Row="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
-        
+        </Viewbox>
+
     </Grid>
 </Window>
