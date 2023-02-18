@@ -41,6 +41,14 @@ namespace Couche_Métier
         }
 
         /// <summary>
+        /// Nom complet de l'utilisateur 
+        /// </summary>
+        public string NomComplet
+        {
+            get => nom + prenom;
+        }
+
+        /// <summary>
         /// mail de l'utilisateur
         /// </summary>
         public string Mail 
