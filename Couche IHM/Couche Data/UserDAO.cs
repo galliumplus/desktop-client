@@ -17,6 +17,11 @@ namespace Gallium_v1.Data
     /// </summary>
     public class UserDAO : IUserDAO
     {
+        public User ConnectionUser(string indentifiant, string hashPassword)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateCompte(User compte)
         {
             dbsDAO.Instance.Fetch("");
