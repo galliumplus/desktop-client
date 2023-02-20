@@ -43,39 +43,9 @@
             </Viewbox>
         </Grid>
         <Viewbox Grid.Column="1">
-
             <!-- DEUXIEME COLONNE -->
-        <Grid Height="607" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="10*"/>
-            </Grid.RowDefinitions>
-
-            
-                <Grid  Grid.Row="0" Width="921">
-                <!-- Nom de la frame  -->
-                <TextBlock x:Name="namePage" Text="Accueil" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-
-
-
-                <Grid Grid.Row="0" HorizontalAlignment="Right" Width="300">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*" />
-                        <ColumnDefinition Width="10*" />
-                    </Grid.ColumnDefinitions>
-                    <!-- Image du compte  -->
-                    <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                    <StackPanel Grid.Column="1" Margin="10">
-                        <Label Name="NomUtilisateur" Content="Marteau Florian" FontSize="14" FontWeight="Bold"/>
-                        <Label Name="RoleUtilisateur" Content="Arabe" FontSize="11" FontWeight="DemiBold" />
-                    </StackPanel>
-                </Grid>
-                
-                
-            </Grid>
-
-
-            <Frame x:Name="mainFrame" Margin="20,30,0,0" Grid.Row="1" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+            <Grid  Height="607" Width="912" >
+                <Frame x:Name="mainFrame" Margin="20,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
         </Viewbox>
 

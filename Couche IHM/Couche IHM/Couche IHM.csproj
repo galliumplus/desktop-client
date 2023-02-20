@@ -11,7 +11,9 @@
   <ItemGroup>
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
+    <None Remove="Images\ajouter.png" />
     <None Remove="Images\DogoPp.png" />
+    <None Remove="Images\export.png" />
     <None Remove="Images\Gallium+.png" />
     <None Remove="Images\loupe.png" />
     <None Remove="Images\modif.png" />
@@ -35,7 +37,13 @@
     <Resource Include="Fonts\There Brat.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\ajouter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\DogoPp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\export.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Gallium+.png">
