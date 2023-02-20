@@ -18,6 +18,7 @@ namespace Couche_Métier.Log
             // Créer le fichier s'il n'existe pas
             if (!File.Exists(Path))
             {
+                Directory.CreateDirectory(Path.Split('\\')[Path.Split('\\').Length - 1]);
                 File.Create(Path);
             }
 
