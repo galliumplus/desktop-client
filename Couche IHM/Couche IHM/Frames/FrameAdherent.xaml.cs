@@ -256,6 +256,15 @@ namespace Couche_IHM.Frames
             this.buttonSupprime.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Permet d'exporter la liste des adhérents
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAdhérent(object sender, RoutedEventArgs e)
+        {
+            this.exportAdh.Export(this.adhérentManager.GetAdhérents());
+        }
 
         /// <summary>
         /// Permet d'afficher le bouton de validation des changements
@@ -428,5 +437,7 @@ namespace Couche_IHM.Frames
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
         #endregion
+
+        
     }
 }

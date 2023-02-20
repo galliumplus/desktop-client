@@ -23,7 +23,7 @@ namespace Couche_Métier
             this.adhérentDao = adhérentDao;
 
             // Récupération des adhérents
-            adhérents = adhérentDao.GetAdhérents();
+            adhérents = new Dictionary<string, Adhérent>(adhérentDao.GetAdhérents());
 
         }
 
