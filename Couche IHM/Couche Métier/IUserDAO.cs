@@ -35,5 +35,13 @@ namespace Couche_Métier
         /// Récupère tous les comptes 
         /// </summary>
         public List<User> GetComptes();
+
+        /// <summary>
+        /// Connection d'un utilisateur à gallium
+        /// </summary>
+        /// <param name="indentifiant"> identifiant de l'utilisateur </param>
+        /// <param name="hashPassword"> mot de passe hashé de l'utilisateur </param>
+        /// <returns> un utilisateur</returns>
+        public ?User ConnectionUser(string indentifiant, string hashPassword);
     }
 }

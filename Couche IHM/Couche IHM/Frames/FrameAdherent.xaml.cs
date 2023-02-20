@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Log;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +34,10 @@ namespace Couche_IHM.Frames
         private int isSortingId = 0;
         private int isSortingIdentite = 0;
 
-        
+
+        private ILog log = new LogToTXT();
+
+
 
         /// <summary>
         /// Cosntructeur du frame adhérent
@@ -50,6 +54,7 @@ namespace Couche_IHM.Frames
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
+            
 
 
         }
@@ -378,6 +383,9 @@ namespace Couche_IHM.Frames
             this.adhérentManager.RemoveAdhérent(adhérentSelect);
             infoAdherent.Visibility = Visibility.Hidden;
             this.buttonSupprime.Visibility = Visibility.Hidden;
+
+            // LOG
+
             UpdateView();
         }
 

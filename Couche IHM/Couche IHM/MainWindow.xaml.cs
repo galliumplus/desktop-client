@@ -1,6 +1,7 @@
 ﻿using Couche_Data;
 using Couche_IHM.Frames;
 using Couche_Métier;
+using Couche_Métier.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,17 @@ namespace Couche_IHM
         // Manager utilisateurs
         private UserManager userManager;
 
-        public MainWindow()
+        private static User compteConnected;
+
+        public MainWindow(User user)
         {
             InitializeComponent();
             this.adherentManager = new AdhérentManager(new FakeAdherentDao());
             this.productManager = new ProductManager(new FakeProduitsDAO());
             this.userManager = new UserManager(new FakeUserDAO());
+
+            // Enregistre la personne qui s'est connecté
+            compteConnected = user;
         }
 
         /// <summary>

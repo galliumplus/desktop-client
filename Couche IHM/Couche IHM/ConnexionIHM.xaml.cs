@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Couche_Data;
+using Couche_Métier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,8 @@ namespace Couche_IHM
     /// </summary>
     public partial class ConnexionIHM : Window
     {
+        private IUserDAO userDAO = new FakeUserDAO();
+
         public ConnexionIHM()
         {
             InitializeComponent();
@@ -29,12 +33,13 @@ namespace Couche_IHM
         /// </summary>
         private void ConnectToAccount(object sender, RoutedEventArgs e)
         {
-            bool isConneted = true;
+            // Vérifie la connexion d'un utilisateur
+            User userConnection = userDAO.ConnectionUser(identifiantBox.Text, passwordBox.Text);
 
             // Vérifie si l'utilisateur réussi à se connecter
-            if (isConneted)
+            if (userConnection != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(userConnection);
                 mainWindow.Show();
                 this.Close();
             }
