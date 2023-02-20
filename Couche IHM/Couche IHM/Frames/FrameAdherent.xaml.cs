@@ -79,7 +79,7 @@ namespace Couche_IHM.Frames
             }
             else
             {
-                infoAdherent.Visibility = Visibility.Hidden;
+                this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
                 this.buttonSupprime.Visibility = Visibility.Hidden;
@@ -131,6 +131,8 @@ namespace Couche_IHM.Frames
 
 
         #region events
+
+     
 
         /// <summary>
         /// Permet d'afficher un accompte en le recherchant
@@ -221,7 +223,7 @@ namespace Couche_IHM.Frames
 
                 // Refresh vue
                 UpdateView();
-                infoAdherent.Visibility = Visibility.Hidden;
+                this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
@@ -390,8 +392,7 @@ namespace Couche_IHM.Frames
             this.buttonSupprime.Visibility = Visibility.Hidden;
         }
 
- 
-        #endregion
+
 
         /// <summary>
         /// Permet de selectionner un adhérent
@@ -403,12 +404,26 @@ namespace Couche_IHM.Frames
             Adhérent adhérent = this.listadherents.SelectedItem as Adhérent;
             if (adhérent != null)
             {
-                
+
                 infoAdherent.Visibility = Visibility.Visible;
                 AfficheAcompte(adhérent);
                 this.buttonSupprime.Visibility = Visibility.Visible;
             }
 
+        }
+        #endregion
+
+        /// <summary>
+        /// Permet de fermer la fenêtre aves les infos adhérents
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseInfoAdherent(object sender, RoutedEventArgs e)
+        {
+            this.infoAdherent.Visibility = Visibility.Hidden;
+            this.buttonSupprime.Visibility= Visibility.Hidden;
+            this.buttonValidate.Visibility = Visibility.Hidden;
+            this.listadherents.SelectedItem = null;
         }
     }
 }
