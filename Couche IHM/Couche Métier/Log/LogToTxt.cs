@@ -14,7 +14,7 @@ namespace Couche_Métier.Log
         public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Gallium\\Log";
         private string name => "\\GalliumLog.txt";
 
-        public void registerLog(CategorieLog categorieLog, string message)
+        public void registerLog(CategorieLog categorieLog, string message, User author)
         {
             // Gestion fichiers
             if (!Directory.Exists(Path)) // Créer le dossier s'il n'existe pas
@@ -26,9 +26,8 @@ namespace Couche_Métier.Log
                 }
             }
             
-
             // Sauvegarde le log
-            message = $"{DateTime.Now} | {categorieLog} | {message}";
+            message = string.Format("{0,-25} | {1,15} | {2,90} | {3,60}", DateTime.Now, categorieLog, message, author);
             using (StreamWriter file = new(Path+name, append: true))
             {
                 file.WriteLine(message);
