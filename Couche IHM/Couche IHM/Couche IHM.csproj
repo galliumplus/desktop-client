@@ -15,6 +15,8 @@
     <None Remove="Images\Gallium+.png" />
     <None Remove="Images\loupe.png" />
     <None Remove="Images\modif.png" />
+    <None Remove="Images\param.png" />
+    <None Remove="Images\retour.png" />
     <None Remove="Images\suprim.png" />
     <None Remove="Images\triAsc.png" />
     <None Remove="Images\triDesc.png" />
@@ -43,6 +45,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\modif.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\param.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\retour.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\suprim.png">
