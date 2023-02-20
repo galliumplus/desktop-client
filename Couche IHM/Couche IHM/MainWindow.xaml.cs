@@ -40,8 +40,6 @@ namespace Couche_IHM
             get => compteConnected;
         }
 
-        // Exporter des adhérents
-        private IExportableAdherent exportAdh;
 
         public MainWindow(User user)
         {

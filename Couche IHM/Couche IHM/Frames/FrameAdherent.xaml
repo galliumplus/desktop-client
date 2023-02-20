@@ -17,11 +17,11 @@
 
         
         <!-- Header de la frame -->
-        <Grid  Grid.Row="0" Width="921">
+        <Grid  Grid.Row="0" >
             <!-- Nom de la frame  -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Adhérents" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-                <Button Name="exportAdherentButton" Visibility="Visible" Margin="5,0,0,10" Background="Transparent" BorderThickness="0"  Width="20" Height="20" >
+                <Button Name="exportAdherentButton" Visibility="Visible" Margin="5,0,0,10" Background="Transparent" BorderThickness="0"  Width="20" Height="20" Click="ExportAdhérents" >
                     <Image Opacity="0.7"   Source="/Images/export.png"/>
                 </Button>
                 <Button Name="addAdherentButton" Click="AddAdherentButton" Visibility="Visible" Margin="0,0,0,5" Background="Transparent" BorderThickness="0"  Width="20" Height="19" >
@@ -30,7 +30,7 @@
             </StackPanel>
 
             <!-- Info du compte connecté-->
-            <Grid HorizontalAlignment="Right" Margin="0,0,40,0"  Width="300">
+            <Grid HorizontalAlignment="Right"   Width="300">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*" />
                     <ColumnDefinition Width="10*" />
