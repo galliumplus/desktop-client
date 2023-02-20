@@ -33,6 +33,11 @@ namespace Couche_Métier
             this.argent = argent;
         }
 
+        public Adhérent()
+        {
+
+        }
+
         public int Id
         {
             get => idAdherent;

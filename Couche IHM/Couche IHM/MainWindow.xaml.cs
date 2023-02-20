@@ -32,6 +32,13 @@ namespace Couche_IHM
         private UserManager userManager;
 
         private static User compteConnected;
+        /// <summary>
+        /// Compte connecté à gallium
+        /// </summary>
+        public static User CompteConnected
+        {
+            get => compteConnected;
+        }
 
         public MainWindow(User user)
         {

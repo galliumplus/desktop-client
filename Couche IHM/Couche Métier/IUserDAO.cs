@@ -42,6 +42,6 @@ namespace Couche_Métier
         /// <param name="indentifiant"> identifiant de l'utilisateur </param>
         /// <param name="hashPassword"> mot de passe hashé de l'utilisateur </param>
         /// <returns> un utilisateur</returns>
-        public ?User ConnectionUser(string indentifiant, string hashPassword);
+        public User ConnectionUser(string indentifiant, string hashPassword);
     }
 }
