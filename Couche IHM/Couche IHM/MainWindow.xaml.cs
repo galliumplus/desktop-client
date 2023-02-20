@@ -30,8 +30,7 @@ namespace Couche_IHM
         // Manager utilisateurs
         private UserManager userManager;
 
-        // Exporter des adhérents
-        private IExportableAdherent exportAdh;
+        
 
         public MainWindow()
         {

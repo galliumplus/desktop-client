@@ -24,6 +24,7 @@ namespace Couche_Métier
 
             // Récupération des adhérents
             adhérents = adhérentDao.GetAdhérents();
+
         }
 
         /// <summary>

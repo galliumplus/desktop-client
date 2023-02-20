@@ -28,6 +28,10 @@ namespace Couche_IHM.Frames
         private AdhérentManager adhérentManager;
         private bool createAdherent;
 
+
+        // Exporter des adhérents
+        private IExportableAdherent exportAdh;
+
         // Attributs qui gèrent si la liste est triée
         private int isSortingArgent = 0;
         private int isSortingId = 0;
@@ -43,7 +47,9 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.adhérentManager = adhérentManager;
+            this.exportAdh = new ExportAdherentToExcel();
             infoAdherent.Visibility = Visibility.Hidden;
+
 
             // Met à jour l'affichage
             UpdateView();
@@ -424,6 +430,16 @@ namespace Couche_IHM.Frames
             this.buttonSupprime.Visibility= Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
+        }
+
+        /// <summary>
+        /// Permet d'exporter les adhérents dans un excel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExportAdhérents(object sender, RoutedEventArgs e)
+        {
+            exportAdh.Export(this.adhérentManager.GetAdhérents());
         }
     }
 }
