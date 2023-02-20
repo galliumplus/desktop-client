@@ -40,11 +40,10 @@ namespace Couche_IHM
             get => compteConnected;
         }
 
-        public MainWindow(User user)
         // Exporter des adhérents
         private IExportableAdherent exportAdh;
 
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
             this.adherentManager = new AdhérentManager(new FakeAdherentDao());
