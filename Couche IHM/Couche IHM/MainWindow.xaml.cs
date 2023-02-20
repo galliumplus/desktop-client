@@ -30,6 +30,9 @@ namespace Couche_IHM
         // Manager utilisateurs
         private UserManager userManager;
 
+        // Exporter des adhérents
+        private IExportableAdherent exportAdh;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,7 +47,6 @@ namespace Couche_IHM
         private void GoToAccueil(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Source = new Uri("Frames/FrameAccueil.xaml", UriKind.Relative);
-            this.namePage.Text = "Accueil";
         }
 
         /// <summary>
@@ -53,7 +55,6 @@ namespace Couche_IHM
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager));
-            this.namePage.Text = "Caisse";
         }
 
         /// <summary>
@@ -64,7 +65,6 @@ namespace Couche_IHM
         private void GoToAdhérent(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Navigate(new FrameAdherent(this.adherentManager));
-            this.namePage.Text = "Adhérents";
         }
 
         /// <summary>
@@ -73,7 +73,6 @@ namespace Couche_IHM
         private void GoToStock(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Navigate(new FrameStock(this.productManager));
-            this.namePage.Text = "Stock";
         }
 
         /// <summary>
@@ -82,7 +81,6 @@ namespace Couche_IHM
         private void GoToCompte(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Navigate(new FrameComptes(this.userManager));
-            this.namePage.Text = "Comptes";
         }
         /// <summary>
         /// Permet d'aller sur la fenêtre des statistiques
@@ -90,7 +88,6 @@ namespace Couche_IHM
         private void GoToStatistique(object sender, RoutedEventArgs e)
         {
             this.mainFrame.Source = new Uri("Frames/FrameStatistique.xaml", UriKind.Relative);
-            this.namePage.Text = "Statistiques";
         }
     }
 }
