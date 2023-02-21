@@ -11,21 +11,24 @@ namespace Couche_Métier.Log
     /// </summary>
     public class LogToTXT : ILog
     {
-        public string Path => Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Gallium\\Log";
-        private string name => "GalliumLog.txt";
+        public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Gallium\\Log";
+        private string name => "\\GalliumLog.txt";
 
-        public void registerLog(CategorieLog categorieLog, string message)
+        public void registerLog(CategorieLog categorieLog, string message, User author)
         {
-            // Créer le fichier s'il n'existe pas
-            if (!File.Exists(Path+name))
+            // Gestion fichiers
+            if (!Directory.Exists(Path)) // Créer le dossier s'il n'existe pas
             {
                 Directory.CreateDirectory(Path);
-                File.Create(Path + name);
+                if(!File.Exists(Path+name)) // Créer le fichier si n'existe pas
+                {
+                    File.Create(Path+name);
+                }
             }
-
+            
             // Sauvegarde le log
-            message = $"{DateTime.Now} | {categorieLog.ToString()} | {message}";
-            using (StreamWriter file = new(Path, append: true))
+            message = string.Format("{0,-25} | {1,25} | {2,90} | {3,60}", DateTime.Now, categorieLog, message, author);
+            using (StreamWriter file = new(Path+name, append: true))
             {
                 file.WriteLine(message);
             }
