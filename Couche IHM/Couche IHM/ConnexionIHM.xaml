@@ -23,20 +23,21 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
+        
         <!-- Connexion -->
-        <StackPanel Grid.Column="1" Grid.Row="1" Background="Gray">
+        <StackPanel Grid.Column="1" Grid.Row="1" Background="#E66600">
             <!-- Nom de l'application -->
-            <TextBlock Text="Gallium" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10"/>
+            <TextBlock Text="Gallium" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10" Foreground="White"/>
             
             <!-- Identifiant -->
-            <TextBlock Text="Identifiant" />
-            <TextBox x:Name="identifiantBox" Height="20" Margin="0, 0, 0, 10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <TextBlock Text="Identifiant" Foreground="White" Margin="5,0,5,0"/>
+            <TextBox x:Name="identifiantBox" Height="20" Margin="5, 2, 5, 10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             
             <!-- Mot de passe -->
-            <TextBlock Text="Mot de passe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            <TextBox x:Name="passwordBox" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <TextBlock Text="Mot de passe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="5,0,5,0"/>
+            <TextBox x:Name="passwordBox" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5, 2, 5, 10"/>
 
-            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
         </StackPanel>
     </Grid>
 
