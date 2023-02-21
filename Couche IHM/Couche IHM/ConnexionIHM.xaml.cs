@@ -34,7 +34,7 @@ namespace Couche_IHM
         private void ConnectToAccount(object sender, RoutedEventArgs e)
         {
             // Vérifie la connexion d'un utilisateur
-            User userConnection = userDAO.ConnectionUser(identifiantBox.Text, passwordBox.Text);
+            User userConnection = userDAO.ConnectionUser(identifiantBox.Text, passwordBox.Password);
 
             // Vérifie si l'utilisateur réussi à se connecter
             if (userConnection != null)

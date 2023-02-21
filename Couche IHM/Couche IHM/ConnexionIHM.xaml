@@ -12,35 +12,31 @@
         MinWidth="800"
         MinHeight="450">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="10*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-
         
-        <!-- Connexion -->
-        <StackPanel Grid.Column="1" Grid.Row="1" Background="#E66600">
-            <!-- Nom de l'application -->
-            <TextBlock Text="Gallium" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="10" Foreground="White"/>
-            
-            <!-- Identifiant -->
-            <TextBlock Text="Identifiant" Foreground="White" Margin="5,0,5,0"/>
-            <TextBox x:Name="identifiantBox" Height="20" Margin="5, 2, 5, 10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-            
-            <!-- Mot de passe -->
-            <TextBlock Text="Mot de passe" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="White" Margin="5,0,5,0"/>
-            <TextBox x:Name="passwordBox" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5, 2, 5, 10"/>
-
-            <Button x:Name="Connexion" Content="Connection" Click="ConnectToAccount" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Information de connexion -->
+        <Rectangle Fill="#E66600" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="300" RadiusX="20" RadiusY="20"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Titre-->
+            <TextBlock Text="Gallium" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0 0 0 20"/>
+            <!-- Identifiant-->
+            <TextBlock  Text="Identifiant" Foreground="White" FontSize="14" Margin="0 0 0 5"/>
+            <TextBox x:Name="identifiantBox" Width="200" Height="25" Margin="0 0 0 10" VerticalContentAlignment="Center"/>
+            <!-- Mot de passe-->
+            <TextBlock Text="Mot de passe" Foreground="White" FontSize="14" Margin="0 0 0 5"/>
+            <PasswordBox x:Name="passwordBox" Width="200" Height="25" Margin="0 0 0 15" VerticalContentAlignment="Center"/>
+            <!-- Bouton -->
+            <Button Content="Connexion" Width="100" Height="30" Margin="0 20 0 0" Background="White" Click="ConnectToAccount"/>
         </StackPanel>
     </Grid>
-
-   
-    
 </Window>
