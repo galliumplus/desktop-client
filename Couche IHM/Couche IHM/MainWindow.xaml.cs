@@ -100,5 +100,13 @@ namespace Couche_IHM
         {
             this.mainFrame.Source = new Uri("Frames/FrameStatistique.xaml", UriKind.Relative);
         }
+
+        /// <summary>
+        /// Va a la frame log
+        /// </summary>
+        private void GoToLog(object sender, RoutedEventArgs e)
+        {
+            this.mainFrame.Source = new Uri("Frames/FrameLogs.xaml", UriKind.Relative);
+        }
     }
 }

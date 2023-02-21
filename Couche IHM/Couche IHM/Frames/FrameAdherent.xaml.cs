@@ -128,6 +128,26 @@ namespace Couche_IHM.Frames
             this.argentWarning.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Créer un adhérent
+        /// </summary>
+        private void createAnAdherent(Adhérent a)
+        {
+            this.adhérentManager.CreateAdhérent(a);
+            // LOG ADD ADHERENT
+            log.registerLog(CategorieLog.CREATE_ADHERENT, $"NOUVEAU COMPTE >> [{a}]", MainWindow.CompteConnected);
+        }
+
+        /// <summary>
+        /// Update un adhérent
+        /// </summary>
+        private void updateAnAdherent(Adhérent baseAdhérent, Adhérent a)
+        {
+            this.adhérentManager.UpdateAdhérent(a);
+            // LOG UPDATE ADHRENT
+            log.registerLog(CategorieLog.UPDATE_ADHERENT, $"AVANT >> [{baseAdhérent}] ... APRES >> [{a}]", MainWindow.CompteConnected);
+        }
+
         #region events
         /// <summary>
         /// Permet d'afficher un accompte en le recherchant
@@ -207,14 +227,11 @@ namespace Couche_IHM.Frames
 
                 if (createAdherent) // Ajout d'un adhérent
                 {
-                    this.adhérentManager.CreateAdhérent(newAdher);
-                    // LOG ADD ADHERENT
-                    log.registerLog(CategorieLog.CREATE_ADHERENT, $"{MainWindow.CompteConnected} create an Adherents : {newAdher}");
+                    this.createAnAdherent(newAdher);
                 }
                 else // Mise à jour de l'adhérent
                 {
-                    this.adhérentManager.UpdateAdhérent(newAdher);
-                    log.registerLog(CategorieLog.UPDATE_ADHERENT, $"{MainWindow.CompteConnected} update an Adherents : {baseAdhérent} BECOME {newAdher}");
+                    this.updateAnAdherent(baseAdhérent, newAdher);
 
                 }
 
@@ -292,7 +309,7 @@ namespace Couche_IHM.Frames
             this.buttonSupprime.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE_ADHERENT, $"{MainWindow.CompteConnected} delete an Adherents : {adhérentSelect}");
+            log.registerLog(CategorieLog.DELETE_ADHERENT, $"DELETED ADHERENT > {adhérentSelect}", MainWindow.CompteConnected);
 
             UpdateView();
         }
