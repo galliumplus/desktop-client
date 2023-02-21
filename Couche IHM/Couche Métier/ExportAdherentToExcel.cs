@@ -13,8 +13,16 @@ namespace Couche_Métier
         public void Export(List<Adhérent> adhérents)
         {
             // Chemin du fichier vers le bureau
-            string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string pathFile = $"{pathDesktop}\\ListeAdherents{DateTime.Now.Year}-{DateTime.Now.Year + 1}.xlsx";
+            string pathDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium";
+            string pathFile = $"{pathDocuments}\\ListeAdherents{DateTime.Now.Year}-{DateTime.Now.Year + 1}.xlsx";
+
+            // Création du répertoire s'il n'existe pas
+            if (!Directory.Exists(pathDocuments)) 
+            {
+                Directory.CreateDirectory(pathDocuments);
+
+            }
+
 
             // Si le fichier existe on le met à jour
             if (File.Exists(pathFile))
