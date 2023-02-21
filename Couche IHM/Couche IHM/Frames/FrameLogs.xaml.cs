@@ -37,10 +37,13 @@ namespace Couche_IHM.Frames
             // Splits
             ILog log = new LogToTXT();
             List<string> logs = log.loadLog();
-            foreach (string l in logs)
+
+            foreach(string s in logs)
             {
-                this.listLogs.ItemsSource = l.Split('|');
+                this.listLogs.Items.Add(s);
             }
+
+
         }
     }
 }
