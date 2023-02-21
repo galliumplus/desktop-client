@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,8 @@ namespace Couche_Métier.Log
                 Directory.CreateDirectory(Path);
                 if(!File.Exists(Path+name)) // Créer le fichier si n'existe pas
                 {
-                    File.Create(Path+name);
+                    FileStream stream = File.Create(Path+name);
+                    stream.Close();
                 }
             }
             
@@ -34,9 +36,18 @@ namespace Couche_Métier.Log
             }
         }
 
+        /// <summary>
+        /// Récupère les logs
+        /// </summary>
+        /// <returns></returns>
         public List<string> loadLog()
         {
-            return null;
+            List<string> logs = new List<string>();
+            foreach (string line in System.IO.File.ReadLines(Path+name))
+            {
+                logs.Add(line);
+            }
+            return logs;
         }
 
     }

@@ -39,6 +39,7 @@
                     <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
                     <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
                     <Button Tag="Statistiques" x:Name="CompteFrame" Content="Statistiques" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
+                    <Button Tag="Logs" x:Name="LogFrame" Content="Logs" Style="{StaticResource buttonNavBarre}" Click="GoToLog" HorizontalAlignment="Right"/>
                 </StackPanel>
             </Viewbox>
         </Grid>
