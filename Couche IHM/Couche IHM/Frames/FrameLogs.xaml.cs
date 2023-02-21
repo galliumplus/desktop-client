@@ -37,20 +37,16 @@ namespace Couche_IHM.Frames
         private void FillListView()
         {
             ILog log = new LogToTXT();
-            
-            List<string> logsLine = new List<string>();
+
+            List<string> logsLine = log.loadLog();
             List<Log> list = new List<Log>();
-            for(int i = logsLine.Count; i > 0; i--)
+            for(int i = logsLine.Count - 1; i > 0; i--)
             {
                 string date = logsLine[i].Split('|')[0];
                 string action = logsLine[i].Split('|')[1];
                 string message = logsLine[i].Split('|')[2];
                 string auteur = logsLine[i].Split('|')[3];
                 list.Add(new Log(date, action, message, auteur));
-            }
-            foreach(string logItem in log.loadLog())
-            {
-                
             }
             this.listLogs.ItemsSource = list;
         }
