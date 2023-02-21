@@ -10,38 +10,14 @@
 
     <Grid>
         <ListView x:Name="listLogs" >
-            <ListView.Template>
-                <ControlTemplate>
-                    <!-- Header des colonnes -->
-                    <DockPanel   LastChildFill="True">
-                        <Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                                <ColumnDefinition Width="4*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Nom des colonnes -->
-                            <Label Content="Date" Grid.Column="0"/>
-                            <Label Content="Action" Grid.Column="1"/>
-                            <Label Content="Message" Grid.Column="2"/>
-                            <Label Content="Auteur" Grid.Column="3"/>
-
-                            <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
-
-                        </Grid>
-                        <!-- items de la listview -->
-                        <ItemsPresenter></ItemsPresenter>
-                    </DockPanel>
-                </ControlTemplate>
-            </ListView.Template>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding itemTime}"/>
+                    <GridViewColumn Header="Action" DisplayMemberBinding="{Binding itemAction}"/>
+                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding itemMessage}"/>
+                    <GridViewColumn Header="Auteur" DisplayMemberBinding="{Binding itemAuteur}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Page>

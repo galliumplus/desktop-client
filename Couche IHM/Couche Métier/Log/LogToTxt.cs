@@ -12,7 +12,7 @@ namespace Couche_Métier.Log
     /// </summary>
     public class LogToTXT : ILog
     {
-        public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Gallium\\Log";
+        public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium\\Log";
         private string name => "\\GalliumLog.txt";
 
         public void registerLog(CategorieLog categorieLog, string message, User author)
