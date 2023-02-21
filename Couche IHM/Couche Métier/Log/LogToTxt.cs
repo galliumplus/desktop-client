@@ -11,15 +11,16 @@ namespace Couche_Métier.Log
     /// </summary>
     public class LogToTXT : ILog
     {
-        public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Gallium\\Log\\GalliumLog.txt";
+        public string Path => Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Gallium\\Log";
+        private string name => "GalliumLog.txt";
 
         public void registerLog(CategorieLog categorieLog, string message)
         {
             // Créer le fichier s'il n'existe pas
-            if (!File.Exists(Path))
+            if (!File.Exists(Path+name))
             {
-                Directory.CreateDirectory(Path.Split('\\')[Path.Split('\\').Length - 1]);
-                File.Create(Path);
+                Directory.CreateDirectory(Path);
+                File.Create(Path + name);
             }
 
             // Sauvegarde le log
