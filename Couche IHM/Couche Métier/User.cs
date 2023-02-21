@@ -45,7 +45,7 @@ namespace Couche_Métier
         /// </summary>
         public string NomComplet
         {
-            get => nom + prenom;
+            get => nom + " " + prenom;
         }
 
         /// <summary>

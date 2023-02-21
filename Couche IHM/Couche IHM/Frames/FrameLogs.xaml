@@ -9,15 +9,56 @@
       Title="FrameLogs">
 
     <Grid>
-        <ListView x:Name="listLogs" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Time" DisplayMemberBinding="{Binding itemTime}"/>
-                    <GridViewColumn Header="Action" DisplayMemberBinding="{Binding itemAction}"/>
-                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding itemMessage}"/>
-                    <GridViewColumn Header="Auteur" DisplayMemberBinding="{Binding itemAuteur}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        
+        <ListView x:Name="listLogs"  HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" >
+                <ListView.Template>
+                    <ControlTemplate>
+                        <!-- Header des colonnes -->
+                        <DockPanel   LastChildFill="True">
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+
+                            <Label Content="Date" Grid.Column="0" FontSize="18"/>
+                            <Label Content="Action" Grid.Column="1" FontSize="18"/>
+                            <Label Content="Message" Grid.Column="2" FontSize="18"/>
+                            <Label Content="Auteur" Grid.Column="3" FontSize="18"/>
+
+                            <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+
+                            </Grid>
+                            <!-- items de la listview -->
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Content -->
+                        <Label Content="{Binding Date}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Action}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Message}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Auteur}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListView>
     </Grid>
 </Page>

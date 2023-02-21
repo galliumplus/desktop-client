@@ -135,7 +135,7 @@ namespace Couche_IHM.Frames
         {
             this.adhérentManager.CreateAdhérent(a);
             // LOG ADD ADHERENT
-            log.registerLog(CategorieLog.CREATE_ADHERENT, $"NOUVEAU COMPTE >> [{a}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE_ADHERENT, $"Création de l'adhérent [{a.NomCompletIHM}]", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Couche_IHM.Frames
         {
             this.adhérentManager.UpdateAdhérent(a);
             // LOG UPDATE ADHRENT
-            log.registerLog(CategorieLog.UPDATE_ADHERENT, $"AVANT >> [{baseAdhérent}] ... APRES >> [{a}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE_ADHERENT, $"Mise à jour de l'adhérent [{a.NomCompletIHM}]", MainWindow.CompteConnected);
         }
 
         #region events
@@ -309,7 +309,7 @@ namespace Couche_IHM.Frames
             this.buttonSupprime.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE_ADHERENT, $"DELETED ADHERENT > {adhérentSelect}", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.DELETE_ADHERENT, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
 
             UpdateView();
         }

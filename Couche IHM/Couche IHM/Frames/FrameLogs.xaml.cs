@@ -1,7 +1,9 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -34,16 +36,23 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void FillListView()
         {
-            // Splits
             ILog log = new LogToTXT();
-            List<string> logs = log.loadLog();
-
-            foreach(string s in logs)
+            
+            List<string> logsLine = new List<string>();
+            List<Log> list = new List<Log>();
+            for(int i = logsLine.Count; i > 0; i--)
             {
-                this.listLogs.Items.Add(s);
+                string date = logsLine[i].Split('|')[0];
+                string action = logsLine[i].Split('|')[1];
+                string message = logsLine[i].Split('|')[2];
+                string auteur = logsLine[i].Split('|')[3];
+                list.Add(new Log(date, action, message, auteur));
             }
-
-
+            foreach(string logItem in log.loadLog())
+            {
+                
+            }
+            this.listLogs.ItemsSource = list;
         }
     }
 }

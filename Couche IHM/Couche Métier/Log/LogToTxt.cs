@@ -29,7 +29,7 @@ namespace Couche_Métier.Log
             }
             
             // Sauvegarde le log
-            message = $"{DateTime.Now}|{categorieLog}|{message}|{author}";
+            message = $"{DateTime.Now}|{categorieLog}|{message}|{author.NomComplet}";
             using (StreamWriter file = new(Path+name, append: true))
             {
                 file.WriteLine(message);
