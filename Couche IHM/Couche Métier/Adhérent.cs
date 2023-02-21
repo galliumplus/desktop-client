@@ -15,6 +15,8 @@ namespace Couche_Métier
         private string prenom;
         private bool canPass;
         private float argent;
+        private bool stillAdherent;
+        private string formation;
 
         /// <summary>
         /// Constructeur de la classe adhérent
@@ -24,13 +26,15 @@ namespace Couche_Métier
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(string identifiant, string nom, string prenom, float argent, bool canPass = false)
+        public Adhérent(string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
             this.identifiant = identifiant;
             this.nom = nom;
             this.prenom = prenom;
             this.canPass = canPass;
             this.argent = argent;
+            this.stillAdherent = stillAdherent;
+            this.formation = formation;
         }
 
         public Adhérent()
@@ -38,11 +42,10 @@ namespace Couche_Métier
 
         }
 
-        public int Id
-        {
-            get => idAdherent;
-            set => idAdherent = value;
-        }
+        /// <summary>
+        /// Id de l'identifiant dans la bdd
+        /// </summary>
+        public int Id { get => idAdherent; set => idAdherent = value;}
 
         /// <summary>
         /// Id de l'adhérent
@@ -68,6 +71,16 @@ namespace Couche_Métier
         /// Argent de l'adhérent
         /// </summary>
         public float Argent { get => argent; set => argent = value; }
+
+        /// <summary>
+        /// Est ce que le compte est toujours adhérent
+        /// </summary>
+        public bool StillAdherent { get => stillAdherent; set => stillAdherent = value; }
+
+        /// <summary>
+        /// Formation de l'adhérent
+        /// </summary>
+        public string Formation { get => formation; set => formation = value; }
 
         #region properties used in IHM
         /// <summary>
@@ -102,6 +115,8 @@ namespace Couche_Métier
                 return ret;
             }
         }
+
+        
         #endregion
 
         public override string ToString()

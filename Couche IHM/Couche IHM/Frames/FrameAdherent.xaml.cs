@@ -1,5 +1,6 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
