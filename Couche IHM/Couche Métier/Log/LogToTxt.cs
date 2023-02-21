@@ -22,7 +22,7 @@ namespace Couche_Métier.Log
                 Directory.CreateDirectory(Path);
                 if(!File.Exists(Path+name)) // Créer le fichier si n'existe pas
                 {
-                    File.Create(Path+name);
+                    FileStream stream = File.Create(Path+name);
                 }
             }
             
