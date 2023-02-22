@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Log;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace Couche_IHM.Frames
     {
         private UserManager userManager;
         private bool createCompte;
+        private ILog log;
 
         // Attributs qui gèrent si la liste est triée
         private int isSortingArgent = 0;
@@ -36,21 +38,56 @@ namespace Couche_IHM.Frames
             InitializeComponent();
             this.userManager = userManager;
             this.listUser.ItemsSource = userManager.Comptes;
+            this.log = new LogToTXT();
 
+            infoUser.Visibility = Visibility.Hidden;
             FieldRoleList();
         }
 
-
         /// <summary>
-        /// Ajoute un nouvelle adhérent
+        /// Créer un utilisateur
         /// </summary>
-        private void AddAdherentButton(object sender, RoutedEventArgs e)
+        /// <param name="u"></param>
+        private void CreateAnUser(User u)
         {
-            infoUser.Visibility = Visibility.Visible;
+            this.userManager.CreateCompte(u);
+            log.registerLog(CategorieLog.CREATE_USER, $"Création de l'utilisateur {u.NomComplet}", MainWindow.CompteConnected);
         }
 
         /// <summary>
-        /// Permet de mettre à jour la liste des adhérents
+        /// Met à jour un utilisateur
+        /// </summary>
+        /// <param name="baseUser"> base utilisateur </param>
+        /// <param name="u"> utilisateur update </param>
+        private void UpdateAnUser(User baseUser, User u)
+        {
+            this.userManager.UpdateCompte(u);
+
+            // LOG
+            string message = "Mise à jour de l'utilisateur " + baseUser.NomComplet + ":";
+            // Si changement de nom
+            if(baseUser.Nom != u.Nom)
+            {
+                message += $"/Changement du nom {baseUser.Nom} en {u.Nom}";
+            }
+
+            // Si changement de prénom
+            if(baseUser.Prenom != u.Prenom)
+            {
+                message += $"/Changement du nom {baseUser.Prenom} en {u.Prenom}";
+            } 
+            
+            // Si changement de mail
+            if(baseUser.Mail != u.Mail)
+            {
+                message += $"/Changement du nom {baseUser.Mail} en {u.Nom}";
+            }
+
+            log.registerLog(CategorieLog.UPDATE_USER, message, MainWindow.CompteConnected);
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour la liste des utilisateurs
         /// </summary>
         private void UpdateView()
         {
@@ -60,7 +97,7 @@ namespace Couche_IHM.Frames
 
 
         /// <summary>
-        /// Permet d'afficher les informations d'un adhérent 
+        /// Permet d'afficher les informations d'un utilisateur
         /// </summary>
         /// <param name="infoUser"> Information de l'utilisateur </param>
         private void AfficheAcompte(string mailUser)
@@ -69,7 +106,6 @@ namespace Couche_IHM.Frames
             if (user != null)
             {
                 AfficheAcompte(user);
-
             }
             else
             {
@@ -80,43 +116,46 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// Permet d'afficher lesi nformations d'un adhérent
+        /// Permet d'afficher les informations d'un utilisateur
         /// </summary>
-        /// <param name="adhérent">adhérent à détailler</param>
+        /// <param name="user">utilisateur à détailler</param>
         private void AfficheAcompte(User user)
         {
-
             this.mailuser.Text = user.Mail;
             this.nomComplet.Text = user.NomComplet;
-            this.roleList.SelectedItem = user.Role;
-
+            this.roleList.SelectedValue = user.Role.ToString();
+            
             this.buttonValidate.Visibility = Visibility.Hidden;
             ResetWarnings();
         }
 
+        /// <summary>
+        /// Cache les warnings
+        /// </summary>
+        private void ResetWarnings()
+        {
+            this.compteWarning.Visibility = Visibility.Hidden;
+            this.identiteWarning.Visibility = Visibility.Hidden;
+        }
 
         /// <summary>
-        /// Permet de sélectionner un adhérent quand l'utilisateur clique sur une ligne de la liste
+        /// Remplis la ComboBox des roles existants
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectUser(object sender, SelectionChangedEventArgs e)
+        private void FieldRoleList()
         {
-            User user = (User)this.listUser.SelectedItem;
-            if (user != null)
+            foreach (RolePerm role in (RolePerm[])Enum.GetValues(typeof(RolePerm)))
             {
-                AfficheAcompte(user);
-                infoUser.Visibility = Visibility.Visible;
+                ComboBoxItem item = new ComboBoxItem();
+                item.Name = role.ToString();
+                roleList.Items.Add(item);
             }
         }
 
-
+        #region events
         /// <summary>
-        /// Permet d'afficher un accompte en le recherchant
+        /// Permet d'afficher un utilisateur en le recherchant
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchAdherent(object sender, TextChangedEventArgs e)
+        private void SearchUser(object sender, TextChangedEventArgs e)
         {
             if (this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
             {
@@ -132,12 +171,24 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// Permet de cacher les warnings
+        /// Ajoute un nouvelle utilisateur
         /// </summary>
-        private void ResetWarnings()
+        private void AddUserButton(object sender, RoutedEventArgs e)
         {
-            this.compteWarning.Visibility = Visibility.Hidden;
-            this.identiteWarning.Visibility = Visibility.Hidden;
+            infoUser.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Permet de sélectionner un compte quand l'utilisateur clique sur une ligne de la liste
+        /// </summary>
+        private void SelectUsers(object sender, SelectionChangedEventArgs e)
+        {
+            User user = (User)this.listUser.SelectedItem;
+            if (user != null)
+            {
+                AfficheAcompte(user);
+                infoUser.Visibility = Visibility.Visible;
+            }
         }
 
         /// <summary>
@@ -149,6 +200,8 @@ namespace Couche_IHM.Frames
 
             try
             {
+                User baseUser = (User)this.listUser.SelectedItem;
+
                 // Mise à jour du nom et du prénom
                 string nomAdherent;
                 string prenomAdherent;
@@ -180,11 +233,12 @@ namespace Couche_IHM.Frames
 
                 if (createCompte) // Ajout d'un compte
                 {
-                    this.userManager.CreateCompte(new User(0, nomAdherent, prenomAdherent, mail, role));
+                    CreateAnUser(new User(0, nomAdherent, prenomAdherent, mail, role));
                 }
                 else // Mise à jour d'un compte
                 {
-                    this.userManager.UpdateCompte(new User(0, nomAdherent, prenomAdherent, mail, role));
+                    UpdateAnUser(baseUser,new User(0, nomAdherent, prenomAdherent, mail, role));
+                   
                 }
 
 
@@ -215,8 +269,6 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Permet d'afficher le bouton de validation des changements
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ShowValidationButton(object sender, TextChangedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
@@ -226,8 +278,6 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Permet d'afficher le bouton de validation des changements
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
@@ -235,88 +285,69 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// Remplis la ComboBox des roles existants
+        /// Permet de cacher les options
         /// </summary>
-        private void FieldRoleList()
+        private void HideOptions(object sender, RoutedEventArgs e)
         {
-            foreach(RolePerm role in (RolePerm[])Enum.GetValues(typeof(RolePerm)))
-            {
-                ComboBoxItem item = new ComboBoxItem();
-                item.Name = role.ToString();
-                roleList.Items.Add(item);
-            }
+            this.options.Visibility = Visibility.Hidden;
         }
+
+        /// <summary>
+        /// Permet d'afficher les options
+        /// </summary>
+        private void ShowOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Permet de supprimer l'utilisateur
+        /// </summary>
+        private void DeleteUser(object sender, RoutedEventArgs e)
+        {
+            User userSelected = this.userManager.GetCompte(this.mailuser.Text);
+            this.userManager.RemoveCompte(userSelected);
+            infoUser.Visibility = Visibility.Hidden;
+
+            // LOG DELETE ADHERENT
+            log.registerLog(CategorieLog.DELETE_USER, $"Supression d'un utilisateur [{userSelected.NomComplet}]", MainWindow.CompteConnected);
+
+            UpdateView();
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet de selectionner un utilisateur
+        /// </summary>
+        private void SelectUser(object sender, SelectionChangedEventArgs e)
+        {
+            User users = (User)this.listUser.SelectedItem;
+            if (users != null)
+            {
+                infoUser.Visibility = Visibility.Visible;
+                AfficheAcompte(users);
+            }
+            this.createCompte = false;
+
+        }
+
+        /// <summary>
+        /// Permet de fermer la fenêtre aves les infos utilisateurs
+        /// </summary>
+        private void CloseInfoAdherent(object sender, RoutedEventArgs e)
+        {
+            this.infoUser.Visibility = Visibility.Hidden;
+            this.buttonValidate.Visibility = Visibility.Hidden;
+            this.listUser.SelectedItem = null;
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        #endregion
 
         #region tri
         /// <summary>
-        /// Permet de trier les adhérents selon leur argent
+        /// Permet de trier les utilisateurs selon leur identité
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SortArgent(object sender, RoutedEventArgs e)
-        {
-
-            ControlTemplate template = this.listUser.Template;
-            Image myImage = template.FindName("argentTri", this.listUser) as Image;
-
-            switch (isSortingArgent)
-            {
-                case 0:
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Argent", ListSortDirection.Ascending));
-                    myImage.Visibility = Visibility.Visible;
-                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
-                    break;
-                case 1:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Argent", ListSortDirection.Ascending));
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Argent", ListSortDirection.Descending));
-                    myImage.Visibility = Visibility.Visible;
-                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
-                    break;
-                case 2:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Argent", ListSortDirection.Descending));
-                    myImage.Visibility = Visibility.Hidden;
-                    break;
-            }
-            isSortingArgent = (isSortingArgent + 1) % 3;
-
-        }
-
-        /// <summary>
-        /// Permet de trier les adhérents selon leur id
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SortId(object sender, RoutedEventArgs e)
-        {
-            ControlTemplate template = this.listUser.Template;
-            Image myImage = template.FindName("idTri", this.listUser) as Image;
-            switch (isSortingId)
-            {
-                case 0:
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Identifiant", ListSortDirection.Ascending));
-                    myImage.Visibility = Visibility.Visible;
-                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
-                    break;
-                case 1:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Identifiant", ListSortDirection.Ascending));
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Identifiant", ListSortDirection.Descending));
-                    myImage.Visibility = Visibility.Visible;
-                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
-                    break;
-                case 2:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Identifiant", ListSortDirection.Descending));
-                    myImage.Visibility = Visibility.Hidden;
-                    break;
-            }
-            isSortingId = (isSortingId + 1) % 3;
-        }
-
-
-        /// <summary>
-        /// Permet de trier les adhérents selon leur identité
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SortIdentite(object sender, RoutedEventArgs e)
         {
             ControlTemplate template = this.listUser.Template;
