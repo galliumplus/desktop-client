@@ -55,6 +55,7 @@ namespace Couche_IHM.Frames
 
             // Met à jour l'affichage
             UpdateView();
+            this.buttonValidate.Content = "Valider";
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
@@ -99,7 +100,7 @@ namespace Couche_IHM.Frames
         /// <param name="adhérent">adhérent à détailler</param>
         private void AfficheAcompte(Adhérent adhérent)
         {
-           
+            this.buttonValidate.Content = "Valider";
             this.id.Text = adhérent.Identifiant;
             this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
             this.name.Text = adhérent.NomCompletIHM;
@@ -241,6 +242,7 @@ namespace Couche_IHM.Frames
                 this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
+                this.buttonValidate.Content = "Valider";
             }
             catch (Exception ex)
             {
@@ -323,6 +325,12 @@ namespace Couche_IHM.Frames
         {
             infoAdherent.Visibility = Visibility.Visible;
             this.buttonSupprime.Visibility = Visibility.Hidden;
+            this.buttonValidate.Content = "Créer";
+            this.id.Text = "";
+            this.name.Text = "";
+            this.nonbypass.IsChecked = false;
+            this.ouibypass.IsChecked = false;
+            this.argent.Text = "";
             this.createAdherent = true;
         }
 

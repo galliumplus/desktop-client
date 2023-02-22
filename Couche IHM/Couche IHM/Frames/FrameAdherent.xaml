@@ -21,11 +21,11 @@
             <!-- Nom de la frame  -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Adhérents" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-                <Button Name="exportAdherentButton" Visibility="Visible" Margin="5,0,0,10" Background="Transparent" BorderThickness="0"  Width="20" Height="20" Click="ExportAdhérent"  >
-                    <Image Opacity="0.7"   Source="/Images/export.png"/>
+                <Button Style="{StaticResource buttonImage}" Name="exportAdherentButton" Visibility="Visible" Margin="5,0,0,10"   Width="20" Height="20" Click="ExportAdhérent"  >
+                    <Image Source="/Images/export.png"/>
                 </Button>
-                <Button Name="addAdherentButton" Click="AddAdherentButton" Visibility="Visible" Margin="0,0,0,5" Background="Transparent" BorderThickness="0"  Width="20" Height="19" >
-                    <Image Opacity="0.7"   Source="/Images/ajouter.png"/>
+                <Button Style="{StaticResource buttonImage}" Name="addAdherentButton" Click="AddAdherentButton" Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" >
+                    <Image Source="/Images/ajouter.png"/>
                 </Button>
             </StackPanel>
 
@@ -128,9 +128,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Barre de recherche -->
-                <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" Grid.ColumnSpan="2" TextChanged="SearchAdherent"   />
+                <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" TextChanged="SearchAdherent"   />
 
-                <Image Source="/Images/loupe.png" Grid.Column="1" Width="22" HorizontalAlignment="Right" Margin="0,0,80,0" />
+                <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
             </Grid>
 
 
@@ -140,10 +140,10 @@
 
                     <StackPanel Margin="0,0,0,8" >
                         <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                            <Button Background="Transparent"  Width="40" HorizontalAlignment="Left" BorderThickness="0" Click="CloseInfoAdherent">
+                            <Button Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left"  Click="CloseInfoAdherent">
                                 <Image Source="/Images/retour.png"/>
                             </Button>
-                            <Button Background="Transparent" Margin="97,0,0,0"  Width="30" HorizontalAlignment="Right" BorderThickness="0">
+                                <Button  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"  Style="{StaticResource buttonImage}">
                                 <Image Source="/Images/param.png"/>
                             </Button>
                         </StackPanel>
@@ -151,7 +151,7 @@
                         <!-- Nom utilisateur -->
                         <TextBlock Text="Identité" HorizontalAlignment="Center" Margin="10,0,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
-                            <TextBox x:Name="name" Text="" FontSize="13"  Foreground="Black" TextChanged="ShowValidationButton"/>
+                                <TextBox x:Name="name"  MinWidth="80" Text="" FontSize="13"   Foreground="Black" TextChanged="ShowValidationButton"/>
                             <Image x:Name="identiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                         </StackPanel>
 
@@ -160,7 +160,7 @@
                         <!-- Compte utilisateur -->
                         <TextBlock  Text="Compte" HorizontalAlignment="Center" Margin="10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                            <TextBox x:Name="id" Text="" FontSize="13" Foreground="Black" TextChanged="ShowValidationButton" />
+                                <TextBox x:Name="id" Text="" MinWidth="80" FontSize="13" Foreground="Black" TextChanged="ShowValidationButton" />
                             <Image x:Name="compteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                         </StackPanel>
 
@@ -176,7 +176,7 @@
                         <!-- Balance utilisateur -->
                         <TextBlock Text="Balance" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBox x:Name="argent" Text="" FontSize="13"  Foreground="Black" TextChanged="ShowValidationButton" />
+                                <TextBox MinWidth="40" x:Name="argent" Text="" FontSize="13"  Foreground="Black" TextChanged="ShowValidationButton" />
                             <Image x:Name="argentWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                         </StackPanel>
 
