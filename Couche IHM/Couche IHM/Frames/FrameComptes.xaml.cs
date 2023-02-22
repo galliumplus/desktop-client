@@ -147,7 +147,7 @@ namespace Couche_IHM.Frames
             {
                 ComboBoxItem item = new ComboBoxItem();
                 item.Name = role.ToString();
-                roleList.Items.Add(item);
+                roleList.Items.Add(item.Name);
             }
         }
 
