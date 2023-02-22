@@ -6,9 +6,11 @@
     <RootNamespace>Couche_IHM</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Logo\Logo_Gallium.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
     <None Remove="Images\ajouter.png" />
@@ -30,6 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\Logo\Logo_Gallium.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.100.3" />
   </ItemGroup>
 
@@ -39,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Logo\Logo_Gallium.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Fonts\Riberio.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
