@@ -88,6 +88,7 @@ namespace Couche_IHM.Frames
         private void ShowRowDetails(object sender, SelectionChangedEventArgs e)
         {
             Log log = (Log)this.listLogs.SelectedItem;
+            this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
             if (!string.IsNullOrEmpty(log.MessageComplete))
             {
                 this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
