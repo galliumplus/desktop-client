@@ -123,7 +123,7 @@ namespace Couche_IHM.Frames
         {
             this.mailuser.Text = user.Mail;
             this.nomComplet.Text = user.NomComplet;
-            this.roleList.SelectedValue = user.Role;
+            this.roleList.SelectedValue = user.Role.ToString();
             
             this.buttonValidate.Visibility = Visibility.Hidden;
             ResetWarnings();
@@ -147,7 +147,7 @@ namespace Couche_IHM.Frames
             {
                 ComboBoxItem item = new ComboBoxItem();
                 item.Name = role.ToString();
-                roleList.Items.Add(item);
+                roleList.Items.Add(item.Name);
             }
         }
 
