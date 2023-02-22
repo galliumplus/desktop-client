@@ -17,16 +17,17 @@
 
         <Label x:Name="titleLog" Content="Aucun log" FontSize="30"/>
 
-        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Birthday" Binding="{Binding Action}" />
-                <DataGridTextColumn Header="Birthday" Binding="{Binding Message}" />
-                <DataGridTextColumn Header="Birthday" Binding="{Binding Auteur}" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100" />
+                <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="150"/>
+                <DataGridTextColumn Header="Auteur" Binding="{Binding Auteur}" Width="auto" />
+                <DataGridTextColumn Header="Mesage" Binding="{Binding MessageCourt}" Width="auto"/>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Message}" Margin="10" />
+                    <TextBlock Text="{Binding MessageComplete}" Margin="10" />
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>

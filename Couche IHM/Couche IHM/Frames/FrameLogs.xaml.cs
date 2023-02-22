@@ -26,22 +26,29 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameLogs : Page
     {
+        private readonly ILog log; // log
+        private readonly List<string> logsLine; // Liste des logs
+
         public FrameLogs()
         {
             InitializeComponent();
-            FillListView();
+            this.log = new LogToTXT();
+            this.logsLine = log.loadLog();
+
+            // Si il y a des logs
+            if(logsLine.Count > 0)
+            {
+                FillListViewLogs();
+            }
+            
         }
 
         /// <summary>
         /// Remplis la list view en lisant les logs
         /// </summary>
-        private void FillListView()
+        private void FillListViewLogs()
         {
-            // Mois des derniers logs
-            
-
-            ILog log = new LogToTXT();
-            List<string> logsLine = log.loadLog();
+            // Affiche les logs du mois actuels
             List<Log> list = new List<Log>();
             string montYear = DateTime.Parse(logsLine[logsLine.Count-1].Split('|')[0]).ToString("MMMM yyyy"); // Récupère la date la plus vieille
             for (int i = logsLine.Count - 1; i > -1; i--)
@@ -58,10 +65,9 @@ namespace Couche_IHM.Frames
             }
             this.listLogs.ItemsSource = list;
 
+            // Change le titre de la page
             if (list.Count > 0)
                 this.titleLog.Content = montYear.ToUpper()[0] + montYear.Substring(1);
         }
-
-        
     }
 }

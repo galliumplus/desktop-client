@@ -13,12 +13,13 @@ namespace Couche_Métier.Log
     public class LogToTXT : ILog
     {
         public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium\\Log";
-        private string name => "\\GalliumLog.txt";
+        private string name = "\\GalliumLog.txt";
 
         public void registerLog(CategorieLog categorieLog, string message, User author)
         {
             VerifyFiles();
             // Sauvegarde le log
+            
             message = $"{DateTime.Now}|{categorieLog}|{message}|{author.NomComplet}";
             using (StreamWriter file = new(Path+name, append: true))
             {
@@ -57,6 +58,5 @@ namespace Couche_Métier.Log
                 }
             }
         }
-
     }
 }

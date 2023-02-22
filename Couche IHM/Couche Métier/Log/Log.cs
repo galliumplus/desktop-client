@@ -54,6 +54,19 @@ namespace Couche_Métier.Log
         }
 
         /// <summary>
+        /// Message détaillés
+        /// </summary>
+        public string MessageComplete
+        {
+            get
+            {
+                string messageSplit = message.Split('|')[1];
+                string[] listLogs = messageSplit.Split("/");
+                return string.Join('\n', listLogs);
+            }
+        }
+
+        /// <summary>
         /// Message
         /// </summary>
         public string Message 
