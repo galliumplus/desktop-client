@@ -47,7 +47,7 @@
             <!-- DEUXIEME COLONNE -->
             <Grid  Height="607" Width="912" >
                 <Frame x:Name="mainFrame" Margin="20,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
-        </Grid>
+            </Grid>
         </Viewbox>
 
     </Grid>
