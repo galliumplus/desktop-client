@@ -15,7 +15,7 @@
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
 
-        <Label x:Name="titleLog" Content="Titre" FontSize="30" VerticalAlignment="Center"/>
+        <Label x:Name="titleLog" Content="Aucun logs" FontSize="30" VerticalAlignment="Center"/>
 
         <ListView x:Name="listLogs"  HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" Grid.Row="1" >
                 <ListView.Template>

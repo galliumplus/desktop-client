@@ -135,7 +135,7 @@ namespace Couche_IHM.Frames
         {
             this.adhérentManager.CreateAdhérent(a);
             // LOG ADD ADHERENT
-            log.registerLog(CategorieLog.CREATE_ADHERENT, $"Création de l'adhérent [{a.NomCompletIHM}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE{a.NomCompletIHM}", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -144,8 +144,36 @@ namespace Couche_IHM.Frames
         private void updateAnAdherent(Adhérent baseAdhérent, Adhérent a)
         {
             this.adhérentManager.UpdateAdhérent(a);
+
             // LOG UPDATE ADHRENT
-            log.registerLog(CategorieLog.UPDATE_ADHERENT, $"Mise à jour de l'adhérent [{a.NomCompletIHM}]", MainWindow.CompteConnected);
+            string message = $"Mise à jour de l'adhérent [{a.NomCompletIHM}]";
+            // Nom 
+            if (baseAdhérent.Nom != a.Nom)
+            {
+                message += $"/Changement du nom de {baseAdhérent.Nom} en {a.Nom}";
+            }
+
+            // Prénom
+            if(baseAdhérent.Prenom != a.Prenom)
+            {
+                message += $"/Changement du prénom de {baseAdhérent.Prenom} en {a.Prenom}";
+            }
+
+            // CanByPAss
+            if(baseAdhérent.CanPass != a.CanPass)
+            {
+                message += $"/Changement de CanPass de {baseAdhérent.CanPass} en {a.CanPass}";
+            }
+
+            // Argent
+            if(baseAdhérent.Argent != a.Argent)
+            {
+                if((a.Argent - baseAdhérent.Argent) > 0) // Ajout d'argent
+                    message += $"/Ajout de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
+                else // Enlever argent
+                    message += $"/Argent retiré de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
+            }
+            log.registerLog(CategorieLog.UPDATE_ADHERENT, message, MainWindow.CompteConnected);
         }
 
         #region events
