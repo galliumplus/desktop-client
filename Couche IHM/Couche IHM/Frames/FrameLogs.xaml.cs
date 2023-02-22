@@ -81,5 +81,17 @@ namespace Couche_IHM.Frames
             if (list.Count > 0)
                 this.titleLog.Content = actualMonth[0] + actualMonth.Substring(1);
         }
+
+        /// <summary>
+        /// Si une ligne n'a pas de détails, elle ne s'affichera pas
+        /// </summary>
+        private void ShowRowDetails(object sender, SelectionChangedEventArgs e)
+        {
+            Log log = (Log)this.listLogs.SelectedItem;
+            if (!string.IsNullOrEmpty(log.MessageComplete))
+            {
+                this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
+            }
+        }
     }
 }

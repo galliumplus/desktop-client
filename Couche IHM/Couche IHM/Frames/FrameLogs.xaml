@@ -18,7 +18,7 @@
         <Label x:Name="titleLog" Content="Aucun log" FontSize="30"/>
 
         <!-- Liste des logs -->
-        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True">
+        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ShowRowDetails" RowDetailsVisibilityMode="Collapsed">
             <!-- Columns -->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100" />
@@ -26,12 +26,14 @@
                 <DataGridTextColumn Header="Auteur" Binding="{Binding Auteur}" Width="auto" />
                 <DataGridTextColumn Header="Mesage" Binding="{Binding MessageCourt}" Width="auto"/>
             </DataGrid.Columns>
+            
             <!-- Détails des lignes-->
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding MessageComplete}" Margin="10" />
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
+            
         </DataGrid>
     </Grid>
 </Page>
