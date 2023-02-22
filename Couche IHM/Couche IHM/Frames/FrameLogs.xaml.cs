@@ -50,6 +50,7 @@ namespace Couche_IHM.Frames
         {
             // Affiche les logs du mois actuels
             List<Log> list = new List<Log>();
+            string actualMonth = DateTime.Today.ToString("MMMM yyyy");
 
             // Pour tous les logs
             for (int i = logsLine.Count - 1; i > -1; i--) 
@@ -61,7 +62,7 @@ namespace Couche_IHM.Frames
                 string auteur = splitedLosline[3];
 
                 // Affiche les logs du mois actuels
-                if (DateTime.Parse(date).ToString("MMMM yyyy") == DateTime.Today.ToString("MMMM yyyy"))
+                if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth)
                 {
                     Log newLog = new Log(date, action, message, auteur);
                     // Adapte le message selon la catégorie
@@ -78,7 +79,7 @@ namespace Couche_IHM.Frames
 
             // Change le titre de la page
             if (list.Count > 0)
-                this.titleLog.Content = DateTime.Today.ToString("MMMM yyyy").ToUpper()[0] + DateTime.Today.ToString("MMMM yyyy").Substring(1);
+                this.titleLog.Content = actualMonth[0] + actualMonth.Substring(1);
         }
     }
 }
