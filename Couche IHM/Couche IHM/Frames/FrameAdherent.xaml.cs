@@ -62,7 +62,11 @@ namespace Couche_IHM.Frames
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
 
-           
+            // Si membre du ca alors parametre pas visibles
+            if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
+            {
+                this.optionsButton.Visibility = Visibility.Hidden;
+            }
 
         }
 
@@ -77,25 +81,8 @@ namespace Couche_IHM.Frames
         }
 
 
-        /// <summary>
-        /// Permet d'afficher les informations d'un adhérent 
-        /// </summary>
-        /// <param name="infoUser"> Information de l'utilisateur </param>
-        private void AfficheAcompte(string infoUser)
-        {
-            Adhérent adhérent = this.adhérentManager.GetAdhérent(infoUser);
-            if (adhérent != null)
-            {
-                AfficheAcompte(adhérent);
 
-            }
-            else
-            {
-                this.infoAdherent.Visibility = Visibility.Hidden;
-                this.listadherents.SelectedItem = null;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-            }
-        }
+        
 
         /// <summary>
         /// Permet d'afficher lesi nformations d'un adhérent
@@ -116,7 +103,9 @@ namespace Couche_IHM.Frames
                 this.nonbypass.IsChecked = true;
             }
 
+
             this.buttonValidate.Visibility = Visibility.Hidden;
+            this.options.Visibility = Visibility.Hidden;
             ResetWarnings();
                      
         }
@@ -323,14 +312,9 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
-            infoAdherent.Visibility = Visibility.Visible;
-            this.buttonValidate.Content = "Créer";
-            this.id.Text = "";
-            this.name.Text = "";
-            this.nonbypass.IsChecked = false;
-            this.ouibypass.IsChecked = false;
-            this.argent.Text = "";
-            this.createAdherent = true;
+            ModificationAcompte modifAcompteWindow = new ModificationAcompte();
+            modifAcompteWindow.ShowDialog();
+            
         }
 
         /// <summary>
@@ -362,6 +346,7 @@ namespace Couche_IHM.Frames
             this.infoAdherent.Visibility = Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
+            this.options.Visibility = Visibility.Hidden;
         }
 
 
@@ -382,12 +367,7 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ShowOptions(object sender, RoutedEventArgs e)
         {
-            // Si le compte est du CA alors il n'a pas accès aux options
-            if (MainWindow.CompteConnected.Role == RolePerm.BUREAU)
-            {
-                this.options.Visibility = Visibility.Visible;
-            }
-
+            this.options.Visibility = Visibility.Visible;
         }
         #endregion
 
