@@ -38,8 +38,8 @@
                 <!-- Image du compte  -->
                 <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                 <StackPanel Grid.Column="1" Margin="10">
-                    <Label Name="NomUtilisateur" Content="Marteau Florian" FontSize="14" FontWeight="Bold"/>
-                    <Label Name="RoleUtilisateur" Content="Arabe" FontSize="11" FontWeight="DemiBold" />
+                    <Label Name="NomUtilisateur" Content="" FontSize="14" FontWeight="Bold"/>
+                    <Label Name="RoleUtilisateur" Content="" FontSize="11" FontWeight="DemiBold" />
                 </StackPanel>
             </Grid>
         </Grid>
@@ -146,8 +146,8 @@
                                 <Button Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left"  Click="CloseInfoAdherent">
                                     <Image Source="/Images/retour.png"/>
                                 </Button>
-                                <Button  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions" >
-                                    <Image Source="/Images/param.png"/>
+                                <Button x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions" >
+                                    <Image   Source="/Images/param.png"/>
 
                                 </Button>
 

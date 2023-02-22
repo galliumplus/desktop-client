@@ -56,10 +56,14 @@ namespace Couche_IHM.Frames
             // Met à jour l'affichage
             UpdateView();
             this.buttonValidate.Content = "Valider";
+            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
+            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
+
            
+
         }
 
 
@@ -475,7 +479,12 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ShowOptions(object sender, RoutedEventArgs e)
         {
-            this.options.Visibility = Visibility.Visible;
+            // Si le compte est du CA alors il n'a pas accès aux options
+            if (MainWindow.CompteConnected.Role == RolePerm.BUREAU)
+            {
+                this.options.Visibility = Visibility.Visible;
+            }
+            
         }
     }
 }
