@@ -61,5 +61,7 @@ namespace Couche_IHM.Frames
             if (list.Count > 0)
                 this.titleLog.Content = montYear.ToUpper()[0] + montYear.Substring(1);
         }
+
+        
     }
 }
