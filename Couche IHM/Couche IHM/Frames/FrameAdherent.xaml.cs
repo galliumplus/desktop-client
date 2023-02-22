@@ -90,7 +90,6 @@ namespace Couche_IHM.Frames
                 this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonSupprime.Visibility = Visibility.Hidden;
             }
         }
 
@@ -114,7 +113,6 @@ namespace Couche_IHM.Frames
             }
 
             this.buttonValidate.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility= Visibility.Visible;
             ResetWarnings();
                      
         }
@@ -168,7 +166,6 @@ namespace Couche_IHM.Frames
                 infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonSupprime.Visibility = Visibility.Hidden;
             }
         }
 
@@ -273,7 +270,6 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, TextChangedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -294,7 +290,6 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
 
         }
 
@@ -308,12 +303,12 @@ namespace Couche_IHM.Frames
             Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
             this.adhérentManager.RemoveAdhérent(adhérentSelect);
             infoAdherent.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
             log.registerLog(CategorieLog.DELETE_ADHERENT, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
 
             UpdateView();
+            this.options.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -324,7 +319,6 @@ namespace Couche_IHM.Frames
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
             infoAdherent.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
             this.buttonValidate.Content = "Créer";
             this.id.Text = "";
             this.name.Text = "";
@@ -347,7 +341,7 @@ namespace Couche_IHM.Frames
 
                 infoAdherent.Visibility = Visibility.Visible;
                 AfficheAcompte(adhérent);
-                this.buttonSupprime.Visibility = Visibility.Visible;
+
             }
             this.createAdherent = false;
 
@@ -361,7 +355,6 @@ namespace Couche_IHM.Frames
         private void CloseInfoAdherent(object sender, RoutedEventArgs e)
         {
             this.infoAdherent.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility= Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
         }
@@ -462,8 +455,27 @@ namespace Couche_IHM.Frames
             }
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
+
         #endregion
 
-        
+        /// <summary>
+        /// Permet de cacher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet d'afficher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -26,9 +26,9 @@
             </Grid.RowDefinitions>
 
             <!-- Icone Gallium -->
-            <Image Source="/Images/Gallium+.png"  VerticalAlignment="Top" Margin="20"/>
+            <Image Source="/Images/Gallium+.png" Margin="0,20,0,54"  VerticalAlignment="Top"/>
 
-            <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="10" VerticalAlignment="Bottom" />
+            <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="12" VerticalAlignment="Bottom" />
 
             <!-- Choix Pages -->
             <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Uniform">
