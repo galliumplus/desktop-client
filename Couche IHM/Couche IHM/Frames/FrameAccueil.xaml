@@ -10,6 +10,61 @@
       Background="White">
 
     <Grid>
-        <TextBlock Text="Accueil" />
+        <!-- Grid principale -->
+        <Grid Height="450" Width="800">
+            <!-- Définition des colonnes & lignes -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Menu -->
+
+
+            <!-- Réseaux -->
+
+            <Label Content="Réseaux Sociaux" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="20"/>
+            <Rectangle Fill="#302F2F" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,39,0,0"/>
+            <!-- Séparation en trois de la case -->
+            <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Name="Res_Drive" VerticalAlignment="Bottom">
+                    <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
+                    <Image  Source="/Images/driveIcon.png"  Width="40"   HorizontalAlignment="Center" />
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="4" Name="Res_Twitter">
+                    <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
+                    <Image  Source="/Images/twitterIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="4" Name="Res_Discord" >
+                    <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
+                    <Image   Source="/Images/discordIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+                <Grid Grid.Column="3" Grid.Row="4" Name="Res_Insta" >
+                    <Rectangle Margin="10,10,10,15" Fill="#302F2F"/>
+                    <Image   Source="/Images/instaIcon.png"  Width="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+            </Grid>
+
+           
+        </Grid>
     </Grid>
 </Page>

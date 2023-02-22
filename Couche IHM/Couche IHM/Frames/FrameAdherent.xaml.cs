@@ -56,10 +56,18 @@ namespace Couche_IHM.Frames
             // Met à jour l'affichage
             UpdateView();
             this.buttonValidate.Content = "Valider";
+            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
+            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
-           
+
+            // Si membre du ca alors parametre pas visibles
+            if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
+            {
+                this.optionsButton.Visibility = Visibility.Hidden;
+            }
+
         }
 
 
@@ -73,26 +81,8 @@ namespace Couche_IHM.Frames
         }
 
 
-        /// <summary>
-        /// Permet d'afficher les informations d'un adhérent 
-        /// </summary>
-        /// <param name="infoUser"> Information de l'utilisateur </param>
-        private void AfficheAcompte(string infoUser)
-        {
-            Adhérent adhérent = this.adhérentManager.GetAdhérent(infoUser);
-            if (adhérent != null)
-            {
-                AfficheAcompte(adhérent);
 
-            }
-            else
-            {
-                this.infoAdherent.Visibility = Visibility.Hidden;
-                this.listadherents.SelectedItem = null;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonSupprime.Visibility = Visibility.Hidden;
-            }
-        }
+        
 
         /// <summary>
         /// Permet d'afficher lesi nformations d'un adhérent
@@ -113,8 +103,9 @@ namespace Couche_IHM.Frames
                 this.nonbypass.IsChecked = true;
             }
 
+
             this.buttonValidate.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility= Visibility.Visible;
+            this.options.Visibility = Visibility.Hidden;
             ResetWarnings();
                      
         }
@@ -185,18 +176,18 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void SearchAdherent(object sender, TextChangedEventArgs e)
         {
-            if (this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
+            if (this.rechercheAcompte.Text.Trim() != "")
             {
-                infoAdherent.Visibility = Visibility.Visible;
-                AfficheAcompte(this.rechercheAcompte.Text);
+                this.listadherents.ItemsSource = this.adhérentManager.GetAdhérents(this.rechercheAcompte.Text);
                 createAdherent = false;
             }
             else
             {
-                infoAdherent.Visibility = Visibility.Hidden;
+                
                 this.listadherents.SelectedItem = null;
+                this.UpdateView();
+                infoAdherent.Visibility = Visibility.Hidden;
                 this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonSupprime.Visibility = Visibility.Hidden;
             }
         }
 
@@ -301,7 +292,6 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, TextChangedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -322,7 +312,6 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
 
         }
 
@@ -336,12 +325,12 @@ namespace Couche_IHM.Frames
             Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
             this.adhérentManager.RemoveAdhérent(adhérentSelect);
             infoAdherent.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
             log.registerLog(CategorieLog.DELETE_ADHERENT, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
 
             UpdateView();
+            this.options.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -351,15 +340,9 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
-            infoAdherent.Visibility = Visibility.Visible;
-            this.buttonSupprime.Visibility = Visibility.Hidden;
-            this.buttonValidate.Content = "Créer";
-            this.id.Text = "";
-            this.name.Text = "";
-            this.nonbypass.IsChecked = false;
-            this.ouibypass.IsChecked = false;
-            this.argent.Text = "";
-            this.createAdherent = true;
+            ModificationAcompte modifAcompteWindow = new ModificationAcompte();
+            modifAcompteWindow.ShowDialog();
+            
         }
 
         /// <summary>
@@ -375,7 +358,7 @@ namespace Couche_IHM.Frames
 
                 infoAdherent.Visibility = Visibility.Visible;
                 AfficheAcompte(adhérent);
-                this.buttonSupprime.Visibility = Visibility.Visible;
+
             }
             this.createAdherent = false;
 
@@ -389,9 +372,30 @@ namespace Couche_IHM.Frames
         private void CloseInfoAdherent(object sender, RoutedEventArgs e)
         {
             this.infoAdherent.Visibility = Visibility.Hidden;
-            this.buttonSupprime.Visibility= Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+
+        /// <summary>
+        /// Permet de cacher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet d'afficher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Visible;
         }
         #endregion
 
@@ -490,6 +494,7 @@ namespace Couche_IHM.Frames
             }
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
+
         #endregion
 
         
