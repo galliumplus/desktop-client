@@ -159,16 +159,17 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void SearchAdherent(object sender, TextChangedEventArgs e)
         {
-            if (this.rechercheAcompte.Text != "" && this.rechercheAcompte.Text != " ")
+            if (this.rechercheAcompte.Text.Trim() != "")
             {
-                infoAdherent.Visibility = Visibility.Visible;
-                AfficheAcompte(this.rechercheAcompte.Text);
+                this.listadherents.ItemsSource = this.adhérentManager.GetAdhérents(this.rechercheAcompte.Text);
                 createAdherent = false;
             }
             else
             {
-                infoAdherent.Visibility = Visibility.Hidden;
+                
                 this.listadherents.SelectedItem = null;
+                this.UpdateView();
+                infoAdherent.Visibility = Visibility.Hidden;
                 this.buttonValidate.Visibility = Visibility.Hidden;
             }
         }
@@ -362,6 +363,32 @@ namespace Couche_IHM.Frames
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
         }
+
+
+        /// <summary>
+        /// Permet de cacher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet d'afficher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowOptions(object sender, RoutedEventArgs e)
+        {
+            // Si le compte est du CA alors il n'a pas accès aux options
+            if (MainWindow.CompteConnected.Role == RolePerm.BUREAU)
+            {
+                this.options.Visibility = Visibility.Visible;
+            }
+
+        }
         #endregion
 
         #region TRI
@@ -462,29 +489,6 @@ namespace Couche_IHM.Frames
 
         #endregion
 
-        /// <summary>
-        /// Permet de cacher les options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HideOptions(object sender, RoutedEventArgs e)
-        {
-            this.options.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
-        /// Permet d'afficher les options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowOptions(object sender, RoutedEventArgs e)
-        {
-            // Si le compte est du CA alors il n'a pas accès aux options
-            if (MainWindow.CompteConnected.Role == RolePerm.BUREAU)
-            {
-                this.options.Visibility = Visibility.Visible;
-            }
-            
-        }
+        
     }
 }
