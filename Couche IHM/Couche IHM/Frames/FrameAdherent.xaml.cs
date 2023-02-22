@@ -127,7 +127,7 @@ namespace Couche_IHM.Frames
         {
             this.adhérentManager.CreateAdhérent(a);
             // LOG ADD ADHERENT
-            log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE{a.NomCompletIHM}", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.UpdateAdhérent(a);
 
             // LOG UPDATE ADHRENT
-            string message = $"Mise à jour de l'adhérent [{a.NomCompletIHM}]";
+            string message = $"Mise à jour de l'adhérent {baseAdhérent.NomCompletIHM}:";
             // Nom 
             if (baseAdhérent.Nom != a.Nom)
             {

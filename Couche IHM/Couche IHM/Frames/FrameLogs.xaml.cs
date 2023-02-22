@@ -51,16 +51,26 @@ namespace Couche_IHM.Frames
             // Affiche les logs du mois actuels
             List<Log> list = new List<Log>();
             string montYear = DateTime.Parse(logsLine[logsLine.Count-1].Split('|')[0]).ToString("MMMM yyyy"); // Récupère la date la plus vieille
-            for (int i = logsLine.Count - 1; i > -1; i--)
+            for (int i = logsLine.Count - 1; i > -1; i--) // Pour tous les logs
             {
-                string date = DateTime.Parse(logsLine[i].Split('|')[0]).ToString("g");
-                string action = logsLine[i].Split('|')[1];
-                string message = logsLine[i].Split('|')[2];
-                string auteur = logsLine[i].Split('|')[3];
+                string[] splitedLosline = logsLine[i].Split('|'); // Sépare par catégorie
+                string date = DateTime.Parse(splitedLosline[0]).ToString("g");
+                string action = splitedLosline[1];
+                string message = splitedLosline[2];
+                string auteur = splitedLosline[3];
+
                 // Affiche les logs que sur un mois
                 if (montYear == DateTime.Parse(date).ToString("MMMM yyyy"))
                 {
-                    list.Add(new Log(date, action, message, auteur));
+                    Log newLog = new Log(date, action, message, auteur);
+                    // Verifie action et adapte le message
+                    if(action == "UPDATE_ADHERENT")
+                    {
+                        newLog.MessageCourt = message.Split('/')[0];
+                        string messageSplit = message.Split(":/")[1];  // Sépare message résumé du messageComplet et les détails du messageComplet
+                        newLog.MessageComplete = string.Join('\n', messageSplit.Split('/')); ; // Renvoie les détails du message avec un alignement entre chaque détails
+                    }
+                    list.Add(newLog);
                 }
             }
             this.listLogs.ItemsSource = list;

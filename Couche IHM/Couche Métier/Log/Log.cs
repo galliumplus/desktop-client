@@ -11,6 +11,7 @@ namespace Couche_Métier.Log
         private string date;
         private string action;
         private string message;
+        private string messageComplete;
         private string auteur;
 
         /// <summary>
@@ -43,31 +44,25 @@ namespace Couche_Métier.Log
         }
 
         /// <summary>
-        /// Intitulé du message
+        /// Intitulé du message sans les détails
         /// </summary>
         public string MessageCourt
         {
-            get
-            {
-                return message.Split('/')[0];
-            }
+            get => message;
+            set => message = value;
         }
 
         /// <summary>
-        /// Message détaillés
+        /// Message détaillés sans l'intitulé du message
         /// </summary>
         public string MessageComplete
         {
-            get
-            {
-                string messageSplit = message.Split('|')[1];
-                string[] listLogs = messageSplit.Split("/");
-                return string.Join('\n', listLogs);
-            }
+            get => messageComplete;
+            set => messageComplete = value;
         }
 
         /// <summary>
-        /// Message
+        /// Message complet intitulé et détails
         /// </summary>
         public string Message 
         { 

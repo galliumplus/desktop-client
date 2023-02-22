@@ -47,15 +47,17 @@ namespace Couche_Métier.Log
         /// </summary>
         private void VerifyFiles()
         {
-            // Gestion fichiers
+            // Gestion Dossier
             if (!Directory.Exists(Path)) // Créer le dossier s'il n'existe pas
             {
                 Directory.CreateDirectory(Path);
-                if (!File.Exists(Path + name)) // Créer le fichier si n'existe pas
-                {
-                    FileStream stream = File.Create(Path + name);
-                    stream.Close();
-                }
+            }
+
+            // Création fichier
+            if (!File.Exists(Path + name)) // Créer le fichier si n'existe pas
+            {
+                FileStream stream = File.Create(Path + name);
+                stream.Close();
             }
         }
     }
