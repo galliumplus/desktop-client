@@ -20,7 +20,7 @@
         <Grid  Grid.Row="0" >
             <!-- Nom de la frame  -->
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Adhérents" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
+                <TextBlock Text="Acomptes" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
                 <Button Style="{StaticResource buttonImage}" Name="exportAdherentButton" Visibility="Visible" Margin="5,0,0,10"   Width="20" Height="20" Click="ExportAdhérent"  >
                     <Image Source="/Images/export.png"/>
                 </Button>

@@ -36,8 +36,11 @@ namespace Couche_IHM.Frames
             // Récupère le manager 
             this.productManager = productManager;
 
-            // Remplis listView
+            // Met à jour l'affichage
             UpdateView();
+            this.buttonValidate.Content = "Valider";
+            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
+            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
         }
 
         /// <summary>

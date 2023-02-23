@@ -37,7 +37,13 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.userManager = userManager;
-            this.listUser.ItemsSource = userManager.Comptes;
+
+            // Met à jour l'affichage
+            UpdateView();
+            this.buttonValidate.Content = "Valider";
+            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
+            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
+
             this.log = new LogToTXT();
 
             infoUser.Visibility = Visibility.Hidden;
