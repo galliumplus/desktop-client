@@ -30,8 +30,8 @@ namespace Couche_IHM.Frames
         private ILog log;
 
         // Attributs qui gèrent si la liste est triée
-        private int isSortingArgent = 0;
-        private int isSortingId = 0;
+        private int isSortingMail = 0;
+        private int isSortingRole = 0;
         private int isSortingIdentite = 0;
         public FrameComptes(UserManager userManager)
         {
@@ -355,22 +355,85 @@ namespace Couche_IHM.Frames
             switch (isSortingIdentite)
             {
                 case 0:
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("NomCompletIHM", ListSortDirection.Ascending));
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("NomComplet", ListSortDirection.Ascending));
                     myImage.Visibility = Visibility.Visible;
                     myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
                     break;
                 case 1:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("NomCompletIHM", ListSortDirection.Ascending));
-                    this.listUser.Items.SortDescriptions.Add(new SortDescription("NomCompletIHM", ListSortDirection.Descending));
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("NomComplet", ListSortDirection.Ascending));
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("NomComplet", ListSortDirection.Descending));
                     myImage.Visibility = Visibility.Visible;
                     myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
                     break;
                 case 2:
-                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("NomCompletIHM", ListSortDirection.Descending));
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("NomComplet", ListSortDirection.Descending));
                     myImage.Visibility = Visibility.Hidden;
                     break;
             }
             isSortingIdentite = (isSortingIdentite + 1) % 3;
+        }
+
+        /// <summary>
+        /// Permet de trier les adhérents selon leur role
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortRole(object sender, RoutedEventArgs e)
+        {
+
+            ControlTemplate template = this.listUser.Template;
+            Image myImage = template.FindName("roleTri", this.listUser) as Image;
+
+            switch (isSortingRole)
+            {
+                case 0:
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Role", ListSortDirection.Ascending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
+                    break;
+                case 1:
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Role", ListSortDirection.Ascending));
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Role", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
+                    break;
+                case 2:
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Role", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Hidden;
+                    break;
+            }
+            isSortingRole = (isSortingRole + 1) % 3;
+
+        }
+
+        /// <summary>
+        /// Permet de trier les adhérents selon leur mail
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SortMail(object sender, RoutedEventArgs e)
+        {
+            ControlTemplate template = this.listUser.Template;
+            Image myImage = template.FindName("mailTri", this.listUser) as Image;
+            switch (isSortingMail)
+            {
+                case 0:
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Mail", ListSortDirection.Ascending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triAsc.png", UriKind.Relative));
+                    break;
+                case 1:
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Mail", ListSortDirection.Ascending));
+                    this.listUser.Items.SortDescriptions.Add(new SortDescription("Mail", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Visible;
+                    myImage.Source = new BitmapImage(new Uri("/Images/triDesc.png", UriKind.Relative));
+                    break;
+                case 2:
+                    this.listUser.Items.SortDescriptions.Remove(new SortDescription("Mail", ListSortDirection.Descending));
+                    myImage.Visibility = Visibility.Hidden;
+                    break;
+            }
+            isSortingMail = (isSortingMail + 1) % 3;
         }
         #endregion
     }
