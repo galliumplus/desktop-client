@@ -1,5 +1,6 @@
 ﻿using Couche_Data;
 using Couche_Métier;
+using Couche_Métier.Sumups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,10 @@ namespace Couche_IHM
         public ConnexionIHM()
         {
             InitializeComponent();
+
+            // TEST
+            test test = new test();
+            test.TestSumup();
         }
 
         /// <summary>
