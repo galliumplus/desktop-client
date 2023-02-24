@@ -14,11 +14,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="12*"/>
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
-        <Grid Grid.Column="0" Background="#252422">
+        <Grid Grid.Column="0" Background="#252422" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
                 <RowDefinition Height="20*" Tag="Bouton"/>
@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
 
             <!-- Icone Gallium -->
-            <Image Source="/Images/Gallium+.png" Margin="0,20,0,54"  VerticalAlignment="Top"/>
+            <Label Content="G" FontSize="90" Foreground="Orange"/>
 
             <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="12" VerticalAlignment="Bottom" />
 
@@ -46,7 +46,7 @@
         <Viewbox Grid.Column="1">
             <!-- DEUXIEME COLONNE -->
             <Grid  Height="607" Width="912" >
-                <Frame x:Name="mainFrame" Margin="20,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="mainFrame" Margin="0,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
             </Grid>
         </Viewbox>
 
