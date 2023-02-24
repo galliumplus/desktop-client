@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,14 @@ namespace Couche_IHM.Frames
 
         private AdhérentManager adherentManager;
         private ProductManager produitManager;
+        private CategoryManager categorieManager;
 
-        public FrameCaisse(AdhérentManager adherentManager, ProductManager produitManager)
+        public FrameCaisse(AdhérentManager adherentManager, ProductManager produitManager, CategoryManager categorieManager)
         {
             InitializeComponent();
             this.adherentManager = adherentManager;
             this.produitManager = produitManager;
+            this.categorieManager = categorieManager;
 
 
             productHandler.ItemsSource = produitManager.GetProducts();

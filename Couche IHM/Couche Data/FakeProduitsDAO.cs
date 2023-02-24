@@ -22,11 +22,11 @@ namespace Couche_Data
         public List<Product> GetProducts()
         {
             List<Product> products = new List<Product>();
-            products.Add(new Product("Coca cola", 20, 0.80f, "BOISSON"));
-            products.Add(new Product("Fanta", 20, 0.80f, "BOISSON"));
-            products.Add(new Product("Monster", 20, 1.20f, "BOISSON"));
-            products.Add(new Product("SUPER MONSTER", 1, 2.20f, "BOISSON"));
-            products.Add(new Product("Pablo", 1, 500f, "SPECIAL"));
+            products.Add(new Product("Coca cola", 20, 0.80f, getRandomCategorie()));
+            products.Add(new Product("Fanta", 20, 0.80f, getRandomCategorie()));
+            products.Add(new Product("Monster", 20, 1.20f, getRandomCategorie()));
+            products.Add(new Product("SUPER MONSTER", 1, 2.20f, getRandomCategorie()));
+            products.Add(new Product("Pablo", 1, 500f, getRandomCategorie())); 
             return products;
         }
 
@@ -38,6 +38,13 @@ namespace Couche_Data
         public void UpdateProduct(Product product)
         {
             throw new NotImplementedException();
+        }
+
+        private string getRandomCategorie()
+        {
+            CategoryManager c = new CategoryManager(new FakeCategoryDAO());
+            List<string> categories = c.ListAllCategory();
+            return categories[new Random().Next(0, categories.Count)];
         }
     }
 }
