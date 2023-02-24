@@ -27,12 +27,12 @@ namespace Gallium_v1.Data
             dbsDAO.Instance.Fetch("");
         }
 
-        public User GetCompte(int id)
+        public User GetCompte(string mail)
         {
             throw new NotImplementedException();
         }
 
-        public List<User> GetComptes()
+        public Dictionary<string,User> GetComptes()
         {
             throw new NotImplementedException();
         }

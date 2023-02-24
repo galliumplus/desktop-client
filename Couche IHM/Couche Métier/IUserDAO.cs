@@ -29,12 +29,12 @@ namespace Couche_Métier
         /// <summary>
         /// Récupère un compte
         /// </summary>
-        public User GetCompte(int id);
+        public User GetCompte(string mail);
 
         /// <summary>
         /// Récupère tous les comptes 
         /// </summary>
-        public List<User> GetComptes();
+        public Dictionary<string,User> GetComptes();
 
         /// <summary>
         /// Connection d'un utilisateur à gallium

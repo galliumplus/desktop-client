@@ -12,55 +12,76 @@ namespace Couche_Métier
     /// </summary>
     public class UserManager
     {
+        // Attribut représentant le DAO pour gérer les comptes 
         private IUserDAO userDao;
-        private List<User> comptes;
 
-        public List<User> Comptes
-        {
-            get => comptes;
-            set => comptes = value;
-        }
+        // Dictionnaire stockant les comptes temporairement en tant que cache
+        private Dictionary<string,User> comptes;
 
+        /// <summary>
+        /// Constructeur du manager des comptes
+        /// </summary>
+        /// <param name="userDao">le DAO des comptes</param>
         public UserManager(IUserDAO userDao)
         {
             this.userDao = userDao;
-            this.comptes = new List<User>();
-            this.comptes = this.userDao.GetComptes();
+            this.comptes = new Dictionary<string,User>(this.userDao.GetComptes());
         }
 
+        /// <summary>
+        /// Permet de créer un compte
+        /// </summary>
+        /// <param name="compte">compte à créer</param>
         public void CreateCompte(User compte)
         {
             userDao.CreateCompte(compte);
-            comptes.Add(compte);
+            comptes.Add(compte.Mail,compte);
         }
 
-        public User GetCompte(string mail)
+        /// <summary>
+        /// Permet d'obtenir un compte
+        /// </summary>
+        /// <param name="infoCompte">information du compte</param>
+        /// <returns>un compte</returns>
+        public User GetCompte(string infoCompte)
         {
             User user = null;
-            foreach(User u in comptes)
+            if (comptes.ContainsKey(infoCompte))
             {
-                if (u.Mail == mail)
-                {
-                    user = u;
-                }
+                user = comptes[infoCompte];
             }
             return user;
         }
 
+
+
+        /// <summary>
+        /// Permet d'obtenir tous les comptes
+        /// </summary>
+        /// <returns>tous les comptes</returns>
         public List<User> GetComptes()
         {
-            return comptes;
+            return comptes.Values.ToList();
         }
 
+        /// <summary>
+        /// Permet de supprimer un compte
+        /// </summary>
+        /// <param name="compte">compte à supprimer</param>
         public void RemoveCompte(User compte)
         {
             userDao.RemoveCompte(compte);
-            comptes.Remove(compte);
+            comptes.Remove(compte.Mail);
         }
 
-        public User UpdateCompte(User compte)
+        /// <summary>
+        /// Permet de mettre à jour un compte
+        /// </summary>
+        /// <param name="compte">compte à modifier</param>
+        public void UpdateCompte(User compte)
         {
-            throw new NotImplementedException();
+            userDao.UpdateCompte(compte);
+            comptes[compte.Mail] = compte;
         }
     }
 }

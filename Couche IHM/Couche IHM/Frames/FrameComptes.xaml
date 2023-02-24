@@ -21,7 +21,7 @@
             <!-- Nom de la frame  -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Comptes" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-                <Button Style="{StaticResource buttonImage}" Name="addUser" Click="AddUserButton" Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" >
+                <Button Style="{StaticResource buttonImage}" Name="addUser"  Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" >
                     <Image Source="/Images/ajouter.png"/>
                 </Button>
             </StackPanel>
@@ -45,11 +45,6 @@
 
         <Grid Grid.Row="1" Margin="0,30,0,0">
             <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
@@ -57,13 +52,14 @@
 
             <!-- ScrollViewer des comptes-->
             <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-                <ListView  x:Name="listUser"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" SelectionChanged="SelectUser">
+                <ListView  x:Name="listUser"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
                     <ListView.Template>
                         <ControlTemplate>
                             <!-- Header des colonnes -->
                             <DockPanel LastChildFill="True">
                                 <Grid DockPanel.Dock="Top">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
@@ -75,7 +71,7 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Button  BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
+                                    <Button  BorderThickness="0"   Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
                                     <Image Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
 
                                     <Button BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Identifiant" Click="SortMail" />
@@ -83,6 +79,8 @@
 
                                     <Button BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Role" Click="SortRole"/>
                                     <Image x:Name="roleTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
+
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Action" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
 
 
 
@@ -99,6 +97,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
@@ -106,109 +105,14 @@
                                 <Label  Content="{Binding NomComplet}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label Content="{Binding Mail}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label Content="{Binding Role}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Button Style="{StaticResource buttonImage}"  Grid.Column="3" MouseEnter="PermButton">
+                                    <Image Source="/Images/modif.png" Width="15"/>
+                                </Button>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>
             </ScrollViewer>
-
-
-
-
-
-            <!-- Information utilisateur sélectionner -->
-            <StackPanel Grid.Column="1"  Grid.Row="0">
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Barre de recherche -->
-                    <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" TextChanged="SearchUser"   />
-
-                    <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
-                </Grid>
-
-
-                <!-- Info -->
-                <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
-
-                    <Border  Name="infoUser" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Visible"  Background="LightGray"    CornerRadius="3"   Margin="0,0,0,10"   >
-
-                        <StackPanel Margin="0,0,0,8" >
-
-                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-
-                                <Button Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left"  Click="CloseInfoAdherent">
-                                    <Image Source="/Images/retour.png"/>
-                                </Button>
-                                <Button x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions" >
-                                    <Image   Source="/Images/param.png"/>
-
-                                </Button>
-
-                            </StackPanel>
-
-
-                            <!-- Nom utilisateur -->
-                            <TextBlock Text="Identité" HorizontalAlignment="Center" Margin="10,0,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
-                                <TextBox x:Name="nomComplet"  MinWidth="80" Text="" FontSize="13"   Foreground="Black" TextChanged="ShowValidationButton"/>
-                                <Image x:Name="identiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
-
-
-                            <!-- Mail utilisateur -->
-                            <TextBlock  Text="Mail" HorizontalAlignment="Center" Margin="10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                <TextBox x:Name="mailuser" Text="" MinWidth="80" FontSize="13" Foreground="Black" TextChanged="ShowValidationButton" />
-                                <Image x:Name="compteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
-
-                            <!-- Role utilisateur -->
-                            <TextBlock Text="Role" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <ComboBox x:Name="roleList" MinWidth="40" Text="" FontSize="13"  Foreground="Black" IsSynchronizedWithCurrentItem="True"/>
-                                <Image x:Name="argentWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-
-                    <Button BorderBrush="Green"   x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="#252422"  Foreground="White" VerticalAlignment="Bottom" Width="120" Click="ValiderChangements" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-                    <Border x:Name="options" Visibility="Hidden" Margin="100,26,-26,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
-                        <Menu  >
-                            <MenuItem Width="104" >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Modifier"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/modif.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Click="DeleteUser" Width="104" >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/suprim.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Width="104" Click="HideOptions"  >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Retour"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/retour.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </Menu>
-                    </Border>
-                </Grid>
-
-            </StackPanel>
         </Grid>
     </Grid>
 </Page>
