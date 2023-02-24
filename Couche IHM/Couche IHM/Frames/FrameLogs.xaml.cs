@@ -1,7 +1,6 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
 using DocumentFormat.OpenXml.Bibliography;
-using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,21 +26,10 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameLogs : Page
     {
-        private readonly ILog log; // log
-        private readonly List<string> logsLine; // Liste des logs
-
         public FrameLogs()
         {
             InitializeComponent();
-            this.log = new LogToTXT();
-            this.logsLine = log.loadLog();
-
-            // Si il y a des logs
-            if(logsLine.Count > 0)
-            {
-                FillListViewLogs();
-            }
-            
+            FillListView();
         }
 
         /// <summary>

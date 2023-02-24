@@ -95,26 +95,6 @@ namespace Couche_Métier
         }
 
 
-        /// <summary>
-        /// Permet de récupérer une liste d'adhérent selo ndes infos
-        /// </summary>
-        /// <param name="id">infos des adhérents</param>
-        /// <returns>des adhérent</returns>
-        public List<Adhérent> GetAdhérents(string infoAdherent)
-        {
-            List<Adhérent> a = new List<Adhérent>();
-            foreach (Adhérent adhérent in this.adhérents.Values)
-            {
-                if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
-                {
-                    a.Add(adhérent);
-                }
-            }
-            
-            return a;
-        }
-
-
 
     }
 }

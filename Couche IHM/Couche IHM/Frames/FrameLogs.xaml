@@ -5,35 +5,60 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Couche_IHM.Frames"
       mc:Ignorable="d" 
-      d:DesignHeight="450" 
-      d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="FrameLogs">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="5*" />
-        </Grid.RowDefinitions>
+        
+        <ListView x:Name="listLogs"  HorizontalContentAlignment="Stretch" Margin="50,0,50,0" VerticalContentAlignment="Top" >
+                <ListView.Template>
+                    <ControlTemplate>
+                        <!-- Header des colonnes -->
+                        <DockPanel   LastChildFill="True">
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
 
-        <Label x:Name="titleLog" Content="Aucun log" FontSize="30"/>
 
-        <!-- Liste des logs -->
-        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ShowRowDetails">
-            <!-- Columns -->
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100" />
-                <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="150"/>
-                <DataGridTextColumn Header="Auteur" Binding="{Binding Auteur}" Width="auto" />
-                <DataGridTextColumn Header="Mesage" Binding="{Binding MessageCourt}" Width="auto"/>
-            </DataGrid.Columns>
-            
-            <!-- Détails des lignes-->
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding MessageComplete}" Margin="10" />
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-            
-        </DataGrid>
+                            <Label Content="Date" Grid.Column="0" FontSize="18"/>
+                            <Label Content="Action" Grid.Column="1" FontSize="18"/>
+                            <Label Content="Message" Grid.Column="2" FontSize="18"/>
+                            <Label Content="Auteur" Grid.Column="3" FontSize="18"/>
+
+                            <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="0,0,0,10"/>
+
+                            </Grid>
+                            <!-- items de la listview -->
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Content -->
+                        <Label Content="{Binding Date}" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Action}" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Message}" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        <Label Content="{Binding Auteur}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListView>
     </Grid>
 </Page>
