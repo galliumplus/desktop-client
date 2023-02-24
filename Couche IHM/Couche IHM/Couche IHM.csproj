@@ -6,15 +6,20 @@
     <RootNamespace>Couche_IHM</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Logo\Logo_Gallium.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
     <None Remove="Images\ajouter.png" />
+    <None Remove="Images\discordIcon.png" />
     <None Remove="Images\DogoPp.png" />
+    <None Remove="Images\driveIcon.png" />
     <None Remove="Images\export.png" />
     <None Remove="Images\Gallium+.png" />
+    <None Remove="Images\instaIcon.png" />
     <None Remove="Images\loupe.png" />
     <None Remove="Images\modif.png" />
     <None Remove="Images\param.png" />
@@ -22,7 +27,12 @@
     <None Remove="Images\suprim.png" />
     <None Remove="Images\triAsc.png" />
     <None Remove="Images\triDesc.png" />
+    <None Remove="Images\twitterIcon.png" />
     <None Remove="Images\warning.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Logo\Logo_Gallium.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Logo\Logo_Gallium.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Fonts\Riberio.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -44,13 +57,22 @@
     <Resource Include="Images\ajouter.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\discordIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\DogoPp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\driveIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\export.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Gallium+.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\instaIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\loupe.png">
@@ -72,6 +94,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\triDesc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\twitterIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\warning.png">

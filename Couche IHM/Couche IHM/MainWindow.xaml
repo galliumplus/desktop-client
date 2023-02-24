@@ -26,16 +26,16 @@
             </Grid.RowDefinitions>
 
             <!-- Icone Gallium -->
-            <Image Source="/Images/Gallium+.png"  VerticalAlignment="Top" Margin="20"/>
+            <Image Source="/Images/Gallium+.png" Margin="0,20,0,54"  VerticalAlignment="Top"/>
 
-            <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="10" VerticalAlignment="Bottom" />
+            <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="12" VerticalAlignment="Bottom" />
 
             <!-- Choix Pages -->
             <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Uniform">
                 <StackPanel >
                     <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource buttonNavBarre}"  Click="GoToAccueil" Width="185"  />
                     <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource buttonNavBarre}" Click="GoToCaisse"/>
-                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Adhérents" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
+                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
                     <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
                     <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
                     <Button Tag="Statistiques" x:Name="CompteFrame" Content="Statistiques" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
@@ -47,7 +47,7 @@
             <!-- DEUXIEME COLONNE -->
             <Grid  Height="607" Width="912" >
                 <Frame x:Name="mainFrame" Margin="20,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
-        </Grid>
+            </Grid>
         </Viewbox>
 
     </Grid>

@@ -36,14 +36,20 @@ namespace Couche_IHM.Frames
             // Récupère le manager 
             this.productManager = productManager;
 
-            // Remplis listView
+            // Met à jour l'affichage
             UpdateView();
+            this.buttonValidate.Content = "Valider";
+            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
+            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
         }
 
+        /// <summary>
+        /// Permet de mettre à jour la liste des produits
+        /// </summary>
         private void UpdateView()
         {
-            this.listStock.ItemsSource = null;
-            this.listStock.ItemsSource = this.productManager.Products;
+            this.listproduits.ItemsSource = null;
+            this.listproduits.ItemsSource = this.productManager.GetProducts();
         }
 
         /// <summary>
@@ -52,13 +58,13 @@ namespace Couche_IHM.Frames
         private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
         {
             this.productDetails.Visibility = Visibility.Visible;
-            Product p = (Product)this.listStock.SelectedItem;
+            Product p = (Product)this.listproduits.SelectedItem;
             if(p != null)
             {
                 this.productName.Text = p.NomProduit;
                 this.productPrice.Text = p.PrixAdherent.ToString();
-                this.productQuantity.Text = p.Quantite.ToString();
-                this.productCategory.Text = p.Categorie;
+                this.productQuantite.Text = p.Quantite.ToString();
+                this.productCategorie.Text = p.Categorie;
             }
         }
 

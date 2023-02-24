@@ -13,22 +13,13 @@ namespace Couche_Métier.Log
     public class LogToTXT : ILog
     {
         public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium\\Log";
-        private string name => "\\GalliumLog.txt";
+        private string name = "\\GalliumLog.txt";
 
         public void registerLog(CategorieLog categorieLog, string message, User author)
         {
-            // Gestion fichiers
-            if (!Directory.Exists(Path)) // Créer le dossier s'il n'existe pas
-            {
-                Directory.CreateDirectory(Path);
-                if(!File.Exists(Path+name)) // Créer le fichier si n'existe pas
-                {
-                    FileStream stream = File.Create(Path+name);
-                    stream.Close();
-                }
-            }
-            
+            VerifyFiles();
             // Sauvegarde le log
+            
             message = $"{DateTime.Now}|{categorieLog}|{message}|{author.NomComplet}";
             using (StreamWriter file = new(Path+name, append: true))
             {
@@ -42,6 +33,7 @@ namespace Couche_Métier.Log
         /// <returns></returns>
         public List<string> loadLog()
         {
+            VerifyFiles();
             List<string> logs = new List<string>();
             foreach (string line in System.IO.File.ReadLines(Path+name))
             {
@@ -50,5 +42,23 @@ namespace Couche_Métier.Log
             return logs;
         }
 
+        /// <summary>
+        /// Vérifie la bonne existences des fichiers
+        /// </summary>
+        private void VerifyFiles()
+        {
+            // Gestion Dossier
+            if (!Directory.Exists(Path)) // Créer le dossier s'il n'existe pas
+            {
+                Directory.CreateDirectory(Path);
+            }
+
+            // Création fichier
+            if (!File.Exists(Path + name)) // Créer le fichier si n'existe pas
+            {
+                FileStream stream = File.Create(Path + name);
+                stream.Close();
+            }
+        }
     }
 }

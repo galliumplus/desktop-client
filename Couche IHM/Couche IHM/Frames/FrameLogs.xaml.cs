@@ -1,6 +1,7 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
 using DocumentFormat.OpenXml.Bibliography;
+using Google.Protobuf.WellKnownTypes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,82 +27,73 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameLogs : Page
     {
+        private readonly ILog log; // log
+        private readonly List<string> logsLine; // Liste des logs
+
         public FrameLogs()
         {
             InitializeComponent();
-            FillListView();
+            this.log = new LogToTXT();
+            this.logsLine = log.loadLog();
+
+            // Si il y a des logs
+            if(logsLine.Count > 0)
+            {
+                FillListViewLogs();
+            }
+            
         }
 
         /// <summary>
         /// Remplis la list view en lisant les logs
         /// </summary>
-        private void FillListView()
+        private void FillListViewLogs()
         {
-
-            // TEST =================================================================================
-            List<string> listMonthYear = new List<string>();
-            string montYear = string.Empty;
-            // ======================================================================================
-
-            ILog log = new LogToTXT();
-            List<string> logsLine = log.loadLog();
+            // Affiche les logs du mois actuels
             List<Log> list = new List<Log>();
-            for(int i = logsLine.Count - 1; i > 0; i--)
+            string actualMonth = DateTime.Today.ToString("MMMM yyyy");
+
+            // Pour tous les logs
+            for (int i = logsLine.Count - 1; i > -1; i--) 
             {
-                string date = logsLine[i].Split('|')[0];
-                string action = logsLine[i].Split('|')[1];
-                string message = logsLine[i].Split('|')[2];
-                string auteur = logsLine[i].Split('|')[3];
-                list.Add(new Log(date, action, message, auteur));
+                string[] splitedLosline = logsLine[i].Split('|'); // Sépare par catégorie
+                string date = DateTime.Parse(splitedLosline[0]).ToString("g");
+                string action = splitedLosline[1];
+                string message = splitedLosline[2];
+                string auteur = splitedLosline[3];
 
-
-                // TEST =================================================================================
-                if(montYear != DateTime.Parse(date).ToString("MMMM yyyy"))
+                // Affiche les logs du mois actuels
+                if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth)
                 {
-                    montYear = DateTime.Parse(date).ToString("MMMM yyyy");
-                    listMonthYear.Add(montYear);
+                    Log newLog = new Log(date, action, message, auteur);
+                    // Adapte le message selon la catégorie
+                    if(action == "UPDATE_ADHERENT")
+                    {
+                        newLog.MessageCourt = message.Split('/')[0];
+                        string messageSplit = message.Split(":/")[1]; 
+                        newLog.MessageComplete = string.Join('\n', messageSplit.Split('/'));
+                    }
+                    list.Add(newLog);
                 }
-                // ========================================================================================
             }
             this.listLogs.ItemsSource = list;
+
+            // Change le titre de la page
+            if (list.Count > 0)
+                this.titleLog.Content = actualMonth[0] + actualMonth.Substring(1);
         }
 
         /// <summary>
-        /// Créer enumération 
+        /// Si une ligne n'a pas de détails, elle ne s'affichera pas
         /// </summary>
-        /// <param name="list"> Ce que contient l'enum </param>
-        /// <returns> renvoie l'enumération </returns>
-        private Array createEnum(List<string> list)
+        private void ShowRowDetails(object sender, SelectionChangedEventArgs e)
         {
-            // Get the current application domain for the current thread
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-
-            // Create a dynamic assembly in the current application domain,
-            // and allow it to be executed and saved to disk.
-            AssemblyName name = new AssemblyName("MyEnums");
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(Guid.NewGuid().ToString()),AssemblyBuilderAccess.Run);
-
-            // Define a dynamic module in "MyEnums" assembly.
-            // For a single-module assembly, the module has the same name as the assembly.
-            ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(name.Name);
-
-            // Define a public enumeration with the name "MyEnum" and an underlying type of Integer.
-            EnumBuilder myEnum = moduleBuilder.DefineEnum("EnumeratedTypes.MyEnum",
-                                     TypeAttributes.Public, typeof(int));
-
-            for(int i = 0; i < list.Count; i++)
+            Log log = (Log)this.listLogs.SelectedItem;
+            this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
+            if (!string.IsNullOrEmpty(log.MessageComplete))
             {
-                myEnum.DefineLiteral(list[i], i);
+                this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
             }
-            
-
-            // Create the enum
-            myEnum.CreateType();
-
-            // Finally, save the assembly
-            assemblyBuilder.CreateInstance(name.Name + ".dll");
-
-            return Enum.GetValues(myEnum);
         }
     }
 }
