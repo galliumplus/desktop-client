@@ -27,8 +27,8 @@ namespace Couche_Métier.Sumups
             // Envoyer requête pour générer tokken
 
             // Entrez vos identifiants API SumUp ici https://developer.sumup.com/protected/oauth-app/?id=CPZF26G7
-            string clientId = "2MLpttwJ8QAMfIhu085rjs1xtegMq";
-            string clientSecret = "l8oWCUS8zwBuSSmWQWQgTzydJvSLqCU8NOiZmnLEHf4IB7EnIa";
+            string clientId = "";
+            string clientSecret = "";
 
             // Montant à envoyer
             double amount = 10.0;
