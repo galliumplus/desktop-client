@@ -27,14 +27,16 @@ namespace Couche_IHM.Frames
     {
         // Manager de produits
         private ProductManager productManager;
-
-        public FrameStock(ProductManager productManager)
+        private CategoryManager categorieManager;
+       
+        public FrameStock(ProductManager productManager, CategoryManager categoryManager)
         {
             InitializeComponent();
             this.productDetails.Visibility = Visibility.Hidden; // Cache détails du produit
 
-            // Récupère le manager 
+            // Récupère les managers
             this.productManager = productManager;
+            this.categorieManager = categoryManager;
 
             // Met à jour l'affichage
             UpdateView();
@@ -68,6 +70,10 @@ namespace Couche_IHM.Frames
             }
         }
 
-       
+        private void ShowCategory(object sender, RoutedEventArgs e)
+        {
+            FenetreCategory fenetreCategory = new FenetreCategory(this.categorieManager.ListAllCategory());
+            fenetreCategory.ShowDialog();
+        }
     }
 }

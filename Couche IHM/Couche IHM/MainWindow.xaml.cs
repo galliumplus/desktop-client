@@ -28,9 +28,12 @@ namespace Couche_IHM
         private AdhérentManager adherentManager;
         // Manager de produits
         private ProductManager productManager;
+       
+        // Manager des catégories
+        CategoryManager categoryManager;
+
         // Manager utilisateurs
         private UserManager userManager;
-
         private static User compteConnected;
         /// <summary>
         /// Compte connecté à gallium
@@ -47,6 +50,7 @@ namespace Couche_IHM
             this.adherentManager = new AdhérentManager(new FakeAdherentDao());
             this.productManager = new ProductManager(new FakeProduitsDAO());
             this.userManager = new UserManager(new FakeUserDAO());
+            this.categoryManager = new CategoryManager(new FakeCategoryDAO());
 
             // Enregistre la personne qui s'est connecté
             compteConnected = user;
@@ -65,7 +69,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager));
+            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager, this.categoryManager));
         }
 
         /// <summary>
@@ -83,7 +87,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameStock(this.productManager));
+            this.mainFrame.Navigate(new FrameStock(this.productManager, this.categoryManager));
         }
 
         /// <summary>

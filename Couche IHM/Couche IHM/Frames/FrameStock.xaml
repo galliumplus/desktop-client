@@ -115,7 +115,7 @@
                 </ListView>
             </ScrollViewer>
 
-
+            <Button Content="Afficher catégories" x:Name="buttonCategory" Click="ShowCategory" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Background="Black" Foreground="White" />
 
 
 
