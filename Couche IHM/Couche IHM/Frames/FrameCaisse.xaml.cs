@@ -24,12 +24,12 @@ namespace Couche_IHM.Frames
     public partial class FrameCaisse : Page
     {
         private List<Product> orderedItem = new List<Product>();
-        private int quantityO = 0;
-        private double priceO = 0.00;
+        private int quantityTotal = 0;
+        private double priceTotal = 0.00;
 
-        public int QuantityO { get => quantityO; set => quantityO = value; }
-        public string PriceAdher { get => priceO + "€"; }
-        public string PriceNanAdher { get => priceO + (0.20 * quantityO) + "€"; }
+        public int QuantityO { get => quantityTotal; set => quantityTotal = value; }
+        public string PriceAdher { get => priceTotal + "€"; }
+        public string PriceNanAdher { get => priceTotal + (0.20 * quantityTotal) + "€"; }
 
         // Liste des managers
         private AdhérentManager adherentManager;
@@ -58,19 +58,20 @@ namespace Couche_IHM.Frames
         {
             Grid gd = sender as Grid;
             int i = 0;
+           
             while (i < orderedItem.Count)
             {
                 if (orderedItem[i].NomProduit == gd.Tag)
                 {
-                    priceO -= orderedItem[i].PrixAdherent;
+                    priceTotal -= orderedItem[i].PrixAdherent;
                     orderedItem.RemoveAt(i);
-                    quantityO--;
+                    quantityTotal--;
                     i = orderedItem.Count;
                 }
                 i++;
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);
-            if (quantityO == 0) priceO = 0.00;
+            if (quantityTotal == 0) priceTotal = 0.00;
             if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
             else this.Price.Content = PriceNanAdher;
 
@@ -82,17 +83,20 @@ namespace Couche_IHM.Frames
         /// </summary
         private void AddProduct(object sender, MouseButtonEventArgs e)
         {
-            Grid gd = sender as Grid;
-            Label lab = gd.Children[1] as Label;
-            string prodName = (string)lab.Content;
+            // Récupère le produit séléctionné 
+            Grid gd = (Grid)sender;
+            Label lab = (Label)gd.Children[1];
+            string prodName = (string)lab.Content; /// Nom du produit
 
+            // Pour tous les produits
             foreach (Product p in produitManager.GetProducts())
             {
+                // Si un produit corresponds à l'item récupérer
                 if (p.NomProduit == prodName)
                 {
                     orderedItem.Add(p);
-                    quantityO++;
-                    priceO += p.PrixAdherent;
+                    quantityTotal++;
+                    priceTotal += p.PrixAdherent;
                 }
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);
