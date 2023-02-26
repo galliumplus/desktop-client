@@ -26,6 +26,8 @@
                 <ColumnDefinition Width="75*"/>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
+            
+            <!-- PRODUITS -->
             <ItemsControl Name="productHandler" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -34,7 +36,8 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid MouseEnter="Mouse_Enter" MouseLeave="Mouse_Leave" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                        <!-- Produit -->
+                        <Grid MouseEnter="Mouse_Enter" MouseLeave="Mouse_Leave" MouseLeftButtonDown="AddProduct">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50*"/>
                                 <RowDefinition Height="10*"/>
@@ -59,7 +62,7 @@
             </Grid>
         </Grid>
 
-            <!-- Panier d'achat -->
+        <!-- Panier d'achat -->
         <ListView Grid.Column="1"  Name="Order" Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -69,7 +72,7 @@
                             <ColumnDefinition Width="10*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="{Binding NomProduit}" Grid.Column="0" Width="125"/>
-                        <Grid Grid.Column="1" MouseEnter="OrderItem_Enter" MouseLeave="OrderItem_Leave" Background="#302F2F" Width="25" MouseLeftButtonDown="Drop_Item_Order" Tag="{Binding NomProduit}" Margin="-15,0,0,0">
+                        <Grid Grid.Column="1" MouseEnter="OrderItem_Enter" MouseLeave="OrderItem_Leave" Background="#302F2F" Width="25" MouseLeftButtonDown="RemoveProduct" Tag="{Binding NomProduit}" Margin="-15,0,0,0">
                             <Label Content="-" Foreground="White" HorizontalAlignment="Center"/>
                         </Grid>
                     </Grid>
@@ -78,7 +81,7 @@
         </ListView>
 
 
-        <!-- Information de paiment -->
+        <!-- Information de paiement -->
         <Grid Grid.Column="1" Grid.Row="1"  Background="#302F2F" Height="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -95,13 +98,13 @@
 
 
             <!-- Paiment -->
-            <Label Content="Moyen de paiment" Foreground="White" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>
-            <ComboBox Name="listeMoyenPayement" Height="15" Width="150" FontSize="10" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <Label Content="Moyen de paiment" Foreground="White" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>
+            <ComboBox Name="listeMoyenPayement" Height="15" Width="150" FontSize="8" Grid.ColumnSpan="2" Grid.Row="1"/>
             <!-- Quantité -->
-            <Label Content="Quantité :" Foreground="White" FontSize="12" Grid.Row="2" Grid.Column="0"/>
+            <Label Content="Quantité :" Foreground="White" FontSize="10" Grid.Row="2" Grid.Column="0"/>
             <Label Name="QuantityOrdered" Content="0" Foreground="White" FontSize="10" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1"/>
             <!-- Prix -->
-            <Label Content="Prix TTC :" Foreground="White" FontSize="12" Grid.Row="3" Grid.Column="0"/>
+            <Label Content="Prix TTC :" Foreground="White" FontSize="10" Grid.Row="3" Grid.Column="0"/>
             <Label Name="Price" Content="0.00 €" Foreground="White" FontSize="10" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" />
             <!-- Autre information-->
             <CheckBox Name="AdherCheck" Content="Adhérent ?" Foreground="White" Click="AdherCheck_Click" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>

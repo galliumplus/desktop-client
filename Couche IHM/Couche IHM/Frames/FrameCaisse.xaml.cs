@@ -31,6 +31,7 @@ namespace Couche_IHM.Frames
         public string PriceAdher { get => priceO + "€"; }
         public string PriceNanAdher { get => priceO + (0.20 * quantityO) + "€"; }
 
+        // Liste des managers
         private AdhérentManager adherentManager;
         private ProductManager produitManager;
         private CategoryManager categorieManager;
@@ -51,15 +52,15 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// Je sias pas numero 2
+        /// Permet de retirer un produit du panier
         /// </summary>
-        private void Drop_Item_Order(object sender, MouseEventArgs e)
+        private void RemoveProduct(object sender, MouseEventArgs e)
         {
             Grid gd = sender as Grid;
             int i = 0;
             while (i < orderedItem.Count)
             {
-                if (orderedItem[i].NomProduit == (string)gd.Tag)
+                if (orderedItem[i].NomProduit == gd.Tag)
                 {
                     priceO -= orderedItem[i].PrixAdherent;
                     orderedItem.RemoveAt(i);
@@ -77,9 +78,9 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
-        /// Je sais pas ça fait quoi
+        /// Ajoute un produit
         /// </summary
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void AddProduct(object sender, MouseButtonEventArgs e)
         {
             Grid gd = sender as Grid;
             Label lab = gd.Children[1] as Label;
