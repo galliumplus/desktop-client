@@ -30,7 +30,6 @@ namespace Couche_IHM.Frames
         private AdhérentManager adhérentManager;
         private bool createAdherent;
 
-
         // Exporter des adhérents
         private IExportableAdherent exportAdh;
 
@@ -39,6 +38,7 @@ namespace Couche_IHM.Frames
         private int isSortingId = 0;
         private int isSortingIdentite = 0;
 
+        // Attribut qui permet de gérer les logs pour chaque opération
         private ILog log = new LogToTXT();
 
         /// <summary>
@@ -50,17 +50,18 @@ namespace Couche_IHM.Frames
             InitializeComponent();
             this.adhérentManager = adhérentManager;
             this.exportAdh = new ExportAdherentToExcel();
-            infoAdherent.Visibility = Visibility.Hidden;
-
+            
 
             // Met à jour l'affichage
             UpdateView();
             this.buttonValidate.Content = "Valider";
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
+            
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
+
 
             // Si membre du ca alors parametre pas visibles
             if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
@@ -120,24 +121,32 @@ namespace Couche_IHM.Frames
             this.argentWarning.Visibility = Visibility.Hidden;
         }
 
+        #region operationsMetiers
         /// <summary>
-        /// Créer un adhérent
+        /// Permet de créer un adhérent
         /// </summary>
-        private void createAnAdherent(Adhérent a)
+        /// <param name="a">Adhérent à créer</param>
+        private void CreateAnAdherent(Adhérent a)
         {
+            // Créer l'adhérent
             this.adhérentManager.CreateAdhérent(a);
-            // LOG ADD ADHERENT
+            
+            // Log l'opération
             log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
         }
 
         /// <summary>
-        /// Update un adhérent
+        /// Permet de mettre à jour un adhérent
         /// </summary>
-        private void updateAnAdherent(Adhérent baseAdhérent, Adhérent a)
+        /// <param name="baseAdhérent">Adhérent à modifier</param>
+        /// <param name="a">Nouvel  Adhérent</param>
+        private void UpdateAnAdherent(Adhérent baseAdhérent, Adhérent a)
         {
+            // Met à jour l'adhérent
             this.adhérentManager.UpdateAdhérent(a);
 
-            // LOG UPDATE ADHRENT
+            // Log l'opération
+
             string message = $"Mise à jour de l'adhérent {baseAdhérent.NomCompletIHM}:";
             // Nom 
             if (baseAdhérent.Nom != a.Nom)
@@ -167,6 +176,7 @@ namespace Couche_IHM.Frames
             }
             log.registerLog(CategorieLog.UPDATE_ADHERENT, message, MainWindow.CompteConnected);
         }
+        #endregion
 
         #region events
         /// <summary>
@@ -247,11 +257,11 @@ namespace Couche_IHM.Frames
 
                 if (createAdherent) // Ajout d'un adhérent
                 {
-                    this.createAnAdherent(newAdher);
+                    this.CreateAnAdherent(newAdher);
                 }
                 else // Mise à jour de l'adhérent
                 {
-                    this.updateAnAdherent(baseAdhérent, newAdher);
+                    this.UpdateAnAdherent(baseAdhérent, newAdher);
 
                 }
 

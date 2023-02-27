@@ -137,7 +137,7 @@
                 <!-- Info -->
                 <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
 
-                    <Border  Name="infoAdherent" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Visible"  Background="LightGray"    CornerRadius="3"   Margin="0,0,0,10"   >
+                    <Border  Name="infoAdherent" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Hidden"  Background="LightGray"    CornerRadius="3"   Margin="0,0,0,10"   >
 
                         <StackPanel Margin="0,0,0,8" >
 
