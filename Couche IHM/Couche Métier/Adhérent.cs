@@ -98,21 +98,8 @@ namespace Couche_Métier
         {
             get
             {
-                string ret = Convert.ToString(Argent);
-                // 1 => 1,00
-                if (new Regex("^[0-9]+$").IsMatch(ret))
-                {
-                    ret += ",00";
-                }
-
-                // 1,2 => 1,20
-                if (new Regex("^[0-9]+,[0-9]$").IsMatch(ret))
-                {
-                    ret += "0";
-                }
-
-                ret += " €";
-                return ret;
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(argent);
             }
         }
 

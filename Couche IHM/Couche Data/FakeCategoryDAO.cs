@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Couche_Data
 {
-    public class FakeCategoryDAO : ICategory
+    public class FakeCategoryDAO : ICategoryDao
     {
         private List<string> _categories = new List<string>()
         {
