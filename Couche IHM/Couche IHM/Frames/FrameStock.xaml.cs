@@ -61,6 +61,8 @@ namespace Couche_IHM.Frames
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
             this.DataContext = categorieManager;
 
+            // Tri initial
+
 
             // Si membre du ca alors parametre pas visibles
             if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
@@ -76,7 +78,13 @@ namespace Couche_IHM.Frames
         private void UpdateView()
         {
             this.listproduits.ItemsSource = null;
-            this.listproduits.ItemsSource = this.productManager.GetProducts();
+            List<Product> productMetier = this.productManager.GetProducts();
+            List<ProduitIHM> produitIHM = new List<ProduitIHM>();
+            foreach (Product p in productMetier)
+            {
+                produitIHM.Add(new ProduitIHM(p));
+            }
+            this.listproduits.ItemsSource = produitIHM;
         }
 
 
@@ -140,11 +148,11 @@ namespace Couche_IHM.Frames
         private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
         {
             this.productDetails.Visibility = Visibility.Visible;
-            Product p = (Product)this.listproduits.SelectedItem;
+            ProduitIHM p = (ProduitIHM)this.listproduits.SelectedItem;
             if(p != null)
             {
                 this.productName.Text = p.NomProduit;
-                this.productQuantite.Text = p.Quantite.ToString();
+                this.productQuantite.Text = p.QuantiteProduit.ToString();
                 this.productCategorie.SelectedItem = p.Categorie.ToString();
             }
         }

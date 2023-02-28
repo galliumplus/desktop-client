@@ -34,7 +34,7 @@ namespace Couche_IHM.Frames
         // private List<Product> orderedItem = new List<Product>();
         // private Dictionary<string, int> productsQuantity = new Dictionary<string, int>();
         private int quantityTotal = 0;
-        private float priceTotal = 0.00f;
+        private double priceTotal = 0.00f;
 
         public int QuantityO { get => quantityTotal; set => quantityTotal = value; }
         public string PriceAdher { get => priceTotal + "€"; }

@@ -100,7 +100,7 @@
                     </ListView.Template>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid   IsEnabled="{Binding isDisponible}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
@@ -108,10 +108,10 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <!-- Content -->
-                                <Label x:Name="labelProduit"  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding Quantite}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding Categorie}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label   x:Name="labelProduit"  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding QuantiteProduit}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding Categorie}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
