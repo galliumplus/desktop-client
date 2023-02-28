@@ -72,7 +72,7 @@ namespace Couche_IHM
         public ProduitIHM(Product produit) 
         {
             this.product = produit;
-            this.QuantiteProduitCaisse = 1;
+            this.QuantiteProduitPanier = 1;
         }
 
     }
