@@ -318,5 +318,14 @@ namespace Couche_IHM.Frames
         }
 
         #endregion
+
+        /// <summary>
+        /// Ajoute un produit
+        /// </summary>
+        private void AddAnProduct(object sender, RoutedEventArgs e)
+        {
+            FenetreAddProduct p = new FenetreAddProduct();
+            p.ShowDialog();
+        }
     }
 }

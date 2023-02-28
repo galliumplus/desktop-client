@@ -120,12 +120,14 @@
             <Setter Property="FontSize" Value="12" />
         </Style>
 
-        <!-- Personaliser listView -->
-        <Style x:Key="onsenfou" TargetType="{x:Type ListView}" BasedOn="{StaticResource {x:Type ListBox}}">
-            <Setter Property="DockPanel.LastChildFill" Value="True" />
+        <!-- Personaliser TextBox Fenetre Modification/Ajout -->
+        <Style x:Key="textBoxGallium" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="DockPanel.LastChildFill" Value="True" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="3,0,0,3" />
+            <Setter Property="Foreground" Value="Black" />
         </Style>
-        
     </Application.Resources>
 </Application>
