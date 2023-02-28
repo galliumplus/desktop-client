@@ -38,7 +38,7 @@ namespace Couche_IHM.Frames
         private int isSortingIdentite = 0;
 
         // Attribut qui permet de gérer les logs pour chaque opération
-        private ILog log = new LogToTxt();
+        private ILog log = new LogAdherentToTxt();
 
         /// <summary>
         /// Cosntructeur du frame adhérent
@@ -122,7 +122,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.CreateAdhérent(a);
             
             // Log l'opération
-            log.registerLog(CategorieLog.CREATE, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE, a, MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -136,35 +136,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.UpdateAdhérent(a);
 
             // Log l'opération
-
-            string message = $"Mise à jour de l'adhérent {baseAdhérent.NomCompletIHM}:";
-            // Nom 
-            if (baseAdhérent.Nom != a.Nom)
-            {
-                message += $"/Changement du nom de {baseAdhérent.Nom} en {a.Nom}";
-            }
-
-            // Prénom
-            if(baseAdhérent.Prenom != a.Prenom)
-            {
-                message += $"/Changement du prénom de {baseAdhérent.Prenom} en {a.Prenom}";
-            }
-
-            // CanByPAss
-            if(baseAdhérent.CanPass != a.CanPass)
-            {
-                message += $"/Changement de CanPass de {baseAdhérent.CanPass} en {a.CanPass}";
-            }
-
-            // Argent
-            if(baseAdhérent.Argent != a.Argent)
-            {
-                if((a.Argent - baseAdhérent.Argent) > 0) // Ajout d'argent
-                    message += $"/Ajout de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
-                else // Enlever argent
-                    message += $"/Argent retiré de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
-            }
-            log.registerLog(CategorieLog.UPDATE, message, MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE, a, MainWindow.CompteConnected);
         }
         #endregion
 
@@ -314,7 +286,7 @@ namespace Couche_IHM.Frames
             infoAdherent.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.DELETE, adhérentSelect, MainWindow.CompteConnected);
 
             UpdateView();
             this.options.Visibility = Visibility.Hidden;

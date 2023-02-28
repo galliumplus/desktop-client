@@ -1,28 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
-namespace Couche_Métier.Log
+namespace Couche_IHM
 {
-    public class Log
+    public class LogIHM 
     {
         private string date;
         private string action;
         private string message;
         private string messageComplete;
         private string auteur;
+        private SolidColorBrush colorOperation;
 
         /// <summary>
         /// Constructeur
         /// </summary>
-        public Log(string date, string action, string message, string auteur)
+        public LogIHM(string date, string action, string message, string auteur)
         {
             this.date = date;
             this.action = action;
             this.message = message;
             this.auteur = auteur;
+            this.colorOperation = new SolidColorBrush();
         }
 
         /// <summary>
@@ -78,5 +82,6 @@ namespace Couche_Métier.Log
             get => auteur; 
             set => auteur = value; 
         }
+        public SolidColorBrush ColorOperation { get => colorOperation; set => colorOperation = value; }
     }
 }

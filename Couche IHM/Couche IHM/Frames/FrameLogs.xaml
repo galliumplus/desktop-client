@@ -21,13 +21,13 @@
 
         <Label x:Name="titleLog" Content="Aucun log" FontSize="30" VerticalAlignment="Center"/>
         <!-- Liste des logs -->
-        <DataGrid Name="listLogs" RowDetailsVisibilityMode="Collapsed" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ToggleRowDetails" Margin="0,0,0,19" >
+        <DataGrid Name="listLogs"  RowDetailsVisibilityMode="Collapsed" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ToggleRowDetails" Margin="0,0,0,19" >
             <!-- Columns -->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100" />
-                <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="150"/>
-                <DataGridTextColumn  Header="Message" Binding="{Binding MessageCourt}" Width="auto"/>
-                <DataGridTextColumn  Header="Auteur" Binding="{Binding Auteur}" Width="*" />
+                <DataGridTextColumn   Header="Date" Binding="{Binding Date}" Width="100" />
+                <DataGridTextColumn  Header="Action" Binding="{Binding Action}" Width="100"/>
+                <DataGridTextColumn   Header="Message" Binding="{Binding MessageCourt}" Width="3*"/>
+                <DataGridTextColumn   Header="Auteur" Binding="{Binding Auteur}" Width="*" />
             </DataGrid.Columns>
             
             <!-- Détails des lignes-->
@@ -43,11 +43,11 @@
             <TextBlock  Text="Filtres" TextDecorations="Underline"  FontSize="20" HorizontalAlignment="Center"/>
             <StackPanel Margin="0,40,0,0" Orientation="Vertical">
                 <TextBlock   Text="Opération :" FontSize="15"/>
-                <CheckBox Margin="0,8,0,0" Content="Produit"/>
-                <CheckBox Content="Adhérent"/>
-                <CheckBox Content="Utilisateur"/>
-                <CheckBox Content="Vente"/>
-                <CheckBox Content="Achat"/>
+                <CheckBox  x:Name="produitActivated" Margin="0,8,0,0" Content="Produit" Unchecked="ResetCriteria" Checked="ResetCriteria"/>
+                <CheckBox x:Name="AdherentActivated" Unchecked="ResetCriteria" Content="Adhérent" Checked="ResetCriteria" />
+                <CheckBox x:Name="CompteActivated" Unchecked="ResetCriteria" Checked="ResetCriteria" Content="Utilisateur"/>
+                <CheckBox Content="Vente" Unchecked="ResetCriteria" Checked="ResetCriteria"/>
+                <CheckBox Content="Achat" Unchecked="ResetCriteria" Checked="ResetCriteria"/>
             </StackPanel>
         </Grid>
     </Grid>

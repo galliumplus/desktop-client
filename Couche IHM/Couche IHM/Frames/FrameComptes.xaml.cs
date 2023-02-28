@@ -43,7 +43,7 @@ namespace Couche_IHM.Frames
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
-            this.log = new LogToTxt();
+            this.log = new LogCompteToTxt();
 
  
         }
@@ -68,26 +68,7 @@ namespace Couche_IHM.Frames
             this.userManager.UpdateCompte(u);
 
             // LOG
-            string message = "Mise à jour de l'utilisateur " + baseUser.NomComplet + ":";
-            // Si changement de nom
-            if(baseUser.Nom != u.Nom)
-            {
-                message += $"/Changement du nom {baseUser.Nom} en {u.Nom}";
-            }
-
-            // Si changement de prénom
-            if(baseUser.Prenom != u.Prenom)
-            {
-                message += $"/Changement du nom {baseUser.Prenom} en {u.Prenom}";
-            } 
-            
-            // Si changement de mail
-            if(baseUser.Mail != u.Mail)
-            {
-                message += $"/Changement du nom {baseUser.Mail} en {u.Nom}";
-            }
-
-            log.registerLog(CategorieLog.UPDATE, message, MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE, u, MainWindow.CompteConnected);
         }
 
         /// <summary>
