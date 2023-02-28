@@ -27,9 +27,9 @@ namespace Couche_IHM
         /// <summary>
         /// Quantité produits présent dans la caisse
         /// </summary>
-        public dynamic QuantiteProduitPanier
+        public int QuantiteProduitPanier
         {
-            get => "x" + nombreProduit;
+            get => nombreProduit;
             set => nombreProduit = value;
         }
 
