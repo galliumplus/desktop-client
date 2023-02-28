@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Couche_IHM
 {
@@ -16,6 +17,16 @@ namespace Couche_IHM
         private int nombreProduit;
         private string pathImage;
 
+        /// <summary>
+        /// Permet d'obtenir la couleur selon si le produit est encore en stock ou pas
+        /// </summary>
+        public bool isDisponible
+        {
+            get
+            {
+                return (product.Quantite > 0);
+            }
+        }
         /// <summary>
         /// Nom du produit
         /// </summary>
@@ -45,15 +56,6 @@ namespace Couche_IHM
         }
 
         /// <summary>
-        /// Image du produits
-        /// </summary>
-        public string ImageProduit
-        {
-            get => pathImage;
-            set => pathImage = value;
-        }
-
-        /// <summary>
         /// Produit ahdérent
         /// </summary>
         public double PrixProduitAdherentAffichage
@@ -64,9 +66,51 @@ namespace Couche_IHM
         /// <summary>
         /// Produit non adhérent
         /// </summary>
-        public string PrixProduitNonAdherentAffichage
+        public double PrixProduitNonAdherentAffichage
         {
-            get => product.PrixNonAdherentIHM;
+            get => product.PrixNonAdherent;
+        }
+
+
+        /// <summary>
+        /// Image du produits
+        /// </summary>
+        public string ImageProduit
+        {
+            get => pathImage;
+            set => pathImage = value;
+        }
+
+
+        /// <summary>
+        /// Prix Adherent formatté pour l'afficher
+        /// </summary>
+        public string PrixAdherentIHM
+        {
+            get
+            {
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(product.PrixAdherent);
+            }
+        }
+        /// <summary>
+        /// Prix non adhérent formatté pour l'afficher
+        /// </summary>
+        public string PrixNonAdherentIHM
+        {
+            get
+            {
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(product.PrixNonAdherent);
+            }
+        }
+
+        /// <summary>
+        /// Permet d'obtenir la catégorie du produit
+        /// </summary>
+        public string Categorie
+        {
+            get => product.Categorie;
         }
 
         public ProduitIHM(Product produit) 

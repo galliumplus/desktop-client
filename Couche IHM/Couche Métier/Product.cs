@@ -69,7 +69,7 @@ namespace Couche_Métier
             get 
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(prixNonAdherent);
+                return converterFormatArgent.ConvertFormat(PrixNonAdherent);
             }
         }
 
@@ -81,6 +81,7 @@ namespace Couche_Métier
             get => categorie; 
             set => categorie = value; 
         }
+        public double PrixNonAdherent { get => prixNonAdherent; set => prixNonAdherent = value; }
 
         /// <summary>
         /// Constructeur naturel
@@ -95,7 +96,7 @@ namespace Couche_Métier
             this.quantite = quantite;
             this.prixAdherent = prixAdherent;
             this.categorie = categorie;
-            this.prixNonAdherent = Math.Round(PrixAdherent + 0.20,2);
+            this.PrixNonAdherent = Math.Round(PrixAdherent + 0.20,2);
         }
 
         public override string ToString()
