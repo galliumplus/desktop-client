@@ -56,7 +56,7 @@ namespace Couche_Data
         }
         public void CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            this.products.Add(product);
         }
 
         public Product GetProduct(int id)
@@ -71,7 +71,7 @@ namespace Couche_Data
 
         public void RemoveProduct(Product product)
         {
-            throw new NotImplementedException();
+            this.products.Remove(product);
         }
 
         public void UpdateProduct(Product product)

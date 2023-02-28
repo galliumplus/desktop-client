@@ -1,5 +1,6 @@
 ﻿using Couche_Data;
 using Couche_Métier;
+using Couche_Métier.Log;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,6 +60,13 @@ namespace Couche_IHM.Frames
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
             this.DataContext = categorieManager;
+
+
+            // Si membre du ca alors parametre pas visibles
+            if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
+            {
+                this.optionsButton.Visibility = Visibility.Hidden;
+            }
         }
 
         
@@ -73,6 +81,59 @@ namespace Couche_IHM.Frames
 
 
         #region events
+
+        /// <summary>
+        /// Permet de fermer la fenêtre aves les infos adhérents
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseInfoAdherent(object sender, RoutedEventArgs e)
+        {
+            this.listproduits.SelectedItem = null;
+            this.productDetails.Visibility = Visibility.Hidden;
+            this.buttonValidate.Visibility = Visibility.Hidden;
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet de cacher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Permet d'afficher les options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowOptions(object sender, RoutedEventArgs e)
+        {
+            this.options.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Permet de supprimer le produit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteStock(object sender, RoutedEventArgs e)
+        {
+            Product productSelect = this.productManager.GetProduct(this.productName.Text);
+            this.productManager.RemoveProduct(productSelect);
+            productDetails.Visibility = Visibility.Hidden;
+
+            // LOG DELETE ADHERENT
+            ILog log = new LogToTxt();
+            log.registerLog(CategorieLog.DELETE_PRODUCT, $"Supression du produit [{productSelect.NomProduit}]", MainWindow.CompteConnected);
+
+            UpdateView();
+            this.options.Visibility = Visibility.Hidden;
+        }
+
         /// <summary>
         /// Charge détails du produit selectionné
         /// </summary>

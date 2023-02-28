@@ -43,7 +43,7 @@ namespace Couche_IHM.Frames
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
-            this.log = new LogToTXT();
+            this.log = new LogToTxt();
 
  
         }

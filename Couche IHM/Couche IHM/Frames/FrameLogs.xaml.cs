@@ -32,7 +32,7 @@ namespace Couche_IHM.Frames
         public FrameLogs()
         {
             InitializeComponent();
-            this.log = new LogToTXT();
+            this.log = new LogToTxt();
             this.logsLine = log.loadLog();
 
             // Si il y a des logs
