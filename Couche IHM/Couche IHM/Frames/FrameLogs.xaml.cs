@@ -31,10 +31,11 @@ namespace Couche_IHM.Frames
         // Liste de logs sous forme de string
         private readonly List<string> logsLine; 
 
+
         public FrameLogs()
         {
             InitializeComponent();
-            this.log = new LogToTxt();
+            this.log = new LogAdherentToTxt();
             this.logsLine = log.loadLog();
 
             // Si il y a des logs
@@ -42,8 +43,11 @@ namespace Couche_IHM.Frames
             {
                 FillListViewLogs();
             }
-            
+
+            string actualMonth = DateTime.Today.ToString("MMMM yyyy");
+            this.titleLog.Content = actualMonth[0].ToString().ToUpper() + actualMonth.Substring(1);
         }
+
 
         /// <summary>
         /// Remplis la list view en lisant les logs
@@ -51,44 +55,70 @@ namespace Couche_IHM.Frames
         private void FillListViewLogs()
         {
             // Affiche les logs du mois actuels
-            List<Log> list = new List<Log>();
+            List<LogIHM> list = new List<LogIHM>();
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
+
 
             // Pour tous les logs
             for (int i = logsLine.Count - 1; i > -1; i--) 
             {
-                string[] splitedLosline = logsLine[i].Split('|'); // Sépare par catégorie
+                // Récupération des différents champs
+                string[] splitedLosline = logsLine[i].Split('|');
                 string date = DateTime.Parse(splitedLosline[0]).ToString("g");
-                string action = splitedLosline[1];
+                string type = splitedLosline[1];
                 string message = splitedLosline[2];
                 string auteur = splitedLosline[3];
+                string operation = splitedLosline[4];
 
-                // Affiche les logs du mois actuels
+                // Affiche les logs selon les critères
                 if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth)
                 {
-                    Log newLog = new Log(date, action, message, auteur);
-                    // Adapte le message selon la catégorie
-                    switch (action)
+                    
+                    LogIHM newLog = null;
+                    switch (type)
                     {
-                        case "UPDATE":
-                            newLog.MessageCourt = message.Split('/')[0];
-                            string messageSplit = message.Split(":/")[1];
-                            newLog.MessageComplete = string.Join('\n', messageSplit.Split('/'));
+                        case "ADHERENT":
+                            if (this.AdherentActivated.IsChecked == true)
+                            {
+                                     newLog = new LogIHM(date, type, message, auteur);
+                            }
                             break;
-                        case "CREATE":
+                        case "PRODUIT":
+                                if (this.produitActivated.IsChecked == true)
+                                {
+                                     newLog = new LogIHM(date, type, message, auteur);
+                                }
                             break;
-                        case "DELETE":
+                        case "COMPTE":
+                            if (this.CompteActivated.IsChecked == true)
+                            {
+                                 newLog = new LogIHM(date, type, message, auteur);
+                            }
                             break;
-                    }
+                        }
 
-                    list.Add(newLog);
+                    if (newLog != null)
+                    {
+                        
+                        switch (operation)
+                        {
+                            case "CREATE":
+                                newLog.ColorOperation = new SolidColorBrush(Colors.ForestGreen);
+                                break;
+                            case "UPDATE":
+                                newLog.ColorOperation = new SolidColorBrush(Colors.Orange);
+                                break;
+                            case "DELETE":
+                                newLog.ColorOperation = new SolidColorBrush(Colors.DarkRed);
+                                break;
+
+                        }
+                        list.Add(newLog);
+                    }
+                    
                 }
             }
             this.listLogs.ItemsSource = list;
-
-            // Change le titre de la page
-            if (list.Count > 0)
-                this.titleLog.Content = actualMonth[0].ToString().ToUpper() + actualMonth.Substring(1);
         }
 
         /// <summary>
@@ -96,7 +126,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void ToggleRowDetails(object sender, SelectionChangedEventArgs e)
         {
-            Log log = (Log)this.listLogs.SelectedItem;
+            LogIHM log = (LogIHM)this.listLogs.SelectedItem;
 
             // Affichage des row details si un log est sélectionné avec un message
             if (this.listLogs.RowDetailsVisibilityMode == DataGridRowDetailsVisibilityMode.VisibleWhenSelected)
@@ -107,6 +137,16 @@ namespace Couche_IHM.Frames
             {
                 this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
             }
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour la liste des logs selon les différents critères
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetCriteria(object sender, RoutedEventArgs e)
+        {
+            FillListViewLogs();
         }
     }
 }
