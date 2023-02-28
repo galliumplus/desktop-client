@@ -122,7 +122,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.CreateAdhérent(a);
             
             // Log l'opération
-            log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Couche_IHM.Frames
                 else // Enlever argent
                     message += $"/Argent retiré de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
             }
-            log.registerLog(CategorieLog.UPDATE_ADHERENT, message, MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE, message, MainWindow.CompteConnected);
         }
         #endregion
 
@@ -314,7 +314,7 @@ namespace Couche_IHM.Frames
             infoAdherent.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE_ADHERENT, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.DELETE, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
 
             UpdateView();
             this.options.Visibility = Visibility.Hidden;

@@ -128,7 +128,7 @@ namespace Couche_IHM.Frames
 
             // LOG DELETE ADHERENT
             ILog log = new LogToTxt();
-            log.registerLog(CategorieLog.DELETE_PRODUCT, $"Supression du produit [{productSelect.NomProduit}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.DELETE, $"Supression du produit [{productSelect.NomProduit}]", MainWindow.CompteConnected);
 
             UpdateView();
             this.options.Visibility = Visibility.Hidden;

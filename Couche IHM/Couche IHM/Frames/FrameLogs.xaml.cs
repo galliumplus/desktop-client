@@ -26,8 +26,10 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameLogs : Page
     {
-        private readonly ILog log; // log
-        private readonly List<string> logsLine; // Liste des logs
+        // Attribut permettant de gérer les logs
+        private readonly ILog log; 
+        // Liste de logs sous forme de string
+        private readonly List<string> logsLine; 
 
         public FrameLogs()
         {
@@ -66,12 +68,19 @@ namespace Couche_IHM.Frames
                 {
                     Log newLog = new Log(date, action, message, auteur);
                     // Adapte le message selon la catégorie
-                    if(action == "UPDATE_ADHERENT")
+                    switch (action)
                     {
-                        newLog.MessageCourt = message.Split('/')[0];
-                        string messageSplit = message.Split(":/")[1]; 
-                        newLog.MessageComplete = string.Join('\n', messageSplit.Split('/'));
+                        case "UPDATE":
+                            newLog.MessageCourt = message.Split('/')[0];
+                            string messageSplit = message.Split(":/")[1];
+                            newLog.MessageComplete = string.Join('\n', messageSplit.Split('/'));
+                            break;
+                        case "CREATE":
+                            break;
+                        case "DELETE":
+                            break;
                     }
+
                     list.Add(newLog);
                 }
             }
@@ -79,17 +88,22 @@ namespace Couche_IHM.Frames
 
             // Change le titre de la page
             if (list.Count > 0)
-                this.titleLog.Content = actualMonth[0] + actualMonth.Substring(1);
+                this.titleLog.Content = actualMonth[0].ToString().ToUpper() + actualMonth.Substring(1);
         }
 
         /// <summary>
         /// Si une ligne n'a pas de détails, elle ne s'affichera pas
         /// </summary>
-        private void ShowRowDetails(object sender, SelectionChangedEventArgs e)
+        private void ToggleRowDetails(object sender, SelectionChangedEventArgs e)
         {
             Log log = (Log)this.listLogs.SelectedItem;
-            this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
-            if (!string.IsNullOrEmpty(log.MessageComplete))
+
+            // Affichage des row details si un log est sélectionné avec un message
+            if (this.listLogs.RowDetailsVisibilityMode == DataGridRowDetailsVisibilityMode.VisibleWhenSelected)
+            {
+                this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
+            }
+            else if (!string.IsNullOrEmpty(log.MessageComplete))
             {
                 this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
             }
