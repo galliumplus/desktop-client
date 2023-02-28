@@ -56,7 +56,7 @@ namespace Couche_IHM
         /// <summary>
         /// Produit ahdérent
         /// </summary>
-        public float PrixProduitAdherentAffichage
+        public double PrixProduitAdherentAffichage
         {
             get => product.PrixAdherent;
         }
@@ -64,9 +64,9 @@ namespace Couche_IHM
         /// <summary>
         /// Produit non adhérent
         /// </summary>
-        public float PrixProduitNonAdherentAffichage
+        public string PrixProduitNonAdherentAffichage
         {
-            get => product.PrixNonAdherent;
+            get => product.PrixNonAdherentIHM;
         }
 
         public ProduitIHM(Product produit) 

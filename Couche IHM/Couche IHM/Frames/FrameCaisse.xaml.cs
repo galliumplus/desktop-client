@@ -83,7 +83,7 @@ namespace Couche_IHM.Frames
             {
                 if (orderedItem[i].NomProduit == gd.Tag)
                 {
-                    priceTotal -= orderedItem[i].PrixProduitAdherentAffichage;
+                    priceTotal -= (float)orderedItem[i].PrixProduitAdherentAffichage;
                     orderedItem.RemoveAt(i);
                     quantityTotal--;
                     i = orderedItem.Count;
@@ -122,7 +122,7 @@ namespace Couche_IHM.Frames
                         orderedItem[orderedItem.IndexOf(p)].QuantiteProduitCaisse++;
                     }
                     quantityTotal++;
-                    priceTotal += p.PrixProduitAdherentAffichage;
+                    priceTotal += (float)p.PrixProduitAdherentAffichage;
                 }
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);

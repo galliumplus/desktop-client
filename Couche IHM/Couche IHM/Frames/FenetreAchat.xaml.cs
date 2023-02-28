@@ -56,7 +56,8 @@ namespace Couche_IHM.Frames
             Adhérent ad = null;
             if(this.listAcompte.SelectedIndex != null)
             {
-                ad = adhérents.Find(x => x.Identifiant == this.listAcompte.SelectedIndex.ToString());
+                ad = adhérents.Find(x => x.Identifiant == this.listAcompte.SelectedItem);
+                this.DialogResult = true;
             };
 
             
