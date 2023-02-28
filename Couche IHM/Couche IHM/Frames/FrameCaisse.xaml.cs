@@ -119,7 +119,7 @@ namespace Couche_IHM.Frames
                     }
                     else // Si déjà présent, augmente quantité de 1
                     {
-                        orderedItem[orderedItem.IndexOf(p)].QuantiteProduitCaisse++;
+                        orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier++;
                     }
                     quantityTotal++;
                     priceTotal += (float)p.PrixProduitAdherentAffichage;
