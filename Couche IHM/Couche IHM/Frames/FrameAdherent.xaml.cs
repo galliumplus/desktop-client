@@ -28,8 +28,6 @@ namespace Couche_IHM.Frames
     {
         // Représente le manager des adhérents
         private AdhérentManager adhérentManager;
-        private bool createAdherent;
-
 
         // Exporter des adhérents
         private IExportableAdherent exportAdh;
@@ -39,7 +37,8 @@ namespace Couche_IHM.Frames
         private int isSortingId = 0;
         private int isSortingIdentite = 0;
 
-        private ILog log = new LogToTXT();
+        // Attribut qui permet de gérer les logs pour chaque opération
+        private ILog log = new LogToTxt();
 
         /// <summary>
         /// Cosntructeur du frame adhérent
@@ -50,17 +49,17 @@ namespace Couche_IHM.Frames
             InitializeComponent();
             this.adhérentManager = adhérentManager;
             this.exportAdh = new ExportAdherentToExcel();
-            infoAdherent.Visibility = Visibility.Hidden;
-
+            
 
             // Met à jour l'affichage
             UpdateView();
-            this.buttonValidate.Content = "Valider";
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
+            
 
             // Focus l'utilisateur sur la barre de recherche
             this.rechercheAcompte.Focus();
+
 
             // Si membre du ca alors parametre pas visibles
             if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
@@ -90,20 +89,12 @@ namespace Couche_IHM.Frames
         /// <param name="adhérent">adhérent à détailler</param>
         private void AfficheAcompte(Adhérent adhérent)
         {
-            this.buttonValidate.Content = "Valider";
             this.id.Text = adhérent.Identifiant;
             this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
             this.name.Text = adhérent.NomCompletIHM;
-            if (adhérent.CanPass == true)
-            {
-                this.ouibypass.IsChecked = true;
-            }
-            else
-            {
-                this.nonbypass.IsChecked = true;
-            }
 
 
+            // Modification affichage
             this.buttonValidate.Visibility = Visibility.Hidden;
             this.options.Visibility = Visibility.Hidden;
             ResetWarnings();
@@ -120,24 +111,32 @@ namespace Couche_IHM.Frames
             this.argentWarning.Visibility = Visibility.Hidden;
         }
 
+        #region operationsMetiers
         /// <summary>
-        /// Créer un adhérent
+        /// Permet de créer un adhérent
         /// </summary>
-        private void createAnAdherent(Adhérent a)
+        /// <param name="a">Adhérent à créer</param>
+        private void CreateAnAdherent(Adhérent a)
         {
+            // Créer l'adhérent
             this.adhérentManager.CreateAdhérent(a);
-            // LOG ADD ADHERENT
-            log.registerLog(CategorieLog.CREATE_ADHERENT, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
+            
+            // Log l'opération
+            log.registerLog(CategorieLog.CREATE, $"CREATION DE {a.NomCompletIHM}", MainWindow.CompteConnected);
         }
 
         /// <summary>
-        /// Update un adhérent
+        /// Permet de mettre à jour un adhérent
         /// </summary>
-        private void updateAnAdherent(Adhérent baseAdhérent, Adhérent a)
+        /// <param name="baseAdhérent">Adhérent à modifier</param>
+        /// <param name="a">Nouvel  Adhérent</param>
+        private void UpdateAnAdherent(Adhérent baseAdhérent, Adhérent a)
         {
+            // Met à jour l'adhérent
             this.adhérentManager.UpdateAdhérent(a);
 
-            // LOG UPDATE ADHRENT
+            // Log l'opération
+
             string message = $"Mise à jour de l'adhérent {baseAdhérent.NomCompletIHM}:";
             // Nom 
             if (baseAdhérent.Nom != a.Nom)
@@ -165,8 +164,9 @@ namespace Couche_IHM.Frames
                 else // Enlever argent
                     message += $"/Argent retiré de {a.Argent - baseAdhérent.Argent}€ à {baseAdhérent.NomCompletIHM}";
             }
-            log.registerLog(CategorieLog.UPDATE_ADHERENT, message, MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE, message, MainWindow.CompteConnected);
         }
+        #endregion
 
         #region events
         /// <summary>
@@ -179,7 +179,6 @@ namespace Couche_IHM.Frames
             if (this.rechercheAcompte.Text.Trim() != "")
             {
                 this.listadherents.ItemsSource = this.adhérentManager.GetAdhérents(this.rechercheAcompte.Text);
-                createAdherent = false;
             }
             else
             {
@@ -227,9 +226,6 @@ namespace Couche_IHM.Frames
                     throw new Exception("IDFormat");
                 }
 
-                // Mise à jour du bypass
-                newAdher.CanPass = this.ouibypass.IsChecked.HasValue && this.ouibypass.IsChecked.Value;
-
 
                 // Mise à jour de l'argent
                 string argentFormat = this.argent.Text.Replace(".", ",");
@@ -245,15 +241,8 @@ namespace Couche_IHM.Frames
                 }
 
 
-                if (createAdherent) // Ajout d'un adhérent
-                {
-                    this.createAnAdherent(newAdher);
-                }
-                else // Mise à jour de l'adhérent
-                {
-                    this.updateAnAdherent(baseAdhérent, newAdher);
-
-                }
+                // Met à jour l'adhérent
+                this.UpdateAnAdherent(baseAdhérent, newAdher);
 
 
                 // Refresh vue
@@ -261,7 +250,6 @@ namespace Couche_IHM.Frames
                 this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonValidate.Content = "Valider";
             }
             catch (Exception ex)
             {
@@ -280,7 +268,6 @@ namespace Couche_IHM.Frames
                         MessageBox.Show(ex.Message);
                         break;
                 }
-                newAdher = null;
             }
         }
 
@@ -327,7 +314,7 @@ namespace Couche_IHM.Frames
             infoAdherent.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE_ADHERENT, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.DELETE, $"Supression de l'adhérent [{adhérentSelect.NomCompletIHM}]", MainWindow.CompteConnected);
 
             UpdateView();
             this.options.Visibility = Visibility.Hidden;
@@ -360,8 +347,6 @@ namespace Couche_IHM.Frames
                 AfficheAcompte(adhérent);
 
             }
-            this.createAdherent = false;
-
         }
 
         /// <summary>

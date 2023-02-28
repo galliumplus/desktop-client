@@ -88,7 +88,25 @@ namespace Couche_Métier
             }
             return produit;
         }
-        
+
+        /// <summary>
+        /// Renvoie une liste de produits selon des critères
+        /// </summary>
+        /// <param name="infoProduct"> info sur le produit </param>
+        /// <returns> liste de produits </returns>
+        public List<Product> GetProducts(string infoProduct)
+        {
+            List<Product> p = new List<Product>();
+            foreach (Product product in this.products)
+            {
+                if (product.NomProduit.ToUpper().Contains(infoProduct.ToUpper()) || product.Categorie.ToUpper().Contains(infoProduct.ToUpper()))
+                {
+                    p.Add(product);
+                }
+            }
+            return p;
+        }
+
         /// <summary>
         /// Retourne la liste des produits
         /// </summary>

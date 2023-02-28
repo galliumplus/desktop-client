@@ -14,26 +14,41 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
 
-        <Label x:Name="titleLog" Content="Aucun log" FontSize="30"/>
-
+        <Label x:Name="titleLog" Content="Aucun log" FontSize="30" VerticalAlignment="Center"/>
         <!-- Liste des logs -->
-        <DataGrid Name="listLogs" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ShowRowDetails">
+        <DataGrid Name="listLogs" RowDetailsVisibilityMode="Collapsed" AutoGenerateColumns="False" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="ToggleRowDetails" Margin="0,0,0,19" >
             <!-- Columns -->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="100" />
                 <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="150"/>
-                <DataGridTextColumn Header="Auteur" Binding="{Binding Auteur}" Width="auto" />
-                <DataGridTextColumn Header="Mesage" Binding="{Binding MessageCourt}" Width="auto"/>
+                <DataGridTextColumn  Header="Message" Binding="{Binding MessageCourt}" Width="auto"/>
+                <DataGridTextColumn  Header="Auteur" Binding="{Binding Auteur}" Width="*" />
             </DataGrid.Columns>
             
             <!-- Détails des lignes-->
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding MessageComplete}" Margin="10" />
+                    <TextBlock Text="{Binding MessageComplete}" Margin="10"  />
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
             
         </DataGrid>
+
+        <Grid Margin="20,0,0,0" Grid.Column="1" Grid.Row="1">
+            <TextBlock  Text="Filtres" TextDecorations="Underline"  FontSize="20" HorizontalAlignment="Center"/>
+            <StackPanel Margin="0,40,0,0" Orientation="Vertical">
+                <TextBlock   Text="Opération :" FontSize="15"/>
+                <CheckBox Margin="0,8,0,0" Content="Produit"/>
+                <CheckBox Content="Adhérent"/>
+                <CheckBox Content="Utilisateur"/>
+                <CheckBox Content="Vente"/>
+                <CheckBox Content="Achat"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

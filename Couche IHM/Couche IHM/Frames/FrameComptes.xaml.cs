@@ -43,7 +43,7 @@ namespace Couche_IHM.Frames
             this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
             this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
-            this.log = new LogToTXT();
+            this.log = new LogToTxt();
 
  
         }
@@ -55,7 +55,7 @@ namespace Couche_IHM.Frames
         private void CreateAnUser(User u)
         {
             this.userManager.CreateCompte(u);
-            log.registerLog(CategorieLog.CREATE_USER, $"Création de l'utilisateur {u.NomComplet}", MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.CREATE, $"Création de l'utilisateur {u.NomComplet}", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Couche_IHM.Frames
                 message += $"/Changement du nom {baseUser.Mail} en {u.Nom}";
             }
 
-            log.registerLog(CategorieLog.UPDATE_USER, message, MainWindow.CompteConnected);
+            log.registerLog(CategorieLog.UPDATE, message, MainWindow.CompteConnected);
         }
 
         /// <summary>

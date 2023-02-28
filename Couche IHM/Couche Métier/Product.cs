@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Couche_Métier
@@ -14,7 +15,8 @@ namespace Couche_Métier
         private int id;
         private string nomProduit;
         private int quantite;
-        private float prixAdherent;
+        private double prixAdherent;
+        private double prixNonAdherent;
         private string categorie;
 
         public int ID
@@ -43,18 +45,32 @@ namespace Couche_Métier
         /// <summary>
         /// Prix adhérent
         /// </summary>
-        public float PrixAdherent 
+        public double PrixAdherent 
         { 
             get => prixAdherent; 
             set => prixAdherent = value; 
         }
 
         /// <summary>
-        /// Prix non adhérent (+20 centimes)
+        /// Prix Adherent formatté pour l'afficher
         /// </summary>
-        public float PrixNonAdherent
+        public string PrixAdherentIHM {
+            get
+            {
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(prixAdherent );
+            }
+        }
+        /// <summary>
+        /// Prix non adhérent formatté pour l'afficher
+        /// </summary>
+        public string PrixNonAdherentIHM
         {
-            get => prixAdherent + 0.20f;
+            get 
+            {
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(prixNonAdherent);
+            }
         }
 
         /// <summary>
@@ -73,12 +89,13 @@ namespace Couche_Métier
         /// <param name="quantite"> quantite du produit </param>
         /// <param name="prixAdherent"> prix adherent </param>
         /// <param name="categorie"> categorie du produit </param>
-        public Product(string nomProduit, int quantite, float prixAdherent, string categorie)
+        public Product(string nomProduit, int quantite, double prixAdherent, string categorie)
         {
             this.nomProduit = nomProduit;
             this.quantite = quantite;
             this.prixAdherent = prixAdherent;
             this.categorie = categorie;
+            this.prixNonAdherent = Math.Round(PrixAdherent + 0.20,2);
         }
 
         public override string ToString()

@@ -14,7 +14,7 @@ namespace Couche_Métier
         private string nom;
         private string prenom;
         private bool canPass;
-        private float argent;
+        private double argent;
         private bool stillAdherent;
         private string formation;
 
@@ -26,7 +26,7 @@ namespace Couche_Métier
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
+        public Adhérent(string identifiant, string nom, string prenom, double argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
             this.identifiant = identifiant;
             this.nom = nom;
@@ -70,7 +70,7 @@ namespace Couche_Métier
         /// <summary>
         /// Argent de l'adhérent
         /// </summary>
-        public float Argent { get => argent; set => argent = value; }
+        public double Argent { get => argent; set => argent = value; }
 
         /// <summary>
         /// Est ce que le compte est toujours adhérent
@@ -98,21 +98,8 @@ namespace Couche_Métier
         {
             get
             {
-                string ret = Convert.ToString(Argent);
-                // 1 => 1,00
-                if (new Regex("^[0-9]+$").IsMatch(ret))
-                {
-                    ret += ",00";
-                }
-
-                // 1,2 => 1,20
-                if (new Regex("^[0-9]+,[0-9]$").IsMatch(ret))
-                {
-                    ret += "0";
-                }
-
-                ret += " €";
-                return ret;
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+                return converterFormatArgent.ConvertFormat(argent);
             }
         }
 

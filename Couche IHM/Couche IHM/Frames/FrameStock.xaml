@@ -23,6 +23,9 @@
             <!-- Nom de la frame  -->
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Stock" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
+                <Button Style="{StaticResource buttonImage}" Name="addProductButton"  Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" >
+                    <Image Source="/Images/ajouter.png"/>
+                </Button>
             </StackPanel>
 
             <!-- Info du compte connecté-->
@@ -56,7 +59,7 @@
 
             <!-- ScrollViewer des adhérents-->
             <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-                <ListView  x:Name="listproduits"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top"  >
+                <ListView  x:Name="listproduits"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" SelectionChanged="ShowProductDetails"  >
                     <ListView.Template>
                         <ControlTemplate>
                             <!-- Header des colonnes -->
@@ -66,7 +69,7 @@
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
@@ -74,18 +77,18 @@
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
 
+                                    
+                                    <Button   BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto" Width="200"  FontSize="17"  Content="Produit" Click="SortProductName" />
+                                    <Image Margin="30,0,0,0" Name="produitTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button  BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Produit" />
-                                    <Image Name="produitTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
-
-                                    <Button BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Quantité" />
+                                    <Button  BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Quantité" Click="SortQuantite" />
                                     <Image Name="quantiteTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Prix A "/>
+                                    <Button  BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Prix A " Click="SortPrix"/>
                                     <Image x:Name="prixTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button BorderThickness="0"  Background="Transparent" Grid.Column="3" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Catégorie"/>
-                                    <Image x:Name="categorieTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
+                                    <Button  BorderThickness="0"  Background="Transparent" Grid.Column="4" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Catégorie" Click="SortCategorie"/>
+                                    <Image x:Name="categorieTri" Margin="20,0,0,0" Visibility="Hidden" Grid.Column="4"  Width="20" HorizontalAlignment="Left"/>
 
                                     <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
 
@@ -95,23 +98,23 @@
                             </DockPanel>
                         </ControlTemplate>
                     </ListView.Template>
-                    <ListBox.ItemTemplate>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <!-- Content -->
-                                <Label  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label x:Name="labelProduit"  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label Content="{Binding Quantite}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding PrixAdherent}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding Categorie}" Margin="50,0,0,0" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label Content="{Binding Categorie}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                             </Grid>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
 
@@ -128,7 +131,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Barre de recherche -->
-                    <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2"    />
+                    <TextBox  Name="rechercheProduct" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" TextChanged="SearchProduct"    />
 
                     <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
                 </Grid>
@@ -137,16 +140,16 @@
                 <!-- Info -->
                 <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
 
-                    <Border  Name="productDetails" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Visible"  Background="LightGray"    CornerRadius="3"   Margin="0,0,0,10"   >
+                    <Border  Name="productDetails" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Hidden"  Background="LightGray"    CornerRadius="3" Height="247" VerticalAlignment="Top"   >
 
                         <StackPanel Margin="0,0,0,8" >
 
                             <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
 
-                                <Button Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left" >
+                                <Button  Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left" Click="CloseInfoAdherent" >
                                     <Image Source="/Images/retour.png"/>
                                 </Button>
-                                <Button x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}"  >
+                                <Button  x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions"  >
                                     <Image   Source="/Images/param.png"/>
 
                                 </Button>
@@ -154,7 +157,7 @@
                             </StackPanel>
 
 
-                            <!-- Nom utilisateur -->
+                            <!-- Nom produit -->
                             <TextBlock Text="Produit" HorizontalAlignment="Center" Margin="10,0,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
                                 <TextBox x:Name="productName"  MinWidth="80" Text="" FontSize="13"   Foreground="Black" />
@@ -163,7 +166,7 @@
 
 
 
-                            <!-- Compte utilisateur -->
+                            <!-- Quantité produit -->
                             <TextBlock  Text="Quantité" HorizontalAlignment="Center" Margin="10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                 <TextBox x:Name="productQuantite" Text="" MinWidth="40" FontSize="13" Foreground="Black"  />
@@ -171,18 +174,10 @@
                             </StackPanel>
 
 
-                            <!-- Bypass utilisateur -->
-                            <TextBlock  Text="Prix" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                <TextBox x:Name="productPrice" Text="" MinWidth="40" FontSize="13" Foreground="Black"  />
-                                <Image x:Name="prixWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
-
-                            <!-- Balance utilisateur -->
+                            <!-- Categorie Produit -->
                             <TextBlock Text="Catégorie" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBox MinWidth="80" x:Name="productCategorie" Text="" FontSize="13"  Foreground="Black"  />
+                                <ComboBox MinWidth="80" x:Name="productCategorie" ItemsSource="{Binding Path=Categories}"  FontSize="13"  Foreground="Black"  />
                                 <Image x:Name="categorieWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                             </StackPanel>
 
@@ -202,7 +197,7 @@
                                     <Image Source="/Images/modif.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Width="104" >
+                            <MenuItem  Width="104" Click="DeleteStock" >
                                 <MenuItem.Header>
                                     <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
                                 </MenuItem.Header>
@@ -210,7 +205,7 @@
                                     <Image Source="/Images/suprim.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Width="104"  >
+                            <MenuItem  Width="104" Click="HideOptions"  >
                                 <MenuItem.Header>
                                     <TextBlock Margin="0,3,0,0" Text="Retour"/>
                                 </MenuItem.Header>

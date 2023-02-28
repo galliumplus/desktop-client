@@ -10,7 +10,7 @@ namespace Couche_Métier.Log
     /// <summary>
     /// Enregistre des logs dans un fichier dont l'extension est .txt
     /// </summary>
-    public class LogToTXT : ILog
+    public class LogToTxt : ILog
     {
         public string Path => @Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium\\Log";
         private string name = "\\GalliumLog.txt";

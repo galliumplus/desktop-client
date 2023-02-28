@@ -12,7 +12,7 @@ namespace TestUnitaire
         [Fact]
         void ReadLog()
         {
-            ILog log = new LogToTXT();
+            ILog log = new LogToTxt();
             Assert.NotEmpty(log.loadLog());
         }
     }

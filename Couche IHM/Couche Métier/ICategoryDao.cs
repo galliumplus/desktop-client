@@ -9,7 +9,7 @@ namespace Couche_Métier
     /// <summary>
     /// I Category
     /// </summary>
-    public interface ICategory
+    public interface ICategoryDao
     {
         /// <summary>
         /// Créer une catégorie
