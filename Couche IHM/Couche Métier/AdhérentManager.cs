@@ -14,6 +14,7 @@ namespace Couche_Métier
         // Représente les adhérents
         private Dictionary<string,Adhérent> adhérents = new Dictionary<string, Adhérent>();
 
+
         /// <summary>
         /// Constructeur de la classe adhérentManager
         /// </summary>
