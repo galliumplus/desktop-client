@@ -38,7 +38,7 @@ namespace Couche_IHM
         /// <summary>
         /// Quantité produits présent dans la caisse
         /// </summary>
-        public int QuantiteProduitCaisse
+        public int QuantiteProduitPanier
         {
             get => nombreProduit;
             set => nombreProduit = value;
@@ -49,9 +49,9 @@ namespace Couche_IHM
         /// Get => String
         /// Set => Entier
         /// </summary>
-        public dynamic QuantiteProduit
+        public int QuantiteProduit
         {
-            get => "x" + product.Quantite;
+            get => product.Quantite;
             set => product.Quantite = value;
         }
 
@@ -116,7 +116,7 @@ namespace Couche_IHM
         public ProduitIHM(Product produit) 
         {
             this.product = produit;
-            this.QuantiteProduitCaisse = 1;
+            this.QuantiteProduitPanier = 1;
         }
 
     }

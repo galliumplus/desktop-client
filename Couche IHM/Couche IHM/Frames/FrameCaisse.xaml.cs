@@ -83,7 +83,7 @@ namespace Couche_IHM.Frames
             {
                 if (orderedItem[i].NomProduit == gd.Tag)
                 {
-                    priceTotal -= orderedItem[i].PrixProduitAdherentAffichage;
+                    priceTotal -= (float)orderedItem[i].PrixProduitAdherentAffichage;
                     orderedItem.RemoveAt(i);
                     quantityTotal--;
                     i = orderedItem.Count;
@@ -119,10 +119,10 @@ namespace Couche_IHM.Frames
                     }
                     else // Si déjà présent, augmente quantité de 1
                     {
-                        orderedItem[orderedItem.IndexOf(p)].QuantiteProduitCaisse++;
+                        orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier = orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier + 1;
                     }
                     quantityTotal++;
-                    priceTotal += p.PrixProduitAdherentAffichage;
+                    priceTotal += (float)p.PrixProduitAdherentAffichage;
                 }
             }
             this.QuantityOrdered.Content = Convert.ToString(QuantityO);

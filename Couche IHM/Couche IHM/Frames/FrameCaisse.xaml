@@ -73,7 +73,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="{Binding NomProduit}" Grid.Column="0" Width="125"/>
                         <!-- Nombre de produit -->
-                        <Label x:Name="numberP" Content="{Binding QuantiteProduitCaisse}" HorizontalAlignment="Right"/>
+                        <Label x:Name="numberP" Content="{Binding QuantiteProduitPanier}" HorizontalAlignment="Right"/>
                         <!-- Bouton pour enlever le produit -->
                         <Grid Grid.Column="1" MouseEnter="OrderItem_Enter" MouseLeave="OrderItem_Leave" Background="#302F2F" Width="25" MouseLeftButtonDown="RemoveProduct" Tag="{Binding NomProduit}" HorizontalAlignment="Right">
                             <Label Content="-" Foreground="White" HorizontalAlignment="Center"/>
