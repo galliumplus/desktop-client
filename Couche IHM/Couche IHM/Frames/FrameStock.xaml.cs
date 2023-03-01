@@ -39,13 +39,15 @@ namespace Couche_IHM.Frames
         private int isSortingPrix = 0;
         private int isSortingQt = 0;
 
+        private List<ProduitIHM> produitsIHM;
+
 
         /// <summary>
         /// Constructeur de la frame des stock
         /// </summary>
         /// <param name="productManager">manager des produits</param>
         /// <param name="categoryManager">manager des catégories</param>
-        public FrameStock(ProductManager productManager, CategoryManager categoryManager)
+        public FrameStock(ProductManager productManager, CategoryManager categoryManager, List<ProduitIHM> produitsIHM)
         {
             InitializeComponent();
             this.productDetails.Visibility = Visibility.Hidden; // Cache détails du produit
@@ -53,6 +55,7 @@ namespace Couche_IHM.Frames
             // Récupère les managers
             this.productManager = productManager;
             this.categorieManager = categoryManager;
+            this.produitsIHM = produitsIHM;
 
             // Met à jour l'affichage
             UpdateView();
@@ -78,13 +81,7 @@ namespace Couche_IHM.Frames
         private void UpdateView()
         {
             this.listproduits.ItemsSource = null;
-            List<Product> productMetier = this.productManager.GetProducts();
-            List<ProduitIHM> produitIHM = new List<ProduitIHM>();
-            foreach (Product p in productMetier)
-            {
-                produitIHM.Add(new ProduitIHM(p));
-            }
-            this.listproduits.ItemsSource = produitIHM;
+            this.listproduits.ItemsSource = this.produitsIHM;
         }
 
 
@@ -332,6 +329,7 @@ namespace Couche_IHM.Frames
             if(res == true)
             {
                 this.productManager.CreateProduct(newProduct.Product);
+                produitsIHM.Add(newProduct);
                 this.UpdateView();  
             }
         }

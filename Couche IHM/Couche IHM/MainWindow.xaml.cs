@@ -43,6 +43,7 @@ namespace Couche_IHM
             get => compteConnected;
         }
 
+        List<ProduitIHM> produitIHM;
 
         public MainWindow(User user)
         {
@@ -51,6 +52,13 @@ namespace Couche_IHM
             this.productManager = new ProductManager(new FakeProduitsDAO());
             this.userManager = new UserManager(new FakeUserDAO());
             this.categoryManager = new CategoryManager(new FakeCategoryDAO());
+
+            List<Product> productMetier = this.productManager.GetProducts();
+            this.produitIHM = new List<ProduitIHM>();
+            foreach (Product p in productMetier)
+            {
+                produitIHM.Add(new ProduitIHM(p));
+            }
 
             // Enregistre la personne qui s'est connecté
             compteConnected = user;
@@ -69,7 +77,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager, this.categoryManager));
+            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager, this.categoryManager, this.produitIHM));
         }
 
         /// <summary>
@@ -87,7 +95,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameStock(this.productManager, this.categoryManager));
+            this.mainFrame.Navigate(new FrameStock(this.productManager, this.categoryManager, this.produitIHM));
         }
 
         /// <summary>

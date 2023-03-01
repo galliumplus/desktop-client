@@ -45,30 +45,19 @@ namespace Couche_IHM.Frames
         private ProductManager produitManager;
         private CategoryManager categorieManager;
 
-        public FrameCaisse(AdhérentManager adherentManager, ProductManager produitManager, CategoryManager categorieManager)
+        public FrameCaisse(AdhérentManager adherentManager, ProductManager produitManager, CategoryManager categorieManager, List<ProduitIHM> produitIHM)
         {
             InitializeComponent();
             this.adherentManager = adherentManager;
             this.produitManager = produitManager;
             this.categorieManager = categorieManager;
-            FIllProduitsIHM();
+            this.produitsIHM = produitIHM;
 
             productHandler.ItemsSource = produitsIHM;
             Order.ItemsSource = orderedItem;
 
             string[] moyenPayement = { "Acompte", "Paypal", "Carte" };
             listeMoyenPayement.ItemsSource = moyenPayement;
-        }
-
-        /// <summary>
-        /// Remplis la liste de produitsIHM
-        /// </summary>
-        private void FIllProduitsIHM()
-        {
-            foreach(Product p in produitManager.GetProducts())
-            {
-                produitsIHM.Add(new ProduitIHM(p));
-            }
         }
 
         /// <summary>
