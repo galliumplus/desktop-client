@@ -121,23 +121,6 @@ namespace Couche_IHM.Frames
             this.listLogs.ItemsSource = list;
         }
 
-        /// <summary>
-        /// Si une ligne n'a pas de détails, elle ne s'affichera pas
-        /// </summary>
-        private void ToggleRowDetails(object sender, SelectionChangedEventArgs e)
-        {
-            LogIHM log = (LogIHM)this.listLogs.SelectedItem;
-
-            // Affichage des row details si un log est sélectionné avec un message
-            if (this.listLogs.RowDetailsVisibilityMode == DataGridRowDetailsVisibilityMode.VisibleWhenSelected)
-            {
-                this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Collapsed;
-            }
-            else if (!string.IsNullOrEmpty(log.MessageComplete))
-            {
-                this.listLogs.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
-            }
-        }
 
         /// <summary>
         /// Permet de mettre à jour la liste des logs selon les différents critères
