@@ -194,5 +194,14 @@ namespace Couche_IHM.Frames
             }
             
         }
+
+        /// <summary>
+        /// Ajoute un nouvelle utilisateur
+        /// </summary>
+        private void AddAnUser(object sender, RoutedEventArgs e)
+        {
+            FenetreAddUser fa = new FenetreAddUser();
+            fa.ShowDialog();
+        }
     }
 }

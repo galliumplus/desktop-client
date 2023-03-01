@@ -1,0 +1,58 @@
+﻿<Window x:Class="Couche_IHM.Frames.FenetreAddProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Couche_IHM.Frames"
+        mc:Ignorable="d"
+        Title="FenetreAddProduct" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Création Produit" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Black"/>
+
+        <!-- Colonne 1 : Image-->
+        <Image Source="/Assets/Logo/Logo_Gallium.png" Margin="20" Grid.Column="0" Grid.Row="1"  Grid.RowSpan="4"/>
+        
+        <!-- Colonne 2 -->
+        <!-- Nom Produit -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
+            <Label Content="Nom Produit"/>
+            <TextBox Style="{StaticResource textBoxGallium}"/>
+        </StackPanel>
+
+        <!-- Prix -->
+        <StackPanel Grid.Column="1" Grid.Row="2" Margin="10">
+            <Label Content="Prix A" />
+            <TextBox Style="{StaticResource textBoxGallium}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Margin="10">
+            <Label Content="Prix NA" />
+            <TextBox Style="{StaticResource textBoxGallium}"/>
+        </StackPanel>
+       
+        <!-- Stock -->
+        <StackPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
+            <Label Content="Stock"/>
+            <TextBox Style="{StaticResource textBoxGallium}"/>
+        </StackPanel>
+        
+        <!-- Catégories -->
+        <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="10">
+            <Label Content="Catégorie" />
+            <ComboBox />
+        </StackPanel>
+    </Grid>
+</Window>
