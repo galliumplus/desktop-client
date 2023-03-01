@@ -36,10 +36,10 @@ namespace Couche_Métier
         public ProductManager(IProductDAO productDAO)
         {
             // Initialisation
-            this.products = new List<Product>();
+           
             this.categoryProduct = new List<string>();
             this.productDAO = productDAO;
-            products = this.productDAO.GetProducts();
+            this.products = new List<Product>(this.productDAO.GetProducts());
             InitialiseCategory();
         }
 
@@ -66,9 +66,12 @@ namespace Couche_Métier
         /// </summary>
         public void UpdateProduct(Product p)
         {
-            Product actalProduit = this.GetProduct(p.NomProduit);
-            actalProduit = p;
-
+            Product actalProduit = this.GetProduct(p.ID);
+            actalProduit.NomProduit = p.NomProduit;
+            actalProduit.PrixNonAdherent = p.PrixNonAdherent;
+            actalProduit.PrixAdherent = p.PrixAdherent;
+            actalProduit.Quantite = p.Quantite;
+            actalProduit.Categorie = p.Categorie;
             productDAO.UpdateProduct(p);
 
         }
@@ -78,12 +81,12 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="productName"> nom du produit </param>
         /// <returns> produit </returns>
-        public Product GetProduct(string productName)
+        public Product GetProduct(int idProduct)
         {
             Product produit = null;
             foreach(Product product in products)
             {
-                if(product.NomProduit == productName)
+                if(product.ID == idProduct)
                     produit = product;
             }
             return produit;

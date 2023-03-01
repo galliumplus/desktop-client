@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icone\modif2.png" />
     <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
@@ -45,6 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Icone\modif2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Logo\Logo_Gallium.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

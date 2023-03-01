@@ -45,7 +45,6 @@
                             </Grid.RowDefinitions>
                             <Image Source="{Binding ImageProduit}"  Grid.Row="0"/>
                             <Label Content="{Binding NomProduit}" ContentStringFormat="" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"/>
-
                             <Label Content="{Binding QuantiteProduit}" ContentStringFormat="STOCK : {0}" HorizontalAlignment="Left" FontSize="8" Grid.Row="2" Margin="0,-10,0,0"/>
                             <Label Content="{Binding PrixProduitAdherentAffichage}" ContentStringFormat="Prix A : {0}€" HorizontalAlignment="Left" FontSize="8" Grid.Row="2"/>
                             <Label Content="{Binding PrixProduitNonAdherentAffichage}" ContentStringFormat="Prix NA : {0}€" HorizontalAlignment="Left" FontSize="8" Grid.Row="2" Margin="0,10,0,0"/>

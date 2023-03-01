@@ -17,6 +17,8 @@ namespace Couche_IHM
         private int nombreProduit;
         private string pathImage;
 
+        public Product Product { get { return product; } }
+
         /// <summary>
         /// Permet d'obtenir la couleur selon si le produit est encore en stock ou pas
         /// </summary>
@@ -119,5 +121,12 @@ namespace Couche_IHM
             this.QuantiteProduitPanier = 1;
         }
 
+
+        public ProduitIHM(ProduitIHM produitIHM)
+        {
+            this.product = new Product(produitIHM.Product);
+            this.QuantiteProduitPanier = produitIHM.QuantiteProduitPanier;
+            this.ImageProduit = produitIHM.ImageProduit;
+        }
     }
 }

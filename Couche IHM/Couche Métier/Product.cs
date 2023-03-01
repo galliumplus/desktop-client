@@ -82,21 +82,34 @@ namespace Couche_Métier
             set => categorie = value; 
         }
         public double PrixNonAdherent { get => prixNonAdherent; set => prixNonAdherent = value; }
-
+        
         /// <summary>
-        /// Constructeur naturel
-        /// </summary>
-        /// <param name="nomProduit"> nom du produit </param>
-        /// <param name="quantite"> quantite du produit </param>
-        /// <param name="prixAdherent"> prix adherent </param>
-        /// <param name="categorie"> categorie du produit </param>
-        public Product(string nomProduit, int quantite, double prixAdherent, string categorie)
+        /// Futur constructeur naturelle
+        public Product(int id, string nomProduit, int quantite, double prixAdherent, double prixNonAdherent, string categorie)
         {
+            this.id = id;
             this.nomProduit = nomProduit;
             this.quantite = quantite;
             this.prixAdherent = prixAdherent;
+            this.prixNonAdherent = prixNonAdherent;
             this.categorie = categorie;
-            this.PrixNonAdherent = Math.Round(PrixAdherent + 0.20,2);
+            this.PrixNonAdherent = this.prixNonAdherent;
+        }
+
+        public Product() { }
+
+        /// <summary>
+        /// Constructeur naturelle copiant l'objet
+        /// </summary>
+        /// <param name="p"> produit à copier </param>
+        public Product(Product p)
+        {
+            this.id = p.ID;
+            this.nomProduit = p.NomProduit;
+            this.quantite = p.Quantite;
+            this.prixAdherent = p.PrixAdherent;
+            this.prixNonAdherent = p.PrixNonAdherent;
+            this.categorie = p.Categorie;
         }
 
         public override string ToString()

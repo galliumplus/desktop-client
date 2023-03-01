@@ -130,7 +130,7 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void DeleteStock(object sender, RoutedEventArgs e)
         {
-            Product productSelect = this.productManager.GetProduct(this.productName.Text);
+            Product productSelect = this.productManager.GetProduct((this.listproduits.SelectedItem as ProduitIHM).Product.ID);
             this.productManager.RemoveProduct(productSelect);
             productDetails.Visibility = Visibility.Hidden;
 
@@ -324,8 +324,37 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void AddAnProduct(object sender, RoutedEventArgs e)
         {
-            FenetreAddProduct p = new FenetreAddProduct();
-            p.ShowDialog();
+            ProduitIHM newProduct = new ProduitIHM(new Product());
+            FenetreAddProduct p = new FenetreAddProduct(newProduct, this.categorieManager.ListAllCategory());
+            bool res = p.ShowDialog().Value;
+
+            // Si fermé
+            if(res == true)
+            {
+                this.productManager.CreateProduct(newProduct.Product);
+                this.UpdateView();  
+            }
+        }
+
+        /// <summary>
+        /// Met à jour un produit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UpdateAnProduct(object sender, RoutedEventArgs e)
+        {
+            ProduitIHM baseProduit = (ProduitIHM)listproduits.SelectedItem;
+            ProduitIHM copyProduct = new ProduitIHM(baseProduit);
+            FenetreAddProduct p = new FenetreAddProduct(copyProduct, this.categorieManager.ListAllCategory());
+            bool res = p.ShowDialog().Value;
+
+            // Si fermé
+            if (res == true)
+            {
+                this.productManager.UpdateProduct(copyProduct.Product);
+                baseProduit.ImageProduit = copyProduct.ImageProduit;
+                this.UpdateView();
+            }
         }
     }
 }

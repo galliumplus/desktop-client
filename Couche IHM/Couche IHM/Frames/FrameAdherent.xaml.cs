@@ -129,7 +129,7 @@ namespace Couche_IHM.Frames
         /// Permet de mettre à jour un adhérent
         /// </summary>
         /// <param name="baseAdhérent">Adhérent à modifier</param>
-        /// <param name="a">Nouvel  Adhérent</param>
+        /// <param name="a">Nouvel Adhérent</param>
         private void UpdateAnAdherent(Adhérent baseAdhérent, Adhérent a)
         {
             // Met à jour l'adhérent

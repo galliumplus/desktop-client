@@ -189,8 +189,8 @@
                     <Button BorderBrush="Green"   x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="#252422"  Foreground="White" VerticalAlignment="Bottom" Width="120"  HorizontalAlignment="Center" Margin="0,0,0,0"/>
                     <Border x:Name="options" Visibility="Hidden" Margin="100,26,-26,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
                         <Menu  >
-                            <MenuItem Width="104" >
-                                <MenuItem.Header>
+                            <MenuItem Width="104" Click="UpdateAnProduct">
+                                <MenuItem.Header >
                                     <TextBlock Margin="0,3,0,0" Text="Modifier"/>
                                 </MenuItem.Header>
                                 <MenuItem.Icon>

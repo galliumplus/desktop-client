@@ -13,46 +13,55 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Label Content="Création Produit" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Black"/>
+        <Label x:Name="title" Content="Titre" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Black"/>
 
         <!-- Colonne 1 : Image-->
-        <Image Source="/Assets/Logo/Logo_Gallium.png" Margin="20" Grid.Column="0" Grid.Row="1"  Grid.RowSpan="4"/>
+        <Grid Margin="20" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" MouseEnter="StyleImageEnter" MouseLeave="StyleImageLeave">
+            <Image x:Name="productImage" Source="/Assets/Logo/Logo_Gallium.png" MouseDown="ChangePicture" Style="{StaticResource ImageStyle}"/>
+            <Image x:Name="modifImage" Source="/Assets/Icone/modif2.png" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" IsHitTestVisible="False" Width="30" Height="30"/>
+        </Grid>
+       
         
         <!-- Colonne 2 -->
         <!-- Nom Produit -->
         <StackPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
             <Label Content="Nom Produit"/>
-            <TextBox Style="{StaticResource textBoxGallium}"/>
+            <TextBox x:Name="productName" Style="{StaticResource textBoxGallium}"/>
         </StackPanel>
 
         <!-- Prix -->
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10">
             <Label Content="Prix A" />
-            <TextBox Style="{StaticResource textBoxGallium}"/>
+            <TextBox x:Name="productPriceA" Style="{StaticResource textBoxGallium}" PreviewTextInput="IsNumberBox" PreviewKeyDown="isSpaceBox"/>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="2" Margin="10">
             <Label Content="Prix NA" />
-            <TextBox Style="{StaticResource textBoxGallium}"/>
+            <TextBox x:Name="productPriceNA" Style="{StaticResource textBoxGallium}" PreviewTextInput="IsNumberBox" PreviewKeyDown="isSpaceBox"/>
         </StackPanel>
        
         <!-- Stock -->
         <StackPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
             <Label Content="Stock"/>
-            <TextBox Style="{StaticResource textBoxGallium}"/>
+            <TextBox x:Name="productStock" Style="{StaticResource textBoxGallium}" PreviewTextInput="IsIntegerBox" PreviewKeyDown="isSpaceBox"/>
         </StackPanel>
         
         <!-- Catégories -->
         <StackPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="10">
             <Label Content="Catégorie" />
-            <ComboBox />
+            <ComboBox x:Name="productCategorie"/>
         </StackPanel>
+        
+        <!-- Boutons -->
+        <Button Content="Valider" Grid.Row="5" Grid.Column="0" Height="30" Width="190" Click="ValidateChangement"/>
+        <Button Content="Annuler" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="30" Width="190" Click="CancelChangement"/>
     </Grid>
 </Window>

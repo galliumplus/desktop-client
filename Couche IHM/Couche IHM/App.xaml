@@ -129,5 +129,16 @@
             <Setter Property="BorderThickness" Value="3,0,0,3" />
             <Setter Property="Foreground" Value="Black" />
         </Style>
+
+        
+        <!-- Grid transparanet -->
+        <Style x:Key="ImageStyle" TargetType="Image">
+            <Setter Property="Opacity" Value="1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
