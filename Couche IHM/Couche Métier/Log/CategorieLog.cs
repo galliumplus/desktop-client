@@ -9,7 +9,6 @@ namespace Couche_Métier.Log
     public enum CategorieLog
     {
         // GENERAL
-        CONNEXION,
         VENTE,
 
         // OPERATIONS

@@ -110,16 +110,20 @@
                     <!-- Filtres méthodes CRUD-->
                     <StackPanel  Grid.Column="1">
                         <CheckBox IsChecked="True"  x:Name="createActivated" Margin="0,20,0,0" Content="Création"  Click="ResetCriteria" HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" x:Name="deleteActivated" Click="ResetCriteria" Content="Supression" HorizontalAlignment="Left" Width="84" />
+                        <CheckBox IsChecked="True" x:Name="deleteActivated" Click="ResetCriteria" Content="Suppression" HorizontalAlignment="Left" Width="84" />
                         <CheckBox IsChecked="True" x:Name="updateActivated" Click="ResetCriteria" Content="Modification" HorizontalAlignment="Left" Width="87"/>
                     </StackPanel>
 
 
                     
                 </Grid>
-                    <TextBlock  TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Left" Margin="0,20,0,9"  Text="Heures :" FontSize="15"/>
+                    <TextBlock  TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Left" Margin="0,30,0,9"  Text="Heures :" FontSize="15"/>
                     <xctk:RangeSlider  TickFrequency="1" TickPlacement="BottomRight" Name="timespan"  Minimum="7" Maximum="19"   AutoToolTipPlacement="BottomRight"  IsSnapToTickEnabled="True" HigherValue="19" HigherThumbBackground="Black" LowerThumbBackground="Black"   LowerValueChanged="ResetCriteria" HigherValueChanged="ResetCriteria" />
-                    <TextBlock  Text="    7     8     9    10   11   12   13   14   15   16   17   18   19" FontSize="8"/>
+                    <TextBlock FontWeight="DemiBold"  Text="    7     8     9    10    11   12   13    14   15   16    17   18   19" FontSize="8"/>
+
+                    <TextBlock  TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Left" Margin="0,30,0,9"  Text="Auteur :" FontSize="15"/>
+                    <ComboBox IsSynchronizedWithCurrentItem="False"  Name="auteurs"  SelectionChanged="ResetCriteria"/>
+
                 </StackPanel>
 
             </Border>
