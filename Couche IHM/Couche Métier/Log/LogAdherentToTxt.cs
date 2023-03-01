@@ -26,13 +26,13 @@ namespace Couche_Métier.Log
             switch (categorieLog)
             {
                 case CategorieLog.UPDATE:
-                    
+                    message = $"{a.NomCompletIHM.ToUpper()} a été modifié";
                     break;
                 case CategorieLog.CREATE:
-                    message = $"L'adhérent {a.NomCompletIHM} a été créé";
+                    message = $"{a.NomCompletIHM.ToUpper()} a été créé";
                     break;
                 case CategorieLog.DELETE:
-                    message = $"L'adhérent {a.NomCompletIHM} a été supprimé";
+                    message = $"{a.NomCompletIHM.ToUpper()} a été supprimé";
                     break;
 
             }      
