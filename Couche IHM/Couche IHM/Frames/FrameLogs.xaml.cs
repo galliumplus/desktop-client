@@ -65,13 +65,14 @@ namespace Couche_IHM.Frames
                 // Récupération des différents champs
                 string[] splitedLosline = logsLine[i].Split('|');
                 string date = DateTime.Parse(splitedLosline[0]).ToString("g");
+                int heureCourte = DateTime.Parse(splitedLosline[0]).Hour;
                 string type = splitedLosline[1];
                 string message = splitedLosline[2];
                 string auteur = splitedLosline[3];
                 string operation = splitedLosline[4];
 
                 // Affiche les logs selon les critères
-                if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth)
+                if ((DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && this.timespan.HigherValue >= Convert.ToInt16(heureCourte) && this.timespan.LowerValue <= Convert.ToInt16(heureCourte)))
                 {
                     
                     LogIHM newLog = null;
@@ -151,7 +152,11 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ResetCriteria(object sender, RoutedEventArgs e)
         {
-            FillListViewLogs();
+            if (logsLine != null)
+            {
+                FillListViewLogs();
+            }
+            
         }
     }
 }

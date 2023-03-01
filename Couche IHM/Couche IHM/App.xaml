@@ -2,10 +2,28 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Couche_IHM"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             
              StartupUri="ConnexionIHM.xaml">
+    
     <Application.Resources>
+        
         <FontFamily x:Key="ThereBrat">pack://application:,,,/Fonts/#There Brat</FontFamily>
         <FontFamily x:Key="Riberio">pack://application:,,,/Fonts/#Riberio</FontFamily>
+
+        <!-- Boutons Thumb du slider timespan-->
+        <Style x:Key="test" TargetType="{x:Type Thumb}">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Ellipse Fill="Green"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
 
         <!-- Texte avec placeholder-->
@@ -131,3 +149,5 @@
         </Style>
     </Application.Resources>
 </Application>
+
+    

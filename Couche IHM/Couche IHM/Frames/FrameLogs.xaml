@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Couche_IHM.Frames"
+      xmlns:local="clr-namespace:Couche_IHM.Frames" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
@@ -91,9 +91,8 @@
             <TextBlock  FontWeight="Medium" FontFamily="Roboto"  Text="Filtres" TextDecorations="Underline"  FontSize="20" HorizontalAlignment="Center"/>
             
             <Border BorderThickness="1" Margin="0,65,0,0">
-
-                
-                <Grid>
+                <StackPanel>
+                    <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="5*"/>
@@ -114,8 +113,15 @@
                         <CheckBox IsChecked="True" x:Name="deleteActivated" Click="ResetCriteria" Content="Supression" HorizontalAlignment="Left" Width="84" />
                         <CheckBox IsChecked="True" x:Name="updateActivated" Click="ResetCriteria" Content="Modification" HorizontalAlignment="Left" Width="87"/>
                     </StackPanel>
+
+
+                    
                 </Grid>
-               
+                    <TextBlock  TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Left" Margin="0,20,0,9"  Text="Heures :" FontSize="15"/>
+                    <xctk:RangeSlider  TickFrequency="1" TickPlacement="BottomRight" Name="timespan"  Minimum="7" Maximum="19"   AutoToolTipPlacement="BottomRight"  IsSnapToTickEnabled="True" HigherValue="19" HigherThumbBackground="Black" LowerThumbBackground="Black"   LowerValueChanged="ResetCriteria" HigherValueChanged="ResetCriteria" />
+                    <TextBlock  Text="    7     8     9    10   11   12   13   14   15   16   17   18   19" FontSize="8"/>
+                </StackPanel>
+
             </Border>
        
         </Grid>
