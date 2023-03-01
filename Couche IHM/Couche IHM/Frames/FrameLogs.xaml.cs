@@ -80,22 +80,34 @@ namespace Couche_IHM.Frames
                         case "ADHERENT":
                             if (this.AdherentActivated.IsChecked == true)
                             {
-                                        newLog = new LogIHM(date, type, message, auteur);
+                                        newLog = new LogIHM(date, type, message, auteur,operation);
                             }
                             break;
                         case "PRODUIT":
                                 if (this.produitActivated.IsChecked == true)
                                 {
-                                        newLog = new LogIHM(date, type, message, auteur);
+                                        newLog = new LogIHM(date, type, message, auteur,operation);
                                 }
                             break;
                         case "COMPTE":
                             if (this.CompteActivated.IsChecked == true)
                             {
-                                    newLog = new LogIHM(date, type, message, auteur);
+                                    newLog = new LogIHM(date, type, message, auteur,operation);
                             }
                             break;
-                        }
+                        case "ACHAT":
+                            if (this.produitActivated.IsChecked == true)
+                            {
+                                newLog = new LogIHM(date, type, message, auteur, operation);
+                            }
+                            break;
+                        case "VENTE":
+                            if (this.CompteActivated.IsChecked == true)
+                            {
+                                newLog = new LogIHM(date, type, message, auteur, operation);
+                            }
+                            break;
+                    }
 
 
                     // Si le log existe alors on l'affiche avec la bonne couleur et on l 'ajoute
@@ -107,21 +119,18 @@ namespace Couche_IHM.Frames
                             case "CREATE":
                                 if (this.createActivated.IsChecked == true)
                                 {
-                                    newLog.ColorOperation = new SolidColorBrush(Colors.ForestGreen);
                                     list.Add(newLog);
                                 }
                                 break;
                             case "UPDATE":
                                 if (this.updateActivated.IsChecked == true)
                                 {
-                                    newLog.ColorOperation = new SolidColorBrush(Colors.Orange);
                                     list.Add(newLog);
                                 }
                                 break;
                             case "DELETE":
                                 if (this.deleteActivated.IsChecked == true)
                                 {
-                                    newLog.ColorOperation = new SolidColorBrush(Colors.DarkRed);
                                     list.Add(newLog);
                                 }
                                 break;

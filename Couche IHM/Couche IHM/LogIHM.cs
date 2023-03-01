@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Couche_IHM
@@ -11,23 +12,50 @@ namespace Couche_IHM
     public class LogIHM 
     {
         private string date;
-        private string action;
+        private string type;
         private string message;
-        private string messageComplete;
         private string auteur;
-        private SolidColorBrush colorOperation;
+        private string operation;
 
         /// <summary>
         /// Constructeur
         /// </summary>
-        public LogIHM(string date, string action, string message, string auteur)
+        public LogIHM(string date, string type, string message, string auteur,string operation)
         {
             this.date = date;
-            this.action = action;
+            this.type = type;
             this.message = message;
             this.auteur = auteur;
-            this.colorOperation = new SolidColorBrush();
+            this.operation = operation;
         }
+
+        /// <summary>
+        /// Renvoie le lien de l'image pour l'opération
+        /// </summary>
+        public string imageLinkOperation
+        {
+            get
+            {
+                string link = "";
+                switch (operation)
+                {
+                    case "UPDATE":
+                        link = "/Images/modi.png";
+                        break;
+                    case "CREATE":
+                        link = "/Images/ajout.png";
+                        break;
+                    case "DELETE":
+                        link = "/Images/supp.png";
+                        break;
+                    case "VENTE":
+                        link = "/Images/vente.png";
+                        break;
+                }
+                return link;
+            }
+        }
+
 
         /// <summary>
         /// Date de l'action
@@ -43,8 +71,8 @@ namespace Couche_IHM
         /// </summary>
         public string Action 
         { 
-            get => action; 
-            set => action = value; 
+            get => type; 
+            set => type = value; 
         }
 
         /// <summary>
@@ -56,14 +84,6 @@ namespace Couche_IHM
             set => message = value;
         }
 
-        /// <summary>
-        /// Message détaillés sans l'intitulé du message
-        /// </summary>
-        public string MessageComplete
-        {
-            get => messageComplete;
-            set => messageComplete = value;
-        }
 
         /// <summary>
         /// Message complet intitulé et détails
@@ -82,6 +102,5 @@ namespace Couche_IHM
             get => auteur; 
             set => auteur = value; 
         }
-        public SolidColorBrush ColorOperation { get => colorOperation; set => colorOperation = value; }
     }
 }
