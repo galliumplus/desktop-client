@@ -31,12 +31,19 @@ namespace Couche_IHM.Frames
         // Liste de logs sous forme de string
         private readonly List<string> logsLine; 
 
+        // Manager des différents comptes admin possibles
+        private UserManager userManager;
 
-        public FrameLogs()
+
+        public FrameLogs(UserManager userManager)
         {
+            
             InitializeComponent();
+
+            // Initialisation des attributs
             this.log = new LogAdherentToTxt();
             this.logsLine = log.loadLog();
+            this.userManager = userManager;
 
             // Si il y a des logs
             if (logsLine.Count > 0)
@@ -44,8 +51,18 @@ namespace Couche_IHM.Frames
                 FillListViewLogs();
             }
 
+            // Initialisation du titre des logs
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
             this.titleLog.Content = actualMonth[0].ToString().ToUpper() + actualMonth.Substring(1);
+
+            // Initialisation des éléments de la combobox avec les auteurs possibles
+            List<User> userList = userManager.GetComptes();
+            this.auteurs.Items.Add("Tout le monde");
+            foreach (User user in userList)
+            {
+                this.auteurs.Items.Add(user.NomComplet);
+            }
+            this.auteurs.SelectedItem = "Tout le monde";
         }
 
 
@@ -59,20 +76,23 @@ namespace Couche_IHM.Frames
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
 
             
-            // Pour tous les logs
+            // Parcoure tous les logs
             for (int i = logsLine.Count - 1; i > -1; i--) 
             {
-                // Récupération des différents champs
-                string[] splitedLosline = logsLine[i].Split('|');
-                string date = DateTime.Parse(splitedLosline[0]).ToString("g");
-                int heureCourte = DateTime.Parse(splitedLosline[0]).Hour;
-                string type = splitedLosline[1];
-                string message = splitedLosline[2];
-                string auteur = splitedLosline[3];
-                string operation = splitedLosline[4];
+                // Récupération des informations
+                string[] SplitedLogLine = logsLine[i].Split('|');
+
+                string date = DateTime.Parse(SplitedLogLine[0]).ToString("g");
+                int heureCourte = DateTime.Parse(SplitedLogLine[0]).Hour;
+                string type = SplitedLogLine[1];
+                string message = SplitedLogLine[2];
+                string auteur = SplitedLogLine[3];
+                string operation = SplitedLogLine[4];
+
+
 
                 // Affiche les logs selon les critères
-                if ((DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && this.timespan.HigherValue >= Convert.ToInt16(heureCourte) && this.timespan.LowerValue <= Convert.ToInt16(heureCourte)))
+                if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && RespectAuthorFilter(auteur) && RespectTimeSpanFilter(heureCourte))
                 {
                     
                     LogIHM newLog = null;
@@ -144,6 +164,34 @@ namespace Couche_IHM.Frames
             
         }
 
+        /// <summary>
+        /// Permet de savoir si le log respecte le filtre
+        /// </summary>
+        /// <returns></returns>
+        private bool RespectAuthorFilter(string author)
+        {
+            bool result = false;
+            if (auteurs.SelectedItem == "Tout le monde")
+            {
+                result = true;
+            }
+            else
+            {
+                result = ((string)auteurs.SelectedItem == author);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Permet de savoir si le log respecte le filtre de l'heure
+        /// </summary>
+        /// <param name="hour">Heure du log</param>
+        /// <returns>si le log respecte le filtre</returns>
+        private bool RespectTimeSpanFilter(int hour)
+        {
+            bool result = false;
+            return this.timespan.HigherValue >= hour && this.timespan.LowerValue <= hour;
+        }
 
         /// <summary>
         /// Permet de mettre à jour la liste des logs selon les différents critères
@@ -152,11 +200,24 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ResetCriteria(object sender, RoutedEventArgs e)
         {
-            if (logsLine != null)
+            if (logsLine != null && this.auteurs != null && this.auteurs.SelectedItem != null)
             {
                 FillListViewLogs();
             }
             
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour la liste des logs selon les différents critères
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetCriteria(object sender, SelectionChangedEventArgs e)
+        {
+            if (logsLine != null && this.auteurs != null && this.auteurs.SelectedItem != null)
+            {
+                FillListViewLogs();
+            }
         }
     }
 }

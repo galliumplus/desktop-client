@@ -110,7 +110,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToLog(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Source = new Uri("Frames/FrameLogs.xaml", UriKind.Relative);
+            this.mainFrame.Navigate(new FrameLogs(this.userManager));
         }
     }
 }
