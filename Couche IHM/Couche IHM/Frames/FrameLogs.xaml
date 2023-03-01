@@ -71,10 +71,10 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
-                            <Label Foreground="{Binding ColorOperation}"  Content="{Binding Date}"  Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Foreground="{Binding ColorOperation}" Content="{Binding Action}"  HorizontalAlignment="Center"  Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label   Content="{Binding Date}"  Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label Content="{Binding Action}"  HorizontalAlignment="Center"  Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
                             <Label Foreground="{Binding ColorOperation}" Content="{Binding MessageCourt}"  Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Foreground="{Binding ColorOperation}" Content="{Binding Auteur}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label  Content="{Binding Auteur}" Grid.Column="3" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -95,7 +95,7 @@
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock TextDecorations="Underline" HorizontalAlignment="Center" Margin="-20,-20,0,0"  Text="Opération :" FontSize="15"/>
+                    <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-23,-20,0,0"  Text="Opération :" FontSize="15"/>
                     
                     <!-- Filtres domaine-->
                     <StackPanel Grid.Column="0">
@@ -112,7 +112,9 @@
                         <CheckBox IsChecked="True" x:Name="updateActivated" Click="ResetCriteria" Content="Modification" HorizontalAlignment="Left" Width="87"/>
                     </StackPanel>
                 </Grid>
+               
             </Border>
+       
         </Grid>
     </Grid>
 </Page>
