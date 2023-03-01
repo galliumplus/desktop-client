@@ -14,7 +14,9 @@
     <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
+    <None Remove="Images\ajout.png" />
     <None Remove="Images\ajouter.png" />
+    <None Remove="Images\details.png" />
     <None Remove="Images\discordIcon.png" />
     <None Remove="Images\DogoPp.png" />
     <None Remove="Images\driveIcon.png" />
@@ -22,13 +24,16 @@
     <None Remove="Images\Gallium+.png" />
     <None Remove="Images\instaIcon.png" />
     <None Remove="Images\loupe.png" />
+    <None Remove="Images\modi.png" />
     <None Remove="Images\modif.png" />
     <None Remove="Images\param.png" />
     <None Remove="Images\retour.png" />
+    <None Remove="Images\supp.png" />
     <None Remove="Images\suprim.png" />
     <None Remove="Images\triAsc.png" />
     <None Remove="Images\triDesc.png" />
     <None Remove="Images\twitterIcon.png" />
+    <None Remove="Images\vente.png" />
     <None Remove="Images\warning.png" />
   </ItemGroup>
 
@@ -38,6 +43,7 @@
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.100.3" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,7 +64,13 @@
     <Resource Include="Fonts\There Brat.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\ajout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ajouter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\details.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\discordIcon.png">
@@ -82,6 +94,9 @@
     <Resource Include="Images\loupe.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\modi.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\modif.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -89,6 +104,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\retour.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\supp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\suprim.png">
@@ -101,6 +119,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\twitterIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\vente.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\warning.png">

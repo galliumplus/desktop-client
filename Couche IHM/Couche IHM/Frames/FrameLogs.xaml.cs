@@ -39,7 +39,7 @@ namespace Couche_IHM.Frames
             this.logsLine = log.loadLog();
 
             // Si il y a des logs
-            if(logsLine.Count > 0)
+            if (logsLine.Count > 0)
             {
                 FillListViewLogs();
             }
@@ -58,20 +58,21 @@ namespace Couche_IHM.Frames
             List<LogIHM> list = new List<LogIHM>();
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
 
-
+            
             // Pour tous les logs
             for (int i = logsLine.Count - 1; i > -1; i--) 
             {
                 // Récupération des différents champs
                 string[] splitedLosline = logsLine[i].Split('|');
                 string date = DateTime.Parse(splitedLosline[0]).ToString("g");
+                int heureCourte = DateTime.Parse(splitedLosline[0]).Hour;
                 string type = splitedLosline[1];
                 string message = splitedLosline[2];
                 string auteur = splitedLosline[3];
                 string operation = splitedLosline[4];
 
                 // Affiche les logs selon les critères
-                if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth)
+                if ((DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && this.timespan.HigherValue >= Convert.ToInt16(heureCourte) && this.timespan.LowerValue <= Convert.ToInt16(heureCourte)))
                 {
                     
                     LogIHM newLog = null;
@@ -80,45 +81,67 @@ namespace Couche_IHM.Frames
                         case "ADHERENT":
                             if (this.AdherentActivated.IsChecked == true)
                             {
-                                     newLog = new LogIHM(date, type, message, auteur);
+                                        newLog = new LogIHM(date, type, message, auteur,operation);
                             }
                             break;
                         case "PRODUIT":
                                 if (this.produitActivated.IsChecked == true)
                                 {
-                                     newLog = new LogIHM(date, type, message, auteur);
+                                        newLog = new LogIHM(date, type, message, auteur,operation);
                                 }
                             break;
                         case "COMPTE":
                             if (this.CompteActivated.IsChecked == true)
                             {
-                                 newLog = new LogIHM(date, type, message, auteur);
+                                    newLog = new LogIHM(date, type, message, auteur,operation);
                             }
                             break;
-                        }
+                        case "ACHAT":
+                            if (this.produitActivated.IsChecked == true)
+                            {
+                                newLog = new LogIHM(date, type, message, auteur, operation);
+                            }
+                            break;
+                        case "VENTE":
+                            if (this.CompteActivated.IsChecked == true)
+                            {
+                                newLog = new LogIHM(date, type, message, auteur, operation);
+                            }
+                            break;
+                    }
 
+
+                    // Si le log existe alors on l'affiche avec la bonne couleur et on l 'ajoute
                     if (newLog != null)
                     {
                         
                         switch (operation)
                         {
                             case "CREATE":
-                                newLog.ColorOperation = new SolidColorBrush(Colors.ForestGreen);
+                                if (this.createActivated.IsChecked == true)
+                                {
+                                    list.Add(newLog);
+                                }
                                 break;
                             case "UPDATE":
-                                newLog.ColorOperation = new SolidColorBrush(Colors.Orange);
+                                if (this.updateActivated.IsChecked == true)
+                                {
+                                    list.Add(newLog);
+                                }
                                 break;
                             case "DELETE":
-                                newLog.ColorOperation = new SolidColorBrush(Colors.DarkRed);
+                                if (this.deleteActivated.IsChecked == true)
+                                {
+                                    list.Add(newLog);
+                                }
                                 break;
-
-                        }
-                        list.Add(newLog);
+                        }  
                     }
-                    
                 }
             }
+
             this.listLogs.ItemsSource = list;
+            
         }
 
 
@@ -129,7 +152,11 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ResetCriteria(object sender, RoutedEventArgs e)
         {
-            FillListViewLogs();
+            if (logsLine != null)
+            {
+                FillListViewLogs();
+            }
+            
         }
     }
 }

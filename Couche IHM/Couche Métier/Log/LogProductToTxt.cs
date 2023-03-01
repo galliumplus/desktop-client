@@ -33,13 +33,13 @@ namespace Couche_Métier.Log
             switch (categorieLog)
             {
                 case CategorieLog.UPDATE:
-
+                    message = $"{p.NomProduit.ToUpper()} a été modifié";
                     break;
                 case CategorieLog.CREATE:
-                    message = $"Le produit {p.NomProduit} a été créé";
+                    message = $"{p.NomProduit.ToUpper()} a été créé";
                     break;
                 case CategorieLog.DELETE:
-                    message = $"Le produit {p.NomProduit} a été supprimé";
+                    message = $"{p.NomProduit.ToUpper()} a été supprimé";
                     break;
 
             }
