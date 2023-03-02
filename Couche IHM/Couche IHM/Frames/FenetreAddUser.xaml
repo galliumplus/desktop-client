@@ -64,7 +64,7 @@
         </StackPanel>
         
         <!-- Bouton -->
-        <Button Content="Valider" Grid.Column="0" Grid.Row="6" FontSize="30" Margin="20"/>
-        <Button Content="Annuler" Grid.Column="1" Grid.Row="6" FontSize="30" Margin="20"/>
+        <Button Content="Valider" Grid.Column="0" Grid.Row="6" FontSize="30" Margin="20" Click="ValideChange"/>
+        <Button Content="Annuler" Grid.Column="1" Grid.Row="6" FontSize="30" Margin="20" Click="CancelChange"/>
     </Grid>
 </Window>
