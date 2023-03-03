@@ -81,9 +81,6 @@ namespace Couche_IHM.Frames
         }
 
 
-
-
-
         #region events
 
       
@@ -202,7 +199,13 @@ namespace Couche_IHM.Frames
         {
             User newUser = new User();
             FenetreAddUser fa = new FenetreAddUser(newUser);
-            fa.ShowDialog();
+
+            // Si l'utilisateur valide la création
+            if (fa.ShowDialog().Value)
+            {
+                this.userManager.CreateCompte(newUser);
+                UpdateView();
+            };
         }
     }
 }
