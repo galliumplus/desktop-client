@@ -200,7 +200,8 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void AddAnUser(object sender, RoutedEventArgs e)
         {
-            FenetreAddUser fa = new FenetreAddUser();
+            User newUser = new User();
+            FenetreAddUser fa = new FenetreAddUser(newUser);
             fa.ShowDialog();
         }
     }

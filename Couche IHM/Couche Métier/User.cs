@@ -82,6 +82,7 @@ namespace Couche_Métier
             this.role = role;
         }
 
+        public User() { }
         public override string ToString()
         {
             return $"{this.mail} {this.nom} {this.prenom} {this.role}";
