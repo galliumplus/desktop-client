@@ -20,6 +20,9 @@ namespace Couche_Métier
         private double prixNonAdherent;
         private string categorie;
 
+        /// <summary>
+        /// Id du produit
+        /// </summary>
         public int ID
         {
             get { return id; }
@@ -97,6 +100,9 @@ namespace Couche_Métier
             this.PrixNonAdherent = this.prixNonAdherent;
         }
 
+        /// <summary>
+        /// Constructeur vide du produit
+        /// </summary>
         public Product() { }
 
         /// <summary>
@@ -117,7 +123,5 @@ namespace Couche_Métier
         {
             return $"{this.nomProduit} {this.quantite} {this.PrixAdherent} {categorie}";
         }
-
-
     }
 }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Couche_Métier.Utilitaire
 {
+    /// <summary>
+    /// Converti le format de l'argent
+    /// </summary>
     public class ConverterFormatArgent
     {
         /// <summary>

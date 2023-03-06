@@ -18,6 +18,9 @@ namespace Couche_Métier
         private RolePerm role;
         private string hashedPassword;
 
+        /// <summary>
+        /// ID de l'utilisateur
+        /// </summary>
         public int ID
         {
             get => id;
@@ -67,6 +70,9 @@ namespace Couche_Métier
             set => role = value; 
         }
 
+        /// <summary>
+        /// Mot de passe hashé de l'utilisateur
+        /// </summary>
         public string HashedPassword
         {
             get => hashedPassword;
@@ -89,6 +95,10 @@ namespace Couche_Métier
             this.role = role;
         }
 
+        /// <summary>
+        /// Cosntructeur par copie de l'utilisateur
+        /// </summary>
+        /// <param name="user"> Utilisateur à copié </param>
         public User(User user)
         {
             this.id = user.ID;
@@ -98,7 +108,11 @@ namespace Couche_Métier
             this.role = user.Role;
         }
 
+        /// <summary>
+        /// Constructeur vide de l'utilisateur
+        /// </summary>
         public User() { }
+
         public override string ToString()
         {
             return $"{this.mail} {this.nom} {this.prenom} {this.role}";

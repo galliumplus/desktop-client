@@ -20,6 +20,9 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameStatistique : Page
     {
+        /// <summary>
+        /// Constructeur naturelle 
+        /// </summary>
         public FrameStatistique()
         {
             InitializeComponent();

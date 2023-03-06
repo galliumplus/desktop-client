@@ -12,6 +12,8 @@ namespace Couche_Métier
     public class ProductManager
     {
         private List<Product> products;
+        private IProductDAO productDAO;
+
         /// <summary>
         /// Liste des produits
         /// </summary>
@@ -31,8 +33,10 @@ namespace Couche_Métier
             set => categoryProduct = value;
         }
 
-        private IProductDAO productDAO;
-
+        /// <summary>
+        /// Constructeur de Product Manager
+        /// </summary>
+        /// <param name="productDAO"> IProductDAO </param>
         public ProductManager(IProductDAO productDAO)
         {
             // Initialisation

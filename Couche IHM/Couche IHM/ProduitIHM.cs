@@ -18,6 +18,9 @@ namespace Couche_IHM
         private int nombreProduit;
         private string pathImage;
 
+        /// <summary>
+        /// Renvoie le produit
+        /// </summary>
         public Product Product { get { return product; } }
 
         /// <summary>
@@ -96,6 +99,7 @@ namespace Couche_IHM
                 return converterFormatArgent.ConvertFormat(product.PrixAdherent);
             }
         }
+
         /// <summary>
         /// Prix non adhérent formatté pour l'afficher
         /// </summary>
@@ -116,13 +120,20 @@ namespace Couche_IHM
             get => product.Categorie;
         }
 
+        /// <summary>
+        /// Constructeur naturelle pour créer un produit IHM
+        /// </summary>
+        /// <param name="produit"> Produit à copier </param>
         public ProduitIHM(Product produit) 
         {
             this.product = produit;
             this.QuantiteProduitPanier = 1;
         }
 
-
+        /// <summary>
+        /// Constructeur par copie
+        /// </summary>
+        /// <param name="produitIHM"> Produit IHM à copier </param>
         public ProduitIHM(ProduitIHM produitIHM)
         {
             this.product = new Product(produitIHM.Product);

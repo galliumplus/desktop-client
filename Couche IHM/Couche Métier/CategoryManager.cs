@@ -7,6 +7,9 @@ using System.Data;
 
 namespace Couche_Métier
 {
+    /// <summary>
+    /// Manager des catégories 
+    /// </summary>
     public class CategoryManager
     {
         // Attribut représentant le DAO gérant les catégories

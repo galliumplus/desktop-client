@@ -20,6 +20,11 @@ namespace Couche_Métier
         private string formation;
 
         /// <summary>
+        /// constructeur vide de l'adhérent
+        /// </summary>
+        public Adhérent() { }
+
+        /// <summary>
         /// Constructeur de la classe adhérent
         /// </summary>
         /// <param name="id">id de l'adhérent</param>
@@ -36,11 +41,6 @@ namespace Couche_Métier
             this.argent = argent;
             this.stillAdherent = stillAdherent;
             this.formation = formation;
-        }
-
-        public Adhérent()
-        {
-
         }
 
         /// <summary>

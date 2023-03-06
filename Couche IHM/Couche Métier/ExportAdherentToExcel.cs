@@ -8,6 +8,9 @@ using ClosedXML.Excel;
 
 namespace Couche_Métier
 {
+    /// <summary>
+    /// Export adhérent sous format excel
+    /// </summary>
     public class ExportAdherentToExcel : IExportableAdherent
     {
         public void Export(List<Adhérent> adhérents)
