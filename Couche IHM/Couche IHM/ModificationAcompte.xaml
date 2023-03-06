@@ -12,46 +12,42 @@
         Background="#FFFCF2"
         BorderThickness="2" >
     <Grid Margin="30">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="title" FontSize="24" FontWeight="DemiBold" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0 0 0 20">Modification de l'acompte</TextBlock>
-        <StackPanel Margin="20,60,0,50" Grid.Column="1" Orientation="Vertical">
-           
-            <Label Content="Identifiant de l'acompte" Grid.Row="1" Padding="0,0,0,5"/>
-            <TextBox x:Name="login" Text="{Binding Identifiant}" Grid.Row="1" Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
+        <TextBlock x:Name="title" FontSize="24" FontWeight="DemiBold"  HorizontalAlignment="Center" Margin="0 0 0 20">Modification de l'acompte</TextBlock>
+        <StackPanel Margin="20,60,0,50"  Orientation="Vertical">
 
-            <Label Content="Mot de passe" Grid.Row="2" Padding="0,0,0,5" Margin="0,30,0,0"/>
-            <PasswordBox x:Name="passwordA" Grid.Row="2" Style="{StaticResource inputPasswordBox}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="355"  MaxLength="100"/>
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel>
+                    <Label Content="Nom"  Padding="0,0,0,5"/>
+                    <TextBox x:Name="nom" Text="{Binding Nom}"  Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="150"  MaxLength="8"/>
+                </StackPanel>
+                <StackPanel Margin="30,0,0,0">
+                    <Label Content="Prénom"  Padding="0,0,0,5" />
+                    <TextBox x:Name="prenom" Text="{Binding Prenom}"  Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="150"  MaxLength="100"/>
+                </StackPanel>
+            </StackPanel>
 
-            <Label Content="Confirmer le mot de passe" Grid.Row="3" Padding="0,0,0,5" Margin="0,30,0,0" />
-            <PasswordBox x:Name="passwordB" Grid.Row="3" Style="{StaticResource inputPasswordBox}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="355" MaxLength="100"/>
+            <Label Content="Identifiant de l'acompte" Margin="0,30,0,0"  Padding="0,0,0,5"/>
+            <TextBox x:Name="login" Text="{Binding Identifiant}"  Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
 
-            <Label Content="Argent" Grid.Row="4" Margin="0,30,0,0" Padding="0,0,0,5"/>
-            <TextBox x:Name="argent" Text="{Binding Argent, Mode=TwoWay}" Grid.Row="4" Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,40" MaxLength="5"/>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0" >
+                <StackPanel>
+                    <Label FontWeight="Light" Content="Mot de passe"  Padding="0,0,0,5" />
+                    <PasswordBox x:Name="passwordA" Style="{StaticResource inputPasswordBox}"  BorderBrush="#FF403D39" Width="150"  MaxLength="100"/>
+                </StackPanel>
+                <StackPanel Margin="30,0,0,0">
+                    <Label FontWeight="Light" Content="Confirmer le mot de passe"  Padding="0,0,0,5" />
+                    <PasswordBox x:Name="passwordB" Style="{StaticResource inputPasswordBox}"   BorderBrush="#FF403D39" Width="150" MaxLength="100"/>
+                </StackPanel>
+            </StackPanel>
+            <Label Content="Argent"  Margin="0,30,0,0" Padding="0,0,0,5"/>
+            <TextBox x:Name="argent" Text="{Binding Argent, Mode=TwoWay}"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,20" MaxLength="5"/>
+            
+            <Label Content="Adhérent ?" HorizontalAlignment="Center"   Padding="0,0,0,5"/>
+            <Slider Minimum="0" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True" Value="0"  x:Name="isadherent"   Style="{StaticResource bleuTemp}"  Width="50" Height="20" />
         </StackPanel>
 
-        <!-- infos adherents-->
-        <StackPanel Margin="0,80,20,50" Grid.Column="0" Orientation="Vertical">
-
-            <Label Content="Nom" Grid.Row="1" Padding="0,0,0,5"/>
-            <TextBox x:Name="nom" Text="{Binding Nom}" Grid.Row="1" Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
-
-            <Label Content="Prénom" Grid.Row="2" Padding="0,0,0,5" Margin="0,30,0,0"/>
-            <TextBox x:Name="prenom" Text="{Binding Prenom}" Grid.Row="2" Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="355"  MaxLength="100"/>
-
-            <Label Content="Formation" Grid.Row="4" Margin="0,30,0,0" Padding="0,0,0,5"/>
-            <TextBox x:Name="formation" Text="{Binding Formation}" Grid.Row="4" Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,40"  MaxLength="5"/>
-
-            <Label Content="Adhérent" Grid.Row="4"  Padding="0,0,0,5"/>
-            <RadioButton Content="Oui"/>
-            <RadioButton Content="Non"/>
-            <ToggleButton  Height="10" Width="100"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Margin="0,0,0,-20" HorizontalAlignment="Center" Height="50">
+        <StackPanel Orientation="Horizontal"  VerticalAlignment="Bottom" Margin="0,0,0,-20" HorizontalAlignment="Center" Height="40">
             <Button Content="Enregistrer" Style="{StaticResource buttonBlack}"   Margin="0,0,20,0" Click="ValideAdherent" />
             <Button Content="Annuler" Style="{StaticResource buttonBlack}"  Margin="20,0,0,0" Click="CancelAdherent" />
         </StackPanel>

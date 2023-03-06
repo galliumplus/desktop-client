@@ -13,7 +13,7 @@ namespace Couche_Métier
         /// Permet de récupérer tous les adhérents
         /// </summary>
         /// <returns>tous les adhérents</returns>
-        public Dictionary<string, Adhérent> GetAdhérents();
+        public Dictionary<int, Adhérent> GetAdhérents();
 
         /// <summary>
         /// Permet de récupérer un adhérent

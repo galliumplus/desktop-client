@@ -9,7 +9,8 @@ namespace Couche_Métier
 {
     public class Adhérent
     {
-        private int idAdherent;
+        #region attributes
+        private int id;
         private string identifiant;
         private string nom;
         private string prenom;
@@ -17,7 +18,9 @@ namespace Couche_Métier
         private double argent;
         private bool stillAdherent;
         private string formation;
+        #endregion
 
+        #region constructeurs
         /// <summary>
         /// Constructeur de la classe adhérent
         /// </summary>
@@ -26,8 +29,9 @@ namespace Couche_Métier
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(string identifiant, string nom, string prenom, double argent,string formation, bool canPass = false,bool stillAdherent = true)
+        public Adhérent(int id, string identifiant, string nom, string prenom, double argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
+            this.id = id;
             this.identifiant = identifiant;
             this.nom = nom.ToUpper();
             this.prenom = prenom;
@@ -37,15 +41,36 @@ namespace Couche_Métier
             this.formation = formation;
         }
 
+        /// <summary>
+        /// Constructeur vide pour créer des adhérents
+        /// </summary>
         public Adhérent()
         {
 
         }
 
         /// <summary>
+        /// Constructeur par copie
+        /// </summary>
+        /// <param name="ad">adhérent à copier</param>
+        public Adhérent(Adhérent ad)
+        {
+            this.argent=ad.argent;
+            this.nom = ad.nom;
+            this.canPass = ad.canPass;
+            this.stillAdherent = ad.stillAdherent;
+            this.prenom=ad.prenom;
+            this.formation=ad.formation;
+            this.identifiant=ad.identifiant;
+            this.id=ad.Id;
+        }
+        #endregion
+
+        #region properties
+        /// <summary>
         /// Id de l'identifiant dans la bdd
         /// </summary>
-        public int Id { get => idAdherent; set => idAdherent = value;}
+        public int Id { get => id; set => id = value;}
 
         /// <summary>
         /// Id de l'adhérent
@@ -82,7 +107,6 @@ namespace Couche_Métier
         /// </summary>
         public string Formation { get => formation; set => formation = value; }
 
-        #region properties used in IHM
         /// <summary>
         /// Nom complet de l'utilisateur
         /// </summary>

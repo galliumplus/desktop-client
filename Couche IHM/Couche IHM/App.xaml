@@ -10,20 +10,79 @@
         
         <FontFamily x:Key="ThereBrat">pack://application:,,,/Fonts/#There Brat</FontFamily>
         <FontFamily x:Key="Riberio">pack://application:,,,/Fonts/#Riberio</FontFamily>
+    
+        <!-- Toggle button-->
+        
 
-        <!-- Boutons Thumb du slider timespan-->
-        <Style x:Key="test" TargetType="{x:Type Thumb}">
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+        <Style x:Key="decreaseTemp" TargetType="RepeatButton">
+
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Ellipse Fill="Green"/>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Margin="0,0,-15,0" CornerRadius="5" Height="10" Background="Green">
+
+                            <RepeatButton Command="Slider.DecreaseLarge" Opacity="0" BorderThickness="0"/>
+
+                        </Border>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+
+        <Style x:Key="increaseTemp" TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Margin="-15,0,0,0" CornerRadius="5" Height="10" Background="LightSlateGray">
+
+                            <RepeatButton Command="Slider.IncreaseLarge" Opacity="0" BorderThickness="0"/>
+
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <Style x:Key="ellipseThumb" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse x:Name="ellipse" Width="{TemplateBinding ActualHeight}" Height="{TemplateBinding ActualHeight}"
+                         Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"></Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="bleuTemp" TargetType="Slider">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Border CornerRadius="5" Height="20"/>
+                            <Track x:Name="PART_Track">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource decreaseTemp}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Style="{StaticResource increaseTemp}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Foreground="LightGray"  x:Name="thumb" Style="{StaticResource ellipseThumb}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
         <!-- Button black-->
         <Style x:Key="buttonBlack" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="#FF403D39"></Setter>

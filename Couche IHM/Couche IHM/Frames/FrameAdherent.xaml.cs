@@ -293,6 +293,29 @@ namespace Couche_IHM.Frames
         }
 
         /// <summary>
+        /// Permet de modifier un adhérent
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ModifyAdherent(object sender, RoutedEventArgs e)
+        {
+            Adhérent adhérentSelect = new Adhérent((Adhérent)this.listadherents.SelectedItem);
+            ModificationAcompte modifAcompteWindow = new ModificationAcompte(adhérentSelect);
+            bool? result = modifAcompteWindow.ShowDialog();
+
+            // Si l'ajout est validé alors on met à jour la bdd et la vue
+            if (result.Value == true)
+            {
+                this.adhérentManager.UpdateAdhérent(adhérentSelect);
+                UpdateView();
+                this.infoAdherent.Visibility = Visibility.Hidden;
+                this.options.Visibility = Visibility.Hidden;
+            }
+
+            
+        }
+
+        /// <summary>
         /// Permet d'ajouter un adhérent
         /// </summary>
         /// <param name="sender"></param>
@@ -307,6 +330,7 @@ namespace Couche_IHM.Frames
             if (result.Value == true)
             {
                 this.adhérentManager.CreateAdhérent(newAdhérent);
+                UpdateView();
             }
             
         }
@@ -459,8 +483,9 @@ namespace Couche_IHM.Frames
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
 
+
         #endregion
 
-        
+       
     }
 }

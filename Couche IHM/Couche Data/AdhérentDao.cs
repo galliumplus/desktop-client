@@ -20,7 +20,7 @@ namespace Couche_Data
             return null;
         }
 
-        public Dictionary<string, Adhérent> GetAdhérents()
+        public Dictionary<int, Adhérent> GetAdhérents()
         {
             dbsDAO.Instance.Fetch("");
             return null;

@@ -12,7 +12,7 @@ namespace Couche_Métier
         private IAdhérentDao adhérentDao;
 
         // Représente les adhérents
-        private Dictionary<string,Adhérent> adhérents = new Dictionary<string, Adhérent>();
+        private Dictionary<int,Adhérent> adhérents = new Dictionary<int, Adhérent>();
 
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Couche_Métier
             this.adhérentDao = adhérentDao;
 
             // Récupération des adhérents
-            adhérents = new Dictionary<string, Adhérent>(adhérentDao.GetAdhérents());
+            adhérents = new Dictionary<int, Adhérent>(adhérentDao.GetAdhérents());
 
         }
 
@@ -34,8 +34,9 @@ namespace Couche_Métier
         /// <param name="adhérent">adhérent à créer</param>
         public void CreateAdhérent(Adhérent adhérent)
         {
+            adhérent.Id = this.adhérents.Count + 1;
             adhérentDao.CreateAdhérent(adhérent);
-            adhérents.Add(adhérent.Identifiant, adhérent);
+            adhérents.Add(adhérent.Id, adhérent);
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Couche_Métier
         public void RemoveAdhérent(Adhérent adhérent)
         {
             adhérentDao.RemoveAdhérent(adhérent);
-            adhérents.Remove(adhérent.Identifiant);
+            adhérents.Remove(adhérent.Id);
         }
 
 
@@ -56,7 +57,7 @@ namespace Couche_Métier
         public void UpdateAdhérent(Adhérent adhérent)
         {
             adhérentDao.UpdateAdhérent(adhérent);
-            adhérents[adhérent.Identifiant] = adhérent;
+            adhérents[adhérent.Id] = adhérent;
         }
 
 
@@ -77,19 +78,12 @@ namespace Couche_Métier
         public Adhérent GetAdhérent(string infoAdherent)
         {
             Adhérent a = null;
-            if (this.adhérents.Keys.Contains(infoAdherent))
+            foreach (Adhérent adhérent in this.adhérents.Values)
             {
-                a = this.adhérents[infoAdherent];
-            }
-            else
-            {
-                foreach (Adhérent adhérent in this.adhérents.Values)
+                if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
                 {
-                    if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
-                    {
-                        a = adhérent;
-                        break;
-                    }
+                    a = adhérent;
+                    break;
                 }
             }
             return a;
