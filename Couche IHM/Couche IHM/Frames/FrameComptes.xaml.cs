@@ -207,5 +207,40 @@ namespace Couche_IHM.Frames
                 UpdateView();
             };
         }
+
+        /// <summary>
+        /// Met à jour un utilisateur
+        /// </summary>
+        private void UpdateAnUser(object sender, RoutedEventArgs e)
+        {
+            // Récupère l'utilisateur selectionné
+            ListViewItem item = FindAncestor<ListViewItem>((sender as Button));
+            User userSelected = (User)item.DataContext;
+
+            User newUser = new User((User)userSelected);
+            FenetreAddUser fa = new FenetreAddUser(newUser);
+
+            // Si l'utilisateur valide la création
+            if (fa.ShowDialog().Value)
+            {
+                this.userManager.UpdateCompte(newUser);
+                UpdateView();
+            };
+        }
+
+        /// <summary>
+        /// Trouve l'élément d'un parent spécifique
+        /// </summary>
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            T res = null;
+            do
+            {
+                if (current is T ancestor) 
+                    res = ancestor;
+                current = VisualTreeHelper.GetParent(current);
+            } while (current != null);
+            return res;
+        }
     }
 }

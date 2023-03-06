@@ -30,6 +30,20 @@ namespace Couche_IHM.Frames
             FillComboBoxRole();
             this.copyUser = copyUser;
 
+            // Si l'utilisateur vient d'être créer, change le titre
+            if(string.IsNullOrEmpty(copyUser.Mail))
+            {
+                this.titleFenetre.Content = "Création d'un utilisateur";
+            }
+            else
+            {
+                this.titleFenetre.Content = "Modification d'un utilisateur";
+                this.identifiantUser.Text = this.copyUser.Mail;
+                this.nomUser.Text = this.copyUser.Nom;
+                this.prenomUser.Text = this.copyUser.Prenom;
+                this.roleUser.SelectedValue = this.copyUser.Role;
+            }
+
         }
 
         /// <summary>
@@ -86,20 +100,20 @@ namespace Couche_IHM.Frames
             {
                 notnull = false;
             }
-            
 
             return notnull;
         }
 
         /// <summary>
-        /// Empêche l'utilisateur d'entrer un espace
+        /// Vérifie que les passwords sont égaux
         /// </summary>
-        private void isSpaceBox(object sender, KeyEventArgs e)
+        /// <param name="password"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        private bool IsPasswordEquals(string password, string newPassword)
         {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
+            return password.Equals(newPassword);
+
         }
 
         /// <summary>

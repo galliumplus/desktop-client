@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!-- Titre -->
-        <Label Content="Création d'un utilisateur" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="Black"/>
+        <Label x:Name="titleFenetre"  Content="TITRE" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="Black"/>
      
         <!-- Identifiant -->
         <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10"> 

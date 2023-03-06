@@ -46,7 +46,7 @@ namespace Couche_Data
 
         public User ConnectionUser(string indentifiant, string hashPassword)
         {
-            return new User(3, "Chabret", "Damien", "damienchab.p@gmail.com", RolePerm.BUREAU);
+            return new User(3, "Caca", "Pipi", "Poupou@gmail.com", RolePerm.PRESIDENT);
         }
     }
 }

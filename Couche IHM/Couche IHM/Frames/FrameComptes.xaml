@@ -105,7 +105,7 @@
                                 <Label  Content="{Binding NomComplet}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label Content="{Binding Mail}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label Content="{Binding Role}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Button Style="{StaticResource buttonImage}"  Grid.Column="3" MouseEnter="PermButton">
+                                <Button Style="{StaticResource buttonImage}"  Grid.Column="3" MouseEnter="PermButton" Click="UpdateAnUser">
                                     <Image Source="/Images/modif.png" Width="15"/>
                                 </Button>
                             </Grid>
