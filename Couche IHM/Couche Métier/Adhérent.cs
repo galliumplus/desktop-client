@@ -30,7 +30,7 @@ namespace Couche_Métier
         public Adhérent(string identifiant, string nom, string prenom, double argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
             this.identifiant = identifiant;
-            this.nom = nom;
+            this.nom = nom.ToUpper();
             this.prenom = prenom;
             this.canPass = canPass;
             this.argent = argent;

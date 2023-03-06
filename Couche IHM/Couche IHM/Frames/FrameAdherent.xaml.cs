@@ -299,8 +299,15 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void AddAdherentButton(object sender, RoutedEventArgs e)
         {
-            ModificationAcompte modifAcompteWindow = new ModificationAcompte();
-            modifAcompteWindow.ShowDialog();
+            Adhérent newAdhérent = new Adhérent();
+            ModificationAcompte modifAcompteWindow = new ModificationAcompte(newAdhérent);
+            bool? result = modifAcompteWindow.ShowDialog();
+
+            // Si l'ajout est validé alors on met à jour la bdd
+            if (result.Value == true)
+            {
+                this.adhérentManager.CreateAdhérent(newAdhérent);
+            }
             
         }
 
