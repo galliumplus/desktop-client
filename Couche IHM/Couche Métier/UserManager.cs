@@ -16,7 +16,7 @@ namespace Couche_Métier
         private IUserDAO userDao;
 
         // Dictionnaire stockant les comptes temporairement en tant que cache
-        private Dictionary<string,User> comptes;
+        private Dictionary<int,User> comptes;
 
         /// <summary>
         /// Constructeur du manager des comptes
@@ -25,7 +25,7 @@ namespace Couche_Métier
         public UserManager(IUserDAO userDao)
         {
             this.userDao = userDao;
-            this.comptes = new Dictionary<string,User>(this.userDao.GetComptes());
+            this.comptes = new Dictionary<int,User>(this.userDao.GetComptes());
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Couche_Métier
         public void CreateCompte(User compte)
         {
             userDao.CreateCompte(compte);
-            comptes.Add(compte.Mail,compte);
+            comptes.Add(compte.ID,compte);
         }
 
         /// <summary>
@@ -46,9 +46,13 @@ namespace Couche_Métier
         public User GetCompte(string infoCompte)
         {
             User user = null;
-            if (comptes.ContainsKey(infoCompte))
+
+            foreach(User compte in comptes.Values)
             {
-                user = comptes[infoCompte];
+                if(compte.Mail == infoCompte)
+                {
+                    user = compte;
+                }
             }
             return user;
         }
@@ -71,7 +75,7 @@ namespace Couche_Métier
         public void RemoveCompte(User compte)
         {
             userDao.RemoveCompte(compte);
-            comptes.Remove(compte.Mail);
+            comptes.Remove(compte.ID);
         }
 
         /// <summary>
@@ -81,7 +85,7 @@ namespace Couche_Métier
         public void UpdateCompte(User compte)
         {
             userDao.UpdateCompte(compte);
-            comptes[compte.Mail] = compte;
+            comptes[compte.ID] = compte;
         }
     }
 }

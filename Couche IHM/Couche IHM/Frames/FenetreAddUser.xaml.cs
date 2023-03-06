@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Utilitaire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,18 +84,6 @@ namespace Couche_IHM.Frames
                 notnull = false;
             }
 
-            // Mot de passe
-            if (string.IsNullOrEmpty(passwordUser.Text))
-            {
-                notnull = false;
-            }
-
-            // Mot de passe2
-            if (string.IsNullOrEmpty(this.password2User.Text))
-            {
-                notnull = false;
-            }
-
             // Rôle
             if (this.roleUser.Text is null)
             {
@@ -127,8 +116,23 @@ namespace Couche_IHM.Frames
                 this.copyUser.Prenom = this.prenomUser.Text;
                 this.copyUser.Mail = this.identifiantUser.Text;
                 this.copyUser.Role = (RolePerm)this.roleUser.SelectedItem;
-                this.copyUser.HashedPassword = passwordUser.Text; // ======================> PENSEZ A CRYPTER
-                this.DialogResult = true;
+
+                // Si le mot de passe est modifié
+                if (!string.IsNullOrEmpty(passwordUser.Text) || !string.IsNullOrEmpty(password2User.Text))
+                {
+                    // Mot de passe identique
+                    if (IsPasswordEquals(passwordUser.Text, password2User.Text))
+                    {
+                        this.copyUser.HashedPassword = CryptStringToSHA256.HashTo256(passwordUser.Text);
+                        this.DialogResult = true;
+                    }
+                }
+                else // Si le mot de passe n'est pas modifié
+                {
+                    this.DialogResult = true;
+                }
+
+               
             }
         }
 

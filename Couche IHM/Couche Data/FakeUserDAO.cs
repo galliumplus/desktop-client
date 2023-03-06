@@ -9,44 +9,44 @@ namespace Couche_Data
 {
     public class FakeUserDAO : IUserDAO
     {
-        private Dictionary<string,User> users = new Dictionary<string, User>
+        private Dictionary<int,User> users = new Dictionary<int, User>
         {
-            {"damienchab.p@gmail.com", new User(1, "Chabret", "Damien", "damienchab.p@gmail.com", RolePerm.BUREAU) },
-            {"flo21p@gmail.com",new User(2, "Marteau", "Florian", "flo21p@gmail.com", RolePerm.CA) },
-            {"lucapupat@gmail.com",new User(3, "Pupats", "Lucas", "lucapupat@gmail.com", RolePerm.BUREAU) },
-            {"pipicaca@gmail.com",new User(4, "Prout", "Pipi", "pipicaca@gmail.com", RolePerm.CA) }
+            {1, new User(1, "Chabret", "Damien", "damienchab.p@gmail.com", RolePerm.BUREAU) },
+            {2,new User(2, "Marteau", "Florian", "flo21p@gmail.com", RolePerm.CA) },
+            {3,new User(3, "Pupats", "Lucas", "lucapupat@gmail.com", RolePerm.BUREAU) },
+            {4,new User(4, "Prout", "Pipi", "pipicaca@gmail.com", RolePerm.CA) }
         };
 
         public void CreateCompte(User compte)
         {
-            users.Add(compte.Mail,compte);
+            users.Add(compte.ID,compte);
         }
 
-        public User GetCompte(string mail)
+        public User GetCompte(int id)
         {
-            return users[mail];
+            return users[id];
         }
 
-        public Dictionary<string,User> GetComptes()
+        public Dictionary<int,User> GetComptes()
         {
             return users;
         }
 
         public void RemoveCompte(User compte)
         {
-            users.Remove(compte.Mail);
+            users.Remove(compte.ID);
         }
 
         public User UpdateCompte(User compte)
         {
-            User newUser = GetCompte(compte.Mail);
+            User newUser = GetCompte(compte.ID);
             newUser = compte;
             return newUser;
         }
 
         public User ConnectionUser(string indentifiant, string hashPassword)
         {
-            return new User(3, "Caca", "Pipi", "Poupou@gmail.com", RolePerm.PRESIDENT);
+            return new User(10, "Caca", "Pipi", "Poupou@gmail.com", RolePerm.PRESIDENT);
         }
     }
 }
