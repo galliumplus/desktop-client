@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Couche_Métier
 {
+    /// <summary>
+    /// IAdhérent
+    /// </summary>
     public interface IAdhérentDao
     {
 

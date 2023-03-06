@@ -5,8 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Couche_Métier
+namespace Couche_Métier.Utilitaire
 {
+    /// <summary>
+    /// Converti le format de l'argent
+    /// </summary>
     public class ConverterFormatArgent
     {
         /// <summary>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Couche_Métier.Utilitaire;
 
 namespace Couche_Métier
 {
@@ -21,6 +22,11 @@ namespace Couche_Métier
         #endregion
 
         #region constructeurs
+        /// <summary>
+        /// constructeur vide de l'adhérent
+        /// </summary>
+        public Adhérent() { }
+
         /// <summary>
         /// Constructeur de la classe adhérent
         /// </summary>

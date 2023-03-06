@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Utilitaire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,20 @@ namespace Couche_IHM.Frames
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             FillComboBoxRole();
             this.copyUser = copyUser;
+
+            // Si l'utilisateur vient d'être créer, change le titre
+            if(string.IsNullOrEmpty(copyUser.Mail))
+            {
+                this.titleFenetre.Content = "Création d'un utilisateur";
+            }
+            else
+            {
+                this.titleFenetre.Content = "Modification d'un utilisateur";
+                this.identifiantUser.Text = this.copyUser.Mail;
+                this.nomUser.Text = this.copyUser.Nom;
+                this.prenomUser.Text = this.copyUser.Prenom;
+                this.roleUser.SelectedValue = this.copyUser.Role;
+            }
 
         }
 
@@ -69,37 +84,25 @@ namespace Couche_IHM.Frames
                 notnull = false;
             }
 
-            // Mot de passe
-            if (string.IsNullOrEmpty(passwordUser.Text))
-            {
-                notnull = false;
-            }
-
-            // Mot de passe2
-            if (string.IsNullOrEmpty(this.password2User.Text))
-            {
-                notnull = false;
-            }
-
             // Rôle
             if (this.roleUser.Text is null)
             {
                 notnull = false;
             }
-            
 
             return notnull;
         }
 
         /// <summary>
-        /// Empêche l'utilisateur d'entrer un espace
+        /// Vérifie que les passwords sont égaux
         /// </summary>
-        private void isSpaceBox(object sender, KeyEventArgs e)
+        /// <param name="password"></param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        private bool IsPasswordEquals(string password, string newPassword)
         {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
+            return password.Equals(newPassword);
+
         }
 
         /// <summary>
@@ -113,8 +116,24 @@ namespace Couche_IHM.Frames
                 this.copyUser.Prenom = this.prenomUser.Text;
                 this.copyUser.Mail = this.identifiantUser.Text;
                 this.copyUser.Role = (RolePerm)this.roleUser.SelectedItem;
-                this.copyUser.HashedPassword = passwordUser.Text; // ======================> PENSEZ A CRYPTER
-                this.DialogResult = true;
+
+                // Si le mot de passe est modifié
+                if (!string.IsNullOrEmpty(passwordUser.Text) || !string.IsNullOrEmpty(password2User.Text))
+                {
+                    // Mot de passe identique
+                    if (IsPasswordEquals(passwordUser.Text, password2User.Text))
+                    {
+                        CryptStringToSHA256 hash = new CryptStringToSHA256();
+                        this.copyUser.HashedPassword = hash.HashTo256(passwordUser.Text);
+                        this.DialogResult = true;
+                    }
+                }
+                else // Si le mot de passe n'est pas modifié
+                {
+                    this.DialogResult = true;
+                }
+
+               
             }
         }
 

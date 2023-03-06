@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Couche_Métier
 {
+    /// <summary>
+    /// Permet d'exporter un adhérent
+    /// </summary>
     public interface IExportableAdherent
     {
         /// <summary>
