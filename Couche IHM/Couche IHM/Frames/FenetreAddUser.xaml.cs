@@ -123,7 +123,8 @@ namespace Couche_IHM.Frames
                     // Mot de passe identique
                     if (IsPasswordEquals(passwordUser.Text, password2User.Text))
                     {
-                        this.copyUser.HashedPassword = CryptStringToSHA256.HashTo256(passwordUser.Text);
+                        CryptStringToSHA256 hash = new CryptStringToSHA256();
+                        this.copyUser.HashedPassword = hash.HashTo256(passwordUser.Text);
                         this.DialogResult = true;
                     }
                 }

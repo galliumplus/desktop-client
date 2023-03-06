@@ -10,14 +10,14 @@ namespace Couche_Métier.Utilitaire
     /// <summary>
     /// Permet de crypter un string en SHA256
     /// </summary>
-    public static class CryptStringToSHA256
+    public class CryptStringToSHA256
     {
         /// <summary>
         /// Hash un string en 256
         /// </summary>
         /// <param name="message"> message à hashé </param>
         /// <returns> le message hashé </returns>
-        public static string HashTo256(string message)
+        public string HashTo256(string message)
         {
             using(SHA256 hash256 = SHA256.Create())
             {
