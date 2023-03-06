@@ -320,7 +320,7 @@ namespace Couche_IHM.Frames
         #endregion
 
         /// <summary>
-        /// Ajoute un produit
+        /// Ajoute un produit 
         /// </summary>
         private void AddAnProduct(object sender, RoutedEventArgs e)
         {
@@ -339,10 +339,9 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Met à jour un produit
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void UpdateAnProduct(object sender, RoutedEventArgs e)
         {
+            HideOptions();
             ProduitIHM baseProduit = (ProduitIHM)listproduits.SelectedItem;
             ProduitIHM copyProduct = new ProduitIHM(baseProduit);
             FenetreAddProduct p = new FenetreAddProduct(copyProduct, this.categorieManager.ListAllCategory());
@@ -355,6 +354,22 @@ namespace Couche_IHM.Frames
                 baseProduit.ImageProduit = copyProduct.ImageProduit;
                 this.UpdateView();
             }
+        }
+
+        /// <summary>
+        /// Cache les options
+        /// </summary>
+        private void HideOptions()
+        {
+            options.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Cache les options quand la souris est en dehors de la zone
+        /// </summary>
+        private void HideOptionsIHM(object sender, MouseEventArgs e)
+        {
+            HideOptions();
         }
     }
 }
