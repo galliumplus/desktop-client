@@ -16,6 +16,7 @@ namespace Couche_Métier
         private string prenom;
         private string mail;
         private RolePerm role;
+        private string hashedPassword;
 
         public int ID
         {
@@ -66,6 +67,12 @@ namespace Couche_Métier
             set => role = value; 
         }
 
+        public string HashedPassword
+        {
+            get => hashedPassword;
+            set => hashedPassword = value;
+        }
+
         /// <summary>
         /// Constructeur naturelle
         /// </summary>
@@ -82,6 +89,7 @@ namespace Couche_Métier
             this.role = role;
         }
 
+        public User() { }
         public override string ToString()
         {
             return $"{this.mail} {this.nom} {this.prenom} {this.role}";

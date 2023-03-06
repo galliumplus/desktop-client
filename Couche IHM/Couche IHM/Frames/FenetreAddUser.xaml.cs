@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,8 +27,20 @@ namespace Couche_IHM.Frames
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            FillComboBoxRole();
             this.copyUser = copyUser;
 
+        }
+
+        /// <summary>
+        /// Remplis la comboBox "Rôle" de chaque enum
+        /// </summary>
+        private void FillComboBoxRole()
+        {
+            foreach (RolePerm role in Enum.GetValues(typeof(RolePerm)))
+            {
+                this.roleUser.Items.Add(role);
+            }
         }
 
         /// <summary>
@@ -96,6 +109,11 @@ namespace Couche_IHM.Frames
         {
             if (IsUserNotNull())
             {
+                this.copyUser.Nom = this.nomUser.Text;
+                this.copyUser.Prenom = this.prenomUser.Text;
+                this.copyUser.Mail = this.identifiantUser.Text;
+                this.copyUser.Role = (RolePerm)this.roleUser.SelectedItem;
+                this.copyUser.HashedPassword = passwordUser.Text; // ======================> PENSEZ A CRYPTER
                 this.DialogResult = true;
             }
         }
