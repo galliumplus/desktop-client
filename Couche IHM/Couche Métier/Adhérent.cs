@@ -23,11 +23,6 @@ namespace Couche_Métier
 
         #region constructeurs
         /// <summary>
-        /// constructeur vide de l'adhérent
-        /// </summary>
-        public Adhérent() { }
-
-        /// <summary>
         /// Constructeur de la classe adhérent
         /// </summary>
         /// <param name="id">id de l'adhérent</param>

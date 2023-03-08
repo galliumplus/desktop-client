@@ -28,8 +28,20 @@ namespace Couche_IHM
         {
             InitializeComponent();
             this.adh = adhérent;
-            DataContext = Adh   ;
-            
+
+            // Remplissage du formulaire
+            this.nom.Text = adh.Nom;
+            this.prenom.Text = adh.Prenom;
+            this.login.Text = adh.Identifiant;
+            int isAdherent = 0;
+            if (adh.StillAdherent)
+            {
+                isAdherent = 1;
+            }
+            this.isadherent.Value = isAdherent;
+            this.argent.Text = Convert.ToString(adh.Argent);
+
+
         }
 
         /// <summary>
@@ -39,7 +51,28 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void ValideAdherent(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            try
+            {
+                this.adh.Nom = this.nom.Text;
+                this.adh.Prenom =  this.prenom.Text;
+                this.adh.Identifiant = this.login.Text;
+                bool isAdherent = false;
+                if (this.isadherent.Value == 1)
+                {
+                    isAdherent = true;
+                }
+                this.adh.StillAdherent= isAdherent;
+                this.adh.Argent = Convert.ToDouble(this.argent.Text);
+
+                DialogResult = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                DialogResult = false;
+            }
+            
         }
 
         /// <summary>
