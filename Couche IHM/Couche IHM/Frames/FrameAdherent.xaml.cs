@@ -301,6 +301,7 @@ namespace Couche_IHM.Frames
         {
             Adhérent adhérentSelect = new Adhérent((Adhérent)this.listadherents.SelectedItem);
             ModificationAcompte modifAcompteWindow = new ModificationAcompte(adhérentSelect);
+            this.options.Visibility = Visibility.Hidden;
             bool? result = modifAcompteWindow.ShowDialog();
 
             // Si l'ajout est validé alors on met à jour la bdd et la vue
@@ -309,7 +310,8 @@ namespace Couche_IHM.Frames
                 this.adhérentManager.UpdateAdhérent(adhérentSelect);
                 UpdateView();
                 this.infoAdherent.Visibility = Visibility.Hidden;
-                this.options.Visibility = Visibility.Hidden;
+
+                log.registerLog(CategorieLog.UPDATE, adhérentSelect, MainWindow.CompteConnected);
             }
 
             
@@ -331,6 +333,7 @@ namespace Couche_IHM.Frames
             {
                 this.adhérentManager.CreateAdhérent(newAdhérent);
                 UpdateView();
+                log.registerLog(CategorieLog.CREATE, newAdhérent, MainWindow.CompteConnected);
             }
             
         }

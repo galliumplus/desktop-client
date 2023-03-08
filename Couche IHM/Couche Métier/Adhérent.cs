@@ -47,7 +47,7 @@ namespace Couche_Métier
         /// </summary>
         public Adhérent()
         {
-
+            this.stillAdherent = true;
         }
 
         /// <summary>

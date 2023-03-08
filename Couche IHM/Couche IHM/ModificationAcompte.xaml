@@ -12,7 +12,11 @@
  >
     <Grid Margin="10">
 
-        <TextBlock x:Name="title" FontSize="24" FontWeight="DemiBold"  HorizontalAlignment="Center" Margin="0 0 0 20">Modification de l'acompte</TextBlock>
+        <TextBlock x:Name="title" FontSize="24" FontWeight="DemiBold" TextDecorations="Underline"  HorizontalAlignment="Center" Text="Modification de l'acompte" Margin="0 2 0 20">
+            <TextBlock.Effect>
+                <DropShadowEffect ShadowDepth="2" Color="Orange" Opacity="0.6" />
+            </TextBlock.Effect>
+        </TextBlock>
         <StackPanel Margin="10,60,0,50"  Orientation="Vertical">
 
             <StackPanel Orientation="Horizontal" >
@@ -29,25 +33,20 @@
             <Label Content="Identifiant de l'acompte" Margin="0,30,0,0"  Padding="0,0,0,5"/>
             <TextBox x:Name="login"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,30,0,0" >
-                <StackPanel>
-                    <Label FontWeight="Light" Content="Mot de passe"  Padding="0,0,0,5" />
-                    <PasswordBox x:Name="passwordA" Style="{StaticResource inputPasswordBox}"  BorderBrush="#FF403D39" Width="150"  MaxLength="100"/>
-                </StackPanel>
-                <StackPanel Margin="30,0,0,0">
-                    <Label FontWeight="Light" Content="Confirmer le mot de passe"  Padding="0,0,0,5" />
-                    <PasswordBox x:Name="passwordB" Style="{StaticResource inputPasswordBox}"   BorderBrush="#FF403D39" Width="150" MaxLength="100"/>
-                </StackPanel>
-            </StackPanel>
             <Label Content="Argent"  Margin="0,30,0,0" Padding="0,0,0,5"/>
             <TextBox x:Name="argent"    Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,20" MaxLength="5"/>
-            
+
             <Label Content="Adhérent ?" HorizontalAlignment="Center"   Padding="0,0,0,5"/>
             <Slider Minimum="0" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True" Value="0"  x:Name="isadherent"   Style="{StaticResource bleuTemp}"  Width="50" Height="20" />
+
+            <Label FontWeight="Light" Content="Formation"   Padding="0,0,0,5"/>
+            <TextBox Opacity="0.7" x:Name="formation"   Style="{StaticResource textBoxGallium}" Margin="0,0,0,20" VerticalAlignment="Bottom"   Width="355"  MaxLength="8"/>
+            
+            
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"  VerticalAlignment="Bottom"  HorizontalAlignment="Center" Height="30">
-            <Button Content="Enregistrer" Style="{StaticResource buttonBlack}"   Margin="0,0,20,0" Click="ValideAdherent" />
+            <Button Content="Enregistrer" Style="{StaticResource buttonBlack}"   Margin="0,0,20,0"  Click="ValideAdherent" />
             <Button Content="Annuler" Style="{StaticResource buttonBlack}"  Margin="20,0,0,0" Click="CancelAdherent" />
         </StackPanel>
     </Grid>

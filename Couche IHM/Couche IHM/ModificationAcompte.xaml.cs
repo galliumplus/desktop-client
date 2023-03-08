@@ -32,6 +32,7 @@ namespace Couche_IHM
             // Remplissage du formulaire
             this.nom.Text = adh.Nom;
             this.prenom.Text = adh.Prenom;
+            this.formation.Text = adh.Formation;
             this.login.Text = adh.Identifiant;
             int isAdherent = 0;
             if (adh.StillAdherent)
@@ -63,6 +64,7 @@ namespace Couche_IHM
                 }
                 this.adh.StillAdherent= isAdherent;
                 this.adh.Argent = Convert.ToDouble(this.argent.Text);
+                this.adh.Formation = this.formation.Text;
 
                 DialogResult = true;
 
