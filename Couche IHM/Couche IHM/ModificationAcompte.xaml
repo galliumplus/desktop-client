@@ -12,35 +12,33 @@
  >
     <Grid Margin="10">
 
-        <TextBlock x:Name="title" FontSize="24" FontWeight="DemiBold" TextDecorations="Underline"  HorizontalAlignment="Center" Text="Modification de l'acompte" Margin="0 2 0 20">
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="2" Color="Orange" Opacity="0.6" />
-            </TextBlock.Effect>
-        </TextBlock>
+        <TextBlock x:Name="title" FontSize="24" FontWeight="Bold" TextDecorations="Underline"  HorizontalAlignment="Center" Text="Modification de l'acompte" Margin="0 2 0 20"/>
         <StackPanel Margin="10,60,0,50"  Orientation="Vertical">
 
             <StackPanel Orientation="Horizontal" >
                 <StackPanel>
                     <Label Content="Nom"  Padding="0,0,0,5"/>
-                    <TextBox x:Name="nom" FontSize="19"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="150"  MaxLength="8"/>
+                    <TextBox x:Name="nom" FontSize="17"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="150"  MaxLength="8"/>
                 </StackPanel>
                 <StackPanel Margin="30,0,0,0">
                     <Label Content="Prénom"  Padding="0,0,0,5" />
-                    <TextBox x:Name="prenom"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="150"  MaxLength="100"/>
+                    <TextBox x:Name="prenom" FontSize="17"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  BorderBrush="#FF403D39" Width="150"  MaxLength="100"/>
                 </StackPanel>
             </StackPanel>
 
             <Label Content="Identifiant de l'acompte" Margin="0,30,0,0"  Padding="0,0,0,5"/>
-            <TextBox x:Name="login"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
+            <TextBox x:Name="login" FontSize="17"   Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355"  MaxLength="8"/>
 
             <Label Content="Argent"  Margin="0,30,0,0" Padding="0,0,0,5"/>
-            <TextBox x:Name="argent"    Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,20" MaxLength="5"/>
+            <TextBox x:Name="argent" FontSize="17"    Style="{StaticResource textBoxGallium}" VerticalAlignment="Bottom"  Width="355" Margin="0,0,0,20" MaxLength="5"/>
 
+            <Label FontWeight="Thin" Content="Formation (optional)"   Padding="0,0,0,5"/>
+            <TextBox Opacity="0.7" x:Name="formation" FontSize="17"   Style="{StaticResource textBoxGallium}" Margin="0,0,0,20" VerticalAlignment="Bottom"   Width="355"  MaxLength="8"/>
+            
             <Label Content="Adhérent ?" HorizontalAlignment="Center"   Padding="0,0,0,5"/>
             <Slider Minimum="0" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True" Value="0"  x:Name="isadherent"   Style="{StaticResource bleuTemp}"  Width="50" Height="20" />
 
-            <Label FontWeight="Light" Content="Formation"   Padding="0,0,0,5"/>
-            <TextBox Opacity="0.7" x:Name="formation"   Style="{StaticResource textBoxGallium}" Margin="0,0,0,20" VerticalAlignment="Bottom"   Width="355"  MaxLength="8"/>
+           
             
             
         </StackPanel>

@@ -124,7 +124,7 @@ namespace Couche_Métier
             get
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(argent);
+                return converterFormatArgent.ConvertToString(argent);
             }
         }
 

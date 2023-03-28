@@ -1,5 +1,6 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
+using Couche_Métier.Utilitaire;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -169,12 +170,17 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ValiderChangements(object sender, RoutedEventArgs e)
         {
+            ConverterFormatArgent converterArgent = new ConverterFormatArgent();
+
             ResetWarnings();
 
             Adhérent newAdher = new Adhérent();
             Adhérent baseAdhérent = (Adhérent)this.listadherents.SelectedItem;
             try
             {
+                // Récupération de l'id
+                newAdher.Id = baseAdhérent.Id;
+
                 // Mise à jour du nom et du prénom
                 if (this.name.Text.Contains(" "))
                 {
@@ -200,18 +206,7 @@ namespace Couche_IHM.Frames
 
 
                 // Mise à jour de l'argent
-                string argentFormat = this.argent.Text.Replace(".", ",");
-                argentFormat = argentFormat.Replace("€", " ");
-                argentFormat = argentFormat.Trim();
-                if (new Regex("^[0-9]+$").IsMatch(argentFormat) || new Regex("^[0-9]+,[0-9]+$").IsMatch(argentFormat))
-                {
-                    newAdher.Argent = (float)Convert.ToDouble(argentFormat);
-                }
-                else
-                {
-                    throw new Exception("ArgentFormat");
-                }
-
+                newAdher.Argent = converterArgent.ConvertToDouble(this.argent.Text);
 
                 // Met à jour l'adhérent
                 this.UpdateAnAdherent(baseAdhérent, newAdher);

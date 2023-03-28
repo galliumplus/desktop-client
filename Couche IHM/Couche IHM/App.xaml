@@ -219,7 +219,7 @@
         <Style x:Key="textBoxGallium" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="Background" Value="White" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="3,0,0,3" />
             <Setter Property="Foreground" Value="Black" />

@@ -96,7 +96,7 @@ namespace Couche_IHM
             get
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(product.PrixAdherent);
+                return converterFormatArgent.ConvertToString(product.PrixAdherent);
             }
         }
 
@@ -108,7 +108,7 @@ namespace Couche_IHM
             get
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(product.PrixNonAdherent);
+                return converterFormatArgent.ConvertToString(product.PrixNonAdherent);
             }
         }
 

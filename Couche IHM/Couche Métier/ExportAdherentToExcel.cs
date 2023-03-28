@@ -27,32 +27,12 @@ namespace Couche_Métier
             }
 
 
-            // Si le fichier existe on le met à jour
-            if (File.Exists(pathFile))
-            {
-                XLWorkbook workbook = new XLWorkbook(pathFile);
-                IXLWorksheet worksheet = workbook.Worksheets.Worksheet("Adhérents");
-                affichageAdhérents(adhérents,worksheet);
-                workbook.Save();
-            }
-            // Sinon on le créer si on est en septembre
-            else if (DateTime.Now.Month == 9)
-            {
-                XLWorkbook workbook = new XLWorkbook();
-                IXLWorksheet worksheet = workbook.AddWorksheet("Adhérents");
-                creationFeuilleExcel(adhérents,worksheet);
-                affichageAdhérents(adhérents, worksheet);
-                workbook.SaveAs(pathFile);
-            }
-            // Temporaire ( si pas de fichier)
-            else
-            {
-                XLWorkbook workbook = new XLWorkbook();
-                IXLWorksheet worksheet = workbook.AddWorksheet("Adhérents");
-                creationFeuilleExcel(adhérents, worksheet);
-                affichageAdhérents(adhérents, worksheet);
-                workbook.SaveAs(pathFile);
-            }
+            // Création du excel
+            XLWorkbook workbook = new XLWorkbook();
+            IXLWorksheet worksheet = workbook.AddWorksheet("Adhérents");
+            CreationTableauxExcel(adhérents, worksheet);
+            AffichageAdherents(adhérents, worksheet);
+            workbook.SaveAs(pathFile);
 
 
             
@@ -72,18 +52,33 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="adhérents">liste des adhérents</param>
         /// <param name="worksheet">feuille excel</param>
-        private void affichageAdhérents(List<Adhérent> adhérents,IXLWorksheet worksheet)
+        private void AffichageAdherents(List<Adhérent> adhérents,IXLWorksheet worksheet)
         {
+
+            // Remplissage des adhérents
+            int compteur = 0;
             for (int i = 0; i < adhérents.Count-1; i++)
             {
                 // Si le compte est toujours adhérent
                 if (adhérents[i].StillAdherent)
                 {
-                    worksheet.Cell($"A{i + 2}").Value = adhérents[i].Nom;
-                    worksheet.Cell($"B{i + 2}").Value = adhérents[i].Prenom;
-                    worksheet.Cell($"C{i + 2}").Value = adhérents[i].Formation;
+                    worksheet.Cell($"A{compteur + 2}").Value = adhérents[i].Nom;
+                    worksheet.Cell($"B{compteur + 2}").Value = adhérents[i].Prenom;
+                    worksheet.Cell($"C{compteur + 2}").Value = adhérents[i].Formation;
+                    compteur++;
                 }   
             }
+
+            // Création style de la table des adhérents
+            IXLRange range = worksheet.Range(1, 1, compteur + 1, 3);
+            IXLTable table = range.CreateTable();
+            table.Name = "Liste d'adhérents";
+            table.Column(1).WorksheetColumn().Width = 15;
+            table.Column(2).WorksheetColumn().Width = 15;
+            table.Column(3).WorksheetColumn().Width = 15;
+            worksheet.Cell($"A1").Value = "Nom";
+            worksheet.Cell($"B1").Value = "Prénom";
+            worksheet.Cell($"C1").Value = "Formation";
         }
 
 
@@ -92,21 +87,8 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="adhérents">liste des adhérents</param>
         /// <param name="worksheet">feuille excel</param>
-        private void creationFeuilleExcel(List<Adhérent> adhérents, IXLWorksheet worksheet)
-        {
-            // Première table ( listage )
-            IXLRange range = worksheet.Range(1, 1, adhérents.Count, 3);
-            IXLTable table = range.CreateTable();
-
-            // apply style
-            table.Name = "Liste d'adhérents";
-            table.Column(1).WorksheetColumn().Width = 15;
-            table.Column(2).WorksheetColumn().Width = 15;
-            table.Column(3).WorksheetColumn().Width = 15;
-            worksheet.Cell($"A1").Value = "Nom";
-            worksheet.Cell($"B1").Value = "Prénom";
-            worksheet.Cell($"C1").Value = "Formation";
-
+        private void CreationTableauxExcel(List<Adhérent> adhérents, IXLWorksheet worksheet)
+        { 
 
             // Deuxième table ( comptage )
             IXLRange range2 = worksheet.Range(1, 5, 6, 6);

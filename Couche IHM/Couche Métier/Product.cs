@@ -62,7 +62,7 @@ namespace Couche_Métier
             get
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(prixAdherent );
+                return converterFormatArgent.ConvertToString(prixAdherent );
             }
         }
         /// <summary>
@@ -73,7 +73,7 @@ namespace Couche_Métier
             get 
             {
                 ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertFormat(PrixNonAdherent);
+                return converterFormatArgent.ConvertToString(PrixNonAdherent);
             }
         }
 

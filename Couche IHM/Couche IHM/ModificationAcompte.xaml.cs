@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Utilitaire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace Couche_IHM
                 isAdherent = 1;
             }
             this.isadherent.Value = isAdherent;
-            this.argent.Text = Convert.ToString(adh.Argent);
+            this.argent.Text = adh.ArgentIHM;
 
 
         }
@@ -52,6 +53,9 @@ namespace Couche_IHM
         /// <param name="e"></param>
         private void ValideAdherent(object sender, RoutedEventArgs e)
         {
+            // Permet de convertir l'argent
+            ConverterFormatArgent converterArgent = new ConverterFormatArgent();
+
             try
             {
                 this.adh.Nom = this.nom.Text;
@@ -63,7 +67,7 @@ namespace Couche_IHM
                     isAdherent = true;
                 }
                 this.adh.StillAdherent= isAdherent;
-                this.adh.Argent = Convert.ToDouble(this.argent.Text);
+                this.adh.Argent = converterArgent.ConvertToDouble(this.argent.Text);
                 this.adh.Formation = this.formation.Text;
 
                 DialogResult = true;
