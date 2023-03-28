@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="75*"/>
                 <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
-            
+
             <!-- PRODUITS -->
             <ItemsControl Name="productHandler" >
                 <ItemsControl.ItemsPanel>
@@ -65,19 +65,16 @@
         <ListView Grid.Column="1"  Name="Order" Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="90*"/>
-                            <ColumnDefinition Width="10*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding NomProduit}" Grid.Column="0" Width="125"/>
+                    <Grid Width="220">
+
+                        <Label Content="{Binding NomProduit}"  Width="125"/>
                         <!-- Nombre de produit -->
-                        <Label x:Name="numberP" Content="{Binding QuantiteProduitPanier}" ContentStringFormat="x{0}"  HorizontalAlignment="Right"/>
+                        <Label x:Name="numberP" Content="{Binding QuantiteProduitPanier}" ContentStringFormat="x{0}"  />
                         <!-- Bouton pour enlever le produit -->
-                        <Grid Grid.Column="1" MouseEnter="OrderItem_Enter" MouseLeave="OrderItem_Leave" Background="#302F2F" Width="25" MouseLeftButtonDown="RemoveProduct" Tag="{Binding NomProduit}" HorizontalAlignment="Right">
-                            <Label Content="-" Foreground="White" HorizontalAlignment="Center"/>
-                        </Grid>
-                        
+                        <Button Style="{StaticResource buttonImage}"  HorizontalAlignment="Right"  Height="15" Width="25" MouseLeftButtonDown="RemoveProduct" Tag="{Binding NomProduit}" >
+                            <Image Source="/Images/suprim.png"  />
+                        </Button>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -91,10 +88,10 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
@@ -103,14 +100,11 @@
             <!-- Paiment -->
             <Label Content="Moyen de paiment" Foreground="White" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>
             <ComboBox Name="listeMoyenPayement" Height="15" Width="150" FontSize="8" Grid.ColumnSpan="2" Grid.Row="1"/>
-            <!-- Quantité -->
-            <Label Content="Quantité :" Foreground="White" FontSize="10" Grid.Row="2" Grid.Column="0"/>
-            <Label Name="QuantityOrdered" Content="0" Foreground="White" FontSize="10" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1"/>
+
             <!-- Prix -->
-            <Label Content="Prix TTC :" Foreground="White" FontSize="10" Grid.Row="3" Grid.Column="0"/>
-            <Label Name="Price" Content="0.00 €" Foreground="White" FontSize="10" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" />
-            <!-- Autre information-->
-            <CheckBox Name="AdherCheck" Content="Adhérent ?" Foreground="White" Click="AdherCheck_Click" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+            <Label Content="Prix TTC :" VerticalAlignment="Center" Foreground="White" FontSize="10" Grid.Row="3" Grid.Column="0"/>
+            <Label Name="Price" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center"  HorizontalAlignment="Center" Grid.Row="3" Grid.ColumnSpan="2"    />
+
 
             <Grid Height="30" MouseEnter="Buy_MouseEnter" MouseLeave="Buy_MouseLeave" Background="Black" Margin="0" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" MouseDown="PayCaisse">
                 <Label Content="Payer" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>

@@ -90,10 +90,8 @@ namespace Couche_IHM.Frames
                 }
                 i++;
             }
-            this.QuantityOrdered.Content = Convert.ToString(QuantityO);
-            if (quantityTotal == 0) priceTotal = 0.00f;
-            if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
-            else this.Price.Content = PriceNanAdher;
+
+
             UpdateListProduitsOrder();
         }
 
@@ -125,9 +123,7 @@ namespace Couche_IHM.Frames
                     priceTotal += (float)p.PrixProduitAdherentAffichage;
                 }
             }
-            this.QuantityOrdered.Content = Convert.ToString(QuantityO);
-            if (this.AdherCheck.IsChecked == false) this.Price.Content = PriceAdher;
-            else this.Price.Content = PriceNanAdher;
+           
             UpdateListProduitsOrder();
         }
 
@@ -140,15 +136,6 @@ namespace Couche_IHM.Frames
             this.Order.ItemsSource = orderedItem;
         }
 
-        /// <summary>
-        /// Change prix Adherent
-        /// </summary>
-        private void AdherCheck_Click(object sender, RoutedEventArgs e)
-        {
-            this.Price.Content = PriceNanAdher;
-            if (this.AdherCheck.IsChecked == false) 
-                this.Price.Content = PriceAdher;
-        }
 
         #region BouttonIHM
 
