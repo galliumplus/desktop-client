@@ -25,7 +25,7 @@
 
         <!-- Colonne 1 : Image-->
         <Grid Margin="20" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" MouseEnter="StyleImageEnter" MouseLeave="StyleImageLeave">
-            <Image x:Name="productImage" Source="/Assets/Logo/Logo_Gallium.png" MouseDown="ChangePicture" Style="{StaticResource ImageStyle}"/>
+            <Image x:Name="productImage"  MouseDown="ChangePicture" Style="{StaticResource ImageStyle}"/>
             <Image x:Name="modifImage" Source="/Assets/Icone/modif2.png" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" IsHitTestVisible="False" Width="30" Height="30"/>
         </Grid>
        

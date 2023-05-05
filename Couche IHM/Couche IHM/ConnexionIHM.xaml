@@ -38,5 +38,7 @@
             <!-- Bouton -->
             <Button Content="Connexion" Width="100" Height="30" Margin="0 20 0 0" Background="White" Click="ConnectToAccount"/>
         </StackPanel>
+
+        <Image x:Name="caca"/> 
     </Grid>
 </Window>

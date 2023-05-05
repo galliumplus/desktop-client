@@ -1,5 +1,7 @@
 ﻿using Couche_Data;
+using Couche_IHM.ImagesProduit;
 using Couche_Métier;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,9 @@ namespace Couche_IHM
         public ConnexionIHM()
         {
             InitializeComponent();
+            ImageManager blobConverter = new ImageManager();
+            byte[] image = blobConverter.ConvertImageToBlob("C:\\Users\\flo21\\OneDrive\\Bureau\\ph.png");
+            blobConverter.CreateImageFromBlob("Gato",image);
         }
 
         /// <summary>

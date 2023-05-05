@@ -1,4 +1,5 @@
 ﻿using Couche_Data;
+using Couche_IHM.CustomListView;
 using Couche_Métier;
 using Couche_Métier.Log;
 using DocumentFormat.OpenXml.Office.CustomUI;
@@ -28,8 +29,8 @@ namespace Couche_IHM.Frames
     public partial class FrameCaisse : Page
     {
         // Produits IHM
-        private List<ProduitIHM> produitsIHM = new List<ProduitIHM>();
-        private List<ProduitIHM> orderedItem = new List<ProduitIHM>();
+        private List<Product> produits = new List<Product>();
+        private List<Product> orderedItem = new List<Product>();
 
         // private List<Product> orderedItem = new List<Product>();
         // private Dictionary<string, int> productsQuantity = new Dictionary<string, int>();
@@ -52,23 +53,28 @@ namespace Couche_IHM.Frames
             this.produitManager = produitManager;
             this.categorieManager = categorieManager;
 
-            FIllProduitsIHM();
-            productHandler.ItemsSource = produitsIHM;
+
+            productsSP.Children.Clear();
+            foreach (string category in categorieManager.Categories)
+            {
+                // On récupère les produits de chaque catégorie
+                List<Product> products = produitManager.GetProductsByCategory(category);
+
+                // On créer chaque vue catégorie
+                CategoryProductList categoryProductList = new CategoryProductList(category, products);
+                productsSP.Children.Add(categoryProductList);
+
+                // On créer des listener sur chaque items
+                foreach (DetailedProduct p in categoryProductList.ListProductView)
+                {
+                    //p.boutonDp.Click += new System.Windows.RoutedEventHandler(AddProductCaisse);
+                }
+            }
+
             Order.ItemsSource = orderedItem;
 
             string[] moyenPayement = { "Acompte", "Paypal", "Carte" };
             listeMoyenPayement.ItemsSource = moyenPayement;
-        }
-
-        /// <summary>
-        /// Remplis la liste de produitsIHM
-        /// </summary>
-        private void FIllProduitsIHM()
-        {
-            foreach (Product p in produitManager.GetProducts())
-            {
-                produitsIHM.Add(new ProduitIHM(p));
-            }
         }
 
         /// <summary>
@@ -83,7 +89,7 @@ namespace Couche_IHM.Frames
             {
                 if (orderedItem[i].NomProduit == gd.Tag)
                 {
-                    priceTotal -= (float)orderedItem[i].PrixProduitAdherentAffichage;
+                    priceTotal -= (float)orderedItem[i].PrixAdherent;
                     orderedItem.RemoveAt(i);
                     quantityTotal--;
                     i = orderedItem.Count;
@@ -105,7 +111,7 @@ namespace Couche_IHM.Frames
             Label lab = (Label)gd.Children[1];
             string prodName = (string)lab.Content; /// Nom du produit
 
-            foreach(ProduitIHM p in produitsIHM)
+            foreach(Product p in this.orderedItem)
             {
                 // Si un produit corresponds à l'item récupérer
                 if (p.NomProduit == prodName)
@@ -117,10 +123,10 @@ namespace Couche_IHM.Frames
                     }
                     else // Si déjà présent, augmente quantité de 1
                     {
-                        orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier = orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier + 1;
+                        //orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier = orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier + 1;
                     }
                     quantityTotal++;
-                    priceTotal += (float)p.PrixProduitAdherentAffichage;
+                    //priceTotal += (float)p.PrixProduitAdherentAffichage;
                 }
             }
            

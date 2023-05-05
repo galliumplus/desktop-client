@@ -59,9 +59,18 @@ namespace Couche_Data
             this.products.Add(product);
         }
 
-        public Product GetProduct(int id)
+        public Product? GetProduct(int id)
         {
            return this.products.Find(x => id == x.ID);
+        }
+
+        /// <summary>
+        /// Récupère tous les produits d'une catégorie
+        /// </summary>
+        /// <returns> liste de produits </returns>
+        public List<Product> GetProductsByCategory(string category)
+        {
+            return this.products.FindAll(x => category == x.Categorie);
         }
 
         public List<Product> GetProducts()
@@ -83,6 +92,7 @@ namespace Couche_Data
             p.Quantite = product.Quantite;
             p.Categorie = product.Categorie;
         }
+
 
         private string getRandomCategorie()
         {

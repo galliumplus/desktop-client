@@ -1,7 +1,9 @@
-﻿using Couche_Métier;
+﻿using Couche_IHM.ImagesProduit;
+using Couche_Métier;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -18,36 +20,48 @@ using System.Windows.Shapes;
 namespace Couche_IHM.Frames
 {
     /// <summary>
-    /// Logique d'interaction pour FenetreAddProduct.xaml
+    /// Fenêtre pour ajouter et modifier les produits
     /// </summary>
     public partial class FenetreAddProduct : Window
     {
-        private ProduitIHM copyProduct;
+        // Produit à créer ou à modifier
+        private Product product;
 
         private ProductManager productManager;
 
-        public FenetreAddProduct(ProduitIHM p, List<string> catégories)
+        /// <summary>
+        /// Constructeur de la fenêtre 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="catégories"></param>
+        public FenetreAddProduct(Product p, List<string> catégories)
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             // Initialisation
-            this.copyProduct = p;
+            this.product = p;
             this.productCategorie.ItemsSource = catégories;
 
-            // Si l'objet vient d'être créer
-            if(string.IsNullOrEmpty(p.Product.Categorie))
+            // Création d'un produit
+            if(string.IsNullOrEmpty(p.NomProduit))
             {
                 title.Content = "Création du produit";
             }
-            else // Si l'objet existe déjà
+            // Modification d'un produit
+            else
             {
                 title.Content = "Modification d'un produit";
-                this.productCategorie.Text = copyProduct.Product.Categorie;
-                this.productStock.Text = copyProduct.Product.Quantite.ToString();
-                this.productPriceA.Text = copyProduct.Product.PrixAdherent.ToString();
-                this.productPriceNA.Text = copyProduct.Product.PrixNonAdherent.ToString();
-                this.productName.Text = copyProduct.Product.NomProduit;
+
+                // On met à jour les champs
+                this.productCategorie.Text = product.Categorie;
+                this.productStock.Text = product.Quantite.ToString();
+                this.productPriceA.Text = product.PrixAdherent.ToString();
+                this.productPriceNA.Text = product.PrixNonAdherent.ToString();
+                this.productName.Text = product.NomProduit;
+                ImageManager image = new ImageManager();
+                this.productImage.Source = new BitmapImage(new Uri(image.GetImageFromProduct(this.product.NomProduit), UriKind.Absolute));
+                
             }
         }
 
@@ -88,12 +102,15 @@ namespace Couche_IHM.Frames
         {
             if (IsAdherentNotNull())
             {
-                copyProduct.Product.Categorie = this.productCategorie.Text;
-                copyProduct.Product.Quantite = Convert.ToInt32(this.productStock.Text.Trim());
-                copyProduct.Product.PrixAdherent = Convert.ToDouble(this.productPriceA.Text.Trim());
-                copyProduct.Product.PrixNonAdherent = Convert.ToDouble(this.productPriceNA.Text.Trim());
-                copyProduct.Product.NomProduit = this.productName.Text;
-                copyProduct.ImageProduit = this.productImage.Source.ToString(); // Path de l'image
+                product.Categorie = this.productCategorie.Text;
+                product.Quantite = Convert.ToInt32(this.productStock.Text.Trim());
+                product.PrixAdherent = Convert.ToDouble(this.productPriceA.Text.Trim());
+                product.PrixNonAdherent = Convert.ToDouble(this.productPriceNA.Text.Trim());
+                product.NomProduit = this.productName.Text;
+
+                // Met à jour l'image
+                ImageManager image = new ImageManager();
+                image.CreateImageFromBlob(product.NomProduit, image.ConvertImageToBlob(this.productImage.Source.ToString()));
 
                 this.DialogResult = true;
             }

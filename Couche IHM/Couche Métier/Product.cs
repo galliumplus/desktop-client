@@ -13,12 +13,27 @@ namespace Couche_Métier
     /// </summary>
     public class Product
     {
+        #region attributes
         private int id;
         private string nomProduit;
         private int quantite;
         private double prixAdherent;
         private double prixNonAdherent;
         private string categorie;
+        #endregion
+
+        #region properties
+
+        /// <summary>
+        /// Permet de savoir si le produit est disponible
+        /// </summary>
+        public bool isDisponible
+        {
+            get
+            {
+                return (quantite > 0);
+            }
+        }
 
         /// <summary>
         /// Id du produit
@@ -85,8 +100,20 @@ namespace Couche_Métier
             get => categorie; 
             set => categorie = value; 
         }
-        public double PrixNonAdherent { get => prixNonAdherent; set => prixNonAdherent = value; }
-        
+
+        /// <summary>
+        /// Renvoie le prix non adhérent
+        /// </summary>
+        public double PrixNonAdherent 
+        { 
+            get => prixNonAdherent; 
+            set => prixNonAdherent = value; 
+        }
+
+
+        #endregion
+
+        #region constructors
         /// <summary>
         /// Futur constructeur naturelle
         public Product(int id, string nomProduit, int quantite, double prixAdherent, double prixNonAdherent, string categorie)
@@ -118,6 +145,8 @@ namespace Couche_Métier
             this.prixNonAdherent = p.PrixNonAdherent;
             this.categorie = p.Categorie;
         }
+
+        #endregion
 
         public override string ToString()
         {

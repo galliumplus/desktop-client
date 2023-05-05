@@ -65,6 +65,16 @@ namespace Couche_Métier
             productDAO.RemoveProduct(p);
         }
 
+
+        /// <summary>
+        /// Récupère tous les produits d'une catégorie
+        /// </summary>
+        /// <returns> liste de produits </returns>
+        public List<Product> GetProductsByCategory(string category)
+        {
+            return this.productDAO.GetProductsByCategory(category);
+        }
+
         /// <summary>
         /// Update un produit
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿using Couche_Data;
+using Couche_IHM.ImagesProduit;
 using Couche_Métier;
 using Couche_Métier.Log;
 using System;
@@ -79,12 +80,8 @@ namespace Couche_IHM.Frames
         {
             this.listproduits.ItemsSource = null;
             List<Product> productMetier = this.productManager.GetProducts();
-            List<ProduitIHM> produitIHM = new List<ProduitIHM>();
-            foreach (Product p in productMetier)
-            {
-                produitIHM.Add(new ProduitIHM(p));
-            }
-            this.listproduits.ItemsSource = produitIHM;
+
+            this.listproduits.ItemsSource = productMetier;
         }
 
 
@@ -130,7 +127,7 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void DeleteStock(object sender, RoutedEventArgs e)
         {
-            Product productSelect = this.productManager.GetProduct((this.listproduits.SelectedItem as ProduitIHM).Product.ID);
+            Product productSelect = this.productManager.GetProduct((this.listproduits.SelectedItem as Product).ID);
             this.productManager.RemoveProduct(productSelect);
             productDetails.Visibility = Visibility.Hidden;
 
@@ -148,11 +145,11 @@ namespace Couche_IHM.Frames
         private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
         {
             this.productDetails.Visibility = Visibility.Visible;
-            ProduitIHM p = (ProduitIHM)this.listproduits.SelectedItem;
+            Product p = (Product)this.listproduits.SelectedItem;
             if(p != null)
             {
                 this.productName.Text = p.NomProduit;
-                this.productQuantite.Text = p.QuantiteProduit.ToString();
+                this.productQuantite.Text = p.Quantite.ToString();
                 this.productCategorie.SelectedItem = p.Categorie.ToString();
             }
         }
@@ -324,14 +321,14 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void AddAnProduct(object sender, RoutedEventArgs e)
         {
-            ProduitIHM newProduct = new ProduitIHM(new Product());
+            Product newProduct = new Product();
             FenetreAddProduct p = new FenetreAddProduct(newProduct, this.categorieManager.ListAllCategory());
             bool res = p.ShowDialog().Value;
 
             // Si fermé
             if(res == true)
             {
-                this.productManager.CreateProduct(newProduct.Product);
+                this.productManager.CreateProduct(newProduct);
                 this.UpdateView();  
             }
         }
@@ -342,16 +339,19 @@ namespace Couche_IHM.Frames
         private void UpdateAnProduct(object sender, RoutedEventArgs e)
         {
             HideOptions();
-            ProduitIHM baseProduit = (ProduitIHM)listproduits.SelectedItem;
-            ProduitIHM copyProduct = new ProduitIHM(baseProduit);
+            Product baseProduit = (Product)listproduits.SelectedItem;
+            Product copyProduct = new Product(baseProduit);
             FenetreAddProduct p = new FenetreAddProduct(copyProduct, this.categorieManager.ListAllCategory());
             bool res = p.ShowDialog().Value;
 
-            // Si fermé
+            // Si la modification est validée
             if (res == true)
             {
-                this.productManager.UpdateProduct(copyProduct.Product);
-                baseProduit.ImageProduit = copyProduct.ImageProduit;
+                // On met à jour le produit
+                this.productManager.UpdateProduct(copyProduct);
+
+              
+                
                 this.UpdateView();
             }
         }

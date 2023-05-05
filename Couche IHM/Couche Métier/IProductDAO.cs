@@ -18,6 +18,12 @@ namespace Couche_Métier
         public List<Product> GetProducts();
 
         /// <summary>
+        /// Récupère tous les produits d'une catégorie
+        /// </summary>
+        /// <returns> liste de produits </returns>
+        public List<Product> GetProductsByCategory(string category);
+
+        /// <summary>
         /// retire un produit
         /// </summary>
         /// <param name="product"> produit à retirer </param>
@@ -40,6 +46,6 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="name"> Nom du produit </param>
         /// <returns> Un produit </returns>
-        public Product GetProduct(int name);
+        public Product? GetProduct(int name);
     }
 }
