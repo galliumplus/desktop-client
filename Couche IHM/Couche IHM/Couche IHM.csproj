@@ -129,8 +129,4 @@
     </Resource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CustomListView\" />
-  </ItemGroup>
-
 </Project>

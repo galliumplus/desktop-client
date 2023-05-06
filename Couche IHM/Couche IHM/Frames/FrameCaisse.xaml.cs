@@ -5,6 +5,7 @@ using Couche_Métier.Log;
 using DocumentFormat.OpenXml.Office.CustomUI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -30,22 +31,52 @@ namespace Couche_IHM.Frames
     {
         // Produits IHM
         private List<Product> produits = new List<Product>();
-        private List<Product> orderedItem = new List<Product>();
+        private ObservableCollection<KeyValuePair<Product, int>> orderedItem = new ObservableCollection<KeyValuePair<Product, int>>();
 
-        // private List<Product> orderedItem = new List<Product>();
-        // private Dictionary<string, int> productsQuantity = new Dictionary<string, int>();
-        private int quantityTotal = 0;
-        private double priceTotal = 0.00f;
 
-        public int QuantityO { get => quantityTotal; set => quantityTotal = value; }
-        public string PriceAdher { get => priceTotal + "€"; }
-        public string PriceNanAdher { get => priceTotal + (0.20 * quantityTotal) + "€"; }
+        /// <summary>
+        /// Renvoie le prix total du panier pour les adhérents
+        /// </summary>
+        public float PriceAdher
+        {
+            get
+            {
+                float prixTotal = 0.00f;
+                foreach (KeyValuePair<Product, int> product in orderedItem)
+                {
+                    prixTotal += (float)product.Key.PrixAdherent * product.Value;
+                }
+                return prixTotal;
+            }
+        }
+        /// <summary>
+        /// Renvoie le prix total du panier pour les non adhérents
+        /// </summary>
+        public float PriceNanAdher
+        {
+            get
+            {
+                float prixTotal = 0.00f;
+                foreach (KeyValuePair<Product, int> product in orderedItem)
+                {
+                    prixTotal += (float)product.Key.PrixNonAdherent * product.Value;
+                }
+                return prixTotal;
+            }
+
+        }
 
         // Liste des managers
         private AdhérentManager adherentManager;
         private ProductManager produitManager;
         private CategoryManager categorieManager;
 
+        /// <summary>
+        /// Constructeur de la caisse
+        /// </summary>
+        /// <param name="adherentManager"></param>
+        /// <param name="produitManager"></param>
+        /// <param name="categorieManager"></param>
         public FrameCaisse(AdhérentManager adherentManager, ProductManager produitManager, CategoryManager categorieManager)
         {
             InitializeComponent();
@@ -53,7 +84,7 @@ namespace Couche_IHM.Frames
             this.produitManager = produitManager;
             this.categorieManager = categorieManager;
 
-
+            // Initialisation des produits de la caisse
             productsSP.Children.Clear();
             foreach (string category in categorieManager.Categories)
             {
@@ -67,36 +98,39 @@ namespace Couche_IHM.Frames
                 // On créer des listener sur chaque items
                 foreach (DetailedProduct p in categoryProductList.ListProductView)
                 {
-                    //p.boutonDp.Click += new System.Windows.RoutedEventHandler(AddProductCaisse);
+                    p.boutonDp.Click += AddProduct;
                 }
             }
 
+            // Initialisation du panier
             Order.ItemsSource = orderedItem;
 
+            // Initialisation des moyens de paiement
             string[] moyenPayement = { "Acompte", "Paypal", "Carte" };
             listeMoyenPayement.ItemsSource = moyenPayement;
         }
 
+
+
         /// <summary>
         /// Permet de retirer un produit du panier 
         /// </summary>
-        private void RemoveProduct(object sender, MouseEventArgs e)
+        private void RemoveProduct(object sender, MouseButtonEventArgs e)
         {
-            Grid gd = sender as Grid;
-            int i = 0;
-           
-            while (i < orderedItem.Count)
-            {
-                if (orderedItem[i].NomProduit == gd.Tag)
-                {
-                    priceTotal -= (float)orderedItem[i].PrixAdherent;
-                    orderedItem.RemoveAt(i);
-                    quantityTotal--;
-                    i = orderedItem.Count;
-                }
-                i++;
-            }
+            MessageBox.Show("delete");
+            // On retrouve le produit
+            System.Windows.Controls.Button buttonRemove = (System.Windows.Controls.Button)sender;
+            int index = doesProductExist(buttonRemove.Tag.ToString());
 
+            // Mise à jour de la quantité
+            orderedItem[index] = new KeyValuePair<Product, int>(orderedItem[index].Key, orderedItem[index].Value - 1);
+
+            // Si quantité inférieur ou égale à 0 alors on supprime le produit
+            if (orderedItem[index].Value <= 0)
+            {
+                orderedItem.Remove(orderedItem[index]);
+            }
+            
 
             UpdateListProduitsOrder();
         }
@@ -104,42 +138,54 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Ajoute un produit au panier
         /// </summary
-        private void AddProduct(object sender, MouseButtonEventArgs e)
+        private void AddProduct(object sender, RoutedEventArgs e)
         {
             // Récupère le produit séléctionné 
-            Grid gd = (Grid)sender;
-            Label lab = (Label)gd.Children[1];
-            string prodName = (string)lab.Content; /// Nom du produit
+            System.Windows.Controls.Button gd = (System.Windows.Controls.Button)sender;
+            Product productSelected = ((StackPanel)gd.Content).DataContext as Product;
 
-            foreach(Product p in this.orderedItem)
+            // On regarde s'il est déjà dans le panier
+            int index = doesProductExist(productSelected.NomProduit);
+            if (index != -1)
             {
-                // Si un produit corresponds à l'item récupérer
-                if (p.NomProduit == prodName)
-                {
-                    // Si l'item n'est pas déjà présent, l'ajouter
-                    if (!orderedItem.Contains(p))
-                    {
-                        orderedItem.Add(p);
-                    }
-                    else // Si déjà présent, augmente quantité de 1
-                    {
-                        //orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier = orderedItem[orderedItem.IndexOf(p)].QuantiteProduitPanier + 1;
-                    }
-                    quantityTotal++;
-                    //priceTotal += (float)p.PrixProduitAdherentAffichage;
-                }
+                orderedItem[index] = new KeyValuePair<Product, int>(productSelected, orderedItem[index].Value + 1);
             }
-           
+            else
+            {
+                orderedItem.Add(new(productSelected, 1));
+            }
+
+            this.PriceA.Content = this.PriceAdher + "€";
+            this.PriceNA.Content = this.PriceNanAdher + "€";
             UpdateListProduitsOrder();
         }
 
+        /// <summary>
+        /// Permet de savoir si le produit a déjà été commandé
+        /// </summary>
+        /// <returns>-1 s'il existe pas , l'index sinon</returns>
+        private int doesProductExist(string productName)
+        {
+            int itemFound = -1;
+            int compteur = 0;
+            foreach (KeyValuePair<Product, int> item in orderedItem)
+            {   
+                if (item.Key.NomProduit == productName)
+                {
+                    itemFound = compteur;
+                    break;
+                }
+                compteur++;
+            }
+            return itemFound;
+        }
         /// <summary>
         /// Met à jour la liste des produits
         /// </summary>
         private void UpdateListProduitsOrder()
         {
-            this.Order.ItemsSource = null;
-            this.Order.ItemsSource = orderedItem;
+            this.Order.Items.Refresh();
+            
         }
 
 
@@ -155,12 +201,20 @@ namespace Couche_IHM.Frames
             // Si Achat acompte
             if(listeMoyenPayement.SelectedItem != null)
             {
-                if (listeMoyenPayement.SelectedItem.Equals("Acompte"))
+                switch (listeMoyenPayement.SelectedItem.ToString())
                 {
-                    // Vrai Windows
-                    FenetreAchat fn = new FenetreAchat(this.adherentManager.GetAdhérents());
-                    bool result = fn.ShowDialog().Value;
+                    case "Acompte":
+                        PaiementAcompteWindow fn = new PaiementAcompteWindow(this.adherentManager.GetAdhérents(),this.PriceAdher,this.PriceNanAdher);
+                        bool result = fn.ShowDialog().Value;
+                        break;
+                    case "Liquide":
+                        break;
+                    case "Carte":
+                        break;
+                    case "Paypal":
+                        break;
                 }
+
             }
         }
 
@@ -203,5 +257,7 @@ namespace Couche_IHM.Frames
             this.SetBackground(sender, Brushes.Black);
         }
         #endregion
+
+
     }
 }

@@ -52,16 +52,38 @@
         </Grid>
 
         <!-- Panier d'achat -->
-        <ListView Grid.Column="1"  Name="Order" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="220">
+        <ListView  Grid.Column="1"  Name="Order" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.Template>
+                <ControlTemplate>
+                    <DockPanel LastChildFill="True">
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                        <Label Content="{Binding NomProduit}"  Width="125"/>
+                            <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" Foreground="#FF403D39">Panier</Label>
+
+                            <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+                        </Grid>
+                        <ItemsPresenter ></ItemsPresenter>
+                    </DockPanel>
+                </ControlTemplate>
+            </ListView.Template>
+            <ListView.ItemTemplate >
+                <DataTemplate >
+
+                    <Grid Width="220">
+                        <Label Content="{Binding Key.NomProduit}"  Width="15" FontWeight="Medium"/>
                         <!-- Nombre de produit -->
-                        <Label x:Name="numberP" Content="{Binding QuantiteProduitPanier}" ContentStringFormat="x{0}"  />
+                        <Label x:Name="numberP" Content="{Binding Value}" ContentStringFormat="x{0}"  />
                         <!-- Bouton pour enlever le produit -->
-                        <Button Style="{StaticResource buttonImage}"  HorizontalAlignment="Right"  Height="15" Width="25" MouseLeftButtonDown="RemoveProduct" Tag="{Binding NomProduit}" >
+                        <Button   HorizontalAlignment="Right"  Height="15" Width="25" Tag="{Binding NomProduit}" MouseDown="RemoveProduct" >
                             <Image Source="/Images/suprim.png"  />
                         </Button>
 
@@ -80,8 +102,12 @@
                     <ComboBox Name="listeMoyenPayement" SelectedIndex="0" Height="15" Width="150" FontSize="8" Grid.ColumnSpan="2" Grid.Row="1"/>
                     <!-- Prix -->
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Prix TTC :" VerticalAlignment="Center" Foreground="White" FontSize="10" />
-                    <Label Name="Price" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="30,0,0,0"    />
+                    <Label Content="Prix A :" VerticalAlignment="Center" Foreground="White" FontSize="10" />
+                    <Label Name="PriceA" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="30,0,0,0"    />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Prix NA :" VerticalAlignment="Center" Foreground="White" FontSize="10" />
+                    <Label Name="PriceNA" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="30,0,0,0"    />
                 </StackPanel>
                 <!-- Bouton Payer-->
                 <Grid  MouseEnter="Buy_MouseEnter" MouseLeave="Buy_MouseLeave" Background="Black"   MouseDown="PayCaisse">

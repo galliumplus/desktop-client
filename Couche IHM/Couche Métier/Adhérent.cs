@@ -128,12 +128,13 @@ namespace Couche_Métier
             }
         }
 
-        
+
+
         #endregion
 
         public override string ToString()
         {
-            return $"{Identifiant} {Nom} {Prenom} {Argent}€";
+            return $" {Nom} {Identifiant} {Prenom}";
         }
     }
 }

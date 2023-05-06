@@ -14,7 +14,7 @@
 
         <StackPanel Margin="0 0 0 40">
             <TextBlock Margin="0 0 0 5" FontSize="18"  Name="nameCategory"></TextBlock>
-            <Rectangle  Height="2" Width="auto"/>
+            <Rectangle Fill="Black"  Height="2" Width="auto"/>
         </StackPanel>
 
         <ItemsControl Grid.Row="1" x:Name="products">
