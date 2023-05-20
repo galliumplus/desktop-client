@@ -135,86 +135,82 @@
 
 
                 <!-- Info -->
-                <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
+                <Border Background="LightBlue" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200" Name="infoAdherent" Visibility="Visible">
+                    
+                    <StackPanel    >
+                        <TextBlock Margin="0,10,0,0" Text="IDENTITE" HorizontalAlignment="Center"  FontSize="13"  FontWeight="Bold" Foreground="Black" />
+                    <!-- Boutons -->
+                    <Button x:Name="optionsButton"  Margin="150,-10,0,0"  Width="28"    Style="{StaticResource buttonImage}" Click="ShowOptions" >
+                        <Image   Source="/Images/param.png"/>
+                    </Button>
 
-                    <Border  Name="infoAdherent" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Hidden"  Background="LightGray"    CornerRadius="3"   Margin="0,0,0,54"   >
+                    <Image Source="/Images/personne.png" Margin="30,-30,30,0"/>
 
-                        <StackPanel Margin="0,0,0,8" >
+                    <!-- Information de l'acompte -->
+                    <StackPanel   Margin="0,0,0,60" >
 
-                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <!-- Nom utilisateur -->
+                            <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" >
+                                <TextBlock Margin="-17,0,0,0"  Text="Nom :" HorizontalAlignment="Left"  FontSize="11" FontWeight="Bold" Foreground="Black" />
+                                <TextBox Margin="7,7,0,0" x:Name="name" Width="135" Text="" FontSize="11"   Foreground="Black"  TextChanged="ShowValidationButton"/>
+                            <Image x:Name="identiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
+                        </StackPanel>
 
-                                <Button Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left"  Click="CloseInfoAdherent">
-                                    <Image Source="/Images/retour.png"/>
-                                </Button>
-                                <Button x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions" >
-                                    <Image   Source="/Images/param.png"/>
-
-                                </Button>
-
-                            </StackPanel>
-
-
-                            <!-- Nom utilisateur -->
-                            <TextBlock Text="Identité" HorizontalAlignment="Center" Margin="10,0,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
-                                <TextBox x:Name="name"  MinWidth="80" Text="" FontSize="13"   Foreground="Black" TextChanged="ShowValidationButton"/>
-                                <Image x:Name="identiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
-
-
-                            <!-- Compte utilisateur -->
-                            <TextBlock  Text="Compte" HorizontalAlignment="Center" Margin="10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                <TextBox x:Name="id" Text="" MinWidth="80" FontSize="13" Foreground="Black" TextChanged="ShowValidationButton" />
-                                <Image x:Name="compteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
-
-                            <!-- Balance utilisateur -->
-                            <TextBlock Text="Balance" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBox MinWidth="40" x:Name="argent" Text="" FontSize="13"  Foreground="Black" TextChanged="ShowValidationButton" />
-                                <Image x:Name="argentWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
-                            </StackPanel>
-
+                        <!-- Compte utilisateur -->
+                        <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                <TextBlock  Margin="-17,0,0,0"  Text="Compte :" HorizontalAlignment="Left"  FontSize="11" FontWeight="Bold" Foreground="Black" />
+                                <TextBox  Margin="7,7,0,0" x:Name="id" Text=""  Width="135" FontSize="11" Foreground="Black"   TextChanged="ShowValidationButton" />
+                            <Image x:Name="compteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                         </StackPanel>
 
 
-                    </Border>
+                        <!-- Balance utilisateur -->
+                        <StackPanel Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock  Margin="-17,0,0,0" Text="Balance :" HorizontalAlignment="Left"  FontSize="11"  FontWeight="Bold" Foreground="Black" />
+                                <TextBox Margin="7,7,0,0" Width="135" x:Name="argent" Text="" FontSize="11"  Foreground="Black" TextChanged="ShowValidationButton"  />
+                            <Image x:Name="argentWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
+                        </StackPanel>
 
-                    <Button BorderBrush="Green"   x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="#252422"  Foreground="White" VerticalAlignment="Bottom" Width="120" Click="ValiderChangements" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-                    <Border x:Name="options" Visibility="Hidden" Margin="100,26,-26,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
-                        <Menu  >
-                            <MenuItem  Width="104" Click="ModifyAdherent" >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Modifier"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/modif.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Click="DeleteAdherent" Width="104" >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/suprim.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Width="104" Click="HideOptions"  >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Retour"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/retour.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </Menu>
-                    </Border>
-                </Grid>
+                           
 
+                        </StackPanel>
+
+                       
+
+                    </StackPanel>
+                </Border>
+                <Border x:Name="options" Visibility="Hidden" Margin="155,-375,0,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
+                    <Menu  >
+                        <MenuItem  Width="104" Click="ModifyAdherent" >
+                            <MenuItem.Header>
+                                <TextBlock Margin="0,3,0,0" Text="Modifier"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Images/modif.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Click="DeleteAdherent" Width="104" >
+                            <MenuItem.Header>
+                                <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Images/suprim.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Width="104" Click="HideOptions"  >
+                            <MenuItem.Header>
+                                <TextBlock Margin="0,3,0,0" Text="Retour"/>
+                            </MenuItem.Header>
+                            <MenuItem.Icon>
+                                <Image Source="/Images/retour.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </Menu>
+                </Border>
+                <Button FontSize="12"  x:Name="buttonValidate" Visibility="Visible" Content="Valider" Background="LightBlue" BorderBrush="Black"  Foreground="ForestGreen" FontWeight="Bold" VerticalAlignment="Bottom" Width="120" Click="ValiderChangements" HorizontalAlignment="Center" Margin="0,20,0,0"/>
             </StackPanel>
+            
+                
 
         </Grid>
     </Grid>

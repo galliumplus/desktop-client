@@ -138,8 +138,8 @@
 
 
                 <!-- Info -->
-                <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
 
+                <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
                     <Border  Name="productDetails" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Hidden"  Background="LightGray"    CornerRadius="3" Height="247" VerticalAlignment="Top"   >
 
                         <StackPanel Margin="0,0,0,8" >
@@ -180,7 +180,7 @@
                                 <ComboBox MinWidth="80" x:Name="productCategorie" ItemsSource="{Binding Path=Categories}"  FontSize="13"  Foreground="Black"  />
                                 <Image x:Name="categorieWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
                             </StackPanel>
-
+                            
                         </StackPanel>
 
 
@@ -218,6 +218,7 @@
                     </Border>
                 </Grid>
             </StackPanel>
+            
         </Grid>
     </Grid>
 </Page>
