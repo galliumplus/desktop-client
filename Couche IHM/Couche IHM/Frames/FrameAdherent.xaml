@@ -78,13 +78,13 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Button  BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
+                                    <Button FocusVisualStyle="{x:Null}"  BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
                                     <Image Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortId" Content="Acompte" />
+                                    <Button FocusVisualStyle="{x:Null}" BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortId" Content="Acompte" />
                                     <Image Name="idTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortArgent" Content="Monnaie "/>
+                                    <Button FocusVisualStyle="{x:Null}" BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortArgent" Content="Monnaie "/>
                                     <Image x:Name="argentTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
 
 
@@ -93,13 +93,13 @@
 
                                 </Grid>
                                 <!-- items de la listview -->
-                                <ItemsPresenter ></ItemsPresenter>
+                                <ItemsPresenter  ></ItemsPresenter>
                             </DockPanel>
                         </ControlTemplate>
                     </ListView.Template>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
@@ -133,18 +133,19 @@
                     <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
                 </Grid>
 
-
+                
                 <!-- Info -->
-                <Border Background="LightBlue" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200" Name="infoAdherent" Visibility="Hidden">
+                <Border Background="#FFFCF2" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200" Name="infoAdherent" Visibility="Hidden">
                     
                     <StackPanel    >
+                        
                         <TextBlock Margin="0,10,0,0" Text="IDENTITE" HorizontalAlignment="Center"  FontSize="13"  FontWeight="Bold" Foreground="Black" />
                     <!-- Boutons -->
-                    <Button x:Name="optionsButton"  Margin="150,-10,0,0"  Width="28"    Style="{StaticResource buttonImage}" Click="ShowOptions" >
-                        <Image   Source="/Images/param.png"/>
+                        <Button x:Name="optionsButton"  Margin="160,-20,0,0"  Width="20"    Style="{StaticResource buttonImage}" Click="ModifyAdherent" >
+                        <Image   Source="/Images/plein_ecran.png"/>
                     </Button>
 
-                    <Image Source="/Images/personne.png" Margin="30,-30,30,0"/>
+                    <Image Source="/Images/personne.png" Margin="30,-10,30,0"/>
 
                     <!-- Information de l'acompte -->
                     <StackPanel   Margin="0,0,0,60" >
@@ -179,35 +180,12 @@
 
                     </StackPanel>
                 </Border>
-                <Border x:Name="options" Visibility="Hidden" Margin="155,-375,0,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
-                    <Menu  >
-                        <MenuItem  Width="104" Click="ModifyAdherent" >
-                            <MenuItem.Header>
-                                <TextBlock Margin="0,3,0,0" Text="Modifier"/>
-                            </MenuItem.Header>
-                            <MenuItem.Icon>
-                                <Image Source="/Images/modif.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Click="DeleteAdherent" Width="104" >
-                            <MenuItem.Header>
-                                <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
-                            </MenuItem.Header>
-                            <MenuItem.Icon>
-                                <Image Source="/Images/suprim.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Width="104" Click="HideOptions"  >
-                            <MenuItem.Header>
-                                <TextBlock Margin="0,3,0,0" Text="Retour"/>
-                            </MenuItem.Header>
-                            <MenuItem.Icon>
-                                <Image Source="/Images/retour.png"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </Menu>
-                </Border>
-                <Button FontSize="12"  x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="LightBlue" BorderBrush="Black"  Foreground="ForestGreen" FontWeight="Bold" VerticalAlignment="Bottom" Width="120" Click="ValiderChangements" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+               
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Bottom">
+                    <Button   FontSize="12" x:Name="buttonCancel"  Visibility="Hidden" Content="Annuler" Background="White" BorderBrush="Black"  Foreground="Red" FontWeight="Bold"  Width="90" Click="CancelChangements"  />
+                    <Button  FontSize="12" Margin="10,0,0,0" x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="LightGray" BorderBrush="Black"  Foreground="ForestGreen"  FontWeight="Bold"  Width="90" Click="ValiderChangements" />
+                </StackPanel>
+                
             </StackPanel>
             
                 

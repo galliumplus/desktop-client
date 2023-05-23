@@ -51,6 +51,14 @@ namespace Couche_IHM.ImagesProduit
             {
                 pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png";
             }
+            else
+            {
+                // On créer l'image dans les documents TEMPORAIREMENT
+                byte[] imageInconnu = ConvertImageToBlob("../../../Images/unknownProduct.png");
+                CreateImageFromBlob("unknownProduct",imageInconnu);
+
+                pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png";
+            }
 
             return pathImage;
 

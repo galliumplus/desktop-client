@@ -162,6 +162,7 @@
             </Setter>
         </Style>
 
+
         <!-- Bouton Nav Barre-->
         <Style TargetType="Button" x:Key="buttonNavBarre">
             <Setter Property="Foreground" Value="#F2F1F0" />

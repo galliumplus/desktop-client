@@ -97,7 +97,7 @@ namespace Couche_IHM.Frames
 
             // Modification affichage
             this.buttonValidate.Visibility = Visibility.Hidden;
-            this.options.Visibility = Visibility.Hidden;
+            this.buttonCancel.Visibility = Visibility.Hidden;
             ResetWarnings();
                      
         }
@@ -160,6 +160,7 @@ namespace Couche_IHM.Frames
                 this.UpdateView();
                 infoAdherent.Visibility = Visibility.Hidden;
                 this.buttonValidate.Visibility = Visibility.Hidden;
+                this.buttonCancel.Visibility = Visibility.Hidden;
             }
         }
 
@@ -217,6 +218,7 @@ namespace Couche_IHM.Frames
                 this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
                 this.buttonValidate.Visibility = Visibility.Hidden;
+                this.buttonCancel.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
@@ -246,6 +248,7 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, TextChangedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
+            this.buttonCancel.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -266,6 +269,7 @@ namespace Couche_IHM.Frames
         private void ShowValidationButton(object sender, RoutedEventArgs e)
         {
             this.buttonValidate.Visibility = Visibility.Visible;
+            this.buttonCancel.Visibility = Visibility.Visible;
 
         }
 
@@ -284,7 +288,6 @@ namespace Couche_IHM.Frames
             log.registerLog(CategorieLog.DELETE, adhérentSelect, MainWindow.CompteConnected);
 
             UpdateView();
-            this.options.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -296,7 +299,6 @@ namespace Couche_IHM.Frames
         {
             Adhérent adhérentSelect = new Adhérent((Adhérent)this.listadherents.SelectedItem);
             ModificationAcompte modifAcompteWindow = new ModificationAcompte(adhérentSelect);
-            this.options.Visibility = Visibility.Hidden;
             bool? result = modifAcompteWindow.ShowDialog();
 
             // Si l'ajout est validé alors on met à jour la bdd et la vue
@@ -359,29 +361,25 @@ namespace Couche_IHM.Frames
         {
             this.infoAdherent.Visibility = Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;
+            this.buttonCancel.Visibility = Visibility.Hidden;
             this.listadherents.SelectedItem = null;
-            this.options.Visibility = Visibility.Hidden;
         }
 
-
+        
         /// <summary>
-        /// Permet de cacher les options
+        /// Permet d'annuler les changements faits à l'adhérent
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void HideOptions(object sender, RoutedEventArgs e)
+        private void CancelChangements(object sender, RoutedEventArgs e)
         {
-            this.options.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
-        /// Permet d'afficher les options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowOptions(object sender, RoutedEventArgs e)
-        {
-            this.options.Visibility = Visibility.Visible;
+            Adhérent Adhérent = (Adhérent)this.listadherents.SelectedItem;
+            this.name.Text = Adhérent.NomCompletIHM;
+            this.argent.Text = Adhérent.ArgentIHM;
+            this.id.Text = Adhérent.Identifiant;
+            this.buttonCancel.Visibility = Visibility.Hidden;
+            this.buttonValidate.Visibility = Visibility.Hidden;
+            ResetWarnings();
         }
         #endregion
 
@@ -480,6 +478,7 @@ namespace Couche_IHM.Frames
             }
             isSortingIdentite = (isSortingIdentite + 1) % 3;
         }
+
 
 
         #endregion

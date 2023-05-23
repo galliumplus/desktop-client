@@ -28,12 +28,14 @@
     <None Remove="Images\modif.png" />
     <None Remove="Images\param.png" />
     <None Remove="Images\personne.png" />
+    <None Remove="Images\plein_ecran.png" />
     <None Remove="Images\retour.png" />
     <None Remove="Images\supp.png" />
     <None Remove="Images\suprim.png" />
     <None Remove="Images\triAsc.png" />
     <None Remove="Images\triDesc.png" />
     <None Remove="Images\twitterIcon.png" />
+    <None Remove="Images\unknownProduct.png" />
     <None Remove="Images\vente.png" />
     <None Remove="Images\warning.png" />
   </ItemGroup>
@@ -107,6 +109,9 @@
     <Resource Include="Images\personne.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\plein_ecran.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\retour.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -123,6 +128,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\twitterIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\unknownProduct.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\vente.png">
