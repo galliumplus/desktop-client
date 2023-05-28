@@ -52,46 +52,41 @@
         </Grid>
 
         <!-- Panier d'achat -->
-        <ListView  Grid.Column="1"  Name="Order" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.Template>
-                <ControlTemplate>
-                    <DockPanel LastChildFill="True">
-                        <Grid DockPanel.Dock="Top">
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="18" Foreground="#FF403D39">Panier</Label>
+            <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+        </StackPanel>
+        <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <ListView  Name="Order" >
+                <ListView.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <ItemsPresenter ></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+
+                        <Grid Width="220">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
+                            <Label Content="{Binding Key.NomProduit}" Grid.Column="1" VerticalAlignment="Center"  FontWeight="Medium"/>
+                            <!-- Nombre de produit -->
+                            <Label x:Name="numberP" Content="{Binding Value}" Grid.Column="0" VerticalAlignment="Center" ContentStringFormat="x{0}"  />
+                            <!-- Bouton pour enlever le produit -->
+                            <Button Style="{StaticResource buttonImage}"   HorizontalAlignment="Right"  Height="20" Grid.Column="2" Width="25"  >
+                                <Image  Source="/Images/moins.png" Tag="{Binding Key.NomProduit}" MouseDown="RemoveProduct"   />
+                            </Button>
 
-                            <Label Grid.Column="0" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" FontSize="18" Foreground="#FF403D39">Panier</Label>
-
-                            <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
                         </Grid>
-                        <ItemsPresenter ></ItemsPresenter>
-                    </DockPanel>
-                </ControlTemplate>
-            </ListView.Template>
-            <ListView.ItemTemplate >
-                <DataTemplate >
-
-                    <Grid Width="220">
-                        <Label Content="{Binding Key.NomProduit}"  Width="15" FontWeight="Medium"/>
-                        <!-- Nombre de produit -->
-                        <Label x:Name="numberP" Content="{Binding Value}" ContentStringFormat="x{0}"  />
-                        <!-- Bouton pour enlever le produit -->
-                        <Button   HorizontalAlignment="Right"  Height="15" Width="25" Tag="{Binding NomProduit}" MouseDown="RemoveProduct" >
-                            <Image Source="/Images/suprim.png"  />
-                        </Button>
-
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
 
         <!-- Information de paiement -->
         <Grid Grid.Column="1" Grid.Row="2"  Background="#302F2F" Height="auto">

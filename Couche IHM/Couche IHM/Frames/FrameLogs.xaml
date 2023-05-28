@@ -104,7 +104,7 @@
                         <CheckBox IsChecked="True"  x:Name="produitActivated"  Margin="0,8,0,0" Content="Produit"  Click="ResetCriteria" HorizontalAlignment="Left" Width="76"/>
                         <CheckBox IsChecked="True" x:Name="AdherentActivated" Click="ResetCriteria" Content="Adhérent" HorizontalAlignment="Left" Width="76" />
                         <CheckBox IsChecked="True" x:Name="CompteActivated" Click="ResetCriteria" Content="Utilisateur" HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" Content="Vente" Click="ResetCriteria" HorizontalAlignment="Left" Width="76"/>
+                        <CheckBox IsChecked="True" x:Name="VenteActivated" Content="Vente" Click="ResetCriteria" HorizontalAlignment="Left" Width="76"/>
                         <CheckBox IsChecked="True" Content="Achat" Click="ResetCriteria" HorizontalAlignment="Left" Width="76"/>
                     </StackPanel >
                     <!-- Filtres méthodes CRUD-->

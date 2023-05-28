@@ -71,6 +71,8 @@ namespace Couche_IHM.Frames
         private ProductManager produitManager;
         private CategoryManager categorieManager;
 
+        private ILog log = new LogVenteToTxt();
+
         /// <summary>
         /// Constructeur de la caisse
         /// </summary>
@@ -119,7 +121,7 @@ namespace Couche_IHM.Frames
         {
             MessageBox.Show("delete");
             // On retrouve le produit
-            System.Windows.Controls.Button buttonRemove = (System.Windows.Controls.Button)sender;
+            System.Windows.Controls.Image buttonRemove = (System.Windows.Controls.Image)sender;
             int index = doesProductExist(buttonRemove.Tag.ToString());
 
             // Mise à jour de la quantité
@@ -198,6 +200,8 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void PayCaisse(object sender, MouseButtonEventArgs e)
         {
+            bool result = false;
+            Adhérent adhérentSelectionne = null;
             // Si Achat acompte
             if(listeMoyenPayement.SelectedItem != null)
             {
@@ -205,7 +209,11 @@ namespace Couche_IHM.Frames
                 {
                     case "Acompte":
                         PaiementAcompteWindow fn = new PaiementAcompteWindow(this.adherentManager.GetAdhérents(),this.PriceAdher,this.PriceNanAdher);
-                        bool result = fn.ShowDialog().Value;
+                        result = fn.ShowDialog().Value;
+                        if (result)
+                        {
+                            adhérentSelectionne = fn.AdhérentSelectionné;
+                        }
                         break;
                     case "Liquide":
                         break;
@@ -215,6 +223,20 @@ namespace Couche_IHM.Frames
                         break;
                 }
 
+            }
+
+            // Si vente reussite
+            if (result == true)
+            {
+                // On enleve les produits du stock
+                for (int i = 0; i < orderedItem.Count; i++)
+                {
+                    orderedItem[i].Key.Quantite -= orderedItem[i].Value;
+                }
+                this.orderedItem.Clear();
+                UpdateListProduitsOrder();
+                this.adherentManager.UpdateAdhérent(adhérentSelectionne);
+                this.log.registerLog(CategorieLog.VENTE, adhérentSelectionne, MainWindow.CompteConnected);
             }
         }
 

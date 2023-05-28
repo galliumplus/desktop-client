@@ -26,6 +26,7 @@
     <None Remove="Images\loupe.png" />
     <None Remove="Images\modi.png" />
     <None Remove="Images\modif.png" />
+    <None Remove="Images\moins.png" />
     <None Remove="Images\param.png" />
     <None Remove="Images\personne.png" />
     <None Remove="Images\plein_ecran.png" />
@@ -101,6 +102,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\modif.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\moins.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\param.png">

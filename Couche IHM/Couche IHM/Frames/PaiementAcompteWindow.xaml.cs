@@ -31,6 +31,8 @@ namespace Couche_IHM.Frames
         // Représente l'adhérent sélectionné pour payer
         private Adhérent? adhérentSelectionné = null;
 
+        public Adhérent? AdhérentSelectionné { get => adhérentSelectionné;}
+
         public PaiementAcompteWindow(List<Adhérent> adhérents, double priceA, double priceNA)
         {
             InitializeComponent();
@@ -76,6 +78,7 @@ namespace Couche_IHM.Frames
                         // S'il a assez d'argent
                         if (this.adhérentSelectionné.Argent >= priceToPay)
                         {
+                            this.adhérentSelectionné.Argent -= priceToPay;
                             DialogResult = true;
                         }
                         else
@@ -97,6 +100,7 @@ namespace Couche_IHM.Frames
                             // S'il a assez d'argent
                             if (this.adhérentSelectionné.Argent >= priceToPay)
                             {
+                                this.adhérentSelectionné.Argent -= priceToPay; 
                                 DialogResult = true;
                             }
                             else
@@ -127,22 +131,33 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ChangeBuyer(object sender, SelectionChangedEventArgs e)
         {
-            this.adhérentSelectionné = adhérents.Find(x => x.Identifiant == ((Adhérent)this.acompteList.SelectedItem).Identifiant);
-            if (this.adhérentSelectionné != null && this.adhérentSelectionné.CanPass)
+            if (this.acompteList.SelectedItem != null)
             {
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                Random random = new Random();
-                string randomMdp = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
-                this.passwordAcompte.Password = randomMdp;
-                this.passwordAcompte.IsEnabled = false;
-                this.labelPassword.IsEnabled = false;
+                this.adhérentSelectionné = adhérents.Find(x => x.Identifiant == ((Adhérent)this.acompteList.SelectedItem).Identifiant);
+                if (this.adhérentSelectionné != null && this.adhérentSelectionné.CanPass)
+                {
+                    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    Random random = new Random();
+                    string randomMdp = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+                    this.passwordAcompte.Password = randomMdp;
+                    this.passwordAcompte.IsEnabled = false;
+                    this.labelPassword.IsEnabled = false;
+                }
+                else
+                {
+                    this.passwordAcompte.Password = "";
+                    this.passwordAcompte.IsEnabled = true;
+                    this.labelPassword.IsEnabled = true;
+                }
             }
             else
             {
                 this.passwordAcompte.Password = "";
                 this.passwordAcompte.IsEnabled = true;
                 this.labelPassword.IsEnabled = true;
+                this.adhérentSelectionné = null;
             }
+            
         }
     }
 }

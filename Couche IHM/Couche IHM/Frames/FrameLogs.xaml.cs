@@ -90,7 +90,6 @@ namespace Couche_IHM.Frames
                 string operation = SplitedLogLine[4];
 
 
-
                 // Affiche les logs selon les critères
                 if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && RespectAuthorFilter(auteur) && RespectTimeSpanFilter(heureCourte))
                 {
@@ -123,7 +122,7 @@ namespace Couche_IHM.Frames
                             }
                             break;
                         case "VENTE":
-                            if (this.CompteActivated.IsChecked == true)
+                            if (this.VenteActivated.IsChecked == true)
                             {
                                 newLog = new LogIHM(date, type, message, auteur, operation);
                             }
@@ -154,6 +153,9 @@ namespace Couche_IHM.Frames
                                 {
                                     list.Add(newLog);
                                 }
+                                break;
+                            case "VENTE":
+                                    list.Add(newLog);
                                 break;
                         }  
                     }
