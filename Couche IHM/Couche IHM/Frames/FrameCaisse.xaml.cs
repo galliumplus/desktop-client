@@ -2,6 +2,7 @@
 using Couche_IHM.CustomListView;
 using Couche_Métier;
 using Couche_Métier.Log;
+using Couche_Métier.Utilitaire;
 using DocumentFormat.OpenXml.Office.CustomUI;
 using System;
 using System.Collections.Generic;
@@ -86,30 +87,11 @@ namespace Couche_IHM.Frames
             this.produitManager = produitManager;
             this.categorieManager = categorieManager;
 
-            // Initialisation des produits de la caisse
-            productsSP.Children.Clear();
-            foreach (string category in categorieManager.Categories)
-            {
-                // On récupère les produits de chaque catégorie
-                List<Product> products = produitManager.GetProductsByCategory(category);
-
-                // On créer chaque vue catégorie
-                CategoryProductList categoryProductList = new CategoryProductList(category, products);
-                productsSP.Children.Add(categoryProductList);
-
-                // On créer des listener sur chaque items
-                foreach (DetailedProduct p in categoryProductList.ListProductView)
-                {
-                    p.boutonDp.Click += AddProduct;
-                }
-            }
-
-            // Initialisation du panier
-            Order.ItemsSource = orderedItem;
-
             // Initialisation des moyens de paiement
             string[] moyenPayement = { "Acompte", "Paypal", "Carte" };
             listeMoyenPayement.ItemsSource = moyenPayement;
+
+            UpdateListProduitsOrder();
         }
 
 
@@ -119,7 +101,6 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void RemoveProduct(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("delete");
             // On retrouve le produit
             System.Windows.Controls.Image buttonRemove = (System.Windows.Controls.Image)sender;
             int index = doesProductExist(buttonRemove.Tag.ToString());
@@ -132,9 +113,10 @@ namespace Couche_IHM.Frames
             {
                 orderedItem.Remove(orderedItem[index]);
             }
-            
 
-            UpdateListProduitsOrder();
+            ConverterFormatArgent converterFormat = new ConverterFormatArgent();
+            this.PriceA.Content = converterFormat.ConvertToString(this.PriceAdher);
+            this.PriceNA.Content = "(" + converterFormat.ConvertToString(this.PriceNanAdher) + ")";
         }
 
         /// <summary>
@@ -150,16 +132,20 @@ namespace Couche_IHM.Frames
             int index = doesProductExist(productSelected.NomProduit);
             if (index != -1)
             {
-                orderedItem[index] = new KeyValuePair<Product, int>(productSelected, orderedItem[index].Value + 1);
+                // On ajoute que si le produit ne va pas manquer
+                if (productSelected.Quantite >= orderedItem[index].Value + 1)
+                {
+                    orderedItem[index] = new KeyValuePair<Product, int>(productSelected, orderedItem[index].Value + 1);
+                }
+                
             }
             else
             {
                 orderedItem.Add(new(productSelected, 1));
             }
-
-            this.PriceA.Content = this.PriceAdher + "€";
-            this.PriceNA.Content = this.PriceNanAdher + "€";
-            UpdateListProduitsOrder();
+            ConverterFormatArgent converterFormat = new ConverterFormatArgent();
+            this.PriceA.Content = converterFormat.ConvertToString(this.PriceAdher);
+            this.PriceNA.Content = "(" +  converterFormat.ConvertToString(this.PriceNanAdher) + ")";
         }
 
         /// <summary>
@@ -186,8 +172,29 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void UpdateListProduitsOrder()
         {
-            this.Order.Items.Refresh();
-            
+
+            // Initialisation des produits de la caisse
+            productsSP.Children.Clear();
+            foreach (string category in categorieManager.Categories)
+            {
+                // On récupère les produits de chaque catégorie
+                List<Product> products = produitManager.GetProductsByCategory(category);
+
+                // On créer chaque vue catégorie
+                CategoryProductList categoryProductList = new CategoryProductList(category, products);
+                productsSP.Children.Add(categoryProductList);
+
+                // On créer des listener sur chaque items
+                foreach (DetailedProduct p in categoryProductList.ListProductView)
+                {
+                    p.boutonDp.Click += AddProduct;
+                }
+            }
+
+            // Initialisation du panier
+            Order.ItemsSource = null;
+            Order.ItemsSource = orderedItem;
+
         }
 
 

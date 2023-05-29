@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="3*" />
-            <RowDefinition Height="1.2*" />
+            <RowDefinition Height="1.8*" />
         </Grid.RowDefinitions>
 
         <!-- Header de la frame -->
@@ -53,7 +53,7 @@
 
         <!-- Panier d'achat -->
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="18" Foreground="#FF403D39">Panier</Label>
+            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="17" Foreground="#FF403D39">Panier</Label>
             <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
         </StackPanel>
         <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="1" VerticalScrollBarVisibility="Hidden">
@@ -78,8 +78,8 @@
                             <!-- Nombre de produit -->
                             <Label x:Name="numberP" Content="{Binding Value}" Grid.Column="0" VerticalAlignment="Center" ContentStringFormat="x{0}"  />
                             <!-- Bouton pour enlever le produit -->
-                            <Button Style="{StaticResource buttonImage}"   HorizontalAlignment="Right"  Height="20" Grid.Column="2" Width="25"  >
-                                <Image  Source="/Images/moins.png" Tag="{Binding Key.NomProduit}" MouseDown="RemoveProduct"   />
+                            <Button Style="{StaticResource buttonImage}"    HorizontalAlignment="Right"  Height="10" Grid.Column="2" Width="25"  >
+                                <Image  Source="/Images/supp.png" Tag="{Binding Key.NomProduit}" MouseDown="RemoveProduct"   />
                             </Button>
 
                         </Grid>
@@ -87,38 +87,25 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
-
+        
         <!-- Information de paiement -->
-        <Grid Grid.Column="1" Grid.Row="2"  Background="#302F2F" Height="auto">
-            <StackPanel>
-                <!-- Paiment -->
-
-                    <Label Content="Moyen de paiment" Foreground="White" FontSize="10" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Name="listeMoyenPayement" SelectedIndex="0" Height="15" Width="150" FontSize="8" Grid.ColumnSpan="2" Grid.Row="1"/>
-                    <!-- Prix -->
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Prix A :" VerticalAlignment="Center" Foreground="White" FontSize="10" />
-                    <Label Name="PriceA" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="30,0,0,0"    />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Prix NA :" VerticalAlignment="Center" Foreground="White" FontSize="10" />
-                    <Label Name="PriceNA" Content="0.00 €" Foreground="White" FontSize="15" VerticalAlignment="Center" Margin="30,0,0,0"    />
-                </StackPanel>
-                <!-- Bouton Payer-->
-                <Grid  MouseEnter="Buy_MouseEnter" MouseLeave="Buy_MouseLeave" Background="Black"   MouseDown="PayCaisse">
-                    <Label Content="Payer" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
-                </Grid>
+        <StackPanel Margin="0,25,0,20"  Grid.Column="1" Grid.Row="2" >
+            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="17" Foreground="#FF403D39">Paiement</Label>
+            <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+            <!-- Paiment -->
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  Content="Moyen :" VerticalAlignment="Center" Foreground="Black" FontSize="12" />
+                <ComboBox Margin="50,0,0,0" Name="listeMoyenPayement" SelectedIndex="0" Height="20"  Width="100" FontSize="11"/>
+            </StackPanel>
+            <!-- Prix -->
+            <StackPanel Orientation="Horizontal">
+                <Label  Content="Total TTC :" VerticalAlignment="Center" Foreground="Black" FontSize="12" />
+                <Label Margin="38,0,0,0"  Name="PriceA" Content="0.00 €" Foreground="Black" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"   />
+                <Label Name="PriceNA" Content="(0.00 €)" Foreground="Black" FontSize="13"  VerticalAlignment="Center" />
             </StackPanel>
 
-
-
-           
-
-            
-
-
-           
-
-        </Grid>
+            <!-- Bouton Payer-->
+            <Button Style="{StaticResource buttonBlack}" Margin="0,15,0,0" Width="150" Content="Payer"  MouseDown="PayCaisse"/>
+        </StackPanel>
     </Grid>
 </Page>

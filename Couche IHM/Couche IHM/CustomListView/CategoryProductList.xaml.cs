@@ -33,7 +33,7 @@ namespace Couche_IHM.CustomListView
         public CategoryProductList(string category,List<Product> produits)
         {
             InitializeComponent();
-            this.nameCategory.Text = category;
+            this.nameCategory.Content = category;
 
             foreach(Product p in produits)
             {
