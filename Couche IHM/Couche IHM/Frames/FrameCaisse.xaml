@@ -105,7 +105,7 @@
             </StackPanel>
 
             <!-- Bouton Payer-->
-            <Button Style="{StaticResource buttonBlack}" Margin="0,15,0,0" Width="150" Content="Payer"  MouseDown="PayCaisse"/>
+            <Button Style="{StaticResource buttonBlack}" Margin="0,15,0,0" Width="150" Content="Payer"  Click="PayCaisse"/>
         </StackPanel>
     </Grid>
 </Page>

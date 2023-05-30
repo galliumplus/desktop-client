@@ -205,7 +205,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PayCaisse(object sender, MouseButtonEventArgs e)
+        private void PayCaisse(object sender, RoutedEventArgs e)
         {
             bool result = false;
             Adhérent adhérentSelectionne = null;
@@ -242,6 +242,9 @@ namespace Couche_IHM.Frames
                 }
                 this.orderedItem.Clear();
                 UpdateListProduitsOrder();
+                ConverterFormatArgent converterFormat = new ConverterFormatArgent();
+                this.PriceA.Content = converterFormat.ConvertToString(this.PriceAdher);
+                this.PriceNA.Content = "(" + converterFormat.ConvertToString(this.PriceNanAdher) + ")";
                 this.adherentManager.UpdateAdhérent(adhérentSelectionne);
                 this.log.registerLog(CategorieLog.VENTE, adhérentSelectionne, MainWindow.CompteConnected);
             }
