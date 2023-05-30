@@ -29,8 +29,7 @@ namespace Couche_IHM
         {
             InitializeComponent();
             ImageManager blobConverter = new ImageManager();
-            byte[] image = blobConverter.ConvertImageToBlob("C:\\Users\\flo21\\OneDrive\\Bureau\\ph.png");
-            blobConverter.CreateImageFromBlob("Gato",image);
+            
         }
 
         /// <summary>
