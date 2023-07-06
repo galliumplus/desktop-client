@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modeles;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -26,13 +27,13 @@ namespace Couche_Métier.Log
             switch (categorieLog)
             {
                 case CategorieLog.UPDATE:
-                    message = $"{a.NomCompletIHM.ToUpper()} a été modifié";
+                    //message = $"{a.NomCompletIHM.ToUpper()} a été modifié";
                     break;
                 case CategorieLog.CREATE:
-                    message = $"{a.NomCompletIHM.ToUpper()} a été créé";
+                    //message = $"{a.NomCompletIHM.ToUpper()} a été créé";
                     break;
                 case CategorieLog.DELETE:
-                    message = $"{a.NomCompletIHM.ToUpper()} a été supprimé";
+                    //message = $"{a.NomCompletIHM.ToUpper()} a été supprimé";
                     break;
 
             }      

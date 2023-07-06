@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Couche Métier\Couche Métier.csproj" />
+    <ProjectReference Include="..\Modeles\Modeles.csproj" />
   </ItemGroup>
 
 </Project>

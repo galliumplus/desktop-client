@@ -7,235 +7,25 @@
              StartupUri="ConnexionIHM.xaml">
     
     <Application.Resources>
-        
-        <FontFamily x:Key="ThereBrat">pack://application:,,,/Fonts/#There Brat</FontFamily>
-        <FontFamily x:Key="Riberio">pack://application:,,,/Fonts/#Riberio</FontFamily>
-    
-        <!-- Toggle button-->
-        
-
-        <Style x:Key="decreaseTemp" TargetType="RepeatButton">
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RepeatButton">
-                        <Border Margin="0,0,-15,0" CornerRadius="5" Height="10" Background="Green">
-
-                            <RepeatButton Command="Slider.DecreaseLarge" Opacity="0" BorderThickness="0"/>
-
-                        </Border>
-                        
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-        </Style>
-
-
-        <Style x:Key="increaseTemp" TargetType="RepeatButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="RepeatButton">
-                        <Border Margin="-15,0,0,0" CornerRadius="5" Height="10" Background="LightSlateGray">
-
-                            <RepeatButton Command="Slider.IncreaseLarge" Opacity="0" BorderThickness="0"/>
-
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ellipseThumb" TargetType="Thumb">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Thumb">
-                        <Ellipse x:Name="ellipse" Width="{TemplateBinding ActualHeight}" Height="{TemplateBinding ActualHeight}"
-                         Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"></Ellipse>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="bleuTemp" TargetType="Slider">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Slider">
-                        <Grid>
-                            <Border CornerRadius="5" Height="20"/>
-                            <Track x:Name="PART_Track">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource decreaseTemp}"/>
-                                </Track.DecreaseRepeatButton>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Style="{StaticResource increaseTemp}"/>
-                                </Track.IncreaseRepeatButton>
-                                <Track.Thumb>
-                                    <Thumb Foreground="LightGray"  x:Name="thumb" Style="{StaticResource ellipseThumb}"/>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-
-        <!-- Button black-->
-        <Style x:Key="buttonBlack" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="#FF403D39"></Setter>
-            <Setter Property="Foreground" Value="#FFFCF2"></Setter>
-            <Setter Property="Padding" Value="40,0,40,0"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <!-- Input password box-->
-        <Style x:Key="inputPasswordBox" TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
-            <Setter Property="BorderThickness" Value="2,0,0,2"/>
-            <Setter Property="Background" Value="{x:Null}"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="FontFamily" Value="Roboto"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="Medium"/>
-        </Style>
-
-
-
-        <!-- Texte avec placeholder-->
-       <Style x:Key="WaterMarkTextBox" TargetType="TextBox" >
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Grid>
-                            <Border Background="White" BorderBrush="DodgerBlue" BorderThickness="1" CornerRadius="3" />
-                            <ScrollViewer x:Name="PART_ContentHost" Margin="2,0,0,0" VerticalAlignment="Center" />
-                            <Label x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" Visibility="Collapsed" Foreground="Gray" FontSize="{TemplateBinding FontSize}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="Text" Value="" />
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible" />
-                            </MultiTrigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="DimGray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Cursor" Value="IBeam" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Bouton Image-->
-        <Style x:Key="buttonImage" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Opacity" Value="0.7"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" 
-                        BorderThickness="0"
-                        CornerRadius="3" 
-                        Background="Transparent">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter  Property="Opacity" Value="1" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                    
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-        <!-- Bouton Nav Barre-->
-        <Style TargetType="Button" x:Key="buttonNavBarre">
-            <Setter Property="Foreground" Value="#F2F1F0" />
-            <Setter Property="Background" Value="#252422" />
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="Height" Value="55" />
-            <Setter Property="Padding" Value="30,0,0,0" />
-            <Setter Property="FontWeight" Value="DemiBold" />
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Border x:Name="border" CornerRadius="0" Background="{TemplateBinding Background}" />
-                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Black" />
-                </Trigger>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="White" />
-                    <Setter Property="Foreground" Value="Black" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        
-        
-        <!-- Personaliser listView -->
-        <Style x:Key="GridViewColumnHeaderStyle1" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
-                        <Border BorderThickness="0,0,0,1" BorderBrush="Black" Background="Transparent">
-                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontFamily" Value="Segoe UI" />
-            <Setter Property="FontSize" Value="12" />
-        </Style>
-
-        <!-- Personaliser TextBox Fenetre Modification/Ajout -->
-        <Style x:Key="textBoxGallium" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="3,0,0,3" />
-            <Setter Property="Foreground" Value="Black" />
-        </Style>
-
-        
-        <!-- Grid transparanet -->
-        <Style x:Key="ImageStyle" TargetType="Image">
-            <Setter Property="Opacity" Value="1"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Opacity" Value="0.5"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <!-- Material Design-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                
+                <ResourceDictionary Source="Assets/Styles/style.xaml"/>
+                
+                <!-- Color Gallium-->
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="galliumColor" Color="#E66600"/>
+                </ResourceDictionary>
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+     
     </Application.Resources>
 </Application>
 

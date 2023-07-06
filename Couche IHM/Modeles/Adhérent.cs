@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Couche_Métier.Utilitaire;
-
-namespace Couche_Métier
+﻿
+namespace Modeles
 {
     public class Adhérent
     {
@@ -108,26 +101,9 @@ namespace Couche_Métier
         /// </summary>
         public string Formation { get => formation; set => formation = value; }
 
-        /// <summary>
-        /// Nom complet de l'utilisateur
-        /// </summary>
-        public string NomCompletIHM
-        {
-            get => $"{Nom.ToUpper()} {Prenom}";
-        }
+     
 
-        /// <summary>
-        /// Renvoie l'argent de l'adhérent sous un string formatté
-        /// </summary>
-        public string ArgentIHM
-        {
-            get
-            {
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertToString(argent);
-            }
-        }
-
+      
 
 
         #endregion

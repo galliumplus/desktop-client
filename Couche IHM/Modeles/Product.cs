@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Couche_Métier.Utilitaire;
-
-namespace Couche_Métier
+﻿
+namespace Modeles
 {
     /// <summary>
     /// Produit
@@ -70,27 +63,7 @@ namespace Couche_Métier
             set => prixAdherent = value; 
         }
 
-        /// <summary>
-        /// Prix Adherent formatté pour l'afficher
-        /// </summary>
-        public string PrixAdherentIHM {
-            get
-            {
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertToString(prixAdherent );
-            }
-        }
-        /// <summary>
-        /// Prix non adhérent formatté pour l'afficher
-        /// </summary>
-        public string PrixNonAdherentIHM
-        {
-            get 
-            {
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                return converterFormatArgent.ConvertToString(PrixNonAdherent);
-            }
-        }
+      
 
         /// <summary>
         /// Categorie du produit

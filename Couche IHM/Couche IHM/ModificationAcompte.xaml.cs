@@ -1,18 +1,8 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Utilitaire;
+using Modeles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Couche_IHM
 {
@@ -41,7 +31,7 @@ namespace Couche_IHM
                 isAdherent = 1;
             }
             this.isadherent.Value = isAdherent;
-            this.argent.Text = adh.ArgentIHM;
+            //this.argent.Text = adh.ArgentIHM;
 
 
         }

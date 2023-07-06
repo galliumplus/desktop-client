@@ -9,6 +9,7 @@
         Height="450" 
         Width="800" 
         WindowState="Maximized"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         MinWidth="800"
         MinHeight="450">
     <Grid>
@@ -18,6 +19,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
+
         <Grid Grid.Column="0" Background="#252422" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
@@ -38,11 +40,21 @@
                     <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
                     <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
                     <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
-                    <Button Tag="Statistiques" x:Name="CompteFrame" Content="Statistiques" Style="{StaticResource buttonNavBarre}" Click="GoToStatistique" />
-                    <Button Tag="Logs" x:Name="LogFrame" Content="Logs" Style="{StaticResource buttonNavBarre}" Click="GoToLog" HorizontalAlignment="Right"/>
                 </StackPanel>
             </Viewbox>
+            <StackPanel  Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+                <Button Style="{StaticResource buttonImage}"    Width="15" Height="15"  >
+                    <Image Source="/Images/stats.png" />
+                </Button>
+                <Button Margin="40,0,0,0" Style="{StaticResource buttonImage}"    Width="15" Height="15"  >
+                    <Image Source="/Images/historique.png" />
+                </Button>
+                <Button Style="{StaticResource buttonImage}"    Width="25" Height="25"  >
+                    <Image Source="/Images/logout.png" />
+                </Button>
+            </StackPanel>
         </Grid>
+        
         <Viewbox Grid.Column="1">
             <!-- DEUXIEME COLONNE -->
             <Grid  Height="607" Width="912" >

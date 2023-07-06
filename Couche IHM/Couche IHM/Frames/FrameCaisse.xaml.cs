@@ -1,27 +1,16 @@
-﻿using Couche_Data;
+﻿
 using Couche_IHM.CustomListView;
 using Couche_Métier;
 using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
-using DocumentFormat.OpenXml.Office.CustomUI;
-using System;
+using Modeles;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ComboBox = System.Windows.Controls.ComboBox;
+
 
 namespace Couche_IHM.Frames
 {

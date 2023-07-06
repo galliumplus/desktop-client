@@ -1,20 +1,10 @@
-﻿using Couche_Data;
+﻿
+using Couche_Data;
 using Couche_IHM.ImagesProduit;
-using Couche_Métier;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Modeles;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
+
 
 namespace Couche_IHM
 {
@@ -28,7 +18,6 @@ namespace Couche_IHM
         public ConnexionIHM()
         {
             InitializeComponent();
-            ImageManager blobConverter = new ImageManager();
             
         }
 

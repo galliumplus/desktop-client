@@ -1,24 +1,12 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
-using Microsoft.Win32;
+using Modeles;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Couche_IHM.Frames
 {
@@ -91,8 +79,8 @@ namespace Couche_IHM.Frames
         private void AfficheAcompte(Adhérent adhérent)
         {
             this.id.Text = adhérent.Identifiant;
-            this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
-            this.name.Text = adhérent.NomCompletIHM;
+            //this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
+            //this.name.Text = adhérent.NomCompletIHM;
 
 
             // Modification affichage
@@ -374,8 +362,8 @@ namespace Couche_IHM.Frames
         private void CancelChangements(object sender, RoutedEventArgs e)
         {
             Adhérent Adhérent = (Adhérent)this.listadherents.SelectedItem;
-            this.name.Text = Adhérent.NomCompletIHM;
-            this.argent.Text = Adhérent.ArgentIHM;
+            //this.name.Text = Adhérent.NomCompletIHM;
+            //this.argent.Text = Adhérent.ArgentIHM;
             this.id.Text = Adhérent.Identifiant;
             this.buttonCancel.Visibility = Visibility.Hidden;
             this.buttonValidate.Visibility = Visibility.Hidden;

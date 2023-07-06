@@ -1,15 +1,7 @@
 ﻿
-using Couche_Data;
-using Couche_Métier;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using Modeles;
 
-namespace Gallium_v1.Data
+namespace Couche_Data
 {
 
     /// <summary>

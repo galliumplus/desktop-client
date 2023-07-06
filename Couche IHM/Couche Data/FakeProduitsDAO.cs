@@ -1,9 +1,5 @@
-﻿using Couche_Métier;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Modeles;
 
 namespace Couche_Data
 {
@@ -96,9 +92,10 @@ namespace Couche_Data
 
         private string getRandomCategorie()
         {
-            CategoryManager c = new CategoryManager(new FakeCategoryDAO());
-            List<string> categories = c.ListAllCategory();
-            return categories[new Random().Next(0, categories.Count)];
+            //CategoryManager c = new CategoryManager(new FakeCategoryDAO());
+            //List<string> categories = c.ListAllCategory();
+            //return categories[new Random().Next(0, categories.Count)];
+            return "test";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modeles;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Couche_Métier.Log
             switch (categorieLog)
             {
                 case CategorieLog.VENTE:
-                    message = $"{u.NomCompletIHM.ToUpper()} a acheté des produits ";
+                    //message = $"{u.NomCompletIHM.ToUpper()} a acheté des produits ";
                     break;
 
             }      

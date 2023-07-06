@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couche MÃ©tier", "Couche MÃ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Couche Data", "Couche Data\Couche Data.csproj", "{6A3EF597-B4FF-492A-A681-F20AE2770C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnitaire", "TestUnitaire\TestUnitaire.csproj", "{D5D04800-F487-4A87-88B7-22577C540523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUnitaire", "TestUnitaire\TestUnitaire.csproj", "{D5D04800-F487-4A87-88B7-22577C540523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modeles", "Modeles\Modeles.csproj", "{2DB5D1B3-23F7-4588-AF56-DF548D681ED9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D5D04800-F487-4A87-88B7-22577C540523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5D04800-F487-4A87-88B7-22577C540523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5D04800-F487-4A87-88B7-22577C540523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB5D1B3-23F7-4588-AF56-DF548D681ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB5D1B3-23F7-4588-AF56-DF548D681ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB5D1B3-23F7-4588-AF56-DF548D681ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB5D1B3-23F7-4588-AF56-DF548D681ED9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
