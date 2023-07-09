@@ -38,8 +38,8 @@
                 <!-- Image du compte  -->
                 <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                 <StackPanel Grid.Column="1" Margin="10,20,10,0">
-                    <Label Name="NomUtilisateur" Content="" FontSize="14" FontWeight="Bold"/>
-                    <Label Name="RoleUtilisateur" Content="" FontSize="11" FontWeight="DemiBold" />
+                    <Label Content="{Binding CompteConnected.NomComplet}" FontSize="14" FontWeight="Bold"/>
+                    <Label Content="{Binding CompteConnected.Role}" FontSize="11" FontWeight="DemiBold" />
                 </StackPanel>
             </Grid>
         </Grid>
@@ -60,7 +60,7 @@
 
             <!-- ScrollViewer des adhérents-->
             <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-                <ListView  x:Name="listadherents"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" SelectionChanged="SelectAdherent"     >
+                <ListView  x:Name="listadherents" ItemsSource="{Binding AdherentViewModel.Adherents}" SelectedItem="{Binding AdherentViewModel.CurrentAdherent}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" >
                     <ListView.Template >
                         <ControlTemplate >
                             <!-- Header des colonnes -->
@@ -128,15 +128,26 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Barre de recherche -->
-                    <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" TextChanged="SearchAdherent"   />
+                    <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
                     <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
                 </Grid>
 
                 
                 <!-- Info -->
-                <Border Background="#FFFCF2" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200" Name="infoAdherent" Visibility="Hidden">
-                    
+                <Border Background="#FFFCF2" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200" Name="infoAdherent" >
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AdherentViewModel.ShowAdherent}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding AdherentViewModel.ShowAdherent}" Value="false">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <StackPanel    >
                         
                         <TextBlock Margin="0,10,0,0" Text="IDENTITE" HorizontalAlignment="Center"  FontSize="13"  FontWeight="Bold" Foreground="Black" />
@@ -153,14 +164,14 @@
                         <!-- Nom utilisateur -->
                             <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" >
                                 <TextBlock Margin="-17,0,0,0"  Text="Nom :" HorizontalAlignment="Left"  FontSize="11" FontWeight="Bold" Foreground="Black" />
-                                <TextBox Margin="7,7,0,0" x:Name="name" Width="135" Text="" FontSize="11"   Foreground="Black"  TextChanged="ShowValidationButton"/>
+                                <TextBox Margin="7,0,0,0" x:Name="name" Text="{Binding AdherentViewModel.CurrentAdherent.NomCompletIHM}" Width="135"  FontSize="11"   Foreground="Black" />
                             <Image x:Name="identiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="140,-21,0,0"/>
                         </StackPanel>
 
                         <!-- Compte utilisateur -->
                         <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
                                 <TextBlock  Margin="-17,0,0,0"  Text="Compte :" HorizontalAlignment="Left"  FontSize="11" FontWeight="Bold" Foreground="Black" />
-                                <TextBox  Margin="7,7,0,0" x:Name="id" Text=""  Width="135" FontSize="11" Foreground="Black"   TextChanged="ShowValidationButton" />
+                                <TextBox  Margin="7,0,0,0" x:Name="id" Text="{Binding AdherentViewModel.CurrentAdherent.Identifiant}"  Width="135" FontSize="11" Foreground="Black"    />
                                 <Image x:Name="compteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="140,-21,0,0"/>
                         </StackPanel>
 
@@ -168,7 +179,7 @@
                         <!-- Balance utilisateur -->
                         <StackPanel Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock  Margin="-17,0,0,0" Text="Balance :" HorizontalAlignment="Left"  FontSize="11"  FontWeight="Bold" Foreground="Black" />
-                                <TextBox Margin="7,7,0,0" Width="135" x:Name="argent" Text="" FontSize="11"  Foreground="Black" TextChanged="ShowValidationButton"  />
+                                <TextBox Margin="7,0,0,0" Width="135" x:Name="argent" Text="{Binding AdherentViewModel.CurrentAdherent.ArgentIHM}" FontSize="11"  Foreground="Black"   />
                                 <Image x:Name="argentWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="140,-21,0,0"/>
                         </StackPanel>
 
@@ -182,8 +193,20 @@
                 </Border>
                
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Bottom">
-                    <Button   FontSize="12" x:Name="buttonCancel"  Visibility="Hidden" Content="Annuler" Background="White" BorderBrush="Black"  Foreground="Red" FontWeight="Bold"  Width="90" Click="CancelChangements"  />
-                    <Button  FontSize="12" Margin="10,0,0,0" x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="LightGray" BorderBrush="Black"  Foreground="ForestGreen"  FontWeight="Bold"  Width="90" Click="ValiderChangements" />
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding AdherentViewModel.ShowModifAdherent}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding AdherentViewModel.ShowModifAdherent}" Value="false">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button   FontSize="12" x:Name="buttonCancel"   Content="Annuler" Background="White" BorderBrush="Black"  Foreground="Red" FontWeight="Bold"  Width="90" Click="CancelChangements"/>
+                    <Button  FontSize="12" Margin="10,0,0,0" x:Name="buttonValidate"  Content="Valider" Background="LightGray" BorderBrush="Black"  Foreground="ForestGreen"  FontWeight="Bold"  Width="90" Click="ValiderChangements" />
                 </StackPanel>
                 
             </StackPanel>

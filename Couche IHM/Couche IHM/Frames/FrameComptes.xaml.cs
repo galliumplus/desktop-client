@@ -1,4 +1,5 @@
-﻿using Couche_Métier;
+﻿using Couche_IHM.VueModeles;
+using Couche_Métier;
 using Couche_Métier.Log;
 using Modeles;
 using System;
@@ -27,12 +28,11 @@ namespace Couche_IHM.Frames
         public FrameComptes(UserManager userManager)
         {
             InitializeComponent();
+            DataContext = MainWindowViewModel.Instance;
             this.userManager = userManager;
 
             // Met à jour l'affichage
             UpdateView();
-            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
-            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
 
             this.log = new LogCompteToTxt();
 
@@ -46,7 +46,7 @@ namespace Couche_IHM.Frames
         private void CreateAnUser(User u)
         {
             this.userManager.CreateCompte(u);
-            log.registerLog(CategorieLog.CREATE, $"Création de l'utilisateur {u.NomComplet}", MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.CREATE, $"Création de l'utilisateur {u.NomComplet}", MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Couche_IHM.Frames
             this.userManager.UpdateCompte(u);
 
             // LOG
-            log.registerLog(CategorieLog.UPDATE, u, MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.UPDATE, u, MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -176,10 +176,10 @@ namespace Couche_IHM.Frames
 
         private void PermButton(object sender, MouseEventArgs e)
         {
-            if (MainWindow.CompteConnected.Role != RolePerm.PRESIDENT)
-            {
-                (sender as Button).IsEnabled = false;
-            }
+            //if (MainWindow.CompteConnected.Role != RolePerm.PRESIDENT)
+            //{
+            //    (sender as Button).IsEnabled = false;
+            //}
             
         }
 

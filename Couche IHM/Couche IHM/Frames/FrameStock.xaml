@@ -37,8 +37,8 @@
                 <!-- Image du compte  -->
                 <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                 <StackPanel Grid.Column="1" Margin="10,20,10,0">
-                    <Label Name="NomUtilisateur" Content="" FontSize="14" FontWeight="Bold"/>
-                    <Label Name="RoleUtilisateur" Content="" FontSize="11" FontWeight="DemiBold" />
+                    <Label Content="{Binding CompteConnected.NomComplet}" FontSize="14" FontWeight="Bold"/>
+                    <Label Content="{Binding CompteConnected.Role}" FontSize="11" FontWeight="DemiBold" />
                 </StackPanel>
             </Grid>
         </Grid>
@@ -109,7 +109,7 @@
                                 </Grid.ColumnDefinitions>
                                 <!-- Content -->
                                 <Label   x:Name="labelProduit"  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding QuantiteProduit}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding Quantite}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label  Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label  Content="{Binding Categorie}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                             </Grid>

@@ -47,18 +47,17 @@ namespace Couche_IHM.Frames
             // Met à jour l'affichage
             UpdateView();
             this.buttonValidate.Content = "Valider";
-            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
-            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
+            
             this.DataContext = categorieManager;
 
             // Tri initial
 
 
             // Si membre du ca alors parametre pas visibles
-            if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
-            {
-                this.optionsButton.Visibility = Visibility.Hidden;
-            }
+        //    if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
+        //    {
+        //        this.optionsButton.Visibility = Visibility.Hidden;
+        //    }
         }
 
         
@@ -122,7 +121,7 @@ namespace Couche_IHM.Frames
 
             // LOG DELETE ADHERENT
             ILog log = new LogProductToTxt();
-            log.registerLog(CategorieLog.DELETE, productSelect ,MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.DELETE, productSelect ,MainWindow.CompteConnected);
 
             UpdateView();
             this.options.Visibility = Visibility.Hidden;

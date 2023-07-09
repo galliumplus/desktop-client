@@ -19,7 +19,6 @@
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
-
         <Grid Grid.Column="0" Background="#252422" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
@@ -35,24 +34,30 @@
             <!-- Choix Pages -->
             <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Uniform">
                 <StackPanel >
-                    <Button Tag="Accueil" x:Name="AccueilFrame" Content="Accueil" Style="{StaticResource buttonNavBarre}"  Click="GoToAccueil" Width="185"  />
-                    <Button Tag="Caisse" x:Name="CaisseFrame" Content="Caisse" Style="{StaticResource buttonNavBarre}" Click="GoToCaisse"/>
-                    <Button Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes" Style="{StaticResource buttonNavBarre}" Click="GoToAdhérent"/>
-                    <Button Tag="Stock" x:Name="StockFrame" Content="Stock" Style="{StaticResource buttonNavBarre}" Click="GoToStock" />
-                    <Button Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes" Style="{StaticResource buttonNavBarre}" Click="GoToCompte"/>
+                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Accueil" x:Name="AccueilFrame" Content="Accueil"   Click="GoToAccueil" Width="185"  />
+                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Caisse" x:Name="CaisseFrame" Content="Caisse"  Click="GoToCaisse"/>
+                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes"  Click="GoToAdhérent"/>
+                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Stock" x:Name="StockFrame" Content="Stock"  Click="GoToStock" />
+                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes"  Click="GoToCompte"/>
                 </StackPanel>
             </Viewbox>
-            <StackPanel  Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
-                <Button Style="{StaticResource buttonImage}"    Width="15" Height="15"  >
-                    <Image Source="/Images/stats.png" />
+            <Grid  Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Style="{StaticResource buttonImage}" Grid.Column="0">
+                    <materialDesign:PackIcon Foreground="White" Kind="ChartBellCurve"/>
                 </Button>
-                <Button Margin="40,0,0,0" Style="{StaticResource buttonImage}"    Width="15" Height="15"  >
+                <Button Style="{StaticResource buttonImage}"  Grid.Column="1">
                     <Image Source="/Images/historique.png" />
                 </Button>
-                <Button Style="{StaticResource buttonImage}"    Width="25" Height="25"  >
-                    <Image Source="/Images/logout.png" />
-                </Button>
-            </StackPanel>
+
+                    <materialDesign:PackIcon VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="White" Grid.Column="2"  Kind="Logout"/>
+
+            </Grid>
         </Grid>
         
         <Viewbox Grid.Column="1">

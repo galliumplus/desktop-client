@@ -16,6 +16,38 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+
+        /// <summary>
+        /// Permet de savoir si le produit est disponible
+        /// </summary>
+        public bool isDisponible
+        {
+            get
+            {
+                return (product.Quantite > 0);
+            }
+        }
+
+        /// <summary>
+        /// Renvoie la quantite du produit
+        /// </summary>
+        public int Quantite
+        {
+            get
+            {
+                return product.Quantite;
+            }
+        }
+
+        /// <summary>
+        /// Nom du produit
+        /// </summary>
+        public string NomProduit
+        {
+            get => product.NomProduit;
+            set => product.NomProduit = value;
+        }
+
         /// <summary>
         /// Prix Adherent formatté pour l'afficher
         /// </summary>
@@ -38,6 +70,17 @@ namespace Couche_IHM.VueModeles
                 return converterFormatArgent.ConvertToString(product.PrixNonAdherent);
             }
         }
+
+        /// <summary>
+        /// Categorie du produit
+        /// </summary>
+        public string Categorie
+        {
+            get => product.Categorie;
+            set => product.Categorie = value;
+        }
+
+
         #endregion
         public ProductViewModel(Product product)
         {

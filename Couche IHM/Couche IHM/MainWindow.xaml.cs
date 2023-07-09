@@ -1,5 +1,6 @@
 ﻿using Couche_Data;
 using Couche_IHM.Frames;
+using Couche_IHM.VueModeles;
 using Couche_Métier;
 using Modeles;
 using System;
@@ -18,31 +19,24 @@ namespace Couche_IHM
         private ProductManager productManager;
        
         // Manager des catégories
-        CategoryManager categoryManager;
+        private CategoryManager categoryManager;
 
         // Manager utilisateurs
         private UserManager userManager;
-        private static User compteConnected;
-        /// <summary>
-        /// Compte connecté à gallium
-        /// </summary>
-        public static User CompteConnected
-        {
-            get => compteConnected;
-        }
+
 
         public MainWindow(User user)
         {
             InitializeComponent();
-            this.adherentManager = new AdhérentManager(new FakeAdherentDao());
+            MainWindowViewModel.Instance.CompteConnected = user;
+            this.adherentManager = new AdhérentManager();
             this.productManager = new ProductManager(new FakeProduitsDAO());
             this.userManager = new UserManager(new FakeUserDAO());
             this.categoryManager = new CategoryManager(new FakeCategoryDAO());
 
-            // Enregistre la personne qui s'est connecté
-            compteConnected = user;
         }
 
+        #region navigationMethods
         /// <summary>
         /// Permet d'aller sur la fenêtre de l'accueil
         /// </summary>
@@ -99,5 +93,6 @@ namespace Couche_IHM
         {
             this.mainFrame.Navigate(new FrameLogs(this.userManager));
         }
+        #endregion
     }
 }

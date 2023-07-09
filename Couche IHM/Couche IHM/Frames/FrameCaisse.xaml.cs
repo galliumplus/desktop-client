@@ -235,7 +235,7 @@ namespace Couche_IHM.Frames
                 this.PriceA.Content = converterFormat.ConvertToString(this.PriceAdher);
                 this.PriceNA.Content = "(" + converterFormat.ConvertToString(this.PriceNanAdher) + ")";
                 this.adherentManager.UpdateAdhérent(adhérentSelectionne);
-                this.log.registerLog(CategorieLog.VENTE, adhérentSelectionne, MainWindow.CompteConnected);
+                //this.log.registerLog(CategorieLog.VENTE, adhérentSelectionne, MainWindow.CompteConnected);
             }
         }
 

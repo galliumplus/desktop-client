@@ -1,4 +1,5 @@
-﻿using Couche_Métier;
+﻿using Couche_IHM.VueModeles;
+using Couche_Métier;
 using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
 using Modeles;
@@ -36,60 +37,14 @@ namespace Couche_IHM.Frames
         public FrameAdherent(AdhérentManager adhérentManager)
         {
             InitializeComponent();
+            DataContext = MainWindowViewModel.Instance;
             this.adhérentManager = adhérentManager;
             this.exportAdh = new ExportAdherentToExcel();
-            
-
-            // Met à jour l'affichage
-            UpdateView();
-            this.RoleUtilisateur.Content = MainWindow.CompteConnected.Role.ToString();
-            this.NomUtilisateur.Content = MainWindow.CompteConnected.NomComplet;
-            
-
-            // Focus l'utilisateur sur la barre de recherche
-            this.rechercheAcompte.Focus();
-
-
-            // Si membre du ca alors parametre pas visibles
-            if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
-            {
-                this.optionsButton.Visibility = Visibility.Hidden;
-            }
-
         }
-
-
-        /// <summary>
-        /// Permet de mettre à jour la liste des adhérents
-        /// </summary>
-        private void UpdateView()
-        {
-            listadherents.ItemsSource = null;
-            listadherents.ItemsSource = adhérentManager.GetAdhérents();
-        }
-
-
 
         
 
-        /// <summary>
-        /// Permet d'afficher lesi nformations d'un adhérent
-        /// </summary>
-        /// <param name="adhérent">adhérent à détailler</param>
-        private void AfficheAcompte(Adhérent adhérent)
-        {
-            this.id.Text = adhérent.Identifiant;
-            //this.argent.Text = Convert.ToString(adhérent.ArgentIHM);
-            //this.name.Text = adhérent.NomCompletIHM;
-
-
-            // Modification affichage
-            this.buttonValidate.Visibility = Visibility.Hidden;
-            this.buttonCancel.Visibility = Visibility.Hidden;
-            ResetWarnings();
-                     
-        }
-
+ 
         /// <summary>
         /// Permet de cacher les warnings
         /// </summary>
@@ -111,7 +66,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.CreateAdhérent(a);
             
             // Log l'opération
-            log.registerLog(CategorieLog.CREATE, a, MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.CREATE, a, MainWindow.CompteConnected);
         }
 
         /// <summary>
@@ -125,7 +80,7 @@ namespace Couche_IHM.Frames
             this.adhérentManager.UpdateAdhérent(a);
 
             // Log l'opération
-            log.registerLog(CategorieLog.UPDATE, a, MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.UPDATE, a, MainWindow.CompteConnected);
         }
         #endregion
 
@@ -145,10 +100,6 @@ namespace Couche_IHM.Frames
             {
                 
                 this.listadherents.SelectedItem = null;
-                this.UpdateView();
-                infoAdherent.Visibility = Visibility.Hidden;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonCancel.Visibility = Visibility.Hidden;
             }
         }
 
@@ -160,7 +111,8 @@ namespace Couche_IHM.Frames
         private void ValiderChangements(object sender, RoutedEventArgs e)
         {
             ConverterFormatArgent converterArgent = new ConverterFormatArgent();
-
+            MainWindowViewModel.Instance.AdherentViewModel.CurrentAdherent.UpdateAdherent();
+            /
             ResetWarnings();
 
             Adhérent newAdher = new Adhérent();
@@ -200,13 +152,7 @@ namespace Couche_IHM.Frames
                 // Met à jour l'adhérent
                 this.UpdateAnAdherent(baseAdhérent, newAdher);
 
-
-                // Refresh vue
-                UpdateView();
-                this.infoAdherent.Visibility = Visibility.Hidden;
                 this.listadherents.SelectedItem = null;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-                this.buttonCancel.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
@@ -228,16 +174,7 @@ namespace Couche_IHM.Frames
             }
         }
 
-        /// <summary>
-        /// Permet d'afficher le bouton de validation des changements
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowValidationButton(object sender, TextChangedEventArgs e)
-        {
-            this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonCancel.Visibility = Visibility.Visible;
-        }
+
 
         /// <summary>
         /// Permet d'exporter la liste des adhérents
@@ -249,17 +186,6 @@ namespace Couche_IHM.Frames
             this.exportAdh.Export(this.adhérentManager.GetAdhérents());
         }
 
-        /// <summary>
-        /// Permet d'afficher le bouton de validation des changements
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowValidationButton(object sender, RoutedEventArgs e)
-        {
-            this.buttonValidate.Visibility = Visibility.Visible;
-            this.buttonCancel.Visibility = Visibility.Visible;
-
-        }
 
         /// <summary>
         /// Permet de supprimer l'adhérent
@@ -270,12 +196,10 @@ namespace Couche_IHM.Frames
         {
             Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
             this.adhérentManager.RemoveAdhérent(adhérentSelect);
-            infoAdherent.Visibility = Visibility.Hidden;
 
             // LOG DELETE ADHERENT
-            log.registerLog(CategorieLog.DELETE, adhérentSelect, MainWindow.CompteConnected);
+            //log.registerLog(CategorieLog.DELETE, adhérentSelect, MainWindow.CompteConnected);
 
-            UpdateView();
         }
 
         /// <summary>
@@ -293,10 +217,8 @@ namespace Couche_IHM.Frames
             if (result.Value == true)
             {
                 this.adhérentManager.UpdateAdhérent(adhérentSelect);
-                UpdateView();
-                this.infoAdherent.Visibility = Visibility.Hidden;
 
-                log.registerLog(CategorieLog.UPDATE, adhérentSelect, MainWindow.CompteConnected);
+                //log.registerLog(CategorieLog.UPDATE, adhérentSelect, MainWindow.CompteConnected);
             }
 
             
@@ -317,41 +239,11 @@ namespace Couche_IHM.Frames
             if (result.Value == true)
             {
                 this.adhérentManager.CreateAdhérent(newAdhérent);
-                UpdateView();
-                log.registerLog(CategorieLog.CREATE, newAdhérent, MainWindow.CompteConnected);
+                //log.registerLog(CategorieLog.CREATE, newAdhérent, MainWindow.CompteConnected);
             }
             
         }
 
-        /// <summary>
-        /// Permet de selectionner un adhérent
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SelectAdherent(object sender, SelectionChangedEventArgs e)
-        {
-            Adhérent adhérent = this.listadherents.SelectedItem as Adhérent;
-            if (adhérent != null)
-            {
-
-                infoAdherent.Visibility = Visibility.Visible;
-                AfficheAcompte(adhérent);
-
-            }
-        }
-
-        /// <summary>
-        /// Permet de fermer la fenêtre aves les infos adhérents
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseInfoAdherent(object sender, RoutedEventArgs e)
-        {
-            this.infoAdherent.Visibility = Visibility.Hidden;
-            this.buttonValidate.Visibility = Visibility.Hidden;
-            this.buttonCancel.Visibility = Visibility.Hidden;
-            this.listadherents.SelectedItem = null;
-        }
 
         
         /// <summary>
@@ -365,8 +257,6 @@ namespace Couche_IHM.Frames
             //this.name.Text = Adhérent.NomCompletIHM;
             //this.argent.Text = Adhérent.ArgentIHM;
             this.id.Text = Adhérent.Identifiant;
-            this.buttonCancel.Visibility = Visibility.Hidden;
-            this.buttonValidate.Visibility = Visibility.Hidden;
             ResetWarnings();
         }
         #endregion

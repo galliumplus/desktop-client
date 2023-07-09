@@ -18,9 +18,9 @@ namespace Couche_Métier
         /// Constructeur de la classe adhérentManager
         /// </summary>
         /// <param name="adhérentDao">Dao des adhérents</param>
-        public AdhérentManager(IAdhérentDao adhérentDao)
+        public AdhérentManager()
         {
-            this.adhérentDao = adhérentDao;
+            this.adhérentDao = new FakeAdherentDao();
 
             // Récupération des adhérents
             adhérents = new Dictionary<int, Adhérent>(adhérentDao.GetAdhérents());
@@ -96,14 +96,11 @@ namespace Couche_Métier
         /// <returns>des adhérent</returns>
         public List<Adhérent> GetAdhérents(string infoAdherent)
         {
-            List<Adhérent> a = new List<Adhérent>();
-            foreach (Adhérent adhérent in this.adhérents.Values)
-            {
-                /*if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
-                {
-                    a.Add(adhérent);
-                }*/
-            }
+            List<Adhérent> a = this.adhérents.Values.ToList().FindAll(adhérent => 
+                adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) ||  
+                adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || 
+                adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()));
+
             
             return a;
         }
