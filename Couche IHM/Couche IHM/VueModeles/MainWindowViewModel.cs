@@ -10,7 +10,7 @@ namespace Couche_IHM.VueModeles
     public class MainWindowViewModel
     {
         #region singleton
-        private static MainWindowViewModel instance;
+        private static MainWindowViewModel instance = null;
         public static MainWindowViewModel Instance
         {
             get 
@@ -26,11 +26,12 @@ namespace Couche_IHM.VueModeles
 
         #region viewmodels
         public AdherentsViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
-        public ProductViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }
-        
+        public ProductsViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }
+        public CaisseViewModel CaisseViewModel { get => caisseViewModel; set => caisseViewModel = value; }
 
         private AdherentsViewModel adherentViewModel;
-        private ProductViewModel productViewModel;
+        private ProductsViewModel productViewModel;
+        private CaisseViewModel caisseViewModel;
         #endregion
 
 
@@ -45,13 +46,15 @@ namespace Couche_IHM.VueModeles
             get => compteConnected;
             set => compteConnected = value;
         }
+    
 
         #endregion
 
-        public MainWindowViewModel()
+        private MainWindowViewModel()
         {
             this.adherentViewModel = new AdherentsViewModel();
-            //this.productViewModel = new productViewModel;
+            this.productViewModel = new ProductsViewModel();
+            this.caisseViewModel = new CaisseViewModel();
         }
     }
 }

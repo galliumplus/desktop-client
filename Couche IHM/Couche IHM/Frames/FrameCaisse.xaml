@@ -37,8 +37,14 @@
                 <!-- Image du compte  -->
                 <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                 <StackPanel Grid.Column="1" Margin="10,20,10,0">
-                    <Label Name="NomUtilisateur" Content="" FontSize="14" FontWeight="Bold"/>
-                    <Label Name="RoleUtilisateur" Content="" FontSize="11" FontWeight="DemiBold" />
+                    <Label 
+                        Content="{Binding CompteConnected.NomComplet}" 
+                        FontSize="14" 
+                        FontWeight="Bold"/>
+                    <Label 
+                        Content="{Binding CompteConnected.Role}" 
+                        FontSize="11" 
+                        FontWeight="DemiBold" />
                 </StackPanel>
             </Grid>
         </Grid>
@@ -57,7 +63,7 @@
             <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
         </StackPanel>
         <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <ListView  Name="Order" >
+            <ListView ItemsSource="{Binding CaisseViewModel.ProductOrder}" >
                 <ListView.Template>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
@@ -65,21 +71,38 @@
                         </DockPanel>
                     </ControlTemplate>
                 </ListView.Template>
-                <ListView.ItemTemplate >
-                    <DataTemplate >
+                <ListView.ItemTemplate  >
+                    <DataTemplate  >
 
-                        <Grid Width="220">
+                        <Grid Width="220" Margin="0,-5,0,-5"> 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Content="{Binding Key.NomProduit}" Grid.Column="1" VerticalAlignment="Center"  FontWeight="Medium"/>
+                            <Label 
+                                Content="{Binding Key.NomProduitIHM}" 
+                                Grid.Column="1" 
+                                VerticalAlignment="Center"  
+                                FontWeight="Medium"/>
                             <!-- Nombre de produit -->
-                            <Label x:Name="numberP" Content="{Binding Value}" Grid.Column="0" VerticalAlignment="Center" ContentStringFormat="x{0}"  />
+                            <Label 
+                                Content="{Binding Value}" 
+                                Grid.Column="0" 
+                                VerticalAlignment="Center" 
+                                ContentStringFormat="x{0}"  />
                             <!-- Bouton pour enlever le produit -->
-                            <Button Style="{StaticResource buttonImage}"    HorizontalAlignment="Right"  Height="10" Grid.Column="2" Width="25"  >
-                                <Image  Source="/Images/supp.png" Tag="{Binding Key.NomProduit}" MouseDown="RemoveProduct"   />
+                            <Button 
+                                Style="{StaticResource buttonImage}" 
+                                Command="{Binding DataContext.CaisseViewModel.RemoveProd, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                CommandParameter="{Binding Key}"
+                                HorizontalAlignment="Right"  
+                                Height="10" 
+                                Grid.Column="2" 
+                                Width="25"  >
+                                <Image  
+                                    Source="/Images/supp.png" />
                             </Button>
 
                         </Grid>
@@ -94,14 +117,23 @@
             <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
             <!-- Paiment -->
             <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                <Label  Content="Moyen :" VerticalAlignment="Center" Foreground="Black" FontSize="12" />
-                <ComboBox Margin="50,0,0,0" Name="listeMoyenPayement" SelectedIndex="0" Height="20"  Width="100" FontSize="11"/>
+                <Label  
+                    Content="Moyen :" 
+                    VerticalAlignment="Center" 
+                    Foreground="Black" 
+                    FontSize="12" />
+                <ComboBox 
+                    Margin="50,0,0,0" 
+                    ItemsSource="{Binding CaisseViewModel.Paiements}" 
+                    SelectedItem="{Binding CaisseViewModel.CurrentPaiement}"
+                    Width="100" 
+                    FontSize="11"/>
             </StackPanel>
             <!-- Prix -->
             <StackPanel Orientation="Horizontal">
                 <Label  Content="Total TTC :" VerticalAlignment="Center" Foreground="Black" FontSize="12" />
-                <Label Margin="38,0,0,0"  Name="PriceA" Content="0.00 €" Foreground="Black" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"   />
-                <Label Name="PriceNA" Content="(0.00 €)" Foreground="Black" FontSize="13"  VerticalAlignment="Center" />
+                <Label Margin="38,0,0,0"  Name="PriceA" Content="{Binding CaisseViewModel.PriceAdherIHM}" Foreground="Black" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"   />
+                <Label Name="PriceNA" Content="{Binding CaisseViewModel.PriceNonAdherIHM}" Foreground="Black" FontSize="13"  VerticalAlignment="Center" />
             </StackPanel>
 
             <!-- Bouton Payer-->

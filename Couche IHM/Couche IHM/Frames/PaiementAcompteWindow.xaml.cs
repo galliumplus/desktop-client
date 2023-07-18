@@ -51,7 +51,7 @@ namespace Couche_IHM.Frames
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Pay(object sender, RoutedEventArgs e)
-        {
+        {/**
             try
             {
                 // Si un adhérent a été selectionné
@@ -113,7 +113,7 @@ namespace Couche_IHM.Frames
             {
                 MessageBox.Show(ex.Message);
             }
-            
+            **/
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Modeles
         private string nom;
         private string prenom;
         private bool canPass;
-        private double argent;
+        private float argent;
         private bool stillAdherent;
         private string formation;
         #endregion
@@ -23,7 +23,7 @@ namespace Modeles
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(int id, string identifiant, string nom, string prenom, double argent,string formation, bool canPass = false,bool stillAdherent = true)
+        public Adhérent(int id, string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
             this.id = id;
             this.identifiant = identifiant;
@@ -89,7 +89,7 @@ namespace Modeles
         /// <summary>
         /// Argent de l'adhérent
         /// </summary>
-        public double Argent { get => argent; set => argent = value; }
+        public float Argent { get => argent; set => argent = value; }
 
         /// <summary>
         /// Est ce que le compte est toujours adhérent

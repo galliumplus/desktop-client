@@ -30,10 +30,18 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private ILog log; 
 
-        private string nomCompletIHM;
         private string argentIHM;
-        private string identifiant;
+        private string identifiantIHM;
+        private bool isAdherentIHM;
+        private string nomIHM;
+        private string prenomIHM;
+        private string formationIHM;
 
+        #endregion
+
+        #region events
+        public RelayCommand ModifyAdherent { get; set; }
+        public RelayCommand ResetAdh { get; set; }
         #endregion
         #region notify
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -44,13 +52,18 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+
+
         /// <summary>
         /// Nom complet de l'utilisateur
         /// </summary>
         public string NomCompletIHM
         {
-            get => nomCompletIHM;
-            set => nomCompletIHM = value;
+            get 
+            { 
+                return $"{adherent.Nom.ToUpper()} {adherent.Prenom}";
+            }
+
         }
 
         /// <summary>
@@ -59,17 +72,49 @@ namespace Couche_IHM.VueModeles
         public string ArgentIHM
         {
             get => argentIHM;
-            set => argentIHM = value;
+            set
+            {
+                argentIHM = value;
+                MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = true;
+            }
         }
 
         /// <summary>
         /// Id de l'adhérent
         /// </summary>
-        public string Identifiant 
-        { 
-            get => identifiant;
-            set => identifiant = value;
+        public string IdentifiantIHM
+        {
+            get => identifiantIHM;
+            set
+            {
+                identifiantIHM = value;
+                MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = true;
+            }
         }
+
+        public string NomIHM 
+        { 
+            get => nomIHM; 
+            set => nomIHM = value; 
+        }
+        public string PrenomIHM 
+        { 
+            get => prenomIHM; 
+            set => prenomIHM = value; 
+        }
+        public string FormationIHM 
+        { 
+            get => formationIHM;
+            set => formationIHM = value; 
+        }
+        public bool IsAdherentIHM 
+        { 
+            get => isAdherentIHM; 
+            set => isAdherentIHM = value; 
+        }
+
+
+
 
         #endregion
 
@@ -78,105 +123,79 @@ namespace Couche_IHM.VueModeles
             this.adherent = adherent;
             this.log =  new LogAdherentToTxt();
             this.adhérentManager = new AdhérentManager();
-            CancelAdherent();
-        }
-
-        /// <summary>
-        /// Permet d'initialiser les champs avec les infos de l'adhérent
-        /// </summary>
-        public void CancelAdherent()
-        {
+            this.ModifyAdherent = new RelayCommand(x => this.UpdateAdherent());
+            this.ResetAdh = new RelayCommand(x => this.ResetAdherent());
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+
+            // Initialisation propriétés
             this.argentIHM = converterFormatArgent.ConvertToString(adherent.Argent);
-            this.identifiant = adherent.Identifiant;
-            this.nomCompletIHM = $"{adherent.Nom.ToUpper()} {adherent.Prenom}";
+            this.identifiantIHM = adherent.Identifiant;
+            this.formationIHM = adherent.Formation;
+            this.isAdherentIHM = adherent.StillAdherent;
+            this.nomIHM = adherent.Nom;
+            this.prenomIHM = adherent.Prenom;
+
         }
 
-        /// <summary>
-        /// Permet le changement rapide des adhérents
-        /// </summary>
-        public void ValidateAdherent()
-        {
-            try
-            {
-                // Mise à jour du nom et du prénom
-                string nom;
-                string prenom;
-                string identifiant;
-                double argent;
-
-                if (this.nomCompletIHM.Contains(" "))
-                {
-                    string[] nomComplet = this.nomCompletIHM.Split(" ");
-                    nom = nomComplet[0];
-                    prenom = nomComplet[1];
-                }
-                else
-                {
-                    throw new Exception("IdentiteFormat");
-                }
-
-
-                // Mise à jour de l'id
-                if (this.identifiant.Length == 8 && this.identifiant[0] == prenom.ToLower()[0] && this.identifiant[1] == nom.ToLower()[0])
-                {
-                    identifiant = this.identifiant;
-                }
-                else
-                {
-                    throw new Exception("IDFormat");
-                }
-
-
-                // Mise à jour de l'argent
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-                argent = converterFormatArgent.ConvertToDouble(this.argentIHM);
-
-                // Met à jour l'adhérent
-                this.adherent.Identifiant = identifiant;
-                this.adherent.Nom = nom;
-                this.adherent.Prenom = prenom;
-                this.adherent.Argent = argent;
-                this.UpdateAdherent();
-
-
-            }
-            catch (Exception ex)
-            {
-                switch (ex.Message)
-                {
-                    case "ArgentFormat":
-                        this.argentWarning.Visibility = Visibility.Visible;
-                        break;
-                    case "IDFormat":
-                        this.compteWarning.Visibility = Visibility.Visible;
-                        break;
-                    case "IdentiteFormat":
-                        this.identiteWarning.Visibility = Visibility.Visible;
-                        break;
-                    default:
-                        MessageBox.Show(ex.Message);
-                        break;
-                }
-            }
-        }
 
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
         public void UpdateAdherent()
         {
+            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+
             // Changer la data
+            this.adherent.Nom = this.nomIHM;
+            this.adherent.Prenom = this.prenomIHM;
+            this.adherent.Argent = converterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.adherent.Formation = this.formationIHM;
+            this.adherent.Identifiant = this.identifiantIHM;
+            this.adherent.StillAdherent = this.isAdherentIHM;
             adhérentManager.UpdateAdhérent(this.adherent);
 
+
             // Notifier la vue
-            NotifyPropertyChanged(nameof(Identifiant));
+            NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
 
             // Log l'action
             this.log.registerLog(CategorieLog.UPDATE, this.adherent, MainWindowViewModel.Instance.CompteConnected);
-    
+
+
+            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = false;
+        }
+
+
+
+        /// <summary>
+        /// Permet de reset les propriétés de l'adhérent
+        /// </summary>
+        public void ResetAdherent()
+        {
+            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+
+            // Initialisation propriétés
+            this.argentIHM = converterFormatArgent.ConvertToString(adherent.Argent);
+            this.identifiantIHM = adherent.Identifiant;
+            this.formationIHM = adherent.Formation;
+            this.nomIHM = adherent.Nom;
+            this.prenomIHM = adherent.Prenom;
+            this.isAdherentIHM = adherent.StillAdherent;
+
+            // Notifier la vue
+            NotifyPropertyChanged(nameof(IdentifiantIHM));
+            NotifyPropertyChanged(nameof(ArgentIHM));
+            NotifyPropertyChanged(nameof(NomCompletIHM));
+            NotifyPropertyChanged(nameof(NomIHM));
+            NotifyPropertyChanged(nameof(PrenomIHM));
+            NotifyPropertyChanged(nameof(FormationIHM));
+            NotifyPropertyChanged(nameof(IsAdherentIHM));
+
+            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = false;
         }
     }
 }

@@ -96,8 +96,8 @@ namespace Couche_IHM.Frames
             {
                 product.Categorie = this.productCategorie.Text;
                 product.Quantite = Convert.ToInt32(this.productStock.Text.Trim());
-                product.PrixAdherent = Convert.ToDouble(this.productPriceA.Text.Trim());
-                product.PrixNonAdherent = Convert.ToDouble(this.productPriceNA.Text.Trim());
+                product.PrixAdherent = (float)(Convert.ToDouble(this.productPriceA.Text.Trim()));
+                product.PrixNonAdherent = (float)(Convert.ToDouble(this.productPriceNA.Text.Trim()));
                 product.NomProduit = this.productName.Text;
 
                 // Met à jour l'image

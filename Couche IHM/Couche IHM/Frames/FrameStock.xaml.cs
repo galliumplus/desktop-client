@@ -1,4 +1,5 @@
 ﻿
+using Couche_IHM.VueModeles;
 using Couche_Métier;
 using Couche_Métier.Log;
 using Modeles;
@@ -17,11 +18,6 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameStock : Page
     {
-        // Manager des produits
-        private ProductManager productManager;
-
-        // Manager des catégories
-        private CategoryManager categorieManager;
 
         // Attributs qui gèrent si la liste est triée
         private int isSortingProductName = 0;
@@ -33,80 +29,19 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Constructeur de la frame des stock
         /// </summary>
-        /// <param name="productManager">manager des produits</param>
-        /// <param name="categoryManager">manager des catégories</param>
-        public FrameStock(ProductManager productManager, CategoryManager categoryManager)
+        public FrameStock()
         {
-            InitializeComponent();
-            this.productDetails.Visibility = Visibility.Hidden; // Cache détails du produit
+            InitializeComponent();       
+            this.DataContext = MainWindowViewModel.Instance;
 
-            // Récupère les managers
-            this.productManager = productManager;
-            this.categorieManager = categoryManager;
-
-            // Met à jour l'affichage
-            UpdateView();
-            this.buttonValidate.Content = "Valider";
-            
-            this.DataContext = categorieManager;
-
-            // Tri initial
-
-
-            // Si membre du ca alors parametre pas visibles
-        //    if (MainWindow.CompteConnected.Role != RolePerm.BUREAU)
-        //    {
-        //        this.optionsButton.Visibility = Visibility.Hidden;
-        //    }
         }
 
         
-        /// <summary>
-        /// Permet de mettre à jour la liste des produits
-        /// </summary>
-        private void UpdateView()
-        {
-            this.listproduits.ItemsSource = null;
-            List<Product> productMetier = this.productManager.GetProducts();
-
-            this.listproduits.ItemsSource = productMetier;
-        }
 
 
         #region events
 
-        /// <summary>
-        /// Permet de fermer la fenêtre aves les infos adhérents
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CloseInfoAdherent(object sender, RoutedEventArgs e)
-        {
-            this.listproduits.SelectedItem = null;
-            this.productDetails.Visibility = Visibility.Hidden;
-            this.buttonValidate.Visibility = Visibility.Hidden;
-            this.options.Visibility = Visibility.Hidden;
-        }
 
-        /// <summary>
-        /// Permet de cacher les options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HideOptions(object sender, RoutedEventArgs e)
-        {
-            this.options.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
-        /// Permet d'afficher les options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowOptions(object sender, RoutedEventArgs e)
-        {
-            this.options.Visibility = Visibility.Visible;
-        }
 
         /// <summary>
         /// Permet de supprimer le produit
@@ -115,6 +50,7 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void DeleteStock(object sender, RoutedEventArgs e)
         {
+            /**
             Product productSelect = this.productManager.GetProduct((this.listproduits.SelectedItem as Product).ID);
             this.productManager.RemoveProduct(productSelect);
             productDetails.Visibility = Visibility.Hidden;
@@ -124,7 +60,7 @@ namespace Couche_IHM.Frames
             //log.registerLog(CategorieLog.DELETE, productSelect ,MainWindow.CompteConnected);
 
             UpdateView();
-            this.options.Visibility = Visibility.Hidden;
+            this.options.Visibility = Visibility.Hidden;**/
         }
 
         /// <summary>
@@ -132,6 +68,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void ShowProductDetails(object sender, SelectionChangedEventArgs e)
         {
+            /**
             this.productDetails.Visibility = Visibility.Visible;
             Product p = (Product)this.listproduits.SelectedItem;
             if(p != null)
@@ -139,7 +76,7 @@ namespace Couche_IHM.Frames
                 this.productName.Text = p.NomProduit;
                 this.productQuantite.Text = p.Quantite.ToString();
                 this.productCategorie.SelectedItem = p.Categorie.ToString();
-            }
+            }**/
         }
 
         /// <summary>
@@ -149,33 +86,14 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ShowCategory(object sender, RoutedEventArgs e)
         {
-            FenetreCategory fenetreCategory = new FenetreCategory(this.categorieManager.ListAllCategory());
-            fenetreCategory.ShowDialog();
+            //FenetreCategory fenetreCategory = new FenetreCategory(this.categorieManager.ListAllCategory());
+            //fenetreCategory.ShowDialog();
         }
 
-        /// <summary>
-        /// Permet de rechercher un produit dans la barre de recherche
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchProduct(object sender, TextChangedEventArgs e)
-        {
-            if (this.rechercheProduct.Text.Trim() != "")
-            {
-                this.listproduits.ItemsSource = this.productManager.GetProducts(this.rechercheProduct.Text);
-            }
-            else
-            {
-
-                this.listproduits.SelectedItem = null;
-                this.UpdateView();
-                productDetails.Visibility = Visibility.Hidden;
-                this.buttonValidate.Visibility = Visibility.Hidden;
-            }
-        }
         #endregion
 
         #region tri
+        /**
         /// <summary>
         /// Permet de trier les produits selon leur prix
         /// </summary>
@@ -271,7 +189,7 @@ namespace Couche_IHM.Frames
         }
 
 
-
+        
         /// <summary>
         /// Permet de trier les produits selon leur nom
         /// </summary>
@@ -301,7 +219,7 @@ namespace Couche_IHM.Frames
             }
             isSortingProductName = (isSortingProductName + 1) % 3;
         }
-
+        **/
         #endregion
 
         /// <summary>
@@ -309,6 +227,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void AddAnProduct(object sender, RoutedEventArgs e)
         {
+            /**
             Product newProduct = new Product();
             FenetreAddProduct p = new FenetreAddProduct(newProduct, this.categorieManager.ListAllCategory());
             bool res = p.ShowDialog().Value;
@@ -316,9 +235,9 @@ namespace Couche_IHM.Frames
             // Si fermé
             if(res == true)
             {
-                this.productManager.CreateProduct(newProduct);
-                this.UpdateView();  
-            }
+                //this.productManager.CreateProduct(newProduct);
+                //this.UpdateView();  
+            }**/
         }
 
         /// <summary>
@@ -326,6 +245,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void UpdateAnProduct(object sender, RoutedEventArgs e)
         {
+            /**
             HideOptions();
             Product baseProduit = (Product)listproduits.SelectedItem;
             Product copyProduct = new Product(baseProduit);
@@ -341,23 +261,10 @@ namespace Couche_IHM.Frames
               
                 
                 this.UpdateView();
-            }
+            }**/
         }
 
-        /// <summary>
-        /// Cache les options
-        /// </summary>
-        private void HideOptions()
-        {
-            options.Visibility = Visibility.Hidden;
-        }
 
-        /// <summary>
-        /// Cache les options quand la souris est en dehors de la zone
-        /// </summary>
-        private void HideOptionsIHM(object sender, MouseEventArgs e)
-        {
-            HideOptions();
-        }
+
     }
 }

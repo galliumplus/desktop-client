@@ -13,9 +13,14 @@ namespace Couche_Métier.Utilitaire
         /// Permet de convertir l'argent en un string formatté
         /// </summary>
         /// <param name="argent"></param>
-        public string ConvertToString(double argent)
+        public string ConvertToString(float argent)
         {
-            string ret = Convert.ToString(argent);
+            // Mise à jour de l'argent
+            string ret = "" + Math.Round(argent, 2);
+            ret = ret.Replace(".", ",");
+            ret = ret.Replace("€", " ");
+            ret = ret.Trim();
+            
             // 1 => 1,00
             if (new Regex("^[0-9]+$").IsMatch(ret))
             {
@@ -37,9 +42,9 @@ namespace Couche_Métier.Utilitaire
         /// Permet de convertir l'argent formatté en double
         /// </summary>
         /// <param name="argent"></param>
-        public double ConvertToDouble(string argent)
+        public float ConvertToDouble(string argent)
         {
-            double argentresult = 0;
+            float argentresult = 0;
 
             // Mise à jour de l'argent
             string argentFormat = argent.Replace(".", ",");
@@ -48,7 +53,7 @@ namespace Couche_Métier.Utilitaire
 
             if (new Regex("^[0-9]+$").IsMatch(argentFormat) || new Regex("^[0-9]+,[0-9]+$").IsMatch(argentFormat))
             {
-                argentresult = Convert.ToDouble(argentFormat);
+                argentresult = (float)(Convert.ToDouble(argentFormat));
             }
             else
             {

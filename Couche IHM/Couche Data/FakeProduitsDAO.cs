@@ -1,5 +1,6 @@
 ﻿
 using Modeles;
+using MySql.Data.MySqlClient;
 
 namespace Couche_Data
 {
@@ -9,24 +10,46 @@ namespace Couche_Data
 
         public FakeProduitsDAO() 
         {
-            products.Add(new Product(1, "Coca cola", 20, 22, 0.80, getRandomCategorie()));
-            products.Add(new Product(2, "Fanta", 20, 22, 0.80, getRandomCategorie()));
-            products.Add(new Product(3,"Monster", 20, 22, 1.20, getRandomCategorie()));
-            products.Add(new Product(4,"SUPER MONSTER", 1, 22, 2.20, getRandomCategorie()));
+            //Connection
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_gallium", "none");
+            MySqlConnection mySqlConnection = new MySqlConnection(connString);
+            mySqlConnection.Open();
+
+            //Requette SQL
+            string stm = "SELECT * FROM Products ORDER BY name";
+            MySqlCommand cmd = new MySqlCommand(stm, mySqlConnection);
+            cmd.Prepare();
+
+            //lecture de la requette
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<Product> products = new List<Product>();
+
+            while (rdr.Read())
+            {
+                products.Add(new Product(rdr.GetInt32("product_id"), rdr.GetString("name"), rdr.GetInt32("stock"), rdr.GetFloat("price_na"), rdr.GetFloat("price_a"),getRandomCategorie()));
+            }
+
+            mySqlConnection.Close();
+            this.products = products;
+            /**
+            products.Add(new Product(1, "Coca cola", 20, 22, 0.80f, getRandomCategorie()));
+            products.Add(new Product(2, "Fanta", 20, 22, 0.80f, getRandomCategorie()));
+            products.Add(new Product(3,"Monster", 20, 22, 1.20f, getRandomCategorie()));
+            products.Add(new Product(4,"SUPER MONSTER", 1, 22, 2.20f, getRandomCategorie()));
             products.Add(new Product(5,"Pablo", 1, 22, 500, getRandomCategorie()));
-            products.Add(new Product(6,"Carotte", 30, 22, 0.20, getRandomCategorie()));
+            products.Add(new Product(6,"Carotte", 30, 22, 0.20f, getRandomCategorie()));
             products.Add(new Product(7,"Chocolat blanc", 15, 22, 1, getRandomCategorie()));
-            products.Add(new Product(8,"Chocolat rouge", 1, 22, 1.50, getRandomCategorie()));
+            products.Add(new Product(8,"Chocolat rouge", 1, 22, 1.50f, getRandomCategorie()));
             products.Add(new Product(9,"Monster ETIQ", 999, 22, 50, getRandomCategorie()));
             products.Add(new Product(10,"Monster Jus de pablo", 1, 22, 220, getRandomCategorie()));
-            products.Add(new Product(11, "Monster Infernale", 3, 22, 1.50, getRandomCategorie()));
+            products.Add(new Product(11, "Monster Infernale", 3, 22, 1.50f, getRandomCategorie()));
             products.Add(new Product(12,"Tomate noire", 23, 22, 20, getRandomCategorie()));
-            products.Add(new Product(13, "Chaire pourrie", 122, 22, 0.50, getRandomCategorie()));
+            products.Add(new Product(13, "Chaire pourrie", 122, 22, 0.50f, getRandomCategorie()));
             products.Add(new Product(14, "Ane", 0, 22, 10000, getRandomCategorie()));
-            products.Add(new Product(15,"Eau", 9, 22, 0.20, getRandomCategorie()));
+            products.Add(new Product(15,"Eau", 9, 22, 0.20f, getRandomCategorie()));
             products.Add(new Product(16, "XXX", 666, 22, 2, getRandomCategorie()));
             products.Add(new Product(17,"TOP SECRET", 1, 22, 999, getRandomCategorie()));
-            products.Add(new Product(18,"Larme de sardoches", 999, 22, 0.20, getRandomCategorie()));
+            products.Add(new Product(18,"Larme de sardoches", 999, 22, 0.20f, getRandomCategorie()));
             products.Add(new Product(19, "Epee de saske", 213, 22, 21, getRandomCategorie()));
             products.Add(new Product(20, "Pyamide de france anglaise", 1, 22, 500, getRandomCategorie()));
             products.Add(new Product(21, "MATTEO BADET", 23, 22, 10, getRandomCategorie()));
@@ -48,7 +71,7 @@ namespace Couche_Data
             products.Add(new Product(37, "Kinder buenp", 23, 22, 10, getRandomCategorie()));
             products.Add(new Product(38, "Craprice des dieux", 23, 22, 10, getRandomCategorie()));
             products.Add(new Product(39, "Louis devie", 23, 22, 10, getRandomCategorie()));
-            products.Add(new Product(40, "Non", 23, 22, 10, getRandomCategorie()));
+            products.Add(new Product(40, "Non", 23, 22, 10, getRandomCategorie()));**/
         }
         public void CreateProduct(Product product)
         {
@@ -92,10 +115,14 @@ namespace Couche_Data
 
         private string getRandomCategorie()
         {
-            //CategoryManager c = new CategoryManager(new FakeCategoryDAO());
-            //List<string> categories = c.ListAllCategory();
-            //return categories[new Random().Next(0, categories.Count)];
-            return "test";
+            List<string> categories =new List<string>(){
+                "BOISSON",
+                "SNACKS",
+                "HIDDEN",
+                "PABLO",
+                "test"
+            };
+            return categories[new Random().Next(0, categories.Count)];
         }
     }
 }

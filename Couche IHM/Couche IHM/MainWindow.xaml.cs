@@ -15,8 +15,7 @@ namespace Couche_IHM
     {
         // Représente le manager des adhérents
         private AdhérentManager adherentManager;
-        // Manager de produits
-        private ProductManager productManager;
+       
        
         // Manager des catégories
         private CategoryManager categoryManager;
@@ -30,9 +29,8 @@ namespace Couche_IHM
             InitializeComponent();
             MainWindowViewModel.Instance.CompteConnected = user;
             this.adherentManager = new AdhérentManager();
-            this.productManager = new ProductManager(new FakeProduitsDAO());
             this.userManager = new UserManager(new FakeUserDAO());
-            this.categoryManager = new CategoryManager(new FakeCategoryDAO());
+            this.categoryManager = new CategoryManager();
 
         }
 
@@ -50,7 +48,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToCaisse(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameCaisse(this.adherentManager, this.productManager, this.categoryManager));
+            this.mainFrame.Navigate(new FrameCaisse());
         }
 
         /// <summary>
@@ -68,7 +66,7 @@ namespace Couche_IHM
         /// </summary>
         private void GoToStock(object sender, RoutedEventArgs e)
         {
-            this.mainFrame.Navigate(new FrameStock(this.productManager, this.categoryManager));
+            this.mainFrame.Navigate(new FrameStock());
         }
 
         /// <summary>

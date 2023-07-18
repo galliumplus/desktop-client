@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Couche_IHM.VueModeles
@@ -20,6 +22,7 @@ namespace Couche_IHM.VueModeles
         private string searchFilter = "";
         private bool showAdherent = false;
         private bool showModifAdherent = false;
+        private bool dialogModifAdherent = false;
         #endregion
 
         #region notify
@@ -30,6 +33,9 @@ namespace Couche_IHM.VueModeles
         }
         #endregion
 
+        #region events
+        public RelayCommand OpenModifAdh { get; set; }
+        #endregion
 
         #region properties
 
@@ -47,9 +53,10 @@ namespace Couche_IHM.VueModeles
                 }
                 else
                 {
+                   
                     adhs = adherents.FindAll(adh =>
                     adh.NomCompletIHM.ToUpper().Contains(searchFilter.ToUpper()) ||
-                    adh.Identifiant.ToUpper().Contains(searchFilter.ToUpper())); ;
+                    adh.IdentifiantIHM.ToUpper().Contains(searchFilter.ToUpper())); ;
                 }
                 
                 return adhs;
@@ -104,20 +111,38 @@ namespace Couche_IHM.VueModeles
             get => currentAdherent;
             set 
             {
+                if (currentAdherent != null)
+                {
+                    this.currentAdherent.ResetAdherent();
+                }
+                
                 currentAdherent = value;
                 if (value != null)
                 {
                     ShowAdherent = true;
-                    ShowModifAdherent = true;
+
                 }
                 else
                 {
                     this.ShowAdherent = false;
-                    this.ShowModifAdherent = false;
+                    
                 }
+                this.ShowModifAdherent = false;
+
                 NotifyPropertyChanged(nameof(CurrentAdherent));
             }
         }
+
+        public bool DialogModifAdherent
+        {
+            get => dialogModifAdherent;
+            set
+            {
+                dialogModifAdherent = value;
+                NotifyPropertyChanged(nameof(DialogModifAdherent));
+            }
+        }
+
 
         #endregion
 
@@ -128,7 +153,9 @@ namespace Couche_IHM.VueModeles
         {
             this.adherentManager = new AdhérentManager();
             this.adherents = new List<AdherentViewModel>();
+            this.OpenModifAdh = new RelayCommand(x => this.DialogModifAdherent = true);
             InitAdhérents();
+
         }
 
         #region methods
@@ -143,6 +170,11 @@ namespace Couche_IHM.VueModeles
                 this.adherents.Add(new AdherentViewModel(adh));
             }
         }
+
+
+  
+
+
         #endregion
 
 

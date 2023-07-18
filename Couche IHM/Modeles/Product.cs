@@ -10,23 +10,12 @@ namespace Modeles
         private int id;
         private string nomProduit;
         private int quantite;
-        private double prixAdherent;
-        private double prixNonAdherent;
+        private float prixAdherent;
+        private float prixNonAdherent;
         private string categorie;
         #endregion
 
         #region properties
-
-        /// <summary>
-        /// Permet de savoir si le produit est disponible
-        /// </summary>
-        public bool isDisponible
-        {
-            get
-            {
-                return (quantite > 0);
-            }
-        }
 
         /// <summary>
         /// Id du produit
@@ -57,7 +46,7 @@ namespace Modeles
         /// <summary>
         /// Prix adhérent
         /// </summary>
-        public double PrixAdherent 
+        public float PrixAdherent 
         { 
             get => prixAdherent; 
             set => prixAdherent = value; 
@@ -77,7 +66,7 @@ namespace Modeles
         /// <summary>
         /// Renvoie le prix non adhérent
         /// </summary>
-        public double PrixNonAdherent 
+        public float PrixNonAdherent 
         { 
             get => prixNonAdherent; 
             set => prixNonAdherent = value; 
@@ -89,7 +78,7 @@ namespace Modeles
         #region constructors
         /// <summary>
         /// Futur constructeur naturelle
-        public Product(int id, string nomProduit, int quantite, double prixAdherent, double prixNonAdherent, string categorie)
+        public Product(int id, string nomProduit, int quantite, float prixAdherent, float prixNonAdherent, string categorie)
         {
             this.id = id;
             this.nomProduit = nomProduit;

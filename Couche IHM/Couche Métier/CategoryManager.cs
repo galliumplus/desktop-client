@@ -21,9 +21,9 @@ namespace Couche_Métier
         /// Constructeur du manager des catégories
         /// </summary>
         /// <param name="category">dao des catégories</param>
-        public CategoryManager(ICategoryDao category) 
+        public CategoryManager() 
         {
-            this.iCategory = category;
+            this.iCategory = new FakeCategoryDAO();
             categories = this.iCategory.ListALlCategory();
         }
       

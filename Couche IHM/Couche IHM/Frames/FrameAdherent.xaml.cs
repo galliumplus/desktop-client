@@ -27,8 +27,6 @@ namespace Couche_IHM.Frames
         private int isSortingId = 0;
         private int isSortingIdentite = 0;
 
-        // Attribut qui permet de gérer les logs pour chaque opération
-        private ILog log = new LogAdherentToTxt();
 
         /// <summary>
         /// Cosntructeur du frame adhérent
@@ -44,16 +42,7 @@ namespace Couche_IHM.Frames
 
         
 
- 
-        /// <summary>
-        /// Permet de cacher les warnings
-        /// </summary>
-        private void ResetWarnings()
-        {
-            this.compteWarning.Visibility = Visibility.Hidden;
-            this.identiteWarning.Visibility = Visibility.Hidden;
-            this.argentWarning.Visibility = Visibility.Hidden;
-        }
+
 
         #region operationsMetiers
         /// <summary>
@@ -85,94 +74,7 @@ namespace Couche_IHM.Frames
         #endregion
 
         #region events
-        /// <summary>
-        /// Permet d'afficher un accompte en le recherchant
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchAdherent(object sender, TextChangedEventArgs e)
-        {
-            if (this.rechercheAcompte.Text.Trim() != "")
-            {
-                this.listadherents.ItemsSource = this.adhérentManager.GetAdhérents(this.rechercheAcompte.Text);
-            }
-            else
-            {
-                
-                this.listadherents.SelectedItem = null;
-            }
-        }
 
-        /// <summary>
-        /// Permet de valider les changements faits à un utilisateur
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ValiderChangements(object sender, RoutedEventArgs e)
-        {
-            ConverterFormatArgent converterArgent = new ConverterFormatArgent();
-            MainWindowViewModel.Instance.AdherentViewModel.CurrentAdherent.UpdateAdherent();
-            /
-            ResetWarnings();
-
-            Adhérent newAdher = new Adhérent();
-            Adhérent baseAdhérent = (Adhérent)this.listadherents.SelectedItem;
-            try
-            {
-                // Récupération de l'id
-                newAdher.Id = baseAdhérent.Id;
-
-                // Mise à jour du nom et du prénom
-                if (this.name.Text.Contains(" "))
-                {
-                    string[] nomComplet = this.name.Text.Split(" ");
-                    newAdher.Nom = nomComplet[0];
-                    newAdher.Prenom = nomComplet[1];
-                }
-                else
-                {
-                    throw new Exception("IdentiteFormat");
-                }
-
-
-                // Mise à jour de l'id
-                if (this.id.Text.Length == 8 && this.id.Text[0] == newAdher.Prenom.ToLower()[0] && this.id.Text[1] == newAdher.Nom.ToLower()[0])
-                {
-                    newAdher.Identifiant = this.id.Text;
-                }
-                else
-                {
-                    throw new Exception("IDFormat");
-                }
-
-
-                // Mise à jour de l'argent
-                newAdher.Argent = converterArgent.ConvertToDouble(this.argent.Text);
-
-                // Met à jour l'adhérent
-                this.UpdateAnAdherent(baseAdhérent, newAdher);
-
-                this.listadherents.SelectedItem = null;
-            }
-            catch (Exception ex)
-            {
-                switch (ex.Message)
-                {
-                    case "ArgentFormat":
-                        this.argentWarning.Visibility = Visibility.Visible;
-                        break;
-                    case "IDFormat":
-                        this.compteWarning.Visibility = Visibility.Visible;
-                        break;
-                    case "IdentiteFormat":
-                        this.identiteWarning.Visibility = Visibility.Visible;
-                        break;
-                    default:
-                        MessageBox.Show(ex.Message);
-                        break;
-                }
-            }
-        }
 
 
 
@@ -194,35 +96,14 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void DeleteAdherent(object sender, RoutedEventArgs e)
         {
-            Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
-            this.adhérentManager.RemoveAdhérent(adhérentSelect);
+            //Adhérent adhérentSelect = this.adhérentManager.GetAdhérent(this.id.Text);
+            //this.adhérentManager.RemoveAdhérent(adhérentSelect);
 
             // LOG DELETE ADHERENT
             //log.registerLog(CategorieLog.DELETE, adhérentSelect, MainWindow.CompteConnected);
 
         }
 
-        /// <summary>
-        /// Permet de modifier un adhérent
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ModifyAdherent(object sender, RoutedEventArgs e)
-        {
-            Adhérent adhérentSelect = new Adhérent((Adhérent)this.listadherents.SelectedItem);
-            ModificationAcompte modifAcompteWindow = new ModificationAcompte(adhérentSelect);
-            bool? result = modifAcompteWindow.ShowDialog();
-
-            // Si l'ajout est validé alors on met à jour la bdd et la vue
-            if (result.Value == true)
-            {
-                this.adhérentManager.UpdateAdhérent(adhérentSelect);
-
-                //log.registerLog(CategorieLog.UPDATE, adhérentSelect, MainWindow.CompteConnected);
-            }
-
-            
-        }
 
         /// <summary>
         /// Permet d'ajouter un adhérent
@@ -245,20 +126,6 @@ namespace Couche_IHM.Frames
         }
 
 
-        
-        /// <summary>
-        /// Permet d'annuler les changements faits à l'adhérent
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CancelChangements(object sender, RoutedEventArgs e)
-        {
-            Adhérent Adhérent = (Adhérent)this.listadherents.SelectedItem;
-            //this.name.Text = Adhérent.NomCompletIHM;
-            //this.argent.Text = Adhérent.ArgentIHM;
-            this.id.Text = Adhérent.Identifiant;
-            ResetWarnings();
-        }
         #endregion
 
         #region TRI

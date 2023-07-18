@@ -1,4 +1,5 @@
 ﻿using Couche_IHM.ImagesProduit;
+using Couche_IHM.VueModeles;
 using Couche_Métier;
 using Modeles;
 using System;
@@ -13,20 +14,25 @@ namespace Couche_IHM.CustomListView
     /// </summary>
     public partial class DetailedProduct : UserControl
     {
-        private Product product;
-        public Product Product { get => product; set { product = value; } }
+        private ProductViewModel product;
+        public ProductViewModel Product { get => product; set { product = value; } }
 
         /// <summary>
         /// Constructeur de la classe DetailedProduct
         /// </summary>
         /// <param name="p"></param>
-        public DetailedProduct(Product p)
+        public DetailedProduct(ProductViewModel p)
         {
             InitializeComponent();
             DataContext = p;
             product = p;
-            ImageManager image = new ImageManager();
-            this.image.Source = new BitmapImage(new Uri(image.GetImageFromProduct(p.NomProduit),UriKind.Absolute));
+        }
+
+
+
+        private void AddProduct(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainWindowViewModel.Instance.CaisseViewModel.AddProduct(this.product);
         }
     }
 }

@@ -61,7 +61,7 @@
         </StackPanel>
         
         <!-- Boutons -->
-        <Button Content="Valider" Grid.Row="5" Grid.Column="0" Height="30" Width="190" Click="ValidateChangement"/>
-        <Button Content="Annuler" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="30" Width="190" Click="CancelChangement"/>
+        <Button Content="Valider" Background="Gray" Grid.Row="5" Grid.Column="0" Height="30" Width="190" Click="ValidateChangement"/>
+        <Button Content="Annuler" Background="{StaticResource galliumColor}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Height="30" Width="190" Click="CancelChangement"/>
     </Grid>
 </Window>

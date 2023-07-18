@@ -9,7 +9,8 @@ namespace Couche_Data
             "BOISSON",
             "SNACKS",
             "HIDDEN",
-            "PABLO"
+            "PABLO",
+            "test"
         };
 
         public void CreateCategory(string ca)

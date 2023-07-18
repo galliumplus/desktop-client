@@ -21,28 +21,18 @@ namespace Couche_Métier
             set => products = value;
         }
 
-        private List<string> categoryProduct;
-        /// <summary>
-        /// Catégorie de produits
-        /// </summary>
-        public List<string> CategoryProduct
-        {
-            get => categoryProduct;
-            set => categoryProduct = value;
-        }
+
 
         /// <summary>
         /// Constructeur de Product Manager
         /// </summary>
         /// <param name="productDAO"> IProductDAO </param>
-        public ProductManager(IProductDAO productDAO)
+        public ProductManager()
         {
             // Initialisation
-           
-            this.categoryProduct = new List<string>();
-            this.productDAO = productDAO;
+
+            this.productDAO = new FakeProduitsDAO();
             this.products = new List<Product>(this.productDAO.GetProducts());
-            InitialiseCategory();
         }
 
         /// <summary>
@@ -131,18 +121,5 @@ namespace Couche_Métier
             return this.products;
         }
 
-        /// <summary>
-        /// Intialise les catégories 
-        /// </summary>
-        private void InitialiseCategory()
-        {
-            foreach(Product p in this.products)
-            {
-                if (!this.categoryProduct.Contains(p.Categorie))
-                {
-                    this.categoryProduct.Add(p.Categorie);
-                }
-            }
-        }
     }
 }

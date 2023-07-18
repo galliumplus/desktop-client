@@ -26,6 +26,7 @@ namespace Couche_IHM
         /// </summary>
         private void ConnectToAccount(object sender, RoutedEventArgs e)
         {
+
             // Vérifie la connexion d'un utilisateur
             User userConnection = userDAO.ConnectionUser(identifiantBox.Text, passwordBox.Password);
 

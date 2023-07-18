@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Couche_IHM.Frames"
+      xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
@@ -59,7 +61,7 @@
 
             <!-- ScrollViewer des adhérents-->
             <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-                <ListView  x:Name="listproduits"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" SelectionChanged="ShowProductDetails"  >
+                <ListView ItemsSource="{Binding ProductViewModel.Products}" SelectedItem="{Binding ProductViewModel.CurrentProduct}"   HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top"   >
                     <ListView.Template>
                         <ControlTemplate>
                             <!-- Header des colonnes -->
@@ -78,16 +80,16 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Button Style="{x:Null}"   BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto" Width="200"  FontSize="17"  Content="Produit" Click="SortProductName" />
+                                    <Button Style="{x:Null}"   BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto" Width="200"  FontSize="17"  Content="Produit" />
                                     <Image Margin="30,0,0,0" Name="produitTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button Style="{x:Null}"  BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Quantité" Click="SortQuantite" />
+                                    <Button Style="{x:Null}"  BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Quantité" />
                                     <Image Name="quantiteTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Prix A " Click="SortPrix"/>
+                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Prix A " />
                                     <Image x:Name="prixTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
 
-                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="4" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Catégorie" Click="SortCategorie"/>
+                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="4" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Catégorie"/>
                                     <Image x:Name="categorieTri" Margin="20,0,0,0" Visibility="Hidden" Grid.Column="4"  Width="20" HorizontalAlignment="Left"/>
 
                                     <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
@@ -108,10 +110,10 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <!-- Content -->
-                                <Label   x:Name="labelProduit"  Content="{Binding NomProduit}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding Quantite}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label   x:Name="labelProduit"  Content="{Binding NomProduitIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding QuantiteIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                                 <Label  Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding Categorie}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  Content="{Binding CategoryIHM}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -119,8 +121,6 @@
             </ScrollViewer>
 
             <Button Content="Afficher catégories" x:Name="buttonCategory" Click="ShowCategory" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Background="Black" Foreground="White" />
-
-
 
             <!-- Information utilisateur sélectionner -->
             <StackPanel Grid.Column="1"  Grid.Row="0">
@@ -131,94 +131,254 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Barre de recherche -->
-                    <TextBox  Name="rechercheProduct" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" TextChanged="SearchProduct"    />
+                    <TextBox 
+                        Height="30"  
+                        Tag="Recherche..."
+                        Width="180" 
+                        Style="{StaticResource WaterMarkTextBox}"   
+                        HorizontalAlignment="Stretch"
+                        FontSize="15" 
+                        Grid.ColumnSpan="2" 
+                        Text="{Binding ProductViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
-                    <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
+                    <Image  
+                        Source="/Images/loupe.png" 
+                        Grid.ColumnSpan="2"
+                        Width="22" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,0,70,0" />
                 </Grid>
 
-
                 <!-- Info -->
+                <Border Background="#FFFCF2" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ProductViewModel.ShowProduct}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ProductViewModel.ShowProduct}" Value="false">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel>
 
-                <Grid Margin="0,60,0,0" Height="289" Width="180" HorizontalAlignment="Center" >
-                    <Border  Name="productDetails" BorderBrush="DodgerBlue" BorderThickness="1" Visibility="Hidden"  Background="LightGray"    CornerRadius="3" Height="247" VerticalAlignment="Top"   >
+                        <TextBlock 
+                            Margin="0,10,0,0" 
+                            Text="PRODUIT" 
+                            HorizontalAlignment="Center"  
+                            FontSize="13"  
+                            FontWeight="Bold" 
+                            Foreground="Black" />
 
-                        <StackPanel Margin="0,0,0,8" >
+                        <!-- Bouton -->
+                        <Button 
+                            Command="{Binding ProductViewModel.OpenProd}" 
+                            Margin="160,-20,0,0"  
+                            Width="20"    
+                            Style="{StaticResource buttonImage}">
+                            <Image   
+                                    Source="/Images/plein_ecran.png"/>
+                        </Button>
 
-                            <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <Image 
+                            Source="/Images/personne.png" 
+                            Margin="30,-10,30,0"/>
 
-                                <Button  Style="{StaticResource buttonImage}"  Width="40" HorizontalAlignment="Left" Click="CloseInfoAdherent" >
-                                    <Image Source="/Images/retour.png"/>
-                                </Button>
-                                <Button  x:Name="optionsButton"  Margin="90,0,0,0"  Width="30" HorizontalAlignment="Right"   Style="{StaticResource buttonImage}" Click="ShowOptions"  >
-                                    <Image   Source="/Images/param.png"/>
-
-                                </Button>
-
-                            </StackPanel>
-
+                        <!-- Information du produit -->
+                        <StackPanel   Margin="0,0,0,60" >
 
                             <!-- Nom produit -->
-                            <TextBlock Text="Produit" HorizontalAlignment="Center" Margin="10,0,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
-                                <TextBox x:Name="productName"  MinWidth="80" Text="" FontSize="13"   Foreground="Black" />
-                                <Image x:Name="productWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
+                            <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
+                                <TextBlock 
+                                    Text="Produit" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="-17,0,0,0" 
+                                    FontSize="11"  
+                                    FontWeight="Bold" 
+                                    Foreground="Black" />
+                                <TextBox  
+                                    Margin="7,0,0,0"  
+                                    Width="135" 
+                                    FontSize="11" 
+                                    Foreground="Black"
+                                    Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM}"/>
                             </StackPanel>
 
-
-
                             <!-- Quantité produit -->
-                            <TextBlock  Text="Quantité" HorizontalAlignment="Center" Margin="10" FontSize="13" FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                <TextBox x:Name="productQuantite" Text="" MinWidth="40" FontSize="13" Foreground="Black"  />
-                                <Image x:Name="quantiteWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
+                            <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                <TextBlock  
+                                    Text="Quantité" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="-17,0,0,0"  
+                                    FontSize="11" 
+                                    FontWeight="Bold" 
+                                    Foreground="Black" />
+                                <TextBox 
+                                    Width="135"
+                                    Margin="7,0,0,0"
+                                    FontSize="11" 
+                                    Foreground="Black"  >
+                                    <TextBox.Text>
+                                        <Binding 
+                                            Path="ProductViewModel.CurrentProduct.QuantiteIHM"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <rules:RuleQuantite/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+
+                                </TextBox>
                             </StackPanel>
 
 
                             <!-- Categorie Produit -->
-                            <TextBlock Text="Catégorie" HorizontalAlignment="Center" Margin="10,15,10,10" FontSize="13"  FontWeight="Bold" Foreground="Black" TextDecorations="Underline"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <ComboBox MinWidth="80" x:Name="productCategorie" ItemsSource="{Binding Path=Categories}"  FontSize="13"  Foreground="Black"  />
-                                <Image x:Name="categorieWarning" Visibility="Hidden" Source="/Images/warning.png" Height="10" Width="10" VerticalAlignment="Top" Margin="-5,-5,0,0"/>
+                            <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                <TextBlock 
+                                    Text="Catégorie" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="-17,0,0,0"
+                                    FontSize="11"  
+                                    FontWeight="Bold" 
+                                    Foreground="Black" />
+
+                                <ComboBox 
+                                    Width="135" 
+                                    SelectedItem="{Binding ProductViewModel.CurrentProduct.CategoryIHM}" 
+                                    ItemsSource="{Binding ProductViewModel.Categories}"  
+                                    FontSize="11"  
+                                    Foreground="Black" 
+                                    Margin="7,0,0,0"/>
+
                             </StackPanel>
-                            
                         </StackPanel>
+                    </StackPanel>
+                </Border>
 
-
-                    </Border>
-
-                    <!-- Options -->
-                    <Button BorderBrush="Green" x:Name="buttonValidate" Visibility="Hidden" Content="Valider" Background="#252422"  Foreground="White" VerticalAlignment="Bottom" Width="120"  HorizontalAlignment="Center" Margin="0,0,0,0"/>
-                    <Border x:Name="options" Visibility="Hidden" Margin="100,26,-26,0" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="74" Width="100" >
-                        <Menu MouseLeave="HideOptionsIHM">
-                            <MenuItem Width="104" Click="UpdateAnProduct">
-                                <MenuItem.Header >
-                                    <TextBlock Margin="0,3,0,0" Text="Modifier"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/modif.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem  Width="104" Click="DeleteStock" >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Supprimer"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/suprim.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem  Width="104" Click="HideOptions"  >
-                                <MenuItem.Header>
-                                    <TextBlock Margin="0,3,0,0" Text="Retour"/>
-                                </MenuItem.Header>
-                                <MenuItem.Icon>
-                                    <Image Source="/Images/retour.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                        </Menu>
-                    </Border>
-                </Grid>
             </StackPanel>
-            
         </Grid>
+        <!-- Modification / Creation produit -->
+        <materialDesign:DialogHost Grid.RowSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        Content="Modification du produit" 
+                        Grid.ColumnSpan="3" 
+                        Margin="10"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        FontSize="30" 
+                        FontWeight="Black"/>
+
+                    <!-- Colonne 1 : Image-->
+                    <Grid Margin="20" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4">
+                        <Image 
+                            Source="{Binding ProductViewModel.CurrentProduct.ImageProduct}" 
+                            Width="200"
+                            Style="{StaticResource ImageStyle}"/>
+                        <Image 
+                            x:Name="modifImage" 
+                            Source="/Assets/Icone/modif2.png" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center" 
+                            Visibility="Hidden" 
+                            IsHitTestVisible="False" 
+                            Width="30" 
+                            Height="30"/>
+                    </Grid>
+
+
+                    <!-- Colonne 2 -->
+
+                    <TextBox 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2"
+                        Grid.Row="1"
+                        Margin="10"
+                        Width="250"
+                        materialDesign:HintAssist.Hint="Nom du produit"
+                        Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"  />
+
+                    <!-- Prix -->
+                    <TextBox 
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Margin="10"
+                        materialDesign:HintAssist.Hint="Prix A"
+                        Text="{Binding ProductViewModel.CurrentProduct.PrixAdherentIHM}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}"  />
+
+
+                    <TextBox 
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        Margin="10"
+                        materialDesign:HintAssist.Hint="Prix NA"
+                        Text="{Binding ProductViewModel.CurrentProduct.PrixNonAdherentIHM}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}" 
+                        />
+
+                    <!-- Stock -->
+                    <TextBox 
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="3"
+                        Margin="10"
+                        materialDesign:HintAssist.Hint="Stock"
+                        Text="{Binding ProductViewModel.CurrentProduct.QuantiteIHM}"
+                        Style="{StaticResource MaterialDesignFilledTextBox}" 
+                        />
+
+                    <!-- Catégories -->
+                    <ComboBox 
+                        Grid.Column="1" 
+                        Grid.Row="4" 
+                        Grid.ColumnSpan="2" 
+                        Margin="10"
+                        SelectedItem="{Binding ProductViewModel.CurrentProduct.CategoryIHM}"
+                        ItemsSource="{Binding ProductViewModel.Categories}"
+                        Style="{StaticResource MaterialDesignFilledComboBox}"
+                        materialDesign:HintAssist.Hint="Catégorie"     
+                        />
+
+                    <!-- Boutons -->
+                    <Button 
+                        Content="Valider" 
+                        Background="{StaticResource galliumColor}" 
+                        Grid.Row="5" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Margin="20,10,20,10" 
+                        Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}"/>
+                    <Button 
+                        Content="Annuler" 
+                        Background="Gray" 
+                        Grid.Row="5" 
+                        Grid.Column="0" 
+                        Margin="20,10,20,10"
+                        Command="{Binding ProductViewModel.CurrentProduct.ResetProd}"/>
+                
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </Page>
