@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace Couche_IHM.VueModeles
 {
@@ -36,7 +37,7 @@ namespace Couche_IHM.VueModeles
         private string nomIHM;
         private string prenomIHM;
         private string formationIHM;
-
+        
         #endregion
 
         #region events

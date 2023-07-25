@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Couche_IHM"
+        xmlns:vm="clr-namespace:Couche_IHM.VueModeles"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -23,22 +24,49 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
                 <RowDefinition Height="20*" Tag="Bouton"/>
-                <RowDefinition Height="3*" Tag="Autre choix"/>
+                <RowDefinition Height="1.1*" Tag="Autre choix"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <!-- Icone Gallium -->
-            <Label Content="G" FontSize="90" Foreground="Orange"/>
+            <Label Content="G" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="90" Foreground="{StaticResource galliumColor}"/>
 
             <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="12" VerticalAlignment="Bottom" />
 
             <!-- Choix Pages -->
             <Viewbox Grid.Column="0" Grid.Row="1" Stretch="Uniform">
                 <StackPanel >
-                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Accueil" x:Name="AccueilFrame" Content="Accueil"   Click="GoToAccueil" Width="185"  />
-                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Caisse" x:Name="CaisseFrame" Content="Caisse"  Click="GoToCaisse"/>
-                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Adhérents" x:Name="AcompteFrame" Content="Acomptes"  Click="GoToAdhérent"/>
-                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Stock" x:Name="StockFrame" Content="Stock"  Click="GoToStock" />
-                    <Button Height="45" Style="{StaticResource buttonNavBarre}" Tag="Comptes" x:Name="AdministrationFrame" Content="Comptes"  Click="GoToCompte"/>
+                    <Button 
+                        Height="45" 
+                        Style="{StaticResource buttonNavBarre}" 
+                        Command="{Binding ChangeFrame}"
+                        CommandParameter="{x:Static vm:Frame.FRAMEACCUEIL}"
+                        Content="Accueil"   
+                        Width="185"  />
+                    <Button 
+                        Height="45" 
+                        Style="{StaticResource buttonNavBarre}" 
+                        Command="{Binding ChangeFrame}"
+                        CommandParameter="{x:Static vm:Frame.FRAMECAISSE}"
+                        Content="Caisse" />
+                    <Button 
+                        Height="45" 
+                        Style="{StaticResource buttonNavBarre}" 
+                        Command="{Binding ChangeFrame}"
+                        CommandParameter="{x:Static vm:Frame.FRAMEADHERENT}"
+                        Content="Acomptes"/>
+                    <Button 
+                        Height="45" 
+                        Style="{StaticResource buttonNavBarre}" 
+                        Command="{Binding ChangeFrame}"
+                        CommandParameter="{x:Static vm:Frame.FRAMESTOCK}"
+                        Content="Stock"/>
+                    <Button 
+                        Height="45" 
+                        Style="{StaticResource buttonNavBarre}" 
+                        Command="{Binding ChangeFrame}"
+                        CommandParameter="{x:Static vm:Frame.FRAMECOMPTES}"
+                        Content="Comptes"/>
                 </StackPanel>
             </Viewbox>
             <Grid  Grid.Row="2">
@@ -46,24 +74,103 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Button Style="{StaticResource buttonImage}" Grid.Column="0">
-                    <materialDesign:PackIcon Foreground="White" Kind="ChartBellCurve"/>
-                </Button>
-                <Button Style="{StaticResource buttonImage}"  Grid.Column="1">
-                    <Image Source="/Images/historique.png" />
-                </Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
 
-                    <materialDesign:PackIcon VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="White" Grid.Column="2"  Kind="Logout"/>
+                <Button 
+                    Style="{StaticResource buttonImage}" 
+                    Command="{Binding ChangeFrame}"
+                    CommandParameter="{x:Static vm:Frame.FRAMESTATISTIQUE}"
+                    Grid.Row="0"
+                    Grid.Column="0">
+                    <materialDesign:PackIcon 
+                        Width="auto" 
+                        Height="auto" 
+                        Foreground="White" 
+                        Kind="ChartLine"/>
+                </Button>
+                <Button 
+                    Style="{StaticResource buttonImage}"
+                    Command="{Binding ChangeFrame}"
+                    CommandParameter="{x:Static vm:Frame.FRAMELOG}"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="-10,0,0,0" 
+                    >
+                    <materialDesign:PackIcon 
+                        Width="auto" 
+                        Height="auto"
+                        HorizontalAlignment="Right" 
+                        Foreground="White" 
+                        Kind="History"/>
+                </Button>
+                <Button
+                    Style="{StaticResource buttonImage}"
+                    Grid.Column="2"
+                    Grid.RowSpan="2"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right">
+                    <materialDesign:PackIcon 
+                        Width="auto" 
+                        Height="auto"
+                        Foreground="White" 
+                        Kind="Logout"/>
+                </Button>
 
             </Grid>
         </Grid>
         
         <Viewbox Grid.Column="1">
+            
             <!-- DEUXIEME COLONNE -->
             <Grid  Height="607" Width="912" >
-                <Frame x:Name="mainFrame" Margin="0,0,0,0" Source="Frames/FrameAccueil.xaml" NavigationUIVisibility="Hidden"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Header de la frame -->
+                <Grid  Grid.Row="0" >
+                    
+                    <!-- Nom de la frame  -->
+                        <TextBlock 
+                            Text="{Binding Frame}" 
+                            FontSize="22" 
+                            VerticalAlignment="Center" 
+                            Margin="40,0,0,0" 
+                            Foreground="Black" 
+                            TextDecorations="Underline" 
+                            FontWeight="Medium"/>
+
+                        <!-- Info du compte connecté-->
+                    <Grid HorizontalAlignment="Right"   Width="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Image du compte  -->
+                        <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
+                        <StackPanel Grid.Column="1" Margin="10,20,10,0">
+                            <TextBlock 
+                                Text="{Binding CompteConnected.NomComplet}" 
+                                FontSize="14" FontWeight="Bold"/>
+                            <TextBlock 
+                                Text="{Binding CompteConnected.Role}" 
+                                FontSize="11" 
+                                FontWeight="DemiBold" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                
+                <Frame 
+                    Grid.Row="1"
+                    Source="{Binding Uri}" 
+                    NavigationUIVisibility="Hidden"/>
+                
             </Grid>
         </Viewbox>
 

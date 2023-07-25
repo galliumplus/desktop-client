@@ -16,8 +16,7 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameAdherent : Page
     {
-        // Représente le manager des adhérents
-        private AdhérentManager adhérentManager;
+
 
         // Exporter des adhérents
         private IExportableAdherent exportAdh;
@@ -32,11 +31,10 @@ namespace Couche_IHM.Frames
         /// Cosntructeur du frame adhérent
         /// </summary>
         /// <param name="adhérentManager">manager des adhérents</param>
-        public FrameAdherent(AdhérentManager adhérentManager)
+        public FrameAdherent()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.Instance;
-            this.adhérentManager = adhérentManager;
             this.exportAdh = new ExportAdherentToExcel();
         }
 
@@ -52,7 +50,7 @@ namespace Couche_IHM.Frames
         private void CreateAnAdherent(Adhérent a)
         {
             // Créer l'adhérent
-            this.adhérentManager.CreateAdhérent(a);
+            //this.adhérentManager.CreateAdhérent(a);
             
             // Log l'opération
             //log.registerLog(CategorieLog.CREATE, a, MainWindow.CompteConnected);
@@ -66,7 +64,7 @@ namespace Couche_IHM.Frames
         private void UpdateAnAdherent(Adhérent baseAdhérent, Adhérent a)
         {
             // Met à jour l'adhérent
-            this.adhérentManager.UpdateAdhérent(a);
+            //this.adhérentManager.UpdateAdhérent(a);
 
             // Log l'opération
             //log.registerLog(CategorieLog.UPDATE, a, MainWindow.CompteConnected);
@@ -85,7 +83,7 @@ namespace Couche_IHM.Frames
         /// <param name="e"></param>
         private void ExportAdhérent(object sender, RoutedEventArgs e)
         {
-            this.exportAdh.Export(this.adhérentManager.GetAdhérents());
+           // this.exportAdh.Export(this.adhérentManager.GetAdhérents());
         }
 
 
@@ -119,7 +117,7 @@ namespace Couche_IHM.Frames
             // Si l'ajout est validé alors on met à jour la bdd
             if (result.Value == true)
             {
-                this.adhérentManager.CreateAdhérent(newAdhérent);
+                //this.adhérentManager.CreateAdhérent(newAdhérent);
                 //log.registerLog(CategorieLog.CREATE, newAdhérent, MainWindow.CompteConnected);
             }
             

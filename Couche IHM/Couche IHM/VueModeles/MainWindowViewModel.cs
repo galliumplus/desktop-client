@@ -1,13 +1,16 @@
 ﻿using Modeles;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Couche_IHM.VueModeles
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         #region singleton
         private static MainWindowViewModel instance = null;
@@ -34,9 +37,19 @@ namespace Couche_IHM.VueModeles
         private CaisseViewModel caisseViewModel;
         #endregion
 
+        #region notify
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
 
         private User compteConnected;
+        private Frame frame = Frame.FRAMEACCUEIL;
 
+        public RelayCommand ChangeFrame { set; get; }
         #region properties
         /// <summary>
         /// Compte connecté à gallium
@@ -46,7 +59,32 @@ namespace Couche_IHM.VueModeles
             get => compteConnected;
             set => compteConnected = value;
         }
-    
+
+        /// <summary>
+        /// Représente la frame actuellement affichée
+        /// </summary>
+        public Frame Frame 
+        { 
+            get => frame;
+            set 
+            { 
+                frame = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Uri));
+            }
+        }
+
+        /// <summary>
+        /// L'uri de la frame
+        /// </summary>
+        public Uri Uri
+        {
+            get
+            {
+                return new Uri($"Frames/{frame}.xaml", UriKind.Relative);
+            }
+        }
+
 
         #endregion
 
@@ -55,6 +93,7 @@ namespace Couche_IHM.VueModeles
             this.adherentViewModel = new AdherentsViewModel();
             this.productViewModel = new ProductsViewModel();
             this.caisseViewModel = new CaisseViewModel();
+            this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }
     }
 }

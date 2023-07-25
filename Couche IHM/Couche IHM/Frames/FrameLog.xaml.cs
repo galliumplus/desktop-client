@@ -11,7 +11,7 @@ namespace Couche_IHM.Frames
     /// <summary>
     /// Logique d'interaction pour FrameLogs.xaml
     /// </summary>
-    public partial class FrameLogs : Page
+    public partial class FrameLog : Page
     {
         // Attribut permettant de gérer les logs
         private readonly ILog log; 
@@ -19,10 +19,10 @@ namespace Couche_IHM.Frames
         private readonly List<string> logsLine; 
 
         // Manager des différents comptes admin possibles
-        private UserManager userManager;
+        private UserManager userManager = new UserManager();
 
 
-        public FrameLogs(UserManager userManager)
+        public FrameLog()
         {
             
             InitializeComponent();
@@ -30,7 +30,6 @@ namespace Couche_IHM.Frames
             // Initialisation des attributs
             this.log = new LogAdherentToTxt();
             this.logsLine = log.loadLog();
-            this.userManager = userManager;
 
             // Si il y a des logs
             if (logsLine.Count > 0)
@@ -59,7 +58,7 @@ namespace Couche_IHM.Frames
         private void FillListViewLogs()
         {
             // Affiche les logs du mois actuels
-            List<LogIHM> list = new List<LogIHM>();
+            List<Log> list = new List<Log>();
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
 
             
@@ -81,37 +80,37 @@ namespace Couche_IHM.Frames
                 if (DateTime.Parse(date).ToString("MMMM yyyy") == actualMonth && RespectAuthorFilter(auteur) && RespectTimeSpanFilter(heureCourte))
                 {
                     
-                    LogIHM newLog = null;
+                    Log newLog = null;
                     switch (type)
                     {
                         case "ADHERENT":
                             if (this.AdherentActivated.IsChecked == true)
                             {
-                                        newLog = new LogIHM(date, type, message, auteur,operation);
+                                        newLog = new Log(date, type, message, auteur,operation);
                             }
                             break;
                         case "PRODUIT":
                                 if (this.produitActivated.IsChecked == true)
                                 {
-                                        newLog = new LogIHM(date, type, message, auteur,operation);
+                                        newLog = new Log(date, type, message, auteur,operation);
                                 }
                             break;
                         case "COMPTE":
                             if (this.CompteActivated.IsChecked == true)
                             {
-                                    newLog = new LogIHM(date, type, message, auteur,operation);
+                                    newLog = new Log(date, type, message, auteur,operation);
                             }
                             break;
                         case "ACHAT":
                             if (this.produitActivated.IsChecked == true)
                             {
-                                newLog = new LogIHM(date, type, message, auteur, operation);
+                                newLog = new Log(date, type, message, auteur, operation);
                             }
                             break;
                         case "VENTE":
                             if (this.VenteActivated.IsChecked == true)
                             {
-                                newLog = new LogIHM(date, type, message, auteur, operation);
+                                newLog = new Log(date, type, message, auteur, operation);
                             }
                             break;
                     }

@@ -17,7 +17,7 @@ namespace Couche_IHM.Frames
     /// </summary>
     public partial class FrameComptes : Page
     {
-        private UserManager userManager;
+        private UserManager userManager = new UserManager();
         private bool createCompte;
         private ILog log;
 
@@ -25,11 +25,10 @@ namespace Couche_IHM.Frames
         private int isSortingMail = 0;
         private int isSortingRole = 0;
         private int isSortingIdentite = 0;
-        public FrameComptes(UserManager userManager)
+        public FrameComptes()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.Instance;
-            this.userManager = userManager;
 
             // Met à jour l'affichage
             UpdateView();

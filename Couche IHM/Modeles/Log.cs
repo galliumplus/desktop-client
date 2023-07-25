@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 
-namespace Couche_IHM
+namespace Modeles
 {
-    public class LogIHM 
+    public class Log 
     {
         private string date;
         private string type;
@@ -20,7 +19,7 @@ namespace Couche_IHM
         /// <summary>
         /// Constructeur
         /// </summary>
-        public LogIHM(string date, string type, string message, string auteur,string operation)
+        public Log(string date, string type, string message, string auteur,string operation)
         {
             this.date = date;
             this.type = type;

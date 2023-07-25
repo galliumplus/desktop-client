@@ -10,40 +10,8 @@
       Background="White">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
 
-
-        <!-- Header de la frame -->
-        <Grid  Grid.Row="0" >
-            <!-- Nom de la frame  -->
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Comptes" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-                <Button Style="{StaticResource buttonImage}" Name="addUser"  Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" Click="AddAnUser">
-                    <Image Source="/Images/ajouter.png"/>
-                </Button>
-            </StackPanel>
-
-            <!-- Info du compte connecté-->
-            <Grid HorizontalAlignment="Right" Width="300">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="10*" />
-                </Grid.ColumnDefinitions>
-                <!-- Image du compte  -->
-                <Image x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                <StackPanel Grid.Column="1" Margin="10">
-                    <Label Content="{Binding CompteConnected.NomComplet}"  FontSize="14" FontWeight="Bold"/>
-                    <Label Content="{Binding CompteConnected.Role}"  FontSize="11" FontWeight="DemiBold" />
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-
-
-        <Grid Grid.Row="1" Margin="0,30,0,0">
+        <Grid Grid.Row="0" Margin="0,30,0,0">
             <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

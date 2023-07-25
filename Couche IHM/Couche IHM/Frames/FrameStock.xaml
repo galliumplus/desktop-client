@@ -14,40 +14,8 @@
       ShowsNavigationUI="False">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
 
-
-        <!-- Header de la frame -->
-        <Grid  Grid.Row="0" >
-            <!-- Nom de la frame  -->
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Stock" FontSize="22" VerticalAlignment="Center" Margin="40,0,0,0" Foreground="Black" TextDecorations="Underline" FontWeight="Medium"/>
-                <Button Style="{StaticResource buttonImage}" Name="addProductButton"  Visibility="Visible" Margin="0,0,0,5"   Width="20" Height="19" Click="AddAnProduct">
-                    <Image Source="/Images/ajouter.png"/>
-                </Button>
-            </StackPanel>
-
-            <!-- Info du compte connecté-->
-            <Grid HorizontalAlignment="Right"   Width="300">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="10*" />
-                </Grid.ColumnDefinitions>
-                <!-- Image du compte  -->
-                <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                <StackPanel Grid.Column="1" Margin="10,20,10,0">
-                    <Label Content="{Binding CompteConnected.NomComplet}" FontSize="14" FontWeight="Bold"/>
-                    <Label Content="{Binding CompteConnected.Role}" FontSize="11" FontWeight="DemiBold" />
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-
-
-        <Grid Grid.Row="1" Margin="0,30,0,0">
+        <Grid Margin="0,30,0,0">
             <!-- Ligne 1 - Colonne 0: Liste des produits-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -110,17 +78,80 @@
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
                                 <!-- Content -->
-                                <Label   x:Name="labelProduit"  Content="{Binding NomProduitIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding QuantiteIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding PrixAdherentIHM}"    Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label  Content="{Binding CategoryIHM}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                                <Label  
+                                    Content="{Binding NomProduitIHM}" 
+                                    Margin="40,0,0,0" 
+                                    Grid.Column="0" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto" 
+                                    FontSize="14"/>
+                                <Label  
+                                    Content="{Binding QuantiteIHM}" 
+                                    Margin="30,0,0,0" 
+                                    Grid.Column="1" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto" 
+                                    FontSize="14"/>
+                                <Label  
+                                    Content="{Binding PrixAdherentIHM}"    
+                                    Grid.Column="2" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto" 
+                                    FontSize="14"/>
+                                <Label  
+                                    Content="{Binding CategoryIHM}" 
+                                    Grid.Column="4" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto" 
+                                    FontSize="14"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </ScrollViewer>
 
-            <Button Content="Afficher catégories" x:Name="buttonCategory" Click="ShowCategory" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Background="Black" Foreground="White" />
+            <Button 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Left" 
+                Margin="10"
+                Height="29"
+                Width="120"
+                Background="Gray" 
+                Foreground="White">
+                <DockPanel>
+                    <materialDesign:PackIcon
+                         Kind="FormatListBulletedType"
+                        Margin="0,0,5,0"
+                        />
+
+                    <TextBlock 
+                        Text="Catégories"
+                         FontSize="13"/>
+                </DockPanel>
+                
+            </Button>
+            <Button 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Center" 
+                Margin="10"
+                Width="120"
+                Height="29"
+                Background="Gray" 
+                Foreground="White">
+                <DockPanel>
+                    <materialDesign:PackIcon
+                         Kind="Plus"
+                        Margin="0,0,5,0"
+                        Width="20"
+                        Height="20"
+                        />
+
+                    <TextBlock 
+                        Text="Produit"
+                         FontSize="13"/>
+                </DockPanel>
+
+            </Button>
 
             <!-- Information utilisateur sélectionner -->
             <StackPanel Grid.Column="1"  Grid.Row="0">
@@ -183,9 +214,7 @@
                                     Source="/Images/plein_ecran.png"/>
                         </Button>
 
-                        <Image 
-                            Source="/Images/personne.png" 
-                            Margin="30,-10,30,0"/>
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Margin="0,10,0,0" Kind="CartPercent" Width="90" Height="90"/>
 
                         <!-- Information du produit -->
                         <StackPanel   Margin="0,0,0,60" >
@@ -279,7 +308,7 @@
                     </Grid.RowDefinitions>
 
                     <Label 
-                        Content="Modification du produit" 
+                        Content="Produit" 
                         Grid.ColumnSpan="3" 
                         Margin="10"
                         HorizontalAlignment="Center" 
@@ -287,6 +316,19 @@
                         FontSize="30" 
                         FontWeight="Black"/>
 
+                    <Button
+                        Style="{StaticResource buttonImage}" 
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        VerticalAlignment="Top"
+                        Grid.Column="2"
+                        Grid.Row="0">
+                        <materialDesign:PackIcon 
+                            Width="21"
+                            Height="21"
+                            Kind="Delete"/>
+                    </Button>
+                    
                     <!-- Colonne 1 : Image-->
                     <Grid Margin="20" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4">
                         <Image 
@@ -323,8 +365,17 @@
                         Grid.Row="2"
                         Margin="10"
                         materialDesign:HintAssist.Hint="Prix A"
-                        Text="{Binding ProductViewModel.CurrentProduct.PrixAdherentIHM}"
-                        Style="{StaticResource MaterialDesignFilledTextBox}"  />
+                        Style="{StaticResource MaterialDesignFilledTextBox}">
+                        <TextBox.Text>
+                            <Binding 
+                                Path="ProductViewModel.CurrentProduct.PrixAdherentIHM"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <rules:RuleMoneyFormat/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
 
                     <TextBox 
@@ -333,9 +384,17 @@
                         Grid.Row="2"
                         Margin="10"
                         materialDesign:HintAssist.Hint="Prix NA"
-                        Text="{Binding ProductViewModel.CurrentProduct.PrixNonAdherentIHM}"
-                        Style="{StaticResource MaterialDesignFilledTextBox}" 
-                        />
+                        Style="{StaticResource MaterialDesignFilledTextBox}">
+                        <TextBox.Text>
+                            <Binding 
+                                Path="ProductViewModel.CurrentProduct.PrixNonAdherentIHM"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <rules:RuleMoneyFormat/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <!-- Stock -->
                     <TextBox 
@@ -344,9 +403,17 @@
                         Grid.Row="3"
                         Margin="10"
                         materialDesign:HintAssist.Hint="Stock"
-                        Text="{Binding ProductViewModel.CurrentProduct.QuantiteIHM}"
-                        Style="{StaticResource MaterialDesignFilledTextBox}" 
-                        />
+                        Style="{StaticResource MaterialDesignFilledTextBox}">
+                        <TextBox.Text>
+                            <Binding 
+                                Path="ProductViewModel.CurrentProduct.QuantiteIHM"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <rules:RuleQuantite/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <!-- Catégories -->
                     <ComboBox 

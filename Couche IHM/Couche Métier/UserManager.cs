@@ -19,9 +19,9 @@ namespace Couche_Métier
         /// Constructeur du manager des comptes
         /// </summary>
         /// <param name="userDao">le DAO des comptes</param>
-        public UserManager(IUserDAO userDao)
+        public UserManager()
         {
-            this.userDao = userDao;
+            this.userDao = new FakeUserDAO();
             this.comptes = new Dictionary<int,User>(this.userDao.GetComptes());
         }
 
