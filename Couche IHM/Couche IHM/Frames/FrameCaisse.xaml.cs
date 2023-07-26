@@ -35,12 +35,12 @@ namespace Couche_IHM.Frames
 
             // Initialisation des produits de la caisse
             productsSP.Children.Clear();
-            foreach (string category in MainWindowViewModel.Instance.ProductViewModel.Categories)
+            foreach (CategoryViewModel category in MainWindowViewModel.Instance.ProductViewModel.Categories)
             {
-                if (category != "HIDDEN")
+                if (category.CurrentNameCategory != "HIDDEN")
                 {
                     // On créer chaque vue catégorie
-                    CategoryProductList categoryProductList = new CategoryProductList(category);
+                    CategoryProductList categoryProductList = new CategoryProductList(category.CurrentNameCategory);
                     productsSP.Children.Add(categoryProductList);
                 }
 

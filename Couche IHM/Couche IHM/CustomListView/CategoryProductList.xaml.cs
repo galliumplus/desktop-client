@@ -32,7 +32,7 @@ namespace Couche_IHM.CustomListView
             InitializeComponent();
             DataContext = this;
             this.Category = category;
-            List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.FindAll(prod => prod.CategoryIHM == category );  
+            List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.FindAll(prod => prod.CategoryIHM != null && prod.CategoryIHM.CurrentNameCategory == category );  
             foreach (ProductViewModel p in produits)
             {
                 DetailedProduct dp = new DetailedProduct(p);

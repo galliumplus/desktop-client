@@ -22,29 +22,32 @@ namespace Couche_IHM.VueModeles
 
         #region attributes
         private List<ProductViewModel> products = new List<ProductViewModel>();
+        private List<CategoryViewModel> categories = new List<CategoryViewModel>();
         private ProductManager productManager;
         private CategoryManager categoryManager;
         private ProductViewModel currentProduct;
 
         private bool showProductDetail = false;
         private bool showProduct = false;
-
+        private bool showCategories = false;
         private string searchFilter = "";
 
         #endregion
         #region events
         public RelayCommand OpenProd { get; set; }
+        public RelayCommand CloseCategory { get; set; }
+        public RelayCommand OpenCat { get; set; }
         #endregion
         #region properties
 
         /// <summary>
         /// Représente toutes les catégories de produits disponibles
         /// </summary>
-        public List<string> Categories
+        public List<CategoryViewModel> Categories
         {
             get
             {
-                return categoryManager.ListAllCategory();
+                return categories;
             }
         }
         /// <summary>
@@ -87,7 +90,7 @@ namespace Couche_IHM.VueModeles
 
                     produitsIHM = products.FindAll(prd =>
                     prd.NomProduitIHM.ToUpper().Contains(searchFilter.ToUpper()) ||
-                    prd.CategoryIHM.ToUpper().Contains(searchFilter.ToUpper()));
+                    prd.CategoryIHM.CurrentNameCategory.ToUpper().Contains(searchFilter.ToUpper()));
                 }
 
                 return produitsIHM;
@@ -136,6 +139,15 @@ namespace Couche_IHM.VueModeles
         }
 
         public ProductManager ProductManager { get => productManager; set => productManager = value; }
+        public bool ShowCategories 
+        { 
+            get => showCategories;
+            set
+            { 
+                showCategories = value; 
+                NotifyPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -144,7 +156,19 @@ namespace Couche_IHM.VueModeles
             this.productManager = new ProductManager();
             this.categoryManager = new CategoryManager();
             this.OpenProd = new RelayCommand(x => this.ShowProductDetail = true);
+            this.OpenCat = new RelayCommand(x => this.ShowCategories = true);
+            this.CloseCategory = new RelayCommand(x =>
+            {
+                foreach (CategoryViewModel categoryViewModel in categories)
+                {
+                    categoryViewModel.ResetCategory();
+                }
+                this.showCategories = false;
+            }
+            );
+            InitCategories();
             InitProducts();
+            
         }
 
         #region methods
@@ -156,10 +180,22 @@ namespace Couche_IHM.VueModeles
             List<Product> produitsMetier = this.productManager.GetProducts();
             foreach (Product prd in produitsMetier)
             {
-                this.products.Add(new ProductViewModel(prd,this.productManager));
+                CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == prd.Categorie);
+                this.products.Add(new ProductViewModel(prd,this.productManager,catProduit));
             }
         }
 
+        /// <summary>
+        /// Permet de récupérer la liste des catégories
+        /// </summary>
+        private void InitCategories()
+        {
+            List<string> categories = this.categoryManager.Categories;
+            foreach (string cat in categories)
+            {
+                this.categories.Add(new CategoryViewModel(this.categoryManager,cat));
+            }
+        }
 
 
 

@@ -25,7 +25,7 @@ namespace Couche_IHM.VueModeles
         private ILog logProduct;
         private int quantiteIHM;
         private string nomProduitIHM;
-        private string categoryIHM;
+        private CategoryViewModel categoryIHM;
         private string prixAdherentIHM;
         private string prixNonAdherentIHM;
         #endregion
@@ -96,10 +96,10 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Categorie du produit
         /// </summary>
-        public string CategoryIHM
+        public CategoryViewModel CategoryIHM
         {
             get => categoryIHM;
-            set => categoryIHM = value;
+            set { categoryIHM = value; NotifyPropertyChanged(); }
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Couche_IHM.VueModeles
         }
 
         #endregion
-        public ProductViewModel(Product product,ProductManager productManager)
+        public ProductViewModel(Product product,ProductManager productManager,CategoryViewModel categoryProduit)
         {
             // Initialisation du modele
             this.product = product;
@@ -127,7 +127,7 @@ namespace Couche_IHM.VueModeles
             this.logProduct = new LogProductToTxt();
 
             // Initialisation des attributsIHM
-            this.categoryIHM = product.Categorie;
+            this.categoryIHM = categoryProduit;
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
@@ -150,7 +150,7 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryIHM;
+            this.product.Categorie = this.categoryIHM.CurrentNameCategory;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.UpdateProduct(this.product);
@@ -178,7 +178,7 @@ namespace Couche_IHM.VueModeles
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
-            this.categoryIHM = product.Categorie;
+            this.categoryIHM.NameCategory = product.Categorie;
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);

@@ -35,7 +35,7 @@ namespace Couche_Data
 
         public void UpdateCategory(string baseCategory, string category)
         {
-            throw new NotImplementedException();
+            _categories[_categories.IndexOf(baseCategory)] = category;
         }
     }
 }
