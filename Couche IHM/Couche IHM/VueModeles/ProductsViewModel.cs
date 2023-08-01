@@ -32,7 +32,6 @@ namespace Couche_IHM.VueModeles
         private bool showProduct = false;
         private bool showCategories = false;
         private bool showDeleteProduct = false;
-        private bool isFlipped = true;
         private string searchFilter = "";
 
         #endregion
@@ -66,13 +65,11 @@ namespace Couche_IHM.VueModeles
                 if (value != null)
                 {
                     ShowProduct = true;
-                    IsFlipped = false;
 
                 }
                 else
                 {
                     this.ShowProduct = false;
-                    IsFlipped = true;
 
                 }
                 NotifyPropertyChanged(nameof(CurrentProduct));
@@ -108,18 +105,6 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-        /// <summary>
-        /// Permet d'ouvrir le détail du produit
-        /// </summary>
-        public bool ShowProduct
-        {
-            get => showProduct;
-            set 
-            {
-                showProduct = value;
-                NotifyPropertyChanged(nameof(ShowProduct));
-            }
-        }
 
         /// <summary>
         /// Représente la barre de recherche des produits
@@ -172,12 +157,12 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Est ce que la card actions est retournée
         /// </summary>
-        public bool IsFlipped
+        public bool ShowProduct
         {
-            get => isFlipped;
+            get => showProduct;
             set
             {
-                isFlipped = value;
+                showProduct = value;
                 NotifyPropertyChanged();
             }
         }

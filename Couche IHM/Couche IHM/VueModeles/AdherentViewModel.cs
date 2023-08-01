@@ -76,7 +76,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 argentIHM = value;
-                MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = true;
+                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = true;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 identifiantIHM = value;
-                MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = true;
+                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = true;
             }
         }
 
@@ -166,7 +166,7 @@ namespace Couche_IHM.VueModeles
 
 
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
 
 
@@ -196,7 +196,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(IsAdherentIHM));
 
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
     }
 }

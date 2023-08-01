@@ -20,8 +20,9 @@ namespace Couche_IHM.VueModeles
         private AdherentViewModel currentAdherent;
         private AdhérentManager adherentManager;
         private string searchFilter = "";
-        private bool showActions = true;
-        private bool showModifAdherent = false;
+        private bool showAdherent = false;
+        private bool showModifButtons = false;
+        private bool showDeleteAcompte = false;
         private bool dialogModifAdherent = false;
         #endregion
 
@@ -80,26 +81,26 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Est ce qu'on affiche la fenetre de l adherent
         /// </summary>
-        public bool ShowActions 
+        public bool ShowAdherent
         { 
-            get => showActions;
+            get => showAdherent;
             set 
             { 
-                showActions = value; 
+                showAdherent = value; 
                 NotifyPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Est ce qu on affiche les choix sur l adherent
+        /// Permet d'afficher les boutons de modification de l'adhérent
         /// </summary>
-        public bool ShowModifAdherent 
+        public bool ShowModifButtons
         { 
-            get => showModifAdherent;
+            get => showModifButtons;
             set 
-            { 
-                showModifAdherent = value; 
-                NotifyPropertyChanged(nameof(ShowModifAdherent));
+            {
+                showModifButtons = value; 
+                NotifyPropertyChanged();
             }
         }
 
@@ -119,15 +120,15 @@ namespace Couche_IHM.VueModeles
                 currentAdherent = value;
                 if (value != null)
                 {
-                    ShowActions = false;
+                    ShowAdherent = true;
 
                 }
                 else
                 {
-                    this.ShowActions = true;
+                    this.ShowAdherent = false;
                     
                 }
-                this.ShowModifAdherent = false;
+                this.ShowModifButtons = false;
 
                 NotifyPropertyChanged(nameof(CurrentAdherent));
             }
@@ -141,6 +142,20 @@ namespace Couche_IHM.VueModeles
                 dialogModifAdherent = value;
                 NotifyPropertyChanged(nameof(DialogModifAdherent));
             }
+        }
+
+        /// <summary>
+        /// Permet d'afficher le bouton de suppresion
+        /// </summary>
+        public bool ShowDeleteAcompte 
+        { 
+            get => showDeleteAcompte;
+            set 
+            {
+                showDeleteAcompte = value;
+                NotifyPropertyChanged();
+            }
+
         }
 
 
