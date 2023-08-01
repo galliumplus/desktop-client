@@ -8,7 +8,7 @@ namespace Modeles
     {
         #region attributes
         private int id;
-        private string nomProduit;
+        private string nomProduit = "";
         private int quantite;
         private float prixAdherent;
         private float prixNonAdherent;

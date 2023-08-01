@@ -69,12 +69,20 @@ namespace Couche_Métier
         public void UpdateProduct(Product p)
         {
             Product actalProduit = this.GetProduct(p.ID);
-            actalProduit.NomProduit = p.NomProduit;
-            actalProduit.PrixNonAdherent = p.PrixNonAdherent;
-            actalProduit.PrixAdherent = p.PrixAdherent;
-            actalProduit.Quantite = p.Quantite;
-            actalProduit.Categorie = p.Categorie;
-            productDAO.UpdateProduct(p);
+            if (actalProduit != null)
+            {
+                actalProduit.NomProduit = p.NomProduit;
+                actalProduit.PrixNonAdherent = p.PrixNonAdherent;
+                actalProduit.PrixAdherent = p.PrixAdherent;
+                actalProduit.Quantite = p.Quantite;
+                actalProduit.Categorie = p.Categorie;
+                productDAO.UpdateProduct(p);
+            }
+            else
+            {
+                this.CreateProduct(p);
+            }
+           
 
         }
 

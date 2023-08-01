@@ -135,7 +135,7 @@ namespace Couche_IHM.VueModeles
 
             // Initialisation des events
             this.ResetProd = new RelayCommand(x => ResetProduct());
-            this.UpdateProd = new RelayCommand(x => UpdateProduct());
+            this.UpdateProd = new RelayCommand(x => CreateProduct());
         }
 
         #region methods
@@ -168,7 +168,35 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
         }
 
+        /// <summary>
+        /// Permet de mettre à jour visuellement les modifications de l'adhérent
+        /// </summary>
+        public void CreateProduct()
+        {
+            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
+            // Changer la data
+            this.product.Quantite = this.quantiteIHM;
+            this.product.NomProduit = this.nomProduitIHM;
+            this.product.Categorie = this.categoryIHM.CurrentNameCategory;
+            this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
+            this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+            this.productManager.CreateProduct(this.product);
+
+
+            // Notifier la vue
+            MainWindowViewModel.Instance.ProductViewModel.Products.Add(this);
+            NotifyPropertyChanged(nameof(NomProduitIHM));
+            NotifyPropertyChanged(nameof(QuantiteIHM));
+            NotifyPropertyChanged(nameof(CategoryIHM));
+            NotifyPropertyChanged(nameof(isDisponible));
+
+            // Log l'action
+            this.logProduct.registerLog(CategorieLog.CREATE, this.product, MainWindowViewModel.Instance.CompteConnected);
+
+
+            MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+        }
 
         /// <summary>
         /// Permet de reset les propriétés de l'adhérent
@@ -178,7 +206,11 @@ namespace Couche_IHM.VueModeles
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
-            this.categoryIHM.NameCategory = product.Categorie;
+            if(this.categoryIHM != null)
+            {
+                this.categoryIHM.NameCategory = product.Categorie;
+            }
+            
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);

@@ -2,6 +2,7 @@
 using Couche_IHM.VueModeles;
 using Modeles;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Couche_IHM.CustomListView
@@ -32,7 +33,7 @@ namespace Couche_IHM.CustomListView
             InitializeComponent();
             DataContext = this;
             this.Category = category;
-            List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.FindAll(prod => prod.CategoryIHM != null && prod.CategoryIHM.CurrentNameCategory == category );  
+            List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(prod => prod.CategoryIHM != null && prod.CategoryIHM.CurrentNameCategory == category );  
             foreach (ProductViewModel p in produits)
             {
                 DetailedProduct dp = new DetailedProduct(p);

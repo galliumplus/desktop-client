@@ -28,6 +28,10 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+
+        /// <summary>
+        /// Représente le nom de la catégorie modifiable
+        /// </summary>
         public string NameCategory 
         { 
             get => nameCategory;
@@ -38,6 +42,9 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Représente le modèle du nom de la catégorie
+        /// </summary>
         public string CurrentNameCategory 
         { 
             get => currentNameCategory;
@@ -79,7 +86,7 @@ namespace Couche_IHM.VueModeles
             // Log l'action
             //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
 
-            MainWindowViewModel.Instance.ProductViewModel.ShowCategories = false;
+            
         }
 
 
@@ -91,7 +98,7 @@ namespace Couche_IHM.VueModeles
         {
             // Mise à jour data
             this.NameCategory = this.currentNameCategory;
-            
+
 
             // Log l'action
             //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
@@ -106,7 +113,7 @@ namespace Couche_IHM.VueModeles
         {
             // Mise à jour data
             this.categoryManager.DeleteCategory(CurrentNameCategory);
-            foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.FindAll(x => x.CategoryIHM == this))
+            foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(x => x.CategoryIHM == this))
             {
                 prod.CategoryIHM = null;
             }
@@ -114,8 +121,6 @@ namespace Couche_IHM.VueModeles
             // Notifier la vue
             MainWindowViewModel.Instance.ProductViewModel.Categories.Remove(this);
 
-
-            MainWindowViewModel.Instance.ProductViewModel.ShowCategories = false;
         }
 
         public override bool Equals(object? obj)
