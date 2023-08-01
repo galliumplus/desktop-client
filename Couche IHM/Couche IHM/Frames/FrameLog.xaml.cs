@@ -37,9 +37,7 @@ namespace Couche_IHM.Frames
                 FillListViewLogs();
             }
 
-            // Initialisation du titre des logs
-            string actualMonth = DateTime.Today.ToString("MMMM yyyy");
-            this.titleLog.Content = actualMonth[0].ToString().ToUpper() + actualMonth.Substring(1);
+           
 
             // Initialisation des éléments de la combobox avec les auteurs possibles
             List<User> userList = userManager.GetComptes();

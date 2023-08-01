@@ -306,7 +306,7 @@
 
 
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom">
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
                             <Style.Triggers>
@@ -321,20 +321,36 @@
                         </Style>
                     </StackPanel.Style>
                     <Button   
-                        FontSize="12"  
-                        Content="Annuler" 
-                        Background="Gray"
-                        FontWeight="Bold"  
-                        Width="90" 
-                        Command="{Binding AdherentViewModel.CurrentAdherent.ResetAdh}"/>
-                    <Button  
-                        FontSize="12" 
-                        Margin="10,0,0,0"   
-                        Content="Valider" 
-                        Background="{StaticResource galliumColor}"
-                        FontWeight="Bold"  
-                        Width="90" 
-                        Command="{Binding AdherentViewModel.CurrentAdherent.ModifyAdherent}" />
+                        Style="{StaticResource buttonImage}"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        Command="{Binding AdherentViewModel.CurrentAdherent.ResetAdh}">
+                        <materialDesign:PackIcon
+                            Foreground="Red"
+                            Width="27"
+                            Height="27"
+                            Kind="CloseThick">
+
+                        </materialDesign:PackIcon>
+                    </Button>
+                    
+                    <Button 
+                        Style="{StaticResource buttonImage}"
+                        Margin="10,0,0,0"
+                        Command="{Binding AdherentViewModel.CurrentAdherent.ModifyAdherent}"
+                        BorderBrush="Transparent"
+                        Background="Transparent">
+                        <materialDesign:PackIcon
+                            Foreground="Green"
+                            Width="30"
+                            Height="30"
+                            Kind="CheckBold">
+
+                        </materialDesign:PackIcon>
+
+
+                    </Button>
+                   
                 </StackPanel>
 
             </StackPanel>
