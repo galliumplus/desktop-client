@@ -110,51 +110,8 @@
                 </ListView>
             </ScrollViewer>
 
-            <Button 
-                Command="{Binding ProductViewModel.OpenCat}"
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Left" 
-                Margin="10"
-                Height="29"
-                Width="120"
-                Background="Gray" 
-                Foreground="White">
-                <DockPanel>
-                    <materialDesign:PackIcon
-                         Kind="FormatListBulletedType"
-                        Margin="0,0,5,0"
-                        />
+            
 
-                    <TextBlock 
-                        Text="Catégories"
-                         FontSize="13"/>
-                </DockPanel>
-                
-            </Button>
-            <Button 
-                Command="{Binding ProductViewModel.OpenProd}"
-                CommandParameter="NEW"
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Center" 
-                Margin="10"
-                Width="120"
-                Height="29"
-                Background="Gray" 
-                Foreground="White">
-                <DockPanel>
-                    <materialDesign:PackIcon
-                         Kind="Plus"
-                        Margin="0,0,5,0"
-                        Width="20"
-                        Height="20"
-                        />
-
-                    <TextBlock 
-                        Text="Produit"
-                         FontSize="13"/>
-                </DockPanel>
-
-            </Button>
 
             <!-- Information utilisateur sélectionner -->
             <StackPanel Grid.Column="1"  Grid.Row="0">
@@ -184,93 +141,105 @@
                 </Grid>
 
                 <!-- Info -->
-                <Border Background="#FFFCF2" BorderBrush="Black" BorderThickness="2" CornerRadius="3" HorizontalAlignment="Center" Margin="0,40,0,0" Height="310" Width="200">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ProductViewModel.ShowProduct}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding ProductViewModel.ShowProduct}" Value="false">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <StackPanel>
+                <materialDesign:Flipper
+                    IsFlipped="{Binding ProductViewModel.IsFlipped}"
+                    Margin="0,40,0,0" 
+                    HorizontalAlignment="Center" 
+                    >
+                    <materialDesign:Flipper.FrontContent>
+                        <Button
+                            BorderBrush="{StaticResource galliumColor}"
+                            Background="#FFFCF2"
+                            Height="310" 
+                            Width="200"
+                            Command="{x:Static materialDesign:Flipper.FlipCommand}">
 
-                        <TextBlock 
-                            Margin="0,10,0,0" 
-                            Text="PRODUIT" 
-                            HorizontalAlignment="Center"  
-                            FontSize="13"  
-                            FontWeight="Bold" 
-                            Foreground="Black" />
-
-                        <!-- Bouton -->
-                        <Button 
-                            Command="{Binding ProductViewModel.OpenProd}" 
-                            CommandParameter="DS"
-                            Margin="160,-20,0,0"  
-                            Width="20"    
-                            Style="{StaticResource buttonImage}">
-                            <Image   
-                                    Source="/Images/plein_ecran.png"/>
-                        </Button>
-
-                        <materialDesign:PackIcon HorizontalAlignment="Center" Margin="0,10,0,0" Kind="CartPercent" Width="90" Height="90"/>
-
-                        <!-- Information du produit -->
-                        <StackPanel   Margin="0,0,0,60" >
-
-                            <!-- Nom produit -->
-                            <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
+                            <StackPanel 
+                                Height="310" 
+                                Width="180">
                                 <TextBlock 
+                                    Margin="0,10,0,0" 
+                                    Text="PRODUIT" 
+                                    HorizontalAlignment="Center"  
+                                    FontSize="13"  
+                                    FontWeight="Bold" 
+                                    Foreground="Black" />
+
+                                <!-- Bouton ouvrir détails -->
+                                <Button 
+                                    Command="{Binding ProductViewModel.OpenProd}" 
+                                    CommandParameter="DS"
+                                    Margin="140,-20,0,0"  
+                                    Width="20"    
+                                    Style="{StaticResource buttonImage}">
+                                    <materialDesign:PackIcon
+                                        Width="23"
+                                        Height="23"
+                                        Foreground="Black"
+                                        Kind="Fullscreen"
+                                        />
+                                </Button>
+
+                                <!-- Image produit-->
+                                <materialDesign:PackIcon 
+                                        HorizontalAlignment="Center" 
+                                        Margin="0,15,0,0" 
+                                        Foreground="Black"
+                                        Kind="CartPercent" 
+                                        Width="90" 
+                                        Height="90"/>
+
+                                    <!-- Information du produit -->
+                                <StackPanel   Margin="0,10,0,60" >
+
+                                    <!-- Nom produit -->
+                                    <StackPanel  Orientation="Vertical"  HorizontalAlignment="Center">
+                                        <TextBlock 
                                     Text="Produit" 
                                     HorizontalAlignment="Left" 
                                     Margin="-17,0,0,0" 
                                     FontSize="11"  
                                     FontWeight="Bold" 
                                     Foreground="Black" />
-                                <TextBox  
+                                        <TextBox  
                                     Margin="7,0,0,0"  
                                     Width="135" 
                                     FontSize="11" 
                                     Foreground="Black"
                                     Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM}"/>
-                            </StackPanel>
+                                    </StackPanel>
 
-                            <!-- Quantité produit -->
-                            <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
-                                <TextBlock  
+                                    <!-- Quantité produit -->
+                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                        <TextBlock  
                                     Text="Quantité" 
                                     HorizontalAlignment="Left" 
                                     Margin="-17,0,0,0"  
                                     FontSize="11" 
                                     FontWeight="Bold" 
                                     Foreground="Black" />
-                                <TextBox 
+                                        <TextBox 
                                     Width="135"
                                     Margin="7,0,0,0"
                                     FontSize="11" 
                                     Foreground="Black"  >
-                                    <TextBox.Text>
-                                        <Binding 
+                                            <TextBox.Text>
+                                                <Binding 
                                             Path="ProductViewModel.CurrentProduct.QuantiteIHM"
                                             UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <rules:RuleQuantite/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
+                                                    <Binding.ValidationRules>
+                                                        <rules:RuleQuantite/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
 
-                                </TextBox>
-                            </StackPanel>
+                                        </TextBox>
+                                    </StackPanel>
 
 
-                            <!-- Categorie Produit -->
-                            <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
-                                <TextBlock 
+                                    <!-- Categorie Produit -->
+                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                        <TextBlock 
                                     Text="Catégorie" 
                                     HorizontalAlignment="Left" 
                                     Margin="-17,0,0,0"
@@ -278,24 +247,104 @@
                                     FontWeight="Bold" 
                                     Foreground="Black" />
 
-                                <ComboBox 
+                                        <ComboBox 
                                     Width="135" 
                                     SelectedItem="{Binding ProductViewModel.CurrentProduct.CategoryIHM}" 
                                     ItemsSource="{Binding ProductViewModel.Categories }"  
                                     FontSize="11"  
                                     Foreground="Black" 
                                     Margin="7,0,0,0">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding CurrentNameCategory}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding CurrentNameCategory}" />
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
 
+                                    </StackPanel>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
+
+                        </Button>
+                    </materialDesign:Flipper.FrontContent>
+                    
+                    <!-- Bouton créer produit-->
+                    <materialDesign:Flipper.BackContent>
+                        <Button
+                            Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                            HorizontalAlignment="Center" 
+                            BorderBrush="{StaticResource galliumColor}"
+                            Background="#FFFCF2"
+                            Height="310" 
+                            Width="200">
+
+                            <!-- Boutons Ations -->
+                            <StackPanel Height="280" VerticalAlignment="Top" Orientation="Vertical">
+
+                                <TextBlock
+                                    Foreground="Black"
+                                    FontSize="17"  
+                                    FontWeight="Bold" 
+                                    TextDecorations="Underline"
+                                    HorizontalAlignment="Center"
+                                    Text="Actions"/>
+                                
+                                <!-- Créer un produit -->
+                                <Button 
+                                    Command="{Binding ProductViewModel.OpenProd}"
+                                    CommandParameter="NEW"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Center" 
+                                    Margin="10,30,10,10"
+                                    Width="120"
+                                    Height="29"
+                                    BorderBrush="Transparent"
+                                    Background="{StaticResource galliumColor}" 
+                                    Opacity="0.8"
+                                    Foreground="White">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon
+                                        Kind="Plus"
+                                        Margin="0,1,5,0"
+                                        Width="20"
+                                        Height="20"
+                                        />
+                                        <TextBlock 
+                                            VerticalAlignment="Center"
+                                        Text="Produit"
+                                        FontSize="13"/>
+                                    </DockPanel>
+                                </Button>
+                                
+                                <!-- Manager les catégories -->
+                                <Button 
+                                    Command="{Binding ProductViewModel.OpenCat}"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="10"
+                                    BorderBrush="Transparent"
+                                    Height="29"
+                                    Width="120"
+                                    Background="Gray" 
+                                    Foreground="White">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon
+                                            Kind="FormatListBulletedType"
+                                            Margin="0,0,5,0"
+                                            />
+
+                                        <TextBlock 
+                                            Text="Catégories"
+                                            FontSize="13"/>
+                                    </DockPanel>
+                                </Button>
+                            </StackPanel>
+                            
+                        </Button>
+                    </materialDesign:Flipper.BackContent>
+                </materialDesign:Flipper>
+                
+              
 
             </StackPanel>
         </Grid>
@@ -416,7 +465,6 @@
                         FontWeight="Black"/>
 
                     <Button
-                        Style="{StaticResource buttonImage}" 
                         HorizontalAlignment="Right"
                         Margin="10"
                         VerticalAlignment="Top"
@@ -426,6 +474,18 @@
                             Width="21"
                             Height="21"
                             Kind="Delete"/>
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource buttonImage}"  TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ProductViewModel.ShowDeleteProduct}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ProductViewModel.ShowDeleteProduct}" Value="false">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                     
                     <!-- Colonne 1 : Image-->

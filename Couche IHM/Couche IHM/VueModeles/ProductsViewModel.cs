@@ -31,6 +31,8 @@ namespace Couche_IHM.VueModeles
         private bool showProductDetail = false;
         private bool showProduct = false;
         private bool showCategories = false;
+        private bool showDeleteProduct = false;
+        private bool isFlipped = true;
         private string searchFilter = "";
 
         #endregion
@@ -38,6 +40,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand OpenProd { get; set; }
         public RelayCommand CloseCategory { get; set; }
         public RelayCommand OpenCat { get; set; }
+
         #endregion
         #region properties
 
@@ -63,11 +66,13 @@ namespace Couche_IHM.VueModeles
                 if (value != null)
                 {
                     ShowProduct = true;
+                    IsFlipped = false;
 
                 }
                 else
                 {
                     this.ShowProduct = false;
+                    IsFlipped = true;
 
                 }
                 NotifyPropertyChanged(nameof(CurrentProduct));
@@ -154,6 +159,29 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public bool ShowDeleteProduct 
+        { 
+            get => showDeleteProduct;
+            set 
+            { 
+                showDeleteProduct = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Est ce que la card actions est retournée
+        /// </summary>
+        public bool IsFlipped
+        {
+            get => isFlipped;
+            set
+            {
+                isFlipped = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         public ProductsViewModel()
@@ -208,8 +236,14 @@ namespace Couche_IHM.VueModeles
 
             if (action == "NEW")
             {
+                ShowDeleteProduct = false;
                 CurrentProduct = new ProductViewModel(new Product(),this.productManager, this.categories[0]);
             }
+            else
+            {
+                ShowDeleteProduct = true;
+            }
+            
             ShowProductDetail = true;
         }
 

@@ -20,7 +20,7 @@ namespace Couche_IHM.VueModeles
         private AdherentViewModel currentAdherent;
         private AdhérentManager adherentManager;
         private string searchFilter = "";
-        private bool showAdherent = false;
+        private bool showActions = true;
         private bool showModifAdherent = false;
         private bool dialogModifAdherent = false;
         #endregion
@@ -80,13 +80,13 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Est ce qu'on affiche la fenetre de l adherent
         /// </summary>
-        public bool ShowAdherent 
+        public bool ShowActions 
         { 
-            get => showAdherent;
+            get => showActions;
             set 
             { 
-                showAdherent = value; 
-                NotifyPropertyChanged(nameof(ShowAdherent));
+                showActions = value; 
+                NotifyPropertyChanged();
             }
         }
 
@@ -119,12 +119,12 @@ namespace Couche_IHM.VueModeles
                 currentAdherent = value;
                 if (value != null)
                 {
-                    ShowAdherent = true;
+                    ShowActions = false;
 
                 }
                 else
                 {
-                    this.ShowAdherent = false;
+                    this.ShowActions = true;
                     
                 }
                 this.ShowModifAdherent = false;
