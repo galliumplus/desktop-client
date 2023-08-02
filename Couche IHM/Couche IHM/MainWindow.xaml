@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Couche_IHM"
         xmlns:vm="clr-namespace:Couche_IHM.VueModeles"
+        xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -13,6 +14,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         MinWidth="800"
         MinHeight="450">
+    <Window.Resources>
+        <rules:FrameEnumConverterName x:Key="EnumToNameConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -138,7 +142,7 @@
                     
                     <!-- Nom de la frame  -->
                         <TextBlock 
-                            Text="{Binding Frame}" 
+                            Text="{Binding Frame, Converter={StaticResource EnumToNameConverter}}" 
                             FontSize="22" 
                             VerticalAlignment="Center" 
                             Margin="40,0,0,0" 

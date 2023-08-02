@@ -124,7 +124,8 @@
                     <TextBox 
                         Height="30"  
                         Tag="Recherche..."
-                        Width="180" 
+                        Width="200" 
+                        BorderBrush="{StaticResource galliumColor}"
                         Style="{StaticResource WaterMarkTextBox}"   
                         HorizontalAlignment="Stretch"
                         FontSize="15" 

@@ -28,7 +28,7 @@
 
         <!-- ScrollViewer des adhérents-->
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-            <ListView  x:Name="listadherents" ItemsSource="{Binding AdherentViewModel.Adherents}" SelectedItem="{Binding AdherentViewModel.CurrentAdherent}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" >
+            <ListView  ItemsSource="{Binding AdherentViewModel.Adherents}" SelectedItem="{Binding AdherentViewModel.CurrentAdherent}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top" >
                 <ListView.Template >
                     <ControlTemplate >
                         <!-- Header des colonnes -->
@@ -45,15 +45,54 @@
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
 
+                                <Button 
+                                    Style="{x:Null}" 
+                                    FocusVisualStyle="{x:Null}"  
+                                    BorderThickness="0"  
+                                    Margin="-50,0,0,0"  
+                                    Background="Transparent"   
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto"  
+                                    FontSize="16" 
+                                    Content="Nom et prénom" />
+                                <Image
+                                    Visibility="Hidden"   
+                                    Width="20" 
+                                    HorizontalAlignment="Left"/>
 
-                                <Button Style="{x:Null}" FocusVisualStyle="{x:Null}"  BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
-                                <Image   Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
+                                <Button 
+                                    Style="{x:Null}" 
+                                    FocusVisualStyle="{x:Null}" 
+                                    BorderThickness="0"    
+                                    Background="Transparent" 
+                                    Grid.Column="1"  
+                                    Grid.Row="0" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto"  
+                                    FontSize="16" 
+                                    Content="Acompte" />
+                                <Image  
+                                    Visibility="Hidden" 
+                                    Grid.Column="1"   
+                                    Width="20" 
+                                    HorizontalAlignment="Left"/>
 
-                                <Button Style="{x:Null}" FocusVisualStyle="{x:Null}" BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortId" Content="Acompte" />
-                                <Image  Name="idTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
-
-                                <Button Style="{x:Null}" FocusVisualStyle="{x:Null}" BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortArgent" Content="Monnaie "/>
-                                <Image  x:Name="argentTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
+                                <Button 
+                                    Style="{x:Null}" 
+                                    FocusVisualStyle="{x:Null}" 
+                                    BorderThickness="0"  
+                                    Background="Transparent" 
+                                    Grid.Column="2" 
+                                    Grid.Row="0" 
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto"  
+                                    FontSize="16"
+                                    Content="Monnaie "/>
+                                <Image  
+                                    Visibility="Hidden" 
+                                    Grid.Column="2"  
+                                    Width="20" 
+                                    HorizontalAlignment="Left"/>
 
 
 
@@ -74,9 +113,9 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
-                            <Label Style="{x:Null}" Content="{Binding NomCompletIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                            <Label Content="{Binding IdentifiantIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                            <Label Content="{Binding ArgentIHM}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                            <Label Style="{x:Null}" Content="{Binding NomCompletIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label Content="{Binding IdentifiantIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label Content="{Binding ArgentIHM}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -96,7 +135,16 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Barre de recherche -->
-                    <TextBox Name="rechercheAcompte" Height="30"  Tag="Recherche..." Width="180" Style="{StaticResource WaterMarkTextBox}"   HorizontalAlignment="Stretch" FontSize="15" Grid.ColumnSpan="2" Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
+                    <TextBox 
+                        Height="30"  
+                        Tag="Recherche..." 
+                        Width="200" 
+                        BorderBrush="{StaticResource galliumColor}"
+                        Style="{StaticResource WaterMarkTextBox}"   
+                        HorizontalAlignment="Stretch" 
+                        FontSize="15" 
+                        Grid.ColumnSpan="2" 
+                        Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
                     <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
                 </Grid>
@@ -305,7 +353,7 @@
 
 
 
-
+                <!-- Boutons modif rapide -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom">
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -320,6 +368,7 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Style>
+                    
                     <Button   
                         Style="{StaticResource buttonImage}"
                         BorderBrush="Transparent"
@@ -333,7 +382,7 @@
 
                         </materialDesign:PackIcon>
                     </Button>
-                    
+
                     <Button 
                         Style="{StaticResource buttonImage}"
                         Margin="10,0,0,0"
@@ -345,14 +394,10 @@
                             Width="30"
                             Height="30"
                             Kind="CheckBold">
-
                         </materialDesign:PackIcon>
-
-
                     </Button>
-                   
-                </StackPanel>
 
+                </StackPanel>
             </StackPanel>
         </Grid>
         

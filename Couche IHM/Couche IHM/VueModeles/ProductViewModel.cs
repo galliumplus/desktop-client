@@ -42,6 +42,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ResetProd { get; set; }
         public RelayCommand UpdateProd { get; set; }
         #endregion
+
         #region properties
 
         /// <summary>
@@ -115,6 +116,7 @@ namespace Couche_IHM.VueModeles
         }
 
         #endregion
+
         public ProductViewModel(Product product,ProductManager productManager,CategoryViewModel categoryProduit)
         {
             // Initialisation du modele
