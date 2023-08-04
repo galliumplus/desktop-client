@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Couche_IHM.Frames" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" 
       d:DesignWidth="800"
@@ -18,7 +19,10 @@
 
         <!-- ScrollViewer des comptes-->
         <ScrollViewer  Margin="0,20,0,19"   >
-            <ListView  x:Name="listLogs"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
+            <ListView 
+                ItemsSource="{Binding LogsViewModel.Logs}"
+                HorizontalContentAlignment="Stretch"  
+                VerticalContentAlignment="Top">
                 <ListView.Template>
                     <ControlTemplate>
                         <!-- Header des colonnes -->
@@ -38,10 +42,24 @@
                                 </Grid.RowDefinitions>
 
 
-                                <Button  BorderThickness="0"   Background="Transparent" Grid.Column="1"  FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Date" />
-                                <Image  Name="dateTri" Visibility="Hidden" Grid.Column="1"  Width="30" HorizontalAlignment="Left"/>
+                                <TextBlock  
+                                    HorizontalAlignment="Center"
+                                    Background="Transparent" 
+                                    Grid.Column="1"  
+                                    FontWeight="Medium" 
+                                    FontFamily="Roboto"  
+                                    FontSize="17"  
+                                    Text="Date" />
 
-                                <TextBlock  Margin="38,0,0,0"  Background="Transparent" Grid.Column="2"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Text="Thème"  />
+                                <TextBlock  
+                                    Margin="38,0,0,0"  
+                                    Background="Transparent" 
+                                    Grid.Column="2"  
+                                    Grid.Row="0" 
+                                    FontWeight="Medium"
+                                    FontFamily="Roboto"  
+                                    FontSize="17" 
+                                    Text="Thème"  />
 
                                 <TextBlock Margin="60,0,0,0"  Background="Transparent" Grid.Column="3" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Text="Message" />
                                 
@@ -68,11 +86,41 @@
                                 <ColumnDefinition Width="2.2*"/>
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
-                            <Image Grid.Column="0"  Source="{Binding imageLinkOperation}" Width="10" HorizontalAlignment="Center"/>
-                            <Label   Content="{Binding Date}"  Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Content="{Binding Action}"  HorizontalAlignment="Center"  Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Grid.Column="3"  Content="{Binding MessageCourt}"   FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label  Content="{Binding Auteur}" Grid.Column="4" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            
+                            <materialDesign:PackIcon
+                                Grid.Column="0"  
+                                Kind="{Binding KindOperationImage}"
+                                Foreground="{Binding ColorAction}"
+                                Width="15" 
+                                Height="15"
+                                HorizontalAlignment="Center"
+                                />
+                            <Label   
+                                Content="{Binding Date}"  
+                                Grid.Column="1" 
+                                FontWeight="Medium" 
+                                FontFamily="Roboto" 
+                                FontSize="13"/>
+                            <Label 
+                                Content="{Binding Theme}"  
+                                HorizontalAlignment="Center"  
+                                Grid.Column="2" 
+                                FontWeight="Medium" 
+                                FontFamily="Roboto" 
+                                FontSize="13"/>
+                            <Label 
+                                Grid.Column="3"  
+                                Content="{Binding MessageCourt}"   
+                                FontWeight="Medium" 
+                                FontFamily="Roboto" 
+                                FontSize="13"/>
+                            <Label  
+                                Content="{Binding Auteur}" 
+                                Grid.Column="4" 
+                                
+                                FontWeight="Medium" 
+                                FontFamily="Roboto" 
+                                FontSize="13"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

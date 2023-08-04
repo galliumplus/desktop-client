@@ -1,4 +1,5 @@
-﻿using Couche_Métier;
+﻿using Couche_IHM.VueModeles;
+using Couche_Métier;
 using Couche_Métier.Log;
 using Modeles;
 using System;
@@ -26,10 +27,10 @@ namespace Couche_IHM.Frames
         {
             
             InitializeComponent();
-
+            DataContext = MainWindowViewModel.Instance;
             // Initialisation des attributs
-            this.log = new LogAdherentToTxt();
-            this.logsLine = log.loadLog();
+            //this.log = new LogAdherentToTxt();
+            /**this.logsLine = log.loadLog();
 
             // Si il y a des logs
             if (logsLine.Count > 0)
@@ -46,7 +47,7 @@ namespace Couche_IHM.Frames
             {
                 this.auteurs.Items.Add(user.NomComplet);
             }
-            this.auteurs.SelectedItem = "Tout le monde";
+            this.auteurs.SelectedItem = "Tout le monde";**/
         }
 
 
@@ -55,6 +56,7 @@ namespace Couche_IHM.Frames
         /// </summary>
         private void FillListViewLogs()
         {
+            /**
             // Affiche les logs du mois actuels
             List<Log> list = new List<Log>();
             string actualMonth = DateTime.Today.ToString("MMMM yyyy");
@@ -147,7 +149,7 @@ namespace Couche_IHM.Frames
             }
 
             this.listLogs.ItemsSource = list;
-            
+            **/
         }
 
         /// <summary>

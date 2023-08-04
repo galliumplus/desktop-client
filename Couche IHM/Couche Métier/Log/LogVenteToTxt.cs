@@ -44,13 +44,22 @@ namespace Couche_Métier.Log
         /// Récupère les logs
         /// </summary>
         /// <returns></returns>
-        public List<string> loadLog()
+        public List<Modeles.Log> loadLog()
         {
             VerifyFiles();
-            List<string> logs = new List<string>();
-            foreach (string line in System.IO.File.ReadLines(Path+name))
+            List<Modeles.Log> logs = new List<Modeles.Log>();
+            foreach (string line in System.IO.File.ReadLines(Path + name))
             {
-                logs.Add(line);
+                // Récupération des informations
+                string[] SplitedLogLine = line.Split('|');
+                string date = DateTime.Parse(SplitedLogLine[0]).ToString("g");
+                string type = SplitedLogLine[1];
+                string message = SplitedLogLine[2];
+                string auteur = SplitedLogLine[3];
+                string operation = SplitedLogLine[4];
+
+                Modeles.Log log = new Modeles.Log(date, type, message, auteur, operation);
+                logs.Add(log);
             }
             return logs;
         }

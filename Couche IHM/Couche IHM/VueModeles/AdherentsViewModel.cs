@@ -128,7 +128,6 @@ namespace Couche_IHM.VueModeles
                     this.ShowAdherent = false;
                     
                 }
-                this.ShowModifButtons = false;
 
                 NotifyPropertyChanged(nameof(CurrentAdherent));
             }

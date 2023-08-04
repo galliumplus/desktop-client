@@ -281,7 +281,7 @@
                                     Width="135" 
                                     FontSize="11" 
                                     Foreground="Black"
-                                    Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM}"/>
+                                    Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
 
                                     <!-- Quantité produit -->
@@ -343,8 +343,51 @@
                     </materialDesign:Flipper.BackContent>
                 </materialDesign:Flipper>
                 
-              
+                <!-- Boutons modif rapide -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ProductViewModel.ShowModifButtons}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ProductViewModel.ShowModifButtons}" Value="false">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
 
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    <Button   
+                        Style="{StaticResource buttonImage}"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        Command="{Binding ProductViewModel.CurrentProduct.ResetProd}">
+                        <materialDesign:PackIcon
+                            Foreground="Red"
+                            Width="27"
+                            Height="27"
+                            Kind="CloseThick">
+
+                        </materialDesign:PackIcon>
+                    </Button>
+
+                    <Button 
+                        Style="{StaticResource buttonImage}"
+                        Margin="10,0,0,0"
+                        Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}"
+                        BorderBrush="Transparent"
+                        Background="Transparent">
+                        <materialDesign:PackIcon
+                            Foreground="Green"
+                            Width="30"
+                            Height="30"
+                            Kind="CheckBold">
+                        </materialDesign:PackIcon>
+                    </Button>
+
+                </StackPanel>
             </StackPanel>
         </Grid>
         <!-- Liste Catégories -->

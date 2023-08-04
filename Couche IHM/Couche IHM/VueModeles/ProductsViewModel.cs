@@ -29,6 +29,7 @@ namespace Couche_IHM.VueModeles
         private ProductViewModel currentProduct;
 
         private bool showProductDetail = false;
+        private bool showModifButtons = false;
         private bool showProduct = false;
         private bool showCategories = false;
         private bool showDeleteProduct = false;
@@ -61,7 +62,13 @@ namespace Couche_IHM.VueModeles
             get => currentProduct;
             set
             {
+                if (currentProduct != null)
+                {
+                    currentProduct.ResetProduct();
+                }
+
                 currentProduct = value;
+
                 if (value != null)
                 {
                     ShowProduct = true;
@@ -105,6 +112,18 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Permet d'afficher les boutons de modification rapide
+        /// </summary>
+        public bool ShowModifButtons
+        {
+            get => showModifButtons;
+            set
+            {
+                showModifButtons = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Représente la barre de recherche des produits
@@ -166,6 +185,7 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged();
             }
         }
+
 
         #endregion
 

@@ -11,7 +11,7 @@ namespace Modeles
     public class Log 
     {
         private string date;
-        private string type;
+        private string theme;
         private string message;
         private string auteur;
         private string operation;
@@ -19,10 +19,10 @@ namespace Modeles
         /// <summary>
         /// Constructeur
         /// </summary>
-        public Log(string date, string type, string message, string auteur,string operation)
+        public Log(string date, string theme, string message, string auteur,string operation)
         {
             this.date = date;
-            this.type = type;
+            this.theme = theme;
             this.message = message;
             this.auteur = auteur;
             this.operation = operation;
@@ -68,10 +68,10 @@ namespace Modeles
         /// <summary>
         /// Action de l'utilisateur
         /// </summary>
-        public string Action 
+        public string Theme 
         { 
-            get => type; 
-            set => type = value; 
+            get => theme; 
+            set => theme = value; 
         }
 
         /// <summary>
@@ -101,5 +101,6 @@ namespace Modeles
             get => auteur; 
             set => auteur = value; 
         }
+        public string Operation { get => operation; set => operation = value; }
     }
 }

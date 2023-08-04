@@ -31,10 +31,12 @@ namespace Couche_IHM.VueModeles
         public AdherentsViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
         public ProductsViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }
         public CaisseViewModel CaisseViewModel { get => caisseViewModel; set => caisseViewModel = value; }
+        public LogsViewModel LogsViewModel { get => logsViewModel; set => logsViewModel = value; }
 
         private AdherentsViewModel adherentViewModel;
         private ProductsViewModel productViewModel;
         private CaisseViewModel caisseViewModel;
+        private LogsViewModel logsViewModel;
         #endregion
 
         #region notify
@@ -49,7 +51,11 @@ namespace Couche_IHM.VueModeles
         private User compteConnected;
         private Frame frame = Frame.FRAMEACCUEIL;
 
+        #region events
         public RelayCommand ChangeFrame { set; get; }
+        #endregion
+
+
         #region properties
         /// <summary>
         /// Compte connecté à gallium
@@ -93,6 +99,7 @@ namespace Couche_IHM.VueModeles
             this.adherentViewModel = new AdherentsViewModel();
             this.productViewModel = new ProductsViewModel();
             this.caisseViewModel = new CaisseViewModel();
+            this.logsViewModel = new LogsViewModel();
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }
     }

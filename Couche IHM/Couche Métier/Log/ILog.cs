@@ -24,6 +24,6 @@ namespace Couche_Métier.Log
         /// <summary>
         /// Récupère les logs
         /// </summary>
-        public List<string> loadLog();
+        public List<Modeles.Log> loadLog();
     }
 }

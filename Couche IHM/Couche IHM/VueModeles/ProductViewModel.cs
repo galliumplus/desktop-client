@@ -28,6 +28,7 @@ namespace Couche_IHM.VueModeles
         private CategoryViewModel categoryIHM;
         private string prixAdherentIHM;
         private string prixNonAdherentIHM;
+        
         #endregion
 
         #region notify
@@ -65,7 +66,11 @@ namespace Couche_IHM.VueModeles
             {
                 return quantiteIHM;
             }
-            set => quantiteIHM = value;
+            set 
+            { 
+                quantiteIHM = value;
+                MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = true;
+            }
         }
 
         /// <summary>
@@ -74,7 +79,11 @@ namespace Couche_IHM.VueModeles
         public string NomProduitIHM
         {
             get => nomProduitIHM;
-            set => nomProduitIHM = value;
+            set
+            {
+                nomProduitIHM = value;
+                MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = true;
+            }
         }
 
         /// <summary>
@@ -83,7 +92,10 @@ namespace Couche_IHM.VueModeles
         public string PrixAdherentIHM
         {
             get => prixAdherentIHM;
-            set => prixAdherentIHM = value;
+            set 
+            { 
+                prixAdherentIHM = value;
+            }
         }
         /// <summary>
         /// Prix non adhérent formatté pour l'afficher
@@ -91,7 +103,10 @@ namespace Couche_IHM.VueModeles
         public string PrixNonAdherentIHM
         {
             get => prixNonAdherentIHM;
-            set => prixNonAdherentIHM = value;
+            set 
+            { 
+                prixNonAdherentIHM = value; 
+            }
         }
 
         /// <summary>
@@ -100,7 +115,11 @@ namespace Couche_IHM.VueModeles
         public CategoryViewModel CategoryIHM
         {
             get => categoryIHM;
-            set { categoryIHM = value; NotifyPropertyChanged(); }
+            set 
+            { 
+                categoryIHM = value;
+                MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = true;
+            }
         }
 
         /// <summary>
@@ -114,6 +133,9 @@ namespace Couche_IHM.VueModeles
             }
             
         }
+
+
+     
 
         #endregion
 
@@ -138,9 +160,15 @@ namespace Couche_IHM.VueModeles
             // Initialisation des events
             this.ResetProd = new RelayCommand(x => ResetProduct());
             this.UpdateProd = new RelayCommand(x => CreateProduct());
+
         }
 
         #region methods
+        public void DeleteCatNotify()
+        {
+            this.categoryIHM = null;
+            NotifyPropertyChanged(nameof(this.CategoryIHM));
+        }
 
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
@@ -168,6 +196,7 @@ namespace Couche_IHM.VueModeles
             this.logProduct.registerLog(CategorieLog.UPDATE, this.product, MainWindowViewModel.Instance.CompteConnected);
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
         }
 
         /// <summary>
@@ -198,6 +227,7 @@ namespace Couche_IHM.VueModeles
 
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
         }
 
         /// <summary>
@@ -212,7 +242,8 @@ namespace Couche_IHM.VueModeles
             {
                 this.categoryIHM.NameCategory = product.Categorie;
             }
-            
+
+            this.categoryIHM = MainWindowViewModel.Instance.ProductViewModel.Categories.Find(x => x.NameCategory == product.Categorie);
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
@@ -226,6 +257,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(PrixAdherentIHM));
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
         }
 
         public override bool Equals(object? obj)

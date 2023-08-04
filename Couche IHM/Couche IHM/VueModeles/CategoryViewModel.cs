@@ -115,7 +115,7 @@ namespace Couche_IHM.VueModeles
             this.categoryManager.DeleteCategory(CurrentNameCategory);
             foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(x => x.CategoryIHM == this))
             {
-                prod.CategoryIHM = null;
+                prod.DeleteCatNotify();
             }
             
             // Notifier la vue
