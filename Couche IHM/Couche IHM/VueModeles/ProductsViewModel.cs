@@ -45,6 +45,23 @@ namespace Couche_IHM.VueModeles
         #region properties
 
         /// <summary>
+        /// Liste des adhérents
+        /// </summary>
+        public List<PodiumProduit> PodiumProduits
+        {
+            get
+            {
+                List<PodiumProduit> podAdherents = new List<PodiumProduit>();
+                List<ProductViewModel> prds = products.OrderByDescending(a => a.PurchaseCount).Take(3).ToList();
+                for (int i = 0; i < 3; i++)
+                {
+                    podAdherents.Add(new PodiumProduit(prds[i], i));
+                }
+                return podAdherents;
+            }
+        }
+
+        /// <summary>
         /// Représente toutes les catégories de produits disponibles
         /// </summary>
         public List<CategoryViewModel> Categories
@@ -216,10 +233,12 @@ namespace Couche_IHM.VueModeles
         private void InitProducts()
         {
             List<Product> produitsMetier = this.productManager.GetProducts();
+            Random random = new Random();
             foreach (Product prd in produitsMetier)
             {
+                int r = random.Next(0, 100);
                 CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == prd.Categorie);
-                this.products.Add(new ProductViewModel(prd,this.productManager,catProduit));
+                this.products.Add(new ProductViewModel(prd,this.productManager,catProduit,r));
             }
         }
 
@@ -242,7 +261,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW")
             {
                 ShowDeleteProduct = false;
-                CurrentProduct = new ProductViewModel(new Product(),this.productManager, this.categories[0]);
+                CurrentProduct = new ProductViewModel(new Product(),this.productManager, this.categories[0],0);
             }
             else
             {

@@ -9,78 +9,75 @@
       Title="FrameComptes"
       Background="White">
 
-    <Grid>
+    <Grid  Margin="20,50,20,0">
+        <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,30,0,0">
-            <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- ScrollViewer des comptes-->
-            <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
-                <ListView  x:Name="listUser"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
-                    <ListView.Template>
-                        <ControlTemplate>
-                            <!-- Header des colonnes -->
-                            <DockPanel LastChildFill="True">
-                                <Grid DockPanel.Dock="Top">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-
-
-                                    <Button Style="{x:Null}"  BorderThickness="0"   Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
-                                    <Image Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
-
-                                    <Button Style="{x:Null}" BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Identifiant" Click="SortMail" />
-                                    <Image Name="mailTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
-
-                                    <Button Style="{x:Null}" BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Role" Click="SortRole"/>
-                                    <Image x:Name="roleTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
-
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Action" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
-
-
-
-                                    <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
-
-                                </Grid>
-                                <!-- items de la listview -->
-                                <ItemsPresenter ></ItemsPresenter>
-                            </DockPanel>
-                        </ControlTemplate>
-                    </ListView.Template>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
+        <!-- ScrollViewer des comptes-->
+        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
+            <ListView  x:Name="listUser"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
+                <ListView.Template>
+                    <ControlTemplate>
+                        <!-- Header des colonnes -->
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- Content -->
-                                <Label  Content="{Binding NomComplet}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding Mail}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Label Content="{Binding Role}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
-                                <Button Style="{StaticResource buttonImage}"  Grid.Column="3" MouseEnter="PermButton" Click="UpdateAnUser">
-                                    <Image Source="/Images/modif.png" Width="15"/>
-                                </Button>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+
+                                <Button Style="{x:Null}"  BorderThickness="0"   Background="Transparent"   FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Click="SortIdentite" Content="Nom et prénom" />
+                                <Image Name="identiteTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
+
+                                <Button Style="{x:Null}" BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Identifiant" Click="SortMail" />
+                                <Image Name="mailTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
+
+                                <Button Style="{x:Null}" BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Content="Role" Click="SortRole"/>
+                                <Image x:Name="roleTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
+
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Action" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
+
+
+
+                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
+
                             </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListView>
-            </ScrollViewer>
-        </Grid>
+                            <!-- items de la listview -->
+                            <ItemsPresenter ></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListView.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Content -->
+                            <Label  Content="{Binding NomComplet}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                            <Label Content="{Binding Mail}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                            <Label Content="{Binding Role}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="14"/>
+                            <Button Style="{StaticResource buttonImage}"  Grid.Column="3" MouseEnter="PermButton" Click="UpdateAnUser">
+                                <Image Source="/Images/modif.png" Width="15"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

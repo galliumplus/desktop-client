@@ -131,14 +131,15 @@
         <Viewbox Grid.Column="1">
             
             <!-- DEUXIEME COLONNE -->
-            <Grid  Height="607" Width="912" >
+            <Grid  Height="607" Width="969" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Header de la frame -->
-                <Grid  Grid.Row="0" >
+                <materialDesign:Card Grid.Row="0">
+                    <Grid  Grid.Row="0" >
                     
                     <!-- Nom de la frame  -->
                         <TextBlock 
@@ -157,7 +158,7 @@
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <!-- Image du compte  -->
-                        <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/DogoPp.png" Width="50" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
+                        <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/logoEtiq.png" Width="40" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                         <StackPanel Grid.Column="1" Margin="10,20,10,0">
                             <TextBlock 
                                 Text="{Binding CompteConnected.NomComplet}" 
@@ -169,13 +170,14 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                
+                </materialDesign:Card>
                 <Frame 
                     Grid.Row="1"
                     Source="{Binding Uri}" 
                     NavigationUIVisibility="Hidden"/>
                 
             </Grid>
+
         </Viewbox>
 
     </Grid>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 
 namespace Couche_IHM.VueModeles
@@ -20,7 +21,7 @@ namespace Couche_IHM.VueModeles
         /// Représente le modèle adhérent
         /// </summary>
         private Adhérent adherent;
-
+        private int random;
         /// <summary>
         /// Représente le manager des adhérents
         /// </summary>
@@ -64,7 +65,14 @@ namespace Couche_IHM.VueModeles
             { 
                 return $"{adherent.Nom.ToUpper()} {adherent.Prenom}";
             }
+            
 
+        }
+
+        public int PurchaseCount
+        {
+            get => random;
+            set => random = value;
         }
 
         /// <summary>
@@ -119,8 +127,9 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public AdherentViewModel(Adhérent adherent)
+        public AdherentViewModel(Adhérent adherent,int random)
         {
+            this.random = random;
             this.adherent = adherent;
             this.log =  new LogAdherentToTxt();
             this.adhérentManager = new AdhérentManager();

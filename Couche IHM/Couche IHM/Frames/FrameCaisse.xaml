@@ -9,7 +9,7 @@
       Title="FrameCaisse"
       Background="White">
 
-    <Grid>
+    <Grid Margin="20,40,20,0">
         <!-- Definitions colonnes -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -84,7 +84,7 @@
         </ScrollViewer>
         
         <!-- Information de paiement -->
-        <StackPanel Margin="0,25,0,20"  Grid.Column="1" Grid.Row="1" >
+        <StackPanel Margin="0,25,0,10"  Grid.Column="1" Grid.Row="1" >
             <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="17" Foreground="#FF403D39">Paiement</Label>
             <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
             <!-- Paiment -->

@@ -11,10 +11,7 @@
     Title="FrameAdherent"
     Background="White">
 
-    <Grid>
-
-
-        <Grid Margin="0,30,0,0">
+    <Grid Margin="20,50,20,0">
         <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -127,15 +124,15 @@
 
 
         <!-- Information utilisateur sélectionner -->
-            <StackPanel Grid.Column="1"  Grid.Row="0">
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1"  Grid.Row="0">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                    <!-- Barre de recherche -->
-                    <TextBox 
+                <!-- Barre de recherche -->
+                <TextBox 
                         Height="30"  
                         Tag="Recherche..." 
                         Width="200" 
@@ -146,17 +143,17 @@
                         Grid.ColumnSpan="2" 
                         Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
-                    <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
-                </Grid>
+                <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
+            </Grid>
 
-                <!-- Info -->
-                <materialDesign:Flipper
+            <!-- Info -->
+            <materialDesign:Flipper
                     IsFlipped="{Binding AdherentViewModel.ShowAdherent}"
                     Margin="0,40,0,0" 
                     HorizontalAlignment="Center" 
                     >
-                    <materialDesign:Flipper.FrontContent>
-                        <Button
+                <materialDesign:Flipper.FrontContent>
+                    <Button
                             Command="{x:Static materialDesign:Flipper.FlipCommand}"
                             HorizontalAlignment="Center" 
                             BorderBrush="{StaticResource galliumColor}"
@@ -164,10 +161,10 @@
                             Height="310" 
                             Width="200">
 
-                            <!-- Boutons Actions -->
-                            <StackPanel Height="280" VerticalAlignment="Top" Orientation="Vertical">
+                        <!-- Boutons Actions -->
+                        <StackPanel Height="280" VerticalAlignment="Top" Orientation="Vertical">
 
-                                <TextBlock
+                            <TextBlock
                                     Foreground="Black"
                                     FontSize="17"  
                                     FontWeight="Bold" 
@@ -175,8 +172,8 @@
                                     HorizontalAlignment="Center"
                                     Text="Actions"/>
 
-                                <!-- Créer un acompte -->
-                                <Button 
+                            <!-- Créer un acompte -->
+                            <Button 
                                     Command="{Binding AdherentViewModel.OpenModifAdh}"
                                     VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Center" 
@@ -187,22 +184,22 @@
                                     Background="{StaticResource galliumColor}" 
                                     Opacity="0.8"
                                     Foreground="White">
-                                    <DockPanel>
-                                        <materialDesign:PackIcon
+                                <DockPanel>
+                                    <materialDesign:PackIcon
                                         Kind="Plus"
                                         Margin="0,1,5,0"
                                         Width="20"
                                         Height="20"
                                         />
-                                        <TextBlock 
+                                    <TextBlock 
                                             VerticalAlignment="Center"
                                             Text="Acompte"
                                             FontSize="13"/>
-                                    </DockPanel>
-                                </Button>
+                                </DockPanel>
+                            </Button>
 
-                                <!-- Exporter les acomptes -->
-                                <Button 
+                            <!-- Exporter les acomptes -->
+                            <Button 
                                     VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Left" 
                                     Margin="10"
@@ -211,35 +208,35 @@
                                     Width="120"
                                     Background="Gray" 
                                     Foreground="White">
-                                    <DockPanel>
-                                        <materialDesign:PackIcon
+                                <DockPanel>
+                                    <materialDesign:PackIcon
                                             Kind="Export"
                                             Margin="0,0,5,0"
                                             />
 
-                                        <TextBlock 
+                                    <TextBlock 
                                             Text="Acomptes"
                                             FontSize="13"/>
-                                    </DockPanel>
-                                </Button>
-                            </StackPanel>
+                                </DockPanel>
+                            </Button>
+                        </StackPanel>
 
-                        </Button>
-                    </materialDesign:Flipper.FrontContent>
+                    </Button>
+                </materialDesign:Flipper.FrontContent>
 
-                    <!-- Actions !-->
-                    <materialDesign:Flipper.BackContent>
-                        <Button
+                <!-- Actions !-->
+                <materialDesign:Flipper.BackContent>
+                    <Button
                             BorderBrush="{StaticResource galliumColor}"
                             Background="#FFFCF2"
                             Height="310" 
                             Width="200"
                             Command="{x:Static materialDesign:Flipper.FlipCommand}">
 
-                            <StackPanel 
+                        <StackPanel 
                                 Height="310" 
                                 Width="180">
-                                <TextBlock 
+                            <TextBlock 
                                     Margin="0,10,0,0" 
                                     Text="ACOMPTE" 
                                     HorizontalAlignment="Center" 
@@ -247,23 +244,23 @@
                                     FontWeight="Bold" 
                                     Foreground="Black" />
 
-                                <!-- Bouton ouvrir détails -->
-                                <Button 
+                            <!-- Bouton ouvrir détails -->
+                            <Button 
                                     Command="{Binding AdherentViewModel.OpenModifAdh}" 
                                     CommandParameter="DS"
                                     Margin="140,-20,0,0"  
                                     Width="20"    
                                     Style="{StaticResource buttonImage}">
-                                    <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                         Width="23"
                                         Height="23"
                                         Foreground="Black"
                                         Kind="Fullscreen"
                                         />
-                                </Button>
+                            </Button>
 
-                                <!-- Image produit-->
-                                <materialDesign:PackIcon 
+                            <!-- Image produit-->
+                            <materialDesign:PackIcon 
                                         HorizontalAlignment="Center" 
                                         Margin="0,10,0,0" 
                                         Foreground="Black"
@@ -271,136 +268,135 @@
                                         Width="95" 
                                         Height="95"/>
 
-                                <!-- Information de l'acompte -->
-                                <StackPanel   Margin="0,10,0,60" >
+                            <!-- Information de l'acompte -->
+                            <StackPanel   Margin="0,10,0,60" >
 
-                                    <!-- Nom utilisateur -->
-                                    <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" >
-                                        <TextBlock 
+                                <!-- Nom utilisateur -->
+                                <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" >
+                                    <TextBlock 
                                             Margin="-17,0,0,0"  
                                             Text="Nom" 
                                             HorizontalAlignment="Left"  
                                             FontSize="11" 
                                             FontWeight="Bold" 
                                             Foreground="Black" />
-                                        <TextBlock 
+                                    <TextBlock 
                                             Text="{Binding AdherentViewModel.CurrentAdherent.NomCompletIHM}" 
                                             Margin="7,5,0,0"  
                                             Width="135"
                                             FontSize="11"
                                             Foreground="Black"/>
-                                    </StackPanel>
+                                </StackPanel>
 
-                                    <!-- Compte utilisateur -->
-                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
-                                        <TextBlock  
+                                <!-- Compte utilisateur -->
+                                <StackPanel Margin="0,10,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                    <TextBlock  
                                             Margin="-17,0,0,0"  
                                             Text="Compte" 
                                             HorizontalAlignment="Left"  
                                             FontSize="11" 
                                             FontWeight="Bold" 
                                             Foreground="Black" />
-                                        <TextBox  
+                                    <TextBox  
                                             Margin="7,0,0,0"  
                                             Width="135" 
                                             FontSize="11" 
                                             Foreground="Black"
                                             MaxLength="8">
-                                            <TextBox.Text>
-                                                <Binding 
+                                        <TextBox.Text>
+                                            <Binding 
                                                 Path="AdherentViewModel.CurrentAdherent.IdentifiantIHM"
                                                 UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding.ValidationRules>
-                                                        <rules:RuleIDFormat/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </TextBox.Text>
-                                        </TextBox>
+                                                <Binding.ValidationRules>
+                                                    <rules:RuleIDFormat/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
 
-                                    </StackPanel>
+                                </StackPanel>
 
 
-                                    <!-- Balance utilisateur -->
-                                    <StackPanel Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Center">
-                                        <TextBlock  
+                                <!-- Balance utilisateur -->
+                                <StackPanel Margin="0,10,0,0" Orientation="Vertical" HorizontalAlignment="Center">
+                                    <TextBlock  
                                             Margin="-17,0,0,0" 
                                             Text="Balance" 
                                             HorizontalAlignment="Left"  
                                             FontSize="11"  
                                             FontWeight="Bold" 
                                             Foreground="Black" />
-                                        <TextBox 
+                                    <TextBox 
                                             Margin="7,0,0,0" 
                                             Width="135"
                                             FontSize="11"  
                                             Foreground="Black"   >
-                                            <TextBox.Text>
-                                                <Binding Path="AdherentViewModel.CurrentAdherent.ArgentIHM"
+                                        <TextBox.Text>
+                                            <Binding Path="AdherentViewModel.CurrentAdherent.ArgentIHM"
                                                 UpdateSourceTrigger="PropertyChanged">
-                                                    <Binding.ValidationRules>
-                                                        <rules:RuleMoneyFormat/>
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </TextBox.Text>
-                                        </TextBox>
-                                    </StackPanel>
+                                                <Binding.ValidationRules>
+                                                    <rules:RuleMoneyFormat/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
+                                    </TextBox>
                                 </StackPanel>
                             </StackPanel>
-                        </Button>
-                    </materialDesign:Flipper.BackContent>
-                </materialDesign:Flipper>
+                        </StackPanel>
+                    </Button>
+                </materialDesign:Flipper.BackContent>
+            </materialDesign:Flipper>
 
 
 
 
-                <!-- Boutons modif rapide -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom">
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding AdherentViewModel.ShowModifButtons}" Value="true">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding AdherentViewModel.ShowModifButtons}" Value="false">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                </DataTrigger>
+            <!-- Boutons modif rapide -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AdherentViewModel.ShowModifButtons}" Value="true">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AdherentViewModel.ShowModifButtons}" Value="false">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
 
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                    
-                    <Button   
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <Button   
                         Style="{StaticResource buttonImage}"
                         BorderBrush="Transparent"
                         Background="Transparent"
                         Command="{Binding AdherentViewModel.CurrentAdherent.ResetAdh}">
-                        <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                             Foreground="Red"
                             Width="27"
                             Height="27"
                             Kind="CloseThick">
 
-                        </materialDesign:PackIcon>
-                    </Button>
+                    </materialDesign:PackIcon>
+                </Button>
 
-                    <Button 
+                <Button 
                         Style="{StaticResource buttonImage}"
                         Margin="10,0,0,0"
                         Command="{Binding AdherentViewModel.CurrentAdherent.ModifyAdherent}"
                         BorderBrush="Transparent"
                         Background="Transparent">
-                        <materialDesign:PackIcon
+                    <materialDesign:PackIcon
                             Foreground="Green"
                             Width="30"
                             Height="30"
                             Kind="CheckBold">
-                        </materialDesign:PackIcon>
-                    </Button>
+                    </materialDesign:PackIcon>
+                </Button>
 
-                </StackPanel>
             </StackPanel>
-        </Grid>
-        
+        </StackPanel>
+
         <!-- Modification / Creation acompte -->
         <materialDesign:DialogHost  Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" Name="popup" DialogTheme="Inherit" >
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Couche_IHM.VueModeles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Couche_IHM.Frames
         public FrameAccueil()
         {
             InitializeComponent();
+            DataContext = MainWindowViewModel.Instance;
+                
         }
     }
 }

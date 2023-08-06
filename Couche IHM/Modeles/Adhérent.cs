@@ -35,6 +35,7 @@ namespace Modeles
             this.formation = formation;
         }
 
+ 
         /// <summary>
         /// Constructeur vide pour créer des adhérents
         /// </summary>

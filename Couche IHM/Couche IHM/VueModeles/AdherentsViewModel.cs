@@ -39,6 +39,22 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+        /// <summary>
+        /// Liste des adhérents
+        /// </summary>
+        public List<PodiumAdherent> PodiumAdherents
+        {
+            get
+            {
+                List<PodiumAdherent> podAdherents = new List<PodiumAdherent>();
+                List<AdherentViewModel> adhs = adherents.OrderByDescending(a => a.PurchaseCount).Take(3).ToList();
+                for (int i = 0; i < 3; i++)
+                {
+                    podAdherents.Add(new PodiumAdherent(adhs[i],i));
+                }
+                return podAdherents;
+            }
+        }
 
         /// <summary>
         /// Liste des adhérents
@@ -179,9 +195,11 @@ namespace Couche_IHM.VueModeles
         private void InitAdhérents()
         {
             List<Adhérent> adherents = this.adherentManager.GetAdhérents();
+            Random random = new Random();
             foreach (Adhérent adh in adherents)
             {
-                this.adherents.Add(new AdherentViewModel(adh));
+                int rand = random.Next(0, 100);
+                this.adherents.Add(new AdherentViewModel(adh,rand));
             }
         }
 
