@@ -11,16 +11,14 @@
       Title="FrameAccueil"
       Background="White">
 
-    <Grid>
-        <!-- Grid principale -->
-        <Grid Height="450" Width="800">
-            
-            <!-- Définition des colonnes & lignes -->
+    <Grid Margin="30,30,30,5">
+
+        <!-- Définition des colonnes & lignes -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="26*"/>
                 <RowDefinition Height="6*"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -36,10 +34,11 @@
                 FontSize="21"
                 HorizontalAlignment="Center"
                 FontWeight="Bold"
-                Text="Tops de la journée"/>
+                Text="Top de la journée"/>
 
             <Image
                 Source="/Images/logoEtiq.png"
+                Margin="20"
                 Opacity="0.6"
                 Grid.Row="1"
                 Grid.Column="1"/>
@@ -114,6 +113,7 @@
                         <DataTemplate>
                             <StackPanel Margin="0,10,0,0">
                                 <materialDesign:Chip
+                                    HorizontalAlignment="Right"
                                     FontSize="12"
                                     IconBackground="#252422"
                                     Content="{Binding ProductViewModel.NomProduitIHM}">
@@ -144,6 +144,7 @@
                                 </materialDesign:Chip>
 
                                 <ProgressBar 
+                                    FlowDirection="RightToLeft"
                                     Foreground="#FFB366"
                                     Background="LightGray"
                                     BorderBrush="Transparent"
@@ -156,8 +157,87 @@
                 </ItemsControl>
             </StackPanel>
             
+            <!-- Réseaux -->
+        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <!-- google drive-->
+            <Button
+                Foreground="Black"
+                Style="{StaticResource buttonImage}"
+                >
+
+                    <materialDesign:PackIcon
+                    Foreground="LightGreen"
+                    Width="25"
+                    Height="25"
+                    Kind="GoogleDrive"/>
+
+            </Button>
+
+            <!-- twitter -->
+            <Button
+                Margin="10,0,0,0"
+                Grid.Row="2"
+                Foreground="Black"
+                Style="{StaticResource buttonImage}">
+
+                    <materialDesign:PackIcon
+                    Foreground="LightBlue"
+                    Width="25"
+                    Height="25"
+                    Kind="Twitter"/>
+
+            </Button>
 
 
-        </Grid>
+            <!-- youtube -->
+            <Button
+                Margin="10,0,0,0"
+                Grid.Row="2"
+                Foreground="Black"
+                Style="{StaticResource buttonImage}">
+
+                <materialDesign:PackIcon
+                    Foreground="Red"
+                    Opacity="0.5"
+                    Width="25"
+                    Height="25"
+                    Kind="Youtube"/>
+
+            </Button>
+
+            <!-- instagram -->
+            <Button
+                Margin="10,0,0,0"
+                    Grid.Row="2"
+                    Foreground="Black"
+                    Style="{StaticResource buttonImage}">
+  
+                    <materialDesign:PackIcon
+                        Foreground="LightPink"
+                        Width="25"
+                        Height="25"
+                        Kind="Instagram"/>
+
+            </Button>
+
+
+
+            <!-- twitch -->
+            <Button
+                Margin="10,0,0,0"
+                Grid.Row="2"
+                Foreground="Black"
+                Style="{StaticResource buttonImage}"
+                >
+      
+                    <materialDesign:PackIcon
+                    Foreground="Purple"
+                     Opacity="0.5"
+                    Width="25"
+                    Height="25"
+                    Kind="Twitch"/>
+
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

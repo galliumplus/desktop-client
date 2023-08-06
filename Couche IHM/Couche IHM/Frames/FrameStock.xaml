@@ -123,7 +123,7 @@
                         Height="30"  
                         Tag="Recherche..."
                         Width="200" 
-                        BorderBrush="{StaticResource galliumColor}"
+                        BorderBrush="#FFB366"
                         Style="{StaticResource WaterMarkTextBox}"   
                         HorizontalAlignment="Stretch"
                         FontSize="15" 
@@ -148,7 +148,7 @@
                     <Button
                             Command="{x:Static materialDesign:Flipper.FlipCommand}"
                             HorizontalAlignment="Center" 
-                            BorderBrush="{StaticResource galliumColor}"
+                            BorderBrush="#FFB366"
                             Background="#FFFCF2"
                             Height="310" 
                             Width="200">
@@ -221,7 +221,7 @@
                 <!-- Bouton créer produit-->
                 <materialDesign:Flipper.BackContent>
                     <Button
-                            BorderBrush="{StaticResource galliumColor}"
+                            BorderBrush="#FFB366"
                             Background="#FFFCF2"
                             Height="310" 
                             Width="200"

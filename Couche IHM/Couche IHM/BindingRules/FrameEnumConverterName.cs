@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Couche_IHM.VueModeles;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -15,7 +16,35 @@ namespace Couche_IHM.BindingRules
             if (value is Enum enumValue)
             {
                 string enumName = enumValue.ToString();
-                return enumName.Substring("Frame".Length); 
+                string retour;
+                switch (enumValue)
+                {
+                    case Frame.FRAMECAISSE:
+                        retour = "Caisse";
+                        break;
+                    case Frame.FRAMEADHERENT:
+                        retour = "Acomptes";
+                        break;
+                    case Frame.FRAMESTOCK:
+                        retour = "Produits";
+                        break;
+                    case Frame.FRAMECOMPTES:
+                        retour = "Comptes";
+                        break;
+                    case Frame.FRAMEACCUEIL:
+                        retour = "Accueil";
+                        break;
+                    case Frame.FRAMELOG:
+                        retour = "Logs";
+                        break;
+                    case Frame.FRAMESTATISTIQUE:
+                        retour = "Statistiques";
+                        break;
+                    default:
+                        retour = enumName;
+                        break;
+                }
+                return retour;
             }
             return string.Empty;
         }

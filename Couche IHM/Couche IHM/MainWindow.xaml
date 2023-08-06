@@ -16,6 +16,7 @@
         MinHeight="450">
     <Window.Resources>
         <rules:FrameEnumConverterName x:Key="EnumToNameConverter"/>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,6 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
+        
         <Grid Grid.Column="0" Background="#252422" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
@@ -148,8 +150,7 @@
                             VerticalAlignment="Center" 
                             Margin="40,0,0,0" 
                             Foreground="Black" 
-                            TextDecorations="Underline" 
-                            FontWeight="Medium"/>
+                            FontWeight="Bold"/>
 
                         <!-- Info du compte connecté-->
                     <Grid HorizontalAlignment="Right"   Width="300">
