@@ -9,7 +9,6 @@
     <Button 
         Style="{x:Null}" 
         Width="100" 
-        
         Padding="5" 
         Background="Transparent" 
         BorderThickness="0" 
@@ -22,17 +21,17 @@
                 Source="{Binding ImageProduct}"/>
             <TextBlock 
                 Margin="0 0 0 5" 
-                FontSize="15" 
+                FontSize="13" 
                 Text="{Binding NomProduitIHM}" 
                 FontWeight="Medium"/>
             <TextBlock 
-                FontSize="13" 
+                FontSize="11" 
                 Text="{Binding Path=QuantiteIHM, StringFormat='Stock : {0}'}"/>
             <TextBlock 
-                FontSize="13"  
+                FontSize="11"  
                 Text="{Binding Path=PrixAdherentIHM, StringFormat='Prix A : {0}'}"/>
             <TextBlock 
-                FontSize="13"  
+                FontSize="11"  
                 Text="{Binding Path=PrixNonAdherentIHM, StringFormat='Prix NA : {0}'}"/>
         </StackPanel>
     </Button>

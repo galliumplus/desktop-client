@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:Couche_IHM.Frames"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -20,19 +21,26 @@
             <RowDefinition Height="1.8*" />
         </Grid.RowDefinitions>
 
-        
+
         <!-- Liste des produits -->
         <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,10" >
             <ScrollViewer VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Disabled" Margin="0 3 50 0">
                 <StackPanel x:Name="productsSP"/>
-
             </ScrollViewer>
         </Grid>
 
         <!-- Panier d'achat -->
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="17" Foreground="#FF403D39">Panier</Label>
-            <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+            <Label  
+                FontWeight="Medium" 
+                FontFamily="Roboto" 
+                Content="Panier"
+                FontSize="17" 
+                Foreground="#FF403D39"/>
+            <Rectangle  
+                Fill="#FF403D39" 
+                VerticalAlignment="Bottom" 
+                Height="2"/>
         </StackPanel>
         <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="0" VerticalScrollBarVisibility="Hidden">
             <ListView ItemsSource="{Binding CaisseViewModel.ProductOrder}" >
@@ -46,7 +54,7 @@
                 <ListView.ItemTemplate  >
                     <DataTemplate  >
 
-                        <Grid Width="220" Margin="0,-5,0,-5"> 
+                        <Grid Width="220" Margin="0,-5,0,-5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="4*"/>
@@ -82,7 +90,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </ScrollViewer>
-        
+
         <!-- Information de paiement -->
         <StackPanel Margin="0,25,0,10"  Grid.Column="1" Grid.Row="1" >
             <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="17" Foreground="#FF403D39">Paiement</Label>
@@ -101,20 +109,95 @@
                     Width="100" 
                     FontSize="11"/>
             </StackPanel>
+
             <!-- Prix -->
             <StackPanel Orientation="Horizontal">
-                <Label  Content="Total TTC :" VerticalAlignment="Center" Foreground="Black" FontSize="12" />
-                <Label Margin="38,0,0,0"  Name="PriceA" Content="{Binding CaisseViewModel.PriceAdherIHM}" Foreground="Black" FontSize="15" FontWeight="Medium" VerticalAlignment="Center"   />
-                <Label Name="PriceNA" Content="{Binding CaisseViewModel.PriceNonAdherIHM}" Foreground="Black" FontSize="13"  VerticalAlignment="Center" />
+                <Label  
+                    Content="Total TTC :" 
+                    VerticalAlignment="Center" 
+                    Foreground="Black" 
+                    FontSize="12" />
+                <Label 
+                    Margin="38,0,0,0"  
+                    Content="{Binding CaisseViewModel.PriceAdherIHM}"
+                    Foreground="Black" 
+                    FontSize="15" 
+                    FontWeight="Medium" 
+                    VerticalAlignment="Center"   />
+                <Label 
+                    Content="{Binding CaisseViewModel.PriceNonAdherIHM}" 
+                    Foreground="Black" 
+                    FontSize="13"  
+                    VerticalAlignment="Center" />
             </StackPanel>
 
             <!-- Bouton Payer-->
             <Button 
                 Style="{StaticResource buttonBlack}" 
                 Margin="0,15,0,0" 
-                Width="150" 
-                Content="Payer"
-                />
+                Width="130" 
+                Height="30"
+                Content="Payer"/>
+
         </StackPanel>
+
+        <!-- Paiement Acompte -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="False" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent >
+                <StackPanel Margin="20" Width="200" Orientation="Vertical">
+                    
+                    <TextBlock 
+                        HorizontalAlignment="Center"
+                        FontWeight="Bold"
+                        FontSize="15" 
+                        Text="Paiement par Acompte"
+                        Margin="0 0 0 20"/>
+                    <Label 
+                        Content="Identifiant de l'acompte" 
+                        FontSize="12"
+                        Padding="0,0,0,5" />
+                    <ComboBox 
+                        ItemsSource="{Binding AdherentViewModel.Adherents}"
+                        SelectedItem="{Binding AdherentViewModel.AdherentPayer}"
+                        FontSize="12"
+                        IsTextSearchEnabled="True" 
+                        TextSearch.TextPath="IdentifiantIHM" 
+                        IsEditable="True">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NomCompletIHM}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label 
+                        FontSize="12"
+                        Content="Mot de passe" 
+                        Padding="0,0,0,5" 
+                        Margin="0,20,0,0" />
+                    <PasswordBox 
+                        FontSize="12"
+                        BorderBrush="#FF403D39" 
+                        Style="{StaticResource inputPasswordBox}" 
+                        MaxLength="100"/>
+                    
+                    <StackPanel Margin="0,25,10,10" Orientation="Horizontal">
+                        <Button 
+                            Width="90"
+                            FontSize="12"
+                            Style="{StaticResource buttonBlack}" 
+                            Foreground="White"
+                            Content="Oui"/>
+                        <Button 
+                            FontSize="12"
+                            Width="90"
+                            Margin="20 0 0 0" 
+                            Content="Non"
+                            Style="{StaticResource buttonBlack}"/>
+                    </StackPanel>
+                  
+
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </Page>

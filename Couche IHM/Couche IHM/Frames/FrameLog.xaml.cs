@@ -152,23 +152,7 @@ namespace Couche_IHM.Frames
             **/
         }
 
-        /// <summary>
-        /// Permet de savoir si le log respecte le filtre
-        /// </summary>
-        /// <returns></returns>
-        private bool RespectAuthorFilter(string author)
-        {
-            bool result = false;
-            if (auteurs.SelectedItem == "Tout le monde")
-            {
-                result = true;
-            }
-            else
-            {
-                result = ((string)auteurs.SelectedItem == author);
-            }
-            return result;
-        }
+
 
         /// <summary>
         /// Permet de savoir si le log respecte le filtre de l'heure
@@ -181,31 +165,7 @@ namespace Couche_IHM.Frames
             return this.timespan.HigherValue >= hour && this.timespan.LowerValue <= hour;
         }
 
-        /// <summary>
-        /// Permet de mettre à jour la liste des logs selon les différents critères
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetCriteria(object sender, RoutedEventArgs e)
-        {
-            if (logsLine != null && this.auteurs != null && this.auteurs.SelectedItem != null)
-            {
-                FillListViewLogs();
-            }
-            
-        }
 
-        /// <summary>
-        /// Permet de mettre à jour la liste des logs selon les différents critères
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ResetCriteria(object sender, SelectionChangedEventArgs e)
-        {
-            if (logsLine != null && this.auteurs != null && this.auteurs.SelectedItem != null)
-            {
-                FillListViewLogs();
-            }
-        }
+
     }
 }

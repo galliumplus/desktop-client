@@ -136,7 +136,7 @@
             <Grid  Height="607" Width="969" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Header de la frame -->

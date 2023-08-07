@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="0 0 0 40">
-            <Label FontWeight="Medium" FontFamily="Roboto" FontSize="17" Content="{Binding Category}"></Label>
+            <Label FontWeight="Medium" FontFamily="Roboto" FontSize="16" Content="{Binding Category}"></Label>
             <Rectangle Fill="#FF403D39"  Height="2" Width="auto"/>
         </StackPanel>
 

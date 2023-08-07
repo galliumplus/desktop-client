@@ -1,4 +1,5 @@
-﻿using Couche_Métier.Log;
+﻿using Couche_Métier;
+using Couche_Métier.Log;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,13 @@ namespace Couche_IHM.VueModeles
         #region attributes 
         private List<LogViewModel> logs = new List<LogViewModel>();
         private ILog logManager;
-
+        private UserManager userManager;
+        private string currentAuteur;
         public LogsViewModel()
         {
+            
+            this.userManager = new UserManager();
+            this.CurrentAuteur = Auteurs[0];
             this.logManager = new LogAdherentToTxt();
             List<Log> logs = logManager.loadLog();
             foreach (Log l in logs)
@@ -30,6 +35,34 @@ namespace Couche_IHM.VueModeles
 
         #endregion
         #region properties
+        /// <summary>
+        /// Auteur sélectionné
+        /// </summary>
+        public string CurrentAuteur
+        {
+            get => currentAuteur;
+            set
+            {
+                currentAuteur = value;
+                NotifyPropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Liste des auteurs potentiels
+        /// </summary>
+        public List<string> Auteurs
+        {
+            get
+            {
+                List<string> auteurs = new List<string>() { "Tout le monde" };
+                List<User> users = userManager.GetComptes();
+                foreach (User u in users)
+                {
+                    auteurs.Add(u.NomComplet);
+                }
+                return auteurs;
+            }
+        }
         public List<LogViewModel> Logs 
         {
             get 

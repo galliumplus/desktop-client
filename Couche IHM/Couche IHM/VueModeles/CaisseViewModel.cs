@@ -15,6 +15,7 @@ namespace Couche_IHM.VueModeles
         private ConverterFormatArgent convertFormatArgent = new ConverterFormatArgent();
         private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
         private string currentPaiement;
+        private AdherentViewModel adherentPayer = null;
         public CaisseViewModel()
         {
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
@@ -118,6 +119,19 @@ namespace Couche_IHM.VueModeles
                 currentPaiement = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Représente l'adhérent qui va payer
+        /// </summary>
+        public AdherentViewModel AdherentPayer
+        {
+            get => adherentPayer;
+            set 
+            {
+                adherentPayer = value;
+                NotifyPropertyChanged();
+            } 
         }
 
 
