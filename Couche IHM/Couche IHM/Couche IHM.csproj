@@ -22,6 +22,7 @@
     <None Remove="Images\driveIcon.png" />
     <None Remove="Images\export.png" />
     <None Remove="Images\Gallium+.png" />
+    <None Remove="Images\galliumlite.png" />
     <None Remove="Images\historique.png" />
     <None Remove="Images\instaIcon.png" />
     <None Remove="Images\logoEtiq.png" />
@@ -97,6 +98,7 @@
     <Resource Include="Images\Gallium+.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\galliumlite.png" />
     <Resource Include="Images\historique.png" />
     <Resource Include="Images\instaIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

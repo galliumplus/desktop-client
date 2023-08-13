@@ -24,8 +24,8 @@ namespace Couche_IHM.CustomListView
         public DetailedProduct(ProductViewModel p)
         {
             InitializeComponent();
-            DataContext = p;
             product = p;
+            DataContext = product;
         }
 
 

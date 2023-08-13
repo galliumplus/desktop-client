@@ -35,7 +35,24 @@
             </Grid.RowDefinitions>
 
             <!-- Icone Gallium -->
-            <Label Content="G" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="90" Foreground="{StaticResource galliumColor}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Source="/Images/galliumlite.png"/>
+            </Grid>
+            
+           
 
             <Rectangle Tag="Séparation" Grid.Row="0" Fill="White" StrokeThickness="20" Height="2" Width="900"  HorizontalAlignment="Center" Margin="12" VerticalAlignment="Bottom" />
 
