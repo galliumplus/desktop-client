@@ -131,7 +131,7 @@ namespace Couche_IHM.VueModeles
         {
             this.random = random;
             this.adherent = adherent;
-            this.log =  new LogAdherentToTxt();
+            this.log =  new LogToTxt();
             this.adhérentManager = new AdhérentManager();
             this.ModifyAdherent = new RelayCommand(x => this.UpdateAdherent());
             this.ResetAdh = new RelayCommand(x => this.ResetAdherent());
@@ -171,7 +171,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(NomCompletIHM));
 
             // Log l'action
-            this.log.registerLog(CategorieLog.UPDATE, this.adherent, MainWindowViewModel.Instance.CompteConnected);
+            this.log.registerLog(CategorieLog.ACOMPTE, $"{this.NomCompletIHM} a été modifié", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;

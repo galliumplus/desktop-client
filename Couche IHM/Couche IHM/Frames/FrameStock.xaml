@@ -388,7 +388,7 @@
             </StackPanel>
         </StackPanel>
         <!-- Liste Catégories -->
-        <materialDesign:DialogHost Grid.RowSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowCategories}"  DialogTheme="Inherit">
+        <materialDesign:DialogHost CloseOnClickAway="True" Grid.RowSpan="2" Grid.ColumnSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowCategories}"  DialogTheme="Inherit">
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -477,7 +477,7 @@
         </materialDesign:DialogHost>
         
         <!-- Modification / Creation produit -->
-        <materialDesign:DialogHost Grid.RowSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
+        <materialDesign:DialogHost CloseOnClickAway="True" Grid.RowSpan="2" Grid.ColumnSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Grid.ColumnDefinitions>

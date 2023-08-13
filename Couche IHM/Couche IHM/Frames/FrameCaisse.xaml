@@ -134,6 +134,7 @@
             <!-- Bouton Payer-->
             <Button 
                 Style="{StaticResource buttonBlack}" 
+                Command="{Binding CaisseViewModel.ShowPay}"
                 Margin="0,15,0,0" 
                 Width="130" 
                 Height="30"
@@ -142,7 +143,7 @@
         </StackPanel>
 
         <!-- Paiement Acompte -->
-        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="False" OverlayBackground="Gray"  DialogTheme="Inherit" >
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent >
                 <StackPanel Margin="20" Width="200" Orientation="Vertical">
                     
@@ -179,22 +180,27 @@
                         BorderBrush="#FF403D39" 
                         Style="{StaticResource inputPasswordBox}" 
                         MaxLength="100"/>
-                    
-                    <StackPanel Margin="0,25,10,10" Orientation="Horizontal">
+
+                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                         <Button 
-                            Width="90"
-                            FontSize="12"
-                            Style="{StaticResource buttonBlack}" 
-                            Foreground="White"
-                            Content="Oui"/>
+                            Command="{Binding CaisseViewModel.CancelPay}"
+                        Width="90"
+                        FontSize="12"
+                        Background="#252422"
+                        Foreground="White"
+                        Content="Annuler"/>
+
                         <Button 
-                            FontSize="12"
-                            Width="90"
-                            Margin="20 0 0 0" 
-                            Content="Non"
-                            Style="{StaticResource buttonBlack}"/>
+                            Command="{Binding CaisseViewModel.Pay}"
+                        Width="90"
+                        Margin="20,0,0,0"
+                        FontSize="12"
+                        Background="{StaticResource galliumColor}"
+                        Foreground="White"
+                        Content="Payer"/>
                     </StackPanel>
-                  
+                   
+
 
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>

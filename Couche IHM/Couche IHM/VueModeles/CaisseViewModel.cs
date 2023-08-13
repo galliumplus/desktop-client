@@ -1,4 +1,5 @@
-﻿using Couche_Métier.Utilitaire;
+﻿using Couche_Métier.Log;
+using Couche_Métier.Utilitaire;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,17 @@ namespace Couche_IHM.VueModeles
         private ConverterFormatArgent convertFormatArgent = new ConverterFormatArgent();
         private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
         private string currentPaiement;
+        private bool showPayAcompte = false;
         private AdherentViewModel adherentPayer = null;
+        private ILog logVente;
         public CaisseViewModel()
         {
+            this.logVente = new LogToTxt();
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
+            this.ShowPay = new RelayCommand(x => PreviewPayArticles());
+            this.CancelPay = new RelayCommand(x => this.ShowPayAcompte = false);
+            this.Pay = new RelayCommand(x => PayArticles());
             this.CurrentPaiement = Paiements[0];
         }
 
@@ -34,8 +41,13 @@ namespace Couche_IHM.VueModeles
 
 
         #region events
+
         public RelayCommand AddProd { get; set; }
         public RelayCommand RemoveProd { get; set; }
+
+        public RelayCommand CancelPay { get; set; }
+        public RelayCommand Pay { get; set; }   
+        public RelayCommand ShowPay { get; set; }
         #endregion
         #region properties
 
@@ -134,10 +146,60 @@ namespace Couche_IHM.VueModeles
             } 
         }
 
+        /// <summary>
+        /// Permet d'afficher la sélection d'acompte
+        /// </summary>
+        public bool ShowPayAcompte 
+        { 
+            get => showPayAcompte;
+            set
+            {
+                showPayAcompte = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// Permet de payer les articles
+        /// </summary>
+        private void PayArticles()
+        {
+            // Changer la data
+                //- supprimer du stock
+            foreach (ProductViewModel product in productOrder.Keys)
+            {
+                product.QuantiteIHM -= productOrder[product];
+                // Productmanager
+            }
+            
+
+            // Log l'action
+            this.logVente.registerLog(CategorieLog.VENTE, "Des produits ont été vendu", MainWindowViewModel.Instance.CompteConnected);
+        }
+        /// <summary>
+        /// Permet de préparer le paiement des articles
+        /// </summary>
+        private void PreviewPayArticles()
+        {
+            switch (currentPaiement)
+            {
+                case "Acompte":
+                    this.ShowPayAcompte = true;
+                    
+                    break;
+                case "Paypal":
+                    PayArticles();
+                    break;
+                case "Carte":
+                    PayArticles();
+                    break;
+            }
+        }
 
         /// <summary>
         /// Ajoute un produit au panier

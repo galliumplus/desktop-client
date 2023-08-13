@@ -398,7 +398,7 @@
         </StackPanel>
 
         <!-- Modification / Creation acompte -->
-        <materialDesign:DialogHost  Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" Name="popup" DialogTheme="Inherit" >
+        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" Name="popup" DialogTheme="Inherit" >
 
             <materialDesign:DialogHost.DialogContent>
                 <Grid Margin="10">

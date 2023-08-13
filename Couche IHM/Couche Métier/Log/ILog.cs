@@ -19,7 +19,7 @@ namespace Couche_Métier.Log
         /// </summary>
         /// <param name="categorieLog"> Categorie du log </param>
         /// <param name="message"> message à enregistrer </param>
-        public void registerLog(CategorieLog categorieLog, object itemModif, User author);
+        public void registerLog(CategorieLog categorieLog, string message, User author);
 
         /// <summary>
         /// Récupère les logs

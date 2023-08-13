@@ -10,11 +10,9 @@ namespace Couche_Métier.Log
     {
         // GENERAL
         VENTE,
-
-        // OPERATIONS
-        CREATE,
-        DELETE,
-        UPDATE
+        ACOMPTE,
+        PRODUIT,
+        COMPTE
 
 
     }

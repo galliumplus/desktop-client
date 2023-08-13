@@ -24,7 +24,7 @@ namespace Couche_IHM.VueModeles
             
             this.userManager = new UserManager();
             this.CurrentAuteur = Auteurs[0];
-            this.logManager = new LogAdherentToTxt();
+            this.logManager = new LogToTxt();
             List<Log> logs = logManager.loadLog();
             foreach (Log l in logs)
             {

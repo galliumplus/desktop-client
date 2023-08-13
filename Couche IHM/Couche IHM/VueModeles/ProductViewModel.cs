@@ -150,7 +150,7 @@ namespace Couche_IHM.VueModeles
             this.imageManager = new ImageManager();
             this.formatArgent = new ConverterFormatArgent();
             this.productManager = productManager;
-            this.logProduct = new LogProductToTxt();
+            this.logProduct = new LogToTxt();
 
             // Initialisation des attributsIHM
             this.categoryIHM = categoryProduit;
@@ -195,7 +195,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(isDisponible));
 
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.UPDATE, this.product, MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.nomProduitIHM} a été modifié", MainWindowViewModel.Instance.CompteConnected);
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
@@ -225,7 +225,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(isDisponible));
 
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.CREATE, this.product, MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.NomProduitIHM} a été créé", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
