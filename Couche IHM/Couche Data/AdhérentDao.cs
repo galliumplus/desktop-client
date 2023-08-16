@@ -6,31 +6,37 @@ namespace Couche_Data
 {
     public class AdhérentDao : IAdhérentDao
     {
+        private List<Adhérent> adherents = new List<Adhérent>();
+
+        public AdhérentDao()
+        {
+        }
+
         public void CreateAdhérent(Adhérent adhérent)
         {
-            dbsDAO.Instance.Execute("");
+            this.adherents.Add(adhérent);
         }
 
-        public Adhérent GetAdhérent(int id)
-        {
-            dbsDAO.Instance.Fetch("");
-            return null;
-        }
 
-        public Dictionary<int, Adhérent> GetAdhérents()
+        public List<Adhérent> GetAdhérents()
         {
-            dbsDAO.Instance.Fetch("");
-            return null;
+            return this.adherents;
         }
 
         public void RemoveAdhérent(Adhérent adhérent)
         {
-            dbsDAO.Instance.Execute("");
+            this.adherents.Remove(adhérent);
         }
 
         public void UpdateAdhérent(Adhérent adhérent)
         {
-            dbsDAO.Instance.Execute("");
+            Adhérent adhér = adherents.Find(adh => adh.Id == adhérent.Id);
+            adhér.Nom = adhérent.Nom;
+            adhér.Prenom = adhérent.Prenom;
+            adhér.Argent = adhérent.Argent;
+            adhér.StillAdherent = adhérent.StillAdherent;
+            adhér.CanPass = adhérent.CanPass;
+            adhér.Formation = adhérent.Formation;
         }
     }
 }

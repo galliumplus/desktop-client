@@ -170,7 +170,7 @@ namespace Couche_IHM.VueModeles
             this.adhérentManager.RemoveAdhérent(this.adherent);
 
             // Notifier la vue
-            MainWindowViewModel.Instance.AdherentViewModel.Adherents.Remove(this);
+            MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
 
             // Log l'action
             this.log.registerLog(CategorieLog.ACOMPTE, $"Suppresion de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
@@ -186,7 +186,30 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void CreateAdherent()
         {
-            throw new NotImplementedException();
+            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+
+            // Changer la data
+            this.adherent.Nom = this.nomIHM;
+            this.adherent.Prenom = this.prenomIHM;
+            this.adherent.Argent = converterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.adherent.Formation = this.formationIHM;
+            this.adherent.Identifiant = this.identifiantIHM;
+            this.adherent.StillAdherent = this.isAdherentIHM;
+            adhérentManager.CreateAdhérent(this.adherent);
+
+
+            // Notifier la vue
+            MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
+            NotifyPropertyChanged(nameof(IdentifiantIHM));
+            NotifyPropertyChanged(nameof(ArgentIHM));
+            NotifyPropertyChanged(nameof(NomCompletIHM));
+
+            // Log l'action
+            this.log.registerLog(CategorieLog.ACOMPTE, $"Création de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
+
+
+            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
 
 

@@ -227,7 +227,7 @@ namespace Couche_IHM.VueModeles
 
 
             // Notifier la vue
-            MainWindowViewModel.Instance.ProductViewModel.Products.Remove(this);
+            MainWindowViewModel.Instance.ProductViewModel.RemoveProduct(this);
 
             // Log l'action
             this.logProduct.registerLog(CategorieLog.PRODUIT, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
@@ -255,7 +255,7 @@ namespace Couche_IHM.VueModeles
 
 
             // Notifier la vue
-            MainWindowViewModel.Instance.ProductViewModel.Products.Add(this);
+            MainWindowViewModel.Instance.ProductViewModel.AddProduct(this);
             NotifyPropertyChanged(nameof(NomProduitIHM));
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));

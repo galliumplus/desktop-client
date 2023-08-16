@@ -557,10 +557,44 @@
                         Margin="10"
                         Grid.Column="1"
                         Grid.Row="11"
-                        Content="Enregistrer"
+                        Content="Modifier"
                         Command="{Binding AdherentViewModel.CurrentAdherent.ModifyAdherent}"
-                        Background="{StaticResource galliumColor}"
-                        />
+                        Background="{StaticResource galliumColor}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding AdherentViewModel.CurrentAdherent.Action}" Value="NEW">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding AdherentViewModel.CurrentAdherent.Action}" Value="UPDATE">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button 
+                        Margin="10"
+                        Grid.Column="1"
+                        Grid.Row="11"
+                        Content="Créer"
+                        Command="{Binding AdherentViewModel.CurrentAdherent.CreateAdh}"
+                        Background="{StaticResource galliumColor}">
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AdherentViewModel.CurrentAdherent.Action}" Value="NEW">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    <DataTrigger Binding="{Binding AdherentViewModel.CurrentAdherent.Action}" Value="UPDATE">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>

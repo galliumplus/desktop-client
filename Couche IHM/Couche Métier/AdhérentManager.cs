@@ -11,7 +11,7 @@ namespace Couche_Métier
         private IAdhérentDao adhérentDao;
 
         // Représente les adhérents
-        private Dictionary<int,Adhérent> adhérents = new Dictionary<int, Adhérent>();
+        private List<Adhérent> adhérents = new List<Adhérent>();
 
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Couche_Métier
             this.adhérentDao = new FakeAdherentDao();
 
             // Récupération des adhérents
-            adhérents = new Dictionary<int, Adhérent>(adhérentDao.GetAdhérents());
+            adhérents = adhérentDao.GetAdhérents();
 
         }
 
@@ -33,9 +33,8 @@ namespace Couche_Métier
         /// <param name="adhérent">adhérent à créer</param>
         public void CreateAdhérent(Adhérent adhérent)
         {
-            adhérent.Id = this.adhérents.Count + 1;
             adhérentDao.CreateAdhérent(adhérent);
-            adhérents.Add(adhérent.Id, adhérent);
+            adhérents.Add(adhérent);
         }
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Couche_Métier
         public void RemoveAdhérent(Adhérent adhérent)
         {
             adhérentDao.RemoveAdhérent(adhérent);
-            adhérents.Remove(adhérent.Id);
+            adhérents.Remove(adhérent);
         }
 
 
@@ -56,7 +55,13 @@ namespace Couche_Métier
         public void UpdateAdhérent(Adhérent adhérent)
         {
             adhérentDao.UpdateAdhérent(adhérent);
-            adhérents[adhérent.Id] = adhérent;
+            Adhérent adhér = adhérents.Find(adh => adh.Id == adhérent.Id);
+            adhér.Nom = adhérent.Nom;
+            adhér.Prenom = adhérent.Prenom;
+            adhér.Argent = adhérent.Argent;
+            adhér.StillAdherent = adhérent.StillAdherent;
+            adhér.CanPass = adhérent.CanPass;
+            adhér.Formation = adhérent.Formation;
         }
 
 
@@ -66,28 +71,8 @@ namespace Couche_Métier
        /// <returns>tous les adhérents</returns>
         public List<Adhérent> GetAdhérents()
         {
-            return this.adhérents.Values.ToList();
+            return this.adhérents;
         }
-
-        /// <summary>
-        /// Permet de récupérer un adhérent
-        /// </summary>
-        /// <param name="id">info de l'adhérent</param>
-        /// <returns>un adhérent</returns>
-        public Adhérent GetAdhérent(string infoAdherent)
-        {
-            Adhérent a = null;
-            foreach (Adhérent adhérent in this.adhérents.Values)
-            {
-                /*if (adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.NomCompletIHM.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()))
-                {
-                    a = adhérent;
-                    break;
-                }*/
-            }
-            return a;
-        }
-
 
         /// <summary>
         /// Permet de récupérer une liste d'adhérent selo ndes infos
@@ -96,7 +81,7 @@ namespace Couche_Métier
         /// <returns>des adhérent</returns>
         public List<Adhérent> GetAdhérents(string infoAdherent)
         {
-            List<Adhérent> a = this.adhérents.Values.ToList().FindAll(adhérent => 
+            List<Adhérent> a = this.adhérents.FindAll(adhérent => 
                 adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) ||  
                 adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || 
                 adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()));

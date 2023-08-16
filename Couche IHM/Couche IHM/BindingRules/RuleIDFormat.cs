@@ -24,19 +24,15 @@ namespace Couche_IHM.BindingRules
         {
             ValidationResult result = ValidationResult.ValidResult;
 
-            string NomPrenom = MainWindowViewModel.Instance.AdherentViewModel.CurrentAdherent.NomCompletIHM;
+            AdherentViewModel adh = MainWindowViewModel.Instance.AdherentViewModel.CurrentAdherent;
             string identifiant = (string)value;
             if (identifiant.Length > 2)
             {
-                if (NomPrenom.Contains(" "))
+                string nom = adh.NomIHM;
+                string prenom = adh.PrenomIHM;
+                if (identifiant[0] != prenom.ToLower()[0] || identifiant[1] != nom.ToLower()[0])
                 {
-                    string[] nomComplet = NomPrenom.Split(" ");
-                    string nom = nomComplet[0];
-                    string prenom = nomComplet[1];
-                    if (identifiant[0] != prenom.ToLower()[0] || identifiant[1] != nom.ToLower()[0])
-                    {
-                        result = new ValidationResult(false, "Format invalide");
-                    }
+                    result = new ValidationResult(false, "Format invalide");
                 }
             }
             else

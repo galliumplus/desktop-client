@@ -3,6 +3,7 @@ using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,7 +17,7 @@ namespace Couche_IHM.VueModeles
     public class AdherentsViewModel : INotifyPropertyChanged
     {
         #region attributes
-        private List<AdherentViewModel> adherents;
+        private ObservableCollection<AdherentViewModel> adherents;
         private AdherentViewModel currentAdherent;
         private AdhérentManager adherentManager;
         private string searchFilter = "";
@@ -59,21 +60,20 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Liste des adhérents
         /// </summary>
-        public List<AdherentViewModel> Adherents 
+        public ObservableCollection<AdherentViewModel> Adherents 
         {
             get 
             {
-                List<AdherentViewModel> adhs;
+                ObservableCollection<AdherentViewModel> adhs;
                 if (searchFilter == "")
                 {
                     adhs = this.adherents;
                 }
                 else
                 {
-                   
-                    adhs = adherents.FindAll(adh =>
+                    adhs = new ObservableCollection<AdherentViewModel>(adherents.ToList().FindAll(adh =>
                     adh.NomCompletIHM.ToUpper().Contains(searchFilter.ToUpper()) ||
-                    adh.IdentifiantIHM.ToUpper().Contains(searchFilter.ToUpper())); ;
+                    adh.IdentifiantIHM.ToUpper().Contains(searchFilter.ToUpper()))) ;
                 }
                 
                 return adhs;
@@ -182,7 +182,7 @@ namespace Couche_IHM.VueModeles
         public AdherentsViewModel()
         {
             this.adherentManager = new AdhérentManager();
-            this.adherents = new List<AdherentViewModel>();
+            this.adherents = new ObservableCollection<AdherentViewModel>();
             this.OpenModifAdh = new RelayCommand(x => this.OpenAcompteDetails((string)x));
             InitAdhérents();
 
@@ -224,6 +224,26 @@ namespace Couche_IHM.VueModeles
             DialogModifAdherent = true;
         }
 
+        /// <summary>
+        /// Permet de rajouter un acompte  dans la liste
+        /// </summary>
+        /// <param name="acompte"></param>
+        public void AddAcompte(AdherentViewModel acompte)
+        {
+            this.adherents.Add(acompte);
+            NotifyPropertyChanged(nameof(Adherents));
+
+        }
+
+        /// <summary>
+        /// Permet de supprimer un acompte  dans la liste
+        /// </summary>
+        /// <param name="acompte"></param>
+        public void RemoveAcompte(AdherentViewModel acompte)
+        {
+            this.adherents.Remove(acompte);
+            NotifyPropertyChanged(nameof(Adherents));
+        }
 
 
         #endregion

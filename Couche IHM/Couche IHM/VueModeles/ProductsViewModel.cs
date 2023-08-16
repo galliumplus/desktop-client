@@ -282,6 +282,28 @@ namespace Couche_IHM.VueModeles
             ShowProductDetail = true;
         }
 
+        /// <summary>
+        /// Permet de rajouter un produit  dans la liste
+        /// </summary>
+        /// <param name="produit"></param>
+        public void AddProduct(ProductViewModel produit)
+        {
+            this.products.Add(produit);
+            NotifyPropertyChanged(nameof(Products));
+
+        }
+
+        /// <summary>
+        /// Permet de supprimer un produit  dans la liste
+        /// </summary>
+        /// <param name="produit"></param>
+        public void RemoveProduct(ProductViewModel produit)
+        {
+            this.products.Remove(produit);
+            NotifyPropertyChanged(nameof(Products));
+        }
+
+
         #endregion
     }
 }

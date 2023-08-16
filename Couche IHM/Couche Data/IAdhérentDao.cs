@@ -13,14 +13,7 @@ namespace Couche_Data
         /// Permet de récupérer tous les adhérents
         /// </summary>
         /// <returns>tous les adhérents</returns>
-        public Dictionary<int, Adhérent> GetAdhérents();
-
-        /// <summary>
-        /// Permet de récupérer un adhérent
-        /// </summary>
-        /// <param name="id">id de l'adhérent</param>
-        /// <returns>un adhérent</returns>
-        public Adhérent GetAdhérent(int id);
+        public List<Adhérent> GetAdhérents();
 
 
         /// <summary>
