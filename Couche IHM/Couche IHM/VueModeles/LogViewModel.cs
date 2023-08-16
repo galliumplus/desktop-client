@@ -68,7 +68,7 @@ namespace Couche_IHM.VueModeles
                         image = PackIconKind.AccountCash;
                         break;
                     case "PRODUIT":
-                        image = PackIconKind.FoodApple;
+                        image = PackIconKind.Food;
                         break;
                     case "COMPTE":
                         image = PackIconKind.AccountStar;

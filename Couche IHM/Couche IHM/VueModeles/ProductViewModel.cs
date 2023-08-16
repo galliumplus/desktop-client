@@ -44,6 +44,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand CreateProd { get; set; }
         public RelayCommand ResetProd { get; set; }
         public RelayCommand UpdateProd { get; set; }
+        public RelayCommand DeleteProd { get; set; }
         #endregion
 
         #region properties
@@ -175,6 +176,7 @@ namespace Couche_IHM.VueModeles
             this.ResetProd = new RelayCommand(x => ResetProduct());
             this.UpdateProd = new RelayCommand(x => UpdateProduct());
             this.CreateProd = new RelayCommand(x => CreateProduct());
+            this.DeleteProd = new RelayCommand(x => DeleteProduct());
 
         }
 
@@ -206,13 +208,33 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(isDisponible));
-
+            
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.nomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
            
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour visuellement les modifications de l'adhérent
+        /// </summary>
+        public void DeleteProduct()
+        {
+            // Changer la data
+            this.productManager.RemoveProduct(this.product);
+
+
+            // Notifier la vue
+            MainWindowViewModel.Instance.ProductViewModel.Products.Remove(this);
+
+            // Log l'action
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
+
+            MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+
         }
 
         /// <summary>
@@ -241,7 +263,7 @@ namespace Couche_IHM.VueModeles
             
 
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"(+)  {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;

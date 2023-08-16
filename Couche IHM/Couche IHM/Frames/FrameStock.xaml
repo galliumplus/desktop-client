@@ -508,6 +508,7 @@
                         Margin="10"
                         VerticalAlignment="Top"
                         Grid.Column="2"
+                        Command="{Binding ProductViewModel.CurrentProduct.DeleteProd}"
                         Grid.Row="0">
                         <materialDesign:PackIcon 
                             Width="21"
@@ -641,7 +642,7 @@
                         Margin="20,10,20,10" 
                         Command="{Binding ProductViewModel.CurrentProduct.CreateProd}">
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="NEW">
                                         <Setter Property="Visibility" Value="Visible"/>
@@ -657,14 +658,13 @@
                     <Button 
                         Content="Modifier" 
                         Background="{StaticResource galliumColor}"
-                        Foreground="White"
                         Grid.Row="5" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2" 
                         Margin="20,10,20,10" 
                         Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}">
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="NEW">
                                         <Setter Property="Visibility" Value="Hidden"/>
