@@ -26,7 +26,7 @@ namespace Couche_Data
 
             while (rdr.Read())
             {
-                categories.Add(new Category(rdr.GetInt32("category_id"), rdr.GetString("name")));
+                categories.Add(new Category(rdr.GetInt32("category_id"), rdr.GetString("name"), rdr.GetBoolean("activated")));
             }
 
             mySqlConnection.Close();

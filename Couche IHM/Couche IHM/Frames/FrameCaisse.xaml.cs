@@ -37,7 +37,7 @@ namespace Couche_IHM.Frames
             productsSP.Children.Clear();
             foreach (CategoryViewModel category in MainWindowViewModel.Instance.ProductViewModel.Categories)
             {
-                if (category.CurrentNameCategory != "Hidden")
+                if (!category.Invisible)
                 {
                     // On créer chaque vue catégorie
                     CategoryProductList categoryProductList = new CategoryProductList(category.CurrentNameCategory);

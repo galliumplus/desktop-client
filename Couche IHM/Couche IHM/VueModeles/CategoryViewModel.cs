@@ -26,10 +26,13 @@ namespace Couche_IHM.VueModeles
         private CategoryManager categoryManager;
         private string currentNameCategory;
         private Category nameCategory;
+
+        private bool invisible;
         #endregion
 
         #region properties
 
+        
         /// <summary>
         /// Représente le nom de la catégorie modifiable
         /// </summary>
@@ -55,24 +58,59 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Est ce que la catégory est visible sur la caisse
+        /// </summary>
+        public bool Invisible 
+        { 
+            get => invisible;
+            set 
+            { 
+                invisible = value;
+                NotifyPropertyChanged();
+            }
+
+        }
+
         #endregion
 
         #region events
         public RelayCommand UpdateCat { get; set; }
         public RelayCommand DeleteCat { get; set; }
 
+        public RelayCommand ActivateCat { get; set; }
         #endregion
         public CategoryViewModel(CategoryManager categoryManager,Category category)
         {
             this.categoryManager = categoryManager;
             this.currentNameCategory = category.NomCategory;
             this.nameCategory = category;
+            this.invisible = !category.Visible;
+
+            // Initialisation des events
             this.UpdateCat = new RelayCommand(x => this.UpdateCategory());
             this.DeleteCat = new RelayCommand(x => this.DeleteCategory());
+            this.ActivateCat = new RelayCommand(x => this.ActivateCategory());
 
         }
 
         #region methods
+
+        /// <summary>
+        /// Permet de rendre visible ou invisible une catégory
+        /// </summary>
+        public void ActivateCategory()
+        {
+            // Mise à jour data
+            this.categoryManager.UpdateCategory(nameCategory);
+
+
+            // Log l'action
+            //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
+
+
+        }
 
         /// <summary>
         /// Permet de mettre à jour une category

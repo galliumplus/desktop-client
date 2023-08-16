@@ -8,11 +8,11 @@ namespace Couche_Data
     {
         private List<Category> categories = new List<Category>()
         {
-            new Category(1,"BOISSON"),
-            new Category(2,"SNACKS"),
-            new Category(3,"HIDDEN"),
-            new Category(4,"PABLO"),
-            new Category(5,"test")
+            new Category(1,"BOISSON",true),
+            new Category(2,"SNACKS",true),
+            new Category(3,"HIDDEN",true),
+            new Category(4,"PABLO",true),
+            new Category(5,"test",true)
         };
 
         public void CreateCategory(Category cat)

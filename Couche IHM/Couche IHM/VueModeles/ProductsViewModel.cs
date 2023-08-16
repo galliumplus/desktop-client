@@ -217,6 +217,7 @@ namespace Couche_IHM.VueModeles
             // Initialisation Events
             this.OpenProd = new RelayCommand(action => OpenProductDetails((string)action));
             this.OpenCat = new RelayCommand(x => this.ShowCategories = true);
+            
             this.CloseCategory = new RelayCommand(x =>
             {
                 foreach (CategoryViewModel categoryViewModel in categories)
