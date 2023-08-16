@@ -29,8 +29,7 @@
                         <DockPanel LastChildFill="True">
                             <Grid DockPanel.Dock="Top">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.5*"/>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="5*"/>
                                     <ColumnDefinition Width="3*"/>
@@ -41,7 +40,6 @@
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
 
-
                                 <TextBlock  
                                     HorizontalAlignment="Center"
                                     Background="Transparent" 
@@ -51,19 +49,18 @@
                                     FontSize="17"  
                                     Text="Date" />
 
-                                <TextBlock  
-                                    Margin="38,0,0,0"  
-                                    Background="Transparent" 
-                                    Grid.Column="2"  
-                                    Grid.Row="0" 
-                                    FontWeight="Medium"
-                                    FontFamily="Roboto"  
-                                    FontSize="17" 
-                                    Text="Thème"  />
 
-                                <TextBlock Margin="60,0,0,0"  Background="Transparent" Grid.Column="3" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17" Text="Message" />
+                                <TextBlock 
+                                    Margin="60,0,0,0"  
+                                    Background="Transparent" 
+                                    Grid.Column="2"
+                                    Grid.Row="0"
+                                    FontWeight="Medium"
+                                    FontFamily="Roboto"
+                                    FontSize="17"
+                                    Text="Message" />
                                 
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="4"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
 
 
 
@@ -79,21 +76,20 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="5*"/>
                                 <ColumnDefinition Width="2.2*"/>
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
-                            
+
                             <materialDesign:PackIcon
-                                Grid.Column="0"  
-                                Kind="{Binding KindOperationImage}"
-                                Foreground="{Binding ColorAction}"
-                                Width="15" 
-                                Height="15"
                                 HorizontalAlignment="Center"
+                                Grid.Column="0"
+                                Kind="{Binding Theme}"
+                                Foreground="{Binding ColorTheme}"
+                               
+
                                 />
                             <Label   
                                 Content="{Binding Date}"  
@@ -101,23 +97,17 @@
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="13"/>
+                            
+
                             <Label 
-                                Content="{Binding Theme}"  
-                                HorizontalAlignment="Center"  
-                                Grid.Column="2" 
-                                FontWeight="Medium" 
-                                FontFamily="Roboto" 
-                                FontSize="13"/>
-                            <Label 
-                                Grid.Column="3"  
+                                Grid.Column="2"  
                                 Content="{Binding MessageCourt}"   
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="13"/>
                             <Label  
                                 Content="{Binding Auteur}" 
-                                Grid.Column="4" 
-                                
+                                Grid.Column="3" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="13"/>
@@ -146,16 +136,12 @@
                     <StackPanel Grid.Column="0">
                         <CheckBox IsChecked="True"  x:Name="produitActivated"  Margin="0,8,0,0" Content="Produit"  HorizontalAlignment="Left" Width="76"/>
                         <CheckBox IsChecked="True" x:Name="AdherentActivated" Content="Adhérent" HorizontalAlignment="Left" Width="76" />
-                        <CheckBox IsChecked="True" x:Name="CompteActivated" Content="Utilisateur" HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" x:Name="VenteActivated" Content="Vente" HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" Content="Achat"  HorizontalAlignment="Left" Width="76"/>
-                    </StackPanel >
+                            <CheckBox IsChecked="True" x:Name="CompteActivated" Content="Utilisateur" HorizontalAlignment="Left" Width="76"/>
+                        </StackPanel >
                     <!-- Filtres méthodes CRUD-->
-                    <StackPanel  Grid.Column="1">
-                        <CheckBox IsChecked="True"  x:Name="createActivated" Margin="0,20,0,0" Content="Création"   HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" x:Name="deleteActivated" Content="Suppression" HorizontalAlignment="Left" Width="84" />
-                        <CheckBox IsChecked="True" x:Name="updateActivated"  Content="Modification" HorizontalAlignment="Left" Width="87"/>
-                    </StackPanel>
+                    <StackPanel Margin="5,20,0,0"  Grid.Column="1">
+                            <CheckBox IsChecked="True" x:Name="VenteActivated" Content="Vente" HorizontalAlignment="Left" Width="76"/>
+                        </StackPanel>
 
 
                     

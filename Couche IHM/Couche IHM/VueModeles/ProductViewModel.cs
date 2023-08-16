@@ -22,6 +22,7 @@ namespace Couche_IHM.VueModeles
         private ImageManager imageManager;
         private ConverterFormatArgent formatArgent;
         private ProductManager productManager;
+        private CategoryManager categoryManager;
         private ILog logProduct;
         private int quantiteIHM;
         private string nomProduitIHM;
@@ -40,6 +41,7 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region events
+        public RelayCommand CreateProd { get; set; }
         public RelayCommand ResetProd { get; set; }
         public RelayCommand UpdateProd { get; set; }
         #endregion
@@ -122,6 +124,14 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public string Action
+        {
+            get
+            {
+                return this.product.NomProduit == "" ? "NEW" : "UPDATE";
+            }
+        }
+
         /// <summary>
         /// Image du produit
         /// </summary>
@@ -135,18 +145,20 @@ namespace Couche_IHM.VueModeles
         }
 
         public int PurchaseCount { get => purchaseCount; set => purchaseCount = value; }
+        public Product Product { get => product; set => product = value; }
 
 
 
 
         #endregion
 
-        public ProductViewModel(Product product,ProductManager productManager,CategoryViewModel categoryProduit,int r)
+        public ProductViewModel(Product product,ProductManager productManager,CategoryManager categoryManager,CategoryViewModel categoryProduit,int r)
         {
             // Initialisation du modele
             this.product = product;
             this.purchaseCount = r;
             // Initialisation des objets metiers
+            this.categoryManager = categoryManager;
             this.imageManager = new ImageManager();
             this.formatArgent = new ConverterFormatArgent();
             this.productManager = productManager;
@@ -161,7 +173,8 @@ namespace Couche_IHM.VueModeles
 
             // Initialisation des events
             this.ResetProd = new RelayCommand(x => ResetProduct());
-            this.UpdateProd = new RelayCommand(x => CreateProduct());
+            this.UpdateProd = new RelayCommand(x => UpdateProduct());
+            this.CreateProd = new RelayCommand(x => CreateProduct());
 
         }
 
@@ -182,7 +195,7 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryIHM.CurrentNameCategory;
+            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.CurrentNameCategory).IdCat;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.UpdateProduct(this.product);
@@ -195,10 +208,11 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(isDisponible));
 
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.nomProduitIHM} a été modifié", MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.nomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+           
         }
 
         /// <summary>
@@ -211,7 +225,8 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryIHM.CurrentNameCategory;
+
+            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.CurrentNameCategory).IdCat;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.CreateProduct(this.product);
@@ -223,9 +238,10 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(isDisponible));
+            
 
             // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"{this.NomProduitIHM} a été créé", MainWindowViewModel.Instance.CompteConnected);
+            this.logProduct.registerLog(CategorieLog.PRODUIT, $"(+)  {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
@@ -242,10 +258,10 @@ namespace Couche_IHM.VueModeles
             // Initialisation propriétés
             if(this.categoryIHM != null)
             {
-                this.categoryIHM.NameCategory = product.Categorie;
+                this.categoryIHM.NameCategory = this.categoryManager.Categories.Find(x => x.IdCat == product.Categorie).NomCategory;
             }
 
-            this.categoryIHM = MainWindowViewModel.Instance.ProductViewModel.Categories.Find(x => x.NameCategory == product.Categorie);
+           
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);

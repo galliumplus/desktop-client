@@ -18,7 +18,7 @@ namespace Couche_Data
         /// Récupère tous les produits d'une catégorie
         /// </summary>
         /// <returns> liste de produits </returns>
-        public List<Product> GetProductsByCategory(string category);
+        public List<Product> GetProductsByCategory(Category category);
 
         /// <summary>
         /// retire un produit

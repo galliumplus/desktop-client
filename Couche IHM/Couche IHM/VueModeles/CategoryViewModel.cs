@@ -1,5 +1,6 @@
 ﻿using Couche_Métier;
 using Couche_Métier.Log;
+using Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace Couche_IHM.VueModeles
         #region attributes
         private CategoryManager categoryManager;
         private string currentNameCategory;
-        private string nameCategory;
+        private Category nameCategory;
         #endregion
 
         #region properties
@@ -34,10 +35,10 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public string NameCategory 
         { 
-            get => nameCategory;
+            get => nameCategory.NomCategory;
             set 
             { 
-                nameCategory = value;
+                nameCategory.NomCategory = value;
                 NotifyPropertyChanged(nameof(NameCategory));
             }
         }
@@ -61,10 +62,10 @@ namespace Couche_IHM.VueModeles
         public RelayCommand DeleteCat { get; set; }
 
         #endregion
-        public CategoryViewModel(CategoryManager categoryManager,string category)
+        public CategoryViewModel(CategoryManager categoryManager,Category category)
         {
             this.categoryManager = categoryManager;
-            this.CurrentNameCategory = category;
+            this.currentNameCategory = category.NomCategory;
             this.nameCategory = category;
             this.UpdateCat = new RelayCommand(x => this.UpdateCategory());
             this.DeleteCat = new RelayCommand(x => this.DeleteCategory());
@@ -79,8 +80,8 @@ namespace Couche_IHM.VueModeles
         public void UpdateCategory()
         {   
             // Mise à jour data
-            this.categoryManager.UpdateCategory(CurrentNameCategory,nameCategory);
-            this.CurrentNameCategory=nameCategory;
+            this.categoryManager.UpdateCategory(nameCategory);
+            this.CurrentNameCategory=nameCategory.NomCategory;
 
 
             // Log l'action
@@ -112,7 +113,7 @@ namespace Couche_IHM.VueModeles
         public void DeleteCategory()
         {
             // Mise à jour data
-            this.categoryManager.DeleteCategory(CurrentNameCategory);
+            this.categoryManager.DeleteCategory(nameCategory);
             foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(x => x.CategoryIHM == this))
             {
                 prod.DeleteCatNotify();

@@ -25,7 +25,6 @@
                 Grid.Row="0"
                 Width="auto" 
                 Margin="0 0 0 5"  
-                Opacity="0.5"
                 Source="{Binding ImageProduct}"/>
             <TextBlock 
                 Grid.Row="1"

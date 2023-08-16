@@ -159,7 +159,7 @@
                         Padding="0,0,0,5" />
                     <ComboBox 
                         ItemsSource="{Binding AdherentViewModel.Adherents}"
-                        SelectedItem="{Binding AdherentViewModel.AdherentPayer}"
+                        SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
                         FontSize="12"
                         IsTextSearchEnabled="True" 
                         TextSearch.TextPath="IdentifiantIHM" 
@@ -192,12 +192,13 @@
 
                         <Button 
                             Command="{Binding CaisseViewModel.Pay}"
-                        Width="90"
-                        Margin="20,0,0,0"
-                        FontSize="12"
-                        Background="{StaticResource galliumColor}"
-                        Foreground="White"
-                        Content="Payer"/>
+                            CommandParameter="{Binding CaisseViewModel.AdherentPayer}"
+                            Width="90"
+                            Margin="20,0,0,0"
+                            FontSize="12"
+                            Background="{StaticResource galliumColor}"
+                            Foreground="White"
+                            Content="Payer"/>
                     </StackPanel>
                    
 

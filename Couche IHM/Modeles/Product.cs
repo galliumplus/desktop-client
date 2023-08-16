@@ -12,7 +12,7 @@ namespace Modeles
         private int quantite;
         private float prixAdherent;
         private float prixNonAdherent;
-        private string categorie;
+        private int categorie;
         #endregion
 
         #region properties
@@ -57,7 +57,7 @@ namespace Modeles
         /// <summary>
         /// Categorie du produit
         /// </summary>
-        public string Categorie 
+        public int Categorie 
         { 
             get => categorie; 
             set => categorie = value; 
@@ -78,7 +78,7 @@ namespace Modeles
         #region constructors
         /// <summary>
         /// Futur constructeur naturelle
-        public Product(int id, string nomProduit, int quantite, float prixAdherent, float prixNonAdherent, string categorie)
+        public Product(int id, string nomProduit, int quantite, float prixAdherent, float prixNonAdherent, int categorie)
         {
             this.id = id;
             this.nomProduit = nomProduit;

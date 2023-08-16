@@ -1,5 +1,6 @@
 ﻿
 using Couche_Data;
+using Modeles;
 
 namespace Couche_Métier
 {
@@ -12,9 +13,9 @@ namespace Couche_Métier
         private ICategoryDao iCategory;
 
         // Attribut représentant les catégories en cache
-        private List<string> categories;
+        private List<Category> categories;
 
-        public List<string> Categories { get => categories; set => categories = value; }
+        public List<Category> Categories { get => categories; set => categories = value; }
 
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace Couche_Métier
         /// <param name="category">dao des catégories</param>
         public CategoryManager() 
         {
-            this.iCategory = new FakeCategoryDAO();
+            this.iCategory = new CategoryDAO();
             categories = this.iCategory.ListALlCategory();
         }
       
@@ -31,20 +32,20 @@ namespace Couche_Métier
        /// Permet de créer une catégorie
        /// </summary>
        /// <param name="ca">catégorie à créer</param>
-        public void CreateCategory(string ca)
+        public void CreateCategory(Category cat)
         {
-            this.iCategory.CreateCategory(ca);
-            this.categories.Add(ca);
+            this.iCategory.CreateCategory(cat);
+            this.categories.Add(cat);
         }
 
         /// <summary>
         /// Permet de supprimer une catégorie
         /// </summary>
         /// <param name="ca">catégorie à supprimer</param>
-        public void DeleteCategory(string ca)
+        public void DeleteCategory(Category cat)
         {
-            this.iCategory.DeleteCategory(ca);
-            this.categories.Remove(ca);
+            this.iCategory.DeleteCategory(cat);
+            this.categories.Remove(cat);
         }
 
         /// <summary>
@@ -52,36 +53,20 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="bases"></param>
         /// <param name="news"></param>
-        public void UpdateCategory(string bases, string news)
+        public void UpdateCategory(Category cat)
         {
-            this.iCategory.UpdateCategory(bases, news);
-            this.categories.Remove(bases);
-            this.categories.Add(news);
+            this.iCategory.UpdateCategory(cat);
+            Category category = this.categories.Find(x => x.IdCat == cat.IdCat);
+            category.NomCategory = cat.NomCategory;
         }
 
         /// <summary>
         /// Liste les catégories
         /// </summary>
-        public List<string> ListAllCategory()
+        public List<Category> ListAllCategory()
         {
             return categories;
         }
 
-        /// <summary>
-        /// Cherche une catégorie
-        /// </summary>
-        public string GetCategory(string category)
-        {
-            string cat = null;
-            if (categories.Contains(category))
-            {
-                cat = categories[categories.IndexOf(category)];
-            }
-            else
-            {
-                cat = this.iCategory.GetCategory(category);
-            }
-            return cat;
-        }
     }
 }

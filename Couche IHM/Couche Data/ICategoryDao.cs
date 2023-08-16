@@ -1,4 +1,6 @@
 ﻿
+using Modeles;
+
 namespace Couche_Data
 {
     /// <summary>
@@ -9,26 +11,26 @@ namespace Couche_Data
         /// <summary>
         /// Créer une catégorie
         /// </summary>
-        public void CreateCategory(string ca);
+        public void CreateCategory(Category cat);
         
         /// <summary>
         /// Modifie une catéogorie
         /// </summary>
         /// <param name="baseCategory"> nom de base de la catégorie</param>
         /// <param name=""> Nouveau nom</param>
-        public void UpdateCategory(string baseCategory, string category);
+        public void UpdateCategory(Category category);
         /// <summary>
         /// Suprimme une catégorie
         /// </summary>
-        public void DeleteCategory(string ca);
+        public void DeleteCategory(Category cat);
         /// <summary>
         /// Liste toutes les catégories
         /// </summary>
-        public List<string> ListALlCategory();
+        public List<Category> ListALlCategory();
 
         /// <summary>
         /// Récupère une catégorie
         /// </summary>
-        public string GetCategory(string category);
+        public Category GetCategory(Category category);
     }
 }

@@ -1,41 +1,45 @@
 ﻿
 
+using Modeles;
+
 namespace Couche_Data
 {
     public class FakeCategoryDAO : ICategoryDao
     {
-        private List<string> _categories = new List<string>()
+        private List<Category> categories = new List<Category>()
         {
-            "BOISSON",
-            "SNACKS",
-            "HIDDEN",
-            "PABLO",
-            "test"
+            new Category(1,"BOISSON"),
+            new Category(2,"SNACKS"),
+            new Category(3,"HIDDEN"),
+            new Category(4,"PABLO"),
+            new Category(5,"test")
         };
 
-        public void CreateCategory(string ca)
+        public void CreateCategory(Category cat)
         {
-            _categories.Add(ca);
+            categories.Add(cat);
         }
 
-        public void DeleteCategory(string ca)
+        public void DeleteCategory(Category cat)
         {
-            _categories.Remove(ca);
+            categories.Remove(cat);
         }
 
-        public string GetCategory(string category)
+        public Category GetCategory(Category category)
         {
-            return _categories.Find(x => x == category);
+            return categories.Find(x => x.IdCat == category.IdCat);
         }
 
-        public List<string> ListALlCategory()
+        public List<Category> ListALlCategory()
         {
-            return _categories;
+            return categories;
         }
 
-        public void UpdateCategory(string baseCategory, string category)
+        public void UpdateCategory(Category cat)
         {
-            _categories[_categories.IndexOf(baseCategory)] = category;
+            Category category = categories.Find(x => x.IdCat == cat.IdCat);
+            category.NomCategory = cat.NomCategory;
+
         }
     }
 }

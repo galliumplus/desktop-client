@@ -171,7 +171,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(NomCompletIHM));
 
             // Log l'action
-            this.log.registerLog(CategorieLog.ACOMPTE, $"{this.NomCompletIHM} a été modifié", MainWindowViewModel.Instance.CompteConnected);
+            this.log.registerLog(CategorieLog.ACOMPTE, $"{this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;

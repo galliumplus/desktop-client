@@ -237,8 +237,8 @@ namespace Couche_IHM.VueModeles
             foreach (Product prd in produitsMetier)
             {
                 int r = random.Next(0, 100);
-                CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == prd.Categorie);
-                this.products.Add(new ProductViewModel(prd,this.productManager,catProduit,r));
+                CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit,r));
             }
         }
 
@@ -247,8 +247,8 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void InitCategories()
         {
-            List<string> categories = this.categoryManager.Categories;
-            foreach (string cat in categories)
+            List<Category> categories = this.categoryManager.Categories;
+            foreach (Category cat in categories)
             {
                 this.categories.Add(new CategoryViewModel(this.categoryManager,cat));
             }
@@ -261,7 +261,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW")
             {
                 ShowDeleteProduct = false;
-                CurrentProduct = new ProductViewModel(new Product(),this.productManager, this.categories[0],0);
+                CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null,0);
             }
             else
             {

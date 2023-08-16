@@ -58,7 +58,7 @@ namespace Couche_Métier
         /// Récupère tous les produits d'une catégorie
         /// </summary>
         /// <returns> liste de produits </returns>
-        public List<Product> GetProductsByCategory(string category)
+        public List<Product> GetProductsByCategory(Category category)
         {
             return this.productDAO.GetProductsByCategory(category);
         }
@@ -112,7 +112,7 @@ namespace Couche_Métier
             List<Product> p = new List<Product>();
             foreach (Product product in this.products)
             {
-                if (product.NomProduit.ToUpper().Contains(infoProduct.ToUpper()) || product.Categorie.ToUpper().Contains(infoProduct.ToUpper()))
+                if (product.NomProduit.ToUpper().Contains(infoProduct.ToUpper()))
                 {
                     p.Add(product);
                 }

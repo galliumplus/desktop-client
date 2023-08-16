@@ -632,13 +632,51 @@
 
                     <!-- Boutons -->
                     <Button 
-                        Content="Valider" 
+                        Content="Créer" 
                         Background="{StaticResource galliumColor}" 
+                        Foreground="White"
                         Grid.Row="5" 
                         Grid.Column="1" 
                         Grid.ColumnSpan="2" 
                         Margin="20,10,20,10" 
-                        Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}"/>
+                        Command="{Binding ProductViewModel.CurrentProduct.CreateProd}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="NEW">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="UPDATE">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
+                    <Button 
+                        Content="Modifier" 
+                        Background="{StaticResource galliumColor}"
+                        Foreground="White"
+                        Grid.Row="5" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Margin="20,10,20,10" 
+                        Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="NEW">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ProductViewModel.CurrentProduct.Action}" Value="UPDATE">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                     <Button 
                         Content="Annuler" 
                         Background="Gray" 

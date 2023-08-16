@@ -19,62 +19,6 @@ namespace Couche_IHM.VueModeles
         #region properties
 
         /// <summary>
-        /// Représente l'image correspondant au type d'opération
-        /// </summary>
-        public PackIconKind KindOperationImage
-        {
-            get
-            {
-                PackIconKind image = PackIconKind.Help;
-                switch (log.Operation)
-                {
-                    case "UPDATE":
-                        image = PackIconKind.Edit;
-                        break;
-                    case "CREATE":
-                        image = PackIconKind.Plus;
-                        break;
-                    case "DELETE":
-                        image = PackIconKind.Delete;
-                        break;
-                    case "VENTE":
-                        image = PackIconKind.Cart;
-                        break;
-                }
-
-
-                return image;
-            }
-        }
-
-        /// <summary>
-        /// Représente la couleur de l'opération
-        /// </summary>
-        public SolidColorBrush ColorAction
-        {
-            get
-            {
-                SolidColorBrush color = null;
-                switch (log.Operation)
-                {
-                    case "UPDATE":
-                        color = new SolidColorBrush(Colors.Orange);
-                        break;
-                    case "CREATE":
-                        color = new SolidColorBrush(Colors.Green);
-                        break;
-                    case "DELETE":
-                        color = new SolidColorBrush(Colors.DarkRed);
-                        break;
-                    case "VENTE":
-                        color = new SolidColorBrush(Colors.Yellow);
-                        break;
-                }
-                return color;
-            }
-        }
-
-        /// <summary>
         /// Date de l'opération
         /// </summary>
         public string Date 
@@ -82,12 +26,60 @@ namespace Couche_IHM.VueModeles
             get => log.Date; 
         }
 
+
+        /// <summary>
+        /// Représente la couleur de l'opération
+        /// </summary>
+        public SolidColorBrush ColorTheme
+        {
+            get
+            {
+                SolidColorBrush color = null;
+                switch (log.Theme)
+                {
+                    case "ACOMPTE":
+                        color = new SolidColorBrush(Colors.Orange);
+                        break;
+                    case "PRODUIT":
+                        color = new SolidColorBrush(Colors.LightGreen);
+                        break;
+                    case "COMPTE":
+                        color = new SolidColorBrush(Colors.Gray);
+                        break;
+                    case "VENTE":
+                        color = new SolidColorBrush(Colors.LightBlue);
+                        break;
+                }
+                return color;
+            }
+        }
+
         /// <summary>
         /// Theme general de l'operation
         /// </summary>
-        public string Theme
-        { 
-            get => log.Theme; 
+        public PackIconKind Theme
+        {
+            get
+            {
+                PackIconKind image = PackIconKind.Help;
+                switch (log.Theme)
+                {
+                    case "ACOMPTE":
+                        image = PackIconKind.AccountCash;
+                        break;
+                    case "PRODUIT":
+                        image = PackIconKind.FoodApple;
+                        break;
+                    case "COMPTE":
+                        image = PackIconKind.AccountStar;
+                        break;
+                    case "VENTE":
+                        image = PackIconKind.Cart;
+                        break;
+                }
+
+                return image;
+            }
         }
 
         /// <summary>
