@@ -199,7 +199,7 @@ namespace Couche_IHM.VueModeles
             foreach (Adhérent adh in adherents)
             {
                 int rand = random.Next(0, 100);
-                this.adherents.Add(new AdherentViewModel(adh,rand));
+                this.adherents.Add(new AdherentViewModel(adh,this.adherentManager,rand));
             }
             this.CurrentAdherent = this.adherents[0];
         }
@@ -214,7 +214,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW" || currentAdherent.Action == "NEW")
             {
                 ShowDeleteAcompte = false;
-                CurrentAdherent = new AdherentViewModel(new Adhérent(), 0);
+                CurrentAdherent = new AdherentViewModel(new Adhérent(),this.adherentManager, 0);
             }
             else
             {

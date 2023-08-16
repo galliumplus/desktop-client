@@ -137,12 +137,12 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public AdherentViewModel(Adhérent adherent,int random)
+        public AdherentViewModel(Adhérent adherent,AdhérentManager adherentManager,int random)
         {
             this.random = random;
             this.adherent = adherent;
             this.log =  new LogToTxt();
-            this.adhérentManager = new AdhérentManager();
+            this.adhérentManager = adherentManager;
             
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
