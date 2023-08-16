@@ -44,6 +44,8 @@ namespace Couche_IHM.VueModeles
         #region events
         public RelayCommand ModifyAdherent { get; set; }
         public RelayCommand ResetAdh { get; set; }
+        public RelayCommand CreateAdh { get; set; }
+        public RelayCommand DeleteAdh { get; set; }
         #endregion
         #region notify
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -122,6 +124,14 @@ namespace Couche_IHM.VueModeles
             set => isAdherentIHM = value; 
         }
 
+        public string Action
+        {
+            get
+            {
+                return this.adherent.Prenom == "" ? "NEW" : "UPDATE";
+            }
+        }
+
 
 
 
@@ -133,8 +143,7 @@ namespace Couche_IHM.VueModeles
             this.adherent = adherent;
             this.log =  new LogToTxt();
             this.adhérentManager = new AdhérentManager();
-            this.ModifyAdherent = new RelayCommand(x => this.UpdateAdherent());
-            this.ResetAdh = new RelayCommand(x => this.ResetAdherent());
+            
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
@@ -145,6 +154,39 @@ namespace Couche_IHM.VueModeles
             this.nomIHM = adherent.Nom;
             this.prenomIHM = adherent.Prenom;
 
+            this.ModifyAdherent = new RelayCommand(x => this.UpdateAdherent());
+            this.ResetAdh = new RelayCommand(x => this.ResetAdherent());
+            this.CreateAdh = new RelayCommand(x => this.CreateAdherent());
+            this.DeleteAdh = new RelayCommand(x => this.DeleteAdherent());
+
+        }
+
+        /// <summary>
+        /// Permet de supprimer un acompte
+        /// </summary>
+        private void DeleteAdherent()
+        {
+            // Modifier la data
+            this.adhérentManager.RemoveAdhérent(this.adherent);
+
+            // Notifier la vue
+            MainWindowViewModel.Instance.AdherentViewModel.Adherents.Remove(this);
+
+            // Log l'action
+            this.log.registerLog(CategorieLog.ACOMPTE, $"Suppresion de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
+
+
+            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
+            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+
+        }
+
+        /// <summary>
+        /// Permet de créer un acompte
+        /// </summary>
+        private void CreateAdherent()
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -171,7 +213,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(NomCompletIHM));
 
             // Log l'action
-            this.log.registerLog(CategorieLog.ACOMPTE, $"{this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
+            this.log.registerLog(CategorieLog.ACOMPTE, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
 
 
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;

@@ -183,7 +183,7 @@ namespace Couche_IHM.VueModeles
         {
             this.adherentManager = new AdhérentManager();
             this.adherents = new List<AdherentViewModel>();
-            this.OpenModifAdh = new RelayCommand(x => this.DialogModifAdherent = true);
+            this.OpenModifAdh = new RelayCommand(x => this.OpenAcompteDetails((string)x));
             InitAdhérents();
 
         }
@@ -201,10 +201,29 @@ namespace Couche_IHM.VueModeles
                 int rand = random.Next(0, 100);
                 this.adherents.Add(new AdherentViewModel(adh,rand));
             }
+            this.CurrentAdherent = this.adherents[0];
         }
 
+        /// <summary>
+        /// Permet d'ouvrir le détail de l'adhérent
+        /// </summary>
+        /// <param name="action"></param>
+        private void OpenAcompteDetails(string action)
+        {
 
-  
+            if (action == "NEW" || currentAdherent.Action == "NEW")
+            {
+                ShowDeleteAcompte = false;
+                CurrentAdherent = new AdherentViewModel(new Adhérent(), 0);
+            }
+            else
+            {
+                ShowDeleteAcompte = true;
+            }
+
+            DialogModifAdherent = true;
+        }
+
 
 
         #endregion

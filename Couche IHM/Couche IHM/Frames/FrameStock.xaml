@@ -246,10 +246,10 @@
                                     Width="20"    
                                     Style="{StaticResource buttonImage}">
                                 <materialDesign:PackIcon
-                                        Width="23"
-                                        Height="23"
+                                        Width="18"
+                                        Height="18"
                                         Foreground="Black"
-                                        Kind="Fullscreen"
+                                        Kind="ArrowTopRightBottomLeft"
                                         />
                             </Button>
 

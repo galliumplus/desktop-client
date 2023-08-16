@@ -175,13 +175,14 @@
                             <!-- Créer un acompte -->
                             <Button 
                                     Command="{Binding AdherentViewModel.OpenModifAdh}"
+                                    CommandParameter="NEW"
                                     VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Center" 
                                     Margin="10,30,10,10"
                                     Width="120"
                                     Height="29"
                                     BorderBrush="Transparent"
-                                    Background="{StaticResource galliumColor}" 
+                                    Background="#A0DAA9" 
                                     Opacity="0.8"
                                     Foreground="White">
                                 <DockPanel>
@@ -252,10 +253,10 @@
                                     Width="20"    
                                     Style="{StaticResource buttonImage}">
                                 <materialDesign:PackIcon
-                                        Width="23"
-                                        Height="23"
+                                        Width="18"
+                                        Height="18"
                                         Foreground="Black"
-                                        Kind="Fullscreen"
+                                        Kind="ArrowTopRightBottomLeft"
                                         />
                             </Button>
 
@@ -434,6 +435,7 @@
                     <Button  
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
+                        Command="{Binding AdherentViewModel.CurrentAdherent.DeleteAdh}"
                         Grid.Column="2"
                         Grid.Row="0">
                         <materialDesign:PackIcon 

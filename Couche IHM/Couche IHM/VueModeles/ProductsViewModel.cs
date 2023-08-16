@@ -36,12 +36,14 @@ namespace Couche_IHM.VueModeles
         private string searchFilter = "";
 
         #endregion
+
         #region events
         public RelayCommand OpenProd { get; set; }
         public RelayCommand CloseCategory { get; set; }
         public RelayCommand OpenCat { get; set; }
 
         #endregion
+
         #region properties
 
         /// <summary>
@@ -208,8 +210,11 @@ namespace Couche_IHM.VueModeles
 
         public ProductsViewModel()
         {
+            // Initialisation objet métier
             this.productManager = new ProductManager();
             this.categoryManager = new CategoryManager();
+
+            // Initialisation Events
             this.OpenProd = new RelayCommand(action => OpenProductDetails((string)action));
             this.OpenCat = new RelayCommand(x => this.ShowCategories = true);
             this.CloseCategory = new RelayCommand(x =>
@@ -221,6 +226,8 @@ namespace Couche_IHM.VueModeles
                 this.showCategories = false;
             }
             );
+
+            // Initialisation Data
             InitCategories();
             InitProducts();
             
@@ -240,6 +247,7 @@ namespace Couche_IHM.VueModeles
                 CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit,r));
             }
+            this.CurrentProduct = this.products[0];
         }
 
         /// <summary>
@@ -254,11 +262,14 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-
+        /// <summary>
+        /// Permet d'ouvrir les détails du produit
+        /// </summary>
+        /// <param name="action"></param>
         private void OpenProductDetails(string action)
         {
 
-            if (action == "NEW")
+            if (action == "NEW" || currentProduct.Action == "NEW")
             {
                 ShowDeleteProduct = false;
                 CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null,0);

@@ -6,8 +6,8 @@ namespace Modeles
         #region attributes
         private int id;
         private string identifiant;
-        private string nom;
-        private string prenom;
+        private string nom = "";
+        private string prenom = "";
         private bool canPass;
         private float argent;
         private bool stillAdherent;
