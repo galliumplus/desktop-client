@@ -1,4 +1,6 @@
-﻿using Modeles;
+﻿using Couche_Métier;
+using Couche_Métier.Manager;
+using Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,10 +35,13 @@ namespace Couche_IHM.VueModeles
         public CaisseViewModel CaisseViewModel { get => caisseViewModel; set => caisseViewModel = value; }
         public LogsViewModel LogsViewModel { get => logsViewModel; set => logsViewModel = value; }
 
+        public UsersViewModel UserViewModel { get => userViewModel; set => userViewModel = value; }
+
         private AdherentsViewModel adherentViewModel;
         private ProductsViewModel productViewModel;
         private CaisseViewModel caisseViewModel;
         private LogsViewModel logsViewModel;
+        private UsersViewModel userViewModel;
         #endregion
 
         #region notify
@@ -48,8 +53,10 @@ namespace Couche_IHM.VueModeles
         }
         #endregion
 
-        private User compteConnected;
+        private UserViewModel compteConnected;
         private Frame frame = Frame.FRAMEACCUEIL;
+        private LogManager logManager;
+        private UserManager userManager;
 
         #region events
         public RelayCommand ChangeFrame { set; get; }
@@ -60,11 +67,30 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Compte connecté à gallium
         /// </summary>
-        public User CompteConnected
+        public UserViewModel CompteConnected
         {
             get => compteConnected;
             set => compteConnected = value;
         }
+
+        /// <summary>
+        /// Permet de créer des logs
+        /// </summary>
+        public LogManager LogManager
+        {
+            get => logManager;
+            set => logManager = value;
+        }
+
+        /// <summary>
+        /// Permet de gérer les comptes
+        /// </summary>
+        public UserManager UserManager
+        {
+            get => userManager;
+            set => userManager = value;
+        }
+
 
         /// <summary>
         /// Représente la frame actuellement affichée
@@ -96,10 +122,13 @@ namespace Couche_IHM.VueModeles
 
         private MainWindowViewModel()
         {
+            this.logManager = new LogManager();
+            this.userManager = new UserManager();
             this.adherentViewModel = new AdherentsViewModel();
             this.productViewModel = new ProductsViewModel();
             this.caisseViewModel = new CaisseViewModel();
-            this.logsViewModel = new LogsViewModel();
+            this.logsViewModel = new LogsViewModel(userManager,logManager);
+            this.userViewModel = new UsersViewModel(this.userManager);
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }
     }

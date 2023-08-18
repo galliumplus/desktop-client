@@ -31,7 +31,7 @@ namespace Couche_Métier
         {
             // Initialisation
 
-            this.productDAO = new FakeProduitsDAO();
+            this.productDAO = new ProductDAO();
             this.products = new List<Product>(this.productDAO.GetProducts());
         }
 

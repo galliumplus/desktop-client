@@ -11,8 +11,8 @@ namespace Couche_Data
         #region attribut
         private MySqlConnection sql;
         private static dbsDAO instance = null;
-        private static MySqlCommand cmd;
-        private static MySqlDataReader reader;
+        private  MySqlCommand cmd;
+        private  MySqlDataReader reader;
         private static bool isConnected;
         #endregion
 
@@ -35,7 +35,7 @@ namespace Couche_Data
         /// <summary>
         /// Permet de faire des requêtes
         /// </summary>
-        public static MySqlCommand CMD
+        public  MySqlCommand CMD
         {
             get => cmd;
             set => cmd = value; 
@@ -44,7 +44,7 @@ namespace Couche_Data
         /// <summary>
         /// permet de lire les données
         /// </summary>
-        public static MySqlDataReader Reader
+        public  MySqlDataReader Reader
         {
             get => reader;
             set => reader = value;
@@ -65,7 +65,7 @@ namespace Couche_Data
         private dbsDAO()
         {
             this.ConnexionToBdd();
-
+            
         }
 
         /// <summary>
@@ -73,7 +73,8 @@ namespace Couche_Data
         /// </summary>
         private void ConnexionToBdd()
         {
-            sql = new MySqlConnection("balb alba");
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "127.0.0.1", "3306", "root", "", "galliumPlus", "none");
+            this.sql = new MySqlConnection(connString);
         }
 
         /// <summary>
@@ -94,24 +95,5 @@ namespace Couche_Data
             isConnected = false;
         }
 
-       /// <summary>
-       /// Permet de récupérer des informations de la bdd
-       /// </summary>
-       /// <param name="requete"></param>
-       /// <returns></returns>
-       public string Fetch(string requete)
-       {
-            return "";
-       }
-
-
-        /// <summary>
-        /// Permet d'executer une requête sur la bdd
-        /// </summary>
-        /// <param name="requete">requette en string</param>
-        public void Execute(string requete)
-        {
-
-        }
     }
 }

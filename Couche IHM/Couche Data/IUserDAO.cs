@@ -21,17 +21,18 @@ namespace Couche_Data
         /// <summary>
         /// Met à jour un compte
         /// </summary>
-        public User UpdateCompte(User compte);
+        public void UpdateCompte(User compte);
 
-        /// <summary>
-        /// Récupère un compte
-        /// </summary>
-        public User GetCompte(int id);
 
         /// <summary>
         /// Récupère tous les comptes 
         /// </summary>
-        public Dictionary<int,User> GetComptes();
+        public List<User> GetComptes();
+
+        /// <summary>
+        /// Récupère tous les comptes 
+        /// </summary>
+        public List<Role> GetRoles();
 
         /// <summary>
         /// Connection d'un utilisateur à gallium

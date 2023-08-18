@@ -1,5 +1,6 @@
 ﻿
 using Modeles;
+using MySql.Data.MySqlClient;
 
 namespace Couche_Data
 {
@@ -9,34 +10,72 @@ namespace Couche_Data
     /// </summary>
     public class UserDAO : IUserDAO
     {
-        public User ConnectionUser(string indentifiant, string hashPassword)
+
+        private List<User> users = new List<User>();
+        private List<Role> roles = new List<Role>();
+        public UserDAO()
         {
-            throw new NotImplementedException();
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = "SELECT * FROM users ORDER BY firstname";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                users.Add(new User(rdr.GetInt32("user_id"), rdr.GetString("lastname"), rdr.GetString("firstname"),rdr.GetString("email"),rdr.GetInt16("grade_id")));
+            }
+
+            //Requette SQL
+            string stm2 = "SELECT * FROM grades";
+            MySqlCommand cmd2 = new MySqlCommand(stm2, dbsDAO.Instance.Sql);
+            cmd2.Prepare();
+            rdr.Close();
+            //lecture de la requette
+            MySqlDataReader rdr2 = cmd2.ExecuteReader();
+
+            while (rdr2.Read())
+            {
+                roles.Add(new Role(rdr2.GetInt32("grade_id"), rdr2.GetString("name")));
+            }
+
+            dbsDAO.Instance.CloseDatabase();
+
         }
 
         public void CreateCompte(User compte)
         {
-            dbsDAO.Instance.Fetch("");
+            users.Add(compte);
         }
 
-        public User GetCompte(int id)
+        public List<User> GetComptes()
         {
-            throw new NotImplementedException();
+            return users;
         }
-
-        public Dictionary<int,User> GetComptes()
+        public List<Role> GetRoles()
         {
-            throw new NotImplementedException();
+            return roles;
         }
 
         public void RemoveCompte(User compte)
         {
-            throw new NotImplementedException();
+            users.Remove(compte);
         }
 
-        public User UpdateCompte(User compte)
+        public void UpdateCompte(User compte)
         {
-            throw new NotImplementedException();
+            User newUser = users.Find(x => x.ID == compte.ID);
+            newUser = compte;
+        }
+
+        public User ConnectionUser(string indentifiant, string hashPassword)
+        {
+            return new User(10, "Caca", "Pipi", "Poupou@gmail.com", 1);
         }
     }
 

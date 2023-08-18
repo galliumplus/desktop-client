@@ -1,4 +1,4 @@
-﻿using Couche_Métier.Log;
+﻿
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -19,10 +19,8 @@ namespace Couche_IHM.VueModeles
         private string currentPaiement;
         private bool showPayAcompte = false;
         private AdherentViewModel adherentPayer = null;
-        private ILog logVente;
         public CaisseViewModel()
         {
-            this.logVente = new LogToTxt();
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
@@ -195,13 +193,15 @@ namespace Couche_IHM.VueModeles
                 this.ShowPayAcompte = false;
             }
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 5, "Des produits ont été vendu", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
+            // Notifier la vue
             this.ProductOrder.Clear();
             NotifyPropertyChanged(nameof(PriceAdherIHM));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
-
-            // Log l'action
-            this.logVente.registerLog(CategorieLog.VENTE, "Des produits ont été vendu", MainWindowViewModel.Instance.CompteConnected);
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
         }
 
         /// <summary>

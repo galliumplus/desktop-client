@@ -1,5 +1,4 @@
 ﻿using Couche_Métier;
-using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -27,10 +26,6 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private AdhérentManager adhérentManager;
 
-        /// <summary>
-        /// Permet de log les actions des adhérents
-        /// </summary>
-        private ILog log; 
 
         private string argentIHM;
         private string identifiantIHM;
@@ -141,7 +136,6 @@ namespace Couche_IHM.VueModeles
         {
             this.random = random;
             this.adherent = adherent;
-            this.log =  new LogToTxt();
             this.adhérentManager = adherentManager;
             
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
@@ -169,13 +163,13 @@ namespace Couche_IHM.VueModeles
             // Modifier la data
             this.adhérentManager.RemoveAdhérent(this.adherent);
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 2, $"Suppresion de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+
             // Notifier la vue
             MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
-
-            // Log l'action
-            this.log.registerLog(CategorieLog.ACOMPTE, $"Suppresion de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
-
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
 
@@ -197,17 +191,16 @@ namespace Couche_IHM.VueModeles
             this.adherent.StillAdherent = this.isAdherentIHM;
             adhérentManager.CreateAdhérent(this.adherent);
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 2, $"Création de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
-
-            // Log l'action
-            this.log.registerLog(CategorieLog.ACOMPTE, $"Création de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
-
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
@@ -229,16 +222,15 @@ namespace Couche_IHM.VueModeles
             this.adherent.StillAdherent = this.isAdherentIHM;
             adhérentManager.UpdateAdhérent(this.adherent);
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 2, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
-
-            // Log l'action
-            this.log.registerLog(CategorieLog.ACOMPTE, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected);
-
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }

@@ -1,8 +1,9 @@
 ﻿using Couche_Métier;
-using Couche_Métier.Log;
+using Couche_Métier.Manager;
 using Modeles;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,21 +16,16 @@ namespace Couche_IHM.VueModeles
     {
 
         #region attributes 
-        private List<LogViewModel> logs = new List<LogViewModel>();
-        private ILog logManager;
+        private ObservableCollection<LogViewModel> logs = new ObservableCollection<LogViewModel>();
         private UserManager userManager;
+        private LogManager logManager;
         private string currentAuteur;
-        public LogsViewModel()
+        public LogsViewModel(UserManager userManager,LogManager logManager)
         {
-            
-            this.userManager = new UserManager();
-            this.CurrentAuteur = Auteurs[0];
-            this.logManager = new LogToTxt();
-            List<Log> logs = logManager.loadLog();
-            foreach (Log l in logs)
-            {
-                this.logs.Add(new LogViewModel(l));
-            }
+            this.userManager = userManager;
+            this.logManager = logManager;
+            CurrentAuteur = Auteurs[0];
+            InitLogs();
         }
 
 
@@ -55,19 +51,23 @@ namespace Couche_IHM.VueModeles
             get
             {
                 List<string> auteurs = new List<string>() { "Tout le monde" };
-                List<User> users = userManager.GetComptes();
+                List<User> users = this.userManager.GetComptes();
                 foreach (User u in users)
                 {
-                    auteurs.Add(u.NomComplet);
+                    auteurs.Add(u.Nom);
                 }
                 return auteurs;
             }
         }
-        public List<LogViewModel> Logs 
+
+        /// <summary>
+        /// Liste des logs
+        /// </summary>
+        public ObservableCollection<LogViewModel> Logs 
         {
             get 
-            { 
-                return logs.FindAll(x => DateTime.Parse(x.Date).ToString("MMMM yyyy") == DateTime.Today.ToString("MMMM yyyy")); 
+            {
+                return logs;
             }
             set => logs = value; 
         }
@@ -79,6 +79,22 @@ namespace Couche_IHM.VueModeles
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Permet d'initialiser la liste des logs
+        /// </summary>
+        public void InitLogs()
+        {
+            List<Log> logs = this.logManager.GetLogs();
+            foreach (Log log in logs)
+            {
+                this.logs.Add(new LogViewModel(log));
+            }
+
+        }
+
         #endregion
     }
 }

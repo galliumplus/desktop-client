@@ -1,6 +1,6 @@
 ﻿
 using Modeles;
-
+using MySql.Data.MySqlClient;
 
 namespace Couche_Data
 {
@@ -10,6 +10,23 @@ namespace Couche_Data
 
         public AdhérentDao()
         {
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = "SELECT * FROM acompte ORDER BY nom";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                adherents.Add(new Adhérent(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), ""));
+            }
+
+            dbsDAO.Instance.CloseDatabase();
         }
 
         public void CreateAdhérent(Adhérent adhérent)

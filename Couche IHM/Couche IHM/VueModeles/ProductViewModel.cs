@@ -2,7 +2,6 @@
 
 using Couche_IHM.ImagesProduit;
 using Couche_Métier;
-using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -23,7 +22,6 @@ namespace Couche_IHM.VueModeles
         private ConverterFormatArgent formatArgent;
         private ProductManager productManager;
         private CategoryManager categoryManager;
-        private ILog logProduct;
         private int quantiteIHM;
         private string nomProduitIHM;
         private CategoryViewModel categoryIHM;
@@ -163,7 +161,6 @@ namespace Couche_IHM.VueModeles
             this.imageManager = new ImageManager();
             this.formatArgent = new ConverterFormatArgent();
             this.productManager = productManager;
-            this.logProduct = new LogToTxt();
 
             // Initialisation des attributsIHM
             this.categoryIHM = categoryProduit;
@@ -202,16 +199,16 @@ namespace Couche_IHM.VueModeles
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.UpdateProduct(this.product);
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(NomProduitIHM));
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(isDisponible));
-            
-            // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0,new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
            
@@ -225,13 +222,13 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.productManager.RemoveProduct(this.product);
 
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             MainWindowViewModel.Instance.ProductViewModel.RemoveProduct(this);
-
-            // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected);
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
 
@@ -247,11 +244,14 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-
             this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.CurrentNameCategory).IdCat;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.CreateProduct(this.product);
+
+            // Log l'action
+            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
 
             // Notifier la vue
@@ -260,12 +260,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(isDisponible));
-            
-
-            // Log l'action
-            this.logProduct.registerLog(CategorieLog.PRODUIT, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected);
-
-
+            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
         }
@@ -295,7 +290,6 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(NomProduitIHM));
             NotifyPropertyChanged(nameof(PrixNonAdherentIHM));
             NotifyPropertyChanged(nameof(PrixAdherentIHM));
-
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
         }

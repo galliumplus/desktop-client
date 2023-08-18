@@ -20,7 +20,7 @@ namespace Couche_Métier
         /// <param name="adhérentDao">Dao des adhérents</param>
         public AdhérentManager()
         {
-            this.adhérentDao = new FakeAdherentDao();
+            this.adhérentDao = new AdhérentDao();
 
             // Récupération des adhérents
             adhérents = adhérentDao.GetAdhérents();

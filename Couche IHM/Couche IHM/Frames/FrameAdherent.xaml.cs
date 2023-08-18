@@ -1,6 +1,5 @@
 ﻿using Couche_IHM.VueModeles;
 using Couche_Métier;
-using Couche_Métier.Log;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;

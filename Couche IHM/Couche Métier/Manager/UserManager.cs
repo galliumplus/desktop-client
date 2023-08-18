@@ -13,7 +13,9 @@ namespace Couche_Métier
         private IUserDAO userDao;
 
         // Dictionnaire stockant les comptes temporairement en tant que cache
-        private Dictionary<int,User> comptes;
+        private List<User> comptes;
+
+        private List<Role> roles;
 
         /// <summary>
         /// Constructeur du manager des comptes
@@ -21,8 +23,9 @@ namespace Couche_Métier
         /// <param name="userDao">le DAO des comptes</param>
         public UserManager()
         {
-            this.userDao = new FakeUserDAO();
-            this.comptes = new Dictionary<int,User>(this.userDao.GetComptes());
+            this.userDao = new UserDAO();
+            this.comptes = this.userDao.GetComptes();
+            this.roles = this.userDao.GetRoles();
         }
 
         /// <summary>
@@ -32,26 +35,7 @@ namespace Couche_Métier
         public void CreateCompte(User compte)
         {
             userDao.CreateCompte(compte);
-            comptes.Add(compte.ID,compte);
-        }
-
-        /// <summary>
-        /// Permet d'obtenir un compte
-        /// </summary>
-        /// <param name="infoCompte">information du compte</param>
-        /// <returns>un compte</returns>
-        public User GetCompte(string infoCompte)
-        {
-            User user = null;
-
-            foreach(User compte in comptes.Values)
-            {
-                if(compte.Mail == infoCompte)
-                {
-                    user = compte;
-                }
-            }
-            return user;
+            comptes.Add(compte);
         }
 
 
@@ -62,7 +46,16 @@ namespace Couche_Métier
         /// <returns>tous les comptes</returns>
         public List<User> GetComptes()
         {
-            return comptes.Values.ToList();
+            return comptes;
+        }
+
+        // <summary>
+        /// Permet d'obtenir tous les comptes
+        /// </summary>
+        /// <returns>tous les comptes</returns>
+        public List<Role> GetRoles()
+        {
+            return roles;
         }
 
         /// <summary>
@@ -72,7 +65,7 @@ namespace Couche_Métier
         public void RemoveCompte(User compte)
         {
             userDao.RemoveCompte(compte);
-            comptes.Remove(compte.ID);
+            comptes.Remove(compte);
         }
 
         /// <summary>
@@ -82,7 +75,11 @@ namespace Couche_Métier
         public void UpdateCompte(User compte)
         {
             userDao.UpdateCompte(compte);
-            comptes[compte.ID] = compte;
+            User comp =comptes.Find(x => x.ID == compte.ID);
+            comp.Nom = compte.Nom;
+            comp.Prenom = compte.Prenom;
+            comp.Mail = compte.Mail;
+            comp.IdRole = compte.IdRole;
         }
     }
 }

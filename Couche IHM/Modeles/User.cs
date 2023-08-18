@@ -11,7 +11,7 @@ namespace Modeles
         private string nom;
         private string prenom;
         private string mail;
-        private RolePerm role;
+        private int role;
         private string hashedPassword;
 
         /// <summary>
@@ -41,14 +41,6 @@ namespace Modeles
         }
 
         /// <summary>
-        /// Nom complet de l'utilisateur 
-        /// </summary>
-        public string NomComplet
-        {
-            get => nom + " " + prenom;
-        }
-
-        /// <summary>
         /// mail de l'utilisateur
         /// </summary>
         public string Mail 
@@ -60,7 +52,7 @@ namespace Modeles
         /// <summary>
         /// Role de l'utilisateur
         /// </summary>
-        public RolePerm Role 
+        public int IdRole 
         { 
             get => role; 
             set => role = value; 
@@ -82,7 +74,7 @@ namespace Modeles
         /// <param name="prenom"> prénom de l'utilisateur </param>
         /// <param name="mail"> mail de l'utilisateur </param>
         /// <param name="role"> role de l'utilisateur </param>
-        public User(int id, string nom, string prenom, string mail, RolePerm role)
+        public User(int id, string nom, string prenom, string mail, int role)
         {
             this.id = id;
             this.nom = nom;
@@ -101,7 +93,7 @@ namespace Modeles
             this.nom = user.Nom;
             this.prenom = user.Prenom;
             this.mail = user.Mail;
-            this.role = user.Role;
+            this.role = user.IdRole;
         }
 
         /// <summary>

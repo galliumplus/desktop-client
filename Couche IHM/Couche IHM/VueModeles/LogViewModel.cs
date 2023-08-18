@@ -37,16 +37,19 @@ namespace Couche_IHM.VueModeles
                 SolidColorBrush color = null;
                 switch (log.Theme)
                 {
-                    case "ACOMPTE":
+                    case 1:
+                        color = new SolidColorBrush(Colors.Green);
+                        break;
+                    case 2:
                         color = new SolidColorBrush(Colors.Orange);
                         break;
-                    case "PRODUIT":
+                    case 3:
                         color = new SolidColorBrush(Colors.LightGreen);
                         break;
-                    case "COMPTE":
+                    case 5:
                         color = new SolidColorBrush(Colors.Gray);
                         break;
-                    case "VENTE":
+                    case 6:
                         color = new SolidColorBrush(Colors.LightBlue);
                         break;
                 }
@@ -64,16 +67,19 @@ namespace Couche_IHM.VueModeles
                 PackIconKind image = PackIconKind.Help;
                 switch (log.Theme)
                 {
-                    case "ACOMPTE":
+                    case 1:
+                        image = PackIconKind.AccountArrowRight;
+                        break;
+                    case 2:
                         image = PackIconKind.AccountCash;
                         break;
-                    case "PRODUIT":
+                    case 3:
                         image = PackIconKind.Food;
                         break;
-                    case "COMPTE":
+                    case 6:
                         image = PackIconKind.AccountStar;
                         break;
-                    case "VENTE":
+                    case 5:
                         image = PackIconKind.Cart;
                         break;
                 }
@@ -87,7 +93,7 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public string MessageCourt
         { 
-            get => log.MessageCourt; 
+            get => log.Message; 
         }
 
         /// <summary>
@@ -97,19 +103,6 @@ namespace Couche_IHM.VueModeles
         { 
             get => log.Auteur; 
         }
-
-        /// <summary>
-        /// Action effectué par l'opération
-        /// </summary>
-        public string Operation 
-        { 
-            get => log.Operation; 
-        }
-
-
-
-
-
         #endregion
 
 

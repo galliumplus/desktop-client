@@ -436,13 +436,14 @@
                                     <ToggleButton
                                         IsChecked="{Binding Invisible}"
                                         Command="{Binding ActivateCat}"
-                                        Background="{StaticResource galliumColor}"
+                                        Background="Transparent"
+                                        Foreground="{StaticResource galliumColor}"
                                         Width="18"
                                         Height="18"
                                         Style="{StaticResource MaterialDesignActionToggleButton}"
                                         Grid.Column="1"
-                                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=EyeOff, Size=15}"
-                                        Content="{materialDesign:PackIcon Kind=Eye, Size=15}">
+                                        materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=EyeOff, Size=16}"
+                                        Content="{materialDesign:PackIcon Kind=Eye, Size=16}">
                                     </ToggleButton>
 
                                     <!-- Delete Category -->
