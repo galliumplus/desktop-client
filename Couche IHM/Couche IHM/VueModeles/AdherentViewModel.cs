@@ -209,7 +209,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
-        public void UpdateAdherent()
+        public void UpdateAdherent(bool doLog = true)
         {
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
@@ -223,14 +223,17 @@ namespace Couche_IHM.VueModeles
             adhérentManager.UpdateAdhérent(this.adherent);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 2, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+            if (doLog)
+            {
+                Log log = new Log(0, DateTime.Now.ToString("g"), 2, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            }
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }

@@ -46,10 +46,10 @@ namespace Couche_IHM.VueModeles
                     case 3:
                         color = new SolidColorBrush(Colors.LightGreen);
                         break;
-                    case 5:
+                    case 6:
                         color = new SolidColorBrush(Colors.Gray);
                         break;
-                    case 6:
+                    case 5:
                         color = new SolidColorBrush(Colors.LightBlue);
                         break;
                 }

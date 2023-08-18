@@ -168,12 +168,7 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void PayArticles(AdherentViewModel acompte = null)
         {
-            // Changer la data
-            foreach (ProductViewModel product in productOrder.Keys)
-            {
-                product.QuantiteIHM -= productOrder[product];
-                product.UpdateProduct();
-            }
+            string messageLog = $"Achat par {currentPaiement} ";
 
             // Si paiement par acompte
             if (acompte != null)
@@ -183,18 +178,28 @@ namespace Couche_IHM.VueModeles
                 {
                     argent -= this.PriceAdher;
                     acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
+                    messageLog += $"({this.PriceAdherIHM}) de ";
                 }
                 else
                 {
                     argent -= this.PriceNanAdher;
                     acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
+                    messageLog += $"({this.PriceNanAdher}) de ";
                 }
-                acompte.UpdateAdherent();
+                acompte.UpdateAdherent(false);
                 this.ShowPayAcompte = false;
             }
 
+            // Changer la data
+            foreach (ProductViewModel product in productOrder.Keys)
+            {
+                product.QuantiteIHM -= productOrder[product];
+                messageLog += product.NomProduitIHM +", ";
+                product.UpdateProduct(false);
+            }
+
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 5, "Des produits ont été vendu", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now.ToString("g"), 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue

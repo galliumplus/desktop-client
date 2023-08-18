@@ -187,7 +187,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
-        public void UpdateProduct()
+        public void UpdateProduct(bool doLog = true)
         {
             ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
@@ -200,15 +200,18 @@ namespace Couche_IHM.VueModeles
             this.productManager.UpdateProduct(this.product);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+            if (doLog)
+            {
+                Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            }
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(NomProduitIHM));
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(isDisponible));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0,new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
            
