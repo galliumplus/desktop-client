@@ -4,6 +4,7 @@ using Modeles;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Couche_IHM.CustomListView
 {
@@ -39,6 +40,32 @@ namespace Couche_IHM.CustomListView
                 DetailedProduct dp = new DetailedProduct(p);
                 listProductView.Add(dp);
             }
-        }        
+        }
+
+        private void FilterDisponibility(object sender, System.Windows.RoutedEventArgs e)
+        {
+            bool activate = ((ToggleButton)sender).IsChecked.Value;
+            this.listProductView.Clear();
+            if (activate)
+            {
+                List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(prod => prod.CategoryIHM != null && prod.isDisponible== true && prod.CategoryIHM.NomCat == category);
+                foreach (ProductViewModel p in produits)
+                {
+                    DetailedProduct dp = new DetailedProduct(p);
+                    listProductView.Add(dp);
+                }
+            }
+            else
+            {
+                List<ProductViewModel> produits = MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(prod => prod.CategoryIHM != null && prod.CategoryIHM.NomCat == category);
+                foreach (ProductViewModel p in produits)
+                {
+                    DetailedProduct dp = new DetailedProduct(p);
+                    listProductView.Add(dp);
+                }
+            }
+            produits.ItemsSource = null;
+            produits.ItemsSource = this.listProductView;
+        }
     }
 }

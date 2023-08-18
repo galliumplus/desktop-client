@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Couche_IHM.CustomListView"
+                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -13,11 +14,25 @@
         </Grid.RowDefinitions>
 
         <StackPanel Margin="0 0 0 40">
-            <Label FontWeight="Medium" FontFamily="Roboto" FontSize="16" Content="{Binding Category}"></Label>
+            <StackPanel Orientation="Horizontal">
+                <Label FontWeight="Medium" FontFamily="Roboto" FontSize="16" Content="{Binding Category}"></Label>
+                <ToggleButton
+                    Margin="5,0,0,0"
+                    Background="Transparent"
+                    Foreground="#252422"
+                    Width="20"
+                    Height="20"
+                    Style="{StaticResource MaterialDesignActionToggleButton}"
+                    materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=GridOff, Size=18}"
+                    Content="{materialDesign:PackIcon Kind=Grid, Size=18}" Click="FilterDisponibility">
+                </ToggleButton>
+
+            </StackPanel>
+            
             <Rectangle Fill="#FF403D39"  Height="2" Width="auto"/>
         </StackPanel>
 
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding ListProductView}">
+        <ItemsControl x:Name="produits" Grid.Row="1" ItemsSource="{Binding ListProductView}">
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Setter Property="FrameworkElement.Margin" Value="10,0,10,40"/>
