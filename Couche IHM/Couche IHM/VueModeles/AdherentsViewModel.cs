@@ -201,7 +201,7 @@ namespace Couche_IHM.VueModeles
                 int rand = random.Next(0, 100);
                 this.adherents.Add(new AdherentViewModel(adh,this.adherentManager,rand));
             }
-            this.CurrentAdherent = this.adherents[0];
+            this.currentAdherent = this.adherents[0];
         }
 
         /// <summary>

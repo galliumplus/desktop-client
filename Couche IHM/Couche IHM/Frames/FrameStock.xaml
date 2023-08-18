@@ -97,7 +97,7 @@
                                     FontFamily="Roboto" 
                                     FontSize="14"/>
                                 <Label  
-                                    Content="{Binding CategoryIHM.CurrentNameCategory}" 
+                                    Content="{Binding CategoryIHM.NomCat}" 
                                     Grid.Column="4" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
@@ -329,7 +329,7 @@
                                     Margin="7,0,0,0">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding CurrentNameCategory}" />
+                                                <TextBlock Text="{Binding NomCat}" />
                                             </DataTemplate>
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
@@ -429,7 +429,7 @@
                                     
                                     <TextBox 
                                         Grid.Column="0"
-                                        Text="{Binding NameCategory, UpdateSourceTrigger=PropertyChanged}"
+                                        Text="{Binding NomCat, UpdateSourceTrigger=PropertyChanged}"
                                         Margin="5,0,5,0" />
 
                                     <!-- Visible Category -->
@@ -641,7 +641,7 @@
                         materialDesign:HintAssist.Hint="Catégorie">
                         <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding CurrentNameCategory}" />
+                            <TextBlock Text="{Binding NomCat}" />
                         </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>

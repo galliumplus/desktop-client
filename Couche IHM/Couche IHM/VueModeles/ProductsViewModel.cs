@@ -120,7 +120,7 @@ namespace Couche_IHM.VueModeles
                     produitsIHM = new ObservableCollection<ProductViewModel>(
                         products.ToList().FindAll(prd =>
                             prd.NomProduitIHM.ToUpper().Contains(searchFilter.ToUpper()) ||
-                            prd.CategoryIHM.CurrentNameCategory.ToUpper().Contains(searchFilter.ToUpper())));
+                            prd.CategoryIHM.NomCat.ToUpper().Contains(searchFilter.ToUpper())));
                 }
 
                 return produitsIHM;
@@ -245,10 +245,10 @@ namespace Couche_IHM.VueModeles
             foreach (Product prd in produitsMetier)
             {
                 int r = random.Next(0, 100);
-                CategoryViewModel catProduit = this.categories.Find(x => x.CurrentNameCategory == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                CategoryViewModel catProduit = this.categories.Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit,r));
             }
-            this.CurrentProduct = this.products[0];
+            this.currentProduct = this.products[0];
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace Couche_IHM.VueModeles
         private void OpenProductDetails(string action)
         {
 
-            if (action == "NEW" || currentProduct.Action == "NEW")
+            if (action == "NEW" || currentProduct == null || currentProduct.Action == "NEW")
             {
                 ShowDeleteProduct = false;
                 CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null,0);

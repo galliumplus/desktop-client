@@ -23,38 +23,22 @@ namespace Couche_IHM.VueModeles
 
         #region attributes
         private CategoryManager categoryManager;
-        private string currentNameCategory;
-        private Category nameCategory;
-
+        private Category category;
+        private string nomCat;
         private bool invisible;
         #endregion
 
         #region properties
 
-        
-        /// <summary>
-        /// Représente le nom de la catégorie modifiable
-        /// </summary>
-        public string NameCategory 
-        { 
-            get => nameCategory.NomCategory;
-            set 
-            { 
-                nameCategory.NomCategory = value;
-                NotifyPropertyChanged(nameof(NameCategory));
-            }
-        }
-
         /// <summary>
         /// Représente le modèle du nom de la catégorie
         /// </summary>
-        public string CurrentNameCategory 
-        { 
-            get => currentNameCategory;
+        public string NomCat 
+        {
+            get => nomCat;
             set 
             { 
-                currentNameCategory = value; 
-                NotifyPropertyChanged();
+                nomCat = value; 
             }
         }
 
@@ -83,8 +67,8 @@ namespace Couche_IHM.VueModeles
         public CategoryViewModel(CategoryManager categoryManager,Category category)
         {
             this.categoryManager = categoryManager;
-            this.currentNameCategory = category.NomCategory;
-            this.nameCategory = category;
+            this.nomCat = category.NomCategory;
+            this.category = category;
             this.invisible = !category.Visible;
 
             // Initialisation des events
@@ -102,7 +86,8 @@ namespace Couche_IHM.VueModeles
         public void ActivateCategory()
         {
             // Mise à jour data
-            this.categoryManager.UpdateCategory(nameCategory);
+            category.Visible = !this.invisible;
+            this.categoryManager.UpdateCategory(category);
 
 
             // Log l'action
@@ -115,10 +100,10 @@ namespace Couche_IHM.VueModeles
         /// Permet de mettre à jour une category
         /// </summary>
         public void UpdateCategory()
-        {   
+        {
             // Mise à jour data
-            this.categoryManager.UpdateCategory(nameCategory);
-            this.CurrentNameCategory=nameCategory.NomCategory;
+            category.NomCategory = this.nomCat;
+            this.categoryManager.UpdateCategory(category);
 
 
             // Log l'action
@@ -135,8 +120,8 @@ namespace Couche_IHM.VueModeles
         public void ResetCategory()
         {
             // Mise à jour data
-            this.NameCategory = this.currentNameCategory;
-
+            this.nomCat = this.category.NomCategory;
+            NotifyPropertyChanged(nameof(this.NomCat));
 
             // Log l'action
             //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
@@ -150,7 +135,7 @@ namespace Couche_IHM.VueModeles
         public void DeleteCategory()
         {
             // Mise à jour data
-            this.categoryManager.DeleteCategory(nameCategory);
+            this.categoryManager.DeleteCategory(category);
             foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(x => x.CategoryIHM == this))
             {
                 prod.DeleteCatNotify();
@@ -164,7 +149,7 @@ namespace Couche_IHM.VueModeles
         public override bool Equals(object? obj)
         {
             return obj is CategoryViewModel model &&
-                   currentNameCategory == model.currentNameCategory;
+                   category == model.category;
         }
         #endregion
 

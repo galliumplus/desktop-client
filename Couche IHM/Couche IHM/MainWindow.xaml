@@ -116,6 +116,7 @@
                         Foreground="White" 
                         Kind="ChartLine"/>
                 </Button>
+                
                 <Button 
                     Style="{StaticResource buttonImage}"
                     Command="{Binding ChangeFrame}"
@@ -179,10 +180,10 @@
                         <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/logoEtiq.png" Width="40" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
                         <StackPanel Grid.Column="1" Margin="10,20,10,0">
                             <TextBlock 
-                                Text="{Binding CompteConnected.NomComplet}" 
+                                Text="{Binding CompteConnected.NomCompletIHM}" 
                                 FontSize="14" FontWeight="Bold"/>
                             <TextBlock 
-                                Text="{Binding CompteConnected.Role}" 
+                                Text="{Binding CompteConnected.RoleIHM}" 
                                 FontSize="11" 
                                 FontWeight="DemiBold" />
                         </StackPanel>

@@ -58,6 +58,19 @@ namespace Couche_Data
             Category category = categories.Find(x => x.IdCat == cat.IdCat);
             category.NomCategory = cat.NomCategory;
 
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = $"UPDATE Categories SET name ='{cat.NomCategory}',activated={Convert.ToInt16(cat.Visible)} WHERE category_id = {cat.IdCat}";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+
+
+            dbsDAO.Instance.CloseDatabase();
+
         }
     }
 }

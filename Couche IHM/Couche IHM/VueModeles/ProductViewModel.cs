@@ -194,7 +194,7 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.CurrentNameCategory).IdCat;
+            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.UpdateProduct(this.product);
@@ -244,7 +244,7 @@ namespace Couche_IHM.VueModeles
             // Changer la data
             this.product.Quantite = this.quantiteIHM;
             this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.CurrentNameCategory).IdCat;
+            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
             this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
             this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
             this.productManager.CreateProduct(this.product);
@@ -275,7 +275,7 @@ namespace Couche_IHM.VueModeles
             // Initialisation propriétés
             if(this.categoryIHM != null)
             {
-                this.categoryIHM.NameCategory = this.categoryManager.Categories.Find(x => x.IdCat == product.Categorie).NomCategory;
+                this.categoryIHM.NomCat = this.categoryManager.Categories.Find(x => x.IdCat == product.Categorie).NomCategory;
             }
 
            

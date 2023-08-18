@@ -39,7 +39,7 @@ namespace Couche_IHM.Frames
                 if (!category.Invisible)
                 {
                     // On créer chaque vue catégorie
-                    CategoryProductList categoryProductList = new CategoryProductList(category.CurrentNameCategory);
+                    CategoryProductList categoryProductList = new CategoryProductList(category.NomCat);
                     productsSP.Children.Add(categoryProductList);
                 }
 
