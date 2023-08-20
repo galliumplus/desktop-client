@@ -20,11 +20,26 @@ namespace Couche_IHM.VueModeles
         private UserManager userManager;
         private LogManager logManager;
         private string currentAuteur;
+
+        private List<int> themeLog;
+        private bool selectVente;
+        private bool selectConnexion;
+        private bool selectProduct;
+        private bool selectAcompte;
+        private bool selectCompte;
         public LogsViewModel(UserManager userManager,LogManager logManager)
         {
+            this.themeLog = new List<int>();
             this.userManager = userManager;
             this.logManager = logManager;
-            CurrentAuteur = Auteurs[0];
+
+            // Initialisation des datas
+            currentAuteur = Auteurs[0];
+            this.SelectVente = true;
+            this.SelectAcompte = false;
+            this.SelectConnexion = false;
+            this.SelectProduct = false;
+            this.SelectCompte = false;
             InitLogs();
         }
 
@@ -40,7 +55,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 currentAuteur = value;
-                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Logs));
             }
         }
         /// <summary>
@@ -54,7 +69,7 @@ namespace Couche_IHM.VueModeles
                 List<User> users = this.userManager.GetComptes();
                 foreach (User u in users)
                 {
-                    auteurs.Add(u.Nom);
+                    auteurs.Add($"{u.Prenom} {u.Nom}");
                 }
                 return auteurs;
             }
@@ -67,9 +82,118 @@ namespace Couche_IHM.VueModeles
         {
             get 
             {
-                return logs;
+                List<LogViewModel> logsFiltres = logs.ToList().FindAll(x => themeLog.Contains(x.IdTheme));
+                if (currentAuteur != "Tout le monde")
+                {
+                    logsFiltres = logsFiltres.FindAll(x => x.Auteur == currentAuteur);
+                }
+                return new ObservableCollection<LogViewModel>(logsFiltres);
             }
             set => logs = value; 
+        }
+
+        /// <summary>
+        /// Filtre afficher les ventes
+        /// </summary>
+        public bool SelectVente 
+        { 
+            get => selectVente;
+            set 
+            {
+                if (value)
+                {
+                    this.themeLog.Add(5);
+                }
+                else
+                {
+                    this.themeLog.Remove(5);
+                }
+                selectVente = value;
+                NotifyPropertyChanged(nameof(Logs));
+            }
+        }
+
+        /// <summary>
+        /// Filtre afficher les connexions
+        /// </summary>
+        public bool SelectConnexion
+        {
+            get => selectConnexion;
+            set 
+            {
+                if (value)
+                {
+                    this.themeLog.Add(1);
+                }
+                else
+                {
+                    this.themeLog.Remove(1);
+                }
+                selectConnexion = value;
+                NotifyPropertyChanged(nameof(Logs));
+            } 
+        }
+        /// <summary>
+        /// Filtre afficher les produits
+        /// </summary>
+        public bool SelectProduct 
+        { 
+            get => selectProduct;
+            set 
+            {
+                if (value)
+                {
+                    this.themeLog.Add(3);
+                }
+                else
+                {
+                    this.themeLog.Remove(3);
+                }
+                selectProduct = value;
+                NotifyPropertyChanged(nameof(Logs));
+            }
+        }
+
+        /// <summary>
+        /// Filtre afficher les acomptes
+        /// </summary>
+        public bool SelectAcompte 
+        { 
+            get => selectAcompte;
+            set
+            {
+                if (value)
+                {
+                    this.themeLog.Add(2);
+                }
+                else
+                {
+                    this.themeLog.Remove(2);
+                }
+                selectAcompte = value;
+                NotifyPropertyChanged(nameof(Logs));
+            }
+        }
+
+        /// <summary>
+        /// Filtre afficher les comptes
+        /// </summary>
+        public bool SelectCompte 
+        { 
+            get => selectCompte;
+            set 
+            {
+                if (value)
+                {
+                    this.themeLog.Add(6);
+                }
+                else
+                {
+                    this.themeLog.Remove(6);
+                }
+                selectCompte = value;
+                NotifyPropertyChanged(nameof(Logs));
+            }
         }
         #endregion
 
@@ -93,6 +217,15 @@ namespace Couche_IHM.VueModeles
                 this.logs.Add(new LogViewModel(log));
             }
 
+        }
+
+        /// <summary>
+        /// Permet d'ajouter un log
+        /// </summary>
+        /// <param name="log">og à ajouter</param>
+        public void AddLog(LogViewModel log)
+        {
+            this.logs.Insert(0, log);
         }
 
         #endregion

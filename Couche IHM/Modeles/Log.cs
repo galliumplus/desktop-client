@@ -11,7 +11,7 @@ namespace Modeles
     public class Log 
     {
         private int id;
-        private string date;
+        private DateTime date;
         private int theme;
         private string message;
         private string auteur;
@@ -19,7 +19,7 @@ namespace Modeles
         /// <summary>
         /// Constructeur
         /// </summary>
-        public Log(int id, string date, int theme, string message, string auteur)
+        public Log(int id, DateTime date, int theme, string message, string auteur)
         {
             this.id = id;
             this.date = date;
@@ -31,10 +31,9 @@ namespace Modeles
         /// <summary>
         /// Date de l'action
         /// </summary>
-        public string Date 
-        { 
-            get => date; 
-            set => date = value; 
+        public DateTime Date 
+        {
+            get => date;
         }
 
         /// <summary>

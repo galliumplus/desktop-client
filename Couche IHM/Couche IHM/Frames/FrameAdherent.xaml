@@ -42,57 +42,30 @@
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Button 
-                                    Style="{x:Null}" 
-                                    FocusVisualStyle="{x:Null}"  
-                                    BorderThickness="0"  
-                                    Margin="-50,0,0,0"  
-                                    Background="Transparent"   
+                                <TextBlock 
+                                    HorizontalAlignment="Center"
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
                                     FontSize="16" 
-                                    Content="Nom et prénom" />
-                                <Image
-                                    Visibility="Hidden"   
-                                    Width="20" 
-                                    HorizontalAlignment="Left"/>
+                                    Text="Nom et prénom" />
 
-                                <Button 
-                                    Style="{x:Null}" 
-                                    FocusVisualStyle="{x:Null}" 
-                                    BorderThickness="0"    
-                                    Background="Transparent" 
+                                <TextBlock 
+                                    HorizontalAlignment="Center"
                                     Grid.Column="1"  
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
                                     FontSize="16" 
-                                    Content="Acompte" />
-                                <Image  
-                                    Visibility="Hidden" 
-                                    Grid.Column="1"   
-                                    Width="20" 
-                                    HorizontalAlignment="Left"/>
+                                    Text="Acompte" />
 
-                                <Button 
-                                    Style="{x:Null}" 
-                                    FocusVisualStyle="{x:Null}" 
-                                    BorderThickness="0"  
-                                    Background="Transparent" 
+                                <TextBlock 
+                                    HorizontalAlignment="Center"
                                     Grid.Column="2" 
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
                                     FontSize="16"
-                                    Content="Monnaie "/>
-                                <Image  
-                                    Visibility="Hidden" 
-                                    Grid.Column="2"  
-                                    Width="20" 
-                                    HorizontalAlignment="Left"/>
-
-
-
+                                    Text="Monnaie "/>
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
 
                             </Grid>

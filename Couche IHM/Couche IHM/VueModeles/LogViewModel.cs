@@ -23,7 +23,7 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public string Date 
         { 
-            get => log.Date; 
+            get => log.Date.ToString("g"); 
         }
 
 
@@ -86,6 +86,11 @@ namespace Couche_IHM.VueModeles
 
                 return image;
             }
+        }
+
+        public int IdTheme
+        {
+            get => log.Theme;
         }
 
         /// <summary>

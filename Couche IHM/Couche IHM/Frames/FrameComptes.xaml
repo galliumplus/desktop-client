@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Couche_IHM.Frames"
+      xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -199,6 +200,7 @@
                         Margin="10"
                         Grid.Column="0" 
                         Grid.Row="3"
+                        materialDesign:PasswordBoxAssist.Password="{Binding UserViewModel.CurrentUser.MdpIHM1}"
                         materialDesign:HintAssist.Hint="Nouveau mot de passe"
                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" />
                         
@@ -208,6 +210,7 @@
                         Margin="10"
                         Grid.Column="1" 
                         Grid.Row="3"
+                        materialDesign:PasswordBoxAssist.Password="{Binding UserViewModel.CurrentUser.MdpIHM2}"
                         materialDesign:HintAssist.Hint="Confirmer mot de passe"
                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" />
                         

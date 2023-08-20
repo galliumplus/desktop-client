@@ -28,7 +28,7 @@ namespace Couche_Data
 
             while (rdr.Read())
             {
-                users.Add(new User(rdr.GetInt32("user_id"), rdr.GetString("lastname"), rdr.GetString("firstname"),rdr.GetString("email"),rdr.GetInt16("grade_id")));
+                users.Add(new User(rdr.GetInt32("user_id"), rdr.GetString("lastname"), rdr.GetString("firstname"),rdr.GetString("email"),rdr.GetString("password"),rdr.GetInt16("grade_id")));
             }
 
             //Requette SQL
@@ -69,14 +69,20 @@ namespace Couche_Data
 
         public void UpdateCompte(User compte)
         {
-            User newUser = users.Find(x => x.ID == compte.ID);
-            newUser = compte;
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = $"UPDATE users SET firstname = '{compte.Prenom}',lastname = '{compte.Nom}',email = '{compte.Mail}',password = '{compte.HashedPassword}',grade_id = {compte.IdRole} WHERE user_id = {compte.ID}";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+                
+            cmd.ExecuteNonQuery();
+
+            dbsDAO.Instance.CloseDatabase();
         }
 
-        public User ConnectionUser(string indentifiant, string hashPassword)
-        {
-            return new User(10, "Caca", "Pipi", "Poupou@gmail.com", 1);
-        }
+      
     }
 
 }

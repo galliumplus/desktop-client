@@ -1,4 +1,5 @@
 ﻿using Couche_Data;
+using Couche_Métier.Utilitaire;
 using Modeles;
 
 
@@ -76,10 +77,29 @@ namespace Couche_Métier
         {
             userDao.UpdateCompte(compte);
             User comp =comptes.Find(x => x.ID == compte.ID);
+            comp.HashedPassword = compte.HashedPassword;
             comp.Nom = compte.Nom;
             comp.Prenom = compte.Prenom;
             comp.Mail = compte.Mail;
             comp.IdRole = compte.IdRole;
+        }
+
+        /// <summary>
+        /// Permet de se connecter à un utilisatuer
+        /// </summary>
+        /// <param name="identifiant"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public User? ConnectCompte(string identifiant,string password)
+        {
+            User? user = this.comptes.Find(x => x.Mail == identifiant);
+            User? userFinal = null;
+            if (user != null &&CryptStringToSHA256.Verify(password, user.HashedPassword))
+            {
+                userFinal = user;
+            }
+            
+            return userFinal;
         }
     }
 }

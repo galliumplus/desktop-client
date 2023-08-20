@@ -34,12 +34,5 @@ namespace Couche_Data
         /// </summary>
         public List<Role> GetRoles();
 
-        /// <summary>
-        /// Connection d'un utilisateur à gallium
-        /// </summary>
-        /// <param name="indentifiant"> identifiant de l'utilisateur </param>
-        /// <param name="hashPassword"> mot de passe hashé de l'utilisateur </param>
-        /// <returns> un utilisateur</returns>
-        public User ConnectionUser(string indentifiant, string hashPassword);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -26,6 +28,8 @@ namespace Couche_IHM.VueModeles
         private string nom;
         private string prenom;
         private string email;
+        private string mdpIHM1 = "";
+        private string mdpIHM2 = "";
         private Role role;
 
         
@@ -44,7 +48,6 @@ namespace Couche_IHM.VueModeles
         public string PrenomIHM { get => prenom; set => prenom = value; }
         public string EmailIHM { get => email; set => email = value; }
 
-
         /// <summary>
         /// Nom complet de l'utilisateur 
         /// </summary>
@@ -53,6 +56,9 @@ namespace Couche_IHM.VueModeles
             get => nom + " " + prenom;
         }
         public Role RoleIHM { get => role; set => role = value; }
+        public string MdpIHM2 { get => mdpIHM2; set => mdpIHM2 = value; }
+        public string MdpIHM1 { get => mdpIHM1; set => mdpIHM1 = value; }
+
         #endregion
         public UserViewModel(User user,UserManager userManager)
         {
@@ -76,24 +82,38 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void UpdateUser()
         {
-            // Changer la data
-            this.user.Nom = this.nom;
-            this.user.Prenom = this.prenom; 
-            this.user.Mail = this.email;
-            this.user.IdRole = this.role.Id;
-            this.userManager.UpdateCompte(this.user);
+            if (this.mdpIHM1 == this.mdpIHM2)
+            {
+                // Changer la data
+                this.user.Nom = this.nom;
+                this.user.Prenom = this.prenom;
+                this.user.Mail = this.email;
+                this.user.IdRole = this.role.Id;
+                if (this.mdpIHM1 != "")
+                {
+                    this.user.HashedPassword = CryptStringToSHA256.Hash(this.mdpIHM2);
+                }
+                this.userManager.UpdateCompte(this.user);
+                this.MdpIHM1 = "";
+                this.MdpIHM2 = "";
 
-            // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 6, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                // Log l'action
+                Log log = new Log(0, DateTime.Now, 6, $"Modification de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
-            // Notifier la vue
-            NotifyPropertyChanged(nameof(this.NomIHM));
-            NotifyPropertyChanged(nameof(this.PrenomIHM));
-            NotifyPropertyChanged(nameof(this.EmailIHM));
-            NotifyPropertyChanged(nameof(this.RoleIHM));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
-            MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
+                // Notifier la vue
+                NotifyPropertyChanged(nameof(this.NomIHM));
+                NotifyPropertyChanged(nameof(this.PrenomIHM));
+                NotifyPropertyChanged(nameof(this.EmailIHM));
+                NotifyPropertyChanged(nameof(this.RoleIHM));
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
+            }
+            else
+            {
+                MessageBox.Show("Les deux mots de passe ne correspondent pas");
+            }
+          
         }
 
 

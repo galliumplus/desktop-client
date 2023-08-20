@@ -202,7 +202,7 @@ namespace Couche_IHM.VueModeles
             // Log l'action
             if (doLog)
             {
-                Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(0, DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
                 MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
             }
@@ -226,12 +226,12 @@ namespace Couche_IHM.VueModeles
             this.productManager.RemoveProduct(this.product);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now, 3, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             MainWindowViewModel.Instance.ProductViewModel.RemoveProduct(this);
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
 
@@ -253,7 +253,7 @@ namespace Couche_IHM.VueModeles
             this.productManager.CreateProduct(this.product);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
 

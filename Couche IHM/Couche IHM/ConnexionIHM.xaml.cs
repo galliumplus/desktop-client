@@ -3,6 +3,7 @@ using Couche_IHM.ImagesProduit;
 using Couche_IHM.VueModeles;
 using Couche_Métier;
 using Couche_Métier.Manager;
+using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Windows;
@@ -38,20 +39,19 @@ namespace Couche_IHM
         /// </summary>
         private void ConnectToAccount(object sender, RoutedEventArgs e)
         {
-
-            // Vérifie la connexion d'un utilisateur
-            User userConnection = userManager.GetComptes()[0];
-
-            // Vérifie si l'utilisateur réussi à se connecter
-            if (userConnection != null)
+            string identifiant = this.identifiantBox.Text;
+            string password = this.passwordBox.Password;
+            User? user = this.userManager.ConnectCompte(identifiant, password);
+            if (user != null)
             {
-                Log log = new Log(0, DateTime.Now.ToString("g"), 1, $"Connexion de {userConnection.Nom} {userConnection.Prenom}", $"{userConnection.Nom} {userConnection.Prenom}");
-                logManager.CreateLog(log) ;
-                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
-                MainWindow mainWindow = new MainWindow(userConnection,logManager,userManager);
+                Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Nom} {user.Prenom}", $"{user.Nom} {user.Prenom}");
+                logManager.CreateLog(log);
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                MainWindow mainWindow = new MainWindow(user, logManager, userManager);
                 mainWindow.Show();
                 this.Close();
             }
+
             
         }
     }

@@ -26,6 +26,13 @@ namespace Couche_IHM.VueModeles
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
             this.CancelPay = new RelayCommand(x => this.ShowPayAcompte = false);
             this.Pay = new RelayCommand(acompte => PayArticles((AdherentViewModel)acompte));
+            this.ClearProd = new RelayCommand(x =>
+            {
+                this.ProductOrder.Clear();
+                this.NotifyPropertyChanged(nameof(this.PriceAdherIHM));
+
+                this.NotifyPropertyChanged(nameof(this.PriceNonAdherIHM));
+                });
             this.CurrentPaiement = Paiements[0];
         }
 
@@ -41,6 +48,7 @@ namespace Couche_IHM.VueModeles
 
         #region events
 
+        public RelayCommand ClearProd { get; set; }
         public RelayCommand AddProd { get; set; }
         public RelayCommand RemoveProd { get; set; }
 
@@ -199,14 +207,14 @@ namespace Couche_IHM.VueModeles
             }
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now.ToString("g"), 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
             this.ProductOrder.Clear();
             NotifyPropertyChanged(nameof(PriceAdherIHM));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
         }
 
         /// <summary>

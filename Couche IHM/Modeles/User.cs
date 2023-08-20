@@ -74,12 +74,13 @@ namespace Modeles
         /// <param name="prenom"> prénom de l'utilisateur </param>
         /// <param name="mail"> mail de l'utilisateur </param>
         /// <param name="role"> role de l'utilisateur </param>
-        public User(int id, string nom, string prenom, string mail, int role)
+        public User(int id, string nom, string prenom, string mail,string password ,int role)
         {
             this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.mail = mail;
+            this.hashedPassword = password;
             this.role = role;
         }
 

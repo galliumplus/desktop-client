@@ -126,26 +126,50 @@
             <Border BorderThickness="1" Margin="0,65,0,0">
                 <StackPanel>
                     <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        
                     <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-23,-20,0,0"  Text="Opérations :" FontSize="15"/>
                     
                     <!-- Filtres domaine-->
-                    <StackPanel Grid.Column="0">
-                        <CheckBox IsChecked="True"  x:Name="produitActivated"  Margin="0,8,0,0" Content="Produit"  HorizontalAlignment="Left" Width="76"/>
-                        <CheckBox IsChecked="True" x:Name="AdherentActivated" Content="Adhérent" HorizontalAlignment="Left" Width="76" />
-                            <CheckBox IsChecked="True" x:Name="CompteActivated" Content="Utilisateur" HorizontalAlignment="Left" Width="76"/>
-                        </StackPanel >
-                    <!-- Filtres méthodes CRUD-->
-                    <StackPanel Margin="5,20,0,0"  Grid.Column="1">
-                            <CheckBox IsChecked="True" x:Name="VenteActivated" Content="Vente" HorizontalAlignment="Left" Width="76"/>
-                        </StackPanel>
-
-
-                    
-                </Grid>
+                        <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectProduct}"  
+                            Background="LightGreen"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Produit"/>
+                        <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Background="Orange"
+                            Content="Acompte"/>
+                        <CheckBox 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            IsChecked="{Binding LogsViewModel.SelectCompte}"  
+                            Background="Gray"
+                            Content="Utilisateur"/>
+                        <CheckBox 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            IsChecked="{Binding LogsViewModel.SelectVente}" 
+                            Background="LightBlue"
+                            Content="Vente"/>
+                        <CheckBox 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            IsChecked="{Binding LogsViewModel.SelectConnexion}"  
+                            Background="Green"
+                            Content="Connexion"/>
+                    </Grid>
                     
                     <!-- Filtre heures-->
                     <TextBlock  
@@ -180,7 +204,6 @@
                         Text="Auteur :" 
                         FontSize="15"/>
                     <ComboBox 
-                        IsSynchronizedWithCurrentItem="False"
                         SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
                         ItemsSource="{Binding LogsViewModel.Auteurs}"/>
 

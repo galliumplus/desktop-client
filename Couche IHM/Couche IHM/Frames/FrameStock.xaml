@@ -47,17 +47,43 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Button Style="{x:Null}"   BorderThickness="0"  Margin="-50,0,0,0"  Background="Transparent"   FontWeight="Medium" FontFamily="Roboto" Width="200"  FontSize="17"  Content="Produit" />
-                                    <Image Margin="30,0,0,0" Name="produitTri" Visibility="Hidden"   Width="20" HorizontalAlignment="Left"/>
+                                    <TextBlock 
+                                        Margin="50,0,0,0"
+                                        FontWeight="Medium" 
+                                        FontFamily="Roboto" 
+                                        Width="200"  
+                                        FontSize="17"  
+                                        Text="Produit" />
+                                 
+                                    <TextBlock 
+                                        HorizontalAlignment="Center"
+                                        Grid.Column="1"  
+                                        Grid.Row="0" 
+                                        FontWeight="Medium" 
+                                        FontFamily="Roboto"  
+                                        FontSize="17"  
+                                        Text="Quantité" />
+                                   
 
-                                    <Button Style="{x:Null}"  BorderThickness="0"    Background="Transparent" Grid.Column="1"  Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Quantité" />
-                                    <Image Name="quantiteTri" Visibility="Hidden" Grid.Column="1"   Width="20" HorizontalAlignment="Left"/>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Grid.Column="2" 
+                                        Grid.Row="0" 
+                                        FontWeight="Medium" 
+                                        FontFamily="Roboto"  
+                                        FontSize="17"  
+                                        Text="Prix A " />
+                                   
 
-                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="2" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Prix A " />
-                                    <Image x:Name="prixTri" Visibility="Hidden" Grid.Column="2"  Width="20" HorizontalAlignment="Left"/>
-
-                                    <Button Style="{x:Null}"  BorderThickness="0"  Background="Transparent" Grid.Column="4" Grid.Row="0" FontWeight="Medium" FontFamily="Roboto"  FontSize="17"  Content="Catégorie"/>
-                                    <Image x:Name="categorieTri" Margin="20,0,0,0" Visibility="Hidden" Grid.Column="4"  Width="20" HorizontalAlignment="Left"/>
+                                    <TextBlock  
+                                        HorizontalAlignment="Center"
+                                        Grid.Column="4" 
+                                        Grid.Row="0" 
+                                        FontWeight="Medium" 
+                                        FontFamily="Roboto"  
+                                        FontSize="17"  
+                                        Text="Catégorie"/>
+                                   
 
                                     <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
 

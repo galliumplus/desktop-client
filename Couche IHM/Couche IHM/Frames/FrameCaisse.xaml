@@ -32,12 +32,32 @@
 
         <!-- Panier d'achat -->
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <Label  
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label  
                 FontWeight="Medium" 
                 FontFamily="Roboto" 
                 Content="Panier"
                 FontSize="17" 
                 Foreground="#FF403D39"/>
+                
+                <Button
+                    Command="{Binding CaisseViewModel.ClearProd}"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Style="{StaticResource buttonImage}"
+                    >
+                    <materialDesign:PackIcon
+                        Foreground="Black"
+                        Kind="Clear"/>
+
+                </Button>
+            </Grid>
+           
             <Rectangle  
                 Fill="#FF403D39" 
                 VerticalAlignment="Bottom" 
@@ -82,8 +102,11 @@
                                 Height="10" 
                                 Grid.Column="2" 
                                 Width="25"  >
-                                <Image  
-                                    Source="/Images/supp.png" />
+                                <materialDesign:PackIcon
+                                    Width="12"
+                                    Height="12"
+                                    
+                                    Kind="CloseOutline"/>
                             </Button>
 
                         </Grid>

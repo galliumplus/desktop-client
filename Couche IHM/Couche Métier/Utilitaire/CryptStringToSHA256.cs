@@ -1,33 +1,29 @@
 ﻿
 using System.Security.Cryptography;
 using System.Text;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Couche_Métier.Utilitaire
 {
     /// <summary>
     /// Permet de crypter un string en SHA256
     /// </summary>
-    public class CryptStringToSHA256
+    public static class CryptStringToSHA256
     {
         /// <summary>
-        /// Hash un string en 256
+        /// Hash un message
         /// </summary>
         /// <param name="message"> message à hashé </param>
         /// <returns> le message hashé </returns>
-        public string HashTo256(string message)
+        public static string Hash(string message)
         {
-            using(SHA256 hash256 = SHA256.Create())
-            {
-                byte[] hashBytes = hash256.ComputeHash(Encoding.UTF8.GetBytes(message));
+            return BC.HashPassword(message);
+        }
 
-                // Convertirle les bytes en hexadécimale
-                StringBuilder sb = new StringBuilder();
-                foreach (byte b in hashBytes)
-                {
-                    sb.Append(b.ToString("x2"));
-                }
-                return sb.ToString();
-            }
+
+        public static bool Verify(string message,string encoded)
+        {
+            return BC.Verify(message, encoded); 
         }
     }
 }

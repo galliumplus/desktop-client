@@ -28,7 +28,7 @@ namespace Couche_Data
 
             while (rdr.Read())
             {
-                logs.Add(new Log(rdr.GetInt32("log_id"), rdr.GetString("date_at"),rdr.GetInt16("log_category_id"), rdr.GetString("text"), rdr.GetString("user")));
+                logs.Add(new Log(rdr.GetInt32("log_id"), DateTime.Parse(rdr.GetString("date_at")),rdr.GetInt16("log_category_id"), rdr.GetString("text"), rdr.GetString("user")));
             }
             rdr.Close();    
 
@@ -50,7 +50,19 @@ namespace Couche_Data
 
         public void CreateLog(Log log)
         {
-            this.logs.Add(log);
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
+            string stm = $"INSERT INTO logs VALUES(0,'{log.Message}','{formattedDate}',{log.Theme},'{log.Auteur}')";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
+
+            dbsDAO.Instance.CloseDatabase();
         }
 
 
