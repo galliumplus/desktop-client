@@ -20,7 +20,6 @@ namespace Couche_IHM.VueModeles
         /// Représente le modèle produit
         /// </summary>
         private Product product;
-        private ImageManager imageManager;
         private ConverterFormatArgent formatArgent;
         private BitmapImage image;
         private ProductManager productManager;
@@ -165,7 +164,6 @@ namespace Couche_IHM.VueModeles
             this.purchaseCount = r;
             // Initialisation des objets metiers
             this.categoryManager = categoryManager;
-            this.imageManager = new ImageManager();
             this.formatArgent = new ConverterFormatArgent();
             this.productManager = productManager;
 
@@ -173,7 +171,7 @@ namespace Couche_IHM.VueModeles
             this.categoryIHM = categoryProduit;
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
-            this.image = new BitmapImage(new Uri(imageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
+            this.image = new BitmapImage(new Uri(ImageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
             this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
 
@@ -221,9 +219,8 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
-                ImageManager imageManager = new ImageManager();
-                byte[] bitsImage = imageManager.ConvertImageToBlob(image.UriSource.ToString());
-                imageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
+                ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
                 
                 this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
@@ -285,9 +282,8 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
-                ImageManager imageManager = new ImageManager();
-                byte[] bitsImage = imageManager.ConvertImageToBlob(image.UriSource.ToString());
-                imageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                byte[] bitsImage = ImageManager .ConvertImageToBlob(image.UriSource.ToString());
+                ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
                 this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
@@ -331,7 +327,7 @@ namespace Couche_IHM.VueModeles
            
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
-            this.image = new BitmapImage(new Uri(imageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
+            this.image = new BitmapImage(new Uri(ImageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
             this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
 

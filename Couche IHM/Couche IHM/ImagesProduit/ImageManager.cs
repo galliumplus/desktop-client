@@ -15,11 +15,28 @@ namespace Couche_IHM.ImagesProduit
 {
     public class ImageManager
     {
+
+        /// <summary>
+        /// Permet de vérifier que les dossier existe bien
+        /// </summary>
+        public static void VerifyFiles()
+        {
+            // Création des répertoires
+            Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit");
+
+            //Création de l'image de base
+            if (!File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png"))
+            {
+                byte[] imageInconnu = ConvertImageToBlob("../../../Images/unknownProduct.png");
+                CreateImageFromBlob("unknownProduct", imageInconnu);
+            }
+        }
+
         /// <summary>
         /// Permet de convertir une image en blob
         /// </summary>
         /// <param name="path"></param>
-        public byte[] ConvertImageToBlob(string path)
+        public static byte[] ConvertImageToBlob(string path)
         {
             if (path.Contains("file:///"))
             {
@@ -39,7 +56,7 @@ namespace Couche_IHM.ImagesProduit
         /// <summary>
         /// Permet d'obtenir l'image d'un produit ou une image par défaut si elle n'existe pas
         /// </summary>
-        public string GetImageFromProduct(string productName)
+        public static string GetImageFromProduct(string productName)
         {
             string pathImage = "";
             if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.jpg"))
@@ -50,18 +67,11 @@ namespace Couche_IHM.ImagesProduit
             {
                 pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.png";
             }
-            else if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png"))
-            {
-                pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png";
-            }
             else
             {
-                // On créer l'image dans les documents TEMPORAIREMENT
-                byte[] imageInconnu = ConvertImageToBlob("../../../Images/unknownProduct.png");
-                CreateImageFromBlob("unknownProduct",imageInconnu);
-
                 pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png";
             }
+
 
             return pathImage;
 
@@ -71,7 +81,7 @@ namespace Couche_IHM.ImagesProduit
         /// Permet de créer une image d'après un blob
         /// </summary>
         /// <param name="path"></param>
-        public void CreateImageFromBlob(string fileName, byte[] blob)
+        public static void CreateImageFromBlob(string fileName, byte[] blob)
         {
             File.WriteAllBytes($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{fileName}.png", blob);
         }

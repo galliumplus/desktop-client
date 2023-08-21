@@ -18,14 +18,14 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
-        
+
+
         <!-- Information de connexion -->
         <Image
             Source="/Images/logoEtiq.png"
@@ -34,7 +34,7 @@
             Grid.ColumnSpan="3"
              Grid.RowSpan="3"
             />
-        <Border Grid.Row="1" Grid.Column="1" Background="DarkGray" CornerRadius="10">
+        <Border Grid.Row="1" Grid.Column="1" Background="#353331"  CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
