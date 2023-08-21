@@ -29,6 +29,7 @@ namespace Couche_IHM.VueModeles
 
         private UserViewModel currentUser;
 
+        private bool showDeleteUser;
         private bool showModifCreateUser = false;
 
        
@@ -68,17 +69,29 @@ namespace Couche_IHM.VueModeles
             set 
             { 
                 currentUser = value;
-                ShowModifCreateUser = true;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool ShowDeleteUser
+        {
+            get => showDeleteUser;
+            set 
+            {
+                showDeleteUser = value;
                 NotifyPropertyChanged();
             }
         }
 
         #endregion
 
+        public RelayCommand OpenUser { get; set; }
+
         public UsersViewModel(UserManager userManager)
         {
             this.userManager = userManager;
             this.roles = userManager.GetRoles();
+            this.OpenUser = new RelayCommand(x => this.OpenUserDetails((string)x));
             InitUsers();
         }
 
@@ -96,6 +109,49 @@ namespace Couche_IHM.VueModeles
                 this.users.Add(new UserViewModel(user, this.userManager));
             }
         }
+
+        /// <summary>
+        /// Permet d'ouvrir les détails du compte
+        /// </summary>
+        /// <param name="action"></param>
+        public void OpenUserDetails(string action)
+        {
+            if (action == "NEW")
+            {
+                ShowDeleteUser = false;
+                CurrentUser = new UserViewModel(new User(), this.userManager);
+                CurrentUser.Action = "NEW";
+            }
+            else
+            {
+                ShowDeleteUser = true;
+            }
+
+            ShowModifCreateUser = true;
+        }
+
+
+        /// <summary>
+        /// Permet d'ajouter un compte
+        /// </summary>
+        /// <param name="user"></param>
+        public void AddUser(UserViewModel user)
+        {
+            this.users.Add(user);
+            NotifyPropertyChanged(nameof(Users));
+
+        }
+
+        /// <summary>
+        /// Permet de supprimer un compte
+        /// </summary>
+        /// <param name="user"></param>
+        public void RemoveUser(UserViewModel user)
+        {
+            this.users.Remove(user);
+            NotifyPropertyChanged(nameof(Users));
+        }
+
         #endregion
     }
 }

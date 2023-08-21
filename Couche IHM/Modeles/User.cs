@@ -11,7 +11,7 @@ namespace Modeles
         private string nom;
         private string prenom;
         private string mail;
-        private int role;
+        private int role = 8;
         private string hashedPassword;
 
         /// <summary>

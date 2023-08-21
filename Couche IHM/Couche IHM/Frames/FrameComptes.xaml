@@ -14,12 +14,12 @@
     <Grid  Margin="20,50,20,0">
         <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <!-- ScrollViewer des comptes-->
-        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
+        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,0"   >
             <ListView  ItemsSource="{Binding UserViewModel.Users}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
                 <ListView.Template>
                     <ControlTemplate>
@@ -136,7 +136,15 @@
                 </ListBox.ItemTemplate>
             </ListView>
         </ScrollViewer>
-        
+        <Button 
+            Command="{Binding UserViewModel.OpenUser}"
+            CommandParameter="NEW"
+            Background="Gray"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Grid.Row="1"
+            Content="Créer un compte"/>
+
         <!-- Modification / Création Compte-->
         <materialDesign:DialogHost DialogTheme="Inherit" CloseOnClickAway="True" OverlayBackground="Gray" IsOpen="{Binding UserViewModel.ShowModifCreateUser}">
             <materialDesign:DialogHost.DialogContent>
@@ -164,6 +172,32 @@
                         FontSize="30" 
                         FontWeight="Black"/>
 
+
+                    <Button
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        VerticalAlignment="Top"
+                        Grid.Column="2"
+                        Command="{Binding UserViewModel.CurrentUser.DeleteU}"
+                        Grid.Row="0">
+                        <materialDesign:PackIcon 
+                            Width="21"
+                            Height="21"
+                            Kind="Delete"/>
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource buttonImage}"  TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserViewModel.ShowDeleteUser}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UserViewModel.ShowDeleteUser}" Value="false">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
                     <!-- Identifiant -->
 
                     <TextBox 
@@ -226,13 +260,53 @@
                         />
 
                     <!-- Bouton -->
+                    <!-- Boutons -->
                     <Button 
-                        Content="Valider" 
-                        Command="{Binding UserViewModel.CurrentUser.UpdateU}"
-                        Background="{StaticResource galliumColor}"
-                        Grid.Column="1" 
+                        Content="Créer" 
+                        Background="{StaticResource galliumColor}" 
+                        Foreground="White"
                         Grid.Row="6" 
-                        Margin="20"/>
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Margin="20,10,20,10" 
+                        Command="{Binding UserViewModel.CurrentUser.CreateU}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserViewModel.CurrentUser.Action}" Value="NEW">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UserViewModel.CurrentUser.Action}" Value="UPDATE">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button 
+                        Content="Modifier" 
+                        Background="{StaticResource galliumColor}"
+                        Grid.Row="6" 
+                        Grid.Column="1" 
+                        Grid.ColumnSpan="2" 
+                        Margin="20,10,20,10" 
+                        Command="{Binding UserViewModel.CurrentUser.UpdateU}">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UserViewModel.CurrentUser.Action}" Value="NEW">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UserViewModel.CurrentUser.Action}" Value="UPDATE">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                 
                     <Button 
                         Command="{Binding UserViewModel.CurrentUser.ResetU}"
                         Content="Annuler" 
