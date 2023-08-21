@@ -7,6 +7,7 @@ using Modeles;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace Couche_IHM.VueModeles
@@ -189,32 +190,39 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void UpdateProduct(bool doLog = true)
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
-
-            // Changer la data
-            this.product.Quantite = this.quantiteIHM;
-            this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-            this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
-            this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
-            this.productManager.UpdateProduct(this.product);
-
-            // Log l'action
-            if (doLog)
+            if (this.categoryIHM != null)
             {
-                Log log = new Log(0, DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                MainWindowViewModel.Instance.LogManager.CreateLog(log);
-                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+
+                // Changer la data
+                this.product.Quantite = this.quantiteIHM;
+                this.product.NomProduit = this.nomProduitIHM;
+                this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+                this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
+                this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+                this.productManager.UpdateProduct(this.product);
+
+                // Log l'action
+                if (doLog)
+                {
+                    Log log = new Log(0, DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                    MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                    MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+                }
+
+                // Notifier la vue
+                NotifyPropertyChanged(nameof(NomProduitIHM));
+                NotifyPropertyChanged(nameof(QuantiteIHM));
+                NotifyPropertyChanged(nameof(CategoryIHM));
+                NotifyPropertyChanged(nameof(isDisponible));
+                MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+                MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+            }
+            else
+            {
+                MessageBox.Show("Vous n'avez pas sélectionné de catégory");
             }
 
-            // Notifier la vue
-            NotifyPropertyChanged(nameof(NomProduitIHM));
-            NotifyPropertyChanged(nameof(QuantiteIHM));
-            NotifyPropertyChanged(nameof(CategoryIHM));
-            NotifyPropertyChanged(nameof(isDisponible));
-            MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
-            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
-           
         }
 
         /// <summary>
@@ -242,30 +250,38 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void CreateProduct()
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
+            if (this.categoryIHM != null)
+            {
+                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
-            // Changer la data
-            this.product.Quantite = this.quantiteIHM;
-            this.product.NomProduit = this.nomProduitIHM;
-            this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-            this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
-            this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
-            this.productManager.CreateProduct(this.product);
+                // Changer la data
+                this.product.Quantite = this.quantiteIHM;
+                this.product.NomProduit = this.nomProduitIHM;
+                this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+                this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
+                this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+                this.productManager.CreateProduct(this.product);
 
-            // Log l'action
-            Log log = new Log(0, DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                // Log l'action
+                Log log = new Log(0, DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
 
-            // Notifier la vue
-            MainWindowViewModel.Instance.ProductViewModel.AddProduct(this);
-            NotifyPropertyChanged(nameof(NomProduitIHM));
-            NotifyPropertyChanged(nameof(QuantiteIHM));
-            NotifyPropertyChanged(nameof(CategoryIHM));
-            NotifyPropertyChanged(nameof(isDisponible));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
-            MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
-            MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+                // Notifier la vue
+                MainWindowViewModel.Instance.ProductViewModel.AddProduct(this);
+                NotifyPropertyChanged(nameof(NomProduitIHM));
+                NotifyPropertyChanged(nameof(QuantiteIHM));
+                NotifyPropertyChanged(nameof(CategoryIHM));
+                NotifyPropertyChanged(nameof(isDisponible));
+                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+                MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
+                MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+            }
+            else
+            {
+                MessageBox.Show("Vous n'avez pas sélectionné de catégory");
+            }
+            
         }
 
         /// <summary>

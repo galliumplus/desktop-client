@@ -23,7 +23,7 @@ namespace Couche_IHM.VueModeles
 
         #region attributes
         private ObservableCollection<ProductViewModel> products = new ObservableCollection<ProductViewModel>();
-        private List<CategoryViewModel> categories = new List<CategoryViewModel>();
+        private ObservableCollection<CategoryViewModel> categories = new ObservableCollection<CategoryViewModel>();
         private ProductManager productManager;
         private CategoryManager categoryManager;
         private ProductViewModel currentProduct;
@@ -66,7 +66,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Représente toutes les catégories de produits disponibles
         /// </summary>
-        public List<CategoryViewModel> Categories
+        public ObservableCollection<CategoryViewModel> Categories
         {
             get
             {
@@ -245,7 +245,7 @@ namespace Couche_IHM.VueModeles
             foreach (Product prd in produitsMetier)
             {
                 int r = random.Next(0, 100);
-                CategoryViewModel catProduit = this.categories.Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                CategoryViewModel catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit,r));
             }
             this.currentProduct = this.products[0];
