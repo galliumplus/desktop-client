@@ -172,27 +172,7 @@
                                 </DockPanel>
                             </Button>
 
-                            <!-- Exporter les acomptes -->
-                            <Button 
-                                    VerticalAlignment="Bottom" 
-                                    HorizontalAlignment="Left" 
-                                    Margin="10"
-                                    BorderBrush="Transparent"
-                                    Height="29"
-                                    Width="120"
-                                    Background="Gray" 
-                                    Foreground="White">
-                                <DockPanel>
-                                    <materialDesign:PackIcon
-                                            Kind="Export"
-                                            Margin="0,0,5,0"
-                                            />
-
-                                    <TextBlock 
-                                            Text="Acomptes"
-                                            FontSize="13"/>
-                                </DockPanel>
-                            </Button>
+                       
                         </StackPanel>
 
                     </Button>

@@ -25,7 +25,6 @@ namespace Couche_IHM.ImagesProduit
             {
                 
                 path = path.Substring(8, path.Length - 8);
-                MessageBox.Show(path);
             }
             FileStream imgStream = File.OpenRead(path);
 
@@ -46,6 +45,10 @@ namespace Couche_IHM.ImagesProduit
             if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.jpg"))
             {
                 pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.jpg";
+            }
+            else if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.png"))
+            {
+                pathImage = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{productName}.png";
             }
             else if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png"))
             {

@@ -27,20 +27,25 @@ namespace Couche_IHM
         /// </summary>
         private LogManager logManager;
 
+        private string identifiant;
+        private string password;
+
         public ConnexionIHM()
         {
             InitializeComponent();
+            DataContext = this;
             userManager = MainWindowViewModel.Instance.UserManager;
             logManager = MainWindowViewModel.Instance.LogManager;
         }
+
+        public string Identifiant { get => identifiant; set => identifiant = value; }
+        public string Password { get => password; set => password = value; }
 
         /// <summary>
         /// Permet de se connecter à son compte et de créer la mainWindows
         /// </summary>
         private void ConnectToAccount(object sender, RoutedEventArgs e)
         {
-            string identifiant = this.identifiantBox.Text;
-            string password = this.passwordBox.Password;
             User? user = this.userManager.ConnectCompte(identifiant, password);
             if (user != null)
             {

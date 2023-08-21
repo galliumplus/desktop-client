@@ -3,6 +3,7 @@
 using Couche_IHM.ImagesProduit;
 using Couche_Métier;
 using Couche_Métier.Utilitaire;
+using Microsoft.Win32;
 using Modeles;
 using System;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace Couche_IHM.VueModeles
         private Product product;
         private ImageManager imageManager;
         private ConverterFormatArgent formatArgent;
+        private BitmapImage image;
         private ProductManager productManager;
         private CategoryManager categoryManager;
         private int quantiteIHM;
@@ -44,6 +46,8 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ResetProd { get; set; }
         public RelayCommand UpdateProd { get; set; }
         public RelayCommand DeleteProd { get; set; }
+
+        public RelayCommand ChangeImage { get;set; }
         #endregion
 
         #region properties
@@ -137,9 +141,11 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public BitmapImage ImageProduct 
         {
-            get
+            get => image;
+            set 
             { 
-                return new BitmapImage(new Uri(imageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
+                image = value;
+                NotifyPropertyChanged();
             }
             
         }
@@ -167,6 +173,7 @@ namespace Couche_IHM.VueModeles
             this.categoryIHM = categoryProduit;
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
+            this.image = new BitmapImage(new Uri(imageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
             this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
 
@@ -175,10 +182,27 @@ namespace Couche_IHM.VueModeles
             this.UpdateProd = new RelayCommand(x => UpdateProduct());
             this.CreateProd = new RelayCommand(x => CreateProduct());
             this.DeleteProd = new RelayCommand(x => DeleteProduct());
+            this.ChangeImage = new RelayCommand(x => ChangeImageProduct()); 
 
         }
 
         #region methods
+        /// <summary>
+        /// Permet de changer l'image du produit
+        /// </summary>
+        public void ChangeImageProduct()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.png)|*.jpg; *.png|All Files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string nomImage =openFileDialog.FileName;
+                this.ImageProduct = new BitmapImage(new Uri(nomImage, UriKind.Absolute));
+                NotifyPropertyChanged(nameof(ImageProduct));
+            }
+        }
+
         public void DeleteCatNotify()
         {
             this.categoryIHM = null;
@@ -197,6 +221,10 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
+                ImageManager imageManager = new ImageManager();
+                byte[] bitsImage = imageManager.ConvertImageToBlob(image.UriSource.ToString());
+                imageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                
                 this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
@@ -257,6 +285,9 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
+                ImageManager imageManager = new ImageManager();
+                byte[] bitsImage = imageManager.ConvertImageToBlob(image.UriSource.ToString());
+                imageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
                 this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
@@ -300,10 +331,12 @@ namespace Couche_IHM.VueModeles
            
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
+            this.image = new BitmapImage(new Uri(imageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
             this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
             this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
 
             // Notifier la vue
+            NotifyPropertyChanged(nameof(ImageProduct));
             NotifyPropertyChanged(nameof(CategoryIHM));
             NotifyPropertyChanged(nameof(QuantiteIHM));
             NotifyPropertyChanged(nameof(NomProduitIHM));

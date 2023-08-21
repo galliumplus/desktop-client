@@ -164,7 +164,7 @@ namespace Couche_IHM.VueModeles
             this.adhérentManager.RemoveAdhérent(this.adherent);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 2, $"Suppresion de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
@@ -192,7 +192,7 @@ namespace Couche_IHM.VueModeles
             adhérentManager.CreateAdhérent(this.adherent);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 2, $"Création de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(0, DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
@@ -225,7 +225,7 @@ namespace Couche_IHM.VueModeles
             // Log l'action
             if (doLog)
             {
-                Log log = new Log(0, DateTime.Now, 2, $"Modification de l'acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(0, DateTime.Now, 2, $"Modification de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
                 MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             }

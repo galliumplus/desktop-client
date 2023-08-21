@@ -504,7 +504,7 @@
                     
                     <!-- Retour -->
                     <Button 
-                        Content="Annuler" 
+                        Content="Retour" 
                         Command="{Binding ProductViewModel.CloseCategory}"
                         Background="Gray" 
                         Grid.Row="2" 
@@ -519,7 +519,7 @@
         </materialDesign:DialogHost>
         
         <!-- Modification / Creation produit -->
-        <materialDesign:DialogHost CloseOnClickAway="True" Grid.RowSpan="2" Grid.ColumnSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -571,21 +571,22 @@
                     </Button>
                     
                     <!-- Colonne 1 : Image-->
-                    <Grid Margin="20" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4">
+                    <Button
+                        Command="{Binding ProductViewModel.CurrentProduct.ChangeImage}"
+                        Margin="20" 
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Grid.Column="0" 
+                        Height="220"
+                        Grid.Row="1" 
+                        Grid.RowSpan="4"
+                            >
                         <Image 
-                            Source="{Binding ProductViewModel.CurrentProduct.ImageProduct}" 
+                            Source="{Binding ProductViewModel.CurrentProduct.ImageProduct}"
                             Width="200"
+                            Height="220"
                             Style="{StaticResource ImageStyle}"/>
-                        <Image 
-                            x:Name="modifImage" 
-                            Source="/Assets/Icone/modif2.png" 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Center" 
-                            Visibility="Hidden" 
-                            IsHitTestVisible="False" 
-                            Width="30" 
-                            Height="30"/>
-                    </Grid>
+                    </Button>
 
 
                     <!-- Colonne 2 -->
