@@ -29,13 +29,24 @@ namespace Couche_Métier.Manager
         public LogManager()
         {
             logDao = new LogDAO();
-            this.logs = this.logDao.GetLogs();
+            int annee = Convert.ToInt16(DateTime.Now.ToString("yyyy"));
+            int mois = Convert.ToInt16(DateTime.Now.ToString("MM"));
+            this.logs = this.logDao.GetLogs(mois,annee);
             this.logThemes = this.logDao.GetLogsTheme();
         }
 
-        public List<Modeles.Log> GetLogs()
+        public List<Modeles.Log> GetLogs(int mois = 0,int annee=0)
         {
-            return this.logs;
+            List<Log> logs = new List<Log>();
+            if (mois == 0 || annee == 0)
+            {
+                logs = this.logs;
+            }
+            else
+            {
+                logs = this.logDao.GetLogs(mois, annee);
+            }
+            return logs;
         }
 
         public List<Modeles.LogTheme> GetLogsTheme()

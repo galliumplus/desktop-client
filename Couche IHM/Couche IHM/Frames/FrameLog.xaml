@@ -125,7 +125,28 @@
             
             <Border BorderThickness="1" Margin="0,65,0,0">
                 <StackPanel>
-                    <Grid>
+                    
+                    <!-- filtre mois-->
+                    <TextBlock
+                        Margin="0,0,0,2"
+                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="15"
+                        Text="Date :"/>
+                    <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                        <ComboBox
+                            ItemsSource="{Binding LogsViewModel.Mois}"
+                            SelectedItem="{Binding LogsViewModel.CurrentMois}"
+                            materialDesign:HintAssist.Hint="Mois"
+                        />
+                        <ComboBox
+                            SelectedItem="{Binding LogsViewModel.CurrentAnnee}"
+                            ItemsSource="{Binding LogsViewModel.Annees}"
+                            Margin="20,0,0,0"
+                            materialDesign:HintAssist.Hint="Année"
+                        />
+                    </StackPanel>
+                   
+
+                    <Grid Margin="0,50,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
@@ -135,10 +156,10 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        
-                    <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-23,-20,0,0"  Text="Opérations :" FontSize="15"/>
-                    
-                    <!-- Filtres domaine-->
+
+                        <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-23,-20,0,0"  Text="Opérations :" FontSize="15"/>
+
+                        <!-- Filtres domaine-->
                         <CheckBox 
                             IsChecked="{Binding LogsViewModel.SelectProduct}"  
                             Background="LightGreen"
@@ -170,30 +191,6 @@
                             Background="Green"
                             Content="Connexion"/>
                     </Grid>
-                    
-                    <!-- Filtre heures-->
-                    <TextBlock  
-                        TextDecorations="Underline" 
-                        FontFamily="Roboto" 
-                        HorizontalAlignment="Left" 
-                        Margin="0,30,0,9"  
-                        Text="Heures :" 
-                        FontSize="15"/>
-                    
-                    <xctk:RangeSlider  
-                        TickFrequency="1" 
-                        TickPlacement="BottomRight" 
-                        Name="timespan" 
-                        Minimum="7" Maximum="19"   
-                        AutoToolTipPlacement="BottomRight"  
-                        IsSnapToTickEnabled="True" 
-                        HigherValue="19" 
-                        HigherThumbBackground="Black" 
-                        LowerThumbBackground="Black"  />
-                    <TextBlock 
-                        FontWeight="DemiBold"  
-                        Text="    7     8     9    10    11   12   13    14   15   16    17   18   19" 
-                        FontSize="8"/>
 
                     <!-- Filtre auteur-->
                     <TextBlock  

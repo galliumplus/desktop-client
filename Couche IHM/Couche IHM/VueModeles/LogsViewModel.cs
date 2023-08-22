@@ -20,6 +20,24 @@ namespace Couche_IHM.VueModeles
         private UserManager userManager;
         private LogManager logManager;
         private string currentAuteur;
+        private int currentAnnee;
+        private string currentMois;
+        private List<string> mois = new List<string>()
+        {
+            "janvier",
+            "février",
+            "mars",
+            "avril",
+            "mai",
+            "juin",
+            "juillet",
+            "août",
+            "septembre",
+            "octobre",
+            "novembre",
+            "décembre"
+        };
+        private List<int> annees;
 
         private List<int> themeLog;
         private bool selectVente;
@@ -34,7 +52,12 @@ namespace Couche_IHM.VueModeles
             this.logManager = logManager;
 
             // Initialisation des datas
+            DateTime currentDate = DateTime.Now;
             currentAuteur = Auteurs[0];
+            int année = Convert.ToInt16(currentDate.ToString("yyyy"));
+            this.annees = new List<int>() { année, année - 1, année - 2 };
+            currentMois = currentDate.ToString("MMMM");
+            currentAnnee = année;
             this.SelectVente = true;
             this.SelectAcompte = false;
             this.SelectConnexion = false;
@@ -195,6 +218,35 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
+
+        public List<string> Mois { get => mois; set => mois = value; }
+        public List<int> Annees { get => annees; set => annees = value; }
+        public string CurrentMois 
+        { 
+            get => currentMois;
+            set
+            {
+                currentMois = value;
+                this.logs.Clear();
+                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                NotifyPropertyChanged(nameof(Logs));
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public int CurrentAnnee 
+        { 
+            get => currentAnnee;
+            set
+            {
+                currentAnnee = value;
+                this.logs.Clear();
+                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                NotifyPropertyChanged(nameof(Logs));
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region notify
@@ -209,9 +261,9 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'initialiser la liste des logs
         /// </summary>
-        public void InitLogs()
+        public void InitLogs(int mois=0,int annee=0)
         {
-            List<Log> logs = this.logManager.GetLogs();
+            List<Log> logs = this.logManager.GetLogs(mois,annee);
             foreach (Log log in logs)
             {
                 this.logs.Add(new LogViewModel(log));
