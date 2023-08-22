@@ -16,7 +16,7 @@ namespace Couche_Data
             dbsDAO.Instance.OpenDataBase();
 
             //Requette SQL
-            string stm = "SELECT * FROM Categories ORDER BY name";
+            string stm = "SELECT * FROM categories ORDER BY name";
             MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
             cmd.Prepare();
 
