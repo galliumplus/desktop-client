@@ -203,6 +203,7 @@ namespace Couche_IHM.VueModeles
                 foreach (ProductViewModel product in productOrder.Keys)
                 {
                     StatProduit stat = new StatProduit(0, DateTime.Now, productOrder[product], product.Id);
+                    MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
                     statProduitManager.CreateStat(stat);
                 }
             });

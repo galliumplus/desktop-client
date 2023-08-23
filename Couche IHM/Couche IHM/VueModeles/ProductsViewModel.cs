@@ -25,10 +25,8 @@ namespace Couche_IHM.VueModeles
         #region attributes
         private ObservableCollection<ProductViewModel> products = new ObservableCollection<ProductViewModel>();
         private ObservableCollection<CategoryViewModel> categories = new ObservableCollection<CategoryViewModel>();
-        private List<PodiumProduit> stats = new List<PodiumProduit>();
         private ProductManager productManager;
         private CategoryManager categoryManager;
-        private StatProduitManager statProduit;
         private ProductViewModel currentProduct;
 
         private bool showProductDetail = false;
@@ -49,19 +47,6 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
-
-        
-
-        /// <summary>
-        /// Liste des adhérents
-        /// </summary>
-        public List<PodiumProduit> PodiumProduits
-        {
-            get
-            {
-                return stats.Take(3).ToList();
-            }
-        }
 
 
         /// <summary>
@@ -211,6 +196,8 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public ProductManager ProductManager { get => productManager; set => productManager = value; }
+
 
         #endregion
 
@@ -222,7 +209,6 @@ namespace Couche_IHM.VueModeles
             // Initialisation objet métier
             this.productManager = new ProductManager();
             this.categoryManager = new CategoryManager();
-            this.statProduit = new StatProduitManager();
 
             // Initialisation Events
             this.OpenProd = new RelayCommand(action => OpenProductDetails((string)action));
@@ -240,8 +226,6 @@ namespace Couche_IHM.VueModeles
             // Initialisation Data
             InitCategories();
             InitProducts();
-            InitStats();
-            
         }
 
         #region methods
@@ -261,6 +245,7 @@ namespace Couche_IHM.VueModeles
             this.currentProduct = this.products[0];
         }
 
+
         /// <summary>
         /// Permet de récupérer la liste des catégories
         /// </summary>
@@ -270,20 +255,6 @@ namespace Couche_IHM.VueModeles
             foreach (Category cat in categories)
             {
                 this.categories.Add(new CategoryViewModel(this.categoryManager,cat));
-            }
-        }
-
-        /// <summary>
-        /// Permet de récupérer la liste des catégories
-        /// </summary>
-        private void InitStats()
-        {
-            List<StatProduit> statProduit = this.statProduit.GetStats();
-            int classement = 0;
-            foreach (StatProduit stat in statProduit)
-            {
-                classement++;
-                this.stats.Add(new PodiumProduit(stat, products.ToList().Find(x => x.Id == stat.Product_id),classement));
             }
         }
 
@@ -328,6 +299,14 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(Products));
         }
 
+        /// <summary>
+        /// Permet de récupérer les produits
+        /// </summary>
+        /// <returns></returns>
+        public List<ProductViewModel> GetProducts()
+        {
+            return this.products.ToList();
+        }
 
         #endregion
     }

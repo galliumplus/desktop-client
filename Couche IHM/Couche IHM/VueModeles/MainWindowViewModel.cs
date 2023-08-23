@@ -36,12 +36,14 @@ namespace Couche_IHM.VueModeles
         public LogsViewModel LogsViewModel { get => logsViewModel; set => logsViewModel = value; }
 
         public UsersViewModel UserViewModel { get => userViewModel; set => userViewModel = value; }
+        public StatistiqueViewModel StatViewModel { get => statViewModel; set => statViewModel = value; }
 
         private AdherentsViewModel adherentViewModel;
         private ProductsViewModel productViewModel;
         private CaisseViewModel caisseViewModel;
         private LogsViewModel logsViewModel;
         private UsersViewModel userViewModel;
+        private StatistiqueViewModel statViewModel;
         #endregion
 
         #region notify
@@ -118,6 +120,8 @@ namespace Couche_IHM.VueModeles
         }
 
 
+
+
         #endregion
 
         private MainWindowViewModel()
@@ -127,6 +131,7 @@ namespace Couche_IHM.VueModeles
             this.adherentViewModel = new AdherentsViewModel();
             this.productViewModel = new ProductsViewModel();
             this.caisseViewModel = new CaisseViewModel();
+            this.statViewModel = new StatistiqueViewModel(productViewModel.GetProducts());
             this.logsViewModel = new LogsViewModel(userManager,logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
