@@ -27,7 +27,7 @@ namespace Couche_Data
             {
                 products.Add(new Product(rdr.GetInt32("product_id"), rdr.GetString("name"), rdr.GetInt32("stock"), rdr.GetFloat("price_na"), rdr.GetFloat("price_a"), rdr.GetInt32("category_id")));
             }
-
+            rdr.Close();
             dbsDAO.Instance.CloseDatabase();
         }
 

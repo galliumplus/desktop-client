@@ -26,6 +26,7 @@ namespace Couche_Data
                 adherents.Add(new Adhérent(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), ""));
             }
 
+            rdr.Close();
             dbsDAO.Instance.CloseDatabase();
         }
 

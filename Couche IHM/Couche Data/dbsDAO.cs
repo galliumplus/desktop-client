@@ -67,6 +67,12 @@ namespace Couche_Data
             this.ConnexionToBdd();
             
         }
+        private object databaseLock = new object();
+
+        public object DatabaseLock
+        {
+            get { return databaseLock; }
+        }
 
         /// <summary>
         /// Se connecte à la base de donnée
@@ -82,8 +88,12 @@ namespace Couche_Data
         /// </summary>
         public void OpenDataBase()
         {
-            sql.Open();
-            isConnected = true;
+            if (!isConnected)
+            {
+                sql.Open();
+                isConnected = true;
+            }
+            
         }
 
         /// <summary>
@@ -91,8 +101,11 @@ namespace Couche_Data
         /// </summary>
         public void CloseDatabase()
         {
-            sql.Close();
-            isConnected = false;
+            if (isConnected)
+            {
+                sql.Close();
+                isConnected = false;
+            }
         }
 
     }

@@ -27,7 +27,7 @@ namespace Couche_Data
             {
                 categories.Add(new Category(rdr.GetInt32("category_id"), rdr.GetString("name"), rdr.GetBoolean("activated")));
             }
-
+            rdr.Close();
             dbsDAO.Instance.CloseDatabase();
 
 

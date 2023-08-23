@@ -169,7 +169,7 @@ namespace Couche_IHM.VueModeles
 
             // Notifier la vue
             MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
 
@@ -200,7 +200,7 @@ namespace Couche_IHM.VueModeles
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
-            MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }

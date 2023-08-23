@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Manager;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,10 @@ namespace Couche_IHM.VueModeles
         #region attributes
         private ObservableCollection<ProductViewModel> products = new ObservableCollection<ProductViewModel>();
         private ObservableCollection<CategoryViewModel> categories = new ObservableCollection<CategoryViewModel>();
+        private List<PodiumProduit> stats = new List<PodiumProduit>();
         private ProductManager productManager;
         private CategoryManager categoryManager;
+        private StatProduitManager statProduit;
         private ProductViewModel currentProduct;
 
         private bool showProductDetail = false;
@@ -38,6 +41,7 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region events
+
         public RelayCommand OpenProd { get; set; }
         public RelayCommand CloseCategory { get; set; }
         public RelayCommand OpenCat { get; set; }
@@ -46,6 +50,8 @@ namespace Couche_IHM.VueModeles
 
         #region properties
 
+        
+
         /// <summary>
         /// Liste des adhérents
         /// </summary>
@@ -53,15 +59,10 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                List<PodiumProduit> podAdherents = new List<PodiumProduit>();
-                List<ProductViewModel> prds = products.OrderByDescending(a => a.PurchaseCount).Take(3).ToList();
-                for (int i = 0; i < 3; i++)
-                {
-                    podAdherents.Add(new PodiumProduit(prds[i], i));
-                }
-                return podAdherents;
+                return stats.Take(3).ToList();
             }
         }
+
 
         /// <summary>
         /// Représente toutes les catégories de produits disponibles
@@ -171,7 +172,9 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-        public ProductManager ProductManager { get => productManager; set => productManager = value; }
+        /// <summary>
+        /// Permet d'afficher la popup des catégories
+        /// </summary>
         public bool ShowCategories 
         { 
             get => showCategories;
@@ -182,6 +185,9 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Permet d'afficher l'icone pour supprimer un produit
+        /// </summary>
         public bool ShowDeleteProduct 
         { 
             get => showDeleteProduct;
@@ -208,16 +214,19 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
+        /// <summary>
+        /// Constructeur du viewModel
+        /// </summary>
         public ProductsViewModel()
         {
             // Initialisation objet métier
             this.productManager = new ProductManager();
             this.categoryManager = new CategoryManager();
+            this.statProduit = new StatProduitManager();
 
             // Initialisation Events
             this.OpenProd = new RelayCommand(action => OpenProductDetails((string)action));
             this.OpenCat = new RelayCommand(x => this.ShowCategories = true);
-            
             this.CloseCategory = new RelayCommand(x =>
             {
                 foreach (CategoryViewModel categoryViewModel in categories)
@@ -231,6 +240,7 @@ namespace Couche_IHM.VueModeles
             // Initialisation Data
             InitCategories();
             InitProducts();
+            InitStats();
             
         }
 
@@ -260,6 +270,20 @@ namespace Couche_IHM.VueModeles
             foreach (Category cat in categories)
             {
                 this.categories.Add(new CategoryViewModel(this.categoryManager,cat));
+            }
+        }
+
+        /// <summary>
+        /// Permet de récupérer la liste des catégories
+        /// </summary>
+        private void InitStats()
+        {
+            List<StatProduit> statProduit = this.statProduit.GetStats();
+            int classement = 0;
+            foreach (StatProduit stat in statProduit)
+            {
+                classement++;
+                this.stats.Add(new PodiumProduit(stat, products.ToList().Find(x => x.Id == stat.Product_id),classement));
             }
         }
 

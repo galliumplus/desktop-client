@@ -2,6 +2,7 @@
 using Modeles;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +59,6 @@ namespace Couche_Métier.Manager
         {
             this.logs.Insert(0, log);
             this.logDao.CreateLog(log);
-
         }
     }
 }

@@ -277,7 +277,12 @@ namespace Couche_IHM.VueModeles
         /// <param name="log">og à ajouter</param>
         public void AddLog(LogViewModel log)
         {
-            this.logs.Insert(0, log);
+
+            if (mois.IndexOf(currentMois)+1 == Convert.ToInt16(log.DateTime.ToString("MM")) && currentAnnee == Convert.ToInt16(log.DateTime.ToString("yyyy")))
+            {
+                this.logs.Insert(0, log);
+            }
+            
         }
 
         #endregion

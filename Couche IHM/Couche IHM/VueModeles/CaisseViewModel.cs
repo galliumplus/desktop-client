@@ -1,13 +1,16 @@
 ﻿
+using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -18,9 +21,15 @@ namespace Couche_IHM.VueModeles
         private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
         private string currentPaiement;
         private bool showPayAcompte = false;
+        private bool isAdherent = true;
         private AdherentViewModel adherentPayer = null;
+        private StatProduitManager statProduitManager;
         public CaisseViewModel()
         {
+            // Initialisation objets métier
+            this.statProduitManager = new StatProduitManager();
+
+            // Initialisation events
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
@@ -166,6 +175,16 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public bool IsAdherent
+        {
+            get => isAdherent;
+            set
+            {
+                isAdherent = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -174,9 +193,19 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de payer les articles
         /// </summary>
-        private void PayArticles(AdherentViewModel acompte = null)
+        private async void PayArticles(AdherentViewModel acompte = null)
         {
             string messageLog = $"Achat par {currentPaiement} ";
+
+            // Gérer les stats 
+            Task.Run(() =>
+            {
+                foreach (ProductViewModel product in productOrder.Keys)
+                {
+                    StatProduit stat = new StatProduit(0, DateTime.Now, productOrder[product], product.Id);
+                    statProduitManager.CreateStat(stat);
+                }
+            });
 
             // Si paiement par acompte
             if (acompte != null)
@@ -186,17 +215,30 @@ namespace Couche_IHM.VueModeles
                 {
                     argent -= this.PriceAdher;
                     acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
-                    messageLog += $"({this.PriceAdherIHM}) de ";
+                    messageLog += $"({this.PriceAdherIHM}) : ";
                 }
                 else
                 {
                     argent -= this.PriceNanAdher;
                     acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
-                    messageLog += $"({this.PriceNanAdher}) de ";
+                    messageLog += $"({this.PriceNanAdher}) : ";
                 }
                 acompte.UpdateAdherent(false);
                 this.ShowPayAcompte = false;
             }
+            else
+            {
+                if (isAdherent)
+                {
+                    messageLog += $"({this.PriceAdherIHM}) : ";
+                }
+                else
+                {
+                    messageLog += $"{this.PriceNonAdherIHM} : ";
+                }
+            }
+
+
 
             // Changer la data
             foreach (ProductViewModel product in productOrder.Keys)
@@ -205,16 +247,21 @@ namespace Couche_IHM.VueModeles
                 messageLog += product.NomProduitIHM +", ";
                 product.UpdateProduct(false);
             }
-
+            
+            
             // Log l'action
             Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
+            Task.Run (() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
+
+
 
             // Notifier la vue
             this.ProductOrder.Clear();
             NotifyPropertyChanged(nameof(PriceAdherIHM));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
             MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+
+
         }
 
         /// <summary>

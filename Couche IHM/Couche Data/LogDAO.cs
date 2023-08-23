@@ -13,19 +13,22 @@ namespace Couche_Data
 
         public void CreateLog(Log log)
         {
-            //Connection
-            dbsDAO.Instance.OpenDataBase();
+            lock (dbsDAO.Instance.DatabaseLock)
+            {
+                //Connection
+                dbsDAO.Instance.OpenDataBase();
 
-            //Requette SQL
-            string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
-            string stm = $"INSERT INTO logs VALUES(0,'{log.Message}','{formattedDate}',{log.Theme},'{log.Auteur}')";
-            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
-            cmd.Prepare();
+                //Requette SQL
+                string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
+                string stm = $"INSERT INTO logs VALUES(0,'{log.Message}','{formattedDate}',{log.Theme},'{log.Auteur}')";
+                MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+                cmd.Prepare();
 
-            //lecture de la requette
-            cmd.ExecuteNonQuery();
+                //lecture de la requette
+                cmd.ExecuteNonQuery();
 
-            dbsDAO.Instance.CloseDatabase();
+                dbsDAO.Instance.CloseDatabase();
+            }
         }
 
 
@@ -71,6 +74,7 @@ namespace Couche_Data
                 logsTheme.Add(new LogTheme(rdr2.GetInt32("log_category_id"), rdr2.GetString("name")));
             }
 
+            rdr2.Close();
             dbsDAO.Instance.CloseDatabase();
             return logsTheme;
         }

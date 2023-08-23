@@ -106,15 +106,15 @@
                                             <materialDesign:PackIcon.Style>
                                                 <Style TargetType="materialDesign:PackIcon">
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="0">
+                                                        <DataTrigger Binding="{Binding Podium}" Value="1">
                                                             <Setter Property="Kind" Value="Numeric1" />
                                                             <Setter Property="Foreground" Value="Gold" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="1">
+                                                        <DataTrigger Binding="{Binding Podium}" Value="2">
                                                             <Setter Property="Kind" Value="Numeric2" />
                                                             <Setter Property="Foreground" Value="Silver" />
                                                         </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="2">
+                                                        <DataTrigger Binding="{Binding Podium}" Value="3">
                                                             <Setter Property="Kind" Value="Numeric3" />
                                                             <Setter Property="Foreground" Value="#CD853F" />
                                                         </DataTrigger>
@@ -167,7 +167,7 @@
                             <!-- nb vendu !-->
                             <TextBlock
                                 Margin="0,20,0,0"
-                                Text="{Binding Path=PurchaseCount, StringFormat=' {0}x'}"
+                                Text="{Binding Path=PurchaseCount, StringFormat=' {0}'}"
                                 Grid.Column="0"
                                 />
                             
@@ -187,15 +187,15 @@
                                         <materialDesign:PackIcon.Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Podium}" Value="0">
+                                                    <DataTrigger Binding="{Binding Podium}" Value="1">
                                                         <Setter Property="Kind" Value="Numeric1" />
                                                         <Setter Property="Foreground" Value="Gold" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Podium}" Value="1">
+                                                    <DataTrigger Binding="{Binding Podium}" Value="2">
                                                         <Setter Property="Kind" Value="Numeric2" />
                                                         <Setter Property="Foreground" Value="Silver" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Podium}" Value="2">
+                                                    <DataTrigger Binding="{Binding Podium}" Value="3">
                                                         <Setter Property="Kind" Value="Numeric3" />
                                                         <Setter Property="Foreground" Value="#CD853F" />
                                                     </DataTrigger>

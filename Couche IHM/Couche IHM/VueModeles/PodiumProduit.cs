@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Modeles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,11 @@ namespace Couche_IHM.VueModeles
         private int podium;
         private int purchaseCount;
 
-        public PodiumProduit(ProductViewModel productViewModel, int podium)
+        public PodiumProduit(StatProduit stat,ProductViewModel product,int podium)
         {
-            this.productViewModel = productViewModel;
+            this.purchaseCount = stat.Number_sales;
+            this.productViewModel = product;
             this.podium = podium;
-            this.purchaseCount = productViewModel.PurchaseCount;
         }
 
         public ProductViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }

@@ -43,7 +43,7 @@ namespace Couche_Data
             {
                 roles.Add(new Role(rdr2.GetInt32("grade_id"), rdr2.GetString("name")));
             }
-
+            rdr2.Close();
             dbsDAO.Instance.CloseDatabase();
 
         }

@@ -153,6 +153,25 @@
                     Foreground="Black" 
                     FontSize="13"  
                     VerticalAlignment="Center" />
+                <ToggleButton
+                    IsChecked="{Binding CaisseViewModel.IsAdherent}"
+                    FontSize="13"
+                    Foreground="Black"
+                    Background="Transparent"
+                    Height="17"
+                  materialDesign:ToggleButtonAssist.OnContent="A"
+                  Content="NA"
+                  ToolTip="MaterialDesignActionLightToggleButton" >
+                    <ToggleButton.Style>
+                        <Style BasedOn="{StaticResource MaterialDesignActionToggleButton}" TargetType="ToggleButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Acompte">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
             </StackPanel>
 
             <!-- Bouton Payer-->
@@ -175,6 +194,7 @@
                         HorizontalAlignment="Center"
                         FontWeight="Bold"
                         FontSize="15" 
+                        
                         Text="Paiement par Acompte"
                         Margin="0 0 0 20"/>
                     <Label 

@@ -51,6 +51,10 @@ namespace Couche_IHM.VueModeles
 
         #region properties
 
+        public int Id
+        {
+            get => product.ID;
+        }
         /// <summary>
         /// Permet de savoir si le produit est disponible
         /// </summary>
@@ -219,21 +223,24 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
-                byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
-                ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                
                 
                 this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
-                this.productManager.UpdateProduct(this.product);
+
 
                 // Log l'action
                 if (doLog)
                 {
+                    byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
+                    ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
                     Log log = new Log(0, DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                     MainWindowViewModel.Instance.LogManager.CreateLog(log);
-                    MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+
                 }
+                this.productManager.UpdateProduct(this.product);
 
                 // Notifier la vue
                 NotifyPropertyChanged(nameof(NomProduitIHM));
@@ -300,7 +307,7 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged(nameof(QuantiteIHM));
                 NotifyPropertyChanged(nameof(CategoryIHM));
                 NotifyPropertyChanged(nameof(isDisponible));
-                MainWindowViewModel.Instance.LogsViewModel.Logs.Insert(0, new LogViewModel(log));
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
                 MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
                 MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
             }

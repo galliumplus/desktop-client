@@ -26,7 +26,10 @@ namespace Couche_IHM.VueModeles
             get => log.Date.ToString("g"); 
         }
 
-
+        public DateTime DateTime
+        {
+            get => log.Date;
+        }
         /// <summary>
         /// Représente la couleur de l'opération
         /// </summary>
