@@ -24,10 +24,12 @@ namespace Couche_IHM.VueModeles
         private bool isAdherent = true;
         private AdherentViewModel adherentPayer = null;
         private StatProduitManager statProduitManager;
+        private StatAcompteManager statAcompteManager;
         public CaisseViewModel()
         {
             // Initialisation objets métier
             this.statProduitManager = new StatProduitManager();
+            this.statAcompteManager = new StatAcompteManager();
 
             // Initialisation events
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
@@ -198,11 +200,12 @@ namespace Couche_IHM.VueModeles
             string messageLog = $"Achat par {currentPaiement} ";
 
             // Gérer les stats 
+            ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
             Task.Run(() =>
             {
-                foreach (ProductViewModel product in productOrder.Keys)
+                foreach (ProductViewModel product in productOrder2.Keys)
                 {
-                    StatProduit stat = new StatProduit(0, DateTime.Now, productOrder[product], product.Id);
+                    StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
                     MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
                     statProduitManager.CreateStat(stat);
                 }
@@ -212,18 +215,25 @@ namespace Couche_IHM.VueModeles
             if (acompte != null)
             {
                 float argent = this.convertFormatArgent.ConvertToDouble(acompte.ArgentIHM);
+                float prix;
                 if (acompte.IsAdherentIHM)
                 {
-                    argent -= this.PriceAdher;
-                    acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
-                    messageLog += $"({this.PriceAdherIHM}) : ";
+                    prix = this.PriceAdher;
                 }
                 else
                 {
-                    argent -= this.PriceNanAdher;
-                    acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent);
-                    messageLog += $"({this.PriceNanAdher}) : ";
+                    prix = this.PriceNanAdher;
                 }
+
+                Task.Run(() =>
+                {
+                    StatAcompte stat = new StatAcompte(0, DateTime.Now,prix ,acompte.Id);
+                    MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
+                    statAcompteManager.CreateStat(stat);
+                });
+
+                acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent- prix);
+                messageLog += $"({prix}) : ";
                 acompte.UpdateAdherent(false);
                 this.ShowPayAcompte = false;
             }

@@ -66,6 +66,11 @@ namespace Couche_IHM.VueModeles
 
         }
 
+        public int Id
+        {
+            get => adherent.Id;
+        }
+
         public int PurchaseCount
         {
             get => random;

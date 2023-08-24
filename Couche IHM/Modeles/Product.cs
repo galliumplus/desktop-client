@@ -23,6 +23,7 @@ namespace Modeles
         public int ID
         {
             get { return id; }
+            set { id = value; }
         }
 
         /// <summary>

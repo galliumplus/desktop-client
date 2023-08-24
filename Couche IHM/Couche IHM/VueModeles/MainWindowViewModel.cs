@@ -131,7 +131,7 @@ namespace Couche_IHM.VueModeles
             this.adherentViewModel = new AdherentsViewModel();
             this.productViewModel = new ProductsViewModel();
             this.caisseViewModel = new CaisseViewModel();
-            this.statViewModel = new StatistiqueViewModel(productViewModel.GetProducts());
+            this.statViewModel = new StatistiqueViewModel(productViewModel.GetProducts(),adherentViewModel.GetAcomptes());
             this.logsViewModel = new LogsViewModel(userManager,logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);

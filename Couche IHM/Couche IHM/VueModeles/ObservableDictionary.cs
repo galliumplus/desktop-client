@@ -26,9 +26,13 @@ namespace Couche_IHM.VueModeles
             this.baseDictionary = new Dictionary<TKey, TValue>();
         }
 
-       
+        public ObservableDictionary(ObservableDictionary<TKey, TValue> dictionary)
+        {
+            this.baseDictionary = new Dictionary<TKey, TValue>(dictionary.baseDictionary);
+        }
+
         #region base methods
-     
+
         public void Clear()
         {
             baseDictionary.Clear();

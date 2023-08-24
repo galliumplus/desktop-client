@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Couche_Métier.Utilitaire;
+using Modeles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +11,24 @@ namespace Couche_IHM.VueModeles
     public class PodiumAdherent
     {
         private AdherentViewModel adherentViewModel;
-        private int podium;
-        private int purchaseCount;
+        private float argent;
 
-        public PodiumAdherent(AdherentViewModel adherentViewModel, int podium)
+        public PodiumAdherent(StatAcompte stat,AdherentViewModel adherentViewModel)
         {
             this.adherentViewModel = adherentViewModel;
-            this.podium = podium;
-            this.purchaseCount = adherentViewModel.PurchaseCount;
+            this.argent = stat.Amount_money;
         }
 
         public AdherentViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
-        public int Podium { get => podium; set => podium = value; }
-        public int PurchaseCount { get => purchaseCount; set => purchaseCount = value; }
+        public string FormattedArgent
+        {
+            get
+            {
+                ConverterFormatArgent c = new ConverterFormatArgent();
+                return c.ConvertToString(argent);
+            }
+            
+        }
+        public float Argent { get => argent; set => argent = value; }
     }
 }

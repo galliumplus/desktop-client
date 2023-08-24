@@ -14,11 +14,7 @@ namespace Couche_Data
         /// <returns> liste de produits </returns>
         public List<Product> GetProducts();
 
-        /// <summary>
-        /// Récupère tous les produits d'une catégorie
-        /// </summary>
-        /// <returns> liste de produits </returns>
-        public List<Product> GetProductsByCategory(Category category);
+     
 
         /// <summary>
         /// retire un produit
@@ -38,11 +34,6 @@ namespace Couche_Data
         /// <param name="product"> Produit à modifier </param>
         public void UpdateProduct(Product product);
 
-        /// <summary>
-        /// Récupère un produit
-        /// </summary>
-        /// <param name="name"> Nom du produit </param>
-        /// <returns> Un produit </returns>
-        public Product? GetProduct(int name);
+ 
     }
 }

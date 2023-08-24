@@ -60,15 +60,16 @@ namespace Couche_Métier
         /// <returns> liste de produits </returns>
         public List<Product> GetProductsByCategory(Category category)
         {
-            return this.productDAO.GetProductsByCategory(category);
+            return this.products.FindAll(x => category.IdCat == x.Categorie);
         }
+
 
         /// <summary>
         /// Update un produit
         /// </summary>
         public void UpdateProduct(Product p)
         {
-            Product actalProduit = this.GetProduct(p.ID);
+            Product actalProduit = this.products.Find(x => p.ID == x.ID);
             actalProduit.NomProduit = p.NomProduit;
             actalProduit.PrixNonAdherent = p.PrixNonAdherent;
             actalProduit.PrixAdherent = p.PrixAdherent;

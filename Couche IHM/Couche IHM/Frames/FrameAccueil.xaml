@@ -12,6 +12,7 @@
       Background="White">
     <Page.Resources>
         <rules:PositionPodiumProduit x:Key="PositionConverter" />
+        <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
     </Page.Resources>
     <Grid Margin="30,30,30,5">
 
@@ -46,7 +47,7 @@
                 FontSize="21"
                 VerticalAlignment="Center"
                 FontWeight="Bold"
-                Text="Top de la journée"/>
+                Text="Top de la semaine"/>
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
                 Margin="10,0,0,0"
@@ -69,10 +70,10 @@
                 FontSize="17"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
-                Text="Les plus gros pigeons"/>
+                Text="Adhérents fidèles"/>
 
             <StackPanel Grid.Row="1" Margin="0,30,0,0" Orientation="Vertical">
-                <ItemsControl ItemsSource="{Binding AdherentViewModel.PodiumAdherents}">
+            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                         <Grid Margin="0,10,0,0">
@@ -90,7 +91,7 @@
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 Margin="0,20,0,0"
-                                Text="{Binding PurchaseCount}"
+                                Text="{Binding FormattedArgent}"
                                 Grid.Column="1"
                                 />
                             
@@ -99,31 +100,31 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                     FontSize="12"
-                                    IconBackground="#252422"
+                                    IconBackground="#004D40"
                                     Content="{Binding AdherentViewModel.NomCompletIHM}">
                                     <materialDesign:Chip.Icon>
                                         <materialDesign:PackIcon
                                             Width="24"
                                             Height="24">
-                                            <materialDesign:PackIcon.Style>
-                                                <Style TargetType="materialDesign:PackIcon">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="1">
-                                                            <Setter Property="Kind" Value="Numeric1" />
-                                                            <Setter Property="Foreground" Value="Gold" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="2">
-                                                            <Setter Property="Kind" Value="Numeric2" />
-                                                            <Setter Property="Foreground" Value="Silver" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Podium}" Value="3">
-                                                            <Setter Property="Kind" Value="Numeric3" />
-                                                            <Setter Property="Foreground" Value="#CD853F" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </materialDesign:PackIcon.Style>
-                                        </materialDesign:PackIcon>
+                                        <materialDesign:PackIcon.Style>
+                                            <Style TargetType="materialDesign:PackIcon">
+                                                <Style.Setters>
+                                                    <Setter Property="Kind" Value="Numeric1" />
+                                                    <Setter Property="Foreground" Value="Gold" />
+                                                </Style.Setters>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding AdherentViewModel.NomCompletIHM, Converter={StaticResource PositionConverter2}}" Value="2">
+                                                        <Setter Property="Kind" Value="Numeric2" />
+                                                        <Setter Property="Foreground" Value="Silver" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AdherentViewModel.NomCompletIHM, Converter={StaticResource PositionConverter2}}" Value="3">
+                                                        <Setter Property="Kind" Value="Numeric3" />
+                                                        <Setter Property="Foreground" Value="#CD853F" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </materialDesign:PackIcon.Style>
+                                    </materialDesign:PackIcon>
                                     </materialDesign:Chip.Icon>
                                 </materialDesign:Chip>
 
@@ -135,7 +136,7 @@
                                     BorderBrush="Transparent"
                                     Maximum="100" 
                                     Height="10"
-                                    Value="{Binding PurchaseCount}" />
+                                    Value="{Binding Argent}" />
                             </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -149,7 +150,7 @@
                 FontSize="17"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
-                Text="La méta des produits"/>
+                Text="Meilleures ventes"/>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,30,0,0" Orientation="Vertical">
                 <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
@@ -179,7 +180,7 @@
                                 Grid.Column="1"
                                 HorizontalAlignment="Right"
                                 FontSize="12"
-                                IconBackground="#252422"
+                                IconBackground="#880E4F"
                                 Content="{Binding ProductViewModel.NomProduitIHM}">
 
                                 <materialDesign:Chip.Icon>
@@ -216,7 +217,7 @@
                                     Foreground="#FFB366"
                                     Background="LightGray"
                                     BorderBrush="Transparent"
-                                    Maximum="50" 
+                                    Maximum="100" 
                                     Height="10"
                                     Value="{Binding PurchaseCount}" />
                         </Grid>

@@ -17,6 +17,10 @@ namespace Couche_IHM.VueModeles
         private StatProduitManager statProduitManager;
         private List<ProductViewModel> products;
         private List<PodiumProduit> statsProduit = new List<PodiumProduit>();
+
+        private StatAcompteManager statAcompteManager;
+        private List<AdherentViewModel> acomptes;
+        private List<PodiumAdherent> statsAcompte = new List<PodiumAdherent>();
         #endregion
 
         #region inotify
@@ -41,16 +45,30 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Podium des trois meilleurs acomptes
+        /// </summary>
+        public List<PodiumAdherent> PodiumAcompte
+        {
+            get
+            {
+                return statsAcompte.OrderByDescending(x => x.Argent).Take(3).ToList();
+            }
+        }
+
         #endregion
 
-        public StatistiqueViewModel(List<ProductViewModel> products)
+        public StatistiqueViewModel(List<ProductViewModel> products,List<AdherentViewModel> adherents)
         {
             // Initialisation des objets métiers
             this.statProduitManager = new StatProduitManager();
+            this.statAcompteManager = new StatAcompteManager(); 
 
             // Initialisation des datas
             this.products = products;
+            this.acomptes = adherents;
             InitStatsProduit();
+            InitStatsAcompte();
         }
 
         #region
@@ -60,22 +78,60 @@ namespace Couche_IHM.VueModeles
         /// <param name="stat"></param>
         public void AddStatProduit(StatProduit stat)
         {
-            this.statsProduit.Find(x => x.ProductViewModel.Id == stat.Product_id).PurchaseCount += stat.Number_sales;
+            PodiumProduit? produitStat = this.statsProduit.Find(x => x.ProductViewModel.Id == stat.Product_id);
+            if( produitStat != null)
+            {
+                produitStat.PurchaseCount += stat.Number_sales;
+            }
+            else
+            {
+                this.statsProduit.Add(new PodiumProduit(stat, products.Find(x => x.Id == stat.Product_id)));
+            }
             NotifyPropertyChanged(nameof(this.PodiumProduits));
         }
 
         /// <summary>
-        /// Permet de récupérer la liste des catégories
+        /// Permet de mettre à jour les stats de la journée
+        /// </summary>
+        /// <param name="stat"></param>
+        public void AddStatAcompte(StatAcompte stat)
+        {
+            PodiumAdherent? acompteStat = this.statsAcompte.Find(x => x.AdherentViewModel.Id == stat.Aompte_Id);
+            if (acompteStat != null)
+            {
+                acompteStat.Argent += stat.Amount_money;
+            }
+            else
+            {
+                this.statsAcompte.Add(new PodiumAdherent(stat, acomptes.Find(x => x.Id == stat.Aompte_Id)));
+            }
+            NotifyPropertyChanged(nameof(this.PodiumAcompte));
+        }
+
+        /// <summary>
+        /// Permet d'inistaliser les stats des produits
         /// </summary>
         public void InitStatsProduit()
         {
             this.statsProduit.Clear();
             List<StatProduit> statProduit = this.statProduitManager.GetStats();
-            int classement = 0;
             foreach (StatProduit stat in statProduit)
             {
-                classement++;
-                this.statsProduit.Add(new PodiumProduit(stat,products.Find(x => x.Id == stat.Product_id), classement));
+                this.statsProduit.Add(new PodiumProduit(stat,products.Find(x => x.Id == stat.Product_id)));
+            }
+        }
+
+
+        /// <summary>
+        /// Permet d'initialiser les stats des acomptes
+        /// </summary>
+        public void InitStatsAcompte()
+        {
+            this.statsAcompte.Clear();
+            List<StatAcompte> statAcompte = this.statAcompteManager.GetStats();
+            foreach (StatAcompte stat in statAcompte)
+            {
+                this.statsAcompte.Add(new PodiumAdherent(stat, acomptes.Find(x => x.Id == stat.Aompte_Id)));
             }
         }
         #endregion

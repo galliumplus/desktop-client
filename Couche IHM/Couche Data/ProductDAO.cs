@@ -9,9 +9,31 @@ namespace Couche_Data
     /// </summary>
     public class ProductDAO : IProductDAO
     {
-        private List<Product> products = new List<Product>();
 
-        public ProductDAO()
+        public void CreateProduct(Product product)
+        {
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = $"INSERT INTO products VALUES (0,'{product.NomProduit}',{product.Quantite},{product.PrixAdherent},{product.PrixNonAdherent},{product.Categorie})";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
+            
+
+            using (MySqlCommand selectCommand = new MySqlCommand("SELECT LAST_INSERT_ID() AS nouvel_id", dbsDAO.Instance.Sql))
+            {
+                int nouvelId = Convert.ToInt32(selectCommand.ExecuteScalar());
+                product.ID = nouvelId;
+            }
+            dbsDAO.Instance.CloseDatabase();
+
+        }
+
+        public List<Product> GetProducts()
         {
             //Connection
             dbsDAO.Instance.OpenDataBase();
@@ -23,51 +45,47 @@ namespace Couche_Data
 
             //lecture de la requette
             MySqlDataReader rdr = cmd.ExecuteReader();
+            List<Product> products = new List<Product>();
             while (rdr.Read())
             {
                 products.Add(new Product(rdr.GetInt32("product_id"), rdr.GetString("name"), rdr.GetInt32("stock"), rdr.GetFloat("price_na"), rdr.GetFloat("price_a"), rdr.GetInt32("category_id")));
             }
             rdr.Close();
             dbsDAO.Instance.CloseDatabase();
-        }
-
-        public void CreateProduct(Product product)
-        {
-            this.products.Add(product);
-        }
-
-        public Product? GetProduct(int id)
-        {
-            return this.products.Find(x => id == x.ID);
-        }
-
-        /// <summary>
-        /// Récupère tous les produits d'une catégorie
-        /// </summary>
-        /// <returns> liste de produits </returns>
-        public List<Product> GetProductsByCategory(Category category)
-        {
-            return this.products.FindAll(x => category.IdCat == x.Categorie);
-        }
-
-        public List<Product> GetProducts()
-        {
             return products;
         }
 
         public void RemoveProduct(Product product)
         {
-            this.products.Remove(product);
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = $"DELETE FROM products WHERE product_id = {product.ID}";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
+
+            dbsDAO.Instance.CloseDatabase();
         }
 
         public void UpdateProduct(Product product)
         {
-            Product p = GetProduct(product.ID);
-            p.NomProduit = product.NomProduit;
-            p.PrixNonAdherent = product.PrixNonAdherent;
-            p.PrixAdherent = product.PrixAdherent;
-            p.Quantite = product.Quantite;
-            p.Categorie = product.Categorie;
+            //Connection
+            dbsDAO.Instance.OpenDataBase();
+
+            //Requette SQL
+            string stm = $"UPDATE products SET name = '{product.NomProduit}', stock = {product.Quantite}, price_a = {product.PrixAdherent}, price_na = {product.PrixNonAdherent}, category_id = {product.Categorie})";
+            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            cmd.Prepare();
+
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
+
+            dbsDAO.Instance.CloseDatabase();
+            
         }
 
     }
