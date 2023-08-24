@@ -20,7 +20,7 @@ namespace Couche_IHM.VueModeles
         /// Représente le modèle adhérent
         /// </summary>
         private Adhérent adherent;
-        private int random;
+
         /// <summary>
         /// Représente le manager des adhérents
         /// </summary>
@@ -71,11 +71,7 @@ namespace Couche_IHM.VueModeles
             get => adherent.Id;
         }
 
-        public int PurchaseCount
-        {
-            get => random;
-            set => random = value;
-        }
+  
 
         /// <summary>
         /// Renvoie l'argent de l'adhérent sous un string formatté
@@ -137,9 +133,8 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public AdherentViewModel(Adhérent adherent,AdhérentManager adherentManager,int random)
+        public AdherentViewModel(Adhérent adherent,AdhérentManager adherentManager)
         {
-            this.random = random;
             this.adherent = adherent;
             this.adhérentManager = adherentManager;
             

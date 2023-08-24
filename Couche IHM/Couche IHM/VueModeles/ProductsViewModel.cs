@@ -204,10 +204,10 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur du viewModel
         /// </summary>
-        public ProductsViewModel()
+        public ProductsViewModel(ProductManager productManager)
         {
             // Initialisation objet métier
-            this.productManager = new ProductManager();
+            this.productManager = productManager;
             this.categoryManager = new CategoryManager();
 
             // Initialisation Events
@@ -235,12 +235,11 @@ namespace Couche_IHM.VueModeles
         private void InitProducts()
         {
             List<Product> produitsMetier = this.productManager.GetProducts();
-            Random random = new Random();
+
             foreach (Product prd in produitsMetier)
             {
-                int r = random.Next(0, 100);
                 CategoryViewModel catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
-                this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit,r));
+                this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit));
             }
             this.currentProduct = this.products[0];
         }
@@ -268,7 +267,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW" || currentProduct == null || currentProduct.Action == "NEW")
             {
                 ShowDeleteProduct = false;
-                CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null,0);
+                CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null);
             }
             else
             {

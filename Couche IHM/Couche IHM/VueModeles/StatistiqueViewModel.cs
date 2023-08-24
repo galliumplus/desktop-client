@@ -15,11 +15,11 @@ namespace Couche_IHM.VueModeles
     {
         #region attributes
         private StatProduitManager statProduitManager;
-        private List<ProductViewModel> products;
+        private AdhérentManager acompteManager;
         private List<PodiumProduit> statsProduit = new List<PodiumProduit>();
 
         private StatAcompteManager statAcompteManager;
-        private List<AdherentViewModel> acomptes;
+        private ProductManager productManager;
         private List<PodiumAdherent> statsAcompte = new List<PodiumAdherent>();
         #endregion
 
@@ -58,15 +58,15 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public StatistiqueViewModel(List<ProductViewModel> products,List<AdherentViewModel> adherents)
+        public StatistiqueViewModel(ProductManager produtManager,AdhérentManager acompteManager)
         {
             // Initialisation des objets métiers
             this.statProduitManager = new StatProduitManager();
             this.statAcompteManager = new StatAcompteManager(); 
+            this.productManager = produtManager;
+            this.acompteManager = acompteManager;
 
             // Initialisation des datas
-            this.products = products;
-            this.acomptes = adherents;
             InitStatsProduit();
             InitStatsAcompte();
         }
@@ -85,7 +85,7 @@ namespace Couche_IHM.VueModeles
             }
             else
             {
-                this.statsProduit.Add(new PodiumProduit(stat, products.Find(x => x.Id == stat.Product_id)));
+                this.statsProduit.Add(new PodiumProduit(stat, new ProductViewModel(productManager.GetProducts().Find(x => x.ID == stat.Product_id),null,null,null)));
             }
             NotifyPropertyChanged(nameof(this.PodiumProduits));
         }
@@ -103,7 +103,7 @@ namespace Couche_IHM.VueModeles
             }
             else
             {
-                this.statsAcompte.Add(new PodiumAdherent(stat, acomptes.Find(x => x.Id == stat.Aompte_Id)));
+                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Aompte_Id),null)));
             }
             NotifyPropertyChanged(nameof(this.PodiumAcompte));
         }
@@ -117,7 +117,7 @@ namespace Couche_IHM.VueModeles
             List<StatProduit> statProduit = this.statProduitManager.GetStats();
             foreach (StatProduit stat in statProduit)
             {
-                this.statsProduit.Add(new PodiumProduit(stat,products.Find(x => x.Id == stat.Product_id)));
+                this.statsProduit.Add(new PodiumProduit(stat, new ProductViewModel(productManager.GetProducts().Find(x => x.ID == stat.Product_id), null, null, null)));
             }
         }
 
@@ -131,7 +131,7 @@ namespace Couche_IHM.VueModeles
             List<StatAcompte> statAcompte = this.statAcompteManager.GetStats();
             foreach (StatAcompte stat in statAcompte)
             {
-                this.statsAcompte.Add(new PodiumAdherent(stat, acomptes.Find(x => x.Id == stat.Aompte_Id)));
+                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Aompte_Id), null)));
             }
         }
         #endregion

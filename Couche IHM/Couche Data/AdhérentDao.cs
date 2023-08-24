@@ -76,19 +76,20 @@ namespace Couche_Data
 
         public void UpdateAdhérent(Adhérent adhérent)
         {
+                //Connection
+                dbsDAO.Instance.OpenDataBase();
 
-            //Connection
-            dbsDAO.Instance.OpenDataBase();
+                //Requette SQL
+                string formattedAmountMoney = adhérent.Argent.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                string stm = $"UPDATE acompte set nom = '{adhérent.Nom}', prenom = '{adhérent.Prenom}', balance = {formattedAmountMoney}, isAdherent = {adhérent.StillAdherent}, login = '{adhérent.Identifiant}' WHERE acompte_id = {adhérent.Id}";
+                MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+                cmd.Prepare();
 
-            //Requette SQL
-            string stm = $"UPDATE acompte set nom = '{adhérent.Nom}', prenom = '{adhérent.Prenom}', balance = {adhérent.Argent}, isAdherent = {adhérent.StillAdherent}, login = '{adhérent.Identifiant}'";
-            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
-            cmd.Prepare();
+                //lecture de la requette
+                cmd.ExecuteNonQuery();
 
-            //lecture de la requette
-            cmd.ExecuteNonQuery();
-
-            dbsDAO.Instance.CloseDatabase();
+                dbsDAO.Instance.CloseDatabase();
+            
         }
     }
 }

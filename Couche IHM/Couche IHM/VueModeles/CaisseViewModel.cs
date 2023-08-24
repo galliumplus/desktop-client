@@ -199,6 +199,7 @@ namespace Couche_IHM.VueModeles
         {
             string messageLog = $"Achat par {currentPaiement} ";
 
+            
             // Gérer les stats 
             ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
             Task.Run(() =>
@@ -208,6 +209,10 @@ namespace Couche_IHM.VueModeles
                     StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
                     MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
                     statProduitManager.CreateStat(stat);
+
+                    product.QuantiteIHM -= productOrder2[product];
+                    messageLog += product.NomProduitIHM + ", ";
+                    product.UpdateProduct(false);
                 }
             });
 
@@ -250,16 +255,6 @@ namespace Couche_IHM.VueModeles
             }
 
 
-
-            // Changer la data
-            foreach (ProductViewModel product in productOrder.Keys)
-            {
-                product.QuantiteIHM -= productOrder[product];
-                messageLog += product.NomProduitIHM +", ";
-                product.UpdateProduct(false);
-            }
-            
-            
             // Log l'action
             Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             Task.Run (() => MainWindowViewModel.Instance.LogManager.CreateLog(log));

@@ -73,18 +73,22 @@ namespace Couche_Data
 
         public void UpdateProduct(Product product)
         {
-            //Connection
-            dbsDAO.Instance.OpenDataBase();
+
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            MySqlConnection sql = new MySqlConnection(connString);
+            sql.Open();
 
             //Requette SQL
-            string stm = $"UPDATE products SET name = '{product.NomProduit}', stock = {product.Quantite}, price_a = {product.PrixAdherent}, price_na = {product.PrixNonAdherent}, category_id = {product.Categorie})";
-            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            string prixA = product.PrixAdherent.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string prixNA = product.PrixNonAdherent.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string stm = $"UPDATE products SET name = '{product.NomProduit}', stock = {product.Quantite}, price_a = {prixA}, price_na = {prixNA}, category_id = {product.Categorie} WHERE product_id = {product.ID}";
+            MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 
             //lecture de la requette
             cmd.ExecuteNonQuery();
 
-            dbsDAO.Instance.CloseDatabase();
+            sql.Close();
             
         }
 

@@ -29,7 +29,6 @@ namespace Couche_IHM.VueModeles
         private CategoryViewModel categoryIHM;
         private string prixAdherentIHM;
         private string prixNonAdherentIHM;
-        private int purchaseCount;
         #endregion
 
         #region notify
@@ -153,7 +152,6 @@ namespace Couche_IHM.VueModeles
             
         }
 
-        public int PurchaseCount { get => purchaseCount; set => purchaseCount = value; }
         public Product Product { get => product; set => product = value; }
 
 
@@ -161,11 +159,11 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public ProductViewModel(Product product,ProductManager productManager,CategoryManager categoryManager,CategoryViewModel categoryProduit,int r)
+        public ProductViewModel(Product product,ProductManager productManager,CategoryManager categoryManager,CategoryViewModel categoryProduit)
         {
             // Initialisation du modele
             this.product = product;
-            this.purchaseCount = r;
+
             // Initialisation des objets metiers
             this.categoryManager = categoryManager;
             this.formatArgent = new ConverterFormatArgent();

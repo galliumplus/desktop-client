@@ -164,9 +164,9 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur de la classe adhérents view model
         /// </summary>
-        public AdherentsViewModel()
+        public AdherentsViewModel(AdhérentManager acompteManager)
         {
-            this.adherentManager = new AdhérentManager();
+            this.adherentManager = acompteManager;
             this.adherents = new ObservableCollection<AdherentViewModel>();
             this.OpenModifAdh = new RelayCommand(x => this.OpenAcompteDetails((string)x));
             InitAdhérents();
@@ -180,11 +180,9 @@ namespace Couche_IHM.VueModeles
         private void InitAdhérents()
         {
             List<Adhérent> adherents = this.adherentManager.GetAdhérents();
-            Random random = new Random();
             foreach (Adhérent adh in adherents)
             {
-                int rand = random.Next(0, 100);
-                this.adherents.Add(new AdherentViewModel(adh,this.adherentManager,rand));
+                this.adherents.Add(new AdherentViewModel(adh,this.adherentManager));
             }
             this.currentAdherent = this.adherents[0];
         }
@@ -199,7 +197,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW" || currentAdherent.Action == "NEW")
             {
                 ShowDeleteAcompte = false;
-                CurrentAdherent = new AdherentViewModel(new Adhérent(),this.adherentManager, 0);
+                CurrentAdherent = new AdherentViewModel(new Adhérent(),this.adherentManager);
             }
             else
             {

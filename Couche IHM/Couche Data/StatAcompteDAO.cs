@@ -39,24 +39,21 @@ namespace Couche_Data
 
         public void CreateStat(StatAcompte stat)
         {
-            lock (dbsDAO.Instance.DatabaseLock)
-            {
-                //Connection
-                dbsDAO.Instance.OpenDataBase();
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            MySqlConnection sql = new MySqlConnection(connString);
+            sql.Open();
 
-                //Requette SQL
-                string formattedDate = stat.Date.ToString("yyyy-MM-dd");
-                string formattedAmountMoney = stat.Amount_money.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Aompte_Id})";
-                MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
-                cmd.Prepare();
+            //Requette SQL
+            string formattedDate = stat.Date.ToString("yyyy-MM-dd");
+            string formattedAmountMoney = stat.Amount_money.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Aompte_Id})";
+            MySqlCommand cmd = new MySqlCommand(stm, sql);
+            cmd.Prepare();
 
-                //lecture de la requette
-                cmd.ExecuteNonQuery();
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
 
-
-                dbsDAO.Instance.CloseDatabase();
-            }
+            sql.Close();
         }
     }
 }

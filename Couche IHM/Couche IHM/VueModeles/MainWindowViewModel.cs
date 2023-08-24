@@ -59,6 +59,8 @@ namespace Couche_IHM.VueModeles
         private Frame frame = Frame.FRAMEACCUEIL;
         private LogManager logManager;
         private UserManager userManager;
+        private AdhérentManager acompteManager;
+        private ProductManager productManager;
 
         #region events
         public RelayCommand ChangeFrame { set; get; }
@@ -128,10 +130,13 @@ namespace Couche_IHM.VueModeles
         {
             this.logManager = new LogManager();
             this.userManager = new UserManager();
-            this.adherentViewModel = new AdherentsViewModel();
-            this.productViewModel = new ProductsViewModel();
+            this.productManager = new ProductManager();
+            this.acompteManager = new AdhérentManager();
+
+            this.adherentViewModel = new AdherentsViewModel(acompteManager);
+            this.productViewModel = new ProductsViewModel(productManager);
             this.caisseViewModel = new CaisseViewModel();
-            this.statViewModel = new StatistiqueViewModel(productViewModel.GetProducts(),adherentViewModel.GetAcomptes());
+            this.statViewModel = new StatistiqueViewModel(productManager,acompteManager);
             this.logsViewModel = new LogsViewModel(userManager,logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
