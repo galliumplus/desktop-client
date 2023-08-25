@@ -56,7 +56,7 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public string NomCompletIHM
         {
-            get => nom + " " + prenom;
+            get => prenom + " " + nom;
         }
         public Role RoleIHM { get => role; set => role = value; }
         public string MdpIHM2 { get => mdpIHM2; set => mdpIHM2 = value; }

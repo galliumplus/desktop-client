@@ -18,7 +18,7 @@ namespace Couche_Data
             dbsDAO.Instance.OpenDataBase();
 
             //Requette SQL
-            string stm = $"INSERT INTO acompte VALUES (0,'{adhérent.Nom}','{adhérent.Prenom}',{adhérent.Argent},{adhérent.StillAdherent},'{adhérent.Identifiant}','no')";
+            string stm = $"INSERT INTO acompte VALUES (0,'{adhérent.Nom}','{adhérent.Prenom}',{adhérent.Argent},{adhérent.StillAdherent},'{adhérent.Formation}','{adhérent.Identifiant}','no')";
             MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
             cmd.Prepare();
 
@@ -50,7 +50,7 @@ namespace Couche_Data
             List<Adhérent> acomptes = new List<Adhérent>();
             while (rdr.Read())
             {
-                acomptes.Add(new Adhérent(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), ""));
+                acomptes.Add(new Adhérent(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), rdr.GetString("formation"),true,rdr.GetBoolean("isAdherent")));
             }
 
             rdr.Close();
@@ -81,7 +81,7 @@ namespace Couche_Data
 
                 //Requette SQL
                 string formattedAmountMoney = adhérent.Argent.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                string stm = $"UPDATE acompte set nom = '{adhérent.Nom}', prenom = '{adhérent.Prenom}', balance = {formattedAmountMoney}, isAdherent = {adhérent.StillAdherent}, login = '{adhérent.Identifiant}' WHERE acompte_id = {adhérent.Id}";
+                string stm = $"UPDATE acompte set nom = '{adhérent.Nom}', prenom = '{adhérent.Prenom}', balance = {formattedAmountMoney}, isAdherent = {adhérent.StillAdherent}, formation = '{adhérent.Formation}', login = '{adhérent.Identifiant}' WHERE acompte_id = {adhérent.Id}";
                 MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
                 cmd.Prepare();
 

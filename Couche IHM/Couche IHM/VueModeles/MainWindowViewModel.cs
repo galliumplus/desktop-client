@@ -63,6 +63,10 @@ namespace Couche_IHM.VueModeles
         private ProductManager productManager;
 
         #region events
+        public RelayCommand GoTwitter { get;set; }
+        public RelayCommand GoTwitch { get; set; }
+        public RelayCommand GoInsta { get; set; }
+        public RelayCommand GoDrive { get; set; }
         public RelayCommand ChangeFrame { set; get; }
         #endregion
 
@@ -139,6 +143,8 @@ namespace Couche_IHM.VueModeles
             this.statViewModel = new StatistiqueViewModel(productManager,acompteManager);
             this.logsViewModel = new LogsViewModel(userManager,logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
+
+            // Initialisation des events
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }
     }
