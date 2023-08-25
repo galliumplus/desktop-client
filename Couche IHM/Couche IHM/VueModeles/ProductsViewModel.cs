@@ -238,7 +238,12 @@ namespace Couche_IHM.VueModeles
 
             foreach (Product prd in produitsMetier)
             {
-                CategoryViewModel catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                CategoryViewModel catProduit = null;
+                if (prd.Categorie != -1)
+                {
+                    catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                }
+                
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit));
             }
             this.currentProduct = this.products[0];

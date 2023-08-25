@@ -28,9 +28,6 @@ namespace Couche_Data
         /// </summary>
         public List<Category> ListALlCategory();
 
-        /// <summary>
-        /// Récupère une catégorie
-        /// </summary>
-        public Category GetCategory(Category category);
+
     }
 }

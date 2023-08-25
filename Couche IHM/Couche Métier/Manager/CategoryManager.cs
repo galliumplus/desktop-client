@@ -58,6 +58,7 @@ namespace Couche_Métier
             this.iCategory.UpdateCategory(cat);
             Category category = this.categories.Find(x => x.IdCat == cat.IdCat);
             category.NomCategory = cat.NomCategory;
+            category.Visible = cat.Visible;
         }
 
         /// <summary>

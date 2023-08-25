@@ -35,8 +35,6 @@ namespace Couche_IHM
         {
             InitializeComponent();
             DataContext = this;
-            userManager = MainWindowViewModel.Instance.UserManager;
-            logManager = MainWindowViewModel.Instance.LogManager;
             this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
         }
 
@@ -57,20 +55,31 @@ namespace Couche_IHM
             }
             else
             {
-                User? user = this.userManager.ConnectCompte(identifiant, password);
-                if (user != null)
+                try
                 {
-                    Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
-                    logManager.CreateLog(log);
-                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-                    MainWindow mainWindow = new MainWindow(user, logManager, userManager);
-                    mainWindow.Show();
-                    this.Close();
+                    userManager = MainWindowViewModel.Instance.UserManager;
+                    logManager = MainWindowViewModel.Instance.LogManager;
+                    User? user = this.userManager.ConnectCompte(identifiant, password);
+                    if (user != null)
+                    {
+                        Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
+                        logManager.CreateLog(log);
+                        MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                        MainWindow mainWindow = new MainWindow(user, logManager, userManager);
+                        mainWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        messageQueue.Enqueue("Mauvais mot de passe");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    messageQueue.Enqueue("Mauvais mot de passe");
+                    messageQueue?.Enqueue("Vous n'êtes pas connecté à Internet");
                 }
+
+                
             }
           
 

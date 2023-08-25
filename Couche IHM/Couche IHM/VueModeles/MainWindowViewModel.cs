@@ -132,6 +132,7 @@ namespace Couche_IHM.VueModeles
 
         private MainWindowViewModel()
         {
+
             this.logManager = new LogManager();
             this.userManager = new UserManager();
             this.productManager = new ProductManager();

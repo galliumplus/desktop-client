@@ -46,9 +46,11 @@ namespace Couche_Data
             //lecture de la requette
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<Product> products = new List<Product>();
+
             while (rdr.Read())
             {
-                products.Add(new Product(rdr.GetInt32("product_id"), rdr.GetString("name"), rdr.GetInt32("stock"), rdr.GetFloat("price_na"), rdr.GetFloat("price_a"), rdr.GetInt32("category_id")));
+                int categoryId = rdr.IsDBNull(rdr.GetOrdinal("category_id")) ? -1 : rdr.GetInt32("category_id");
+                products.Add(new Product(rdr.GetInt32("product_id"), rdr.GetString("name"), rdr.GetInt32("stock"), rdr.GetFloat("price_na"), rdr.GetFloat("price_a"), categoryId));
             }
             rdr.Close();
             dbsDAO.Instance.CloseDatabase();
