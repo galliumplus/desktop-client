@@ -34,7 +34,7 @@
             Grid.ColumnSpan="3"
              Grid.RowSpan="3"
             />
-        <Border Grid.Row="1" Grid.Column="1" Background="#353331"  CornerRadius="10">
+        <Border Grid.Row="1" Grid.Column="1" Background="#252422"  CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
@@ -86,5 +86,14 @@
                    Click="ConnectToAccount"/>
             </Grid>
         </Border>
+        <materialDesign:Snackbar 
+            Height="50"
+            Grid.Row="2" 
+            Grid.ColumnSpan="3"
+            FontWeight="Bold"
+            Background="IndianRed"
+            Foreground="White"
+            MessageQueue="{Binding MessageQueue}"
+            />
     </Grid>
 </Window>

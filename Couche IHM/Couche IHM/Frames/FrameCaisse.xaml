@@ -230,7 +230,7 @@
                             Command="{Binding CaisseViewModel.CancelPay}"
                         Width="90"
                         FontSize="12"
-                        Background="#252422"
+                        Background="Gray"
                         Foreground="White"
                         Content="Annuler"/>
 

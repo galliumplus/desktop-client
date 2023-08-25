@@ -211,7 +211,6 @@ namespace Couche_IHM.VueModeles
                     statProduitManager.CreateStat(stat);
 
                     product.QuantiteIHM -= productOrder2[product];
-                    messageLog += product.NomProduitIHM + ", ";
                     product.UpdateProduct(false);
                 }
             });
@@ -237,8 +236,9 @@ namespace Couche_IHM.VueModeles
                     statAcompteManager.CreateStat(stat);
                 });
 
+                string prixFormatted = this.convertFormatArgent.ConvertToString(prix);
                 acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent- prix);
-                messageLog += $"({prix}) : ";
+                messageLog += $"({prixFormatted}) : ";
                 acompte.UpdateAdherent(false);
                 this.ShowPayAcompte = false;
             }
@@ -250,13 +250,19 @@ namespace Couche_IHM.VueModeles
                 }
                 else
                 {
-                    messageLog += $"{this.PriceNonAdherIHM} : ";
+                    messageLog += $"'{this.PriceNonAdherIHM}) : ";
                 }
             }
 
 
-            // Log l'action
-            Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            foreach (ProductViewModel product in productOrder.Keys)
+            {
+                messageLog += product.NomProduitIHM + ", ";
+            }
+
+
+                // Log l'action
+                Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             Task.Run (() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
 
 

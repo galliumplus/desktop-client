@@ -4,6 +4,7 @@ using Couche_IHM.VueModeles;
 using Couche_Métier;
 using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
+using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Windows;
@@ -27,8 +28,8 @@ namespace Couche_IHM
         /// </summary>
         private LogManager logManager;
 
-        private string identifiant;
-        private string password;
+        private string identifiant = "";
+        private string password = "";
 
         public ConnexionIHM()
         {
@@ -36,26 +37,42 @@ namespace Couche_IHM
             DataContext = this;
             userManager = MainWindowViewModel.Instance.UserManager;
             logManager = MainWindowViewModel.Instance.LogManager;
+            this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
         }
 
         public string Identifiant { get => identifiant; set => identifiant = value; }
         public string Password { get => password; set => password = value; }
+        public SnackbarMessageQueue MessageQueue { get => messageQueue; set => messageQueue = value; }
+
+        private SnackbarMessageQueue messageQueue;
 
         /// <summary>
         /// Permet de se connecter à son compte et de créer la mainWindows
         /// </summary>
         private void ConnectToAccount(object sender, RoutedEventArgs e)
-        {
-            User? user = this.userManager.ConnectCompte(identifiant, password);
-            if (user != null)
+        {      
+            if (password == "" || identifiant == "")
             {
-                Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
-                logManager.CreateLog(log);
-                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-                MainWindow mainWindow = new MainWindow(user, logManager, userManager);
-                mainWindow.Show();
-                this.Close();
+                messageQueue.Enqueue("Vous devez remplir les deux champs !");
             }
+            else
+            {
+                User? user = this.userManager.ConnectCompte(identifiant, password);
+                if (user != null)
+                {
+                    Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
+                    logManager.CreateLog(log);
+                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                    MainWindow mainWindow = new MainWindow(user, logManager, userManager);
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    messageQueue.Enqueue("Mauvais mot de passe");
+                }
+            }
+          
 
             
         }

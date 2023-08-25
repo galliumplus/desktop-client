@@ -18,13 +18,13 @@ namespace Couche_IHM.VueModeles
         private static MainWindowViewModel instance = null;
         public static MainWindowViewModel Instance
         {
-            get 
-            { 
+            get
+            {
                 if (instance == null)
                 {
                     instance = new MainWindowViewModel();
                 }
-                return instance; 
+                return instance;
             }
         }
         #endregion
@@ -63,7 +63,7 @@ namespace Couche_IHM.VueModeles
         private ProductManager productManager;
 
         #region events
-        public RelayCommand GoTwitter { get;set; }
+        public RelayCommand GoTwitter { get; set; }
         public RelayCommand GoTwitch { get; set; }
         public RelayCommand GoInsta { get; set; }
         public RelayCommand GoDrive { get; set; }
@@ -103,11 +103,11 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Représente la frame actuellement affichée
         /// </summary>
-        public Frame Frame 
-        { 
+        public Frame Frame
+        {
             get => frame;
-            set 
-            { 
+            set
+            {
                 frame = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Uri));
@@ -140,12 +140,13 @@ namespace Couche_IHM.VueModeles
             this.adherentViewModel = new AdherentsViewModel(acompteManager);
             this.productViewModel = new ProductsViewModel(productManager);
             this.caisseViewModel = new CaisseViewModel();
-            this.statViewModel = new StatistiqueViewModel(productManager,acompteManager);
-            this.logsViewModel = new LogsViewModel(userManager,logManager);
+            this.statViewModel = new StatistiqueViewModel(productManager, acompteManager);
+            this.logsViewModel = new LogsViewModel(userManager, logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
 
             // Initialisation des events
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }
+
     }
 }

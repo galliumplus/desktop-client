@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Couche_IHM.VueModeles"
         xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Gallium" 
         Height="450" 
         Width="800" 
         WindowState="Maximized"
@@ -134,11 +134,12 @@
                         Kind="History"/>
                 </Button>
                 <Button
+                    
                     Style="{StaticResource buttonImage}"
                     Grid.Column="2"
                     Grid.RowSpan="2"
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Right">
+                    HorizontalAlignment="Right" Click="Disconnect">
                     <materialDesign:PackIcon 
                         Width="auto" 
                         Height="auto"

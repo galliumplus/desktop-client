@@ -26,6 +26,16 @@ namespace Couche_IHM
             DataContext = MainWindowViewModel.Instance;
         }
 
-
+        /// <summary>
+        /// Permet de se déconnecter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Disconnect(object sender, RoutedEventArgs e)
+        {
+            ConnexionIHM connexionIHM = new ConnexionIHM();
+            connexionIHM.Show();
+            this.Close();
+        }
     }
 }
