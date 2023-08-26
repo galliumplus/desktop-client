@@ -2,6 +2,7 @@
 
 using Couche_IHM.ImagesProduit;
 using Couche_Métier;
+using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Microsoft.Win32;
 using Modeles;
@@ -166,7 +167,6 @@ namespace Couche_IHM.VueModeles
 
             // Initialisation des objets metiers
             this.categoryManager = categoryManager;
-            this.formatArgent = new ConverterFormatArgent();
             this.productManager = productManager;
 
             // Initialisation des attributsIHM
@@ -174,8 +174,8 @@ namespace Couche_IHM.VueModeles
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.image = new BitmapImage(new Uri(ImageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
-            this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
-            this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
+            this.prixNonAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixNonAdherent);
+            this.prixAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixAdherent);
 
             // Initialisation des events
             this.ResetProd = new RelayCommand(x => ResetProduct());
@@ -216,16 +216,15 @@ namespace Couche_IHM.VueModeles
         {
             if (this.categoryIHM != null)
             {
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
                 
                 
-                this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-                this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
-                this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+                this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+                this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
+                this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
 
 
                 // Log l'action
@@ -233,7 +232,7 @@ namespace Couche_IHM.VueModeles
                 {
                     byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
                     ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
-                    Log log = new Log(0, DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                    Log log = new Log(DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                     MainWindowViewModel.Instance.LogManager.CreateLog(log);
                     MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
 
@@ -264,7 +263,7 @@ namespace Couche_IHM.VueModeles
             this.productManager.RemoveProduct(this.product);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 3, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(DateTime.Now, 3, $"Suppression du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
@@ -282,20 +281,19 @@ namespace Couche_IHM.VueModeles
         {
             if (this.categoryIHM != null)
             {
-                ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
                 byte[] bitsImage = ImageManager .ConvertImageToBlob(image.UriSource.ToString());
                 ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
-                this.product.Categorie = this.categoryManager.Categories.Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-                this.product.PrixAdherent = formatArgent.ConvertToDouble(this.prixAdherentIHM);
-                this.product.PrixNonAdherent = formatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+                this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+                this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
+                this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
                 this.productManager.CreateProduct(this.product);
 
                 // Log l'action
-                Log log = new Log(0, DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
 
@@ -321,20 +319,19 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void ResetProduct()
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
             if(this.categoryIHM != null)
             {
-                this.categoryIHM.NomCat = this.categoryManager.Categories.Find(x => x.IdCat == product.Categorie).NomCategory;
+                this.categoryIHM.NomCat = this.categoryManager.ListAllCategory().Find(x => x.IdCat == product.Categorie).NomCategory;
             }
 
            
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.image = new BitmapImage(new Uri(ImageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
-            this.prixNonAdherentIHM = formatArgent.ConvertToString(product.PrixNonAdherent);
-            this.prixAdherentIHM = formatArgent.ConvertToString(product.PrixAdherent);
+            this.prixNonAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixNonAdherent);
+            this.prixAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixAdherent);
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(ImageProduct));

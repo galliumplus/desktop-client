@@ -1,37 +1,44 @@
 ﻿
-using Couche_Data;
+using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using Modeles;
 
-namespace Couche_Métier
+namespace Couche_Métier.Manager
 {
     /// <summary>
     /// Manager des catégories 
     /// </summary>
     public class CategoryManager
     {
-        // Attribut représentant le DAO gérant les catégories
+        #region attributes
+        /// <summary>
+        /// Dao permettant de gérer les données des catégories
+        /// </summary>
         private ICategoryDao iCategory;
 
-        // Attribut représentant les catégories en cache
+        /// <summary>
+        /// Liste des catégories
+        /// </summary>
         private List<Category> categories;
 
-        public List<Category> Categories { get => categories; set => categories = value; }
+        #endregion
 
-
+        #region constructor
         /// <summary>
         /// Constructeur du manager des catégories
         /// </summary>
-        /// <param name="category">dao des catégories</param>
         public CategoryManager() 
         {
             this.iCategory = new CategoryDAO();
             categories = this.iCategory.ListALlCategory();
         }
-      
-       /// <summary>
-       /// Permet de créer une catégorie
-       /// </summary>
-       /// <param name="ca">catégorie à créer</param>
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Permet de créer une catégorie
+        /// </summary>
+        /// <param name="ca">catégorie à créer</param>
         public void CreateCategory(Category cat)
         {
             this.iCategory.CreateCategory(cat);
@@ -69,5 +76,6 @@ namespace Couche_Métier
             return categories;
         }
 
+        #endregion
     }
 }

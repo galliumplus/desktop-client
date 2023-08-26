@@ -91,7 +91,7 @@ namespace Couche_IHM.VueModeles
                 float prixTotal = 0.00f;
                 foreach (ProductViewModel product in productOrder.Keys)
                 {
-                  prixTotal += (float)convertFormatArgent.ConvertToDouble(product.PrixAdherentIHM) * productOrder[product];
+                  prixTotal += (float)ConverterFormatArgent.ConvertToDouble(product.PrixAdherentIHM) * productOrder[product];
                 }
                 return prixTotal;
             }
@@ -101,7 +101,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return $"{convertFormatArgent.ConvertToString(PriceAdher)}";
+                return $"{ConverterFormatArgent.ConvertToString(PriceAdher)}";
             }
         }
 
@@ -109,7 +109,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return $"({convertFormatArgent.ConvertToString(PriceNanAdher)})";
+                return $"({ConverterFormatArgent.ConvertToString(PriceNanAdher)})";
             }
         }
         /// <summary>
@@ -122,7 +122,7 @@ namespace Couche_IHM.VueModeles
                 float prixTotal = 0.00f;
                 foreach (ProductViewModel product in productOrder.Keys)
                 {
-                    prixTotal += (float)convertFormatArgent.ConvertToDouble(product.PrixNonAdherentIHM) * productOrder[product];
+                    prixTotal += (float)ConverterFormatArgent.ConvertToDouble(product.PrixNonAdherentIHM) * productOrder[product];
                 }
                 return prixTotal;
             }
@@ -218,7 +218,7 @@ namespace Couche_IHM.VueModeles
             // Si paiement par acompte
             if (acompte != null)
             {
-                float argent = this.convertFormatArgent.ConvertToDouble(acompte.ArgentIHM);
+                float argent = ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM);
                 float prix;
                 if (acompte.IsAdherentIHM)
                 {
@@ -236,8 +236,8 @@ namespace Couche_IHM.VueModeles
                     statAcompteManager.CreateStat(stat);
                 });
 
-                string prixFormatted = this.convertFormatArgent.ConvertToString(prix);
-                acompte.ArgentIHM = this.convertFormatArgent.ConvertToString(argent- prix);
+                string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
+                acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent- prix);
                 messageLog += $"({prixFormatted}) : ";
                 acompte.UpdateAdherent(false);
                 this.ShowPayAcompte = false;
@@ -262,7 +262,7 @@ namespace Couche_IHM.VueModeles
 
 
                 // Log l'action
-                Log log = new Log(0, DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             Task.Run (() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
 
 

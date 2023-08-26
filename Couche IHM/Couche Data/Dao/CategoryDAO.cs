@@ -1,9 +1,10 @@
 ﻿
 
+using Couche_Data.Interfaces;
 using Modeles;
 using MySql.Data.MySqlClient;
 
-namespace Couche_Data
+namespace Couche_Data.Dao
 {
     public class CategoryDAO : ICategoryDao
     {

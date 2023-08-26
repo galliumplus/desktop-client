@@ -1,37 +1,44 @@
 ﻿
-
-using Couche_Data;
+using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using Modeles;
 
-namespace Couche_Métier
+namespace Couche_Métier.Manager
 {
-    public class AdhérentManager
+    public class AcompteManager
     {
-        // Représente le dao des adhérents
-        private IAdhérentDao adhérentDao;
+        #region attributes
+        /// <summary>
+        /// Dao permettant de gérer les données des acomptes
+        /// </summary>
+        private IAcompteDao adhérentDao;
 
-        // Représente les adhérents
-        private List<Adhérent> adhérents = new List<Adhérent>();
+        /// <summary>
+        /// Liste des acomptes
+        /// </summary>
+        private List<Acompte> adhérents = new List<Acompte>();
+        #endregion
 
-
+        #region constructor
         /// <summary>
         /// Constructeur de la classe adhérentManager
         /// </summary>
-        /// <param name="adhérentDao">Dao des adhérents</param>
-        public AdhérentManager()
+        public AcompteManager()
         {
-            this.adhérentDao = new AdhérentDao();
+            this.adhérentDao = new AcompteDAO();
 
             // Récupération des adhérents
             adhérents = adhérentDao.GetAdhérents();
 
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Permet de créer un nouvel adhérent
         /// </summary>
         /// <param name="adhérent">adhérent à créer</param>
-        public void CreateAdhérent(Adhérent adhérent)
+        public void CreateAdhérent(Acompte adhérent)
         {
             adhérentDao.CreateAdhérent(adhérent);
             adhérents.Add(adhérent);
@@ -41,7 +48,7 @@ namespace Couche_Métier
         /// Permet de supprimer un adhérent
         /// </summary>
         /// <param name="adhérent">adhérent à supprimer</param>
-        public void RemoveAdhérent(Adhérent adhérent)
+        public void RemoveAdhérent(Acompte adhérent)
         {
             adhérentDao.RemoveAdhérent(adhérent);
             adhérents.Remove(adhérent);
@@ -52,10 +59,10 @@ namespace Couche_Métier
         /// Permet de mettre à jour les adhérents
         /// </summary>
         /// <param name="adhérent">adhérent à modifier</param>
-        public void UpdateAdhérent(Adhérent adhérent)
+        public void UpdateAdhérent(Acompte adhérent)
         {
             adhérentDao.UpdateAdhérent(adhérent);
-            Adhérent adhér = adhérents.Find(adh => adh.Id == adhérent.Id);
+            Acompte adhér = adhérents.Find(adh => adh.Id == adhérent.Id);
             adhér.Nom = adhérent.Nom;
             adhér.Prenom = adhérent.Prenom;
             adhér.Argent = adhérent.Argent;
@@ -69,28 +76,12 @@ namespace Couche_Métier
        /// Permet de récupérer tous les adhérents
        /// </summary>
        /// <returns>tous les adhérents</returns>
-        public List<Adhérent> GetAdhérents()
+        public List<Acompte> GetAdhérents()
         {
             return this.adhérents;
         }
 
-        /// <summary>
-        /// Permet de récupérer une liste d'adhérent selo ndes infos
-        /// </summary>
-        /// <param name="id">infos des adhérents</param>
-        /// <returns>des adhérent</returns>
-        public List<Adhérent> GetAdhérents(string infoAdherent)
-        {
-            List<Adhérent> a = this.adhérents.FindAll(adhérent => 
-                adhérent.Prenom.ToUpper().Contains(infoAdherent.ToUpper()) ||  
-                adhérent.Nom.ToUpper().Contains(infoAdherent.ToUpper()) || 
-                adhérent.Identifiant.ToUpper().Contains(infoAdherent.ToUpper()));
-
-            
-            return a;
-        }
-
-
+#endregion
 
     }
 }

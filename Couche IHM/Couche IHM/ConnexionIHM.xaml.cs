@@ -62,7 +62,7 @@ namespace Couche_IHM
                     User? user = this.userManager.ConnectCompte(identifiant, password);
                     if (user != null)
                     {
-                        Log log = new Log(0, DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
+                        Log log = new Log(DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
                         logManager.CreateLog(log);
                         MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
                         MainWindow mainWindow = new MainWindow(user, logManager, userManager);

@@ -1,11 +1,9 @@
 ﻿
 using Modeles;
 
-namespace Couche_Data
+namespace Couche_Data.Interfaces
 {
-    /// <summary>
-    /// I Category
-    /// </summary>
+
     public interface ICategoryDao
     {
         /// <summary>
@@ -16,13 +14,13 @@ namespace Couche_Data
         /// <summary>
         /// Modifie une catéogorie
         /// </summary>
-        /// <param name="baseCategory"> nom de base de la catégorie</param>
-        /// <param name=""> Nouveau nom</param>
         public void UpdateCategory(Category category);
+
         /// <summary>
         /// Suprimme une catégorie
         /// </summary>
         public void DeleteCategory(Category cat);
+
         /// <summary>
         /// Liste toutes les catégories
         /// </summary>

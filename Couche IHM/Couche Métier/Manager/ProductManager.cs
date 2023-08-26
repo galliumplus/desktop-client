@@ -1,40 +1,40 @@
-﻿using Couche_Data;
+﻿
+using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using Modeles;
 
 
-namespace Couche_Métier
+namespace Couche_Métier.Manager
 {
     /// <summary>
     /// Manager de produit qui gère la DATA et le METIER
     /// </summary>
     public class ProductManager
     {
-        private List<Product> products;
-        private IProductDAO productDAO;
-
+        #region attributes
         /// <summary>
         /// Liste des produits
         /// </summary>
-        public List<Product> Products
-        {
-            get => products;
-            set => products = value;
-        }
+        private List<Product> products;
 
+        /// <summary>
+        /// Dao permettant de gérer les données des produits
+        /// </summary>
+        private IProductDAO productDAO;
+        #endregion
 
-
+        #region constructor
         /// <summary>
         /// Constructeur de Product Manager
         /// </summary>
-        /// <param name="productDAO"> IProductDAO </param>
         public ProductManager()
         {
-            // Initialisation
-
             this.productDAO = new ProductDAO();
             this.products = new List<Product>(this.productDAO.GetProducts());
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Ajoute un produit
         /// </summary>
@@ -53,17 +53,6 @@ namespace Couche_Métier
             productDAO.RemoveProduct(p);
         }
 
-
-        /// <summary>
-        /// Récupère tous les produits d'une catégorie
-        /// </summary>
-        /// <returns> liste de produits </returns>
-        public List<Product> GetProductsByCategory(Category category)
-        {
-            return this.products.FindAll(x => category.IdCat == x.Categorie);
-        }
-
-
         /// <summary>
         /// Update un produit
         /// </summary>
@@ -80,40 +69,6 @@ namespace Couche_Métier
         }
 
         /// <summary>
-        /// Cherche un produit
-        /// </summary>
-        /// <param name="productName"> nom du produit </param>
-        /// <returns> produit </returns>
-        public Product GetProduct(int idProduct)
-        {
-            Product produit = null;
-            foreach(Product product in products)
-            {
-                if(product.ID == idProduct)
-                    produit = product;
-            }
-            return produit;
-        }
-
-        /// <summary>
-        /// Renvoie une liste de produits selon des critères
-        /// </summary>
-        /// <param name="infoProduct"> info sur le produit </param>
-        /// <returns> liste de produits </returns>
-        public List<Product> GetProducts(string infoProduct)
-        {
-            List<Product> p = new List<Product>();
-            foreach (Product product in this.products)
-            {
-                if (product.NomProduit.ToUpper().Contains(infoProduct.ToUpper()))
-                {
-                    p.Add(product);
-                }
-            }
-            return p;
-        }
-
-        /// <summary>
         /// Retourne la liste des produits
         /// </summary>
         /// <returns> Liste de produit </returns>
@@ -122,5 +77,6 @@ namespace Couche_Métier
             return this.products;
         }
 
+        #endregion
     }
 }

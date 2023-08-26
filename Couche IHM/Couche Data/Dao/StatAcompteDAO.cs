@@ -1,12 +1,8 @@
 ﻿using Modeles;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Couche_Data
+
+namespace Couche_Data.Dao
 {
     public class StatAcompteDAO
     {
@@ -45,8 +41,8 @@ namespace Couche_Data
 
             //Requette SQL
             string formattedDate = stat.Date.ToString("yyyy-MM-dd");
-            string formattedAmountMoney = stat.Amount_money.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Aompte_Id})";
+            string formattedAmountMoney = stat.Money.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Acompte_Id})";
             MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 

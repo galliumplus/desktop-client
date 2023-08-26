@@ -112,11 +112,19 @@
                         BorderBrush="LightGreen"
                         Style="{StaticResource WaterMarkTextBox}"   
                         HorizontalAlignment="Stretch" 
-                        FontSize="15" 
+                        FontSize="13" 
                         Grid.ColumnSpan="2" 
                         Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
-                <Image  Source="/Images/loupe.png" Grid.ColumnSpan="2" Width="22" HorizontalAlignment="Right" Margin="0,0,70,0" />
+                <materialDesign:PackIcon
+                    Margin="-10,0,0,0"
+                    Grid.Column="1"
+                    Width="25"
+                    Height="25"
+                    Foreground="Black"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Kind="Magnify"/>
             </Grid>
 
             <!-- Info -->

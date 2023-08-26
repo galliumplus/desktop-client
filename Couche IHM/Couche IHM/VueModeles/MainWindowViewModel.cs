@@ -59,7 +59,7 @@ namespace Couche_IHM.VueModeles
         private Frame frame = Frame.FRAMEACCUEIL;
         private LogManager logManager;
         private UserManager userManager;
-        private AdhérentManager acompteManager;
+        private AcompteManager acompteManager;
         private ProductManager productManager;
 
         #region events
@@ -136,7 +136,7 @@ namespace Couche_IHM.VueModeles
             this.logManager = new LogManager();
             this.userManager = new UserManager();
             this.productManager = new ProductManager();
-            this.acompteManager = new AdhérentManager();
+            this.acompteManager = new AcompteManager();
 
             this.adherentViewModel = new AdherentsViewModel(acompteManager);
             this.productViewModel = new ProductsViewModel(productManager);

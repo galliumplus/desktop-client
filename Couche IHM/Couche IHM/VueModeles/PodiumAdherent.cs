@@ -16,7 +16,7 @@ namespace Couche_IHM.VueModeles
         public PodiumAdherent(StatAcompte stat,AdherentViewModel adherentViewModel)
         {
             this.adherentViewModel = adherentViewModel;
-            this.argent = stat.Amount_money;
+            this.argent = stat.Money;
         }
 
         public AdherentViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
@@ -24,8 +24,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                ConverterFormatArgent c = new ConverterFormatArgent();
-                return c.ConvertToString(argent);
+                return ConverterFormatArgent.ConvertToString(argent);
             }
             
         }

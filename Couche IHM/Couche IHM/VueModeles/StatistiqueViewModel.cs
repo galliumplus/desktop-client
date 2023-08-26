@@ -15,7 +15,7 @@ namespace Couche_IHM.VueModeles
     {
         #region attributes
         private StatProduitManager statProduitManager;
-        private AdhérentManager acompteManager;
+        private AcompteManager acompteManager;
         private List<PodiumProduit> statsProduit = new List<PodiumProduit>();
 
         private StatAcompteManager statAcompteManager;
@@ -58,7 +58,7 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public StatistiqueViewModel(ProductManager produtManager,AdhérentManager acompteManager)
+        public StatistiqueViewModel(ProductManager produtManager,AcompteManager acompteManager)
         {
             // Initialisation des objets métiers
             this.statProduitManager = new StatProduitManager();
@@ -96,14 +96,14 @@ namespace Couche_IHM.VueModeles
         /// <param name="stat"></param>
         public void AddStatAcompte(StatAcompte stat)
         {
-            PodiumAdherent? acompteStat = this.statsAcompte.Find(x => x.AdherentViewModel.Id == stat.Aompte_Id);
+            PodiumAdherent? acompteStat = this.statsAcompte.Find(x => x.AdherentViewModel.Id == stat.Acompte_Id);
             if (acompteStat != null)
             {
-                acompteStat.Argent += stat.Amount_money;
+                acompteStat.Argent += stat.Money;
             }
             else
             {
-                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Aompte_Id),null)));
+                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id),null)));
             }
             NotifyPropertyChanged(nameof(this.PodiumAcompte));
         }
@@ -131,7 +131,7 @@ namespace Couche_IHM.VueModeles
             List<StatAcompte> statAcompte = this.statAcompteManager.GetStats();
             foreach (StatAcompte stat in statAcompte)
             {
-                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Aompte_Id), null)));
+                this.statsAcompte.Add(new PodiumAdherent(stat, new AdherentViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id), null)));
             }
         }
         #endregion

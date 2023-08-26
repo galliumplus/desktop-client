@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -107,14 +108,14 @@ namespace Couche_IHM.VueModeles
                 this.user.IdRole = this.role.Id;
                 if (this.mdpIHM1 != "")
                 {
-                    this.user.HashedPassword = CryptStringToSHA256.Hash(this.mdpIHM2);
+                    this.user.HashedPassword = CryptString.Hash(this.mdpIHM2);
                 }
                 this.userManager.UpdateCompte(this.user);
                 this.MdpIHM1 = "";
                 this.MdpIHM2 = "";
 
                 // Log l'action
-                Log log = new Log(0, DateTime.Now, 6, $"Modification du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 6, $"Modification du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
                 // Notifier la vue
@@ -145,7 +146,7 @@ namespace Couche_IHM.VueModeles
                 this.user.Prenom = this.prenom;
                 this.user.Mail = this.email;
                 this.user.IdRole = this.role.Id;
-                this.user.HashedPassword = CryptStringToSHA256.Hash(this.mdpIHM2);
+                this.user.HashedPassword = CryptString.Hash(this.mdpIHM2);
 
                 this.userManager.CreateCompte(this.user);
                 this.MdpIHM1 = "";
@@ -153,7 +154,7 @@ namespace Couche_IHM.VueModeles
                 this.action = "UPDATE";
 
                 // Log l'action
-                Log log = new Log(0, DateTime.Now, 6, $"Création du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 6, $"Création du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
                 // Notifier la vue
@@ -203,7 +204,7 @@ namespace Couche_IHM.VueModeles
             this.userManager.RemoveCompte(this.user);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 6, $"Suppression du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(DateTime.Now, 6, $"Suppression du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue

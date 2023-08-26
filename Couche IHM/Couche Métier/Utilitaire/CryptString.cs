@@ -1,6 +1,4 @@
 ﻿
-using System.Security.Cryptography;
-using System.Text;
 using BC = BCrypt.Net.BCrypt;
 
 namespace Couche_Métier.Utilitaire
@@ -8,7 +6,7 @@ namespace Couche_Métier.Utilitaire
     /// <summary>
     /// Permet de crypter un string en SHA256
     /// </summary>
-    public static class CryptStringToSHA256
+    public static class CryptString
     {
         /// <summary>
         /// Hash un message
@@ -20,7 +18,9 @@ namespace Couche_Métier.Utilitaire
             return BC.HashPassword(message);
         }
 
-
+        /// <summary>
+        /// Permet de vérifier qu'un mot de passe et un hashage sont les mêmes
+        /// </summary>
         public static bool Verify(string message,string encoded)
         {
             return BC.Verify(message, encoded); 

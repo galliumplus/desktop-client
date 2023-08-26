@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -19,7 +20,7 @@ namespace Couche_IHM.VueModeles
         #region attributes
         private ObservableCollection<AdherentViewModel> adherents;
         private AdherentViewModel currentAdherent;
-        private AdhérentManager adherentManager;
+        private AcompteManager adherentManager;
         private string searchFilter = "";
         private bool showAdherent = false;
         private bool showModifButtons = false;
@@ -164,7 +165,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur de la classe adhérents view model
         /// </summary>
-        public AdherentsViewModel(AdhérentManager acompteManager)
+        public AdherentsViewModel(AcompteManager acompteManager)
         {
             this.adherentManager = acompteManager;
             this.adherents = new ObservableCollection<AdherentViewModel>();
@@ -179,8 +180,8 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void InitAdhérents()
         {
-            List<Adhérent> adherents = this.adherentManager.GetAdhérents();
-            foreach (Adhérent adh in adherents)
+            List<Acompte> adherents = this.adherentManager.GetAdhérents();
+            foreach (Acompte adh in adherents)
             {
                 this.adherents.Add(new AdherentViewModel(adh,this.adherentManager));
             }
@@ -197,7 +198,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW" || currentAdherent.Action == "NEW")
             {
                 ShowDeleteAcompte = false;
-                CurrentAdherent = new AdherentViewModel(new Adhérent(),this.adherentManager);
+                CurrentAdherent = new AdherentViewModel(new Acompte(),this.adherentManager);
             }
             else
             {

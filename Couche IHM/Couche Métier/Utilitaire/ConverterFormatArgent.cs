@@ -13,7 +13,7 @@ namespace Couche_Métier.Utilitaire
         /// Permet de convertir l'argent en un string formatté
         /// </summary>
         /// <param name="argent"></param>
-        public string ConvertToString(float argent)
+        public static string ConvertToString(float argent)
         {
             // Mise à jour de l'argent
             string ret = "" + Math.Round(argent, 2);
@@ -42,7 +42,7 @@ namespace Couche_Métier.Utilitaire
         /// Permet de convertir l'argent formatté en double
         /// </summary>
         /// <param name="argent"></param>
-        public float ConvertToDouble(string argent)
+        public static float ConvertToDouble(string argent)
         {
             float argentresult = 0;
 

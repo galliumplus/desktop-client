@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Manager;
 using Modeles;
 using System;
 using System.Collections.Generic;

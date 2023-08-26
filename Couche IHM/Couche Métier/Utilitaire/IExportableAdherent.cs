@@ -12,6 +12,6 @@ namespace Couche_Métier
         /// Permet d'exporter des adhérents
         /// </summary>
         /// <param name="adhérents">liste des adhérents</param>
-        public void Export(List<Adhérent> adhérents);
+        public void Export(List<Acompte> adhérents);
     }
 }

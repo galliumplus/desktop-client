@@ -1,17 +1,13 @@
 ﻿using Couche_Data;
+using Couche_Data.Dao;
 using Modeles;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Couche_Métier.Manager
 {
     public class LogManager
     {
-
+        #region attributes
         /// <summary>
         /// Permet d'accéder aux données
         /// </summary>
@@ -20,23 +16,24 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Liste des logs
         /// </summary>
-        private List<Modeles.Log> logs = new List<Modeles.Log>();
+        private List<Log> logs = new List<Log>();
+        #endregion
 
+        #region constructor
         /// <summary>
-        /// Liste des catégories de log
+        /// Constructeur du log Manager
         /// </summary>
-        private List<LogTheme> logThemes = new List<LogTheme>();
-
         public LogManager()
         {
             logDao = new LogDAO();
             int annee = Convert.ToInt16(DateTime.Now.ToString("yyyy"));
             int mois = Convert.ToInt16(DateTime.Now.ToString("MM"));
             this.logs = this.logDao.GetLogs(mois,annee);
-            this.logThemes = this.logDao.GetLogsTheme();
         }
+        #endregion
 
-        public List<Modeles.Log> GetLogs(int mois = 0,int annee=0)
+        #region methods
+        public List<Log> GetLogs(int mois = 0,int annee=0)
         {
             List<Log> logs = new List<Log>();
             if (mois == 0 || annee == 0)
@@ -50,15 +47,12 @@ namespace Couche_Métier.Manager
             return logs;
         }
 
-        public List<Modeles.LogTheme> GetLogsTheme()
-        {
-            return this.logThemes;
-        }
 
-        public void CreateLog(Modeles.Log log)
+        public void CreateLog(Log log)
         {
             this.logs.Insert(0, log);
             this.logDao.CreateLog(log);
         }
+        #endregion
     }
 }

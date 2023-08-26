@@ -10,7 +10,7 @@ namespace Couche_Métier
     /// </summary>
     public class ExportAdherentToExcel : IExportableAdherent
     {
-        public void Export(List<Adhérent> adhérents)
+        public void Export(List<Acompte> adhérents)
         {
             // Chemin du fichier vers le bureau
             string pathDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Gallium";
@@ -49,7 +49,7 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="adhérents">liste des adhérents</param>
         /// <param name="worksheet">feuille excel</param>
-        private void AffichageAdherents(List<Adhérent> adhérents,IXLWorksheet worksheet)
+        private void AffichageAdherents(List<Acompte> adhérents,IXLWorksheet worksheet)
         {
 
             // Remplissage des adhérents
@@ -84,7 +84,7 @@ namespace Couche_Métier
         /// </summary>
         /// <param name="adhérents">liste des adhérents</param>
         /// <param name="worksheet">feuille excel</param>
-        private void CreationTableauxExcel(List<Adhérent> adhérents, IXLWorksheet worksheet)
+        private void CreationTableauxExcel(List<Acompte> adhérents, IXLWorksheet worksheet)
         { 
 
             // Deuxième table ( comptage )

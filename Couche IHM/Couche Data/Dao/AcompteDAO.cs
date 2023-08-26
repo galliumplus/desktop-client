@@ -1,24 +1,20 @@
 ﻿
+using Couche_Data.Interfaces;
 using Modeles;
 using MySql.Data.MySqlClient;
 
-namespace Couche_Data
+namespace Couche_Data.Dao
 {
-    public class AdhérentDao : IAdhérentDao
+    public class AcompteDAO : IAcompteDao
     {
 
-        public AdhérentDao()
-        {
-            
-        }
-
-        public void CreateAdhérent(Adhérent adhérent)
+        public void CreateAdhérent(Acompte adhérent)
         {
             //Connection
             dbsDAO.Instance.OpenDataBase();
 
             //Requette SQL
-            string stm = $"INSERT INTO acompte VALUES (0,'{adhérent.Nom}','{adhérent.Prenom}',{adhérent.Argent},{adhérent.StillAdherent},'{adhérent.Formation}','{adhérent.Identifiant}','no')";
+            string stm = $"INSERT INTO acompte VALUES (0,'{adhérent.Nom}','{adhérent.Prenom}',{adhérent.Argent},{adhérent.StillAdherent},'{adhérent.Formation}','{adhérent.Identifiant}')";
             MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
             cmd.Prepare();
 
@@ -34,7 +30,7 @@ namespace Couche_Data
         }
 
 
-        public List<Adhérent> GetAdhérents()
+        public List<Acompte> GetAdhérents()
         {
             //Connection
             dbsDAO.Instance.OpenDataBase();
@@ -47,10 +43,10 @@ namespace Couche_Data
             //lecture de la requette
             MySqlDataReader rdr = cmd.ExecuteReader();
 
-            List<Adhérent> acomptes = new List<Adhérent>();
+            List<Acompte> acomptes = new List<Acompte>();
             while (rdr.Read())
             {
-                acomptes.Add(new Adhérent(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), rdr.GetString("formation"),true,rdr.GetBoolean("isAdherent")));
+                acomptes.Add(new Acompte(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), rdr.GetString("formation"),true,rdr.GetBoolean("isAdherent")));
             }
 
             rdr.Close();
@@ -58,7 +54,7 @@ namespace Couche_Data
             return acomptes;
         }
 
-        public void RemoveAdhérent(Adhérent adhérent)
+        public void RemoveAdhérent(Acompte adhérent)
         {
             //Connection
             dbsDAO.Instance.OpenDataBase();
@@ -74,7 +70,7 @@ namespace Couche_Data
             dbsDAO.Instance.CloseDatabase();
         }
 
-        public void UpdateAdhérent(Adhérent adhérent)
+        public void UpdateAdhérent(Acompte adhérent)
         {
                 //Connection
                 dbsDAO.Instance.OpenDataBase();

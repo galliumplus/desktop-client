@@ -1,7 +1,7 @@
 ﻿
 namespace Modeles
 {
-    public class Adhérent
+    public class Acompte
     {
         #region attributes
         private int id;
@@ -23,7 +23,7 @@ namespace Modeles
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Adhérent(int id, string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
+        public Acompte(int id, string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
         {
             this.id = id;
             this.identifiant = identifiant;
@@ -39,26 +39,11 @@ namespace Modeles
         /// <summary>
         /// Constructeur vide pour créer des adhérents
         /// </summary>
-        public Adhérent()
+        public Acompte()
         {
             this.stillAdherent = true;
         }
 
-        /// <summary>
-        /// Constructeur par copie
-        /// </summary>
-        /// <param name="ad">adhérent à copier</param>
-        public Adhérent(Adhérent ad)
-        {
-            this.argent=ad.argent;
-            this.nom = ad.nom;
-            this.canPass = ad.canPass;
-            this.stillAdherent = ad.stillAdherent;
-            this.prenom=ad.prenom;
-            this.formation=ad.formation;
-            this.identifiant=ad.identifiant;
-            this.id=ad.Id;
-        }
         #endregion
 
         #region properties
@@ -102,16 +87,7 @@ namespace Modeles
         /// </summary>
         public string Formation { get => formation; set => formation = value; }
 
-     
-
-      
-
-
         #endregion
 
-        public override string ToString()
-        {
-            return $" {Nom} {Identifiant} {Prenom}";
-        }
     }
 }

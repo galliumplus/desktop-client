@@ -1,12 +1,5 @@
 ﻿using Couche_IHM.VueModeles;
-using Couche_Métier;
-using Couche_Métier.Utilitaire;
-using Modeles;
-using System;
-using System.ComponentModel;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace Couche_IHM.Frames
 {
@@ -18,7 +11,6 @@ namespace Couche_IHM.Frames
         /// <summary>
         /// Cosntructeur du frame adhérent
         /// </summary>
-        /// <param name="adhérentManager">manager des adhérents</param>
         public FrameAdherent()
         {
             InitializeComponent();

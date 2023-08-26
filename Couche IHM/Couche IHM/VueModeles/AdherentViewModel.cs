@@ -1,4 +1,5 @@
 ﻿using Couche_Métier;
+using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
@@ -19,12 +20,12 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Représente le modèle adhérent
         /// </summary>
-        private Adhérent adherent;
+        private Acompte adherent;
 
         /// <summary>
         /// Représente le manager des adhérents
         /// </summary>
-        private AdhérentManager adhérentManager;
+        private AcompteManager adhérentManager;
 
 
         private string argentIHM;
@@ -133,15 +134,13 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
-        public AdherentViewModel(Adhérent adherent,AdhérentManager adherentManager)
+        public AdherentViewModel(Acompte adherent,AcompteManager adherentManager)
         {
             this.adherent = adherent;
             this.adhérentManager = adherentManager;
-            
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
-            this.argentIHM = converterFormatArgent.ConvertToString(adherent.Argent);
+            this.argentIHM = ConverterFormatArgent.ConvertToString(adherent.Argent);
             this.identifiantIHM = adherent.Identifiant;
             this.formationIHM = adherent.Formation;
             this.isAdherentIHM = adherent.StillAdherent;
@@ -164,7 +163,7 @@ namespace Couche_IHM.VueModeles
             this.adhérentManager.RemoveAdhérent(this.adherent);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
@@ -180,19 +179,18 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void CreateAdherent()
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Changer la data
             this.adherent.Nom = this.nomIHM;
             this.adherent.Prenom = this.prenomIHM;
-            this.adherent.Argent = converterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.adherent.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
             this.adherent.Formation = this.formationIHM;
             this.adherent.Identifiant = this.identifiantIHM;
             this.adherent.StillAdherent = this.isAdherentIHM;
             adhérentManager.CreateAdhérent(this.adherent);
 
             // Log l'action
-            Log log = new Log(0, DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
             MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
             // Notifier la vue
@@ -211,12 +209,11 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void UpdateAdherent(bool doLog = true)
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Changer la data
             this.adherent.Nom = this.nomIHM;
             this.adherent.Prenom = this.prenomIHM;
-            this.adherent.Argent = converterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.adherent.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
             this.adherent.Formation = this.formationIHM;
             this.adherent.Identifiant = this.identifiantIHM;
             this.adherent.StillAdherent = this.isAdherentIHM;
@@ -225,7 +222,7 @@ namespace Couche_IHM.VueModeles
             // Log l'action
             if (doLog)
             {
-                Log log = new Log(0, DateTime.Now, 2, $"Modification de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 2, $"Modification de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
                 MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             }
@@ -245,10 +242,9 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void ResetAdherent()
         {
-            ConverterFormatArgent converterFormatArgent = new ConverterFormatArgent();
 
             // Initialisation propriétés
-            this.argentIHM = converterFormatArgent.ConvertToString(adherent.Argent);
+            this.argentIHM = ConverterFormatArgent.ConvertToString(adherent.Argent);
             this.identifiantIHM = adherent.Identifiant;
             this.formationIHM = adherent.Formation;
             this.nomIHM = adherent.Nom;

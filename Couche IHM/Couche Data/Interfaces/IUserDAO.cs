@@ -1,11 +1,9 @@
 ﻿
 using Modeles;
 
-namespace Couche_Data
+namespace Couche_Data.Interfaces
 {
-    /// <summary>
-    /// Compte DAO
-    /// </summary>
+
     public interface IUserDAO
     {
         /// <summary>

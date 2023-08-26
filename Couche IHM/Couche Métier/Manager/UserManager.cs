@@ -1,33 +1,47 @@
-﻿using Couche_Data;
+﻿
+using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using Couche_Métier.Utilitaire;
 using Modeles;
 
 
-namespace Couche_Métier
+namespace Couche_Métier.Manager
 {
     /// <summary>
     /// Manager des utilisateurs gallium
     /// </summary>
     public class UserManager
     {
-        // Attribut représentant le DAO pour gérer les comptes 
+        #region attributes
+        /// <summary>
+        /// Dao pour gérer les données des users
+        /// </summary>        
         private IUserDAO userDao;
 
-        // Dictionnaire stockant les comptes temporairement en tant que cache
+        /// <summary>
+        /// Liste des comptes
+        /// </summary>
         private List<User> comptes;
 
+        /// <summary>
+        /// Liste des rôles
+        /// </summary>
         private List<Role> roles;
+        #endregion
 
+        #region constructor
         /// <summary>
         /// Constructeur du manager des comptes
         /// </summary>
-        /// <param name="userDao">le DAO des comptes</param>
         public UserManager()
         {
             this.userDao = new UserDAO();
             this.comptes = this.userDao.GetComptes();
             this.roles = this.userDao.GetRoles();
         }
+        #endregion
+
+        #region methods
 
         /// <summary>
         /// Permet de créer un compte
@@ -39,8 +53,6 @@ namespace Couche_Métier
             comptes.Add(compte);
         }
 
-
-
         /// <summary>
         /// Permet d'obtenir tous les comptes
         /// </summary>
@@ -50,7 +62,6 @@ namespace Couche_Métier
             return comptes;
         }
 
-        // <summary>
         /// Permet d'obtenir tous les comptes
         /// </summary>
         /// <returns>tous les comptes</returns>
@@ -94,12 +105,13 @@ namespace Couche_Métier
         {
             User? user = this.comptes.Find(x => x.Mail == identifiant);
             User? userFinal = null;
-            if (user != null &&CryptStringToSHA256.Verify(password, user.HashedPassword))
+            if (user != null &&CryptString.Verify(password, user.HashedPassword))
             {
                 userFinal = user;
             }
             
             return userFinal;
         }
+        #endregion
     }
 }

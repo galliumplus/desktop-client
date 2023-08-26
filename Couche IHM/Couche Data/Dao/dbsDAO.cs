@@ -1,7 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace Couche_Data
+namespace Couche_Data.Dao
 {
+
     /// <summary>
     /// Classe qui permet de créer une connexion avec la database
     /// </summary>
@@ -11,8 +12,8 @@ namespace Couche_Data
         #region attribut
         private MySqlConnection sql;
         private static dbsDAO instance = null;
-        private  MySqlCommand cmd;
-        private  MySqlDataReader reader;
+        private MySqlCommand cmd;
+        private MySqlDataReader reader;
         private static bool isConnected;
         #endregion
 
@@ -26,30 +27,30 @@ namespace Couche_Data
                 if (instance == null)
                 {
                     instance = new dbsDAO();
-                    
+
                 }
                 return instance;
             }
         }
-        
+
         /// <summary>
         /// Permet de faire des requêtes
         /// </summary>
-        public  MySqlCommand CMD
+        public MySqlCommand CMD
         {
             get => cmd;
-            set => cmd = value; 
+            set => cmd = value;
         }
 
         /// <summary>
         /// permet de lire les données
         /// </summary>
-        public  MySqlDataReader Reader
+        public MySqlDataReader Reader
         {
             get => reader;
             set => reader = value;
         }
-        
+
         /// <summary>
         /// Vérifie si la connexion à la bdd existe 
         /// </summary>
@@ -65,7 +66,7 @@ namespace Couche_Data
         private dbsDAO()
         {
             this.ConnexionToBdd();
-            
+
         }
         private object databaseLock = new object();
 
@@ -93,7 +94,7 @@ namespace Couche_Data
                 sql.Open();
                 isConnected = true;
             }
-            
+
         }
 
         /// <summary>
@@ -107,6 +108,6 @@ namespace Couche_Data
                 isConnected = false;
             }
         }
-
     }
+
 }

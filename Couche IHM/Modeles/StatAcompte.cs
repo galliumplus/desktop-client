@@ -1,29 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Modeles
 {
     public class StatAcompte
     {
+        #region attributes
+        private int id;
         private int acompte_id;
-        private float amount_money;
-        private int sale_id;
+        private float money;
         private DateTime date;
+        #endregion
 
-        public StatAcompte(int sale_id,DateTime date, float argent, int acompte_id)
+        #region constructor
+        /// <summary>
+        /// Constructeur du modèle statacompte
+        /// </summary>
+        /// <param name="id">id de la stat</param>
+        /// <param name="date">date de la stat</param>
+        /// <param name="money">argent de la stat</param>
+        /// <param name="acompte_id">numéro de l'acompte</param>
+        public StatAcompte(int id, DateTime date, float money, int acompte_id)
         {
             this.acompte_id = acompte_id;
-            this.amount_money = argent;
-            this.sale_id = sale_id;
+            this.money = money;
+            this.id = id;
             this.date = date;
         }
+        #endregion
 
-        public int Aompte_Id { get => acompte_id; set => acompte_id = value; }
-        public float Amount_money { get => amount_money; set => amount_money = value; }
-        public int Sale_id { get => sale_id; set => sale_id = value; }
+        #region properties
+        public int Acompte_Id { get => acompte_id; set => acompte_id = value; }
+        public float Money { get => money; set => money = value; }
+        public int Id { get => id; set => id = value; }
         public DateTime Date { get => date; set => date = value; }
+        #endregion
     }
 }

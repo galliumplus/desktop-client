@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿
 
 namespace Modeles
 {
     public class Log 
     {
-        private int id;
+        #region attributes
         private DateTime date;
         private int theme;
         private string message;
         private string auteur;
+        #endregion
 
+        #region constructors
         /// <summary>
-        /// Constructeur
+        /// Constructeur du modèle log
         /// </summary>
-        public Log(int id, DateTime date, int theme, string message, string auteur)
+        /// <param name="date">date du log</param>
+        /// <param name="theme">theme du log</param>
+        /// <param name="message">message du log</param>
+        /// <param name="auteur">auteur du log</param>
+        public Log(DateTime date, int theme, string message, string auteur)
         {
-            this.id = id;
             this.date = date;
             this.theme = theme;
             this.message = message;
             this.auteur = auteur;
         }
+        #endregion
 
+        #region properties
         /// <summary>
         /// Date de l'action
         /// </summary>
@@ -63,6 +64,6 @@ namespace Modeles
             get => auteur;
             set => auteur = value;
         }
-        public int Id { get => id; set => id = value; }
+        #endregion
     }
 }

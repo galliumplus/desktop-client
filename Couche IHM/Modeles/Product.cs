@@ -77,8 +77,16 @@ namespace Modeles
         #endregion
 
         #region constructors
+
         /// <summary>
-        /// Futur constructeur naturelle
+        /// Constructeur du modèle produit
+        /// </summary>
+        /// <param name="id">id du produit</param>
+        /// <param name="nomProduit">nom du produit</param>
+        /// <param name="quantite">quantite du produit</param>
+        /// <param name="prixAdherent">prix A du produit</param>
+        /// <param name="prixNonAdherent">prix NA du produit</param>
+        /// <param name="categorie">numero de categorie du produit</param>
         public Product(int id, string nomProduit, int quantite, float prixAdherent, float prixNonAdherent, int categorie)
         {
             this.id = id;
@@ -95,25 +103,7 @@ namespace Modeles
         /// </summary>
         public Product() { }
 
-        /// <summary>
-        /// Constructeur naturelle copiant l'objet
-        /// </summary>
-        /// <param name="p"> produit à copier </param>
-        public Product(Product p)
-        {
-            this.id = p.ID;
-            this.nomProduit = p.NomProduit;
-            this.quantite = p.Quantite;
-            this.prixAdherent = p.PrixAdherent;
-            this.prixNonAdherent = p.PrixNonAdherent;
-            this.categorie = p.Categorie;
-        }
-
         #endregion
 
-        public override string ToString()
-        {
-            return $"{this.nomProduit} {this.quantite} {this.PrixAdherent} {categorie}";
-        }
     }
 }

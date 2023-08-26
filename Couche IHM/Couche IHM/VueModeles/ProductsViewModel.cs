@@ -243,7 +243,7 @@ namespace Couche_IHM.VueModeles
                 CategoryViewModel catProduit = null;
                 if (prd.Categorie != -1)
                 {
-                    catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.Categories.Find(x => x.IdCat == prd.Categorie).NomCategory);
+                    catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.ListAllCategory().Find(x => x.IdCat == prd.Categorie).NomCategory);
                 }
                 
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit));
@@ -257,7 +257,7 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void InitCategories()
         {
-            List<Category> categories = this.categoryManager.Categories;
+            List<Category> categories = this.categoryManager.ListAllCategory();
             foreach (Category cat in categories)
             {
                 this.categories.Add(new CategoryViewModel(this.categoryManager,cat));
