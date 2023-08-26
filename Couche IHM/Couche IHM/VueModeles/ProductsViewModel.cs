@@ -40,6 +40,7 @@ namespace Couche_IHM.VueModeles
 
         #region events
 
+        public RelayCommand CreateCat { get; set; }
         public RelayCommand OpenProd { get; set; }
         public RelayCommand CloseCategory { get; set; }
         public RelayCommand OpenCat { get; set; }
@@ -222,6 +223,7 @@ namespace Couche_IHM.VueModeles
                 this.showCategories = false;
             }
             );
+            this.CreateCat = new RelayCommand(x => CreateCategory());
 
             // Initialisation Data
             InitCategories();
@@ -280,6 +282,20 @@ namespace Couche_IHM.VueModeles
             }
             
             ShowProductDetail = true;
+        }
+
+        /// <summary>
+        /// Permet de créer une catégorie
+        /// </summary>
+        public void CreateCategory()
+        {
+            // Mise à jour data
+            CategoryViewModel cat = new CategoryViewModel(this.categoryManager,new Category(0,"New",true));
+            this.categoryManager.CreateCategory(cat.Category);
+
+            // Notifier la vue
+            Categories.Add(cat);
+
         }
 
         /// <summary>

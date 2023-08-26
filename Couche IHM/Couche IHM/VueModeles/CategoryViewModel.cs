@@ -62,7 +62,9 @@ namespace Couche_IHM.VueModeles
         public RelayCommand UpdateCat { get; set; }
         public RelayCommand DeleteCat { get; set; }
 
+
         public RelayCommand ActivateCat { get; set; }
+        public Category Category { get => category; set => category = value; }
         #endregion
         public CategoryViewModel(CategoryManager categoryManager,Category category)
         {
@@ -145,6 +147,8 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.ProductViewModel.Categories.Remove(this);
 
         }
+
+
 
         public override bool Equals(object? obj)
         {
