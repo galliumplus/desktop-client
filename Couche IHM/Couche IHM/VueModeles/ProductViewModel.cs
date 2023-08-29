@@ -224,18 +224,27 @@ namespace Couche_IHM.VueModeles
             if (this.categoryIHM != null)
             {
 
-                // Changer la data
-                this.product.Quantite = this.quantiteIHM;
-                this.product.NomProduit = this.nomProduitIHM;
-                this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-                this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
-                this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+                // Log l'opération
+                if (doLog && product.Quantite != this.quantiteIHM)
+                {
+                    string log;
+                    if (product.Quantite > this.quantiteIHM)
+                    {
+                        log = $"Prélèvement du stock  ( -{product.Quantite - this.quantiteIHM} {product.NomProduit} )";
+                    }
+                    else
+                    {
+                        log = $"Ajout du stock ( +{quantiteIHM - product.Quantite} {product.NomProduit} )";
+                    }
+                    Log log2 = new Log(DateTime.Now, 3, log, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                    MainWindowViewModel.Instance.LogManager.CreateLog(log2);
+                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log2));
 
-                
+                }
 
-                // Log l'action
                 if (doLog)
                 {
+
                     // Changer l'image
                     if (image.UriSource.ToString() != image2)
                     {
@@ -243,11 +252,15 @@ namespace Couche_IHM.VueModeles
                         byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
                         ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
                     }
-                    Log log = new Log(DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                    MainWindowViewModel.Instance.LogManager.CreateLog(log);
-                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-
+                   
                 }
+
+                // Changer la data
+                this.product.Quantite = this.quantiteIHM;
+                this.product.NomProduit = this.nomProduitIHM;
+                this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+                this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
+                this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
                 this.productManager.UpdateProduct(this.product);
 
                 // Notifier la vue
@@ -322,7 +335,7 @@ namespace Couche_IHM.VueModeles
             }
             else
             {
-                MessageBox.Show("Vous n'avez pas sélectionné de catégory");
+                MessageBox.Show("Vous n'avez pas sélectionné de catégorie");
             }
             
         }

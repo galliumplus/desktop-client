@@ -204,6 +204,27 @@ namespace Couche_IHM.VueModeles
         public void UpdateAcompte(bool doLog = true)
         {
 
+            // Log l'action
+            float argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            if (doLog && acompte.Argent != argent)
+            {
+                // Si suppresion argent
+                string logMessage;
+                if (acompte.Argent > argent)
+                {
+                    logMessage = $"Prélèvement de {ConverterFormatArgent.ConvertToString(acompte.Argent - argent)} sur {acompte.Identifiant}";
+                }
+                else
+                {
+                    logMessage = $"Ajout de {ConverterFormatArgent.ConvertToString(argent - acompte.Argent)} sur {acompte.Identifiant}";
+                }
+
+                Log log = new Log(DateTime.Now, 2, logMessage, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+            }
+            
+
             // Changer la data
             this.acompte.Nom = this.nomIHM;
             this.acompte.Prenom = this.prenomIHM;
@@ -212,14 +233,6 @@ namespace Couche_IHM.VueModeles
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.StillAdherent = this.isAdherentIHM;
             acompteManager.UpdateAdhérent(this.acompte);
-
-            // Log l'action
-            if (doLog)
-            {
-                Log log = new Log(DateTime.Now, 2, $"Modification de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                MainWindowViewModel.Instance.LogManager.CreateLog(log);
-                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-            }
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(IdentifiantIHM));
