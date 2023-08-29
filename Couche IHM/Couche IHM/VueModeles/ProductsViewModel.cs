@@ -1,4 +1,4 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
 using Modeles;
 using System;
@@ -7,8 +7,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Couche_IHM.VueModeles
 {
@@ -48,8 +46,6 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
-
-
         /// <summary>
         /// Représente toutes les catégories de produits disponibles
         /// </summary>
@@ -197,11 +193,9 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-        public ProductManager ProductManager { get => productManager; set => productManager = value; }
-
-
         #endregion
 
+        #region constructor
         /// <summary>
         /// Constructeur du viewModel
         /// </summary>
@@ -229,6 +223,7 @@ namespace Couche_IHM.VueModeles
             InitCategories();
             InitProducts();
         }
+        #endregion
 
         #region methods
         /// <summary>
@@ -237,13 +232,13 @@ namespace Couche_IHM.VueModeles
         private void InitProducts()
         {
             List<Product> produitsMetier = this.productManager.GetProducts();
-
+            List<CategoryViewModel> categories = this.categories.ToList();
             foreach (Product prd in produitsMetier)
             {
                 CategoryViewModel catProduit = null;
                 if (prd.Categorie != -1)
                 {
-                    catProduit = this.categories.ToList().Find(x => x.NomCat == this.categoryManager.ListAllCategory().Find(x => x.IdCat == prd.Categorie).NomCategory);
+                    catProduit = categories.Find(x => x.Id == prd.Categorie);
                 }
                 
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit));
@@ -301,7 +296,6 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de rajouter un produit  dans la liste
         /// </summary>
-        /// <param name="produit"></param>
         public void AddProduct(ProductViewModel produit)
         {
             this.products.Add(produit);
@@ -312,7 +306,6 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de supprimer un produit  dans la liste
         /// </summary>
-        /// <param name="produit"></param>
         public void RemoveProduct(ProductViewModel produit)
         {
             this.products.Remove(produit);

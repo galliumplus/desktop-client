@@ -1,14 +1,10 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Couche_IHM.VueModeles
@@ -38,6 +34,7 @@ namespace Couche_IHM.VueModeles
         private UserManager userManager;
 
         #endregion
+
         #region events
         public RelayCommand ShowUpdate { get; set; }
         public RelayCommand ResetU { get; set; }
@@ -48,10 +45,18 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+        /// <summary>
+        /// Nom de l'utilisateur
+        /// </summary>
         public string NomIHM { get => nom; set => nom = value; }
+        /// <summary>
+        /// Prénom de l'utilisateur
+        /// </summary>
         public string PrenomIHM { get => prenom; set => prenom = value; }
+        /// <summary>
+        /// Mail de l'utilisateur
+        /// </summary>
         public string EmailIHM { get => email; set => email = value; }
-
         /// <summary>
         /// Nom complet de l'utilisateur 
         /// </summary>
@@ -59,9 +64,21 @@ namespace Couche_IHM.VueModeles
         {
             get => prenom + " " + nom;
         }
+        /// <summary>
+        /// Role de l'utilisateur
+        /// </summary>
         public Role RoleIHM { get => role; set => role = value; }
+        /// <summary>
+        /// Nouveau mot de passe 1
+        /// </summary>
         public string MdpIHM2 { get => mdpIHM2; set => mdpIHM2 = value; }
+        /// <summary>
+        /// Nouveau mot de passe 2
+        /// </summary>
         public string MdpIHM1 { get => mdpIHM1; set => mdpIHM1 = value; }
+        /// <summary>
+        /// Action à réaliser sur l'utilisateur
+        /// </summary>
         public string Action
         {
             get => action;
@@ -71,6 +88,11 @@ namespace Couche_IHM.VueModeles
         }
 
         #endregion
+
+        #region constructor
+        /// <summary>
+        /// Constructeur de l'utilisateur vue modele
+        /// </summary>
         public UserViewModel(User user, UserManager userManager)
         {
             // Initialisation des datas
@@ -80,7 +102,6 @@ namespace Couche_IHM.VueModeles
             this.prenom = user.Prenom;
             this.email = user.Mail;
             this.role = userManager.GetRoles().Find(x => x.Id == user.IdRole);
-
             this.userManager = userManager;
 
             // Initialisation des events
@@ -93,7 +114,9 @@ namespace Couche_IHM.VueModeles
             this.CreateU = new RelayCommand(x => this.CreateUser());
             this.DeleteU = new RelayCommand(x => this.DeleteUser());
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'user
         /// </summary>
@@ -146,25 +169,32 @@ namespace Couche_IHM.VueModeles
                 this.user.Prenom = this.prenom;
                 this.user.Mail = this.email;
                 this.user.IdRole = this.role.Id;
-                this.user.HashedPassword = CryptString.Hash(this.mdpIHM2);
+                if (this.mdpIHM1 != "")
+                {
+                    this.user.HashedPassword = CryptString.Hash(this.mdpIHM2);
+                    this.userManager.CreateCompte(this.user);
+                    this.MdpIHM1 = "";
+                    this.MdpIHM2 = "";
+                    this.action = "UPDATE";
 
-                this.userManager.CreateCompte(this.user);
-                this.MdpIHM1 = "";
-                this.MdpIHM2 = "";
-                this.action = "UPDATE";
+                    // Log l'action
+                    Log log = new Log(DateTime.Now, 6, $"Création du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                    MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
-                // Log l'action
-                Log log = new Log(DateTime.Now, 6, $"Création du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                MainWindowViewModel.Instance.LogManager.CreateLog(log);
-
-                // Notifier la vue
-                NotifyPropertyChanged(nameof(this.NomIHM));
-                NotifyPropertyChanged(nameof(this.PrenomIHM));
-                NotifyPropertyChanged(nameof(this.EmailIHM));
-                NotifyPropertyChanged(nameof(this.RoleIHM));
-                MainWindowViewModel.Instance.UserViewModel.AddUser(this);
-                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-                MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
+                    // Notifier la vue
+                    NotifyPropertyChanged(nameof(this.NomIHM));
+                    NotifyPropertyChanged(nameof(this.PrenomIHM));
+                    NotifyPropertyChanged(nameof(this.EmailIHM));
+                    NotifyPropertyChanged(nameof(this.RoleIHM));
+                    MainWindowViewModel.Instance.UserViewModel.AddUser(this);
+                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                    MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
+                }
+                else
+                {
+                    MessageBox.Show("Les deux mots de passe sont vides");
+                }
+                
             }
             else
             {
@@ -172,7 +202,6 @@ namespace Couche_IHM.VueModeles
             }
 
         }
-
 
 
         /// <summary>
@@ -212,6 +241,7 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
         }
+        #endregion
 
     }
 }

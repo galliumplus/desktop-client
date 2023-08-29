@@ -38,20 +38,25 @@ namespace Couche_IHM.VueModeles
             "décembre"
         };
         private List<int> annees;
-
         private List<int> themeLog;
         private bool selectVente;
         private bool selectConnexion;
         private bool selectProduct;
         private bool selectAcompte;
         private bool selectCompte;
+        #endregion
+
+        #region constructor
+
+        /// <summary>
+        /// Constructeur du logs vue modele
+        /// </summary>
         public LogsViewModel(UserManager userManager,LogManager logManager)
         {
+            // Initialisation des datas
             this.themeLog = new List<int>();
             this.userManager = userManager;
             this.logManager = logManager;
-
-            // Initialisation des datas
             DateTime currentDate = DateTime.Now;
             currentAuteur = Auteurs[0];
             int année = Convert.ToInt16(currentDate.ToString("yyyy"));
@@ -65,9 +70,8 @@ namespace Couche_IHM.VueModeles
             this.SelectCompte = false;
             InitLogs();
         }
-
-
         #endregion
+
         #region properties
         /// <summary>
         /// Auteur sélectionné
@@ -218,9 +222,19 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
-
+        /// <summary>
+        /// Liste des mois disponibles
+        /// </summary>
         public List<string> Mois { get => mois; set => mois = value; }
+
+        /// <summary>
+        /// Liste des années disponibles
+        /// </summary>
         public List<int> Annees { get => annees; set => annees = value; }
+
+        /// <summary>
+        /// Mois sélectionné
+        /// </summary>
         public string CurrentMois 
         { 
             get => currentMois;
@@ -230,11 +244,12 @@ namespace Couche_IHM.VueModeles
                 this.logs.Clear();
                 InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
                 NotifyPropertyChanged(nameof(Logs));
-                NotifyPropertyChanged();
             }
         }
 
-
+        /// <summary>
+        /// Annee selectionné
+        /// </summary>
         public int CurrentAnnee 
         { 
             get => currentAnnee;
@@ -244,7 +259,6 @@ namespace Couche_IHM.VueModeles
                 this.logs.Clear();
                 InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
                 NotifyPropertyChanged(nameof(Logs));
-                NotifyPropertyChanged();
             }
         }
         #endregion

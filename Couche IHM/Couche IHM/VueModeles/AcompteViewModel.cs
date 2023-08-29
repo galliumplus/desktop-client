@@ -1,33 +1,19 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Navigation;
 
 namespace Couche_IHM.VueModeles
 {
-    public class AdherentViewModel : INotifyPropertyChanged
+    public class AcompteViewModel : INotifyPropertyChanged
     {
         #region attributes
-        /// <summary>
-        /// Représente le modèle adhérent
-        /// </summary>
-        private Acompte adherent;
 
-        /// <summary>
-        /// Représente le manager des adhérents
-        /// </summary>
-        private AcompteManager adhérentManager;
-
-
+        private Acompte acompte;
+        private AcompteManager acompteManager;
         private string argentIHM;
         private string identifiantIHM;
         private bool isAdherentIHM;
@@ -43,6 +29,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand CreateAdh { get; set; }
         public RelayCommand DeleteAdh { get; set; }
         #endregion
+
         #region notify
         public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
@@ -53,26 +40,25 @@ namespace Couche_IHM.VueModeles
 
         #region properties
 
-
         /// <summary>
-        /// Nom complet de l'utilisateur
+        /// Nom complet de l'acompte
         /// </summary>
         public string NomCompletIHM
         {
             get 
             { 
-                return $"{adherent.Nom.ToUpper()} {adherent.Prenom}";
+                return $"{acompte.Nom.ToUpper()} {acompte.Prenom}";
             }
             
 
         }
-
+        /// <summary>
+        /// Id de l'acompte
+        /// </summary>
         public int Id
         {
-            get => adherent.Id;
+            get => acompte.Id;
         }
-
-  
 
         /// <summary>
         /// Renvoie l'argent de l'adhérent sous un string formatté
@@ -99,68 +85,72 @@ namespace Couche_IHM.VueModeles
                 MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = true;
             }
         }
+        /// <summary>
+        /// Nom de l'acompte
+        /// </summary>
+        public string NomIHM { get => nomIHM; set => nomIHM = value; }
 
-        public string NomIHM 
-        { 
-            get => nomIHM; 
-            set => nomIHM = value; 
-        }
-        public string PrenomIHM 
-        { 
-            get => prenomIHM; 
-            set => prenomIHM = value; 
-        }
-        public string FormationIHM 
-        { 
-            get => formationIHM;
-            set => formationIHM = value; 
-        }
-        public bool IsAdherentIHM 
-        { 
-            get => isAdherentIHM; 
-            set => isAdherentIHM = value; 
-        }
+        /// <summary>
+        /// Prenom de l'acompte
+        /// </summary>
+        public string PrenomIHM { get => prenomIHM; set => prenomIHM = value; }
+        
+        /// <summary>
+        /// Formation de l'acompte
+        /// </summary>
+        public string FormationIHM { get => formationIHM; set => formationIHM = value; }
 
+        /// <summary>
+        /// Est ce que l'acompte est adhérent
+        /// </summary>
+        public bool IsAdherentIHM { get => isAdherentIHM; set => isAdherentIHM = value; }
+
+        /// <summary>
+        /// Action à réaliser sur l'acompte
+        /// </summary>
         public string Action
         {
             get
             {
-                return this.adherent.Prenom == "" ? "NEW" : "UPDATE";
+                return this.acompte.Prenom == "" ? "NEW" : "UPDATE";
             }
         }
-
-
-
-
         #endregion
 
-        public AdherentViewModel(Acompte adherent,AcompteManager adherentManager)
+        #region constructor
+        /// <summary>
+        /// Constructeur du acompteViewModel
+        /// </summary>
+        public AcompteViewModel(Acompte acompte,AcompteManager acompteManager)
         {
-            this.adherent = adherent;
-            this.adhérentManager = adherentManager;
+            this.acompte = acompte;
+            this.acompteManager = acompteManager;
 
             // Initialisation propriétés
-            this.argentIHM = ConverterFormatArgent.ConvertToString(adherent.Argent);
-            this.identifiantIHM = adherent.Identifiant;
-            this.formationIHM = adherent.Formation;
-            this.isAdherentIHM = adherent.StillAdherent;
-            this.nomIHM = adherent.Nom;
-            this.prenomIHM = adherent.Prenom;
+            this.argentIHM = ConverterFormatArgent.ConvertToString(acompte.Argent);
+            this.identifiantIHM = acompte.Identifiant;
+            this.formationIHM = acompte.Formation;
+            this.isAdherentIHM = acompte.StillAdherent;
+            this.nomIHM = acompte.Nom;
+            this.prenomIHM = acompte.Prenom;
 
-            this.ModifyAdherent = new RelayCommand(x => this.UpdateAdherent());
-            this.ResetAdh = new RelayCommand(x => this.ResetAdherent());
-            this.CreateAdh = new RelayCommand(x => this.CreateAdherent());
-            this.DeleteAdh = new RelayCommand(x => this.DeleteAdherent());
+            // Initialisation des events
+            this.ModifyAdherent = new RelayCommand(x => this.UpdateAcompte());
+            this.ResetAdh = new RelayCommand(x => this.ResetAcompte());
+            this.CreateAdh = new RelayCommand(x => this.CreateAcompte());
+            this.DeleteAdh = new RelayCommand(x => this.DeleteAcompte());
 
         }
+        #endregion
 
+        #region methods
         /// <summary>
         /// Permet de supprimer un acompte
         /// </summary>
-        private void DeleteAdherent()
+        private void DeleteAcompte()
         {
             // Modifier la data
-            this.adhérentManager.RemoveAdhérent(this.adherent);
+            this.acompteManager.RemoveAdhérent(this.acompte);
 
             // Log l'action
             Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
@@ -177,17 +167,17 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de créer un acompte
         /// </summary>
-        private void CreateAdherent()
+        private void CreateAcompte()
         {
 
             // Changer la data
-            this.adherent.Nom = this.nomIHM;
-            this.adherent.Prenom = this.prenomIHM;
-            this.adherent.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
-            this.adherent.Formation = this.formationIHM;
-            this.adherent.Identifiant = this.identifiantIHM;
-            this.adherent.StillAdherent = this.isAdherentIHM;
-            adhérentManager.CreateAdhérent(this.adherent);
+            this.acompte.Nom = this.nomIHM;
+            this.acompte.Prenom = this.prenomIHM;
+            this.acompte.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.acompte.Formation = this.formationIHM;
+            this.acompte.Identifiant = this.identifiantIHM;
+            this.acompte.StillAdherent = this.isAdherentIHM;
+            acompteManager.CreateAdhérent(this.acompte);
 
             // Log l'action
             Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
@@ -207,17 +197,17 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
-        public void UpdateAdherent(bool doLog = true)
+        public void UpdateAcompte(bool doLog = true)
         {
 
             // Changer la data
-            this.adherent.Nom = this.nomIHM;
-            this.adherent.Prenom = this.prenomIHM;
-            this.adherent.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
-            this.adherent.Formation = this.formationIHM;
-            this.adherent.Identifiant = this.identifiantIHM;
-            this.adherent.StillAdherent = this.isAdherentIHM;
-            adhérentManager.UpdateAdhérent(this.adherent);
+            this.acompte.Nom = this.nomIHM;
+            this.acompte.Prenom = this.prenomIHM;
+            this.acompte.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
+            this.acompte.Formation = this.formationIHM;
+            this.acompte.Identifiant = this.identifiantIHM;
+            this.acompte.StillAdherent = this.isAdherentIHM;
+            acompteManager.UpdateAdhérent(this.acompte);
 
             // Log l'action
             if (doLog)
@@ -238,18 +228,18 @@ namespace Couche_IHM.VueModeles
 
 
         /// <summary>
-        /// Permet de reset les propriétés de l'adhérent
+        /// Permet de reset les propriétés de l'acompte
         /// </summary>
-        public void ResetAdherent()
+        public void ResetAcompte()
         {
 
             // Initialisation propriétés
-            this.argentIHM = ConverterFormatArgent.ConvertToString(adherent.Argent);
-            this.identifiantIHM = adherent.Identifiant;
-            this.formationIHM = adherent.Formation;
-            this.nomIHM = adherent.Nom;
-            this.prenomIHM = adherent.Prenom;
-            this.isAdherentIHM = adherent.StillAdherent;
+            this.argentIHM = ConverterFormatArgent.ConvertToString(acompte.Argent);
+            this.identifiantIHM = acompte.Identifiant;
+            this.formationIHM = acompte.Formation;
+            this.nomIHM = acompte.Nom;
+            this.prenomIHM = acompte.Prenom;
+            this.isAdherentIHM = acompte.StillAdherent;
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(IdentifiantIHM));
@@ -263,5 +253,6 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
+        #endregion
     }
 }

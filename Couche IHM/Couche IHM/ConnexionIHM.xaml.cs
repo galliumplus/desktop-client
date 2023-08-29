@@ -1,9 +1,6 @@
 ﻿
-using Couche_IHM.ImagesProduit;
 using Couche_IHM.VueModeles;
-using Couche_Métier;
 using Couche_Métier.Manager;
-using Couche_Métier.Utilitaire;
 using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
@@ -18,18 +15,12 @@ namespace Couche_IHM
     /// </summary>
     public partial class ConnexionIHM : Window
     {
-        /// <summary>
-        /// Permet de gérer les utilisateurs
-        /// </summary>
+        #region attributes
         private UserManager userManager;
-
-        /// <summary>
-        /// Permet de générer les logs
-        /// </summary>
         private LogManager logManager;
-
         private string identifiant = "";
         private string password = "";
+        #endregion
 
         public ConnexionIHM()
         {

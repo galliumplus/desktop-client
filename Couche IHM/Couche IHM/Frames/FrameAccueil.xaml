@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Couche_IHM.Frames"
       xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
@@ -14,6 +13,7 @@
         <rules:PositionPodiumProduit x:Key="PositionConverter" />
         <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
     </Page.Resources>
+    
     <Grid Margin="30,30,30,5">
 
         <!-- Définition des colonnes & lignes -->

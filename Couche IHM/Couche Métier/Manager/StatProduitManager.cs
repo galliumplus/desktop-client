@@ -12,6 +12,10 @@ namespace Couche_Métier.Manager
         /// </summary>
         private StatProduitDAO dao;
 
+        /// <summary>
+        /// Liste des stats des produits
+        /// </summary>
+        private List<StatProduit> statProduitList;
         #endregion
 
         #region constructor
@@ -21,6 +25,7 @@ namespace Couche_Métier.Manager
         public StatProduitManager()
         {
             dao = new StatProduitDAO();
+            Task.Run(()=> statProduitList = dao.GetStat());
         }
         #endregion
 
@@ -32,7 +37,7 @@ namespace Couche_Métier.Manager
 
         public List<StatProduit> GetStats()
         {
-            return this.dao.GetStat();
+            return this.statProduitList;
         }
         #endregion
     }

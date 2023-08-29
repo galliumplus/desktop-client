@@ -1,7 +1,6 @@
 ﻿
 
 using Couche_IHM.ImagesProduit;
-using Couche_Métier;
 using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Microsoft.Win32;
@@ -17,12 +16,9 @@ namespace Couche_IHM.VueModeles
     public class ProductViewModel : INotifyPropertyChanged
     {
         #region attributes
-        /// <summary>
-        /// Représente le modèle produit
-        /// </summary>
         private Product product;
-        private ConverterFormatArgent formatArgent;
         private BitmapImage image;
+        private string image2;
         private ProductManager productManager;
         private CategoryManager categoryManager;
         private int quantiteIHM;
@@ -51,6 +47,9 @@ namespace Couche_IHM.VueModeles
 
         #region properties
 
+        /// <summary>
+        /// Id du produit
+        /// </summary>
         public int Id
         {
             get => product.ID;
@@ -130,7 +129,9 @@ namespace Couche_IHM.VueModeles
                 MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = true;
             }
         }
-
+        /// <summary>
+        /// Action à réaliser sur le produit
+        /// </summary>
         public string Action
         {
             get
@@ -153,13 +154,12 @@ namespace Couche_IHM.VueModeles
             
         }
 
-        public Product Product { get => product; set => product = value; }
-
-
-
-
         #endregion
 
+        #region constructor
+        /// <summary>
+        /// Constructeur du produit vue modele
+        /// </summary>
         public ProductViewModel(Product product,ProductManager productManager,CategoryManager categoryManager,CategoryViewModel categoryProduit)
         {
             // Initialisation du modele
@@ -174,6 +174,7 @@ namespace Couche_IHM.VueModeles
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
             this.image = new BitmapImage(new Uri(ImageManager.GetImageFromProduct(this.NomProduitIHM), UriKind.Absolute));
+            this.image2 = image.UriSource.ToString();
             this.prixNonAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixNonAdherent);
             this.prixAdherentIHM = ConverterFormatArgent.ConvertToString(product.PrixAdherent);
 
@@ -185,6 +186,7 @@ namespace Couche_IHM.VueModeles
             this.ChangeImage = new RelayCommand(x => ChangeImageProduct()); 
 
         }
+        #endregion
 
         #region methods
         /// <summary>
@@ -202,7 +204,9 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged(nameof(ImageProduct));
             }
         }
-
+        /// <summary>
+        /// Permet de supprimer la catégorie et de le notifier
+        /// </summary>
         public void DeleteCatNotify()
         {
             this.categoryIHM = null;
@@ -220,18 +224,22 @@ namespace Couche_IHM.VueModeles
                 // Changer la data
                 this.product.Quantite = this.quantiteIHM;
                 this.product.NomProduit = this.nomProduitIHM;
-                
-                
                 this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
 
+                
 
                 // Log l'action
                 if (doLog)
                 {
-                    byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
-                    ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                    // Changer l'image
+                    if (image.UriSource.ToString() != image2)
+                    {
+                        this.image2 = image.UriSource.ToString();
+                        byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
+                        ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                    }
                     Log log = new Log(DateTime.Now, 3, $"Modification du produit : {this.NomProduitIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                     MainWindowViewModel.Instance.LogManager.CreateLog(log);
                     MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
@@ -241,6 +249,7 @@ namespace Couche_IHM.VueModeles
 
                 // Notifier la vue
                 NotifyPropertyChanged(nameof(NomProduitIHM));
+                NotifyPropertyChanged(nameof(PrixAdherentIHM));
                 NotifyPropertyChanged(nameof(QuantiteIHM));
                 NotifyPropertyChanged(nameof(CategoryIHM));
                 NotifyPropertyChanged(nameof(isDisponible));
@@ -249,7 +258,7 @@ namespace Couche_IHM.VueModeles
             }
             else
             {
-                MessageBox.Show("Vous n'avez pas sélectionné de catégory");
+                MessageBox.Show("Vous n'avez pas sélectionné de catégorie");
             }
 
         }

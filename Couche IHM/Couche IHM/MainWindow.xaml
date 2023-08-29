@@ -76,7 +76,7 @@
                         Height="45" 
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
-                        CommandParameter="{x:Static vm:Frame.FRAMEADHERENT}"
+                        CommandParameter="{x:Static vm:Frame.FRAMEACOMPTE}"
                         Content="Acomptes"/>
                     <Button 
                         Height="45" 

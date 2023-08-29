@@ -11,6 +11,11 @@ namespace Couche_Métier.Manager
         /// Dao permettant de gérer les données des stats d'acompte
         /// </summary>
         private StatAcompteDAO dao;
+
+        /// <summary>
+        /// Liste des stats d'acompte
+        /// </summary>
+        private List<StatAcompte> statAcompteList;
         #endregion
 
         #region constructor
@@ -20,6 +25,8 @@ namespace Couche_Métier.Manager
         public StatAcompteManager()
         {
             dao = new StatAcompteDAO();
+            Task.Run(() => this.statAcompteList = dao.GetStat());
+
         }
         #endregion
 
@@ -31,7 +38,7 @@ namespace Couche_Métier.Manager
 
         public List<StatAcompte> GetStats()
         {
-            return this.dao.GetStat();
+            return this.statAcompteList;
         }
         #endregion
     }

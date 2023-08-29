@@ -10,11 +10,13 @@ namespace Couche_Data.Dao
         public List<StatProduit> GetStat()
         {
             //Connection
-            dbsDAO.Instance.OpenDataBase();
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            MySqlConnection sql = new MySqlConnection(connString);
+            sql.Open();
 
             //Requette SQL
             string stm = "SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE YEARWEEK(date_sale) = YEARWEEK(CURRENT_DATE) group by product_id order by nb desc";
-            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 
             //lecture de la requette
@@ -27,7 +29,7 @@ namespace Couche_Data.Dao
             }
 
             rdr.Close();
-            dbsDAO.Instance.CloseDatabase();
+            sql.Close();
             return statProduitList;
         }
 

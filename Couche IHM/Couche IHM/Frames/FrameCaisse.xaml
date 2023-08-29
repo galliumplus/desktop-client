@@ -4,8 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
-      xmlns:local="clr-namespace:Couche_IHM.Frames"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FrameCaisse"
@@ -202,7 +200,7 @@
                         FontSize="12"
                         Padding="0,0,0,5" />
                     <ComboBox 
-                        ItemsSource="{Binding AdherentViewModel.Adherents}"
+                        ItemsSource="{Binding AdherentViewModel.Acomptes}"
                         SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
                         FontSize="12"
                         IsTextSearchEnabled="True" 

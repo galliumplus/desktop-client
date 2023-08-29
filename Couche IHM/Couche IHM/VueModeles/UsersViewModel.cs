@@ -1,14 +1,11 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
 using Modeles;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Couche_IHM.VueModeles
 {
@@ -37,6 +34,9 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+        /// <summary>
+        /// Liste des utilisateurs
+        /// </summary>
         public ObservableCollection<UserViewModel> Users
         {
             get => users;
@@ -59,11 +59,11 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Liste des roles disponibles aux users
         /// </summary>
-        public List<Role> Roles 
-        { 
-            get => roles; 
-            set => roles = value; 
-        }
+        public List<Role> Roles { get => roles; set => roles = value; }
+
+        /// <summary>
+        /// Utilisateur sélectionné
+        /// </summary>
         public UserViewModel CurrentUser 
         { 
             get => currentUser;
@@ -73,7 +73,9 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Permet d'afficher l'option pour supprimer un utilisateur
+        /// </summary>
         public bool ShowDeleteUser
         {
             get => showDeleteUser;
@@ -86,15 +88,25 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
+        #region events
         public RelayCommand OpenUser { get; set; }
+        #endregion
 
+        #region constructor
+        /// <summary>
+        /// Constructeur de l'utilisateur vue modele
+        /// </summary>
         public UsersViewModel(UserManager userManager)
         {
+            // Initialisation des datas
             this.userManager = userManager;
             this.roles = userManager.GetRoles();
-            this.OpenUser = new RelayCommand(x => this.OpenUserDetails((string)x));
             InitUsers();
+
+            // Initialisation des events
+            this.OpenUser = new RelayCommand(x => this.OpenUserDetails((string)x));
         }
+        #endregion
 
         #region methods
 
@@ -114,7 +126,6 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'ouvrir les détails du compte
         /// </summary>
-        /// <param name="action"></param>
         public void OpenUserDetails(string action)
         {
             if (action == "NEW")
@@ -135,7 +146,6 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'ajouter un compte
         /// </summary>
-        /// <param name="user"></param>
         public void AddUser(UserViewModel user)
         {
             this.users.Add(user);

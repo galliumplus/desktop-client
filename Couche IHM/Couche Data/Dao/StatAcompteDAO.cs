@@ -10,11 +10,13 @@ namespace Couche_Data.Dao
         public List<StatAcompte> GetStat()
         {
             //Connection
-            dbsDAO.Instance.OpenDataBase();
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            MySqlConnection sql = new MySqlConnection(connString);
+            sql.Open();
 
             //Requette SQL
             string stm = "SELECT acompte_id,sum(amount) as argent FROM best_acomptes WHERE YEARWEEK(date) = YEARWEEK(CURRENT_DATE) group by acompte_id order by argent desc";
-            MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+            MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 
             //lecture de la requette
@@ -27,7 +29,7 @@ namespace Couche_Data.Dao
             }
 
             rdr.Close();
-            dbsDAO.Instance.CloseDatabase();
+            sql.Close();
             return statAcompteList;
         }
 

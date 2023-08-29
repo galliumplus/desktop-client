@@ -22,7 +22,7 @@ namespace Couche_IHM.BindingRules
                     case Frame.FRAMECAISSE:
                         retour = "Caisse";
                         break;
-                    case Frame.FRAMEADHERENT:
+                    case Frame.FRAMEACOMPTE:
                         retour = "Acomptes";
                         break;
                     case Frame.FRAMESTOCK:

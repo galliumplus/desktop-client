@@ -1,10 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace Couche_IHM.VueModeles
@@ -25,7 +21,9 @@ namespace Couche_IHM.VueModeles
         { 
             get => log.Date.ToString("g"); 
         }
-
+        /// <summary>
+        /// DateTime de l'opération
+        /// </summary>
         public DateTime DateTime
         {
             get => log.Date;
@@ -91,6 +89,9 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Id du theme de l'opération
+        /// </summary>
         public int IdTheme
         {
             get => log.Theme;
@@ -113,13 +114,14 @@ namespace Couche_IHM.VueModeles
         }
         #endregion
 
-
+        #region constructor
         /// <summary>
-        /// Constructeur
+        /// Constructeur du log vuemodele
         /// </summary>
         public LogViewModel(Log log)
         {
             this.log = log;
         }
+        #endregion
     }
 }

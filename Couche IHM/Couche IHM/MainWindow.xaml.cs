@@ -18,7 +18,6 @@ namespace Couche_IHM
         /// <summary>
         /// Constructeur de la mainwindow
         /// </summary>
-        /// <param name="user"></param>
         public MainWindow(User user,LogManager logManager,UserManager userManager)
         {
             InitializeComponent();

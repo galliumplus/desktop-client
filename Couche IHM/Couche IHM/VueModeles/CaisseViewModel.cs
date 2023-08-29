@@ -5,38 +5,39 @@ using Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
     public class CaisseViewModel : INotifyPropertyChanged
     {
-
-        private ConverterFormatArgent convertFormatArgent = new ConverterFormatArgent();
+        #region attributes
         private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
         private string currentPaiement;
         private bool showPayAcompte = false;
         private bool isAdherent = true;
-        private AdherentViewModel adherentPayer = null;
+        private AcompteViewModel adherentPayer = null;
         private StatProduitManager statProduitManager;
         private StatAcompteManager statAcompteManager;
-        public CaisseViewModel()
+        #endregion
+
+        #region constructor
+        /// <summary>
+        /// Constructeur de caisse vue modele
+        /// </summary>
+        public CaisseViewModel(StatAcompteManager statAcompte,StatProduitManager statProduit)
         {
             // Initialisation objets métier
-            this.statProduitManager = new StatProduitManager();
-            this.statAcompteManager = new StatAcompteManager();
+            this.statProduitManager = statProduit;
+            this.statAcompteManager = statAcompte;
 
             // Initialisation events
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
             this.CancelPay = new RelayCommand(x => this.ShowPayAcompte = false);
-            this.Pay = new RelayCommand(acompte => PayArticles((AdherentViewModel)acompte));
+            this.Pay = new RelayCommand(acompte => PayArticles((AcompteViewModel)acompte));
             this.ClearProd = new RelayCommand(x =>
             {
                 this.ProductOrder.Clear();
@@ -46,7 +47,7 @@ namespace Couche_IHM.VueModeles
                 });
             this.CurrentPaiement = Paiements[0];
         }
-
+        #endregion
 
         #region notify
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -55,7 +56,6 @@ namespace Couche_IHM.VueModeles
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
 
         #region events
 
@@ -67,6 +67,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand Pay { get; set; }   
         public RelayCommand ShowPay { get; set; }
         #endregion
+
         #region properties
 
         /// <summary>
@@ -96,7 +97,9 @@ namespace Couche_IHM.VueModeles
                 return prixTotal;
             }
         }
-
+        /// <summary>
+        /// Prix adhérent formatté
+        /// </summary>
         public string PriceAdherIHM
         {
             get
@@ -104,7 +107,9 @@ namespace Couche_IHM.VueModeles
                 return $"{ConverterFormatArgent.ConvertToString(PriceAdher)}";
             }
         }
-
+        /// <summary>
+        /// Prix non adhérent formatté
+        /// </summary>
         public string PriceNonAdherIHM
         {
             get
@@ -154,7 +159,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Représente l'adhérent qui va payer
         /// </summary>
-        public AdherentViewModel AdherentPayer
+        public AcompteViewModel AdherentPayer
         {
             get => adherentPayer;
             set 
@@ -176,7 +181,9 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Est ce que l'acheteur est adhérent
+        /// </summary>
         public bool IsAdherent
         {
             get => isAdherent;
@@ -195,7 +202,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de payer les articles
         /// </summary>
-        private async void PayArticles(AdherentViewModel acompte = null)
+        private async void PayArticles(AcompteViewModel acompte = null)
         {
             string messageLog = $"Achat par {currentPaiement} ";
 
@@ -239,7 +246,7 @@ namespace Couche_IHM.VueModeles
                 string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
                 acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent- prix);
                 messageLog += $"({prixFormatted}) : ";
-                acompte.UpdateAdherent(false);
+                acompte.UpdateAcompte(false);
                 this.ShowPayAcompte = false;
             }
             else

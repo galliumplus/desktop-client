@@ -29,9 +29,6 @@ namespace Couche_IHM.Frames
                     CategoryProductList categoryProductList = new CategoryProductList(category.NomCat);
                     productsSP.Children.Add(categoryProductList);
                 }
-
-
-
             }
         }
     }

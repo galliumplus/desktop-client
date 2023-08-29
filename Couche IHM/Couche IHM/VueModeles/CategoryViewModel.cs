@@ -1,13 +1,10 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
 using Modeles;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Couche_IHM.VueModeles
 {
@@ -31,6 +28,10 @@ namespace Couche_IHM.VueModeles
 
         #region properties
 
+        /// <summary>
+        /// Id de la catégorie
+        /// </summary>
+        public int Id { get => category.IdCat; }
         /// <summary>
         /// Représente le modèle du nom de la catégorie
         /// </summary>
@@ -67,8 +68,14 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ActivateCat { get; set; }
         public Category Category { get => category; set => category = value; }
         #endregion
+
+        #region constructor
+        /// <summary>
+        /// Constructeur du category vue modele
+        /// </summary>
         public CategoryViewModel(CategoryManager categoryManager,Category category)
         {
+            // Initialisation des datas
             this.categoryManager = categoryManager;
             this.nomCat = category.NomCategory;
             this.category = category;
@@ -80,6 +87,7 @@ namespace Couche_IHM.VueModeles
             this.ActivateCat = new RelayCommand(x => this.ActivateCategory());
 
         }
+        #endregion
 
         #region methods
 
@@ -91,12 +99,6 @@ namespace Couche_IHM.VueModeles
             // Mise à jour data
             category.Visible = !this.invisible;
             this.categoryManager.UpdateCategory(category);
-
-
-            // Log l'action
-            //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
-
-
         }
 
         /// <summary>
@@ -107,12 +109,6 @@ namespace Couche_IHM.VueModeles
             // Mise à jour data
             category.NomCategory = this.nomCat;
             this.categoryManager.UpdateCategory(category);
-
-
-            // Log l'action
-            //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
-
-            
         }
 
 
@@ -125,10 +121,6 @@ namespace Couche_IHM.VueModeles
             // Mise à jour data
             this.nomCat = this.category.NomCategory;
             NotifyPropertyChanged(nameof(this.NomCat));
-
-            // Log l'action
-            //this.log.registerLog(CategorieLog.UPDATE, this.currentNameCategory, MainWindowViewModel.Instance.CompteConnected);
-
             MainWindowViewModel.Instance.ProductViewModel.ShowCategories = false;
         }
 
@@ -146,7 +138,6 @@ namespace Couche_IHM.VueModeles
             
             // Notifier la vue
             MainWindowViewModel.Instance.ProductViewModel.Categories.Remove(this);
-
         }
 
 

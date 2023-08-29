@@ -1,15 +1,6 @@
-﻿using Microsoft.Win32;
+﻿
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Resources;
-using System.Windows.Media.Imaging;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections;
 
 namespace Couche_IHM.ImagesProduit
 {
@@ -43,12 +34,12 @@ namespace Couche_IHM.ImagesProduit
                 
                 path = path.Substring(8, path.Length - 8);
             }
-            FileStream imgStream = File.OpenRead(path);
-
-            byte[] blob = new byte[imgStream.Length];
-            imgStream.Read(blob, 0, (int)imgStream.Length);
-
-            imgStream.Dispose();
+            byte[] blob;
+            using (FileStream imgStream = File.OpenRead(path))
+            {
+                blob = new byte[imgStream.Length];
+                imgStream.Read(blob, 0, (int)imgStream.Length);
+            }
 
             return blob;
         }
@@ -80,10 +71,17 @@ namespace Couche_IHM.ImagesProduit
         /// <summary>
         /// Permet de créer une image d'après un blob
         /// </summary>
-        /// <param name="path"></param>
         public static void CreateImageFromBlob(string fileName, byte[] blob)
         {
-            File.WriteAllBytes($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\{fileName}.png", blob);
+            string filePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            "Gallium", "ImagesProduit", $"{fileName}.png"
+            );
+            using (FileStream fileStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                fileStream.Write(blob, 0, blob.Length);
+            }
+            
         }
     }
 }

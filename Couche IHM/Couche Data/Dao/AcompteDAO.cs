@@ -36,7 +36,7 @@ namespace Couche_Data.Dao
             dbsDAO.Instance.OpenDataBase();
 
             //Requette SQL
-            string stm = "SELECT * FROM acompte ORDER BY nom";
+            string stm = "SELECT * FROM acompte ORDER BY login";
             MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
             cmd.Prepare();
 

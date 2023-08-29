@@ -1,6 +1,5 @@
-﻿using Couche_Métier;
+﻿
 using Couche_Métier.Manager;
-using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -8,24 +7,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
 
 namespace Couche_IHM.VueModeles
 {
-    public class AdherentsViewModel : INotifyPropertyChanged
+    public class AcomptesViewModel : INotifyPropertyChanged
     {
         #region attributes
-        private ObservableCollection<AdherentViewModel> adherents;
-        private AdherentViewModel currentAdherent;
-        private AcompteManager adherentManager;
+        private ObservableCollection<AcompteViewModel> acomptes;
+        private AcompteViewModel currentAcompte;
+        private AcompteManager acompteManager;
         private string searchFilter = "";
-        private bool showAdherent = false;
+        private bool showAcompte = false;
         private bool showModifButtons = false;
         private bool showDeleteAcompte = false;
-        private bool dialogModifAdherent = false;
+        private bool dialogModifAcompte = false;
         #endregion
 
         #region notify
@@ -44,27 +39,27 @@ namespace Couche_IHM.VueModeles
       
 
         /// <summary>
-        /// Liste des adhérents
+        /// Liste des acomptes
         /// </summary>
-        public ObservableCollection<AdherentViewModel> Adherents 
+        public ObservableCollection<AcompteViewModel> Acomptes 
         {
             get 
             {
-                ObservableCollection<AdherentViewModel> adhs;
+                ObservableCollection<AcompteViewModel> adhs;
                 if (searchFilter == "")
                 {
-                    adhs = this.adherents;
+                    adhs = this.acomptes;
                 }
                 else
                 {
-                    adhs = new ObservableCollection<AdherentViewModel>(adherents.ToList().FindAll(adh =>
+                    adhs = new ObservableCollection<AcompteViewModel>(acomptes.ToList().FindAll(adh =>
                     adh.NomCompletIHM.ToUpper().Contains(searchFilter.ToUpper()) ||
                     adh.IdentifiantIHM.ToUpper().Contains(searchFilter.ToUpper()))) ;
                 }
                 
                 return adhs;
             }
-            set => adherents = value; 
+            set => acomptes = value; 
         }
 
         /// <summary>
@@ -76,25 +71,25 @@ namespace Couche_IHM.VueModeles
             set 
             { 
                 searchFilter = value; 
-                NotifyPropertyChanged(nameof(Adherents)); 
+                NotifyPropertyChanged(nameof(Acomptes)); 
             } 
         }
 
         /// <summary>
-        /// Est ce qu'on affiche la fenetre de l adherent
+        /// Est ce qu'on affiche la fenetre de l acompte
         /// </summary>
-        public bool ShowAdherent
+        public bool ShowAcompte
         { 
-            get => showAdherent;
+            get => showAcompte;
             set 
-            { 
-                showAdherent = value; 
+            {
+                showAcompte = value; 
                 NotifyPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Permet d'afficher les boutons de modification de l'adhérent
+        /// Permet d'afficher les boutons de modification de l'acompte
         /// </summary>
         public bool ShowModifButtons
         { 
@@ -107,40 +102,42 @@ namespace Couche_IHM.VueModeles
         }
 
         /// <summary>
-        /// Représente l'adherent selectionné
+        /// Représente l'acompte selectionné
         /// </summary>
-        public AdherentViewModel CurrentAdherent 
+        public AcompteViewModel CurrentAcompte 
         { 
-            get => currentAdherent;
+            get => currentAcompte;
             set 
             {
-                if (currentAdherent != null)
+                if (currentAcompte != null)
                 {
-                    this.currentAdherent.ResetAdherent();
+                    this.currentAcompte.ResetAcompte();
                 }
-                
-                currentAdherent = value;
+
+                currentAcompte = value;
                 if (value != null)
                 {
-                    ShowAdherent = true;
+                    ShowAcompte = true;
 
                 }
                 else
                 {
-                    this.ShowAdherent = false;
+                    this.ShowAcompte = false;
                     
                 }
 
-                NotifyPropertyChanged(nameof(CurrentAdherent));
+                NotifyPropertyChanged(nameof(CurrentAcompte));
             }
         }
-
+        /// <summary>
+        /// Ouvrir la fenetre pour modifier l'acompte
+        /// </summary>
         public bool DialogModifAdherent
         {
-            get => dialogModifAdherent;
+            get => dialogModifAcompte;
             set
             {
-                dialogModifAdherent = value;
+                dialogModifAcompte = value;
                 NotifyPropertyChanged(nameof(DialogModifAdherent));
             }
         }
@@ -162,43 +159,48 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
+        #region constructor
         /// <summary>
-        /// Constructeur de la classe adhérents view model
+        /// Constructeur de la classe acompte view model
         /// </summary>
-        public AdherentsViewModel(AcompteManager acompteManager)
+        public AcomptesViewModel(AcompteManager acompteManager)
         {
-            this.adherentManager = acompteManager;
-            this.adherents = new ObservableCollection<AdherentViewModel>();
+            // Initialisation des datas
+            this.acompteManager = acompteManager;
+            this.acomptes = new ObservableCollection<AcompteViewModel>();
+            InitAcomptes();
+
+            // Initialisation des events
             this.OpenModifAdh = new RelayCommand(x => this.OpenAcompteDetails((string)x));
-            InitAdhérents();
+
 
         }
+        #endregion
 
         #region methods
         /// <summary>
-        /// Permet de récupérer la liste des adhérents
+        /// Permet de récupérer la liste des acomptes
         /// </summary>
-        private void InitAdhérents()
+        private void InitAcomptes()
         {
-            List<Acompte> adherents = this.adherentManager.GetAdhérents();
+            List<Acompte> adherents = this.acompteManager.GetAdhérents();
             foreach (Acompte adh in adherents)
             {
-                this.adherents.Add(new AdherentViewModel(adh,this.adherentManager));
+                this.acomptes.Add(new AcompteViewModel(adh,this.acompteManager));
             }
-            this.currentAdherent = this.adherents[0];
+            this.currentAcompte = this.acomptes[0];
         }
 
         /// <summary>
-        /// Permet d'ouvrir le détail de l'adhérent
+        /// Permet d'ouvrir le détail de l'acompte
         /// </summary>
-        /// <param name="action"></param>
         private void OpenAcompteDetails(string action)
         {
 
-            if (action == "NEW" || currentAdherent.Action == "NEW")
+            if (action == "NEW" || currentAcompte.Action == "NEW")
             {
                 ShowDeleteAcompte = false;
-                CurrentAdherent = new AdherentViewModel(new Acompte(),this.adherentManager);
+                CurrentAcompte = new AcompteViewModel(new Acompte(),this.acompteManager);
             }
             else
             {
@@ -211,29 +213,21 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de rajouter un acompte  dans la liste
         /// </summary>
-        /// <param name="acompte"></param>
-        public void AddAcompte(AdherentViewModel acompte)
+        public void AddAcompte(AcompteViewModel acompte)
         {
-            this.adherents.Add(acompte);
-            NotifyPropertyChanged(nameof(Adherents));
+            this.acomptes.Add(acompte);
+            NotifyPropertyChanged(nameof(Acomptes));
 
         }
 
         /// <summary>
         /// Permet de supprimer un acompte  dans la liste
         /// </summary>
-        /// <param name="acompte"></param>
-        public void RemoveAcompte(AdherentViewModel acompte)
+        public void RemoveAcompte(AcompteViewModel acompte)
         {
-            this.adherents.Remove(acompte);
-            NotifyPropertyChanged(nameof(Adherents));
+            this.acomptes.Remove(acompte);
+            NotifyPropertyChanged(nameof(Acomptes));
         }
-
-        public List<AdherentViewModel> GetAcomptes()
-        {
-            return this.adherents.ToList();
-        }
-
 
         #endregion
 
