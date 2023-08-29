@@ -46,7 +46,7 @@ namespace Couche_Data.Dao
             List<Acompte> acomptes = new List<Acompte>();
             while (rdr.Read())
             {
-                acomptes.Add(new Acompte(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), rdr.GetString("formation"),true,rdr.GetBoolean("isAdherent")));
+                acomptes.Add(new Acompte(rdr.GetInt32("acompte_id"), rdr.GetString("login"), rdr.GetString("nom"), rdr.GetString("prenom"), rdr.GetFloat("balance"), rdr.GetString("formation"),rdr.GetBoolean("isAdherent")));
             }
 
             rdr.Close();

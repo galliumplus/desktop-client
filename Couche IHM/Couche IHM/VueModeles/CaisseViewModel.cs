@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -206,79 +207,93 @@ namespace Couche_IHM.VueModeles
         {
             string messageLog = $"Achat par {currentPaiement} ";
 
-            
-            // Gérer les stats 
-            ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
-            Task.Run(() =>
+            try
             {
-                foreach (ProductViewModel product in productOrder2.Keys)
+                // Si paiement par acompte
+                if (acompte != null)
                 {
-                    StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
-                    MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
-                    statProduitManager.CreateStat(stat);
+                    float argent = ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM);
+                    float prix;
+                    if (acompte.IsAdherentIHM)
+                    {
+                        prix = this.PriceAdher;
+                    }
+                    else
+                    {
+                        prix = this.PriceNanAdher;
+                    }
 
-                    product.QuantiteIHM -= productOrder2[product];
-                    product.UpdateProduct(false);
-                }
-            });
+                    if (argent - prix < 0)
+                    {
+                        throw new Exception("Pas assez d'argent sur l'acompte");
+                    }
 
-            // Si paiement par acompte
-            if (acompte != null)
-            {
-                float argent = ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM);
-                float prix;
-                if (acompte.IsAdherentIHM)
-                {
-                    prix = this.PriceAdher;
+                    Task.Run(() =>
+                    {
+                        StatAcompte stat = new StatAcompte(0, DateTime.Now, prix, acompte.Id);
+                        MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
+                        statAcompteManager.CreateStat(stat);
+                    });
+
+                    string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
+                    acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent - prix);
+                    messageLog += $"({prixFormatted}) : ";
+                    acompte.UpdateAcompte(false);
+
                 }
                 else
                 {
-                    prix = this.PriceNanAdher;
+                    if (isAdherent)
+                    {
+                        messageLog += $"({this.PriceAdherIHM}) : ";
+                    }
+                    else
+                    {
+                        messageLog += $"'{this.PriceNonAdherIHM}) : ";
+                    }
                 }
 
-                Task.Run(() =>
-                {
-                    StatAcompte stat = new StatAcompte(0, DateTime.Now,prix ,acompte.Id);
-                    MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
-                    statAcompteManager.CreateStat(stat);
-                });
 
-                string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
-                acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent- prix);
-                messageLog += $"({prixFormatted}) : ";
-                acompte.UpdateAcompte(false);
-                this.ShowPayAcompte = false;
-            }
-            else
-            {
-                if (isAdherent)
+                foreach (ProductViewModel product in productOrder.Keys)
                 {
-                    messageLog += $"({this.PriceAdherIHM}) : ";
+                    messageLog += product.NomProduitIHM + ", ";
                 }
-                else
-                {
-                    messageLog += $"'{this.PriceNonAdherIHM}) : ";
-                }
-            }
 
+                // Gérer les stats 
+                ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
+                _ = Task.Run(() =>
+                  {
+                      foreach (ProductViewModel product in productOrder2.Keys)
+                      {
+                          StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
+                          MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
+                          statProduitManager.CreateStat(stat);
 
-            foreach (ProductViewModel product in productOrder.Keys)
-            {
-                messageLog += product.NomProduitIHM + ", ";
-            }
-
+                          product.QuantiteIHM -= productOrder2[product];
+                          product.UpdateProduct(false);
+                      }
+                  });
 
                 // Log l'action
                 Log log = new Log(DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            Task.Run (() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
+                _ = Task.Run(() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
 
+                this.ProductOrder.Clear();
+                NotifyPropertyChanged(nameof(PriceAdherIHM));
+                NotifyPropertyChanged(nameof(PriceNonAdherIHM));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
 
 
             // Notifier la vue
-            this.ProductOrder.Clear();
-            NotifyPropertyChanged(nameof(PriceAdherIHM));
-            NotifyPropertyChanged(nameof(PriceNonAdherIHM));
-            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+            this.ShowPayAcompte = false;
+            
+
 
 
         }
@@ -319,6 +334,7 @@ namespace Couche_IHM.VueModeles
                 if (produitIHM.QuantiteIHM - productOrder[produitIHM] > 0)
                 {
                     this.productOrder[produitIHM]++;
+                    
                 }
                 
             }

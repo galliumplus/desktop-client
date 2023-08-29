@@ -212,31 +212,37 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Label 
+                    <StackPanel 
+                        Margin="0,20,0,0" 
+                        Orientation="Horizontal">
+                        <Label 
                         FontSize="12"
-                        Content="Mot de passe" 
-                        Padding="0,0,0,5" 
-                        Margin="0,20,0,0" />
-                    <PasswordBox 
-                        FontSize="12"
-                        BorderBrush="#FF403D39" 
-                        Style="{StaticResource inputPasswordBox}" 
-                        MaxLength="100"/>
+                        Content="Adhérent ?" 
+ />
+                        <CheckBox
 
-                    <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                        IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
+                        Background="Green"
+                        />
+                    </StackPanel>
+                    
+
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
                         <Button 
+                            BorderThickness="0"
                             Command="{Binding CaisseViewModel.CancelPay}"
-                        Width="90"
+                        Width="80"
                         FontSize="12"
                         Background="Gray"
                         Foreground="White"
                         Content="Annuler"/>
 
                         <Button 
+                            BorderThickness="0"
                             Command="{Binding CaisseViewModel.Pay}"
                             CommandParameter="{Binding CaisseViewModel.AdherentPayer}"
-                            Width="90"
-                            Margin="20,0,0,0"
+                            Width="80"
+                            Margin="40,0,0,0"
                             FontSize="12"
                             Background="{StaticResource galliumColor}"
                             Foreground="White"

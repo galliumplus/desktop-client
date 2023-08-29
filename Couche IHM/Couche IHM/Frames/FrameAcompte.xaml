@@ -110,7 +110,7 @@
                         Width="200" 
                         BorderBrush="Black"
                         FontSize="13" 
-                        Grid.ColumnSpan="2" 
+                        Grid.ColumnSpan="2"
                         Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
 
                 <materialDesign:PackIcon
@@ -214,7 +214,7 @@
                                         Width="15"
                                         Height="15"
                                         Foreground="Black"
-                                        Kind="ArrowTopRightBottomLeft"
+                                        Kind="ArrowExpand"
                                         />
                             </Button>
 

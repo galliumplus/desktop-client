@@ -362,6 +362,7 @@ namespace Couche_IHM.VueModeles
                    nomProduitIHM == model.nomProduitIHM;
         }
 
+   
 
         #endregion
     }

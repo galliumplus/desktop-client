@@ -8,7 +8,6 @@ namespace Modeles
         private string identifiant;
         private string nom = "";
         private string prenom = "";
-        private bool canPass;
         private float argent;
         private bool stillAdherent;
         private string formation;
@@ -23,13 +22,12 @@ namespace Modeles
         /// <param name="prenom">prenom de l'adhérent</param>
         /// <param name="canPass">si le mdp peut être skip</param>
         /// <param name="argent">argent de l'adhérent</param>
-        public Acompte(int id, string identifiant, string nom, string prenom, float argent,string formation, bool canPass = false,bool stillAdherent = true)
+        public Acompte(int id, string identifiant, string nom, string prenom, float argent,string formation,bool stillAdherent = true)
         {
             this.id = id;
             this.identifiant = identifiant;
             this.nom = nom.ToUpper();
             this.prenom = prenom;
-            this.canPass = canPass;
             this.argent = argent;
             this.stillAdherent = stillAdherent;
             this.formation = formation;
@@ -67,10 +65,6 @@ namespace Modeles
         /// </summary>
         public string Prenom { get => prenom; set => prenom = value; }
 
-        /// <summary>
-        /// Le mot de passe peut-il être facultatif
-        /// </summary>
-        public bool CanPass { get => canPass; set => canPass = value; }
 
         /// <summary>
         /// Argent de l'adhérent

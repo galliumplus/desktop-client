@@ -67,7 +67,6 @@ namespace Couche_Métier.Manager
             adhér.Prenom = adhérent.Prenom;
             adhér.Argent = adhérent.Argent;
             adhér.StillAdherent = adhérent.StillAdherent;
-            adhér.CanPass = adhérent.CanPass;
             adhér.Formation = adhérent.Formation;
         }
 

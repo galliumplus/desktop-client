@@ -16,7 +16,6 @@
     <None Remove="Fonts\There Brat.ttf" />
     <None Remove="Images\galliumlite.png" />
     <None Remove="Images\logoEtiq.png" />
-    <None Remove="Images\plein_ecran.png" />
     <None Remove="Images\unknownProduct.png" />
   </ItemGroup>
 
@@ -50,9 +49,6 @@
     </Resource>
     <Resource Include="Images\galliumlite.png" />
     <Resource Include="Images\logoEtiq.png" />
-    <Resource Include="Images\plein_ecran.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\unknownProduct.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
