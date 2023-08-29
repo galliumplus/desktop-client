@@ -188,7 +188,6 @@ namespace Couche_IHM.VueModeles
             {
                 this.acomptes.Add(new AcompteViewModel(adh,this.acompteManager));
             }
-            this.currentAcompte = this.acomptes[0];
         }
 
         /// <summary>
@@ -197,10 +196,10 @@ namespace Couche_IHM.VueModeles
         private void OpenAcompteDetails(string action)
         {
 
-            if (action == "NEW" || currentAcompte.Action == "NEW")
+            if (action == "NEW" || currentAcompte == null || currentAcompte.Action == "NEW")
             {
                 ShowDeleteAcompte = false;
-                CurrentAcompte = new AcompteViewModel(new Acompte(),this.acompteManager);
+                CurrentAcompte = new AcompteViewModel(new Acompte(),this.acompteManager,"NEW");
             }
             else
             {

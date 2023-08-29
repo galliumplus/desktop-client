@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using Modeles;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -26,6 +27,7 @@ namespace Couche_IHM.VueModeles
         private CategoryViewModel categoryIHM;
         private string prixAdherentIHM;
         private string prixNonAdherentIHM;
+        private string action;
         #endregion
 
         #region notify
@@ -136,7 +138,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return this.product.NomProduit == "" ? "NEW" : "UPDATE";
+                return this.action;
             }
         }
 
@@ -160,7 +162,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur du produit vue modele
         /// </summary>
-        public ProductViewModel(Product product,ProductManager productManager,CategoryManager categoryManager,CategoryViewModel categoryProduit)
+        public ProductViewModel(Product product, ProductManager productManager, CategoryManager categoryManager, CategoryViewModel categoryProduit,string action = "UPDATE")
         {
             // Initialisation du modele
             this.product = product;
@@ -170,6 +172,7 @@ namespace Couche_IHM.VueModeles
             this.productManager = productManager;
 
             // Initialisation des attributsIHM
+            this.action = action;
             this.categoryIHM = categoryProduit;
             this.quantiteIHM = product.Quantite;
             this.nomProduitIHM = product.NomProduit;
@@ -300,6 +303,7 @@ namespace Couche_IHM.VueModeles
                 this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
                 this.productManager.CreateProduct(this.product);
+                this.action = "UPDATE";
 
                 // Log l'action
                 Log log = new Log(DateTime.Now, 3, $"Ajout du produit : {product.NomProduit}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
@@ -328,11 +332,10 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public void ResetProduct()
         {
-
             // Initialisation propriétés
             if(this.categoryIHM != null)
             {
-                this.categoryIHM.NomCat = this.categoryManager.ListAllCategory().Find(x => x.IdCat == product.Categorie).NomCategory;
+                this.categoryIHM = MainWindowViewModel.Instance.ProductViewModel.Categories.ToList().Find(x => x.Id == product.Categorie);
             }
 
            

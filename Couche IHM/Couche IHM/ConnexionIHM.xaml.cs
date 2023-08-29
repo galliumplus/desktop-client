@@ -1,4 +1,5 @@
 ﻿
+using Couche_IHM.ImagesProduit;
 using Couche_IHM.VueModeles;
 using Couche_Métier.Manager;
 using MaterialDesignThemes.Wpf;
@@ -27,6 +28,7 @@ namespace Couche_IHM
             InitializeComponent();
             DataContext = this;
             this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
+            ImageManager.VerifyFiles();
         }
 
         public string Identifiant { get => identifiant; set => identifiant = value; }

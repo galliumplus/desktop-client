@@ -13,7 +13,11 @@ namespace Couche_IHM.ImagesProduit
         public static void VerifyFiles()
         {
             // Création des répertoires
-            Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit");
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit"))
+            {
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit");
+            }
+            
 
             //Création de l'image de base
             if (!File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png"))
@@ -73,15 +77,19 @@ namespace Couche_IHM.ImagesProduit
         /// </summary>
         public static void CreateImageFromBlob(string fileName, byte[] blob)
         {
-            string filePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-            "Gallium", "ImagesProduit", $"{fileName}.png"
-            );
-            using (FileStream fileStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            if (fileName != "")
             {
-                fileStream.Write(blob, 0, blob.Length);
+
+                string filePath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "Gallium", "ImagesProduit", $"{fileName}.png"
+                );
+                using (FileStream fileStream = File.Open(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    fileStream.Write(blob, 0, blob.Length);
+                }
+
             }
-            
         }
     }
 }

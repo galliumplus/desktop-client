@@ -20,7 +20,8 @@ namespace Couche_IHM.VueModeles
         private string nomIHM;
         private string prenomIHM;
         private string formationIHM;
-        
+        private string action;
+
         #endregion
 
         #region events
@@ -112,7 +113,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return this.acompte.Prenom == "" ? "NEW" : "UPDATE";
+                return this.action;
             }
         }
         #endregion
@@ -121,10 +122,11 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur du acompteViewModel
         /// </summary>
-        public AcompteViewModel(Acompte acompte,AcompteManager acompteManager)
+        public AcompteViewModel(Acompte acompte,AcompteManager acompteManager,string action = "UPDATE")
         {
             this.acompte = acompte;
             this.acompteManager = acompteManager;
+            this.action = action;
 
             // Initialisation propriétés
             this.argentIHM = ConverterFormatArgent.ConvertToString(acompte.Argent);
@@ -177,6 +179,7 @@ namespace Couche_IHM.VueModeles
             this.acompte.Formation = this.formationIHM;
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.StillAdherent = this.isAdherentIHM;
+            this.action = "UPDATE";
             acompteManager.CreateAdhérent(this.acompte);
 
             // Log l'action
@@ -185,6 +188,7 @@ namespace Couche_IHM.VueModeles
 
             // Notifier la vue
             MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
+            NotifyPropertyChanged(nameof(this.Action));
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));

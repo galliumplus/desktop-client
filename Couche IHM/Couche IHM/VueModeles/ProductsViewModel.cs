@@ -243,7 +243,6 @@ namespace Couche_IHM.VueModeles
                 
                 this.products.Add(new ProductViewModel(prd,this.productManager,this.categoryManager,catProduit));
             }
-            this.currentProduct = this.products[0];
         }
 
 
@@ -269,7 +268,7 @@ namespace Couche_IHM.VueModeles
             if (action == "NEW" || currentProduct == null || currentProduct.Action == "NEW")
             {
                 ShowDeleteProduct = false;
-                CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null);
+                CurrentProduct = new ProductViewModel(new Product(),this.productManager,this.categoryManager ,null,"NEW");
             }
             else
             {
