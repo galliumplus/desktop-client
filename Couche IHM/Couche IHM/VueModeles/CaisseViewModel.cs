@@ -38,7 +38,7 @@ namespace Couche_IHM.VueModeles
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
             this.CancelPay = new RelayCommand(x => this.ShowPayAcompte = false);
-            this.Pay = new RelayCommand(acompte => PayArticles((AcompteViewModel)acompte));
+            this.Pay = new RelayCommand(tuple => PayArticles(tuple));
             this.ClearProd = new RelayCommand(x =>
             {
                 this.ProductOrder.Clear();
@@ -63,7 +63,6 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ClearProd { get; set; }
         public RelayCommand AddProd { get; set; }
         public RelayCommand RemoveProd { get; set; }
-
         public RelayCommand CancelPay { get; set; }
         public RelayCommand Pay { get; set; }   
         public RelayCommand ShowPay { get; set; }
@@ -203,18 +202,21 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de payer les articles
         /// </summary>
-        private async void PayArticles(AcompteViewModel acompte = null)
+        private async void PayArticles(object tuple = null)
         {
             string messageLog = $"Achat par {currentPaiement} ";
 
+            // Paiement par acompte
             try
             {
-                // Si paiement par acompte
-                if (acompte != null)
+                if (tuple is Tuple<AcompteViewModel, bool> values)
                 {
+                    AcompteViewModel acompte = values.Item1;
+                    bool isAdherentCheckboxChecked = values.Item2;
+
                     float argent = ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM);
                     float prix;
-                    if (acompte.IsAdherentIHM)
+                    if (isAdherentCheckboxChecked)
                     {
                         prix = this.PriceAdher;
                     }
@@ -228,7 +230,7 @@ namespace Couche_IHM.VueModeles
                         throw new Exception("Pas assez d'argent sur l'acompte");
                     }
 
-                    Task.Run(() =>
+                    _ = Task.Run(() =>
                     {
                         StatAcompte stat = new StatAcompte(0, DateTime.Now, prix, acompte.Id);
                         MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
@@ -253,7 +255,7 @@ namespace Couche_IHM.VueModeles
                     }
                 }
 
-
+                
                 foreach (ProductViewModel product in productOrder.Keys)
                 {
                     messageLog += product.NomProduitIHM + ", ";
@@ -262,17 +264,17 @@ namespace Couche_IHM.VueModeles
                 // Gérer les stats 
                 ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
                 _ = Task.Run(() =>
-                  {
-                      foreach (ProductViewModel product in productOrder2.Keys)
-                      {
-                          StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
-                          MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
-                          statProduitManager.CreateStat(stat);
+                    {
+                        foreach (ProductViewModel product in productOrder2.Keys)
+                        {
+                            StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
+                            MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
+                            statProduitManager.CreateStat(stat);
 
-                          product.QuantiteIHM -= productOrder2[product];
-                          product.UpdateProduct(false);
-                      }
-                  });
+                            product.QuantiteIHM -= productOrder2[product];
+                            product.UpdateProduct(false);
+                        }
+                    });
 
                 // Log l'action
                 Log log = new Log(DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);

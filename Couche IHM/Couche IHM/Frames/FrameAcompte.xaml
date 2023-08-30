@@ -106,9 +106,10 @@
                 <!-- Barre de recherche -->
                 <TextBox 
                         Height="30"  
-                        materialDesign:HintAssist.Hint="Recherche..."
+                        Tag="Recherche..."
+                        Style="{StaticResource WaterMarkTextBox}"
                         Width="200" 
-                        BorderBrush="Black"
+                        BorderBrush="LightGreen"
                         FontSize="13" 
                         Grid.ColumnSpan="2"
                         Text="{Binding AdherentViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
@@ -161,7 +162,7 @@
                                     Width="120"
                                     Height="29"
                                     BorderBrush="Transparent"
-                                    Background="ForestGreen" 
+                                    Background="LightGreen" 
                                     Opacity="0.8"
                                     Foreground="White">
                                 <DockPanel>

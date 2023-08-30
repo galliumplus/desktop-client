@@ -4,11 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Couche_IHM.VueModeles"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FrameCaisse"
       Background="White">
-
+    <Page.Resources>
+        <local:AcompteAndCheckboxConverter x:Key="AcompteAndCheckboxConverter" />
+    </Page.Resources>
     <Grid Margin="20,40,20,10">
         <!-- Definitions colonnes -->
         <Grid.ColumnDefinitions>
@@ -220,7 +223,7 @@
                         Content="Adhérent ?" 
  />
                         <CheckBox
-
+                        x:Name="AdherentCheckbox"
                         IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
                         Background="Green"
                         />
@@ -238,15 +241,22 @@
                         Content="Annuler"/>
 
                         <Button 
+                            Content="Payer"
                             BorderThickness="0"
-                            Command="{Binding CaisseViewModel.Pay}"
-                            CommandParameter="{Binding CaisseViewModel.AdherentPayer}"
                             Width="80"
                             Margin="40,0,0,0"
                             FontSize="12"
                             Background="{StaticResource galliumColor}"
                             Foreground="White"
-                            Content="Payer"/>
+                            Command="{Binding CaisseViewModel.Pay}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource AcompteAndCheckboxConverter}">
+                                    <Binding Path="CaisseViewModel.AdherentPayer" />
+                                    <Binding Path="IsChecked" ElementName="AdherentCheckbox" />
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                            
+                        </Button>
                     </StackPanel>
                    
 
