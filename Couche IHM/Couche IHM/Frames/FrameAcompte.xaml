@@ -240,7 +240,6 @@
                                             Text="Compte" 
                                             HorizontalAlignment="Center"  
                                             FontSize="11" 
-                                           
                                             Foreground="Black" />
                                         <TextBox  
                                         HorizontalAlignment="Center"
