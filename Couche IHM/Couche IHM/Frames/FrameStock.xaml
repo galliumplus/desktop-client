@@ -52,7 +52,7 @@
                                         FontWeight="Medium" 
                                         FontFamily="Roboto" 
                                         Width="200"  
-                                        FontSize="17"  
+                                        FontSize="15"  
                                         Text="Produit" />
                                  
                                     <TextBlock 
@@ -61,7 +61,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="17"  
+                                        FontSize="15"  
                                         Text="Quantité" />
                                    
 
@@ -71,7 +71,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="17"  
+                                        FontSize="15"  
                                         Text="Prix A " />
                                    
 
@@ -81,7 +81,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="17"  
+                                        FontSize="15"  
                                         Text="Catégorie"/>
                                    
 
@@ -109,26 +109,26 @@
                                     Grid.Column="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="14"/>
+                                    FontSize="13"/>
                                 <Label  
                                     Content="{Binding QuantiteIHM}" 
                                     Margin="30,0,0,0" 
                                     Grid.Column="1" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="14"/>
+                                    FontSize="13"/>
                                 <Label  
                                     Content="{Binding PrixAdherentIHM}"    
                                     Grid.Column="2" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="14"/>
+                                    FontSize="13"/>
                                 <Label  
                                     Content="{Binding CategoryIHM.NomCat}" 
                                     Grid.Column="4" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="14"/>
+                                    FontSize="13"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

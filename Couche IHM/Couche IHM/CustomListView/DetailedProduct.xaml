@@ -16,7 +16,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="15"/>
                 <RowDefinition Height="15"/>
@@ -28,21 +28,20 @@
                 Source="{Binding ImageProduct}"/>
             <TextBlock 
                 Grid.Row="1"
-                Margin="0 0 0 5" 
-                FontSize="13" 
+                FontSize="12" 
                 Text="{Binding NomProduitIHM}" 
                 FontWeight="Medium"/>
             <TextBlock 
                 Grid.Row="2"
-                FontSize="11" 
+                FontSize="10" 
                 Text="{Binding Path=QuantiteIHM, StringFormat='Stock : {0}'}"/>
             <TextBlock 
                 Grid.Row="3"
-                FontSize="11"  
+                FontSize="10"  
                 Text="{Binding Path=PrixAdherentIHM, StringFormat='Prix A : {0}'}"/>
             <TextBlock 
                 Grid.Row="4"
-                FontSize="11"  
+                FontSize="10"  
                 Text="{Binding Path=PrixNonAdherentIHM, StringFormat='Prix NA : {0}'}"/>
         </Grid>
     </Button>

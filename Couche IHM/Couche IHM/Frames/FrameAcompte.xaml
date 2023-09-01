@@ -45,7 +45,7 @@
                                     HorizontalAlignment="Center"
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="16" 
+                                    FontSize="15" 
                                     Text="Nom et prénom" />
 
                                 <TextBlock 
@@ -54,7 +54,7 @@
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="16" 
+                                    FontSize="15" 
                                     Text="Acompte" />
 
                                 <TextBlock 
@@ -63,7 +63,7 @@
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="16"
+                                    FontSize="15"
                                     Text="Monnaie "/>
                                 <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
 
@@ -82,9 +82,9 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <!-- Content -->
-                            <Label Style="{x:Null}" Content="{Binding NomCompletIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Content="{Binding IdentifiantIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
-                            <Label Content="{Binding ArgentIHM}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="13"/>
+                            <Label Style="{x:Null}" Content="{Binding NomCompletIHM}" Margin="40,0,0,0" Grid.Column="0" FontWeight="Medium" FontFamily="Roboto" FontSize="12"/>
+                            <Label Content="{Binding IdentifiantIHM}" Margin="30,0,0,0" Grid.Column="1" FontWeight="Medium" FontFamily="Roboto" FontSize="12"/>
+                            <Label Content="{Binding ArgentIHM}" Margin="50,0,0,0" Grid.Column="2" FontWeight="Medium" FontFamily="Roboto" FontSize="12"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

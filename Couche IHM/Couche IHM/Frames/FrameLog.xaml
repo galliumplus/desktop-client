@@ -46,7 +46,7 @@
                                     Grid.Column="1"  
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="17"  
+                                    FontSize="16"  
                                     Text="Date" />
 
 
@@ -57,7 +57,7 @@
                                     Grid.Row="0"
                                     FontWeight="Medium"
                                     FontFamily="Roboto"
-                                    FontSize="17"
+                                    FontSize="16"
                                     Text="Message" />
                                 
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
@@ -96,7 +96,7 @@
                                 Grid.Column="1" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="13"/>
+                                FontSize="12"/>
                             
 
                             <Label 
@@ -104,13 +104,13 @@
                                 Content="{Binding MessageCourt}"   
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="13"/>
+                                FontSize="12"/>
                             <Label  
                                 Content="{Binding Auteur}" 
                                 Grid.Column="3" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="13"/>
+                                FontSize="12"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -121,7 +121,7 @@
    
 
         <Grid Margin="15,15,10,15" Grid.Column="1">
-            <TextBlock  FontWeight="Medium" FontFamily="Roboto"  Text="Filtres" TextDecorations="Underline"  FontSize="20" HorizontalAlignment="Center"/>
+            <TextBlock  FontWeight="Medium" FontFamily="Roboto"  Text="Filtres" TextDecorations="Underline"  FontSize="17" HorizontalAlignment="Center"/>
             
             <Border BorderThickness="1" Margin="0,65,0,0">
                 <StackPanel>
@@ -129,7 +129,7 @@
                     <!-- filtre mois-->
                     <TextBlock
                         Margin="0,0,0,2"
-                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="15"
+                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="13"
                         Text="Date :"/>
                     <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
                         <ComboBox
@@ -157,7 +157,7 @@
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-23,-20,0,0"  Text="Opérations :" FontSize="15"/>
+                        <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-29,-20,0,0"  Text="Opérations :" FontSize="13"/>
 
                         <!-- Filtres domaine-->
                         <CheckBox 
@@ -199,7 +199,7 @@
                         HorizontalAlignment="Left" 
                         Margin="0,30,0,9"  
                         Text="Auteur :" 
-                        FontSize="15"/>
+                        FontSize="13"/>
                     <ComboBox 
                         SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
                         ItemsSource="{Binding LogsViewModel.Auteurs}"/>

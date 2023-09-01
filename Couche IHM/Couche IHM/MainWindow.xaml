@@ -38,12 +38,12 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Image
@@ -64,28 +64,33 @@
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMEACCUEIL}"
+                        FontSize="16"
                         Content="Accueil"   
                         Width="185"  />
                     <Button 
                         Height="45" 
+                        FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMECAISSE}"
                         Content="Caisse" />
                     <Button 
                         Height="45" 
+                        FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMEACOMPTE}"
                         Content="Acomptes"/>
                     <Button 
                         Height="45" 
+                        FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMESTOCK}"
                         Content="Stock"/>
                     <Button 
                         Height="45" 
+                        FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMECOMPTES}"
@@ -165,8 +170,9 @@
                     
                     <!-- Nom de la frame  -->
                         <TextBlock 
-                            Text="{Binding Frame, Converter={StaticResource EnumToNameConverter}}" 
-                            FontSize="22" 
+                            Text="{Binding Frame, Converter={StaticResource EnumToNameConverter}}"
+                            
+                            FontSize="20" 
                             VerticalAlignment="Center" 
                             Margin="40,0,0,0" 
                             Foreground="Black" 
@@ -183,7 +189,7 @@
                         <StackPanel Grid.Column="1" Margin="10,20,10,0">
                             <TextBlock 
                                 Text="{Binding CompteConnected.NomCompletIHM}" 
-                                FontSize="14" FontWeight="Bold"/>
+                                FontSize="13" FontWeight="Bold"/>
                             <TextBlock 
                                 Text="{Binding CompteConnected.RoleIHM}" 
                                 FontSize="11" 

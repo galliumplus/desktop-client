@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <!-- ScrollViewer des comptes-->
-        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,0"   >
+        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10"   >
             <ListView  ItemsSource="{Binding UserViewModel.Users}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
                 <ListView.Template>
                     <ControlTemplate>
@@ -43,7 +43,7 @@
                                     HorizontalAlignment="Center"
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="17"  
+                                    FontSize="15"  
                                     Text="Nom et prénom" />
                               
 
@@ -53,7 +53,7 @@
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="17" 
+                                    FontSize="15" 
                                     Text="Identifiant" />
                             
                                 <TextBlock   
@@ -62,7 +62,7 @@
                                     Grid.Row="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="17" 
+                                    FontSize="15" 
                                     Text="Role" />
                               
 
@@ -105,24 +105,25 @@
                                 Grid.Column="0" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="14"/>
+                                FontSize="13"/>
                             <Label 
                                 Content="{Binding EmailIHM}" 
                                 Margin="30,0,0,0" 
                                 Grid.Column="1" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="14"/>
+                                FontSize="13"/>
                             <Label 
                                 Content="{Binding RoleIHM}" 
                                 Margin="50,0,0,0" 
                                 Grid.Column="2" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="14"/>
+                                FontSize="13"/>
                             <Button 
                                 Style="{StaticResource buttonImage}"  
                                 Grid.Column="3" 
+                                
                                 Command="{Binding ShowUpdate}"
                                 >
                                 <materialDesign:PackIcon
@@ -137,6 +138,7 @@
             </ListView>
         </ScrollViewer>
         <Button 
+            BorderThickness="0"
             Command="{Binding UserViewModel.OpenUser}"
             CommandParameter="NEW"
             Background="Gray"
