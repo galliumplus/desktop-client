@@ -20,8 +20,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="500*"/>
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
