@@ -14,32 +14,38 @@
         <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
     </Page.Resources>
     
-    <Grid Margin="50,50,50,25">
+    <Grid >
 
         <!-- Définition des colonnes & lignes -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="26*"/>
-                <RowDefinition Height="2*"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="0.4*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
 
 
             <!-- Title -->
         <StackPanel 
             Orientation="Horizontal" 
-            Grid.Row="0"
+            Grid.Row="1"
             HorizontalAlignment="Center"
-            Grid.ColumnSpan="6">
+            Grid.Column="3"
+            Grid.ColumnSpan="2">
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
                 VerticalAlignment="Center"
@@ -65,21 +71,21 @@
                 Source="/Images/logoEtiq.png"
                 Margin="20"
                 Opacity="0.6"
-                Grid.Row="1"
-                Grid.Column="2"
+                Grid.Row="3"
+                Grid.Column="3"
                 Grid.ColumnSpan="2"/>
         
             <!-- acomptes -->
             <TextBlock 
-                Grid.Row="1"
+                Grid.Row="2"
+                Grid.Column="1"
                 Grid.ColumnSpan="2"
-                FontSize="14"
+                FontSize="15"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
                 Text="Adhérents fidèles"/>
 
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Margin="0,30,0,0" Orientation="Vertical">
-            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
+            <ItemsControl  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding StatViewModel.PodiumAcompte}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                         <Grid Margin="0,10,0,0">
@@ -147,19 +153,19 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </StackPanel>
+    
 
             <!-- Meta -->
             <TextBlock
-                Grid.Row="1"
-                Grid.Column="4"
+                Grid.Row="2"
+                Grid.Column="5"
                 Grid.ColumnSpan="2"
-                FontSize="14"
+                FontSize="15"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
                 Text="Meilleures ventes"/>
 
-            <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,30,0,0" Orientation="Vertical">
+            <StackPanel Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="2" Orientation="Vertical">
                 <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -239,7 +245,8 @@
             Background="LightGreen" 
             Margin="10,0,10,0"
             BorderBrush="Transparent"
-            Grid.Row="3"
+            Grid.Column="1"
+            Grid.Row="5"
             Foreground="Black"
             Command="{Binding GoDrive}"
             Opacity="0.6"
@@ -267,8 +274,8 @@
             Command="{Binding GoTwitter}"
             Margin="10,0,10,0"
             BorderBrush="Transparent"
-            Grid.Column="1"
-            Grid.Row="3"
+            Grid.Column="2"
+            Grid.Row="5"
             Foreground="Black"
             Opacity="0.6"
             >
@@ -296,8 +303,8 @@
             Background="LightPink" 
             Margin="10,0,10,0"
             Command="{Binding GoInsta}"
-            Grid.Column="4"
-            Grid.Row="3"
+            Grid.Column="5"
+            Grid.Row="5"
             BorderBrush="Transparent"
             Foreground="Black"
             Opacity="0.6"
@@ -325,8 +332,8 @@
             Margin="10,0,10,0"
             Command="{Binding GoTwitch}"
             BorderBrush="Transparent"
-            Grid.Column="5"
-            Grid.Row="3"
+            Grid.Column="6"
+            Grid.Row="5"
             Foreground="Black"
             Opacity="0.6"
             >

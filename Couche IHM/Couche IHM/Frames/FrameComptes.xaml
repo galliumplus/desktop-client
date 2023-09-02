@@ -11,15 +11,21 @@
       Title="FrameComptes"
       Background="White">
 
-    <Grid  Margin="20,50,20,0">
+    <Grid >
         <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
 
         <!-- ScrollViewer des comptes-->
-        <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10"   >
+        <ScrollViewer Grid.Row="1" Grid.Column="1"  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" >
             <ListView  ItemsSource="{Binding UserViewModel.Users}"  HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top">
                 <ListView.Template>
                     <ControlTemplate>
@@ -123,7 +129,6 @@
                             <Button 
                                 Style="{StaticResource buttonImage}"  
                                 Grid.Column="3" 
-                                
                                 Command="{Binding ShowUpdate}"
                                 >
                                 <materialDesign:PackIcon
@@ -138,17 +143,18 @@
             </ListView>
         </ScrollViewer>
         <Button 
+            Grid.Column="1"
             BorderThickness="0"
             Command="{Binding UserViewModel.OpenUser}"
             CommandParameter="NEW"
             Background="Gray"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Grid.Row="1"
+            Grid.Row="2"
             Content="Créer un compte"/>
 
         <!-- Modification / Création Compte-->
-        <materialDesign:DialogHost DialogTheme="Inherit" CloseOnClickAway="True" OverlayBackground="Gray" IsOpen="{Binding UserViewModel.ShowModifCreateUser}">
+        <materialDesign:DialogHost Grid.ColumnSpan="3" Grid.RowSpan="3" DialogTheme="Inherit" CloseOnClickAway="True" OverlayBackground="Gray" IsOpen="{Binding UserViewModel.ShowModifCreateUser}">
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -315,7 +321,7 @@
                         Background="Gray"
                         Grid.Column="0" 
                         Grid.Row="6" 
-                        Margin="20" />
+                        Margin="20,0,20,20" />
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>

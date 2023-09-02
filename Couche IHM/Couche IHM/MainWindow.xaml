@@ -20,8 +20,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
-            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
@@ -155,10 +155,9 @@
             </Grid>
         </Grid>
         
-        <Viewbox Grid.Column="1">
             
             <!-- DEUXIEME COLONNE -->
-            <Grid  Height="607" Width="969" >
+            <Grid  Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="12*"/>
@@ -179,14 +178,14 @@
                             FontWeight="Bold"/>
 
                         <!-- Info du compte connecté-->
-                    <Grid HorizontalAlignment="Right"   Width="300">
+                    <Grid HorizontalAlignment="Right"   >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10*" />
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <!-- Image du compte  -->
                         <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/logoEtiq.png" Width="40" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                        <StackPanel Grid.Column="1" Margin="10,20,10,0">
+                        <StackPanel Grid.Column="1" Margin="10,30,50,0">
                             <TextBlock 
                                 Text="{Binding CompteConnected.NomCompletIHM}" 
                                 FontSize="13" FontWeight="Bold"/>
@@ -204,8 +203,6 @@
                     NavigationUIVisibility="Hidden"/>
                 
             </Grid>
-
-        </Viewbox>
 
     </Grid>
 </Window>

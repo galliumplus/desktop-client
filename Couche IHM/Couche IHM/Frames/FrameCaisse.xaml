@@ -12,27 +12,31 @@
     <Page.Resources>
         <local:AcompteAndCheckboxConverter x:Key="AcompteAndCheckboxConverter" />
     </Page.Resources>
-    <Grid Margin="20,40,20,10">
+    <Grid >
         <!-- Definitions colonnes -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="0.2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="1.8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
 
 
         <!-- Liste des produits -->
-        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="0,0,0,10" >
+        <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" >
             <ScrollViewer VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Disabled" Margin="0 3 50 0">
                 <StackPanel x:Name="productsSP"/>
             </ScrollViewer>
         </Grid>
 
         <!-- Panier d'achat -->
-        <StackPanel Grid.Column="1" Grid.Row="0">
+        <StackPanel Grid.Column="2" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
@@ -64,11 +68,12 @@
                 VerticalAlignment="Bottom" 
                 Height="2"/>
         </StackPanel>
-        <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="0" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer Margin="0,40,0,0"  Grid.Column="2"  Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <ListView ItemsSource="{Binding CaisseViewModel.ProductOrder}" >
                 <ListView.Template>
                     <ControlTemplate>
                         <DockPanel LastChildFill="True">
+
                             <ItemsPresenter ></ItemsPresenter>
                         </DockPanel>
                     </ControlTemplate>
@@ -76,38 +81,37 @@
                 <ListView.ItemTemplate  >
                     <DataTemplate  >
 
-                        <Grid Width="220" Margin="0,-5,0,-5">
+                        <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="250"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            <Label 
-                                Content="{Binding Key.NomProduitIHM}" 
-                                Grid.Column="1" 
-                                VerticalAlignment="Center"  
-                                FontWeight="Medium"/>
                             <!-- Nombre de produit -->
                             <Label 
-                                Content="{Binding Value}" 
-                                Grid.Column="0" 
-                                VerticalAlignment="Center" 
-                                ContentStringFormat="x{0}"  />
+                                    Content="{Binding Value}" 
+                                    Grid.Column="0" 
+                                    VerticalAlignment="Center" 
+                                    ContentStringFormat="x{0}"  />
+
+                            <Label 
+                                    Content="{Binding Key.NomProduitIHM}" 
+                                    Grid.Column="1" 
+                                    VerticalAlignment="Center"  
+                                    FontWeight="Medium"/>
+                         
                             <!-- Bouton pour enlever le produit -->
                             <Button 
-                                Style="{StaticResource buttonImage}" 
-                                Command="{Binding DataContext.CaisseViewModel.RemoveProd, 
-                                    RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-                                CommandParameter="{Binding Key}"
-                                HorizontalAlignment="Right"  
-                                Height="10" 
-                                Grid.Column="2" 
-                                Width="25"  >
+                                    Style="{StaticResource buttonImage}" 
+                                    Command="{Binding DataContext.CaisseViewModel.RemoveProd, 
+                                        RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    CommandParameter="{Binding Key}"
+                                    Grid.Column="2" >
                                 <materialDesign:PackIcon
-                                    Width="12"
-                                    Height="12"
+                                        Width="12"
+                                        Height="12"
                                     
-                                    Kind="CloseOutline"/>
+                                        Kind="CloseOutline"/>
                             </Button>
 
                         </Grid>
@@ -117,44 +121,57 @@
         </ScrollViewer>
 
         <!-- Information de paiement -->
-        <StackPanel Margin="0,25,0,10"  Grid.Column="1" Grid.Row="1" >
-            <Label  FontWeight="Medium" FontFamily="Roboto" FontSize="15" Foreground="#FF403D39">Paiement</Label>
-            <Rectangle  Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" FontWeight="Medium" FontFamily="Roboto" VerticalAlignment="Bottom"  FontSize="15" Foreground="#FF403D39">Paiement</Label>
+            <Rectangle Grid.Row="0" Fill="#FF403D39" VerticalAlignment="Bottom" Height="2"/>
+            
             <!-- Paiment -->
-            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                <Label  
+            <Label  
+                    Grid.Row="2" 
                     Content="Moyen :" 
                     VerticalAlignment="Center" 
                     Foreground="Black" 
                     FontSize="11" />
-                <ComboBox 
-                    Margin="50,0,0,0" 
+            <ComboBox 
+                    Grid.Row="2"
                     ItemsSource="{Binding CaisseViewModel.Paiements}" 
                     SelectedItem="{Binding CaisseViewModel.CurrentPaiement}"
                     Width="100" 
                     FontSize="11"/>
-            </StackPanel>
+
 
             <!-- Prix -->
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
                 <Label  
+                    Grid.Row="5" Grid.Column="1" 
                     Content="Total TTC :" 
                     VerticalAlignment="Center" 
                     Foreground="Black" 
                     FontSize="11" />
                 <Label 
-                    Margin="38,0,0,0"  
+                    Grid.Row="5" Grid.Column="1" 
+                    Margin="48,0,0,0"  
                     Content="{Binding CaisseViewModel.PriceAdherIHM}"
                     Foreground="Black" 
                     FontSize="14" 
                     FontWeight="Medium" 
                     VerticalAlignment="Center"   />
                 <Label 
+                    Grid.Row="5" Grid.Column="1" 
                     Content="{Binding CaisseViewModel.PriceNonAdherIHM}" 
                     Foreground="Black" 
                     FontSize="12"  
                     VerticalAlignment="Center" />
                 <ToggleButton
+                    Grid.Row="5" Grid.Column="1" 
                     IsChecked="{Binding CaisseViewModel.IsAdherent}"
                     FontSize="12"
                     Foreground="Black"
@@ -177,18 +194,22 @@
 
             <!-- Bouton Payer-->
             <Button 
+                
                 Style="{StaticResource buttonBlack}" 
                 Command="{Binding CaisseViewModel.ShowPay}"
+                Grid.Row="4" 
                 Margin="0,15,0,0"
                 FontSize="12"
                 Width="110" 
                 Height="30"
                 Content="Payer"/>
+        </Grid>
+            
 
-        </StackPanel>
+
 
         <!-- Paiement Acompte -->
-        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+        <materialDesign:DialogHost Grid.RowSpan="4" Grid.ColumnSpan="4" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent >
                 <StackPanel Margin="20" Width="200" Orientation="Vertical">
                     
