@@ -54,7 +54,7 @@
                 Kind="Podium"/>
             <TextBlock 
                 Margin="10,0,0,0"
-                FontSize="19"
+                FontSize="18"
                 VerticalAlignment="Center"
                 FontWeight="Bold"
                 Text="Top de la semaine"/>
@@ -80,7 +80,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
-                FontSize="17"
+                FontSize="14"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
                 Text="Adhérents fidèles"/>
@@ -111,7 +111,7 @@
                             <materialDesign:Chip
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                    FontSize="14"
+                                    FontSize="10"
                                     IconBackground="#004D40"
                                     Content="{Binding AdherentViewModel.NomCompletIHM}">
                                     <materialDesign:Chip.Icon>
@@ -160,12 +160,12 @@
                 Grid.Row="2"
                 Grid.Column="5"
                 Grid.ColumnSpan="2"
-                FontSize="17"
+                FontSize="14"
                 HorizontalAlignment="Center"
                 FontWeight="DemiBold"
                 Text="Meilleures ventes"/>
 
-            <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,50,0,0" Orientation="Vertical">
+            <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,30,0,0" Orientation="Vertical">
                 <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -184,7 +184,6 @@
                             <TextBlock
                                 Margin="0,20,0,0"
                                 Text="{Binding Path=PurchaseCount, StringFormat=' {0}'}"
-                                FontSize="14"
                                 Grid.Column="0"
                                 />
                             
@@ -193,7 +192,7 @@
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 HorizontalAlignment="Right"
-                                FontSize="14"
+                                FontSize="10"
                                 IconBackground="#880E4F"
                                  
                                 Content="{Binding ProductViewModel.NomProduitIHM}">
