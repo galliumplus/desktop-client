@@ -156,7 +156,7 @@
         </Grid>
 
             <!-- DEUXIEME COLONNE -->
-            <Grid Grid.Column="1"   >
+            <Grid  Grid.Column="1"   >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="12*"/>
@@ -184,7 +184,7 @@
                         </Grid.ColumnDefinitions>
                         <!-- Image du compte  -->
                         <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/logoEtiq.png" Width="40" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                        <StackPanel Grid.Column="1" Margin="10,20,10,0">
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
                             <TextBlock 
                                 Text="{Binding CompteConnected.NomCompletIHM}" 
                                 FontSize="13" FontWeight="Bold"/>

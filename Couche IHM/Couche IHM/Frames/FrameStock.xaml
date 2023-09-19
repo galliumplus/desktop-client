@@ -16,17 +16,12 @@
 
     <Grid  Margin="20,50,20,0">
         <!-- Ligne 1 - Colonne 0: Liste des produits-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1.1*"/>
+        </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- ScrollViewer des adhérents-->
+        <!-- ScrollViewer des adhérents-->
             <ScrollViewer  VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,50"   >
                 <ListView ItemsSource="{Binding ProductViewModel.Products, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ProductViewModel.CurrentProduct}"   HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Top"   >
                     <ListView.Template>
@@ -52,7 +47,7 @@
                                         FontWeight="Medium" 
                                         FontFamily="Roboto" 
                                         Width="200"  
-                                        FontSize="15"  
+                                        FontSize="18"  
                                         Text="Produit" />
                                  
                                     <TextBlock 
@@ -61,7 +56,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="15"  
+                                        FontSize="18"  
                                         Text="Quantité" />
                                    
 
@@ -71,7 +66,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="15"  
+                                        FontSize="18"  
                                         Text="Prix A " />
                                    
 
@@ -81,7 +76,7 @@
                                         Grid.Row="0" 
                                         FontWeight="Medium" 
                                         FontFamily="Roboto"  
-                                        FontSize="15"  
+                                        FontSize="18"  
                                         Text="Catégorie"/>
                                    
 
@@ -109,26 +104,26 @@
                                     Grid.Column="0" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="13"/>
+                                    FontSize="16"/>
                                 <Label  
                                     Content="{Binding QuantiteIHM}" 
                                     Margin="30,0,0,0" 
                                     Grid.Column="1" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="13"/>
+                                    FontSize="16"/>
                                 <Label  
                                     Content="{Binding PrixAdherentIHM}"    
                                     Grid.Column="2" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="13"/>
+                                    FontSize="16"/>
                                 <Label  
                                     Content="{Binding CategoryIHM.NomCat}" 
                                     Grid.Column="4" 
                                     FontWeight="Medium" 
                                     FontFamily="Roboto" 
-                                    FontSize="13"/>
+                                    FontSize="16"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -147,13 +142,13 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox 
-                        Height="30"  
+                        Height="33"  
                         Tag="Recherche..."
-                        Width="200" 
+                        Width="280"
                         BorderBrush="#FFB366"
                         Style="{StaticResource WaterMarkTextBox}"   
                         HorizontalAlignment="Stretch"
-                        FontSize="13" 
+                        FontSize="17" 
                         Grid.ColumnSpan="2" 
                         Text="{Binding ProductViewModel.SearchFilter, UpdateSourceTrigger=PropertyChanged}"   />
                 <materialDesign:PackIcon
@@ -171,7 +166,7 @@
             <!-- Info produit -->
             <materialDesign:Flipper
                     IsFlipped="{Binding ProductViewModel.ShowProduct}"
-                     Margin="0,70,0,0"
+                     Margin="0,100,0,0"
                     HorizontalAlignment="Center" 
                     >
                 <materialDesign:Flipper.FrontContent>
@@ -180,15 +175,15 @@
                             HorizontalAlignment="Center" 
                             BorderBrush="#FFB366"
                             Background="#FFFCF2"
-                            Height="270" 
-                            Width="190">
+                            Height="350" 
+                            Width="250">
 
                         <!-- Boutons Actions -->
                         <StackPanel Height="280" VerticalAlignment="Top" Orientation="Vertical">
                             <TextBlock
-                                Margin="0,10,0,0"
+                                Margin="0,-10,0,0"
                                 Foreground="Black"
-                                FontSize="15"  
+                                FontSize="19"  
                                 FontWeight="Bold" 
                                 TextDecorations="Underline"
                                 HorizontalAlignment="Center"
@@ -201,9 +196,9 @@
                                     CommandParameter="NEW"
                                     VerticalAlignment="Bottom" 
                                     HorizontalAlignment="Center" 
-                                    Margin="10,30,10,10"
-                                    Width="120"
-                                    Height="29"
+                                    Margin="10,40,10,10"
+                                    Width="140"
+                                    Height="32"
                                     BorderBrush="Transparent"
                                     Background="{StaticResource galliumColor}" 
                                     Opacity="0.8"
@@ -212,13 +207,13 @@
                                     <materialDesign:PackIcon
                                         Kind="Plus"
                                         Margin="0,1,5,0"
-                                        Width="18"
-                                        Height="18"
+                                        Width="20"
+                                        Height="20"
                                         />
                                     <TextBlock 
                                             VerticalAlignment="Center"
                                         Text="Produit"
-                                        FontSize="11"/>
+                                        FontSize="15"/>
                                 </DockPanel>
                             </Button>
 
@@ -229,19 +224,21 @@
                                     HorizontalAlignment="Left" 
                                     Margin="10"
                                     BorderBrush="Transparent"
-                                    Height="29"
-                                    Width="120"
+                                    Height="32"
+                                    Width="140"
                                     Background="Gray" 
                                     Foreground="White">
                                 <DockPanel>
                                     <materialDesign:PackIcon
                                             Kind="FormatListBulletedType"
                                             Margin="0,0,5,0"
+                                        Width="20"
+                                        Height="20"
                                             />
 
                                     <TextBlock 
                                             Text="Catégories"
-                                            FontSize="11"/>
+                                            FontSize="15"/>
                                 </DockPanel>
                             </Button>
                         </StackPanel>
@@ -252,8 +249,8 @@
                     <Button
                             BorderBrush="#FFB366"
                             Background="#FFFCF2"
-                            Height="270" 
-                            Width="190"
+                            Height="350" 
+                            Width="250"
                             Command="{x:Static materialDesign:Flipper.FlipCommand}">
 
                         <!-- Informations produits-->
@@ -266,8 +263,8 @@
                                 Style="{x:Null}"
                                 Background="Transparent"
                                 BorderThickness="0"
-                                Width="100" 
-                                FontSize="13" 
+                                Width="140" 
+                                FontSize="17" 
                                 Foreground="Black"
                                 Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -275,12 +272,12 @@
                             <Button 
                                     Command="{Binding ProductViewModel.OpenProd}" 
                                     CommandParameter="DS"
-                                    Margin="140,-20,0,0"  
+                                    Margin="180,-20,0,0"  
                                     Width="20"   
                                     Style="{StaticResource buttonImage}">
                                 <materialDesign:PackIcon
-                                        Width="15"
-                                        Height="15"
+                                        Width="20"
+                                        Height="20"
                                         Foreground="Black"
                                         Kind="ArrowExpand"
                                         />
@@ -289,11 +286,11 @@
                             <!-- Image produit-->
                             <materialDesign:PackIcon 
                                         HorizontalAlignment="Center" 
-                                        Margin="0,15,0,0" 
+                                        Margin="0,25,0,0" 
                                         Foreground="Black"
                                         Kind="CartPercent" 
-                                        Width="90" 
-                                        Height="90"/>
+                                        Width="120" 
+                                        Height="120"/>
 
                             <!-- Information du produit -->
                             <StackPanel   Margin="0,10,0,60" >
@@ -303,12 +300,12 @@
                                     <StackPanel  Orientation="Vertical" >
                                         <TextBlock  
                                             Text="Quantité" 
-                                            FontSize="11" 
+                                            FontSize="15" 
                                             Foreground="Black" />
                                         <TextBox 
                                             HorizontalContentAlignment="Center"
                                             Width="50"
-                                            FontSize="11" 
+                                            FontSize="16" 
                                             FontWeight="Bold"
                                             Foreground="Black"  >
                                             <TextBox.Text>
@@ -325,18 +322,18 @@
                                     </StackPanel>
 
                                     <!-- Categorie Produit -->
-                                    <StackPanel Margin="20,0,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
+                                    <StackPanel Margin="30,0,0,0" Orientation="Vertical"  HorizontalAlignment="Center">
                                         <TextBlock 
                                         Text="Catégorie" 
                                         HorizontalAlignment="Center" 
-                                        FontSize="11"  
+                                        FontSize="15"  
                                         Foreground="Black" />
 
                                         <ComboBox 
-                                            Width="70" 
+                                            Width="80" 
                                             SelectedItem="{Binding ProductViewModel.CurrentProduct.CategoryIHM}" 
                                             ItemsSource="{Binding ProductViewModel.Categories }"  
-                                            FontSize="11"  
+                                            FontSize="16"  
                                             Foreground="Black">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
@@ -370,21 +367,21 @@
                                     Command="{Binding ProductViewModel.CurrentProduct.ResetProd}">
                                         <materialDesign:PackIcon
                                         Foreground="Red"
-                                        Width="27"
-                                        Height="27"
+                                        Width="35"
+                                        Height="35"
                                         Kind="CloseThick"/>
                                     </Button>
 
                                     <Button 
                                         Style="{StaticResource buttonImage}"
-                                        Margin="10,0,0,0"
+                                        Margin="20,0,0,0"
                                         Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}"
                                         BorderBrush="Transparent"
                                         Background="Transparent">
                                         <materialDesign:PackIcon
                                             Foreground="Green"
-                                            Width="30"
-                                            Height="30"
+                                            Width="35"
+                                            Height="35"
                                             Kind="CheckBold"/>
                                     </Button>
 
