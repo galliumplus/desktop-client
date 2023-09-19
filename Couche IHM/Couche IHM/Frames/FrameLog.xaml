@@ -46,7 +46,7 @@
                                     Grid.Column="1"  
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
-                                    FontSize="16"  
+                                    FontSize="18"  
                                     Text="Date" />
 
 
@@ -57,10 +57,10 @@
                                     Grid.Row="0"
                                     FontWeight="Medium"
                                     FontFamily="Roboto"
-                                    FontSize="16"
+                                    FontSize="18"
                                     Text="Message" />
                                 
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="15"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="18"/>
 
 
 
@@ -96,7 +96,7 @@
                                 Grid.Column="1" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="12"/>
+                                FontSize="16"/>
                             
 
                             <Label 
@@ -104,13 +104,13 @@
                                 Content="{Binding MessageCourt}"   
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="12"/>
+                                FontSize="16"/>
                             <Label  
                                 Content="{Binding Auteur}" 
                                 Grid.Column="3" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
-                                FontSize="12"/>
+                                FontSize="16"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

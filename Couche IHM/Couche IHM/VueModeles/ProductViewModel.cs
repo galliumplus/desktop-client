@@ -56,6 +56,19 @@ namespace Couche_IHM.VueModeles
         {
             get => product.ID;
         }
+
+        public double Opacity
+        {
+            get
+            {
+                double d = 1;
+                if (!isDisponible)
+                {
+                    d = 0.5;
+                }
+                return d;
+            }
+        }
         /// <summary>
         /// Permet de savoir si le produit est disponible
         /// </summary>
