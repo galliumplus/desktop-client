@@ -10,37 +10,156 @@
       d:DesignWidth="800"
       Title="FrameLogs">
 
-    <Grid Margin="20,40,20,10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="0,40,0,10">
+
 
 
         <!-- ScrollViewer des comptes-->
-        <ScrollViewer  Margin="0,20,0,19"   >
-            <ListView 
+        <DockPanel   >
+           
+        <!-- Liste des logs -->
+
+        <Expander 
+            DockPanel.Dock="Right"
+            ExpandDirection="Left" Grid.Column="1">
+                <Expander.Header>
+                    <TextBlock
+                        RenderTransformOrigin=".5,.5"
+                        FontSize="15"
+                        Text="Filtres">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform
+                            Angle="270" />
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </Expander.Header>
+                <Grid >
+
+                    <StackPanel Margin="40,50,50,50">
+
+                        <!-- filtre mois-->
+                        <TextBlock
+                        Margin="-10,0,0,2"
+                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="16"
+                            HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                        Text="Date :"/>
+                        <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                            <ComboBox
+                            ItemsSource="{Binding LogsViewModel.Mois}"
+                            SelectedItem="{Binding LogsViewModel.CurrentMois}"
+                            materialDesign:HintAssist.Hint="Mois"
+                            FontSize="15"
+                        />
+                            <ComboBox
+                            SelectedItem="{Binding LogsViewModel.CurrentAnnee}"
+                            ItemsSource="{Binding LogsViewModel.Annees}"
+                            Margin="20,0,0,0"
+                            FontSize="15"
+                            materialDesign:HintAssist.Hint="Année"
+                        />
+                        </StackPanel>
+
+
+                        <Grid Margin="0,50,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock 
+                            TextDecorations="Underline" 
+                            FontFamily="Roboto" 
+                            HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                            Margin="0,-25,0,0"  
+                            Text="Opérations :" 
+                            FontSize="16"/>
+
+                            <!-- Filtres domaine-->
+                            <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectProduct}"  
+                            Background="LightGreen"
+                            FontSize="15"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Produit"/>
+                            <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
+                            Grid.Row="1"
+                             FontSize="15"
+                            Grid.Column="0"
+                            Background="Orange"
+                            Content="Acompte"/>
+                            <CheckBox 
+                            Grid.Row="2"
+                             FontSize="15"
+                            Grid.Column="0"
+                            IsChecked="{Binding LogsViewModel.SelectCompte}"  
+                            Background="Gray"
+                            Content="Utilisateur"/>
+                            <CheckBox 
+                            Grid.Row="0"
+                             FontSize="15"
+                            Grid.Column="1"
+                            IsChecked="{Binding LogsViewModel.SelectVente}" 
+                            Background="LightBlue"
+                            Content="Vente"/>
+                            <CheckBox 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                             FontSize="15"
+                            IsChecked="{Binding LogsViewModel.SelectConnexion}"  
+                            Background="Green"
+                            Content="Connexion"/>
+                        </Grid>
+
+                        <!-- Filtre auteur-->
+                        <TextBlock  
+                        TextDecorations="Underline" 
+                        FontFamily="Roboto" 
+                        HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                        Margin="0,30,0,9"  
+                        Text="Auteur :" 
+                        FontSize="16"/>
+                        <ComboBox 
+                        FontSize="15"
+                        SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
+                        ItemsSource="{Binding LogsViewModel.Auteurs}"/>
+
+                    </StackPanel>
+
+                </Grid>
+    </Expander>
+            <ScrollViewer Margin="0,40,0,19"   >
+                <ListView 
                 ItemsSource="{Binding LogsViewModel.Logs}"
                 HorizontalContentAlignment="Stretch"  
                 VerticalContentAlignment="Top">
-                <ListView.Template>
-                    <ControlTemplate>
-                        <!-- Header des colonnes -->
-                        <DockPanel LastChildFill="True">
-                            <Grid DockPanel.Dock="Top">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <!-- Header des colonnes -->
+                            <DockPanel LastChildFill="True">
+                                <Grid DockPanel.Dock="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock  
+                                    <TextBlock  
                                     HorizontalAlignment="Center"
                                     Background="Transparent" 
                                     Grid.Column="1"  
@@ -50,7 +169,7 @@
                                     Text="Date" />
 
 
-                                <TextBlock 
+                                    <TextBlock 
                                     Margin="60,0,0,0"  
                                     Background="Transparent" 
                                     Grid.Column="2"
@@ -59,31 +178,31 @@
                                     FontFamily="Roboto"
                                     FontSize="18"
                                     Text="Message" />
-                                
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="18"/>
+
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="18"/>
 
 
 
-                                <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
+                                    <Rectangle Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="6"  Height="2" Fill="Black" Margin="30,5,20,10"/>
 
-                            </Grid>
-                            <!-- items de la listview -->
-                            <ItemsPresenter ></ItemsPresenter>
-                        </DockPanel>
-                    </ControlTemplate>
-                </ListView.Template>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="2.2*"/>
-                            </Grid.ColumnDefinitions>
-                            <!-- Content -->
+                                </Grid>
+                                <!-- items de la listview -->
+                                <ItemsPresenter ></ItemsPresenter>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                    <ColumnDefinition Width="2.2*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- Content -->
 
-                            <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                 HorizontalAlignment="Center"
                                 Grid.Column="0"
                                 Kind="{Binding Theme}"
@@ -91,123 +210,32 @@
                                
 
                                 />
-                            <Label   
+                                <Label   
                                 Content="{Binding Date}"  
                                 Grid.Column="1" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="16"/>
-                            
 
-                            <Label 
+
+                                <Label 
                                 Grid.Column="2"  
                                 Content="{Binding MessageCourt}"   
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="16"/>
-                            <Label  
+                                <Label  
                                 Content="{Binding Auteur}" 
                                 Grid.Column="3" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
                                 FontSize="16"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
-        
-        <!-- Liste des logs -->
-   
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
 
-        <Grid Margin="15,15,10,15" Grid.Column="1">
-            <TextBlock  FontWeight="Medium" FontFamily="Roboto"  Text="Filtres" TextDecorations="Underline"  FontSize="17" HorizontalAlignment="Center"/>
-            
-            <Border BorderThickness="1" Margin="0,65,0,0">
-                <StackPanel>
-                    
-                    <!-- filtre mois-->
-                    <TextBlock
-                        Margin="0,0,0,2"
-                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="13"
-                        Text="Date :"/>
-                    <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
-                        <ComboBox
-                            ItemsSource="{Binding LogsViewModel.Mois}"
-                            SelectedItem="{Binding LogsViewModel.CurrentMois}"
-                            materialDesign:HintAssist.Hint="Mois"
-                        />
-                        <ComboBox
-                            SelectedItem="{Binding LogsViewModel.CurrentAnnee}"
-                            ItemsSource="{Binding LogsViewModel.Annees}"
-                            Margin="20,0,0,0"
-                            materialDesign:HintAssist.Hint="Année"
-                        />
-                    </StackPanel>
-                   
-
-                    <Grid Margin="0,50,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock TextDecorations="Underline" FontFamily="Roboto" HorizontalAlignment="Center" Margin="-29,-20,0,0"  Text="Opérations :" FontSize="13"/>
-
-                        <!-- Filtres domaine-->
-                        <CheckBox 
-                            IsChecked="{Binding LogsViewModel.SelectProduct}"  
-                            Background="LightGreen"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Content="Produit"/>
-                        <CheckBox 
-                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Background="Orange"
-                            Content="Acompte"/>
-                        <CheckBox 
-                            Grid.Row="2"
-                            Grid.Column="0"
-                            IsChecked="{Binding LogsViewModel.SelectCompte}"  
-                            Background="Gray"
-                            Content="Utilisateur"/>
-                        <CheckBox 
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            IsChecked="{Binding LogsViewModel.SelectVente}" 
-                            Background="LightBlue"
-                            Content="Vente"/>
-                        <CheckBox 
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            IsChecked="{Binding LogsViewModel.SelectConnexion}"  
-                            Background="Green"
-                            Content="Connexion"/>
-                    </Grid>
-
-                    <!-- Filtre auteur-->
-                    <TextBlock  
-                        TextDecorations="Underline" 
-                        FontFamily="Roboto" 
-                        HorizontalAlignment="Left" 
-                        Margin="0,30,0,9"  
-                        Text="Auteur :" 
-                        FontSize="13"/>
-                    <ComboBox 
-                        SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
-                        ItemsSource="{Binding LogsViewModel.Auteurs}"/>
-
-                </StackPanel>
-
-            </Border>
-       
-        </Grid>
+        </DockPanel>
     </Grid>
 </Page>
