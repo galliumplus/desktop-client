@@ -148,10 +148,10 @@
                             <DockPanel LastChildFill="True">
                                 <Grid DockPanel.Dock="Top">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="0.5*"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="5*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="2.2*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
@@ -179,7 +179,11 @@
                                     FontSize="18"
                                     Text="Message" />
 
-                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Auteur" Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="18"/>
+                                    <TextBlock 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center" 
+                                        Text="Auteur" 
+                                        Grid.Column="3"  FontWeight="Medium" FontFamily="Roboto"  FontSize="18"/>
 
 
 
@@ -195,7 +199,7 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="0.5*"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="5*"/>
                                     <ColumnDefinition Width="2.2*"/>
@@ -203,15 +207,17 @@
                                 <!-- Content -->
 
                                 <materialDesign:PackIcon
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Right"
                                 Grid.Column="0"
                                 Kind="{Binding Theme}"
                                 Foreground="{Binding ColorTheme}"
-                               
+                               Width="18"
+                                    Height="18"
 
                                 />
                                 <Label   
                                 Content="{Binding Date}"  
+                                HorizontalAlignment="Center"
                                 Grid.Column="1" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
@@ -226,6 +232,7 @@
                                 FontSize="16"/>
                                 <Label  
                                 Content="{Binding Auteur}" 
+                                HorizontalAlignment="Center"
                                 Grid.Column="3" 
                                 FontWeight="Medium" 
                                 FontFamily="Roboto" 
