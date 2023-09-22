@@ -76,25 +76,19 @@
                 <ListView.ItemTemplate  >
                     <DataTemplate  >
 
-                        <Grid Width="220" Margin="0,-5,0,-5">
+                        <Grid  Width="285">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Label 
                                 Content="{Binding Key.NomProduitIHM}" 
-                                Grid.Column="1" 
-                                FontSize="15"
+                                Grid.Column="0" 
+                                FontSize="16"
                                 VerticalAlignment="Center"  
                                 FontWeight="Medium"/>
-                            <!-- Nombre de produit -->
-                            <Label 
-                                Content="{Binding Value}" 
-                                Grid.Column="0" 
-                                FontSize="15"
-                                VerticalAlignment="Center" 
-                                ContentStringFormat="x{0}"  />
+                           
                             <!-- Bouton pour enlever le produit -->
                             <Button 
                                 Style="{StaticResource buttonImage}" 
@@ -102,14 +96,22 @@
                                     RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                 CommandParameter="{Binding Key}"
                                 HorizontalAlignment="Right"  
-                                Height="12" 
+                                Height="14" 
                                 Grid.Column="2" >
                                 <materialDesign:PackIcon
-                                    Width="13"
-                                    Height="13"
+                                    Width="15"
+                                    Height="15"
                                     
                                     Kind="CloseOutline"/>
                             </Button>
+                            <!-- Nombre de produit -->
+                            <Label 
+                                Opacity="0.8"
+                                Content="{Binding Value}" 
+                                Grid.Column="1" 
+                                FontSize="15"
+                                VerticalAlignment="Center" 
+                                ContentStringFormat="x{0}"  />
 
                         </Grid>
                     </DataTemplate>
@@ -191,23 +193,22 @@
         <!-- Paiement Acompte -->
         <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent >
-                <StackPanel Margin="20" Width="200" Orientation="Vertical">
+                <StackPanel Margin="20"  Orientation="Vertical">
                     
                     <TextBlock 
                         HorizontalAlignment="Center"
                         FontWeight="Bold"
-                        FontSize="15" 
-                        
+                        FontSize="28" 
                         Text="Paiement par Acompte"
-                        Margin="0 0 0 20"/>
+                        Margin="20 0 20 30"/>
                     <Label 
                         Content="Identifiant de l'acompte" 
-                        FontSize="12"
-                        Padding="0,0,0,5" />
+                        FontSize="16"
+                         />
                     <ComboBox 
                         ItemsSource="{Binding AdherentViewModel.Acomptes}"
                         SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
-                        FontSize="12"
+                        FontSize="16"
                         IsTextSearchEnabled="True" 
                         TextSearch.TextPath="IdentifiantIHM" 
                         IsEditable="True">
@@ -221,33 +222,33 @@
                         Margin="0,20,0,0" 
                         Orientation="Horizontal">
                         <Label 
-                        FontSize="12"
+                        FontSize="16"
                         Content="Adhérent ?" 
  />
                         <CheckBox
-                        x:Name="AdherentCheckbox"
-                        IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
-                        Background="Green"
+                            x:Name="AdherentCheckbox"
+                            
+                            IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
+                            Background="Green"
                         />
                     </StackPanel>
-                    
 
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                    <StackPanel Margin="0,40,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button 
                             BorderThickness="0"
                             Command="{Binding CaisseViewModel.CancelPay}"
-                        Width="80"
-                        FontSize="12"
-                        Background="Gray"
-                        Foreground="White"
-                        Content="Annuler"/>
+                            FontSize="16"
+                            Background="Gray"
+                            Foreground="White"
+                            Content="Annuler"/>
 
                         <Button 
                             Content="Payer"
                             BorderThickness="0"
-                            Width="80"
+                            Width="90"
                             Margin="40,0,0,0"
-                            FontSize="12"
+                            FontSize="16"
                             Background="{StaticResource galliumColor}"
                             Foreground="White"
                             Command="{Binding CaisseViewModel.Pay}">
@@ -257,12 +258,8 @@
                                     <Binding Path="IsChecked" ElementName="AdherentCheckbox" />
                                 </MultiBinding>
                             </Button.CommandParameter>
-                            
                         </Button>
                     </StackPanel>
-                   
-
-
                 </StackPanel>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
