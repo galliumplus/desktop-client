@@ -117,8 +117,8 @@
                     Grid.Row="0"
                     Grid.Column="0">
                     <materialDesign:PackIcon 
-                        Width="auto" 
-                        Height="auto" 
+                        Width="20" 
+                        Height="20" 
                         Foreground="White" 
                         Kind="ChartLine"/>
                 </Button>
@@ -132,8 +132,8 @@
                     Margin="-10,0,0,0" 
                     >
                     <materialDesign:PackIcon 
-                        Width="auto" 
-                        Height="auto"
+                        Width="20" 
+                        Height="20" 
                         HorizontalAlignment="Right" 
                         Foreground="White" 
                         Kind="History"/>
@@ -146,8 +146,8 @@
                     VerticalAlignment="Top"
                     HorizontalAlignment="Right" Click="Disconnect">
                     <materialDesign:PackIcon 
-                        Width="auto" 
-                        Height="auto"
+                        Width="26" 
+                        Height="26"
                         Foreground="White" 
                         Kind="Logout"/>
                 </Button>

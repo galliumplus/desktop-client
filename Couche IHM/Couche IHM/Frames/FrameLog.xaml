@@ -211,8 +211,8 @@
                                 Grid.Column="0"
                                 Kind="{Binding Theme}"
                                 Foreground="{Binding ColorTheme}"
-                               Width="18"
-                                    Height="18"
+                               Width="21"
+                                    Height="21"
 
                                 />
                                 <Label   
