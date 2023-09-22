@@ -251,7 +251,7 @@ namespace Couche_IHM.VueModeles
                     }
                     else
                     {
-                        messageLog += $"'{this.PriceNonAdherIHM}) : ";
+                        messageLog += $"{this.PriceNonAdherIHM}) : ";
                     }
                 }
 
