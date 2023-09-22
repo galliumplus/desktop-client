@@ -352,8 +352,8 @@
             <materialDesign:DialogHost.DialogContent>
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
@@ -373,7 +373,7 @@
                     <TextBlock
                         Grid.ColumnSpan="2"
                         Grid.Row="0"
-                        FontSize="24" 
+                        FontSize="30" 
                         FontWeight="Bold"
                         Margin="10"
                         TextDecorations="Underline"  
@@ -387,8 +387,8 @@
                         Grid.Column="2"
                         Grid.Row="0">
                         <materialDesign:PackIcon 
-                            Width="21"
-                            Height="21"
+                            Width="23"
+                            Height="23"
                             Kind="Delete"/>
                         <Button.Style>
                             <Style BasedOn="{StaticResource buttonImage}"  TargetType="Button">
@@ -407,10 +407,10 @@
                         Grid.Column="0"
                         Grid.Row="2"
                         Width="150"
-                        Margin="10"
+                        Margin="20,20,20,10"
                         materialDesign:HintAssist.Hint="Nom"
                         Text="{Binding AdherentViewModel.CurrentAcompte.NomIHM}"
-                        FontSize="15"   
+                        FontSize="16"   
                         Style="{StaticResource MaterialDesignFilledTextBox}"  
                         MaxLength="100"/>
 
@@ -419,10 +419,10 @@
                         Grid.Column="1" 
                         Grid.Row="2"
                         Width="150"
-                        Margin="10"
+                        Margin="20,20,20,10"
                         materialDesign:HintAssist.Hint="Prénom"
                         Text="{Binding AdherentViewModel.CurrentAcompte.PrenomIHM}"
-                        FontSize="15"   
+                        FontSize="16"   
                         Style="{StaticResource MaterialDesignFilledTextBox}"
                         MaxLength="100"/>
 
@@ -430,8 +430,8 @@
                     <TextBox 
                         Grid.ColumnSpan="2"
                         Grid.Row="4"
-                        FontSize="15"   
-                        Margin="10"
+                        FontSize="16"   
+                        Margin="20,20,20,10"
                         materialDesign:HintAssist.Hint="Identifiant de l'acompte"
                         Style="{StaticResource MaterialDesignFilledTextBox}" 
                         MaxLength="8">
@@ -450,8 +450,8 @@
                         materialDesign:HintAssist.Hint="Argent"
                         Grid.ColumnSpan="2"
                         Grid.Row="6"
-                        Margin="10"
-                        FontSize="15"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         Style="{StaticResource MaterialDesignFilledTextBox}">
                         <TextBox.Text>
                             <Binding 
@@ -468,10 +468,10 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="8"
                         Opacity="0.7" 
-                        Margin="10"
+                        Margin="20,20,20,10"
                         materialDesign:HintAssist.Hint="Formation (optional)"
                         Text="{Binding AdherentViewModel.CurrentAcompte.FormationIHM}"
-                        FontSize="15"   
+                        FontSize="16"   
                         Style="{StaticResource MaterialDesignFilledTextBox}"/>
 
                     <Label 
@@ -480,10 +480,11 @@
                         Margin="10,10,10,0"
                         Content="Adhérent ?" 
                         HorizontalAlignment="Center"
+                        FontSize="16"
                         />
 
                     <CheckBox
-                        Margin="10,0,10,10"
+                        Margin="10,0,10,15"
                         Grid.ColumnSpan="2"
                         HorizontalAlignment="Center"
                         materialDesign:CheckBoxAssist.CheckBoxSize="25"
@@ -495,17 +496,21 @@
                     <Button 
                         Grid.Column="0"
                         Grid.Row="11"
-                        Margin="10"
+                        FontSize="16"
+                        Margin="20,0,20,10"
                         Command="{Binding AdherentViewModel.CurrentAcompte.ResetAdh}"
                         Content="Annuler" 
+                        BorderThickness="0"
                         Background="Gray"
                         />
 
                     <Button 
-                        Margin="10"
+                        FontSize="16"
+                        Margin="20,0,20,10"
                         Grid.Column="1"
                         Grid.Row="11"
                         Content="Modifier"
+                        BorderThickness="0"
                         Command="{Binding AdherentViewModel.CurrentAcompte.ModifyAdherent}"
                         Background="{StaticResource galliumColor}">
                         <Button.Style>
@@ -523,10 +528,12 @@
                     </Button>
 
                     <Button 
-                        Margin="10"
+                        FontSize="16"
+                        Margin="20,0,20,10"
                         Grid.Column="1"
                         Grid.Row="11"
                         Content="Créer"
+                        BorderThickness="0"
                         Command="{Binding AdherentViewModel.CurrentAcompte.CreateAdh}"
                         Background="{StaticResource galliumColor}">
                             <Button.Style>

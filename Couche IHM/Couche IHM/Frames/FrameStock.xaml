@@ -515,16 +515,16 @@
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
@@ -535,7 +535,7 @@
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
                         FontSize="30" 
-                        FontWeight="Black"/>
+                        FontWeight="Bold"/>
 
                     <Button
                         HorizontalAlignment="Right"
@@ -545,8 +545,8 @@
                         Command="{Binding ProductViewModel.CurrentProduct.DeleteProd}"
                         Grid.Row="0">
                         <materialDesign:PackIcon 
-                            Width="21"
-                            Height="21"
+                            Width="23"
+                            Height="23"
                             Kind="Delete"/>
                         <Button.Style>
                             <Style BasedOn="{StaticResource buttonImage}"  TargetType="Button">
@@ -565,18 +565,16 @@
                     <!-- Colonne 1 : Image-->
                     <Button
                         Command="{Binding ProductViewModel.CurrentProduct.ChangeImage}"
-                        Margin="20" 
                         Background="Transparent"
                         BorderThickness="0"
                         Grid.Column="0" 
-                        Height="220"
+                        Height="250"
                         Grid.Row="1" 
                         Grid.RowSpan="4"
                             >
                         <Image 
                             Source="{Binding ProductViewModel.CurrentProduct.ImageProduct}"
-                            Width="200"
-                            Height="220"
+
                             Style="{StaticResource ImageStyle}"/>
                     </Button>
 
@@ -587,8 +585,8 @@
                         Grid.Column="1" 
                         Grid.ColumnSpan="2"
                         Grid.Row="1"
-                        Margin="10"
-                        Width="250"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         materialDesign:HintAssist.Hint="Nom du produit"
                         Text="{Binding ProductViewModel.CurrentProduct.NomProduitIHM}"
                         Style="{StaticResource MaterialDesignFilledTextBox}"  />
@@ -597,7 +595,8 @@
                     <TextBox 
                         Grid.Column="1"
                         Grid.Row="2"
-                        Margin="10"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         materialDesign:HintAssist.Hint="Prix A"
                         Style="{StaticResource MaterialDesignFilledTextBox}">
                         <TextBox.Text>
@@ -616,7 +615,8 @@
                         Grid.Column="2"
                         Grid.ColumnSpan="2"
                         Grid.Row="2"
-                        Margin="10"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         materialDesign:HintAssist.Hint="Prix NA"
                         Style="{StaticResource MaterialDesignFilledTextBox}">
                         <TextBox.Text>
@@ -635,7 +635,8 @@
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
-                        Margin="10"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         materialDesign:HintAssist.Hint="Stock"
                         Style="{StaticResource MaterialDesignFilledTextBox}">
                         <TextBox.Text>
@@ -654,7 +655,8 @@
                         Grid.Column="1" 
                         Grid.Row="4" 
                         Grid.ColumnSpan="2" 
-                        Margin="10"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         SelectedItem="{Binding ProductViewModel.CurrentProduct.CategoryIHM}"
                         ItemsSource="{Binding ProductViewModel.Categories}"
                         Style="{StaticResource MaterialDesignFilledComboBox}"
@@ -672,9 +674,11 @@
                         Background="{StaticResource galliumColor}" 
                         Foreground="White"
                         Grid.Row="5" 
+                         BorderThickness="0"
                         Grid.Column="1" 
                         Grid.ColumnSpan="2" 
-                        Margin="20,10,20,10" 
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         Command="{Binding ProductViewModel.CurrentProduct.CreateProd}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
@@ -694,9 +698,11 @@
                         Content="Modifier" 
                         Background="{StaticResource galliumColor}"
                         Grid.Row="5" 
+                         BorderThickness="0"
                         Grid.Column="1" 
                         Grid.ColumnSpan="2" 
-                        Margin="20,10,20,10" 
+                        Margin="20,20,20,10"
+                        FontSize="16" 
                         Command="{Binding ProductViewModel.CurrentProduct.UpdateProd}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType="Button">
@@ -717,7 +723,9 @@
                         Background="Gray" 
                         Grid.Row="5" 
                         Grid.Column="0" 
-                        Margin="20,10,20,10"
+                        BorderThickness="0"
+                        Margin="20,20,20,10"
+                        FontSize="16"
                         Command="{Binding ProductViewModel.CurrentProduct.ResetProd}"/>
                 
                 </Grid>
