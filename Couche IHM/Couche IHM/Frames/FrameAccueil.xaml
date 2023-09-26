@@ -291,7 +291,7 @@
             
             Orientation="Vertical"
                     >
-            <StackPanel Margin="20,10,50,0" Orientation="Horizontal">
+            <StackPanel Margin="20,20,50,0" Orientation="Horizontal">
                 <materialDesign:PackIcon
                     Foreground="DeepSkyBlue"
                     Width="26"
