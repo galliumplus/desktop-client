@@ -78,7 +78,7 @@
                 FontWeight="DemiBold"
                 Text="Adhérents fidèles"/>
 
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="3"
+        <StackPanel Margin="30,-30,30,0" Grid.ColumnSpan="2" Grid.Row="3"
                         Grid.RowSpan="5" Orientation="Vertical">
             <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
                     <ItemsControl.ItemTemplate>
@@ -162,7 +162,7 @@
                 FontWeight="DemiBold"
                 Text="Meilleures ventes"/>
 
-        <StackPanel Grid.Row="3"
+        <StackPanel Margin="30,-30,30,0"  Grid.Row="3" 
                         Grid.RowSpan="5" Grid.Column="4" Grid.ColumnSpan="2"  Orientation="Vertical">
                 <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
                     <ItemsControl.ItemTemplate>
