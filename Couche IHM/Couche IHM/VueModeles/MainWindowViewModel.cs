@@ -114,6 +114,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 frame = value;
+
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Uri));
             }

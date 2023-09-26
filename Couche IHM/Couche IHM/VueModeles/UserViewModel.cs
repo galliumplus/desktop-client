@@ -87,6 +87,36 @@ namespace Couche_IHM.VueModeles
         }
         }
 
+
+        /// <summary>
+        /// Est ce que l'utilisateur a accès aux comptes
+        /// </summary>
+        public bool CanSeeCompteBool
+        {
+            get
+            {
+                return (role.Name == "Administrateur");
+
+            }
+        }
+
+
+        /// <summary>
+        /// Est ce que l'utilisateur a accès aux comptes
+        /// </summary>
+        public double CanSeeCompte
+        {
+            get
+            {
+                double d = 0.5;
+                if (role.Name == "Administrateur")
+                {
+                    d = 1;
+                }
+                return d;
+            }
+        }
+
         #endregion
 
         #region constructor

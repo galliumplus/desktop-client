@@ -63,7 +63,7 @@
             
             <Image
                 Source="/Images/logoEtiq.png"
-                Margin="20"
+                Margin="25"
                 Opacity="0.6"
                 Grid.Row="1"
                 Grid.Column="2"

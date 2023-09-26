@@ -30,11 +30,11 @@ namespace Couche_Data.Dao
         public List<Log> GetLogs(int mois,int annee)
         {
             //Connection
-            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_gallium", "none");
             MySqlConnection sql = new MySqlConnection(connString);
             sql.Open();
             //Requette SQL 
-            string stm = $"SELECT * FROM logs WHERE YEAR(date_at) =  {annee} AND MONTH(date_at) = {mois} ORDER BY date_at DESC";
+            string stm = $"SELECT * FROM Logs WHERE YEAR(date_at) =  {annee} AND MONTH(date_at) = {mois} ORDER BY date_at DESC";
             MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 
