@@ -14,8 +14,17 @@
     <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
+    <None Remove="Images\burgignon.png" />
+    <None Remove="Images\dominos.png" />
     <None Remove="Images\galliumlite.png" />
+    <None Remove="Images\jocade.png" />
+    <None Remove="Images\laser.jpg" />
     <None Remove="Images\logoEtiq.png" />
+    <None Remove="Images\marcel.png" />
+    <None Remove="Images\melt.png" />
+    <None Remove="Images\momie.png" />
+    <None Remove="Images\tacos.png" />
+    <None Remove="Images\univers.png" />
     <None Remove="Images\unknownProduct.png" />
   </ItemGroup>
 
@@ -47,8 +56,17 @@
     <Resource Include="Fonts\There Brat.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\burgignon.png" />
+    <Resource Include="Images\dominos.png" />
     <Resource Include="Images\galliumlite.png" />
+    <Resource Include="Images\jocade.png" />
+    <Resource Include="Images\laser.jpg" />
     <Resource Include="Images\logoEtiq.png" />
+    <Resource Include="Images\marcel.png" />
+    <Resource Include="Images\melt.png" />
+    <Resource Include="Images\momie.png" />
+    <Resource Include="Images\tacos.png" />
+    <Resource Include="Images\univers.png" />
     <Resource Include="Images\unknownProduct.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
