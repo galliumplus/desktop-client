@@ -239,6 +239,7 @@ namespace Couche_IHM.VueModeles
 
                     string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
                     acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent - prix);
+                    messageLog += $"{acompte.IdentifiantIHM} ";
                     messageLog += $"({prixFormatted}) : ";
                     acompte.UpdateAcompte(false);
 
