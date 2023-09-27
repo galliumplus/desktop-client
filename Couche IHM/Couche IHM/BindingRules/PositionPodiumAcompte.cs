@@ -9,13 +9,13 @@ using System.Windows.Data;
 
 namespace Couche_IHM.BindingRules
 {
-    internal class PositionPodiumProduit : IValueConverter
+    internal class PositionPodiumAcompte : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string nomProduit)
+            if (value is string identfiant)
             {
-                int position = MainWindowViewModel.Instance.StatViewModel.PodiumProduits.FindIndex(p => p.ProductViewModel.NomProduitIHM == nomProduit) + 1;
+                int position = MainWindowViewModel.Instance.StatViewModel.PodiumAcompte.FindIndex(p => p.AdherentViewModel.IdentifiantIHM == identfiant) + 1;
                 return position.ToString();
             }
             return null;
