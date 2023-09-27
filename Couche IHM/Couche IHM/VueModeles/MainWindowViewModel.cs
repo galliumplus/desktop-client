@@ -34,6 +34,7 @@ namespace Couche_IHM.VueModeles
         #region viewmodels
         public AcomptesViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
         public ProductsViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }
+        public PartenariatViewModel PartenariatViewModel { get => partenariatViewModel; set => partenariatViewModel = value; }
         public CaisseViewModel CaisseViewModel { get => caisseViewModel; set => caisseViewModel = value; }
         public LogsViewModel LogsViewModel { get => logsViewModel; set => logsViewModel = value; }
 
@@ -42,6 +43,7 @@ namespace Couche_IHM.VueModeles
 
         private AcomptesViewModel adherentViewModel;
         private ProductsViewModel productViewModel;
+        private PartenariatViewModel partenariatViewModel;
         private CaisseViewModel caisseViewModel;
         private LogsViewModel logsViewModel;
         private UsersViewModel userViewModel;
@@ -131,6 +133,8 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+      
+
 
         #endregion
 
@@ -151,6 +155,7 @@ namespace Couche_IHM.VueModeles
             this.statViewModel = new StatistiqueViewModel(productManager, acompteManager,statAcompteManager,statProduitManager);
             this.logsViewModel = new LogsViewModel(userManager, logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
+            this.partenariatViewModel = new PartenariatViewModel();
             
             // Initialisation des events
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);

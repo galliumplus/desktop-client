@@ -280,14 +280,14 @@
             Grid.Row="7"
             Margin="10"
             Grid.Column="0"
-                Source="/Images/melt.png"/>
+                Source="{Binding PartenariatViewModel.ImagesPartenariats[0]}"/>
 
 
 
         <Image
             Grid.Row="7"
             Grid.Column="4"
-                Source="/Images/jocade.png"/>
+                Source="{Binding PartenariatViewModel.ImagesPartenariats[2]}"/>
 
 
 
@@ -295,13 +295,13 @@
             Grid.Row="7"
             
             Grid.Column="1"
-                Source="/Images/tacos.png"/>
+                Source="{Binding PartenariatViewModel.ImagesPartenariats[1]}"/>
 
         <Image
             Grid.Row="7"
             
             Grid.Column="5"
-                Source="/Images/dominos.png"/>
+                Source="{Binding PartenariatViewModel.ImagesPartenariats[3]}"/>
 
 
         <Image

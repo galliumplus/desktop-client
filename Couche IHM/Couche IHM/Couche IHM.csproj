@@ -56,17 +56,8 @@
     <Resource Include="Fonts\There Brat.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\burgignon.png" />
-    <Resource Include="Images\dominos.png" />
     <Resource Include="Images\galliumlite.png" />
-    <Resource Include="Images\jocade.png" />
-    <Resource Include="Images\laser.jpg" />
     <Resource Include="Images\logoEtiq.png" />
-    <Resource Include="Images\marcel.png" />
-    <Resource Include="Images\melt.png" />
-    <Resource Include="Images\momie.png" />
-    <Resource Include="Images\tacos.png" />
-    <Resource Include="Images\univers.png" />
     <Resource Include="Images\unknownProduct.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
