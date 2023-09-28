@@ -15,128 +15,10 @@
 
 
         <!-- ScrollViewer des comptes-->
-        <DockPanel   >
            
         <!-- Liste des logs -->
 
-        <Expander 
-            DockPanel.Dock="Right"
-            ExpandDirection="Left" Grid.Column="1">
-                <Expander.Header>
-                    <TextBlock
-                        RenderTransformOrigin=".5,.5"
-                        FontSize="15"
-                        Text="Filtres">
-                        <TextBlock.LayoutTransform>
-                            <RotateTransform
-                            Angle="270" />
-                        </TextBlock.LayoutTransform>
-                    </TextBlock>
-                </Expander.Header>
-                <Grid >
-
-                    <StackPanel Margin="40,50,50,50">
-
-                        <!-- filtre mois-->
-                        <TextBlock
-                        Margin="-10,0,0,2"
-                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="16"
-                            HorizontalAlignment="Center" 
-                                Grid.ColumnSpan="2"
-                        Text="Date :"/>
-                        <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
-                            <ComboBox
-                            ItemsSource="{Binding LogsViewModel.Mois}"
-                            SelectedItem="{Binding LogsViewModel.CurrentMois}"
-                            materialDesign:HintAssist.Hint="Mois"
-                            FontSize="15"
-                        />
-                            <ComboBox
-                            SelectedItem="{Binding LogsViewModel.CurrentAnnee}"
-                            ItemsSource="{Binding LogsViewModel.Annees}"
-                            Margin="20,0,0,0"
-                            FontSize="15"
-                            materialDesign:HintAssist.Hint="Année"
-                        />
-                        </StackPanel>
-
-
-                        <Grid Margin="0,50,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock 
-                            TextDecorations="Underline" 
-                            FontFamily="Roboto" 
-                            HorizontalAlignment="Center" 
-                                Grid.ColumnSpan="2"
-                            Margin="0,-25,0,0"  
-                            Text="Opérations :" 
-                            FontSize="16"/>
-
-                            <!-- Filtres domaine-->
-                            <CheckBox 
-                            IsChecked="{Binding LogsViewModel.SelectProduct}"  
-                            Background="LightGreen"
-                            FontSize="15"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Content="Produit"/>
-                            <CheckBox 
-                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
-                            Grid.Row="1"
-                             FontSize="15"
-                            Grid.Column="0"
-                            Background="Orange"
-                            Content="Acompte"/>
-                            <CheckBox 
-                            Grid.Row="2"
-                             FontSize="15"
-                            Grid.Column="0"
-                            IsChecked="{Binding LogsViewModel.SelectCompte}"  
-                            Background="Gray"
-                            Content="Utilisateur"/>
-                            <CheckBox 
-                            Grid.Row="0"
-                             FontSize="15"
-                            Grid.Column="1"
-                            IsChecked="{Binding LogsViewModel.SelectVente}" 
-                            Background="LightBlue"
-                            Content="Vente"/>
-                            <CheckBox 
-                            Grid.Row="1"
-                            Grid.Column="1"
-                             FontSize="15"
-                            IsChecked="{Binding LogsViewModel.SelectConnexion}"  
-                            Background="Green"
-                            Content="Connexion"/>
-                        </Grid>
-
-                        <!-- Filtre auteur-->
-                        <TextBlock  
-                        TextDecorations="Underline" 
-                        FontFamily="Roboto" 
-                        HorizontalAlignment="Center" 
-                                Grid.ColumnSpan="2"
-                        Margin="0,30,0,9"  
-                        Text="Auteur :" 
-                        FontSize="16"/>
-                        <ComboBox 
-                        FontSize="15"
-                        SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
-                        ItemsSource="{Binding LogsViewModel.Auteurs}"/>
-
-                    </StackPanel>
-
-                </Grid>
-    </Expander>
+        
             <ScrollViewer Margin="0,40,0,19"   >
                 <ListView 
                 ItemsSource="{Binding LogsViewModel.Logs}"
@@ -243,6 +125,122 @@
                 </ListView>
             </ScrollViewer>
 
-        </DockPanel>
+        <Expander HorizontalAlignment="Right"
+            ExpandDirection="Left" >
+            <Expander.Header>
+                <TextBlock
+                        RenderTransformOrigin=".5,.5"
+                        FontSize="15"
+                        Text="Filtres">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform
+                            Angle="270" />
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+            </Expander.Header>
+            <Grid >
+
+                <StackPanel Margin="40,50,50,50">
+
+                    <!-- filtre mois-->
+                    <TextBlock
+                        Margin="-10,0,0,2"
+                        TextDecorations="Underline" FontFamily="Roboto"  FontSize="16"
+                            HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                        Text="Date :"/>
+                    <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                        <ComboBox
+                            ItemsSource="{Binding LogsViewModel.Mois}"
+                            SelectedItem="{Binding LogsViewModel.CurrentMois}"
+                            materialDesign:HintAssist.Hint="Mois"
+                            FontSize="15"
+                        />
+                        <ComboBox
+                            SelectedItem="{Binding LogsViewModel.CurrentAnnee}"
+                            ItemsSource="{Binding LogsViewModel.Annees}"
+                            Margin="20,0,0,0"
+                            FontSize="15"
+                            materialDesign:HintAssist.Hint="Année"
+                        />
+                    </StackPanel>
+
+
+                    <Grid Margin="0,50,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock 
+                            TextDecorations="Underline" 
+                            FontFamily="Roboto" 
+                            HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                            Margin="0,-25,0,0"  
+                            Text="Opérations :" 
+                            FontSize="16"/>
+
+                        <!-- Filtres domaine-->
+                        <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectProduct}"  
+                            Background="LightGreen"
+                            FontSize="15"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Content="Produit"/>
+                        <CheckBox 
+                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
+                            Grid.Row="1"
+                             FontSize="15"
+                            Grid.Column="0"
+                            Background="Orange"
+                            Content="Acompte"/>
+                        <CheckBox 
+                            Grid.Row="2"
+                             FontSize="15"
+                            Grid.Column="0"
+                            IsChecked="{Binding LogsViewModel.SelectCompte}"  
+                            Background="Gray"
+                            Content="Utilisateur"/>
+                        <CheckBox 
+                            Grid.Row="0"
+                             FontSize="15"
+                            Grid.Column="1"
+                            IsChecked="{Binding LogsViewModel.SelectVente}" 
+                            Background="LightBlue"
+                            Content="Vente"/>
+                        <CheckBox 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                             FontSize="15"
+                            IsChecked="{Binding LogsViewModel.SelectConnexion}"  
+                            Background="Green"
+                            Content="Connexion"/>
+                    </Grid>
+
+                    <!-- Filtre auteur-->
+                    <TextBlock  
+                        TextDecorations="Underline" 
+                        FontFamily="Roboto" 
+                        HorizontalAlignment="Center" 
+                                Grid.ColumnSpan="2"
+                        Margin="0,30,0,9"  
+                        Text="Auteur :" 
+                        FontSize="16"/>
+                    <ComboBox 
+                        FontSize="15"
+                        SelectedItem="{Binding LogsViewModel.CurrentAuteur}"
+                        ItemsSource="{Binding LogsViewModel.Auteurs}"/>
+
+                </StackPanel>
+
+            </Grid>
+        </Expander>
     </Grid>
 </Page>
