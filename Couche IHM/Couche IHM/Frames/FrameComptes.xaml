@@ -137,16 +137,27 @@
                 </ListBox.ItemTemplate>
             </ListView>
         </ScrollViewer>
-        <Button 
+        <Button
             BorderThickness="0"
             Command="{Binding UserViewModel.OpenUser}"
             CommandParameter="NEW"
-            Background="Gray"
-            FontSize="16"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Grid.Row="1"
-            Content="Créer un compte"/>
+            Background="Gray">
+            <DockPanel >
+                <materialDesign:PackIcon
+                    Width="20"
+                    Margin="-10,2,5,0"
+                    Height="20"
+                    Kind="Plus"/>
+            <TextBlock
+                    Text="Créer un compte"
+                    FontSize="16"/>
+            </DockPanel>
+        </Button>
+        
+
 
         <!-- Modification / Création Compte-->
         <materialDesign:DialogHost DialogTheme="Inherit" CloseOnClickAway="True" OverlayBackground="Gray" IsOpen="{Binding UserViewModel.ShowModifCreateUser}">
@@ -204,7 +215,7 @@
                     <!-- Identifiant -->
 
                     <TextBox 
-                        Margin="20,20,20,10"
+                        Margin="20,15,20,10"
                         Grid.ColumnSpan="2" 
                         Grid.Row="1"
                         materialDesign:HintAssist.Hint="Identifiant"
