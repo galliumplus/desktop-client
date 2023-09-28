@@ -41,6 +41,7 @@ namespace Couche_IHM.VueModeles
                         Thread.Sleep(10000);
                     }
                 });
+                t.IsBackground = true;
                 t.Start();
             }
             

@@ -8,10 +8,7 @@
         xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
         mc:Ignorable="d"
         Title="Gallium" 
-
-        WindowState="Maximized"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    Height="1080" Width="1920">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Window.Resources>
         <rules:FrameEnumConverterName x:Key="EnumToNameConverter"/>
 
