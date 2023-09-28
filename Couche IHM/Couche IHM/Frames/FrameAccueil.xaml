@@ -13,12 +13,11 @@
         <rules:PositionPodiumProduit x:Key="PositionConverter" />
         <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
     </Page.Resources>
-    
-    <Grid  Margin="50,50,0,25">
 
+    <Grid  Margin="50,50,0,25">
         <!-- Définition des colonnes & lignes -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="4*"/>
@@ -27,19 +26,18 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="0.4*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-
-
-            <!-- Title -->
+        
+        <!-- Title -->
         <StackPanel 
             Orientation="Horizontal" 
             Grid.Row="0"
@@ -48,7 +46,6 @@
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
                 VerticalAlignment="Bottom"
-                
                 Margin="10,0,0,5"
                 Width="25"
                 Height="25"
@@ -68,26 +65,28 @@
                 Kind="Podium"/>
         </StackPanel>
     
-        
-            <!-- acomptes -->
-            <TextBlock 
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                FontSize="20"
-                HorizontalAlignment="Center"
-                FontWeight="DemiBold"
-                Text="Adhérents fidèles"/>
+        <!-- Acomptes -->
+        <TextBlock 
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            FontWeight="DemiBold"
+            Text="Adhérents fidèles"/>
 
-        <StackPanel Margin="30,-30,30,0" Grid.ColumnSpan="2" Grid.Row="3"
-                        Grid.RowSpan="5" Orientation="Vertical">
+        <StackPanel 
+            Margin="30,-30,30,0" 
+            Grid.ColumnSpan="2" 
+            Grid.Row="3"
+            Grid.RowSpan="5" 
+            Orientation="Vertical">
             <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
                         <Grid Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="8*"/>
-
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*"/>
@@ -102,13 +101,12 @@
                                 Text="{Binding FormattedArgent}"
                                 Grid.Column="1"
                                 />
-                            
+
                             <!-- nom adhenret-->
-                            <materialDesign:Chip
-                                
+                            <materialDesign:Chip     
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                    Content="{Binding AdherentViewModel.NomCompletIHM}">
+                                Content="{Binding AdherentViewModel.NomCompletIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
                                         <Style.Setters>
@@ -124,9 +122,9 @@
                                     </Style>
                                 </materialDesign:Chip.Style>
                                 <materialDesign:Chip.Icon>
-                                        <materialDesign:PackIcon
-                                            Width="28"
-                                            Height="28">
+                                    <materialDesign:PackIcon
+                                        Width="28"
+                                        Height="28">
                                         <materialDesign:PackIcon.Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Style.Setters>
@@ -151,44 +149,48 @@
                                             </Style>
                                         </materialDesign:PackIcon.Style>
                                     </materialDesign:PackIcon>
-                                    </materialDesign:Chip.Icon>
-                                </materialDesign:Chip>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
 
-                                <ProgressBar 
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    Foreground="LightGreen"
-                                    Background="LightGray"
-                                    BorderBrush="Transparent"
-                                    Maximum="100" 
-                                    Height="12"
-                                    Value="{Binding Argent}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+                            <ProgressBar 
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Foreground="LightGreen"
+                                Background="LightGray"
+                                BorderBrush="Transparent"
+                                Maximum="100" 
+                                Height="12"
+                                Value="{Binding Argent}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
-            <!-- Meta -->
-            <TextBlock
-                Grid.Row="2"
-                Grid.Column="4"
-                Grid.ColumnSpan="2"
-                FontSize="20"
-                HorizontalAlignment="Center"
-                FontWeight="DemiBold"
-                Text="Meilleures ventes"/>
+        <!-- Meta -->
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            FontWeight="DemiBold"
+            Text="Meilleures ventes"/>
 
-        <StackPanel Margin="30,-30,30,0"  Grid.Row="3" 
-                        Grid.RowSpan="5" Grid.Column="4" Grid.ColumnSpan="2"  Orientation="Vertical">
-                <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+        <StackPanel 
+            Margin="30,-30,30,0"  
+            Grid.Row="3" 
+            Grid.RowSpan="5" 
+            Grid.Column="4" 
+            Grid.ColumnSpan="2"  
+            Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
                         <Grid Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="8*"/>
-                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -202,14 +204,12 @@
                                 FontSize="14"
                                 Grid.Column="0"
                                 />
-                            
+
                             <!-- Nom Produit -->
                             <materialDesign:Chip
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                
-                                 
+                                HorizontalAlignment="Right"   
                                 Content="{Binding ProductViewModel.NomProduitIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
@@ -227,8 +227,8 @@
                                 </materialDesign:Chip.Style>
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
-                                            Width="28"
-                                            Height="28">
+                                        Width="28"
+                                        Height="28">
                                         <materialDesign:PackIcon.Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Style.Setters>
@@ -260,49 +260,39 @@
                             <ProgressBar
                                 Grid.ColumnSpan="2"
                                 Grid.Row="1"
-                                    FlowDirection="RightToLeft"
-                                    Foreground="#FFB366"
-                                    Background="LightGray"
-                                    BorderBrush="Transparent"
-                                    Maximum="100" 
-                                    Height="12"
-                                    Value="{Binding PurchaseCount}" />
+                                FlowDirection="RightToLeft"
+                                Foreground="#FFB366"
+                                Background="LightGray"
+                                BorderBrush="Transparent"
+                                Maximum="100" 
+                                Height="12"
+                                Value="{Binding PurchaseCount}" />
                         </Grid>
                     </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-            
-            <!-- Partenariats -->
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
-
+        <!-- Partenariats -->
         <Image
             Grid.Row="7"
-            Margin="10"
             Grid.Column="0"
-                Source="{Binding PartenariatViewModel.ImagesPartenariats[0]}"/>
-
-
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[0]}"/>
 
         <Image
             Grid.Row="7"
             Grid.Column="4"
-                Source="{Binding PartenariatViewModel.ImagesPartenariats[2]}"/>
-
-
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[2]}"/>
 
         <Image
             Grid.Row="7"
-            
             Grid.Column="1"
-                Source="{Binding PartenariatViewModel.ImagesPartenariats[1]}"/>
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[1]}"/>
 
         <Image
             Grid.Row="7"
-            
             Grid.Column="5"
-                Source="{Binding PartenariatViewModel.ImagesPartenariats[3]}"/>
-
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[3]}"/>
 
         <Image
             Grid.Row="2"
@@ -311,60 +301,62 @@
             Margin="40"
             Grid.Column="2"
             Grid.ColumnSpan="2"
-                Source="/Images/logoEtiq.png"/>
+            Source="/Images/logoEtiq.png"/>
 
+        <!-- Réseaux -->
         <materialDesign:Card
             materialDesign:ElevationAssist.Elevation="Dp8"
             HorizontalAlignment="Right"
             Grid.Column="5"
-            Grid.ColumnSpan="2"
-            >
-            
-    
-        <StackPanel
-            VerticalAlignment="Center"
-            Orientation="Vertical"
-                    >
-            <StackPanel Margin="20,0,50,0" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="DeepSkyBlue"
-                    Width="26"
-                    Height="26"
-                    Kind="Twitter"/>
-                <TextBlock 
-                    FontSize="16"
-                    Margin="5,0,0,0"
-                    FontStyle="Italic"
-                    Text="@Etiq_Dijon"/>
-            </StackPanel>
+            Grid.ColumnSpan="2">
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+                <StackPanel 
+                    Margin="20,0,50,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="DeepSkyBlue"
+                        Width="26"
+                        Height="26"
+                        Kind="Twitter"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@Etiq_Dijon"/>
+                </StackPanel>
 
-            <StackPanel Margin="20,0,10,0" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="HotPink"
-                    Width="26"
-                    Height="26"
-                    Kind="Instagram"/>
-                <TextBlock 
-                    FontSize="16"
-                    Margin="5,0,0,0"
-                    FontStyle="Italic"
-                    Text="@etiq_dijon"/>
-            </StackPanel>
+                <StackPanel 
+                    Margin="20,0,10,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="HotPink"
+                        Width="26"
+                        Height="26"
+                        Kind="Instagram"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@etiq_dijon"/>
+                </StackPanel>
 
-            <StackPanel Margin="20,0,10,0" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="Red"
-                    Width="26"
-                    Height="26"
-                    Kind="Youtube"/>
-                <TextBlock 
-                    FontSize="16"
-                    Margin="5,0,0,0"
-                    FontStyle="Italic"
-                    Text="@Etiq_Dijon"/>
+                <StackPanel 
+                    Margin="20,0,10,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="Red"
+                        Width="26"
+                        Height="26"
+                        Kind="Youtube"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@Etiq_Dijon"/>
+                </StackPanel>
             </StackPanel>
-
-        </StackPanel>
         </materialDesign:Card>
     </Grid>
 </Page>

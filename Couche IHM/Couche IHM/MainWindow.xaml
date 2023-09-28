@@ -18,8 +18,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
-            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="225" />
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <!-- PREMIERE COLONNE -->
@@ -165,12 +165,11 @@
 
                 <!-- Header de la frame -->
                 <materialDesign:Card Grid.Row="0">
-                    <Grid  Grid.Row="0" >
+                    <Grid>
                     
                     <!-- Nom de la frame  -->
                         <TextBlock 
                             Text="{Binding Frame, Converter={StaticResource EnumToNameConverter}}"
-                            
                             FontSize="25" 
                             VerticalAlignment="Center" 
                             Margin="40,0,0,0" 
@@ -184,11 +183,21 @@
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <!-- Image du compte  -->
-                        <Image  x:Name="PhotoDeProfil" Grid.Column="0" Source="/Images/logoEtiq.png" Width="40" Height="auto" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,0,10,0">
+                        <Image 
+                            Grid.Column="0" 
+                            Source="/Images/logoEtiq.png" 
+                            Width="40" 
+                            Height="auto" 
+                            VerticalAlignment="Center"  
+                            HorizontalAlignment="Right" />
+                        <StackPanel 
+                            Grid.Column="1" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Center">
                             <TextBlock 
                                 Text="{Binding CompteConnected.NomCompletIHM}" 
-                                FontSize="13" FontWeight="Bold"/>
+                                FontSize="13" 
+                                FontWeight="Bold"/>
                             <TextBlock 
                                 Text="{Binding CompteConnected.RoleIHM}" 
                                 FontSize="11" 
