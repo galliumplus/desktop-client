@@ -19,7 +19,7 @@
         <!-- Liste des logs -->
 
         
-            <ScrollViewer Margin="0,40,0,19"   >
+            <ScrollViewer Margin="0,40,50,19"   >
                 <ListView 
                 ItemsSource="{Binding LogsViewModel.Logs}"
                 HorizontalContentAlignment="Stretch"  
@@ -125,7 +125,7 @@
                 </ListView>
             </ScrollViewer>
 
-        <Expander HorizontalAlignment="Right"
+        <Expander Background="#FDF5E6" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Right"
             ExpandDirection="Left" >
             <Expander.Header>
                 <TextBlock
@@ -140,7 +140,7 @@
             </Expander.Header>
             <Grid >
 
-                <StackPanel Margin="40,50,50,50">
+                <StackPanel Margin="40,30,50,40">
 
                     <!-- filtre mois-->
                     <TextBlock
