@@ -270,6 +270,13 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
+
+        public override string? ToString()
+        {
+            return $"{acompte.Identifiant} {acompte.Nom} {acompte.Prenom}";
+        }
+
+
         #endregion
     }
 }
