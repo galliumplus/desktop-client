@@ -1,5 +1,6 @@
 ﻿
 using Couche_Métier.Manager;
+using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,7 @@ namespace Couche_IHM.VueModeles
             this.statAcompteManager = statAcompte;
             this.productManager = produtManager;
             this.acompteManager = acompteManager;
-
+            
             // Initialisation des datas
             InitStatsProduit();
             InitStatsAcompte();

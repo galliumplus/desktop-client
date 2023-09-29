@@ -1,6 +1,7 @@
 ﻿
 using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
+using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Couche_IHM.VueModeles
         private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
         private string currentPaiement;
         private bool showPayAcompte = false;
+        private bool showPayPaypal = false;
+        private bool showPayBanque = false;
         private bool isAdherent = true;
         private AcompteViewModel adherentPayer = null;
         private StatProduitManager statProduitManager;
@@ -37,7 +40,13 @@ namespace Couche_IHM.VueModeles
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
-            this.CancelPay = new RelayCommand(x => this.ShowPayAcompte = false);
+            this.CancelPay = new RelayCommand(x => 
+            {
+                this.ShowPayPaypal = false;
+                this.ShowPayBanque = false;
+                this.ShowPayAcompte = false;
+            }
+            );
             this.Pay = new RelayCommand(tuple => PayArticles(tuple));
             this.ClearProd = new RelayCommand(x =>
             {
@@ -78,7 +87,7 @@ namespace Couche_IHM.VueModeles
             get
             {
                 return new List<string>()
-                { "Acompte", "Paypal", "Carte" };
+                { "Acompte", "Paypal", "Carte", "Liquide" };
             }
         }
 
@@ -194,6 +203,26 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public bool ShowPayPaypal 
+        { 
+            get => showPayPaypal;
+            set 
+            { 
+                showPayPaypal = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool ShowPayBanque
+        {
+            get => showPayBanque;
+            set 
+            { 
+                showPayBanque = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -252,7 +281,7 @@ namespace Couche_IHM.VueModeles
                     }
                     else
                     {
-                        messageLog += $"{this.PriceNonAdherIHM}) : ";
+                        messageLog += $"{this.PriceNonAdherIHM} : ";
                     }
                 }
 
@@ -295,8 +324,8 @@ namespace Couche_IHM.VueModeles
 
             // Notifier la vue
             this.ShowPayAcompte = false;
-            
-
+            this.ShowPayPaypal = false;
+            this.ShowPayBanque = false;
 
 
         }
@@ -314,9 +343,12 @@ namespace Couche_IHM.VueModeles
                         this.ShowPayAcompte = true;
                         break;
                     case "Paypal":
-                        PayArticles();
+                        this.ShowPayPaypal = true;
                         break;
                     case "Carte":
+                        this.ShowPayBanque = true;
+                        break;
+                    case "Liquide":
                         PayArticles();
                         break;
                 }

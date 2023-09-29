@@ -232,19 +232,16 @@
                         <Button 
                             BorderThickness="0"
                             Command="{Binding CaisseViewModel.CancelPay}"
-                            FontSize="16"
-                            Background="Gray"
-                            Foreground="White"
+                            FontSize="18"
+                            Style="{StaticResource buttonBlack}"
                             Content="Annuler"/>
 
                         <Button 
                             Content="Payer"
                             BorderThickness="0"
-                            Width="90"
                             Margin="40,0,0,0"
-                            FontSize="16"
-                            Background="{StaticResource galliumColor}"
-                            Foreground="White"
+                            FontSize="18"
+                            Style="{StaticResource buttonBlack}"
                             Command="{Binding CaisseViewModel.Pay}">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource AcompteAndCheckboxConverter}">
@@ -255,6 +252,82 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        
+        <!-- Paiement par paypal -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayPaypal}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Text="Paiement par Paypal"
+                            Margin="0 0 0 20"/>
+                        <TextBlock 
+                            Margin="0 0 0 20" 
+                            Text="Vers : etiq1930@gmail.com"
+                            FontSize="16"/>
+                        <TextBlock 
+                            Margin="0 0 0 20" 
+                            Text="Montant : XX €"
+                            FontSize="16"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                BorderThickness="0"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                BorderThickness="0"
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Paiement par carte -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayBanque}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Margin="0 0 0 20" 
+                            Text="Paiement par SumUp (TPE)"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="Veuillez vous saisir du TPE"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="Montant: XX€"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
     </Grid>
