@@ -157,17 +157,14 @@
                     Foreground="Black" 
                     FontSize="15"  
                     VerticalAlignment="Center" />
-                <ToggleButton
+                <CheckBox
                     IsChecked="{Binding CaisseViewModel.IsAdherent}"
-                    FontSize="14"
                     Foreground="Black"
-                    Background="Transparent"
-                    Height="17"
-                  materialDesign:ToggleButtonAssist.OnContent="A"
-                  Content="NA"
+                    Background="ForestGreen"
+                    
                   ToolTip="MaterialDesignActionLightToggleButton" >
                     <ToggleButton.Style>
-                        <Style BasedOn="{StaticResource MaterialDesignActionToggleButton}" TargetType="ToggleButton">
+                        <Style BasedOn="{StaticResource MaterialDesignLightCheckBox}" TargetType="CheckBox">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Acompte">
                                     <Setter Property="Visibility" Value="Hidden"/>
@@ -175,7 +172,7 @@
                             </Style.Triggers>
                         </Style>
                     </ToggleButton.Style>
-                </ToggleButton>
+                </CheckBox>
             </StackPanel>
 
             <!-- Bouton Payer-->

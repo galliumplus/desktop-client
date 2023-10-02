@@ -51,7 +51,12 @@ namespace Couche_IHM.VueModeles
         {
             get 
             { 
-                return $"{acompte.Nom.ToUpper()} {acompte.Prenom}";
+                string result = $"{acompte.Nom.ToUpper()} {acompte.Prenom}";
+                if (result == " ")
+                {
+                    result = "----------------------------------";
+                }
+                return result;
             }
             
 
