@@ -29,8 +29,7 @@ namespace Couche_IHM.VueModeles
         private string mdpIHM2 = "";
         private string action;
         private Role role;
-
-        
+        private bool showConfirmationDelete;
         private UserManager userManager;
 
         #endregion
@@ -40,6 +39,8 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ResetU { get; set; }
         public RelayCommand UpdateU { get; set; }
         public RelayCommand DeleteU { get; set; }
+        public RelayCommand CancelDeleteU { get; set; }
+        public RelayCommand PreviewDeleteU { get; set; }
         public RelayCommand CreateU { get;set; }
 
         #endregion
@@ -85,6 +86,19 @@ namespace Couche_IHM.VueModeles
             set { action = value;
                 NotifyPropertyChanged();
         }
+        }
+
+        /// <summary>
+        /// Permet de montrer le popup de confirmation de suppression
+        /// </summary>
+        public bool ShowConfirmationDelete
+        {
+            get => showConfirmationDelete;
+            set
+            {
+                showConfirmationDelete = value;
+                NotifyPropertyChanged();
+            }
         }
 
 
@@ -143,6 +157,8 @@ namespace Couche_IHM.VueModeles
             this.UpdateU = new RelayCommand(x => this.UpdateUser());
             this.CreateU = new RelayCommand(x => this.CreateUser());
             this.DeleteU = new RelayCommand(x => this.DeleteUser());
+            this.CancelDeleteU= new RelayCommand(x => ShowConfirmationDelete = false);
+            this.PreviewDeleteU = new RelayCommand(x => this.ShowConfirmationDelete = true);
         }
         #endregion
 
@@ -270,6 +286,7 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.UserViewModel.RemoveUser(this);
             MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
+            ShowConfirmationDelete = false;
         }
         #endregion
 

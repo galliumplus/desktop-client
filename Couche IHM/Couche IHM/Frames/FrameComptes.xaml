@@ -158,25 +158,26 @@
         </Button>
 
         <!-- Suppression d un compte-->
-        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" DialogTheme="Inherit" >
+        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding UserViewModel.CurrentUser.ShowConfirmationDelete}" DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent>
                 <Grid Margin="30">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock 
-                            Text="Suppression de "
-                            FontSize="24" 
-                            Margin="0 0 0 20"/>
+                        <TextBlock FontSize="24" Margin="0 0 0 20">
+                            <TextBlock Text="{Binding Path=UserViewModel.CurrentUser.NomCompletIHM, StringFormat=Suppresion de {0}}" />
+                        </TextBlock>
                         <UniformGrid Rows="1" Columns="2" Height="50">
                             <Button 
                                 Margin="0 0 20 0" 
-                                FontSize="18" 
+                                FontSize="18"
                                 Content="Annuler"
+                                Command="{Binding UserViewModel.CurrentUser.CancelDeleteU}"
                                 Style="{StaticResource buttonBlack}" 
                                 Grid.Column="2"/>
                             <Button 
                                 Content="Confirmer"
                                 Margin="20 0 0 0" 
                                 FontSize="18" 
+                                Command="{Binding UserViewModel.CurrentUser.DeleteU}"
                                 Style="{StaticResource buttonBlack}"/>
                         </UniformGrid>
 
@@ -218,7 +219,7 @@
                         Margin="0,10,10,10"
                         VerticalAlignment="Top"
                         Grid.Column="2"
-                        Command="{Binding UserViewModel.CurrentUser.DeleteU}"
+                        Command="{Binding UserViewModel.CurrentUser.PreviewDeleteU}"
                         Grid.Row="0">
                         <materialDesign:PackIcon 
                             Width="23"

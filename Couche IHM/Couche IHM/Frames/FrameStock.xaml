@@ -513,28 +513,28 @@
         </materialDesign:DialogHost>
 
         <!-- Suppression d un produit -->
-        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" DialogTheme="Inherit" >
+        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.CurrentProduct.ShowConfirmationDelete}" DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent>
                 <Grid Margin="30">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock 
-                            Text="Suppression de "
-                            FontSize="24" 
-                            Margin="0 0 0 20"/>
+                        <TextBlock FontSize="24" Margin="0 0 0 20">
+                            <TextBlock Text="{Binding Path=ProductViewModel.CurrentProduct.NomProduitIHM, StringFormat=Suppresion de {0}}" />
+                        </TextBlock>
                         <UniformGrid Rows="1" Columns="2" Height="50">
                             <Button 
                                 Margin="0 0 20 0" 
-                                FontSize="18" 
+                                FontSize="18"
                                 Content="Annuler"
+                                Command="{Binding ProductViewModel.CurrentProduct.CancelDeleteProd}"
                                 Style="{StaticResource buttonBlack}" 
                                 Grid.Column="2"/>
                             <Button 
                                 Content="Confirmer"
                                 Margin="20 0 0 0" 
                                 FontSize="18" 
+                                Command="{Binding ProductViewModel.CurrentProduct.DeleteProd}"
                                 Style="{StaticResource buttonBlack}"/>
                         </UniformGrid>
-
                     </StackPanel>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
@@ -572,7 +572,7 @@
                         Margin="10"
                         VerticalAlignment="Top"
                         Grid.Column="2"
-                        Command="{Binding ProductViewModel.CurrentProduct.DeleteProd}"
+                        Command="{Binding ProductViewModel.CurrentProduct.PreviewDeleteProd}"
                         Grid.Row="0">
                         <materialDesign:PackIcon 
                             Width="23"
