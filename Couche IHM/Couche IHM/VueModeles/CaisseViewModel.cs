@@ -19,8 +19,10 @@ namespace Couche_IHM.VueModeles
         private string currentPaiement;
         private bool showPayAcompte = false;
         private bool showPayPaypal = false;
+        private bool showPayLiquide = false;
         private bool showPayBanque = false;
         private bool isAdherent = true;
+        private string prixIhm;
         private AcompteViewModel adherentPayer = null;
         private StatProduitManager statProduitManager;
         private StatAcompteManager statAcompteManager;
@@ -223,6 +225,26 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public string PrixIHM
+        {
+            get { return prixIhm; }
+            set 
+            { 
+                prixIhm = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool ShowPayLiquide 
+        { 
+            get => showPayLiquide;
+            set 
+            { 
+                showPayLiquide = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -325,6 +347,7 @@ namespace Couche_IHM.VueModeles
             // Notifier la vue
             this.ShowPayAcompte = false;
             this.ShowPayPaypal = false;
+            this.ShowPayLiquide = false;
             this.ShowPayBanque = false;
 
 
@@ -343,13 +366,16 @@ namespace Couche_IHM.VueModeles
                         this.ShowPayAcompte = true;
                         break;
                     case "Paypal":
+                        PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
                         this.ShowPayPaypal = true;
                         break;
                     case "Carte":
+                        PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
                         this.ShowPayBanque = true;
                         break;
                     case "Liquide":
-                        PayArticles();
+                        PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
+                        this.ShowPayLiquide=true;
                         break;
                 }
             }

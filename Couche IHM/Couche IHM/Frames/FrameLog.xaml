@@ -125,7 +125,7 @@
                 </ListView>
             </ScrollViewer>
 
-        <Expander Background="#FDF5E6" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Right"
+        <Expander Background="#FDF5E6"  VerticalAlignment="Center" HorizontalAlignment="Right"
             ExpandDirection="Left" >
             <Expander.Header>
                 <TextBlock

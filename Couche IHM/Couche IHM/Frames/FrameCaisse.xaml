@@ -270,7 +270,7 @@
                             FontSize="16"/>
                         <TextBlock 
                             Margin="0 0 0 20" 
-                            Text="Montant : XX €"
+                            Text="{Binding CaisseViewModel.PrixIHM}"
                             FontSize="16"/>
                         <UniformGrid Rows="1" Columns="2" Height="50">
                             <Button 
@@ -310,7 +310,40 @@
                         <TextBlock 
                             Margin="0 0 0 20"
                             FontSize="16" 
-                            Text="Montant: XX€"/>
+                            Text="{Binding CaisseViewModel.PrixIHM}"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Paiement par liquide -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayLiquide}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Margin="0 0 0 20" 
+                            Text="Paiement en Liquide"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="{Binding CaisseViewModel.PrixIHM}"/>
                         <UniformGrid Rows="1" Columns="2" Height="50">
                             <Button 
                                 Margin="0 0 20 0" 
