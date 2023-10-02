@@ -150,8 +150,12 @@ namespace Couche_IHM.VueModeles
             get => showDeleteAcompte;
             set 
             {
-                showDeleteAcompte = value;
-                NotifyPropertyChanged();
+                if (MainWindowViewModel.Instance.CompteConnected.RoleIHM.Name != "Conseil d'administration")
+                {
+                    showDeleteAcompte = value;
+                    NotifyPropertyChanged();
+                }
+                    
             }
 
         }
