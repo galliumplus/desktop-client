@@ -21,6 +21,7 @@ namespace Couche_IHM.VueModeles
         private string prenomIHM;
         private string formationIHM;
         private string action;
+        private bool showConfirmationDelete;
 
         #endregion
 
@@ -28,7 +29,9 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ModifyAdherent { get; set; }
         public RelayCommand ResetAdh { get; set; }
         public RelayCommand CreateAdh { get; set; }
+        public RelayCommand PreviewAdh { get; set; }
         public RelayCommand DeleteAdh { get; set; }
+        public RelayCommand CancelDeleteAdh { get; set; }
         #endregion
 
         #region notify
@@ -116,6 +119,16 @@ namespace Couche_IHM.VueModeles
                 return this.action;
             }
         }
+
+        public bool ShowConfirmationDelete 
+        { 
+            get => showConfirmationDelete;
+            set 
+            { 
+                showConfirmationDelete = value;
+                NotifyPropertyChanged();
+            }
+        }
         #endregion
 
         #region constructor
@@ -140,6 +153,8 @@ namespace Couche_IHM.VueModeles
             this.ModifyAdherent = new RelayCommand(x => this.UpdateAcompte());
             this.ResetAdh = new RelayCommand(x => this.ResetAcompte());
             this.CreateAdh = new RelayCommand(x => this.CreateAcompte());
+            this.PreviewAdh = new RelayCommand(x => ShowConfirmationDelete = true);
+            this.CancelDeleteAdh = new RelayCommand(x => ShowConfirmationDelete = false);
             this.DeleteAdh = new RelayCommand(x => this.DeleteAcompte());
 
         }
@@ -163,6 +178,7 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+            ShowConfirmationDelete = false;
 
         }
 

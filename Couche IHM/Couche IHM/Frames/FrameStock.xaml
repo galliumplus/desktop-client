@@ -511,6 +511,34 @@
                 
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
+
+        <!-- Suppression d un produit -->
+        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AdherentViewModel.DialogModifAdherent}" DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            Text="Suppression de "
+                            FontSize="24" 
+                            Margin="0 0 0 20"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                Content="Annuler"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"/>
+                            <Button 
+                                Content="Confirmer"
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
         
         <!-- Modification / Creation produit -->
         <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2"  OverlayBackground="Gray" IsOpen="{Binding ProductViewModel.ShowProductDetail}"  DialogTheme="Inherit">
