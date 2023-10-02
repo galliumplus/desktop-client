@@ -149,20 +149,44 @@
                     Margin="38,0,0,0"  
                     Content="{Binding CaisseViewModel.PriceAdherIHM}"
                     Foreground="Black" 
-                    FontSize="16" 
-                    FontWeight="Medium" 
-                    VerticalAlignment="Center"   />
+                    VerticalAlignment="Center"   >
+                    <Label.Style>
+                        <Style  TargetType="Label">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="true">
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="false">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
                 <Label 
                     Content="{Binding CaisseViewModel.PriceNonAdherIHM}" 
                     Foreground="Black" 
-                    FontSize="15"  
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center" >
+                    <Label.Style>
+                        <Style  TargetType="Label">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="false">
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="true">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
                 <CheckBox
                     IsChecked="{Binding CaisseViewModel.IsAdherent}"
-                    Foreground="Black"
-                    Background="ForestGreen"
-                    
-                  ToolTip="MaterialDesignActionLightToggleButton" >
+                    ToolTip="MaterialDesignActionLightToggleButton" >
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource MaterialDesignLightCheckBox}" TargetType="CheckBox">
                             <Style.Triggers>

@@ -47,6 +47,7 @@ namespace Couche_IHM.VueModeles
                 this.ShowPayPaypal = false;
                 this.ShowPayBanque = false;
                 this.ShowPayAcompte = false;
+                this.ShowPayLiquide = false;
             }
             );
             this.Pay = new RelayCommand(tuple => PayArticles(tuple));
