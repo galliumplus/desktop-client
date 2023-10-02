@@ -44,6 +44,14 @@ namespace Couche_IHM.VueModeles
                 t.IsBackground = true;
                 t.Start();
             }
+            else
+            {
+                foreach (BitmapImage image in imagesDispo)
+                {
+                    imagesPartenariats.Add(image);
+                    NotifyPropertyChanged(nameof(ImagesPartenariats));
+                }
+            }
             
         }
         #endregion

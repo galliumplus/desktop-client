@@ -17,7 +17,13 @@ namespace Couche_IHM.ImagesProduit
             {
                 Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit");
             }
-            
+
+            // Création des répertoires
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesPartenariat"))
+            {
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesPartenariat");
+            }
+
 
             //Création de l'image de base
             if (!File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Gallium\\ImagesProduit\\unknownProduct.png"))
