@@ -25,6 +25,7 @@ namespace Couche_Métier.Manager
         public StatAcompteManager()
         {
             dao = new StatAcompteDAO();
+            this.statAcompteList = new List<StatAcompte>();
             Task.Run(() => this.statAcompteList = dao.GetStat());
 
         }

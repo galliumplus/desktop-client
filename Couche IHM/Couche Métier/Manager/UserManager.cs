@@ -2,6 +2,7 @@
 using Couche_Data.Dao;
 using Couche_Data.Interfaces;
 using Couche_Métier.Utilitaire;
+using GalliumPlusApi.PlaceholderDao;
 using Modeles;
 
 
@@ -35,7 +36,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public UserManager()
         {
-            this.userDao = new UserDAO();
+            this.userDao = new PlaceholderUserDao();
             this.comptes = this.userDao.GetComptes();
             this.roles = this.userDao.GetRoles();
         }

@@ -1,6 +1,7 @@
 ﻿
 using Couche_Data.Dao;
 using Couche_Data.Interfaces;
+using GalliumPlusApi.PlaceholderDao;
 using Modeles;
 
 namespace Couche_Métier.Manager
@@ -29,7 +30,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public CategoryManager() 
         {
-            this.iCategory = new CategoryDAO();
+            this.iCategory = new PlaceholderCategoryDao();
             categories = this.iCategory.ListALlCategory();
         }
         #endregion

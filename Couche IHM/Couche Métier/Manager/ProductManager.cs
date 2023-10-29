@@ -1,6 +1,7 @@
 ﻿
 using Couche_Data.Dao;
 using Couche_Data.Interfaces;
+using GalliumPlusApi.PlaceholderDao;
 using Modeles;
 
 
@@ -29,7 +30,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public ProductManager()
         {
-            this.productDAO = new ProductDAO();
+            this.productDAO = new PlaceholderProductDao();
             this.products = new List<Product>(this.productDAO.GetProducts());
         }
         #endregion
