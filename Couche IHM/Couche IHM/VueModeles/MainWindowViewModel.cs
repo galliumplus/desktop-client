@@ -159,8 +159,6 @@ namespace Couche_IHM.VueModeles
             
             // Initialisation des events
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
-           
         }
-
     }
 }

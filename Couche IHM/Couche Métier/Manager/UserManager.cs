@@ -2,6 +2,8 @@
 using Couche_Data.Dao;
 using Couche_Data.Interfaces;
 using Couche_Métier.Utilitaire;
+using GalliumPlusApi.Dao;
+using GalliumPlusApi.Dto;
 using GalliumPlusApi.PlaceholderDao;
 using Modeles;
 
@@ -104,14 +106,9 @@ namespace Couche_Métier.Manager
         /// <returns></returns>
         public User? ConnectCompte(string identifiant,string password)
         {
-            User? user = this.comptes.Find(x => x.Mail == identifiant);
-            User? userFinal = null;
-            if (user != null &&CryptString.Verify(password, user.HashedPassword))
-            {
-                userFinal = user;
-            }
-            
-            return userFinal;
+            SessionDao dao = new();
+
+            return dao.LogIn(identifiant, password);
         }
         #endregion
     }

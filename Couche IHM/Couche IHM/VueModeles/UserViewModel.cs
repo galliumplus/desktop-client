@@ -109,7 +109,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return (role.Name == "Administrateur");
+                return (role?.Name == "Administrateur");
 
             }
         }
@@ -123,7 +123,7 @@ namespace Couche_IHM.VueModeles
             get
             {
                 double d = 0.5;
-                if (role.Name == "Administrateur")
+                if (role?.Name == "Administrateur")
                 {
                     d = 1;
                 }

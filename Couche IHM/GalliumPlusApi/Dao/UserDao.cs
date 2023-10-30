@@ -1,12 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Couche_Data.Interfaces;
+using Modeles;
 
 namespace GalliumPlusApi.Dao
 {
-    internal class UserDao
+    public class UserDao : IUserDAO
     {
+        public void CreateCompte(User compte)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<User> GetComptes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Role> GetRoles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveCompte(User compte)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCompte(User compte)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
