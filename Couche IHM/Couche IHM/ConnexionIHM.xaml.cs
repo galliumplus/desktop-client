@@ -29,6 +29,9 @@ namespace Couche_IHM
             DataContext = this;
             this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
             ImageManager.VerifyFiles();
+
+            Identifiant = "eb069420";
+            Password = "motdepasse";
         }
 
         public string Identifiant { get => identifiant; set => identifiant = value; }
@@ -50,11 +53,11 @@ namespace Couche_IHM
             {
                 try
                 {
-                    userManager = MainWindowViewModel.Instance.UserManager;
-                    logManager = MainWindowViewModel.Instance.LogManager;
-                    User? user = this.userManager.ConnectCompte(identifiant, password);
+                    User? user = UserManager.ConnectCompte(identifiant, password);
                     if (user != null)
                     {
+                        userManager = MainWindowViewModel.Instance.UserManager;
+                        logManager = MainWindowViewModel.Instance.LogManager;
                         Log log = new Log(DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
                         logManager.CreateLog(log);
                         MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));

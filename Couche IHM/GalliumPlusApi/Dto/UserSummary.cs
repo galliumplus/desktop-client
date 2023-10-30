@@ -1,79 +1,134 @@
-﻿/*using GalliumPlus.WebApi.Core.Data;
-using GalliumPlus.WebApi.Core.Exceptions;
-using GalliumPlus.WebApi.Core.Users;
+﻿using GalliumPlusApi.CompatibilityHelpers;
+using GalliumPlusApi.ModelDecorators;
+using Microsoft.VisualBasic;
+using Modeles;
 using System.ComponentModel.DataAnnotations;
 
-namespace GalliumPlus.WebApi.Dto
+namespace GalliumPlusApi.Dto
 {
     public class UserSummary
     {
-        [Required] public string Id { get; set; }
-        [Required] public string FirstName { get; set; }
-        [Required] public string LastName { get; set; }
-        [Required] public string Email { get; set; }
-        [Required] public int? Role { get; set; }
-        [Required] public string Year { get; set; }
-        public decimal? Deposit { get; set; }
-        [Required] public bool? IsMember { get; set; }
+        public string Id { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public int Role { get; set; } = -1;
+        public string Year { get; set; } = string.Empty;
+        public decimal? Deposit { get; set; } = null;
+        public bool IsMember { get; set; } = false;
 
-        public UserSummary()
+        public class UserMapper : Mapper<User, UserSummary>
         {
-            this.Id = String.Empty;
-            this.FirstName = String.Empty;
-            this.LastName = String.Empty;
-            this.Email = String.Empty;
-            this.Role = null;
-            this.Year = String.Empty;
-            this.Deposit = null;
-            this.IsMember = null;
-        }
-
-        public class Mapper : Mapper<User, UserSummary>
-        {
-            private IRoleDao roleDao;
-
-            public Mapper(IRoleDao roleDao)
+            public override UserSummary FromModel(User user)
             {
-                this.roleDao = roleDao;
+                string year = "?";
+                decimal? deposit = null;
+                bool isMember = true;
+                if (user is DecoratedUser deco)
+                {
+                    year = deco.Year;
+                    deposit = deco.Deposit;
+                    isMember = deco.IsMember;
+                }
+
+                return new UserSummary
+                {
+                    Id = UserIdRepository.Current.FindUsernameOf(user.ID),
+                    FirstName = user.Prenom,
+                    LastName = user.Nom,
+                    Email = user.Mail,
+                    Role = user.IdRole,
+                    Year = year,
+                    Deposit = deposit,
+                    IsMember = isMember,
+                };
             }
 
-
-            public override UserSummary FromModel(User user)
+            public UserSummary PatchWithModel(UserDetails originialUser, User patch)
             {
                 return new UserSummary
                 {
-                    Id = user.Id,
-                    FirstName = user.Identity.FirstName,
-                    LastName = user.Identity.LastName,
-                    Email = user.Identity.Email,
-                    Role = user.Role.Id,
-                    Year = user.Identity.Year,
-                    Deposit = user.Deposit,
-                    IsMember = user.IsMember
+                    Id = originialUser.Id,
+                    FirstName = patch.Prenom,
+                    LastName = patch.Nom,
+                    Email = patch.Mail,
+                    Role = patch.IdRole,
+                    Year = originialUser.Year,
+                    Deposit = originialUser.Deposit,
+                    IsMember = originialUser.IsMember,
                 };
             }
 
             public override User ToModel(UserSummary summary)
             {
-                Role role;
-                try
+                return new DecoratedUser(
+                    id: UserIdRepository.Current.GetIdFor(summary.Id),
+                    nom: summary.LastName,
+                    prenom: summary.FirstName,
+                    mail: summary.Email,
+                    password: "",
+                    role: summary.Role,
+                    year: summary.Year,
+                    deposit: summary.Deposit,
+                    isMember: summary.IsMember
+                );
+            }
+        }
+
+        public class AcompteMapper : Mapper<Acompte, UserSummary>
+        {
+            public override UserSummary FromModel(Acompte model)
+            {
+                string email = "";
+                int roleId = -1;
+                if (model is DecoratedAcompte deco)
                 {
-                    role = this.roleDao.Read(summary.Role!.Value);
-                }
-                catch (ItemNotFoundException)
-                {
-                    throw new InvalidItemException("Le rôle associé n'existe pas");
+                    email = deco.Email;
+                    roleId = deco.RoleId;
                 }
 
-                return new User(
-                    summary.Id!,
-                    new UserIdentity(summary.FirstName!, summary.LastName!, summary.Email!, summary.Year!),
-                    role,
-                    summary.Deposit!.Value,
-                    summary.IsMember!.Value
+                return new UserSummary
+                {
+                    Deposit = Format.FloatToMonetary(model.Argent),
+                    Email = email,
+                    FirstName = model.Prenom,
+                    Id = model.Identifiant,
+                    IsMember = model.StillAdherent,
+                    LastName = model.Nom,
+                    Role = roleId,
+                    Year = model.Formation,
+                };
+            }
+
+            public UserSummary PatchWithModel(UserDetails originalUser, Acompte patch)
+            {
+                return new UserSummary
+                {
+                    Deposit = Format.FloatToMonetary(patch.Argent),
+                    Email = originalUser.Email,
+                    FirstName = patch.Prenom,
+                    Id = patch.Identifiant,
+                    IsMember = patch.StillAdherent,
+                    LastName = patch.Nom,
+                    Role = originalUser.Role.Id,
+                    Year = patch.Formation,
+                };
+            }
+
+            public override Acompte ToModel(UserSummary dto)
+            {
+                return new DecoratedAcompte(
+                    id: UserIdRepository.Current.GetIdFor(dto.Id),
+                    identifiant: dto.Id,
+                    nom: dto.LastName,
+                    prenom: dto.FirstName,
+                    argent: (float)dto.Deposit!,
+                    formation: dto.Year,
+                    stillAdherent: dto.IsMember,
+                    email: dto.Email,
+                    roleId: dto.Role
                 );
             }
         }
     }
 }
-*/

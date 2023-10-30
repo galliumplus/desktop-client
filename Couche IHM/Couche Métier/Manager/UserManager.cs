@@ -1,10 +1,5 @@
-﻿
-using Couche_Data.Dao;
-using Couche_Data.Interfaces;
-using Couche_Métier.Utilitaire;
+﻿using Couche_Data.Interfaces;
 using GalliumPlusApi.Dao;
-using GalliumPlusApi.Dto;
-using GalliumPlusApi.PlaceholderDao;
 using Modeles;
 
 
@@ -38,7 +33,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public UserManager()
         {
-            this.userDao = new PlaceholderUserDao();
+            this.userDao = new UserDao();
             this.comptes = this.userDao.GetComptes();
             this.roles = this.userDao.GetRoles();
         }
@@ -104,11 +99,22 @@ namespace Couche_Métier.Manager
         /// <param name="identifiant"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User? ConnectCompte(string identifiant,string password)
+        public static User? ConnectCompte(string identifiant,string password)
         {
             SessionDao dao = new();
 
-            return dao.LogIn(identifiant, password);
+            var result = dao.LogIn(identifiant, password);
+            User? user = result?.Item1;
+            Role? role = result?.Item2;
+
+            if (role?.Name == "Adhérent")
+            {
+                return null;
+            }
+            else
+            {
+                return user;
+            }
         }
         #endregion
     }

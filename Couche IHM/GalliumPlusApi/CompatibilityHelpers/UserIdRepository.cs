@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GalliumPlusApi.Dto
+namespace GalliumPlusApi.CompatibilityHelpers
 {
     internal class UserIdRepository
     {
@@ -34,7 +34,7 @@ namespace GalliumPlusApi.Dto
 
         public int GetIdFor(string username)
         {
-            lock(ids)
+            lock (ids)
             {
                 if (ids.ContainsKey(username))
                 {
@@ -51,7 +51,7 @@ namespace GalliumPlusApi.Dto
 
         public string FindUsernameOf(int numericId)
         {
-            lock(ids)
+            lock (ids)
             {
                 return ids.First(kvp => kvp.Value == numericId).Key;
             }

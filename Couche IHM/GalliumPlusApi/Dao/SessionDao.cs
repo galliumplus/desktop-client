@@ -8,19 +8,22 @@ namespace GalliumPlusApi.Dao
     public class SessionDao
     {
         private UserDetails.Mapper detailsMapper = new();
+        private RoleDetails.Mapper roleMapper = new();
 
-        public User? LogIn(string username, string password)
+        public (User, Role)? LogIn(string username, string password)
         {
             using var client = new GalliumPlusHttpClient();
-            client.JsonOptions.PropertyNamingPolicy = null; // pas de casse chameau
+            client.JsonOptions.PropertyNamingPolicy = null; // pas de casse chameau en sortie
 
             try
             {
                 var loggedIn = client.Post<LoggedIn>("v1/login", new { Username = username, Password = password });
 
+                SessionStorage.Current.Put("token", loggedIn.Token);
+
                 if (loggedIn.User == null) return null;
 
-                return this.detailsMapper.ToModel(loggedIn.User);
+                return (detailsMapper.ToModel(loggedIn.User), roleMapper.ToModel(loggedIn.User.Role));
             }
             catch (UnauthenticatedException)
             {

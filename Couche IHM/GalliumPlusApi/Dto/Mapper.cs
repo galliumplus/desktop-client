@@ -7,7 +7,7 @@
             throw new InvalidOperationException("Ce DTO ne doit pas entrer !! >:(");
         }
 
-        public IEnumerable<TModel> toModel(IEnumerable<TDto> dtos)
+        public IEnumerable<TModel> ToModel(IEnumerable<TDto> dtos)
         {
             foreach (TDto dto in dtos) yield return ToModel(dto);
         }

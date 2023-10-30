@@ -1,5 +1,5 @@
-﻿using Couche_Data;
-using Couche_Data.Dao;
+﻿using GalliumPlusApi.Dao;
+using Couche_Data.Interfaces;
 using Modeles;
 
 namespace Couche_Métier.Manager
@@ -10,7 +10,7 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Dao permettant de gérer les données des stats produits
         /// </summary>
-        private StatProduitDAO dao;
+        private IStatProduitDAO dao;
 
         /// <summary>
         /// Liste des stats des produits

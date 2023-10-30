@@ -11,7 +11,7 @@ namespace GalliumPlusApi.Exceptions
                 throw response.StatusCode switch
                 {
                     HttpStatusCode.Unauthorized => new UnauthenticatedException(),
-                    _ => new GalliumPlusHttpException($"Erreur HTTP non gérée : {response.StatusCode} {response.ReasonPhrase}"),
+                    _ => new GalliumPlusHttpException($"Erreur HTTP non gérée : {(int)response.StatusCode} {response.ReasonPhrase}"),
                 };
             }
         }

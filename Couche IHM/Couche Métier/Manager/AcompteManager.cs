@@ -1,6 +1,5 @@
-﻿
-using GalliumPlusApi.PlaceholderDao;
-using Couche_Data.Interfaces;
+﻿using Couche_Data.Interfaces;
+using GalliumPlusApi.Dao;
 using Modeles;
 
 namespace Couche_Métier.Manager
@@ -25,7 +24,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public AcompteManager()
         {
-            this.adhérentDao = new PlaceholderAcompteDao();
+            this.adhérentDao = new AcompteDao();
 
             // Récupération des adhérents
             adhérents = adhérentDao.GetAdhérents();

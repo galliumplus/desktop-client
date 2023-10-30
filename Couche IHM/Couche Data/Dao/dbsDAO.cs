@@ -80,7 +80,7 @@ namespace Couche_Data.Dao
         /// </summary>
         private void ConnexionToBdd()
         {
-            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            string connString = "nope";
             this.sql = new MySqlConnection(connString);
         }
 

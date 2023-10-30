@@ -1,4 +1,5 @@
-﻿using Modeles;
+﻿using GalliumPlusApi.CompatibilityHelpers;
+using Modeles;
 
 namespace GalliumPlusApi.Dto
 {

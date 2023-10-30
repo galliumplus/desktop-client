@@ -1,16 +1,17 @@
-﻿using Modeles;
+﻿using Couche_Data.Interfaces;
+using Modeles;
 using MySql.Data.MySqlClient;
 
 
 namespace Couche_Data.Dao
 {
-    public class StatProduitDAO
+    public class StatProduitDAO : IStatProduitDAO
     {
 
         public List<StatProduit> GetStat()
         {
             //Connection
-            string connString = String.Format("server={0};port={1};user id={2};password={3};database={4};SslMode={5}", "51.178.36.43", "3306", "c2_gallium", "DfD2no5UJc_nB", "c2_etismash", "none");
+            string connString = "nope";
             MySqlConnection sql = new MySqlConnection(connString);
             sql.Open();
 
@@ -51,7 +52,7 @@ namespace Couche_Data.Dao
             cmd.ExecuteNonQuery();
 
             sql.Close();
-            
+
         }
     }
 }
