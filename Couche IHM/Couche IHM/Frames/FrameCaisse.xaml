@@ -15,10 +15,8 @@
     <Grid Margin="20,40,20,10">
         <!-- Definitions colonnes -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="0.9*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
@@ -78,24 +76,18 @@
                 </ListView.Template>
                 <ListView.ItemTemplate  >
                     <DataTemplate  >
-
-                        <Grid >
+                        <Grid  Width="375">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="250"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Label 
                                 Content="{Binding Key.NomProduitIHM}" 
-                                Grid.Column="1" 
+                                Grid.Column="0" 
+                                FontSize="16"
                                 VerticalAlignment="Center"  
                                 FontWeight="Medium"/>
-                            <!-- Nombre de produit -->
-                            <Label 
-                                Content="{Binding Value}" 
-                                Grid.Column="0" 
-                                VerticalAlignment="Center" 
-                                ContentStringFormat="x{0}"  />
                             <!-- Bouton pour enlever le produit -->
                             <Button 
                                 Style="{StaticResource buttonImage}" 
@@ -103,15 +95,21 @@
                                     RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
                                 CommandParameter="{Binding Key}"
                                 HorizontalAlignment="Right"  
-                                Height="10" 
-                                Grid.Column="2" 
-                                Width="25"  >
+                                Height="14" 
+                                Grid.Column="2" >
                                 <materialDesign:PackIcon
-                                    Width="12"
-                                    Height="12"
-                                    
-                                        Kind="CloseOutline"/>
+                                    Width="15"
+                                    Height="15"
+                                    Kind="CloseOutline"/>
                             </Button>
+                            <!-- Nombre de produit -->
+                            <Label 
+                                Opacity="0.8"
+                                Content="{Binding Value}" 
+                                Grid.Column="1" 
+                                FontSize="15"
+                                VerticalAlignment="Center" 
+                                ContentStringFormat="x{0}"  />
 
                         </Grid>
                     </DataTemplate>
@@ -151,27 +149,49 @@
                     Margin="48,0,0,0"  
                     Content="{Binding CaisseViewModel.PriceAdherIHM}"
                     Foreground="Black" 
-                    FontSize="14" 
-                    FontWeight="Medium" 
-                    VerticalAlignment="Center"   />
+
+                    VerticalAlignment="Center"   >
+                    <Label.Style>
+                        <Style  TargetType="Label">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="true">
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="false">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+
                 <Label 
                     Grid.Row="5" Grid.Column="1" 
                     Content="{Binding CaisseViewModel.PriceNonAdherIHM}" 
                     Foreground="Black" 
-                    FontSize="12"  
-                    VerticalAlignment="Center" />
-                <ToggleButton
-                    Grid.Row="5" Grid.Column="1" 
+                    VerticalAlignment="Center" >
+                    <Label.Style>
+                        <Style  TargetType="Label">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="false">
+                                    <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="FontSize" Value="17"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CaisseViewModel.IsAdherent}" Value="true">
+                                    <Setter Property="FontWeight" Value="Normal"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+                <CheckBox
                     IsChecked="{Binding CaisseViewModel.IsAdherent}"
-                    FontSize="12"
-                    Foreground="Black"
-                    Background="Transparent"
-                    Height="17"
-                  materialDesign:ToggleButtonAssist.OnContent="A"
-                  Content="NA"
-                  ToolTip="MaterialDesignActionLightToggleButton" >
+                    ToolTip="MaterialDesignActionLightToggleButton" >
                     <ToggleButton.Style>
-                        <Style BasedOn="{StaticResource MaterialDesignActionToggleButton}" TargetType="ToggleButton">
+                        <Style BasedOn="{StaticResource MaterialDesignLightCheckBox}" TargetType="CheckBox">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Acompte">
                                     <Setter Property="Visibility" Value="Hidden"/>
@@ -179,7 +199,7 @@
                             </Style.Triggers>
                         </Style>
                     </ToggleButton.Style>
-                </ToggleButton>
+                </CheckBox>
             </StackPanel>
 
             <!-- Bouton Payer-->
@@ -200,65 +220,55 @@
         <!-- Paiement Acompte -->
         <materialDesign:DialogHost Grid.RowSpan="4" Grid.ColumnSpan="4" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent >
-                <StackPanel Margin="20" Width="200" Orientation="Vertical">
+                <StackPanel Margin="20"  Orientation="Vertical">
                     
                     <TextBlock 
                         HorizontalAlignment="Center"
                         FontWeight="Bold"
-                        FontSize="15" 
-                        
+                        FontSize="28" 
                         Text="Paiement par Acompte"
-                        Margin="0 0 0 20"/>
+                        Margin="20 0 20 30"/>
                     <Label 
                         Content="Identifiant de l'acompte" 
-                        FontSize="12"
-                        Padding="0,0,0,5" />
+                        FontSize="16"
+                         />
                     <ComboBox 
                         ItemsSource="{Binding AdherentViewModel.Acomptes}"
                         SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
-                        FontSize="12"
+                        FontSize="16"
                         IsTextSearchEnabled="True" 
                         TextSearch.TextPath="IdentifiantIHM" 
-                        IsEditable="True">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding NomCompletIHM}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                        IsEditable="True"/>
                     <StackPanel 
                         Margin="0,20,0,0" 
                         Orientation="Horizontal">
                         <Label 
-                        FontSize="12"
+                        FontSize="16"
                         Content="Adhérent ?" 
  />
                         <CheckBox
-                        x:Name="AdherentCheckbox"
-                        IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
-                        Background="Green"
+                            x:Name="AdherentCheckbox"
+                            
+                            IsChecked="{Binding CaisseViewModel.AdherentPayer.IsAdherentIHM, Mode=OneWay}"
+                            Background="Green"
                         />
                     </StackPanel>
-                    
 
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+
+                    <StackPanel Margin="0,40,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button 
                             BorderThickness="0"
                             Command="{Binding CaisseViewModel.CancelPay}"
-                        Width="80"
-                        FontSize="12"
-                        Background="Gray"
-                        Foreground="White"
-                        Content="Annuler"/>
+                            FontSize="18"
+                            Style="{StaticResource buttonBlack}"
+                            Content="Annuler"/>
 
                         <Button 
                             Content="Payer"
                             BorderThickness="0"
-                            Width="80"
                             Margin="40,0,0,0"
-                            FontSize="12"
-                            Background="{StaticResource galliumColor}"
-                            Foreground="White"
+                            FontSize="18"
+                            Style="{StaticResource buttonBlack}"
                             Command="{Binding CaisseViewModel.Pay}">
                             <Button.CommandParameter>
                                 <MultiBinding Converter="{StaticResource AcompteAndCheckboxConverter}">
@@ -266,13 +276,118 @@
                                     <Binding Path="IsChecked" ElementName="AdherentCheckbox" />
                                 </MultiBinding>
                             </Button.CommandParameter>
-                            
                         </Button>
                     </StackPanel>
-                   
-
-
                 </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+        
+        <!-- Paiement par paypal -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayPaypal}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Text="Paiement par Paypal"
+                            Margin="0 0 0 20"/>
+                        <TextBlock 
+                            Margin="0 0 0 20" 
+                            Text="Vers : etiq1930@gmail.com"
+                            FontSize="16"/>
+                        <TextBlock 
+                            Margin="0 0 0 20" 
+                            Text="{Binding CaisseViewModel.PrixIHM}"
+                            FontSize="16"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                BorderThickness="0"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                BorderThickness="0"
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Paiement par carte -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayBanque}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Margin="0 0 0 20" 
+                            Text="Paiement par SumUp (TPE)"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="Veuillez vous saisir du TPE"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="{Binding CaisseViewModel.PrixIHM}"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <!-- Paiement par liquide -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayLiquide}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="30,30,30,20">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock 
+                            FontSize="24" 
+                            Margin="0 0 0 20" 
+                            Text="Paiement en Liquide"/>
+                        <TextBlock 
+                            Margin="0 0 0 20"
+                            FontSize="16" 
+                            Text="{Binding CaisseViewModel.PrixIHM}"/>
+                        <UniformGrid Rows="1" Columns="2" Height="50">
+                            <Button 
+                                Margin="0 0 20 0" 
+                                FontSize="18" 
+                                Content="Annuler"
+                                Command="{Binding CaisseViewModel.CancelPay}"
+                                Style="{StaticResource buttonBlack}" 
+                                Grid.Column="2"/>
+                            <Button 
+                                Margin="20 0 0 0" 
+                                FontSize="18" 
+                                Content="Confirmer"
+                                Command="{Binding CaisseViewModel.Pay}"
+                                Style="{StaticResource buttonBlack}"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
     </Grid>

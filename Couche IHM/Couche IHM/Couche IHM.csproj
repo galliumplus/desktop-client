@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Assets\Logo\Logo_Gallium.ico</ApplicationIcon>
+    <AssemblyName>GalliumPlus</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +15,17 @@
     <None Remove="Assets\Logo\Logo_Gallium.png" />
     <None Remove="Fonts\Riberio.ttf" />
     <None Remove="Fonts\There Brat.ttf" />
+    <None Remove="Images\burgignon.png" />
+    <None Remove="Images\dominos.png" />
     <None Remove="Images\galliumlite.png" />
+    <None Remove="Images\jocade.png" />
+    <None Remove="Images\laser.jpg" />
     <None Remove="Images\logoEtiq.png" />
+    <None Remove="Images\marcel.png" />
+    <None Remove="Images\melt.png" />
+    <None Remove="Images\momie.png" />
+    <None Remove="Images\tacos.png" />
+    <None Remove="Images\univers.png" />
     <None Remove="Images\unknownProduct.png" />
   </ItemGroup>
 

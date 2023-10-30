@@ -28,6 +28,7 @@ namespace Couche_IHM.VueModeles
         private string prixAdherentIHM;
         private string prixNonAdherentIHM;
         private string action;
+        private bool showConfirmationDelete;
         #endregion
 
         #region notify
@@ -43,6 +44,8 @@ namespace Couche_IHM.VueModeles
         public RelayCommand ResetProd { get; set; }
         public RelayCommand UpdateProd { get; set; }
         public RelayCommand DeleteProd { get; set; }
+        public RelayCommand CancelDeleteProd { get; set; }
+        public RelayCommand PreviewDeleteProd { get; set; }
 
         public RelayCommand ChangeImage { get;set; }
         #endregion
@@ -55,6 +58,19 @@ namespace Couche_IHM.VueModeles
         public int Id
         {
             get => product.ID;
+        }
+
+        public double Opacity
+        {
+            get
+            {
+                double d = 1;
+                if (!isDisponible)
+                {
+                    d = 0.5;
+                }
+                return d;
+            }
         }
         /// <summary>
         /// Permet de savoir si le produit est disponible
@@ -156,6 +172,16 @@ namespace Couche_IHM.VueModeles
             
         }
 
+        public bool ShowConfirmationDelete
+        {
+            get => showConfirmationDelete;
+            set
+            {
+                showConfirmationDelete = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region constructor
@@ -186,6 +212,8 @@ namespace Couche_IHM.VueModeles
             this.UpdateProd = new RelayCommand(x => UpdateProduct());
             this.CreateProd = new RelayCommand(x => CreateProduct());
             this.DeleteProd = new RelayCommand(x => DeleteProduct());
+            this.PreviewDeleteProd = new RelayCommand(x => ShowConfirmationDelete = true);
+            this.CancelDeleteProd = new RelayCommand(x => ShowConfirmationDelete = false);
             this.ChangeImage = new RelayCommand(x => ChangeImageProduct()); 
 
         }
@@ -296,6 +324,7 @@ namespace Couche_IHM.VueModeles
             MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
             MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
+            this.ShowConfirmationDelete = false;
 
         }
 

@@ -6,40 +6,38 @@
       xmlns:rules="clr-namespace:Couche_IHM.BindingRules"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="945" d:DesignWidth="1595"
       Title="FrameAccueil"
       Background="White">
     <Page.Resources>
         <rules:PositionPodiumProduit x:Key="PositionConverter" />
         <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
     </Page.Resources>
-    
-    <Grid >
 
+    <Grid  Margin="50,50,0,25">
         <!-- Définition des colonnes & lignes -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="23*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-
-
-            <!-- Title -->
+        
+        <!-- Title -->
         <StackPanel 
             Orientation="Horizontal" 
             Grid.Row="1"
@@ -48,51 +46,48 @@
             Grid.ColumnSpan="2">
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
-                VerticalAlignment="Center"
-                Width="20"
-                Height="20"
+                VerticalAlignment="Bottom"
+                Margin="10,0,0,5"
+                Width="25"
+                Height="25"
                 Kind="Podium"/>
             <TextBlock 
                 Margin="10,0,0,0"
-                FontSize="18"
-                VerticalAlignment="Center"
+                FontSize="27"
+                VerticalAlignment="Bottom"
                 FontWeight="Bold"
                 Text="Top de la semaine"/>
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
-                Margin="10,0,0,0"
-                Width="20"
-                Height="20"
-                VerticalAlignment="Center"
+                Margin="10,0,0,5"
+                Width="25"
+                Height="25"
+                VerticalAlignment="Bottom"
                 Kind="Podium"/>
         </StackPanel>
-            
-            <Image
-                Source="/Images/logoEtiq.png"
-                Margin="20"
-                Opacity="0.6"
-                Grid.Row="3"
-                Grid.Column="3"
-                Grid.ColumnSpan="2"/>
-        
-            <!-- acomptes -->
-            <TextBlock 
-                Grid.Row="2"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                FontSize="14"
-                HorizontalAlignment="Center"
-                FontWeight="DemiBold"
-                Text="Adhérents fidèles"/>
 
-            <ItemsControl  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding StatViewModel.PodiumAcompte}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+        <!-- Acomptes -->
+        <TextBlock 
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            FontWeight="DemiBold"
+            Text="Adhérents fidèles"/>
+
+        <StackPanel 
+            Margin="30,-30,30,0" 
+            Grid.ColumnSpan="2" 
+            Grid.Row="3"
+            Grid.RowSpan="5" 
+            Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
                         <Grid Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="8*"/>
-
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="8*"/>
@@ -103,21 +98,35 @@
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 Margin="0,20,0,0"
+                                FontSize="14"
                                 Text="{Binding FormattedArgent}"
                                 Grid.Column="1"
                                 />
-                            
+
                             <!-- nom adhenret-->
-                            <materialDesign:Chip
+                            <materialDesign:Chip     
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                    FontSize="10"
-                                    IconBackground="#004D40"
-                                    Content="{Binding AdherentViewModel.NomCompletIHM}">
-                                    <materialDesign:Chip.Icon>
-                                        <materialDesign:PackIcon
-                                            Width="24"
-                                            Height="24">
+
+                                Content="{Binding AdherentViewModel.NomCompletIHM}">
+                                <materialDesign:Chip.Style>
+                                    <Style TargetType="materialDesign:Chip">
+                                        <Style.Setters>
+                                            <Setter Property="IconBackground" Value="#004D40" />
+                                            <Setter Property="FontSize" Value="15"/>
+                                        </Style.Setters>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
+                                                <Setter Property="IconBackground" Value="#EDEDED"/>
+                                                <Setter Property="FontSize" Value="14"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:Chip.Style>
+                                <materialDesign:Chip.Icon>
+                                    <materialDesign:PackIcon
+                                        Width="28"
+                                        Height="28">
                                         <materialDesign:PackIcon.Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Style.Setters>
@@ -125,55 +134,65 @@
                                                     <Setter Property="Foreground" Value="Gold" />
                                                 </Style.Setters>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding AdherentViewModel.NomCompletIHM, Converter={StaticResource PositionConverter2}}" Value="2">
+                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="2">
                                                         <Setter Property="Kind" Value="Numeric2" />
                                                         <Setter Property="Foreground" Value="Silver" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding AdherentViewModel.NomCompletIHM, Converter={StaticResource PositionConverter2}}" Value="3">
+                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="3">
                                                         <Setter Property="Kind" Value="Numeric3" />
                                                         <Setter Property="Foreground" Value="#CD853F" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
+                                                        <Setter Property="Margin" Value="7,0,0,0"/>
+                                                        <Setter Property="Kind" Value="Numeric4" />
+                                                        <Setter Property="Foreground" Value="#4d5157"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </materialDesign:PackIcon.Style>
                                     </materialDesign:PackIcon>
-                                    </materialDesign:Chip.Icon>
-                                </materialDesign:Chip>
+                                </materialDesign:Chip.Icon>
+                            </materialDesign:Chip>
 
-                                <ProgressBar 
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    Foreground="LightGreen"
-                                    Background="LightGray"
-                                    BorderBrush="Transparent"
-                                    Maximum="100" 
-                                    Height="10"
-                                    Value="{Binding Argent}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-    
+                            <ProgressBar 
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Foreground="LightGreen"
+                                Background="LightGray"
+                                BorderBrush="Transparent"
+                                Maximum="100" 
+                                Height="12"
+                                Value="{Binding Argent}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
-            <!-- Meta -->
-            <TextBlock
-                Grid.Row="2"
-                Grid.Column="5"
-                Grid.ColumnSpan="2"
-                FontSize="14"
-                HorizontalAlignment="Center"
-                FontWeight="DemiBold"
-                Text="Meilleures ventes"/>
+        <!-- Meta -->
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            FontWeight="DemiBold"
+            Text="Meilleures ventes"/>
 
-            <StackPanel Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Margin="0,30,0,0" Orientation="Vertical">
-                <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+        <StackPanel 
+            Margin="30,-30,30,0"  
+            Grid.Row="3" 
+            Grid.RowSpan="5" 
+            Grid.Column="4" 
+            Grid.ColumnSpan="2"  
+            Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumProduits}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
                         <Grid Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="8*"/>
-                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -186,21 +205,31 @@
                                 Text="{Binding Path=PurchaseCount, StringFormat=' {0}'}"
                                 Grid.Column="0"
                                 />
-                            
+
                             <!-- Nom Produit -->
                             <materialDesign:Chip
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                FontSize="10"
-                                IconBackground="#880E4F"
-                                 
+                                HorizontalAlignment="Right"   
                                 Content="{Binding ProductViewModel.NomProduitIHM}">
-                               
+                                <materialDesign:Chip.Style>
+                                    <Style TargetType="materialDesign:Chip">
+                                        <Style.Setters>
+                                            <Setter Property="IconBackground" Value="#880E4F" />
+                                            <Setter Property="FontSize" Value="15"/>
+                                        </Style.Setters>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ProductViewModel.NomProduitIHM, Converter={StaticResource PositionConverter}}" Value="4">
+                                                <Setter Property="IconBackground" Value="#EDEDED"/>
+                                                <Setter Property="FontSize" Value="14"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:Chip.Style>
                                 <materialDesign:Chip.Icon>
                                     <materialDesign:PackIcon
-                                            Width="24"
-                                            Height="24">
+                                        Width="28"
+                                        Height="28">
                                         <materialDesign:PackIcon.Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Style.Setters>
@@ -216,6 +245,11 @@
                                                         <Setter Property="Kind" Value="Numeric3" />
                                                         <Setter Property="Foreground" Value="#CD853F" />
                                                     </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ProductViewModel.NomProduitIHM, Converter={StaticResource PositionConverter}}" Value="4">
+                                                        <Setter Property="Margin" Value="7,0,0,0"/>
+                                                        <Setter Property="Kind" Value="Numeric4" />
+                                                        <Setter Property="Foreground" Value="#6d747d"/>
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </materialDesign:PackIcon.Style>
@@ -227,131 +261,103 @@
                             <ProgressBar
                                 Grid.ColumnSpan="2"
                                 Grid.Row="1"
-                                    FlowDirection="RightToLeft"
-                                    Foreground="#FFB366"
-                                    Background="LightGray"
-                                    BorderBrush="Transparent"
-                                    Maximum="100" 
-                                    Height="10"
-                                    Value="{Binding PurchaseCount}" />
+                                FlowDirection="RightToLeft"
+                                Foreground="#FFB366"
+                                Background="LightGray"
+                                BorderBrush="Transparent"
+                                Maximum="100" 
+                                Height="12"
+                                Value="{Binding PurchaseCount}" />
                         </Grid>
                     </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-            
-            <!-- Réseaux -->
-        <Button
-            Background="LightGreen" 
-            Margin="10,0,10,0"
-            BorderBrush="Transparent"
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <!-- Partenariats -->
+        <Image
+            Grid.Row="7"
+            Grid.Column="0"
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[0]}"/>
+
+        <Image
+            Grid.Row="7"
+            Grid.Column="4"
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[2]}"/>
+
+        <Image
+            Grid.Row="7"
             Grid.Column="1"
-            Grid.Row="5"
-            Foreground="Black"
-            Command="{Binding GoDrive}"
-            Opacity="0.6"
-            >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                Foreground="DarkGreen"
-                Width="21"
-                Height="21"
-                Kind="GoogleDrive"/>
-                <TextBlock
-                    FontWeight="Bold"
-                    FontSize="10"
-                    Margin="2,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Google Drive"/>
-            </StackPanel>
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[1]}"/>
 
-        </Button>
-
-        <!-- Twitter -->
-        <Button
-            Background="LightBlue" 
-            Command="{Binding GoTwitter}"
-            Margin="10,0,10,0"
-            BorderBrush="Transparent"
-            Grid.Column="2"
-            Grid.Row="5"
-            Foreground="Black"
-            Opacity="0.6"
-            >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="Blue"
-                    Width="21"
-                    Height="21"
-                    Kind="Twitter"/>
-                <TextBlock
-                    FontWeight="Bold"
-                    FontSize="10"
-                    Margin="2,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Twitter"/>
-            </StackPanel>
-
-        </Button>
-
-      
-
-        <!-- Instagram -->
-        <Button
-            Background="LightPink" 
-            Margin="10,0,10,0"
-            Command="{Binding GoInsta}"
+        <Image
+            Grid.Row="7"
             Grid.Column="5"
-            Grid.Row="5"
-            BorderBrush="Transparent"
-            Foreground="Black"
-            Opacity="0.6"
-            >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="DeepPink"
-                    Width="21"
-                    Height="21"
-                    Kind="Instagram"/>
-                <TextBlock
-                    FontWeight="Bold"
-                    FontSize="10"
-                    Margin="2,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Instagram"/>
-            </StackPanel>
-        </Button>
+            Source="{Binding PartenariatViewModel.ImagesPartenariats[3]}"/>
 
+        <Image
+            Grid.Row="2"
+            Grid.RowSpan="4"
+            Opacity="0.5"
+            Margin="40"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Source="/Images/logoEtiq.png"/>
 
-        <!-- Twitch -->
-        <Button
-            Background="#D8BFD8" 
-            Margin="10,0,10,0"
-            Command="{Binding GoTwitch}"
-            BorderBrush="Transparent"
-            Grid.Column="6"
-            Grid.Row="5"
-            Foreground="Black"
-            Opacity="0.6"
-            >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Foreground="Purple"
-                    Width="21"
-                    Height="21"
-                    Kind="Twitch"/>
-                <TextBlock
-                    FontWeight="Bold"
-                    FontSize="10"
-                    Margin="2,0,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Text="Twitch"/>
+        <!-- Réseaux -->
+        <materialDesign:Card
+            materialDesign:ElevationAssist.Elevation="Dp8"
+            HorizontalAlignment="Right"
+            Grid.Column="5"
+            Grid.ColumnSpan="2">
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+                <StackPanel 
+                    Margin="20,0,50,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="DeepSkyBlue"
+                        Width="26"
+                        Height="26"
+                        Kind="Twitter"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@Etiq_Dijon"/>
+                </StackPanel>
+
+                <StackPanel 
+                    Margin="20,0,10,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="HotPink"
+                        Width="26"
+                        Height="26"
+                        Kind="Instagram"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@etiq_dijon"/>
+                </StackPanel>
+
+                <StackPanel 
+                    Margin="20,0,10,0" 
+                    Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Foreground="Red"
+                        Width="26"
+                        Height="26"
+                        Kind="Youtube"/>
+                    <TextBlock 
+                        FontSize="16"
+                        Margin="5,0,0,0"
+                        FontStyle="Italic"
+                        Text="@Etiq_Dijon"/>
+                </StackPanel>
             </StackPanel>
-        </Button>
-       
+        </materialDesign:Card>
     </Grid>
 </Page>

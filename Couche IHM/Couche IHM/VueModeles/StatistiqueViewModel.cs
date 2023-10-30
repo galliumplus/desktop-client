@@ -1,5 +1,6 @@
 ﻿
 using Couche_Métier.Manager;
+using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return statsProduit.OrderByDescending(x => x.PurchaseCount).Take(3).ToList();
+                return statsProduit.OrderByDescending(x => x.PurchaseCount).Take(4).ToList();
             }
         }
 
@@ -50,7 +51,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return statsAcompte.OrderByDescending(x => x.Argent).Take(3).ToList();
+                return statsAcompte.OrderByDescending(x => x.Argent).Take(4).ToList();
             }
         }
 
@@ -67,7 +68,7 @@ namespace Couche_IHM.VueModeles
             this.statAcompteManager = statAcompte;
             this.productManager = produtManager;
             this.acompteManager = acompteManager;
-
+            
             // Initialisation des datas
             InitStatsProduit();
             InitStatsAcompte();

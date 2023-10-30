@@ -27,13 +27,7 @@
 
 
         <!-- Information de connexion -->
-        <Image
-            Source="/Images/logoEtiq.png"
-            Opacity="0.6"
-            Margin="25"
-            Grid.ColumnSpan="3"
-             Grid.RowSpan="3"
-            />
+
         <Border Grid.Row="1" Grid.Column="1" Background="#252422"  CornerRadius="10">
             <Grid>
                 <Grid.RowDefinitions>
