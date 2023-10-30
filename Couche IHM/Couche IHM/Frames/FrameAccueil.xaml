@@ -40,9 +40,10 @@
         <!-- Title -->
         <StackPanel 
             Orientation="Horizontal" 
-            Grid.Row="0"
+            Grid.Row="1"
             HorizontalAlignment="Center"
-            Grid.ColumnSpan="6">
+            Grid.Column="3"
+            Grid.ColumnSpan="2">
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
                 VerticalAlignment="Bottom"
@@ -64,7 +65,7 @@
                 VerticalAlignment="Bottom"
                 Kind="Podium"/>
         </StackPanel>
-    
+
         <!-- Acomptes -->
         <TextBlock 
             Grid.Row="2"
@@ -106,6 +107,7 @@
                             <materialDesign:Chip     
                                 Grid.Row="0"
                                 Grid.Column="0"
+
                                 Content="{Binding AdherentViewModel.NomCompletIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
@@ -201,7 +203,6 @@
                             <TextBlock
                                 Margin="0,20,0,0"
                                 Text="{Binding Path=PurchaseCount, StringFormat=' {0}'}"
-                                FontSize="14"
                                 Grid.Column="0"
                                 />
 

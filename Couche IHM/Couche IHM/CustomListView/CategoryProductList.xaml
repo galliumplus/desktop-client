@@ -15,7 +15,7 @@
 
         <StackPanel Margin="0 0 0 40">
             <StackPanel Orientation="Horizontal">
-                <Label FontWeight="Medium" FontFamily="Roboto" FontSize="18" Content="{Binding Category}"></Label>
+                <Label FontWeight="Medium" FontFamily="Roboto" FontSize="15" Content="{Binding Category}"></Label>
                 <ToggleButton
                     Margin="5,0,0,0"
                     Background="Transparent"
