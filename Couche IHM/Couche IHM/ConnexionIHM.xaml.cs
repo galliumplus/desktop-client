@@ -73,13 +73,8 @@ namespace Couche_IHM
                 catch(Exception ex)
                 {
                     messageQueue?.Enqueue("Vous n'êtes pas connecté à Internet");
-                }
-
-                
+                }                
             }
-          
-
-            
         }
     }
 }

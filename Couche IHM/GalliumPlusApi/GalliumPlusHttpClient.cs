@@ -1,4 +1,5 @@
-﻿using GalliumPlusApi.Exceptions;
+﻿using GalliumPlusApi.Dto;
+using GalliumPlusApi.Exceptions;
 using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
@@ -62,5 +63,25 @@ namespace GalliumPlusApi
                 ?? throw new NullReferenceException("Json deserialisation return null");
         }
 
+        public void Post(string resource, object data)
+        {
+            var response = WaitForTask(this.PostAsJsonAsync(resource, data, jsonOptions));
+
+            ExceptionFactory.ThrowForStatus(response);
+        }
+
+        public void Put(string resource, object data)
+        {
+            var response = WaitForTask(this.PutAsJsonAsync(resource, data, jsonOptions));
+
+            ExceptionFactory.ThrowForStatus(response);
+        }
+
+        public void Delete(string resource)
+        {
+            var response = WaitForTask(this.DeleteAsync(resource));
+
+            ExceptionFactory.ThrowForStatus(response);
+        }
     }
 }

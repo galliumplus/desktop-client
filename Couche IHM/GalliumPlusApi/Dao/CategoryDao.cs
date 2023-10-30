@@ -7,16 +7,22 @@ namespace GalliumPlusApi.Dao
 {
     public class CategoryDao : ICategoryDao
     {
-        private CategoryDetails.Mapper summaryMapper = new();
+        private CategoryDetails.Mapper mapper = new();
 
         public void CreateCategory(Category cat)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            client.Post($"v1/categories", mapper.FromModel(cat));
         }
 
         public void DeleteCategory(Category cat)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            client.Delete($"v1/categories/{cat.IdCat}");
         }
 
         public List<Category> ListALlCategory()
@@ -28,7 +34,7 @@ namespace GalliumPlusApi.Dao
             {
                 var categories = client.Get<List<CategoryDetails>>("v1/categories");
 
-                return summaryMapper.ToModel(categories).ToList();
+                return mapper.ToModel(categories).ToList();
             }
             catch (Exception ex)
             {
@@ -39,7 +45,10 @@ namespace GalliumPlusApi.Dao
 
         public void UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            client.Put($"v1/categories/{category.IdCat}", mapper.FromModel(category));
         }
     }
 }
