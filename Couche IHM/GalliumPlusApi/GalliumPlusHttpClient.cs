@@ -43,6 +43,12 @@ namespace GalliumPlusApi
             return task.Result;
         }
 
+        public async Task<string> LookUpVersionAsync()
+        {
+            var response = await this.GetAsync("");
+            return response.Headers.GetValues("x-gallium-version").First();
+        }
+
         public T Get<T>(string resource)
         {
             var response = WaitForTask(this.GetAsync(resource));

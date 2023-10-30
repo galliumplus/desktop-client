@@ -25,9 +25,10 @@ namespace GalliumPlusApi
             storage = new();
         }
 
-        public void Put(string key, object value)
+        public SessionStorage Put(string key, object value)
         {
             storage[key] = value;
+            return this;
         }
 
         public object Get(string key)
@@ -40,9 +41,10 @@ namespace GalliumPlusApi
             return (T)storage[key]; 
         }
 
-        public void Remove(string key)
+        public SessionStorage Remove(string key)
         {
             storage.TryRemove(key, out var _);
+            return this;
         }
     }
 }

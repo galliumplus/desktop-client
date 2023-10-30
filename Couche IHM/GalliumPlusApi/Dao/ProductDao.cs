@@ -1,5 +1,6 @@
 ﻿using Couche_Data.Interfaces;
 using GalliumPlusApi.Dto;
+using GalliumPlusApi.ModelDecorators;
 using Modeles;
 using System.Diagnostics;
 
@@ -7,11 +8,14 @@ namespace GalliumPlusApi.Dao
 {
     public class ProductDao : IProductDAO
     {
-        private ProductSummary.Mapper summaryMapper = new();
+        private ProductSummary.Mapper mapper = new();
 
         public void CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+            
+            client.Post("v1/products", mapper.FromModel(product));
         }
 
         public List<Product> GetProducts()
@@ -23,7 +27,7 @@ namespace GalliumPlusApi.Dao
             {
                 var products = client.Get<List<ProductSummary>>("v1/products");
                 
-                return summaryMapper.ToModel(products).ToList();
+                return mapper.ToModel(products).ToList();
             }
             catch (Exception ex)
             {
@@ -34,12 +38,26 @@ namespace GalliumPlusApi.Dao
 
         public void RemoveProduct(Product product)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            client.Delete($"v1/products/{product.ID}");
         }
 
         public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            if (product is DecoratedProduct deco)
+            {
+                client.Put($"v1/products/{product.ID}", mapper.FromModel(product));
+            }
+            else
+            {
+                var original = client.Get<ProductDetails>($"v1/products/{product.ID}");
+                client.Put($"v1/products/{product.ID}", mapper.PatchWithModel(original, product));
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GalliumPlusApi.CompatibilityHelpers;
+using GalliumPlusApi.ModelDecorators;
 using Modeles;
 
 namespace GalliumPlusApi.Dto
@@ -17,6 +18,12 @@ namespace GalliumPlusApi.Dto
         {
             public override ProductSummary FromModel(Product model)
             {
+                string availability = "AUTO";
+                if (model is DecoratedProduct deco)
+                {
+                    availability = deco.Availability;
+                }
+
                 return new ProductSummary
                 {
                     Id = model.ID,
@@ -24,8 +31,22 @@ namespace GalliumPlusApi.Dto
                     Stock = model.Quantite,
                     NonMemberPrice = Format.FloatToMonetary(model.PrixNonAdherent),
                     MemberPrice = Format.FloatToMonetary(model.PrixAdherent),
-                    Availability = "AUTO",
+                    Availability = availability,
                     Category = model.Categorie
+                };
+            }
+
+            public ProductSummary PatchWithModel(ProductDetails originalProduct, Product patch)
+            {
+                return new ProductSummary
+                {
+                    Id = patch.ID,
+                    Name = patch.NomProduit,
+                    Stock = patch.Quantite,
+                    NonMemberPrice = Format.FloatToMonetary(patch.PrixNonAdherent),
+                    MemberPrice = Format.FloatToMonetary(patch.PrixAdherent),
+                    Availability = originalProduct.Availability,
+                    Category = patch.Categorie
                 };
             }
 
