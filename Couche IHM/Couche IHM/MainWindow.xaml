@@ -153,9 +153,7 @@
 
             </Grid>
         </Grid>
-        
-        <Viewbox Grid.Column="1">
-            
+
             <!-- DEUXIEME COLONNE -->
             <Grid  Grid.Column="1"   >
                 <Grid.RowDefinitions>
@@ -171,20 +169,18 @@
                         <TextBlock 
                             Text="{Binding Frame, Converter={StaticResource EnumToNameConverter}}"
                             FontSize="25" 
-
                             VerticalAlignment="Center" 
                             Margin="40,0,0,0" 
                             Foreground="Black" 
                             FontWeight="Bold"/>
 
                         <!-- Info du compte connecté-->
-                    <Grid HorizontalAlignment="Right"   >
+                    <Grid HorizontalAlignment="Right"   Width="300">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10*" />
                             <ColumnDefinition Width="10*" />
                         </Grid.ColumnDefinitions>
                         <!-- Image du compte  -->
-
                         <Image 
                             Grid.Column="0" 
                             Source="/Images/logoEtiq.png" 
@@ -214,8 +210,6 @@
                     NavigationUIVisibility="Hidden"/>
                 
             </Grid>
-
-        </Viewbox>
 
     </Grid>
 </Window>
