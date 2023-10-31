@@ -25,15 +25,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatAcompteManager()
         {
-            try
-            {
-                dao = new Couche_Data.Dao.StatAcompteDAO();
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine("Impossible de se connecter à la base de donnée GV2 : " + error.Message);
-                dao = new GalliumPlusApi.Dao.StatAcompteDAO();
-            }
+            dao = new Couche_Data.Dao.StatAcompteDAO();
             this.statAcompteList = new List<StatAcompte>();
             Task.Run(() => this.statAcompteList = dao.GetStat());
 

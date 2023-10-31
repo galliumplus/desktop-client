@@ -288,7 +288,7 @@ namespace Couche_IHM.VueModeles
         {
             // Mise à jour data
             CategoryViewModel cat = new CategoryViewModel(this.categoryManager, new Category(0, "New", true));
-            if (MessageBoxErrorHandler.Handle(() => this.categoryManager.CreateCategory(cat.Category)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.categoryManager.CreateCategory(cat.Category)))
             {
 
                 // Notifier la vue

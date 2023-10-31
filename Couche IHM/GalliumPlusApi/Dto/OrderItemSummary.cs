@@ -1,34 +1,16 @@
-﻿/*using GalliumPlus.WebApi.Core.Data;
-using GalliumPlus.WebApi.Core.Orders;
-using System.ComponentModel.DataAnnotations;
-
-namespace GalliumPlus.WebApi.Dto
+﻿namespace GalliumPlusApi.Dto
 {
     public class OrderItemSummary
     {
-        [Required] public int? Product { get; set; }
-        [Required] public int? Quantity { get; set; }
+        public int Product { get; set; }
+        public int Quantity { get; set; }
 
-        public class Mapper : Mapper<OrderItem, OrderItemSummary>
+        public class Mapper : Mapper<KeyValuePair<int, int>, OrderItemSummary>
         {
-            private IProductDao productDao;
-
-            public Mapper(IProductDao productDao)
+            public override OrderItemSummary FromModel(KeyValuePair<int, int> model)
             {
-                this.productDao = productDao;
-            }
-
-            public override OrderItemSummary FromModel(OrderItem model)
-            {
-                // ne sort jamais du serveur !
-                throw new NotImplementedException();
-            }
-
-            public override OrderItem ToModel(OrderItemSummary dto)
-            {
-                return new OrderItem(this.productDao.Read(dto.Product!.Value), dto.Quantity!.Value);
+                return new OrderItemSummary { Product = model.Key, Quantity = model.Value };
             }
         }
     }
 }
-*/

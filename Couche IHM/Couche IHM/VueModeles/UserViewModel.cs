@@ -174,21 +174,24 @@ namespace Couche_IHM.VueModeles
                 {
                     this.user.HashedPassword = CryptString.Hash(this.mdpIHM2);
                 }
-                this.userManager.UpdateCompte(this.user);
-                this.MdpIHM1 = "";
-                this.MdpIHM2 = "";
 
-                // Log l'action
-                Log log = new Log(DateTime.Now, 6, $"Modification du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                MainWindowViewModel.Instance.LogManager.CreateLog(log);
+                if (MessageBoxErrorHandler.DoesntThrow(() => this.userManager.UpdateCompte(this.user)))
+                {
+                    this.MdpIHM1 = "";
+                    this.MdpIHM2 = "";
 
-                // Notifier la vue
-                NotifyPropertyChanged(nameof(this.NomCompletIHM));
-                NotifyPropertyChanged(nameof(this.NomIHM));
-                NotifyPropertyChanged(nameof(this.PrenomIHM));
-                NotifyPropertyChanged(nameof(this.EmailIHM));
-                NotifyPropertyChanged(nameof(this.RoleIHM));
-                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                    // Log l'action
+                    Log log = new Log(DateTime.Now, 6, $"Modification du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                    MainWindowViewModel.Instance.LogManager.CreateLog(log);
+
+                    // Notifier la vue
+                    NotifyPropertyChanged(nameof(this.NomCompletIHM));
+                    NotifyPropertyChanged(nameof(this.NomIHM));
+                    NotifyPropertyChanged(nameof(this.PrenomIHM));
+                    NotifyPropertyChanged(nameof(this.EmailIHM));
+                    NotifyPropertyChanged(nameof(this.RoleIHM));
+                    MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                }
                 MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
             }
             else
@@ -271,15 +274,16 @@ namespace Couche_IHM.VueModeles
         public void DeleteUser()
         {
             // Initialisation propriétés
-            this.userManager.RemoveCompte(this.user);
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.userManager.RemoveCompte(this.user)))
+            {
+                // Log l'action
+                Log log = new Log(DateTime.Now, 6, $"Suppression du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
-            // Log l'action
-            Log log = new Log(DateTime.Now, 6, $"Suppression du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
-
-            // Notifier la vue
-            MainWindowViewModel.Instance.UserViewModel.RemoveUser(this);
-            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                // Notifier la vue
+                MainWindowViewModel.Instance.UserViewModel.RemoveUser(this);
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+            }
             MainWindowViewModel.Instance.UserViewModel.ShowModifCreateUser = false;
             ShowConfirmationDelete = false;
         }

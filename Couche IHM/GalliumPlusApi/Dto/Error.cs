@@ -19,7 +19,7 @@ namespace GalliumPlusApi.Dto
             {
                 StringBuilder sb = new();
                 sb.Append(Message);
-
+#if DEBUG
                 if (DebugInfo != null)
                 {
                     sb.Append("\n\nInformations de débogage:\n");
@@ -29,6 +29,7 @@ namespace GalliumPlusApi.Dto
                 {
                     sb.Append("\n\nAucune informations de débogage.");
                 }
+#endif
                 return sb.ToString();
             }
         }

@@ -108,7 +108,7 @@ namespace Couche_IHM.VueModeles
         {
             // Mise à jour data
             category.NomCategory = this.nomCat;
-            MessageBoxErrorHandler.Handle(()=> this.categoryManager.UpdateCategory(category));
+            MessageBoxErrorHandler.DoesntThrow(()=> this.categoryManager.UpdateCategory(category));
         }
 
 
@@ -130,7 +130,7 @@ namespace Couche_IHM.VueModeles
         public void DeleteCategory()
         {
             // Mise à jour data
-            if (MessageBoxErrorHandler.Handle(() => this.categoryManager.DeleteCategory(category)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.categoryManager.DeleteCategory(category)))
             {
                 foreach (ProductViewModel prod in MainWindowViewModel.Instance.ProductViewModel.Products.ToList().FindAll(x => x.CategoryIHM == this))
                 {

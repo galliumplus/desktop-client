@@ -9,10 +9,10 @@ namespace Couche_IHM
     {
         public static Action<T> AttachToAction<T>(Action<T> action)
         {
-            return input => Handle(() => action(input));
+            return input => DoesntThrow(() => action(input));
         }
 
-        public static bool Handle(Action action)
+        public static bool DoesntThrow(Action action)
         {
             try
             {

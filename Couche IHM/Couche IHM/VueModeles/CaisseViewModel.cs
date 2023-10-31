@@ -15,7 +15,7 @@ namespace Couche_IHM.VueModeles
     public class CaisseViewModel : INotifyPropertyChanged
     {
         #region attributes
-        private ObservableDictionary<ProductViewModel,int> productOrder = new ObservableDictionary<ProductViewModel,int>();
+        private ObservableDictionary<ProductViewModel, int> productOrder = new ObservableDictionary<ProductViewModel, int>();
         private string currentPaiement;
         private bool showPayAcompte = false;
         private bool showPayPaypal = false;
@@ -26,23 +26,25 @@ namespace Couche_IHM.VueModeles
         private AcompteViewModel adherentPayer = null;
         private StatProduitManager statProduitManager;
         private StatAcompteManager statAcompteManager;
+        private OrderManager orderManager;
         #endregion
 
         #region constructor
         /// <summary>
         /// Constructeur de caisse vue modele
         /// </summary>
-        public CaisseViewModel(StatAcompteManager statAcompte,StatProduitManager statProduit)
+        public CaisseViewModel(StatAcompteManager statAcompte, StatProduitManager statProduit, OrderManager orderManager)
         {
             // Initialisation objets métier
             this.statProduitManager = statProduit;
             this.statAcompteManager = statAcompte;
+            this.orderManager = orderManager;
 
             // Initialisation events
             this.AddProd = new RelayCommand(prodIHM => AddProduct(prodIHM));
             this.RemoveProd = new RelayCommand(prodIHM => RemoveProduct(prodIHM));
             this.ShowPay = new RelayCommand(x => PreviewPayArticles());
-            this.CancelPay = new RelayCommand(x => 
+            this.CancelPay = new RelayCommand(x =>
             {
                 this.ShowPayPaypal = false;
                 this.ShowPayBanque = false;
@@ -57,7 +59,7 @@ namespace Couche_IHM.VueModeles
                 this.NotifyPropertyChanged(nameof(this.PriceAdherIHM));
 
                 this.NotifyPropertyChanged(nameof(this.PriceNonAdherIHM));
-                });
+            });
             this.CurrentPaiement = Paiements[0];
         }
         #endregion
@@ -76,7 +78,7 @@ namespace Couche_IHM.VueModeles
         public RelayCommand AddProd { get; set; }
         public RelayCommand RemoveProd { get; set; }
         public RelayCommand CancelPay { get; set; }
-        public RelayCommand Pay { get; set; }   
+        public RelayCommand Pay { get; set; }
         public RelayCommand ShowPay { get; set; }
         #endregion
 
@@ -104,7 +106,7 @@ namespace Couche_IHM.VueModeles
                 float prixTotal = 0.00f;
                 foreach (ProductViewModel product in productOrder.Keys)
                 {
-                  prixTotal += (float)ConverterFormatArgent.ConvertToDouble(product.PrixAdherentIHM) * productOrder[product];
+                    prixTotal += (float)ConverterFormatArgent.ConvertToDouble(product.PrixAdherentIHM) * productOrder[product];
                 }
                 return prixTotal;
             }
@@ -150,19 +152,19 @@ namespace Couche_IHM.VueModeles
         /// Représente les produits du panier
         /// </summary>
         public ObservableDictionary<ProductViewModel, int> ProductOrder
-        { 
-            get => productOrder; 
-            set => productOrder = value; 
+        {
+            get => productOrder;
+            set => productOrder = value;
         }
 
         /// <summary>
         /// Représente le moyen de paiement sélectionné
         /// </summary>
-        public string CurrentPaiement 
-        { 
+        public string CurrentPaiement
+        {
             get => currentPaiement;
-            set 
-            { 
+            set
+            {
                 currentPaiement = value;
                 NotifyPropertyChanged();
             }
@@ -174,18 +176,18 @@ namespace Couche_IHM.VueModeles
         public AcompteViewModel AdherentPayer
         {
             get => adherentPayer;
-            set 
+            set
             {
                 adherentPayer = value;
                 NotifyPropertyChanged();
-            } 
+            }
         }
 
         /// <summary>
         /// Permet d'afficher la sélection d'acompte
         /// </summary>
-        public bool ShowPayAcompte 
-        { 
+        public bool ShowPayAcompte
+        {
             get => showPayAcompte;
             set
             {
@@ -206,11 +208,11 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-        public bool ShowPayPaypal 
-        { 
+        public bool ShowPayPaypal
+        {
             get => showPayPaypal;
-            set 
-            { 
+            set
+            {
                 showPayPaypal = value;
                 NotifyPropertyChanged();
             }
@@ -219,8 +221,8 @@ namespace Couche_IHM.VueModeles
         public bool ShowPayBanque
         {
             get => showPayBanque;
-            set 
-            { 
+            set
+            {
                 showPayBanque = value;
                 NotifyPropertyChanged();
             }
@@ -229,18 +231,18 @@ namespace Couche_IHM.VueModeles
         public string PrixIHM
         {
             get { return prixIhm; }
-            set 
-            { 
+            set
+            {
                 prixIhm = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public bool ShowPayLiquide 
-        { 
+        public bool ShowPayLiquide
+        {
             get => showPayLiquide;
-            set 
-            { 
+            set
+            {
                 showPayLiquide = value;
                 NotifyPropertyChanged();
             }
@@ -251,6 +253,20 @@ namespace Couche_IHM.VueModeles
 
         #region methods
 
+        private record class InfosPaiementAcompte(AcompteViewModel acompte, float argent, float prix);
+
+        private static string FindPaymentCodeFor(string paymentName)
+        {
+            return paymentName switch
+            {
+                "Acompte" => "Deposit",
+                "Paypal" => "Paypal",
+                "Carte" => "CreditCard",
+                "Liquide" => "Cash",
+                _ => throw new ArgumentException($"Méthode de paiement inconnue : « {paymentName} »")
+            };
+        }
+
         /// <summary>
         /// Permet de payer les articles
         /// </summary>
@@ -258,15 +274,13 @@ namespace Couche_IHM.VueModeles
         {
             string messageLog = $"Achat par {currentPaiement} ";
 
-            // Paiement par acompte
             try
             {
-                if (tuple is Tuple<AcompteViewModel, bool> values)
+                InfosPaiementAcompte? paiementAcompte = null;
+                
+                // Paiement par acompte
+                if (tuple is (AcompteViewModel acompte, bool isAdherentCheckboxChecked))
                 {
-                    AcompteViewModel acompte = values.Item1;
-                    bool isAdherentCheckboxChecked = values.Item2;
-
-                    float argent = ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM);
                     float prix;
                     if (isAdherentCheckboxChecked)
                     {
@@ -276,42 +290,60 @@ namespace Couche_IHM.VueModeles
                     {
                         prix = this.PriceNanAdher;
                     }
+                    paiementAcompte = new InfosPaiementAcompte(
+                        acompte,
+                        argent: ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM),
+                        prix
+                    );
 
-                    if (argent - prix < 0)
+                    if (paiementAcompte.argent - prix < 0)
                     {
                         throw new Exception("Pas assez d'argent sur l'acompte");
                     }
 
-                    _ = Task.Run(() =>
-                    {
-                        StatAcompte stat = new StatAcompte(0, DateTime.Now, prix, acompte.Id);
-                        MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
-                        statAcompteManager.CreateStat(stat);
-                    });
-
-                    string prixFormatted = ConverterFormatArgent.ConvertToString(prix);
-                    acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(argent - prix);
-                    messageLog += $"{acompte.IdentifiantIHM} ";
-                    messageLog += $"({prixFormatted}) : ";
-                    acompte.UpdateAcompte(false);
-
+                    orderManager.NewOrder("Deposit", acompte.IdentifiantIHM);
                 }
                 else
                 {
                     if (isAdherent)
                     {
+                        orderManager.NewOrder(
+                            FindPaymentCodeFor(currentPaiement),
+                            Order.ANONYMOUS_MEMBER // le client est un adhérent, juste on sait pas qui
+                        );
                         messageLog += $"({this.PriceAdherIHM}) : ";
                     }
                     else
                     {
+                        orderManager.NewOrder(FindPaymentCodeFor(currentPaiement));
                         messageLog += $"{this.PriceNonAdherIHM} : ";
                     }
                 }
 
-                
-                foreach (ProductViewModel product in productOrder.Keys)
+                foreach (var kvp in productOrder)
                 {
-                    messageLog += product.NomProduitIHM + ", ";
+                    orderManager.CurrentOrder.AddProduct(kvp.Key.Id, kvp.Value);
+                    messageLog += kvp.Key.NomProduitIHM + ", ";
+                }
+
+                // Envoyer le paiement à l'API
+                orderManager.ProcessOrder();
+                
+                // Terminer le paiment par acompte
+                if (paiementAcompte is InfosPaiementAcompte infos)
+                {
+                    _ = Task.Run(() =>
+                    {
+                        StatAcompte stat = new StatAcompte(0, DateTime.Now, infos.prix, infos.acompte.Id);
+                        MainWindowViewModel.Instance.StatViewModel.AddStatAcompte(stat);
+                        statAcompteManager.CreateStat(stat);
+                    });
+
+                    string prixFormatted = ConverterFormatArgent.ConvertToString(infos.prix);
+                    infos.acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(infos.argent - infos.prix);
+                    messageLog += $"{infos.acompte.IdentifiantIHM} ";
+                    messageLog += $"({prixFormatted}) : ";
+                    infos.acompte.UpdateAcompte(false, false);
                 }
 
                 // Gérer les stats 
@@ -323,9 +355,6 @@ namespace Couche_IHM.VueModeles
                             StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
                             MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
                             statProduitManager.CreateStat(stat);
-
-                            product.QuantiteIHM -= productOrder2[product];
-                            product.UpdateProduct(false);
                         }
                     });
 
@@ -341,7 +370,6 @@ namespace Couche_IHM.VueModeles
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
 
 
@@ -376,11 +404,11 @@ namespace Couche_IHM.VueModeles
                         break;
                     case "Liquide":
                         PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
-                        this.ShowPayLiquide=true;
+                        this.ShowPayLiquide = true;
                         break;
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -396,9 +424,9 @@ namespace Couche_IHM.VueModeles
                 if (produitIHM.QuantiteIHM - productOrder[produitIHM] > 0)
                 {
                     this.productOrder[produitIHM]++;
-                    
+
                 }
-                
+
             }
             else
             {

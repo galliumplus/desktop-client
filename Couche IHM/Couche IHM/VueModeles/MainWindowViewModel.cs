@@ -69,6 +69,7 @@ namespace Couche_IHM.VueModeles
         private ProductManager productManager;
         private StatAcompteManager statAcompteManager;
         private StatProduitManager statProduitManager;
+        private OrderManager orderManager;
         #endregion
 
         #region events
@@ -150,9 +151,10 @@ namespace Couche_IHM.VueModeles
             this.acompteManager = new AcompteManager();
             this.statAcompteManager = new StatAcompteManager();
             this.statProduitManager = new StatProduitManager();
+            this.orderManager = new OrderManager();
             this.adherentViewModel = new AcomptesViewModel(acompteManager);
             this.productViewModel = new ProductsViewModel(productManager);
-            this.caisseViewModel = new CaisseViewModel(this.statAcompteManager, this.statProduitManager);
+            this.caisseViewModel = new CaisseViewModel(this.statAcompteManager, this.statProduitManager, this.orderManager);
             this.statViewModel = new StatistiqueViewModel(productManager, acompteManager, statAcompteManager, statProduitManager);
             this.logsViewModel = new LogsViewModel(userManager, logManager);
             this.userViewModel = new UsersViewModel(this.userManager);

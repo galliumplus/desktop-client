@@ -16,5 +16,10 @@
         {
             throw new InvalidOperationException("Ce DTO ne doit pas sortir !! >:(");
         }
+
+        public IEnumerable<TDto> FromModel(IEnumerable<TModel> models)
+        {
+            foreach (TModel model in models) yield return FromModel(model);
+        }
     }
 }

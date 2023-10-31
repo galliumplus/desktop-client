@@ -289,7 +289,7 @@ namespace Couche_IHM.VueModeles
                 this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
                 this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
-                if (MessageBoxErrorHandler.Handle(() => this.productManager.UpdateProduct(this.product)))
+                if (MessageBoxErrorHandler.DoesntThrow(() => this.productManager.UpdateProduct(this.product)))
                 {
 
                     // Notifier la vue
@@ -315,7 +315,7 @@ namespace Couche_IHM.VueModeles
         public void DeleteProduct()
         {
             // Changer la data
-            if (MessageBoxErrorHandler.Handle(() => this.productManager.RemoveProduct(this.product)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.productManager.RemoveProduct(this.product)))
             {
 
                 // Log l'action
@@ -349,7 +349,7 @@ namespace Couche_IHM.VueModeles
                 this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
                 this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
 
-                if (MessageBoxErrorHandler.Handle(() => this.productManager.CreateProduct(this.product)))
+                if (MessageBoxErrorHandler.DoesntThrow(() => this.productManager.CreateProduct(this.product)))
                 {
                     this.action = "UPDATE";
 

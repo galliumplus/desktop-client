@@ -172,7 +172,7 @@ namespace Couche_IHM.VueModeles
         private void DeleteAcompte()
         {
             // Modifier la data
-            if (MessageBoxErrorHandler.Handle(() => this.acompteManager.RemoveAdhérent(this.acompte)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.acompteManager.RemoveAdhérent(this.acompte)))
             {
                 // Log l'action
                 Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
@@ -201,7 +201,7 @@ namespace Couche_IHM.VueModeles
             this.acompte.StillAdherent = this.isAdherentIHM;
             this.action = "UPDATE";
             
-            if (MessageBoxErrorHandler.Handle(() => acompteManager.CreateAdhérent(this.acompte)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => acompteManager.CreateAdhérent(this.acompte)))
             {
                 // Log l'action
                 Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
@@ -222,7 +222,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
-        public void UpdateAcompte(bool doLog = true)
+        public void UpdateAcompte(bool doLog = true, bool persistChanges = true)
         {
             // Log l'action
             float argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
@@ -252,7 +252,7 @@ namespace Couche_IHM.VueModeles
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.StillAdherent = this.isAdherentIHM;
 
-            if (MessageBoxErrorHandler.Handle(() => acompteManager.UpdateAdhérent(this.acompte)))
+            if (persistChanges && MessageBoxErrorHandler.DoesntThrow(() => acompteManager.UpdateAdhérent(this.acompte)))
             {
                 // Notifier la vue
                 NotifyPropertyChanged(nameof(IdentifiantIHM));

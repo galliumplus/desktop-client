@@ -24,16 +24,7 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatProduitManager()
         {
-
-            try
-            {
-                dao = new Couche_Data.Dao.StatProduitDAO();
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine("Impossible de se connecter à la base de donnée GV2 : " + error.Message);
-                dao = new GalliumPlusApi.Dao.StatProduitDAO();
-            }
+            dao = new Couche_Data.Dao.StatProduitDAO();
             statProduitList = new();
             Task.Run(()=> statProduitList = dao.GetStat());
         }
