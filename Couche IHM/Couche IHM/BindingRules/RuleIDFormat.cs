@@ -27,28 +27,23 @@ namespace Couche_IHM.BindingRules
 
             AcompteViewModel adh = MainWindowViewModel.Instance.AdherentViewModel.CurrentAcompte;
             string identifiant = (string)value;
-            if (identifiant.Length == 0)
+            if (identifiant.Length > 2)
             {
-                result = new ValidationResult(false, "Veuillez saisir un nom d'utilisateur");
-            }
-            else if (identifiant.Length > 20)
-            {
-                result = new ValidationResult(false, "Un nom d'utilisateur ne peut pas dépasser 20 caractères");
+                string nom = adh.NomIHM;
+                string prenom = adh.PrenomIHM;
+                if (identifiant[0] != prenom.ToLower()[0] || identifiant[1] != nom.ToLower()[0])
+                {
+                    result = new ValidationResult(false, "Format invalide");
+                }
             }
             else
             {
-                if (identifiant.Any(c => !IsAsciiAndLowerCaseLetterOrDigit(c)))
-                {
-                    result = new ValidationResult(false, "Un nom d'utilisateur doit comprendre uniquement des lettre minuscules et des chiffres");
-                }
+                result = new ValidationResult(false, "Format invalide");
             }
+           
+            
 
             return result;
-        }
-
-        private static bool IsAsciiAndLowerCaseLetterOrDigit(char c)
-        {
-            return char.IsAscii(c) && (char.IsLower(c) || char.IsDigit(c));
         }
     }
 }
