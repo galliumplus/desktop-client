@@ -10,9 +10,7 @@ namespace Couche_Data.Dao
 
         public List<StatProduit> GetStat()
         {
-            //Connection
-            string connString = "nope";
-            MySqlConnection sql = new MySqlConnection(connString);
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
             sql.Open();
 
             //Requette SQL

@@ -1,5 +1,4 @@
-﻿using Couche_Data;
-using Couche_Data.Dao;
+﻿using Couche_Data.Dao;
 using Couche_Data.Interfaces;
 using GalliumPlusApi.Dao;
 using Modeles;
@@ -26,7 +25,15 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatAcompteManager()
         {
-            dao = new GalliumPlusApi.Dao.StatAcompteDAO();
+            try
+            {
+                dao = new Couche_Data.Dao.StatAcompteDAO();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Impossible de se connecter à la base de donnée GV2 : " + error.Message);
+                dao = new GalliumPlusApi.Dao.StatAcompteDAO();
+            }
             this.statAcompteList = new List<StatAcompte>();
             Task.Run(() => this.statAcompteList = dao.GetStat());
 

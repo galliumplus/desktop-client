@@ -11,8 +11,7 @@ namespace Couche_Data.Dao
         public List<StatAcompte> GetStat()
         {
             //Connection
-            string connString ="nope";
-            MySqlConnection sql = new MySqlConnection(connString);
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
             sql.Open();
 
             //Requette SQL
