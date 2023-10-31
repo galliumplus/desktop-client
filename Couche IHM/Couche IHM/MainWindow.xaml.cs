@@ -18,10 +18,11 @@ namespace Couche_IHM
         /// <summary>
         /// Constructeur de la mainwindow
         /// </summary>
-        public MainWindow(User user,LogManager logManager,UserManager userManager)
+        public MainWindow(User user)
         {
             InitializeComponent();
-            MainWindowViewModel.Instance.CompteConnected = new UserViewModel(user,userManager);
+            var mwvm = MainWindowViewModel.GetInstanceFor(this);
+            mwvm.CompteConnected = new UserViewModel(user, mwvm.UserManager);
             DataContext = MainWindowViewModel.Instance;
         }
 
@@ -31,6 +32,11 @@ namespace Couche_IHM
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Disconnect(object sender, RoutedEventArgs e)
+        {
+            this.AskToDisconnect();
+        }
+
+        public void AskToDisconnect()
         {
             ConnexionIHM connexionIHM = new ConnexionIHM();
             connexionIHM.Show();

@@ -1,5 +1,7 @@
 ﻿using Couche_Data.Interfaces;
+using GalliumPlusApi.CompatibilityHelpers;
 using GalliumPlusApi.Dto;
+using GalliumPlusApi.ModelDecorators;
 using Modeles;
 using System.Diagnostics;
 
@@ -7,12 +9,17 @@ namespace GalliumPlusApi.Dao
 {
     public class UserDao : IUserDAO
     {
-        private UserSummary.UserMapper usMapper = new();
-        private RoleDetails.Mapper rdMapper = new();
+        private UserSummary.UserMapper userMapper = new();
+        private RoleDetails.Mapper roleMapper = new();
 
         public void CreateCompte(User compte)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            compte.ID = UserIdRepository.Current.GetIdFor(RandomHelper.RandomUsername());
+
+            client.Post("v1/users", userMapper.FromModel(compte));
         }
 
         public List<User> GetComptes()
@@ -25,10 +32,12 @@ namespace GalliumPlusApi.Dao
                 var roles = client.Get<List<RoleDetails>>("v1/roles");
                 int adherentRoleId = roles.Find(role => role.Name == "Adhérent")?.Id ?? -1;
 
+                SessionStorage.Current.Put("adherentRoleId", adherentRoleId);
+
                 var users = client.Get<List<UserSummary>>("v1/users")
                                   .Where(user => user.Role != adherentRoleId);
 
-                return usMapper.ToModel(users).ToList();
+                return userMapper.ToModel(users).ToList();
             }
             catch (Exception ex)
             {
@@ -46,7 +55,7 @@ namespace GalliumPlusApi.Dao
             {
                 var roles = client.Get<List<RoleDetails>>("v1/roles");
 
-                return rdMapper.ToModel(roles).ToList();
+                return roleMapper.ToModel(roles).ToList();
             }
             catch (Exception ex)
             {
@@ -57,12 +66,30 @@ namespace GalliumPlusApi.Dao
 
         public void RemoveCompte(User compte)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            string username = UserIdRepository.Current.FindUsernameOf(compte.ID);
+
+            client.Delete($"v1/users/{username}");
         }
 
         public void UpdateCompte(User compte)
         {
-            throw new NotImplementedException();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
+
+            string username = UserIdRepository.Current.FindUsernameOf(compte.ID);
+
+            if (compte is DecoratedUser deco)
+            {
+                client.Put($"v1/users/{username}", userMapper.FromModel(deco));
+            }
+            else
+            {
+                var original = client.Get<UserDetails>($"v1/users/{username}");
+                client.Put($"v1/products/{username}", userMapper.PatchWithModel(original, compte));
+            }
         }
     }
 }

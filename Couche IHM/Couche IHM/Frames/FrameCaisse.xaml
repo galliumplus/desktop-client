@@ -65,22 +65,20 @@
                 Height="2"/>
         </StackPanel>
         <ScrollViewer Margin="0,40,0,0"  Grid.Column="1"  Grid.Row="0" VerticalScrollBarVisibility="Hidden">
-            <ListView ItemsSource="{Binding CaisseViewModel.ProductOrder}" >
-                <ListView.Template>
-                    <ControlTemplate>
-                        <DockPanel LastChildFill="True">
-                            <ItemsPresenter ></ItemsPresenter>
-                        </DockPanel>
-                    </ControlTemplate>
-                </ListView.Template>
-                <ListView.ItemTemplate  >
+            <ItemsControl ItemsSource="{Binding CaisseViewModel.ProductOrder}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate  >
                     <DataTemplate  >
 
-                        <Grid  Width="375">
+                        <Grid HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="20"/>
                             </Grid.ColumnDefinitions>
                             <Label 
                                 Content="{Binding Key.NomProduitIHM}" 
@@ -115,8 +113,8 @@
 
                         </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
 
         <!-- Information de paiement -->

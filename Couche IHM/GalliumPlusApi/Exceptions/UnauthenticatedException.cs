@@ -2,6 +2,6 @@
 {
     public class UnauthenticatedException : GalliumPlusHttpException
     {
-        public UnauthenticatedException() : base() { }
+        public UnauthenticatedException() : base("Requête non authentifiée.") { }
     }
 }

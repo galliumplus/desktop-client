@@ -463,7 +463,7 @@
                         Margin="20,20,20,10"
                         materialDesign:HintAssist.Hint="Identifiant de l'acompte"
                         Style="{StaticResource MaterialDesignFilledTextBox}" 
-                        MaxLength="8">
+                        MaxLength="20">
                         <TextBox.Text>
                             <Binding 
                                         Path="AdherentViewModel.CurrentAcompte.IdentifiantIHM"

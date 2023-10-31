@@ -79,8 +79,8 @@ namespace GalliumPlusApi.Dto
         {
             public override UserSummary FromModel(Acompte model)
             {
-                string email = "";
-                int roleId = -1;
+                string email = "UKN";
+                int roleId = SessionStorage.Current.Get<int>("adherentRoleId");
                 if (model is DecoratedAcompte deco)
                 {
                     email = deco.Email;

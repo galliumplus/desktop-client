@@ -18,16 +18,16 @@ namespace Couche_IHM.VueModeles
     {
         #region singleton
         private static MainWindowViewModel instance = null;
-        public static MainWindowViewModel Instance
+
+        public static MainWindowViewModel Instance => instance ?? throw new NullReferenceException("Le MainWindowViewModel doit d'abord être instancié par la fenêtre.");
+
+        public static MainWindowViewModel GetInstanceFor(MainWindow mainWindow)
         {
-            get
+            if (instance == null)
             {
-                if (instance == null)
-                {
-                    instance = new MainWindowViewModel();
-                }
-                return instance;
+                instance = new MainWindowViewModel(mainWindow);
             }
+            return instance;
         }
         #endregion
 
@@ -48,6 +48,7 @@ namespace Couche_IHM.VueModeles
         private LogsViewModel logsViewModel;
         private UsersViewModel userViewModel;
         private StatistiqueViewModel statViewModel;
+        private MainWindow mainWindow;
         #endregion
 
         #region notify
@@ -133,30 +134,31 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-      
 
+        public MainWindow MainWindow => mainWindow;
 
         #endregion
 
         /// <summary>
         /// Constructeur du mainwindow vue modele
         /// </summary>
-        private MainWindowViewModel()
+        private MainWindowViewModel(MainWindow mainWindow)
         {
-            this.logManager = new LogManager();    
-            this.userManager = new UserManager();         
+            this.logManager = new LogManager();
+            this.userManager = new UserManager();
             this.productManager = new ProductManager();
             this.acompteManager = new AcompteManager();
             this.statAcompteManager = new StatAcompteManager();
             this.statProduitManager = new StatProduitManager();
             this.adherentViewModel = new AcomptesViewModel(acompteManager);
             this.productViewModel = new ProductsViewModel(productManager);
-            this.caisseViewModel = new CaisseViewModel(this.statAcompteManager,this.statProduitManager);
-            this.statViewModel = new StatistiqueViewModel(productManager, acompteManager,statAcompteManager,statProduitManager);
+            this.caisseViewModel = new CaisseViewModel(this.statAcompteManager, this.statProduitManager);
+            this.statViewModel = new StatistiqueViewModel(productManager, acompteManager, statAcompteManager, statProduitManager);
             this.logsViewModel = new LogsViewModel(userManager, logManager);
             this.userViewModel = new UsersViewModel(this.userManager);
             this.partenariatViewModel = new PartenariatViewModel();
-            
+            this.mainWindow = mainWindow;
+
             // Initialisation des events
             this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
         }

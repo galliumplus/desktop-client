@@ -172,19 +172,19 @@ namespace Couche_IHM.VueModeles
         private void DeleteAcompte()
         {
             // Modifier la data
-            this.acompteManager.RemoveAdhérent(this.acompte);
+            if (MessageBoxErrorHandler.Handle(() => this.acompteManager.RemoveAdhérent(this.acompte)))
+            {
+                // Log l'action
+                Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
-            // Log l'action
-            Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
-
-            // Notifier la vue
-            MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
-            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+                // Notifier la vue
+                MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
+                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+            }
             ShowConfirmationDelete = false;
-
         }
 
         /// <summary>
@@ -192,7 +192,6 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private void CreateAcompte()
         {
-
             // Changer la data
             this.acompte.Nom = this.nomIHM;
             this.acompte.Prenom = this.prenomIHM;
@@ -201,30 +200,30 @@ namespace Couche_IHM.VueModeles
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.StillAdherent = this.isAdherentIHM;
             this.action = "UPDATE";
-            acompteManager.CreateAdhérent(this.acompte);
+            
+            if (MessageBoxErrorHandler.Handle(() => acompteManager.CreateAdhérent(this.acompte)))
+            {
+                // Log l'action
+                Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
-            // Log l'action
-            Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-            MainWindowViewModel.Instance.LogManager.CreateLog(log);
-
-            // Notifier la vue
-            MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
-            NotifyPropertyChanged(nameof(this.Action));
-            NotifyPropertyChanged(nameof(IdentifiantIHM));
-            NotifyPropertyChanged(nameof(ArgentIHM));
-            NotifyPropertyChanged(nameof(NomCompletIHM));
-            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+                // Notifier la vue
+                MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
+                NotifyPropertyChanged(nameof(this.Action));
+                NotifyPropertyChanged(nameof(IdentifiantIHM));
+                NotifyPropertyChanged(nameof(ArgentIHM));
+                NotifyPropertyChanged(nameof(NomCompletIHM));
+                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+            }
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }
-
 
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
         public void UpdateAcompte(bool doLog = true)
         {
-
             // Log l'action
             float argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
             if (doLog && acompte.Argent != argent)
@@ -244,7 +243,6 @@ namespace Couche_IHM.VueModeles
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
                 MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             }
-            
 
             // Changer la data
             this.acompte.Nom = this.nomIHM;
@@ -253,12 +251,14 @@ namespace Couche_IHM.VueModeles
             this.acompte.Formation = this.formationIHM;
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.StillAdherent = this.isAdherentIHM;
-            acompteManager.UpdateAdhérent(this.acompte);
 
-            // Notifier la vue
-            NotifyPropertyChanged(nameof(IdentifiantIHM));
-            NotifyPropertyChanged(nameof(ArgentIHM));
-            NotifyPropertyChanged(nameof(NomCompletIHM));
+            if (MessageBoxErrorHandler.Handle(() => acompteManager.UpdateAdhérent(this.acompte)))
+            {
+                // Notifier la vue
+                NotifyPropertyChanged(nameof(IdentifiantIHM));
+                NotifyPropertyChanged(nameof(ArgentIHM));
+                NotifyPropertyChanged(nameof(NomCompletIHM));
+            }
             MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
             MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
         }

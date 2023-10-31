@@ -149,9 +149,9 @@ namespace Couche_IHM.VueModeles
             {
             MainWindowViewModel.Instance.UserViewModel.CurrentUser = this;
                 MainWindowViewModel.Instance.UserViewModel.OpenUserDetails("UPDATE"); });
-            this.UpdateU = new RelayCommand(x => this.UpdateUser());
-            this.CreateU = new RelayCommand(x => this.CreateUser());
-            this.DeleteU = new RelayCommand(x => this.DeleteUser());
+            this.UpdateU = new RelayCommand(MessageBoxErrorHandler.AttachToAction<object>(x => this.UpdateUser()));
+            this.CreateU = new RelayCommand(MessageBoxErrorHandler.AttachToAction<object>(x => this.CreateUser()));
+            this.DeleteU = new RelayCommand(MessageBoxErrorHandler.AttachToAction<object>(x => this.DeleteUser()));
             this.CancelDeleteU= new RelayCommand(x => ShowConfirmationDelete = false);
             this.PreviewDeleteU = new RelayCommand(x => this.ShowConfirmationDelete = true);
         }

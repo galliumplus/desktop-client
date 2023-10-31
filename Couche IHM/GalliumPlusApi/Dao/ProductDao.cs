@@ -51,7 +51,7 @@ namespace GalliumPlusApi.Dao
 
             if (product is DecoratedProduct deco)
             {
-                client.Put($"v1/products/{product.ID}", mapper.FromModel(product));
+                client.Put($"v1/products/{product.ID}", mapper.FromModel(deco));
             }
             else
             {

@@ -56,14 +56,15 @@ namespace Couche_IHM
                     User? user = UserManager.ConnectCompte(identifiant, password);
                     if (user != null)
                     {
+                        MainWindow mainWindow = new MainWindow(user);
+                        mainWindow.Show();
+                        this.Close();
+
                         userManager = MainWindowViewModel.Instance.UserManager;
                         logManager = MainWindowViewModel.Instance.LogManager;
                         Log log = new Log(DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
                         logManager.CreateLog(log);
                         MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-                        MainWindow mainWindow = new MainWindow(user, logManager, userManager);
-                        mainWindow.Show();
-                        this.Close();
                     }
                     else
                     {
