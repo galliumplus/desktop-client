@@ -25,8 +25,8 @@
 
         private ApiConfig()
         {
-            apiKey = "test-api-key-normal";
-            host = "localhost:5443";
+            apiKey = "test-api-key";
+            host = "api.gallium.etiq-dijon.fr";
         }
     }
 }

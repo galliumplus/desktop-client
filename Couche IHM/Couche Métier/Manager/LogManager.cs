@@ -27,11 +27,10 @@ namespace Couche_Métier.Manager
             logDao = new LogDAO();
             Task.Run(() =>
             {
-                int annee = Convert.ToInt16(DateTime.Now.ToString("yyyy"));
-                int mois = Convert.ToInt16(DateTime.Now.ToString("MM"));
+                int annee = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+                int mois = Convert.ToInt32(DateTime.Now.ToString("MM"));
                 this.logs = this.logDao.GetLogs(mois, annee);
             });
-
         }
         #endregion
 

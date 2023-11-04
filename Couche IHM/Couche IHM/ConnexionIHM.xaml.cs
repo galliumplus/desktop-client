@@ -29,9 +29,6 @@ namespace Couche_IHM
             DataContext = this;
             this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
             ImageManager.VerifyFiles();
-
-            Identifiant = "eb069420";
-            Password = "motdepasse";
         }
 
         public string Identifiant { get => identifiant; set => identifiant = value; }

@@ -16,7 +16,7 @@ namespace GalliumPlusApi.Dto
 
             public override Category ToModel(CategoryDetails dto)
             {
-                return new Category(dto.Id, dto.Name, true);
+                return new Category(dto.Id, dto.Name, dto.Name != "Hidden");
             }
         }
     }
