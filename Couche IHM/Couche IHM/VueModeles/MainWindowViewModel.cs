@@ -162,7 +162,23 @@ namespace Couche_IHM.VueModeles
             this.mainWindow = mainWindow;
 
             // Initialisation des events
-            this.ChangeFrame = new RelayCommand(fram => this.Frame = (Frame)fram);
+            this.ChangeFrame = new RelayCommand(fram => ChangeFrameInit((Frame)fram));
+        }
+
+        /// <summary>
+        /// Permet de changer de frame et d'initialiser des données voulues
+        /// </summary>
+        /// <param name="frame">Nouvelle frame à afficher</param>
+        private void ChangeFrameInit(Frame frame)
+        {
+            switch (frame)
+            {
+                case Frame.FRAMECAISSE:
+                    this.productViewModel.SearchFilter = "";
+                    this.adherentViewModel.SearchFilter = "";
+                    break;
+            }
+            this.Frame = frame;
         }
     }
 }
