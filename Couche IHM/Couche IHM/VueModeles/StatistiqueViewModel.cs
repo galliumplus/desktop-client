@@ -70,8 +70,8 @@ namespace Couche_IHM.VueModeles
             this.acompteManager = acompteManager;
             
             // Initialisation des datas
-            InitStatsProduit();
-            InitStatsAcompte();
+            //InitStatsProduit();
+            //InitStatsAcompte();
         }
         #endregion
 

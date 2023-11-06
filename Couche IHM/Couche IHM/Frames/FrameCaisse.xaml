@@ -91,7 +91,7 @@
                             <Button 
                                 Style="{StaticResource buttonImage}" 
                                 Command="{Binding DataContext.CaisseViewModel.RemoveProd, 
-                                    RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                    RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}}}"
                                 CommandParameter="{Binding Key}"
                                 HorizontalAlignment="Right"  
                                 Height="14" 
