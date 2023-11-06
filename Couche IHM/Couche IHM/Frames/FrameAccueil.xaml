@@ -42,7 +42,7 @@
             Orientation="Horizontal" 
             Grid.Row="1"
             HorizontalAlignment="Center"
-            Grid.Column="3"
+            Grid.Column="2"
             Grid.ColumnSpan="2">
             <materialDesign:PackIcon
                 Foreground="{StaticResource galliumColor}"
