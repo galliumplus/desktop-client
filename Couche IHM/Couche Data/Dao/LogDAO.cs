@@ -31,11 +31,11 @@ namespace Couche_Data.Dao
         public List<Log> GetLogs(int mois, int annee)
         {
             //Connection
-            string connString = "nope";
+            string connString = dbsDAO.ConnectionString;
             MySqlConnection sql = new MySqlConnection(connString);
             sql.Open();
             //Requette SQL 
-            string stm = $"SELECT * FROM Logs WHERE YEAR(date_at) =  {annee} AND MONTH(date_at) = {mois} ORDER BY date_at DESC";
+            string stm = $"SELECT * FROM logs WHERE YEAR(date_at) =  {annee} AND MONTH(date_at) = {mois} ORDER BY date_at DESC";
             MySqlCommand cmd = new MySqlCommand(stm, sql);
             cmd.Prepare();
 
