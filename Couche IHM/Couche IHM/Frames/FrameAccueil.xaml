@@ -104,10 +104,12 @@
                                 />
 
                             <!-- nom adhenret-->
-                            <materialDesign:Chip     
+                            <materialDesign:Chip  
                                 Grid.Row="0"
                                 Grid.Column="0"
-
+                                Command="{Binding DataContext.StatViewModel.FindAcompte, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                                CommandParameter="{Binding AdherentViewModel}"
                                 Content="{Binding AdherentViewModel.NomCompletIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
@@ -211,6 +213,9 @@
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 HorizontalAlignment="Right"   
+                                Command="{Binding DataContext.StatViewModel.FindProduct, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                                CommandParameter="{Binding ProductViewModel}"
                                 Content="{Binding ProductViewModel.NomProduitIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
