@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -58,6 +59,10 @@ namespace Couche_IHM.VueModeles
 
         #endregion
 
+        #region events
+        public RelayCommand FindAcompte { get; set;}
+        public RelayCommand FindProduct { get; set;}
+        #endregion
         #region constructor
         /// <summary>
         /// Constructeur du statistique vue modele
@@ -70,17 +75,36 @@ namespace Couche_IHM.VueModeles
             this.productManager = produtManager;
             this.acompteManager = acompteManager;
 
+            // Initialisation des events
+            this.FindProduct = new RelayCommand(product => GoToProductDetails((ProductViewModel)product));
+            this.FindAcompte = new RelayCommand(acompte => GoToAcompteDetails((AcompteViewModel)acompte));
+
             // Initialisation des datas
-            Task.Run(() =>
-            {
-                InitStatsProduit();
-                InitStatsAcompte();
-            });
+            InitStatsProduit();
+            InitStatsAcompte();
             
         }
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// Permet de retrouver l'acompte en liant avec la stat et de redirigier sur ses détails
+        /// </summary>
+        private void GoToAcompteDetails(AcompteViewModel acompte)
+        {
+            MainWindowViewModel.Instance.Frame = Frame.FRAMEACOMPTE;
+            MainWindowViewModel.Instance.AdherentViewModel.CurrentAcompte = MainWindowViewModel.Instance.AdherentViewModel.Acomptes.ToList().Find(x => x.Id == acompte.Id);
+        }
+        /// <summary>
+        /// Permet de retrouver le produit en liant avec la stat et de redirigier sur ses détails
+        /// </summary>
+        private void GoToProductDetails(ProductViewModel product)
+        {
+            MainWindowViewModel.Instance.Frame = Frame.FRAMESTOCK;
+            MainWindowViewModel.Instance.ProductViewModel.CurrentProduct = MainWindowViewModel.Instance.ProductViewModel.GetProducts().Find(x => x.Id == product.Id);
+        }
+
         /// <summary>
         /// Permet d'ajouter une stat de produit
         /// </summary>
@@ -124,7 +148,8 @@ namespace Couche_IHM.VueModeles
             List<StatProduit> statProduit = this.statProduitManager.GetStats();
             foreach (StatProduit stat in statProduit)
             {
-                this.statsProduit.Add(new StatProduitViewModel(stat, new ProductViewModel(productManager.GetProducts().Find(x => x.ID == stat.Product_id), null, null, null)));
+                Product productLogic = productManager.GetProducts().Find(x => x.ID == stat.Product_id);
+                this.statsProduit.Add(new StatProduitViewModel(stat, new ProductViewModel(productLogic, null, null, null)));
             }
             NotifyPropertyChanged(nameof(this.PodiumProduits));
         }
