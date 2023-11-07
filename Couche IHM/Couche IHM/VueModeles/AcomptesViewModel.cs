@@ -1,5 +1,6 @@
 ﻿
 using Couche_Métier.Manager;
+using DocumentFormat.OpenXml.Office2016.Presentation.Command;
 using Modeles;
 using System;
 using System.Collections.Generic;
@@ -182,12 +183,21 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region methods
+        private class AcompteComparer : IComparer<Acompte>
+        {
+            public int Compare(Acompte? x, Acompte? y)
+            {
+                return StringComparer.Ordinal.Compare(x?.Identifiant, y?.Identifiant);
+            }
+        }
+
         /// <summary>
         /// Permet de récupérer la liste des acomptes
         /// </summary>
         private void InitAcomptes()
         {
             List<Acompte> adherents = this.acompteManager.GetAdhérents();
+            adherents.Sort(new AcompteComparer());
             foreach (Acompte adh in adherents)
             {
                 this.acomptes.Add(new AcompteViewModel(adh,this.acompteManager));

@@ -229,6 +229,14 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region methods
+        private class ProductComparer : IComparer<Product>
+        {
+            public int Compare(Product? x, Product? y)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         /// <summary>
         /// Permet de récupérer la liste des adhérents
         /// </summary>
