@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Couche_IHM.VueModeles
 {
@@ -68,10 +69,14 @@ namespace Couche_IHM.VueModeles
             this.statAcompteManager = statAcompte;
             this.productManager = produtManager;
             this.acompteManager = acompteManager;
-            
+
             // Initialisation des datas
-            //InitStatsProduit();
-            //InitStatsAcompte();
+            Task.Run(() =>
+            {
+                InitStatsProduit();
+                InitStatsAcompte();
+            });
+            
         }
         #endregion
 
@@ -121,6 +126,7 @@ namespace Couche_IHM.VueModeles
             {
                 this.statsProduit.Add(new StatProduitViewModel(stat, new ProductViewModel(productManager.GetProducts().Find(x => x.ID == stat.Product_id), null, null, null)));
             }
+            NotifyPropertyChanged(nameof(this.PodiumProduits));
         }
 
 
@@ -135,6 +141,7 @@ namespace Couche_IHM.VueModeles
             {
                 this.statsAcompte.Add(new StatAcompteViewModel(stat, new AcompteViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id), null)));
             }
+            NotifyPropertyChanged(nameof(this.PodiumAcompte));
         }
         #endregion
     }

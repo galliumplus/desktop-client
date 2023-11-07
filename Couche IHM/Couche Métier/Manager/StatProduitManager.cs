@@ -25,8 +25,7 @@ namespace Couche_Métier.Manager
         public StatProduitManager()
         {
             dao = new Couche_Data.Dao.StatProduitDAO();
-            statProduitList = new();
-            Task.Run(()=> statProduitList = dao.GetStat());
+
         }
         #endregion
 
@@ -38,6 +37,7 @@ namespace Couche_Métier.Manager
 
         public List<StatProduit> GetStats()
         {
+            statProduitList = dao.GetStat();
             return this.statProduitList;
         }
         #endregion

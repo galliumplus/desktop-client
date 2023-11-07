@@ -27,7 +27,7 @@ namespace Couche_Métier.Manager
         {
             dao = new Couche_Data.Dao.StatAcompteDAO();
             this.statAcompteList = new List<StatAcompte>();
-            Task.Run(() => this.statAcompteList = dao.GetStat());
+            
 
         }
         #endregion
@@ -40,6 +40,7 @@ namespace Couche_Métier.Manager
 
         public List<StatAcompte> GetStats()
         {
+            this.statAcompteList = dao.GetStat();
             return this.statAcompteList;
         }
         #endregion
