@@ -102,30 +102,6 @@ namespace Couche_IHM.VueModeles
         }
 
 
-        /// <summary>
-        /// Est ce que l'utilisateur a accès aux comptes
-        /// </summary>
-        public bool CanSeeCompteBool
-        {
-            get
-            {
-                return true;
-
-            }
-        }
-
-
-        /// <summary>
-        /// Est ce que l'utilisateur a accès aux comptes
-        /// </summary>
-        public double CanSeeCompte
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
         #endregion
 
         #region constructor

@@ -85,8 +85,6 @@
                         CommandParameter="{x:Static vm:Frame.FRAMESTOCK}"
                         Content="Stock"/>
                     <Button 
-                        Opacity="{Binding CompteConnected.CanSeeCompte}"
-                        IsEnabled="{Binding CompteConnected.CanSeeCompteBool}"
                         Height="45" 
                         FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
