@@ -27,6 +27,8 @@ namespace Couche_IHM.VueModeles
         private StatProduitManager statProduitManager;
         private StatAcompteManager statAcompteManager;
         private OrderManager orderManager;
+        private bool retourAcompteArgent = false;
+        private string textArgentAdherentRetour;
         #endregion
 
         #region constructor
@@ -83,6 +85,21 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+        /// <summary>
+        /// Permet d'afficher une popup avec l'argent qu'il reste à l'adhérent
+        /// </summary>
+        public bool RetourAcompteArgent
+        {
+            get
+            {
+                return this.retourAcompteArgent;
+            }
+            set
+            {
+                this.retourAcompteArgent = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Liste des moyens de paiements
@@ -248,6 +265,16 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        public string TextArgentAdherentRetour 
+        { 
+            get => textArgentAdherentRetour;
+            set
+            {
+                textArgentAdherentRetour = value;
+                NotifyPropertyChanged();
+            } 
+        }
+
 
         #endregion
 
@@ -344,6 +371,8 @@ namespace Couche_IHM.VueModeles
                     messageLog += $"{infos.acompte.IdentifiantIHM} ";
                     messageLog += $"({prixFormatted}) : ";
                     infos.acompte.UpdateAcompte(false, false);
+                    this.TextArgentAdherentRetour = $"Il vous reste {infos.acompte.ArgentIHM}";
+                    this.RetourAcompteArgent = true;
                 }
 
                 // Gérer les stats 
@@ -378,7 +407,8 @@ namespace Couche_IHM.VueModeles
             this.ShowPayPaypal = false;
             this.ShowPayLiquide = false;
             this.ShowPayBanque = false;
-
+            
+            
 
         }
 
