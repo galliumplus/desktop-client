@@ -39,7 +39,7 @@
         
         <!-- Title -->
         <StackPanel 
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Orientation="Horizontal" 
             Grid.Row="1"
             HorizontalAlignment="Center"
