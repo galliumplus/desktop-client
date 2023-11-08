@@ -39,6 +39,7 @@
         
         <!-- Title -->
         <StackPanel 
+            VerticalAlignment="Center"
             Orientation="Horizontal" 
             Grid.Row="1"
             HorizontalAlignment="Center"
@@ -53,7 +54,7 @@
                 Kind="Podium"/>
             <TextBlock 
                 Margin="10,0,0,0"
-                FontSize="27"
+                FontSize="29"
                 VerticalAlignment="Bottom"
                 FontWeight="Bold"
                 Text="Top de la semaine"/>
@@ -70,7 +71,7 @@
         <TextBlock 
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            FontSize="20"
+            FontSize="23"
             HorizontalAlignment="Center"
             FontWeight="DemiBold"
             Text="Adhérents fidèles"/>
@@ -98,7 +99,7 @@
                             <TextBlock
                                 HorizontalAlignment="Right"
                                 Margin="0,20,0,0"
-                                FontSize="14"
+                                FontSize="15"
                                 Text="{Binding FormattedArgent}"
                                 Grid.Column="1"
                                 />
@@ -115,12 +116,12 @@
                                     <Style TargetType="materialDesign:Chip">
                                         <Style.Setters>
                                             <Setter Property="IconBackground" Value="#004D40" />
-                                            <Setter Property="FontSize" Value="15"/>
+                                            <Setter Property="FontSize" Value="17"/>
                                         </Style.Setters>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
                                                 <Setter Property="IconBackground" Value="#EDEDED"/>
-                                                <Setter Property="FontSize" Value="14"/>
+                                                <Setter Property="FontSize" Value="16"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -176,7 +177,7 @@
             Grid.Row="2"
             Grid.Column="4"
             Grid.ColumnSpan="2"
-            FontSize="20"
+            FontSize="23"
             HorizontalAlignment="Center"
             FontWeight="DemiBold"
             Text="Meilleures ventes"/>
@@ -206,6 +207,7 @@
                                 Margin="0,20,0,0"
                                 Text="{Binding Path=PurchaseCount, StringFormat=' {0}'}"
                                 Grid.Column="0"
+                                FontSize="15"
                                 />
 
                             <!-- Nom Produit -->
@@ -221,12 +223,12 @@
                                     <Style TargetType="materialDesign:Chip">
                                         <Style.Setters>
                                             <Setter Property="IconBackground" Value="#880E4F" />
-                                            <Setter Property="FontSize" Value="15"/>
+                                            <Setter Property="FontSize" Value="17"/>
                                         </Style.Setters>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ProductViewModel.NomProduitIHM, Converter={StaticResource PositionConverter}}" Value="4">
                                                 <Setter Property="IconBackground" Value="#EDEDED"/>
-                                                <Setter Property="FontSize" Value="14"/>
+                                                <Setter Property="FontSize" Value="16"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
