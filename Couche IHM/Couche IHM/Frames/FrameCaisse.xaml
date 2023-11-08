@@ -229,7 +229,6 @@
                         SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
                         FontSize="16"
                         IsTextSearchEnabled="True" 
-                        TextSearch.TextPath="IdentifiantIHM" 
                         IsEditable="True"/>
                     <StackPanel 
                         Margin="0,20,0,0" 
