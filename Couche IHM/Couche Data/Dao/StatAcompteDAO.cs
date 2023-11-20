@@ -27,7 +27,7 @@ namespace Couche_Data.Dao
                 List<StatAcompte> statAcompteList = new List<StatAcompte>();
                 while (rdr.Read())
                 {
-                    statAcompteList.Add(new StatAcompte(0, DateTime.Now, rdr.GetFloat("argent"), rdr.GetInt16("acompte_id")));
+                    statAcompteList.Add(new StatAcompte(0, DateTime.Now, rdr.GetFloat("argent"), rdr.GetInt32("acompte_id")));
                 }
 
                 rdr.Close();

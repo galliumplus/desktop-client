@@ -33,6 +33,7 @@ namespace GalliumPlusApi.Exceptions
                     "InvalidItem" => new InvalidItemException(error.DetailedMessage),
                     "PermissionDenied" => new PermissionDeniedException(error.DetailedMessage),
                     "ItemNotFound" => new ItemNotFoundException(error.DetailedMessage),
+                    "CantSell" => new CantSellException(error.DetailedMessage),
                     _ => throw new NotImplementedException($"Code d'erreur non géré : « {error.Code} »")
                 };
             }

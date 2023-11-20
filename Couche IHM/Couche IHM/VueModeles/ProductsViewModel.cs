@@ -233,7 +233,7 @@ namespace Couche_IHM.VueModeles
         {
             public int Compare(Product? x, Product? y)
             {
-                throw new NotImplementedException();
+                return StringComparer.CurrentCultureIgnoreCase.Compare(x?.NomProduit, y?.NomProduit);
             }
         }
 
@@ -243,6 +243,7 @@ namespace Couche_IHM.VueModeles
         private void InitProducts()
         {
             List<Product> produitsMetier = this.productManager.GetProducts();
+            produitsMetier.Sort(new ProductComparer());
             List<CategoryViewModel> categories = this.categories.ToList();
             foreach (Product prd in produitsMetier)
             {

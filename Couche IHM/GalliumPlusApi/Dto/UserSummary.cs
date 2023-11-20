@@ -33,7 +33,7 @@ namespace GalliumPlusApi.Dto
 
                 return new UserSummary
                 {
-                    Id = UserIdRepository.Current.FindUsernameOf(user.ID),
+                    Id = UserIdMapper.Current.FindUsernameOf(user.ID),
                     FirstName = user.Prenom,
                     LastName = user.Nom,
                     Email = user.Mail,
@@ -62,7 +62,7 @@ namespace GalliumPlusApi.Dto
             public override User ToModel(UserSummary summary)
             {
                 return new DecoratedUser(
-                    id: UserIdRepository.Current.GetIdFor(summary.Id),
+                    id: UserIdMapper.Current.GetIdFor(summary.Id),
                     nom: summary.LastName,
                     prenom: summary.FirstName,
                     mail: summary.Email,
@@ -118,7 +118,7 @@ namespace GalliumPlusApi.Dto
             public override Acompte ToModel(UserSummary dto)
             {
                 return new DecoratedAcompte(
-                    id: UserIdRepository.Current.GetIdFor(dto.Id),
+                    id: UserIdMapper.Current.GetIdFor(dto.Id),
                     identifiant: dto.Id,
                     nom: dto.LastName,
                     prenom: dto.FirstName,

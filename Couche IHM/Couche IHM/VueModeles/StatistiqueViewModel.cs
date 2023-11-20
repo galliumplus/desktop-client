@@ -164,7 +164,10 @@ namespace Couche_IHM.VueModeles
             List<StatAcompte> statAcompte = this.statAcompteManager.GetStats();
             foreach (StatAcompte stat in statAcompte)
             {
-                this.statsAcompte.Add(new StatAcompteViewModel(stat, new AcompteViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id), null)));
+                if (acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id) is Acompte acompte)
+                {
+                    this.statsAcompte.Add(new StatAcompteViewModel(stat, new AcompteViewModel(acompte, null)));
+                }
             }
             NotifyPropertyChanged(nameof(this.PodiumAcompte));
         }

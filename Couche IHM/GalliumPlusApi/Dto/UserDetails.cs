@@ -33,7 +33,7 @@ namespace GalliumPlusApi.Dto
             public override User ToModel(UserDetails details)
             {
                 return new User(
-                    UserIdRepository.Current.GetIdFor(details.Id),
+                    UserIdMapper.Current.GetIdFor(details.Id),
                     details.LastName,
                     details.FirstName,
                     details.Email,

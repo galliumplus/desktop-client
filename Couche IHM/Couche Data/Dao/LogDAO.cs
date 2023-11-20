@@ -16,8 +16,9 @@ namespace Couche_Data.Dao
 
                 //Requette SQL
                 string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
-                string stm = $"INSERT INTO logs VALUES(0,'{log.Message}','{formattedDate}',{log.Theme},'{log.Auteur}')";
+                string stm = $"INSERT INTO logs VALUES(0,@message,'{formattedDate}',{log.Theme},'{log.Auteur}')";
                 MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
+                cmd.Parameters.AddWithValue("@message", log.Message);
                 cmd.Prepare();
 
                 //lecture de la requette

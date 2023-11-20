@@ -17,7 +17,7 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            compte.ID = UserIdRepository.Current.GetIdFor(RandomHelper.RandomUsername());
+            compte.ID = UserIdMapper.Current.GetIdFor(RandomHelper.RandomUsername());
 
             client.Post("v1/users", userMapper.FromModel(compte));
         }
@@ -69,7 +69,7 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            string username = UserIdRepository.Current.FindUsernameOf(compte.ID);
+            string username = UserIdMapper.Current.FindUsernameOf(compte.ID);
 
             client.Delete($"v1/users/{username}");
         }
@@ -79,7 +79,7 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            string username = UserIdRepository.Current.FindUsernameOf(compte.ID);
+            string username = UserIdMapper.Current.FindUsernameOf(compte.ID);
 
             if (compte is DecoratedUser deco)
             {

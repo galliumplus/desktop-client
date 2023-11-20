@@ -28,7 +28,6 @@ namespace Couche_Métier.Manager
 
             // Récupération des adhérents
             adhérents = adhérentDao.GetAdhérents();
-
         }
         #endregion
 

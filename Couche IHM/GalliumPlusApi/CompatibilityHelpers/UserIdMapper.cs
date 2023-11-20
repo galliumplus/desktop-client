@@ -41,9 +41,7 @@ namespace GalliumPlusApi.CompatibilityHelpers
                 }
                 else
                 {
-                    Span<byte> binaryData = new();
-                    Base64.DecodeFromUtf8(Encoding.UTF8.GetBytes(username), binaryData, out _, out _);
-                    int id = BitConverter.ToInt32(binaryData);
+                    int id = HashUsername(username);
                     ids[username] = id;
                     return id;
                 }
@@ -56,6 +54,21 @@ namespace GalliumPlusApi.CompatibilityHelpers
             {
                 return ids.First(kvp => kvp.Value == numericId).Key;
             }
+        }
+
+        private static readonly string BASE64_DU_BLED = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+
+        private static int HashUsername(string username)
+        {
+            int result = 0;
+
+            foreach(char c in username.Take(4))
+            {
+                result += BASE64_DU_BLED.IndexOf(c);
+                result <<= 6;
+            }
+
+            return result;
         }
     }
 }
