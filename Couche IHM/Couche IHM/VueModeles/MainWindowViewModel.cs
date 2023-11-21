@@ -171,14 +171,45 @@ namespace Couche_IHM.VueModeles
         /// <param name="frame">Nouvelle frame à afficher</param>
         private void ChangeFrameInit(Frame frame)
         {
+            // gestion de la sortie de l'ancienne frame
+            this.LeaveFrame(this.Frame);
+            // gestion de l'entrée sur une nouvelle frame
+            this.EnterFrame(frame);
+            // changement
+            this.Frame = frame;
+        }
+
+        /// <summary>
+        /// Appelée quand la frame change pour gérer la sortie de la frame.
+        /// </summary>
+        /// <param name="frame">La frame actuelle qui va être remplacée.</param>
+        private void LeaveFrame(Frame frame)
+        {
+            switch (frame)
+            {
+                case Frame.FRAMELOG:
+                    this.logsViewModel.StopLoading();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Appelée quand la frame change pour gérer l'entrée de la nouvelle frame.
+        /// </summary>
+        /// <param name="frame">La nouvelle frame qui va remplacer la frame actuelle.</param>
+        private void EnterFrame(Frame frame)
+        {
             switch (frame)
             {
                 case Frame.FRAMECAISSE:
                     this.productViewModel.SearchFilter = "";
                     this.adherentViewModel.SearchFilter = "";
                     break;
+
+                case Frame.FRAMELOG:
+                    this.logsViewModel.ReloadInBackground();
+                    break;
             }
-            this.Frame = frame;
         }
     }
 }

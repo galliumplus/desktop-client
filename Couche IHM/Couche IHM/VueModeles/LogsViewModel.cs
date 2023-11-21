@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -44,6 +46,7 @@ namespace Couche_IHM.VueModeles
         private bool selectProduct;
         private bool selectAcompte;
         private bool selectCompte;
+        private CancellationTokenSource reloadCTS;
         #endregion
 
         #region constructor
@@ -68,7 +71,9 @@ namespace Couche_IHM.VueModeles
             this.SelectConnexion = false;
             this.SelectProduct = false;
             this.SelectCompte = false;
-            InitLogs();
+            this.reloadCTS = new CancellationTokenSource();
+
+            this.PropertyChanged += this.SelfPropertyChanged;
         }
         #endregion
 
@@ -107,15 +112,15 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         public ObservableCollection<LogViewModel> Logs 
         {
-            get 
-            {
+            get => this.logs;
+            /*{
                 List<LogViewModel> logsFiltres = logs.ToList().FindAll(x => themeLog.Contains(x.IdTheme));
                 if (currentAuteur != "Tout le monde")
                 {
                     logsFiltres = logsFiltres.FindAll(x => x.Auteur == currentAuteur);
                 }
                 return new ObservableCollection<LogViewModel>(logsFiltres);
-            }
+            }*/
             set => logs = value; 
         }
 
@@ -296,7 +301,56 @@ namespace Couche_IHM.VueModeles
             {
                 this.logs.Insert(0, log);
             }
-            
+
+        }
+
+        /// <summary>
+        /// Réagis aux propriétés changées au sein du viewmodel.
+        /// </summary>
+        private void SelfPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Logs))
+            {
+                // this.ReloadInBackground();
+            }
+        }
+
+        /// <summary>
+        /// Lance le chargement des logs en arrière-plan.
+        /// </summary>
+        public void ReloadInBackground()
+        {
+            this.StopLoading();
+            this.reloadCTS = new();
+            Task.Run(() => this.ReloadAsync(this.reloadCTS.Token));
+        }
+
+        public void StopLoading()
+        {
+            this.reloadCTS.Cancel();
+        }
+
+        /// <summary>
+        /// Charge les logs.
+        /// </summary>
+        /// <param name="ct">Un jeton d'annulation pour arrêter le chargement en cours.</param>
+        private async Task ReloadAsync(CancellationToken ct = default)
+        {
+            List<Log> logs = this.logManager.GetLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+
+            int i = 0;
+            foreach (Log log in logs)
+            {
+                // ajout par impulsions
+                if (i%20 == 0) await Task.Delay(100, ct);
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    this.logs.Add(new LogViewModel(log));
+                });
+                
+                i++;
+            }
         }
 
         #endregion

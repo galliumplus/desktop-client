@@ -13,6 +13,5 @@ namespace Couche_IHM.Frames
             InitializeComponent();
             DataContext = MainWindowViewModel.Instance;
         }
-
     }
 }
