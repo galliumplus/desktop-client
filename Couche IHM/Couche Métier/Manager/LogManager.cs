@@ -1,4 +1,5 @@
-﻿using Couche_Data.Dao;
+﻿using Couche_Data.Interfaces;
+using GalliumPlusApi.Dao;
 using Modeles;
 
 
@@ -10,7 +11,7 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Permet d'accéder aux données
         /// </summary>
-        private LogDAO logDao;
+        private ILogDAO logDao;
 
         /// <summary>
         /// Liste des logs
