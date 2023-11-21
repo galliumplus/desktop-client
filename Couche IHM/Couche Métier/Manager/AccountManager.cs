@@ -62,16 +62,8 @@ namespace Couche_Métier.Manager
         /// <param name="adhérent">adhérent à créer</param>
         public void CreateAdhérent(Account adhérent)
         {
-            if (adhérent.RoleId == 2)
-            {
-                adhérentDao.CreateAdhérent(adhérent);
-                adhérents.Add(adhérent);
-            }
-            else
-            {
-                UpdateAdhérent(adhérent);
-            }
-
+            adhérentDao.CreateAdhérent(adhérent);
+            adhérents.Add(adhérent);
         }
 
         /// <summary>
@@ -95,6 +87,9 @@ namespace Couche_Métier.Manager
             Account adhér = adhérents.Find(adh => adh.Id == adhérent.Id);
             adhér.Nom = adhérent.Nom;
             adhér.Prenom = adhérent.Prenom;
+            adhér.Mail = adhérent.Mail;
+            adhér.RoleId = adhérent.RoleId;
+            adhér.Identifiant = adhérent.Identifiant;
             adhér.Argent = adhérent.Argent;
             adhér.IsMember = adhérent.IsMember;
             adhér.Formation = adhérent.Formation;

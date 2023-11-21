@@ -124,14 +124,11 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Action à réaliser sur l'acompte
         /// </summary>
-        public string Action
-        {
-            get
-            {
-                return this.action;
-            }
-        }
+        public string Action { get => this.action; }
 
+        /// <summary>
+        /// Afficher la popup pour supprimer un compte ?
+        /// </summary>
         public bool ShowConfirmationDelete 
         { 
             get => showConfirmationDelete;
@@ -142,9 +139,22 @@ namespace Couche_IHM.VueModeles
             }
         }
 
+        /// <summary>
+        /// Mail du compte
+        /// </summary>
         public string Email { get => email; set => email = value; }
+
+        /// <summary>
+        /// Mdp1 du compte
+        /// </summary>
         public string MdpIHM1 { get => mdpIHM1; set => mdpIHM1 = value; }
+        /// <summary>
+        /// Mdp2 du compte
+        /// </summary>
         public string MdpIHM2 { get => mdpIHM2; set => mdpIHM2 = value; }
+        /// <summary>
+        /// Role du compte
+        /// </summary>
         public Role Role { get => role; set => role = value; }
         #endregion
 
@@ -285,7 +295,6 @@ namespace Couche_IHM.VueModeles
             this.acompte.IsMember = this.isAdherentIHM;
             this.acompte.Mail = this.email;
             this.acompte.RoleId = this.role.Id;
-            this.acompte.HashedPassword = CryptString.SaltAndHash(this.mdpIHM1,"saltDev").ToString();
 
             if (persistChanges && MessageBoxErrorHandler.DoesntThrow(() => accountManager.UpdateAdhérent(this.acompte)))
             {
