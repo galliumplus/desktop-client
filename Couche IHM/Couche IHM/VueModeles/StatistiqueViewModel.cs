@@ -148,8 +148,10 @@ namespace Couche_IHM.VueModeles
             List<StatProduit> statProduit = this.statProduitManager.GetStats();
             foreach (StatProduit stat in statProduit)
             {
-                Product productLogic = productManager.GetProducts().Find(x => x.ID == stat.Product_id);
-                this.statsProduit.Add(new StatProduitViewModel(stat, new ProductViewModel(productLogic, null, null, null)));
+                if (productManager.GetProducts().Find(x => x.ID == stat.Product_id) is Product productLogic)
+                {
+                    this.statsProduit.Add(new StatProduitViewModel(stat, new ProductViewModel(productLogic, null, null, null)));
+                }
             }
             NotifyPropertyChanged(nameof(this.PodiumProduits));
         }

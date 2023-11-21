@@ -19,16 +19,34 @@ namespace Couche_IHM
                 action();
                 return true;
             }
-            catch (UnauthenticatedException)
+            catch (AggregateException aggregateErrors)
             {
-                MessageBox.Show("Veuillez vous reconnecter.", "Session expirée", MessageBoxButton.OK, MessageBoxImage.Error);
-                MainWindowViewModel.Instance.MainWindow.AskToDisconnect();
-                return false;
+                if (aggregateErrors.InnerException != null)
+                {
+                    HandleError(aggregateErrors.InnerException);
+                    return false;
+                }
+                return true;
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                HandleError(error);
                 return false;
+            }
+        }
+
+        private static void HandleError(Exception error)
+        {
+            switch (error)
+            {
+                case UnauthenticatedException:
+                    MessageBox.Show("Veuillez vous reconnecter.", "Session expirée", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MainWindowViewModel.Instance.MainWindow.AskToDisconnect();
+                    break;
+
+                default:
+                    MessageBox.Show(error.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
             }
         }
     }
