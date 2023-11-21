@@ -1,6 +1,7 @@
 ﻿using GalliumPlusApi.Dao;
 using Couche_Data.Interfaces;
 using Modeles;
+using Couche_Data.Dao;
 
 namespace Couche_Métier.Manager
 {
@@ -24,7 +25,15 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatProduitManager()
         {
-            dao = new Couche_Data.Dao.StatProduitDAO();
+            if (DevelopmentInfo.isDevelopment)
+            {
+                dao = new StatProduitDAO();
+            }
+            else
+            {
+                dao = new StatProduitDao();
+            }
+           
 
         }
         #endregion

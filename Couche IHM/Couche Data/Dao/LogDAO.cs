@@ -9,7 +9,7 @@ namespace Couche_Data.Dao
 
         public void CreateLog(Log log)
         {
-            string connString = dbsDAO.ConnectionStringDev;
+            string connString = dbsDAO.ConnectionString;
             MySqlConnection sql = new MySqlConnection(connString);
 
             //Connection
@@ -33,7 +33,7 @@ namespace Couche_Data.Dao
         public List<Log> GetLogs(int mois, int annee)
         {
             //Connection
-            string connString = dbsDAO.ConnectionStringDev;
+            string connString = dbsDAO.ConnectionString;
             MySqlConnection sql = new MySqlConnection(connString);
             sql.Open();
             //Requette SQL 

@@ -24,7 +24,7 @@ namespace Couche_IHM
             InitializeComponent();
             var mwvm = MainWindowViewModel.GetInstanceFor(this);
             AccountManager accountManager = MainWindowViewModel.Instance.AccountManager;
-            mwvm.CompteConnected = new AccountViewModel(user, accountManager, null);
+            mwvm.CompteConnected = new AccountViewModel(user, accountManager);
             DataContext = MainWindowViewModel.Instance;
 
             if (DevelopmentInfo.isDevelopment)

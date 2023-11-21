@@ -34,12 +34,14 @@ namespace GalliumPlusApi.Dto
             {
                 return new Account(
                     UserIdMapper.Current.GetIdFor(details.Id),
+                    details.Id,
                     details.LastName,
                     details.FirstName,
                     details.Email,
-                    "",
-                    details.Role.Id,
-                    details.Id
+                    0.00f,
+                    details.Year,
+                    details.IsMember,
+                    details.Role.Id
                 );
             }
         }

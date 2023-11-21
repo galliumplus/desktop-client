@@ -95,6 +95,8 @@ namespace Couche_IHM.VueModeles
             set => logManager = value;
         }
 
+        public AccountManager AccountManager { get => accountManager; set => accountManager = value; }
+
 
         /// <summary>
         /// Représente la frame actuellement affichée
@@ -125,7 +127,7 @@ namespace Couche_IHM.VueModeles
 
         public MainWindow MainWindow => mainWindow;
 
-        public AccountManager AccountManager { get => accountManager; set => accountManager = value; }
+
 
         #endregion
 

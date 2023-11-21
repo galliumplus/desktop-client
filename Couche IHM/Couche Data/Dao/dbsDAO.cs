@@ -93,8 +93,7 @@ namespace Couche_Data.Dao
                 return connectionString;
             }
         }
-
-        public static string ConnectionStringDev
+        public static string ConnectionStringV
         {
             get
             {
@@ -105,11 +104,14 @@ namespace Couche_Data.Dao
                     using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
                     using StreamReader reader = new StreamReader(stream);
                     connectionString = reader.ReadToEnd();
-                    connectionString.Replace("c2_etismash", "c2_gallium");
+                    connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
                 }
                 return connectionString;
             }
         }
+
+
+
 
         /// <summary>
         /// Se connecte à la base de donnée

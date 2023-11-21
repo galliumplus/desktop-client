@@ -79,7 +79,7 @@
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMEACCOUNT}"
-                        Content="Accounts"/>
+                        Content="Acomptes"/>
                     <Button 
                         Name="buttonStock"
                         Height="45" 
@@ -193,11 +193,11 @@
      HorizontalAlignment="Center">
                             <TextBlock 
          Text="{Binding CompteConnected.NomCompletIHM}" 
-         FontSize="13" 
+         FontSize="15" 
          FontWeight="Bold"/>
                             <TextBlock 
-         Text="{Binding CompteConnected.RoleIHM}" 
-         FontSize="11" 
+         Text="{Binding CompteConnected.Role}" 
+         FontSize="13" 
          FontWeight="DemiBold" />
                         </StackPanel>
                     </StackPanel>

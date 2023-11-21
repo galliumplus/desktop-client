@@ -12,7 +12,6 @@
       Background="White">
 
     <Grid  Margin="20,50,20,0">
-        <!-- Ligne 1 - Colonne 0: Liste des adhérents-->
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="1*"/>
@@ -54,7 +53,7 @@
                                     FontWeight="Medium" 
                                     FontFamily="Roboto"  
                                     FontSize="18" 
-                                    Text="Identifiant" />
+                                    Text="Mail" />
                             
                                 <TextBlock   
                                     HorizontalAlignment="Center"
@@ -145,46 +144,11 @@
             VerticalAlignment="Center"
             Grid.Row="1"
             Background="Gray">
-            <DockPanel >
-                <materialDesign:PackIcon
-                    Width="20"
-                    Margin="-10,2,5,0"
-                    Height="20"
-                    Kind="Plus"/>
             <TextBlock
-                    Text="Gérer les comptes"
-                    FontSize="16"/>
-            </DockPanel>
+                Text="Gérer les comptes"
+                FontSize="16"/>
+ 
         </Button>
-
-        <!-- Suppression d un compte-->
-        <materialDesign:DialogHost  CloseOnClickAway="True" Grid.ColumnSpan="2" Grid.RowSpan="2" OverlayBackground="Gray" IsOpen="{Binding AccountsViewModel.CurrentAccount.ShowConfirmationDelete}" DialogTheme="Inherit" >
-            <materialDesign:DialogHost.DialogContent>
-                <Grid Margin="30">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock FontSize="24" Margin="0 0 0 20">
-                            <TextBlock Text="{Binding Path=AccountsViewModel.CurrentAccount.NomCompletIHM, StringFormat=Suppression de {0}}" />
-                        </TextBlock>
-                        <UniformGrid Rows="1" Columns="2" Height="50">
-                            <Button 
-                                Margin="0 0 20 0" 
-                                FontSize="18"
-                                Content="Annuler"
-                                Command="{Binding AccountsViewModel.CurrentAccount.CancelDeleteU}"
-                                Style="{StaticResource buttonBlack}" 
-                                Grid.Column="2"/>
-                            <Button 
-                                Content="Confirmer"
-                                Margin="20 0 0 0" 
-                                FontSize="18" 
-                                Command="{Binding AccountsViewModel.CurrentAccount.DeleteAdh}"
-                                Style="{StaticResource buttonBlack}"/>
-                        </UniformGrid>
-
-                    </StackPanel>
-                </Grid>
-            </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
 
         <!-- Modification / Création Compte-->
         <materialDesign:DialogHost DialogTheme="Inherit" OverlayBackground="Gray" IsOpen="{Binding AccountsViewModel.DialogModifAdmin}">
@@ -214,32 +178,6 @@
                         FontSize="30" 
                         FontWeight="Black"/>
 
-
-                    <Button
-                        HorizontalAlignment="Right"
-                        Margin="0,10,10,10"
-                        VerticalAlignment="Top"
-                        Grid.Column="2"
-                        Command="{Binding AccountsViewModel.CurrentAccount.PreviewDeleteU}"
-                        Grid.Row="0">
-                        <materialDesign:PackIcon 
-                            Width="23"
-                            Height="23"
-                            Kind="Delete"/>
-                        <Button.Style>
-                            <Style BasedOn="{StaticResource buttonImage}"  TargetType="Button">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding UserViewModel.ShowDeleteUser}" Value="true">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding UserViewModel.ShowDeleteUser}" Value="false">
-                                        <Setter Property="Visibility" Value="Hidden"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-
                     <ComboBox
                         Margin="20,15,20,10"
                         Grid.Row="1"
@@ -254,7 +192,7 @@
                         Margin="20,15,20,10"
                         Grid.ColumnSpan="2" 
                         Grid.Row="2"
-                        materialDesign:HintAssist.Hint="Identifiant"
+                        materialDesign:HintAssist.Hint="Mail"
                         FontSize="16"
                         Text="{Binding AccountsViewModel.CurrentAccount.Email}"
                         Style="{StaticResource MaterialDesignFilledTextBox}" 

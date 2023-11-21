@@ -1,4 +1,5 @@
-﻿using Couche_Data.Interfaces;
+﻿using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using DocumentFormat.OpenXml.Presentation;
 using GalliumPlusApi.Dao;
 using Modeles;
@@ -19,7 +20,15 @@ namespace Couche_Métier.Manager
 
         public OrderManager()
         {
-            dao = new OrderDao();
+            if (DevelopmentInfo.isDevelopment)
+            {
+                dao = new OrderDAO();
+            }
+            else
+            {
+                dao = new OrderDao();
+            }
+
         }
 
         public void NewOrder(string paymentMethod, string customer = null)

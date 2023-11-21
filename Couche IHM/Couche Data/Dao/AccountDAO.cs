@@ -100,8 +100,9 @@ namespace Couche_Data.Dao
             dbsDAO.Instance.OpenDataBase();
 
             //Requette SQL
+            
             string formattedAmountMoney = adhérent.Argent.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            string stm = $"UPDATE User set lastName = '{adhérent.Nom}', firstName = '{adhérent.Prenom}', deposit = {formattedAmountMoney}, isMember = {adhérent.IsMember}, role = {adhérent.RoleId} , email = '{adhérent.Mail}' ,year = '{adhérent.Formation}', userId = '{adhérent.Identifiant}' WHERE id = {adhérent.Id}";
+            string stm = $"UPDATE User set lastName = '{adhérent.Nom}', firstName = '{adhérent.Prenom}', deposit = {formattedAmountMoney}, isMember = {adhérent.IsMember}, role = {adhérent.RoleId} , email = '{adhérent.Mail}' ,year = '{adhérent.Formation}',password = '{adhérent.HashedPassword}', userId = '{adhérent.Identifiant}' WHERE id = {adhérent.Id}";
             MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
             cmd.Prepare();
 

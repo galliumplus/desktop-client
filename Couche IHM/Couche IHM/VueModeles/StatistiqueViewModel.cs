@@ -134,7 +134,7 @@ namespace Couche_IHM.VueModeles
             }
             else
             {
-                this.statsAccount.Add(new StatAccountViewModel(stat, new AccountViewModel(accountManager.GetAdhérents().Find(x => x.Id == stat.Account_Id),null)));
+                this.statsAccount.Add(new StatAccountViewModel(stat, new AccountViewModel(accountManager.GetAdhérents().Find(x => x.Id == stat.Account_Id),this.accountManager)));
             }
             NotifyPropertyChanged(nameof(this.PodiumAccount));
         }

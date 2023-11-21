@@ -125,23 +125,29 @@ namespace Couche_Métier.Manager
         /// <param name="identifiant"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static Account? ConnectCompte(string identifiant, string password)
+        public static Account ConnectCompte(string identifiant, string password)
         {
             SessionDao dao = new();
 
             var result = dao.LogIn(identifiant, password);
             Account? user = result?.Item1;
+
+            if (user == null)
+            {
+                throw new Exception("Mauvaise combinaison identifiant/mot de passe");
+            }
+
             Role? role = result?.Item2;
             user.RoleId = role.Id;
-
+   
             if (role?.Name == "Adhérent")
             {
-                return null;
+                throw new Exception("Le compte n'a pas les permissions pour se connecter");
             }
-            else
-            {
-                return user;
-            }
+
+            DevelopmentInfo.isDevelopment = user.RoleId == 11 ? true : false;
+
+            return user;
         }
 
         #endregion

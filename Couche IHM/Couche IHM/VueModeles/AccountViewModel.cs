@@ -285,7 +285,7 @@ namespace Couche_IHM.VueModeles
             this.acompte.IsMember = this.isAdherentIHM;
             this.acompte.Mail = this.email;
             this.acompte.RoleId = this.role.Id;
-            this.acompte.HashedPassword = this.mdpIHM1;
+            this.acompte.HashedPassword = CryptString.SaltAndHash(this.mdpIHM1,"saltDev").ToString();
 
             if (persistChanges && MessageBoxErrorHandler.DoesntThrow(() => accountManager.UpdateAdhérent(this.acompte)))
             {

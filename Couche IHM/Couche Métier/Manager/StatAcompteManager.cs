@@ -25,7 +25,15 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatAccountManager()
         {
-            dao = new Couche_Data.Dao.StatAccountDAO();
+            if (DevelopmentInfo.isDevelopment)
+            {
+                dao = new StatAccountDAO();
+            }
+            else
+            {
+                dao = new StatAccountDao();
+            }
+            
             this.statAccountList = new List<StatAccount>();
             
 
