@@ -22,7 +22,7 @@
 
         <!-- PREMIERE COLONNE -->
         
-        <Grid Grid.Column="0" Background="#252422" HorizontalAlignment="Left">
+        <Grid Grid.Column="0" x:Name="Menu" Background="#252422" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" Tag="Nom app"/>
                 <RowDefinition Height="20*" Tag="Bouton"/>
@@ -57,6 +57,7 @@
                 <StackPanel >
                     <Button 
                         Height="45" 
+                        Name="buttonAccueil"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMEACCUEIL}"
@@ -66,6 +67,7 @@
                     <Button 
                         Height="45" 
                         FontSize="16"
+                        Name="buttonCaisse"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
                         CommandParameter="{x:Static vm:Frame.FRAMECAISSE}"
@@ -73,11 +75,13 @@
                     <Button 
                         Height="45" 
                         FontSize="16"
+                        Name="buttonAccount"
                         Style="{StaticResource buttonNavBarre}" 
                         Command="{Binding ChangeFrame}"
-                        CommandParameter="{x:Static vm:Frame.FRAMEACOMPTE}"
-                        Content="Acomptes"/>
+                        CommandParameter="{x:Static vm:Frame.FRAMEACCOUNT}"
+                        Content="Accounts"/>
                     <Button 
+                        Name="buttonStock"
                         Height="45" 
                         FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 
@@ -85,6 +89,7 @@
                         CommandParameter="{x:Static vm:Frame.FRAMESTOCK}"
                         Content="Stock"/>
                     <Button 
+                        Name="buttonComptes"
                         Height="45" 
                         FontSize="16"
                         Style="{StaticResource buttonNavBarre}" 

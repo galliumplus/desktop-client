@@ -25,7 +25,7 @@ namespace Couche_IHM.BindingRules
         {
             ValidationResult result = ValidationResult.ValidResult;
 
-            AcompteViewModel adh = MainWindowViewModel.Instance.AdherentViewModel.CurrentAcompte;
+            AccountViewModel adh = MainWindowViewModel.Instance.AccountsViewModel.CurrentAccount;
             string identifiant = (string)value;
             if (identifiant.Length > 2)
             {

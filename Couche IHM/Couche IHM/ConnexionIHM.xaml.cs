@@ -1,6 +1,7 @@
 ﻿
 using Couche_IHM.ImagesProduit;
 using Couche_IHM.VueModeles;
+using Couche_Métier;
 using Couche_Métier.Manager;
 using MaterialDesignThemes.Wpf;
 using Modeles;
@@ -17,7 +18,7 @@ namespace Couche_IHM
     public partial class ConnexionIHM : Window
     {
         #region attributes
-        private UserManager userManager;
+        private AccountManager accountManager;
         private LogManager logManager;
         private string identifiant = "";
         private string password = "";
@@ -50,14 +51,19 @@ namespace Couche_IHM
             {
                 try
                 {
-                    User? user = UserManager.ConnectCompte(identifiant, password);
+                    Account? user = AccountManager.ConnectCompte(identifiant, password);
                     if (user != null)
                     {
+                        if (user.RoleId == 1)
+                        {
+                            DevelopmentInfo.isDevelopment = true;
+                        }
+
                         MainWindow mainWindow = new MainWindow(user);
                         mainWindow.Show();
                         this.Close();
 
-                        userManager = MainWindowViewModel.Instance.UserManager;
+                        
                         logManager = MainWindowViewModel.Instance.LogManager;
                         Log log = new Log(DateTime.Now, 1, $"Connexion de {user.Prenom} {user.Nom}", $"{user.Prenom} {user.Nom}");
                         logManager.CreateLog(log);

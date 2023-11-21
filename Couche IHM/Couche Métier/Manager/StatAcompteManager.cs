@@ -5,43 +5,43 @@ using Modeles;
 
 namespace Couche_Métier.Manager
 {
-    public class StatAcompteManager
+    public class StatAccountManager
     {
         #region attributes
         /// <summary>
         /// Dao permettant de gérer les données des stats d'acompte
         /// </summary>
-        private IStatAcompteDAO dao;
+        private IStatAccountDAO dao;
 
         /// <summary>
         /// Liste des stats d'acompte
         /// </summary>
-        private List<StatAcompte> statAcompteList;
+        private List<StatAccount> statAccountList;
         #endregion
 
         #region constructor
         /// <summary>
         /// Constructeur du statProduit Manager
         /// </summary>
-        public StatAcompteManager()
+        public StatAccountManager()
         {
-            dao = new Couche_Data.Dao.StatAcompteDAO();
-            this.statAcompteList = new List<StatAcompte>();
+            dao = new Couche_Data.Dao.StatAccountDAO();
+            this.statAccountList = new List<StatAccount>();
             
 
         }
         #endregion
 
         #region methods
-        public void CreateStat(StatAcompte stat)
+        public void CreateStat(StatAccount stat)
         {
             dao.CreateStat(stat);
         }
 
-        public List<StatAcompte> GetStats()
+        public List<StatAccount> GetStats()
         {
-            this.statAcompteList = dao.GetStat();
-            return this.statAcompteList;
+            this.statAccountList = dao.GetStat();
+            return this.statAccountList;
         }
         #endregion
     }

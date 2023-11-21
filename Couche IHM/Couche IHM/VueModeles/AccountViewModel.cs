@@ -3,17 +3,18 @@ using Couche_Métier.Manager;
 using Couche_Métier.Utilitaire;
 using Modeles;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Couche_IHM.VueModeles
 {
-    public class AcompteViewModel : INotifyPropertyChanged
+    public class AccountViewModel : INotifyPropertyChanged
     {
         #region attributes
 
-        private Acompte acompte;
-        private AcompteManager acompteManager;
+        private Account acompte;
+        private AccountManager accountManager;
         private string argentIHM;
         private string identifiantIHM;
         private bool isAdherentIHM;
@@ -21,11 +22,17 @@ namespace Couche_IHM.VueModeles
         private string prenomIHM;
         private string formationIHM;
         private string action;
+        private string email;
+        private Role role;
+        private string mdpIHM1;
+        private string mdpIHM2;
         private bool showConfirmationDelete;
+
 
         #endregion
 
         #region events
+        public RelayCommand ShowUpdate { get; set; }
         public RelayCommand ModifyAdherent { get; set; }
         public RelayCommand ResetAdh { get; set; }
         public RelayCommand CreateAdh { get; set; }
@@ -52,7 +59,7 @@ namespace Couche_IHM.VueModeles
             get 
             { 
                 string result = $"{acompte.Nom.ToUpper()} {acompte.Prenom}";
-                if (result == " ")
+                if (result.Trim() == "")
                 {
                     result = "----------------------------------";
                 }
@@ -78,7 +85,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 argentIHM = value;
-                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = true;
+                MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = true;
             }
         }
 
@@ -91,7 +98,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 identifiantIHM = value;
-                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = true;
+                MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = true;
             }
         }
         /// <summary>
@@ -134,33 +141,54 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged();
             }
         }
+
+        public string Email { get => email; set => email = value; }
+        public string MdpIHM1 { get => mdpIHM1; set => mdpIHM1 = value; }
+        public string MdpIHM2 { get => mdpIHM2; set => mdpIHM2 = value; }
+        public Role Role { get => role; set => role = value; }
         #endregion
 
         #region constructor
         /// <summary>
         /// Constructeur du acompteViewModel
         /// </summary>
-        public AcompteViewModel(Acompte acompte,AcompteManager acompteManager,string action = "UPDATE")
+        public AccountViewModel(Account acompte, AccountManager accountManager, string action = "UPDATE")
         {
             this.acompte = acompte;
-            this.acompteManager = acompteManager;
+            this.accountManager = accountManager;
             this.action = action;
 
             // Initialisation propriétés
             this.argentIHM = ConverterFormatArgent.ConvertToString(acompte.Argent);
             this.identifiantIHM = acompte.Identifiant;
             this.formationIHM = acompte.Formation;
-            this.isAdherentIHM = acompte.StillAdherent;
+            this.isAdherentIHM = acompte.IsMember;
             this.nomIHM = acompte.Nom;
             this.prenomIHM = acompte.Prenom;
+            this.role = accountManager.GetRoles().Find(x => x.Id == acompte.RoleId);
+            this.email = acompte.Mail;
+            this.mdpIHM1 = acompte.HashedPassword;
+            this.mdpIHM2 = acompte.HashedPassword;
 
             // Initialisation des events
-            this.ModifyAdherent = new RelayCommand(x => this.UpdateAcompte());
-            this.ResetAdh = new RelayCommand(x => this.ResetAcompte());
-            this.CreateAdh = new RelayCommand(x => this.CreateAcompte());
+            this.ShowUpdate = new RelayCommand(x =>
+            {
+                MainWindowViewModel.Instance.AccountsViewModel.CurrentAccount = this;
+                MainWindowViewModel.Instance.AccountsViewModel.OpenUserDetails("UPDATE");
+            });
+            this.ModifyAdherent = new RelayCommand(x => this.UpdateAccount());
+
+
+            this.ResetAdh = new RelayCommand(x =>
+            {
+            this.ResetAccount(); 
+            this.HideAccountDetails();
+            });
+
+            this.CreateAdh = new RelayCommand(x => this.CreateAccount());
             this.PreviewAdh = new RelayCommand(x => ShowConfirmationDelete = true);
             this.CancelDeleteAdh = new RelayCommand(x => ShowConfirmationDelete = false);
-            this.DeleteAdh = new RelayCommand(x => this.DeleteAcompte());
+            this.DeleteAdh = new RelayCommand(x => this.DeleteAccount());
 
         }
         #endregion
@@ -169,20 +197,20 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de supprimer un acompte
         /// </summary>
-        private void DeleteAcompte()
+        private void DeleteAccount()
         {
             // Modifier la data
-            if (MessageBoxErrorHandler.DoesntThrow(() => this.acompteManager.RemoveAdhérent(this.acompte)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.accountManager.RemoveAdhérent(this.acompte)))
             {
                 // Log l'action
-                Log log = new Log(DateTime.Now, 2, $"Suppresion de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+                Log log = new Log(DateTime.Now, 2, $"Suppresion du compte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
                 // Notifier la vue
-                MainWindowViewModel.Instance.AdherentViewModel.RemoveAcompte(this);
+                MainWindowViewModel.Instance.AccountsViewModel.RemoveAccount(this);
                 MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-                MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-                MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+                MainWindowViewModel.Instance.AccountsViewModel.DialogModifAccount = false;
+                MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = false;
             }
             ShowConfirmationDelete = false;
         }
@@ -190,7 +218,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de créer un acompte
         /// </summary>
-        private void CreateAcompte()
+        private void CreateAccount()
         {
             // Changer la data
             this.acompte.Nom = this.nomIHM;
@@ -198,31 +226,35 @@ namespace Couche_IHM.VueModeles
             this.acompte.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
             this.acompte.Formation = this.formationIHM;
             this.acompte.Identifiant = this.identifiantIHM;
-            this.acompte.StillAdherent = this.isAdherentIHM;
+            this.acompte.IsMember = this.isAdherentIHM;
             this.action = "UPDATE";
             
-            if (MessageBoxErrorHandler.DoesntThrow(() => acompteManager.CreateAdhérent(this.acompte)))
+            if (MessageBoxErrorHandler.DoesntThrow(() => accountManager.CreateAdhérent(this.acompte)))
             {
                 // Log l'action
                 Log log = new Log(DateTime.Now, 2, $"Création de l acompte : {this.NomCompletIHM}", MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
                 MainWindowViewModel.Instance.LogManager.CreateLog(log);
 
                 // Notifier la vue
-                MainWindowViewModel.Instance.AdherentViewModel.AddAcompte(this);
+                MainWindowViewModel.Instance.AccountsViewModel.AddAccount(this);
+
                 NotifyPropertyChanged(nameof(this.Action));
                 NotifyPropertyChanged(nameof(IdentifiantIHM));
                 NotifyPropertyChanged(nameof(ArgentIHM));
                 NotifyPropertyChanged(nameof(NomCompletIHM));
+                NotifyPropertyChanged(nameof(Email));
+                NotifyPropertyChanged(nameof(Role));
+                NotifyPropertyChanged(nameof(IsAdherentIHM));
                 MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
             }
-            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+            MainWindowViewModel.Instance.AccountsViewModel.DialogModifAccount = false;
+            MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = false;
         }
 
         /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
-        public void UpdateAcompte(bool doLog = true, bool persistChanges = true)
+        public void UpdateAccount(bool doLog = true, bool persistChanges = true)
         {
             // Log l'action
             float argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
@@ -250,17 +282,25 @@ namespace Couche_IHM.VueModeles
             this.acompte.Argent = ConverterFormatArgent.ConvertToDouble(this.ArgentIHM);
             this.acompte.Formation = this.formationIHM;
             this.acompte.Identifiant = this.identifiantIHM;
-            this.acompte.StillAdherent = this.isAdherentIHM;
+            this.acompte.IsMember = this.isAdherentIHM;
+            this.acompte.Mail = this.email;
+            this.acompte.RoleId = this.role.Id;
+            this.acompte.HashedPassword = this.mdpIHM1;
 
-            if (persistChanges && MessageBoxErrorHandler.DoesntThrow(() => acompteManager.UpdateAdhérent(this.acompte)))
+            if (persistChanges && MessageBoxErrorHandler.DoesntThrow(() => accountManager.UpdateAdhérent(this.acompte)))
             {
                 // Notifier la vue
                 NotifyPropertyChanged(nameof(IdentifiantIHM));
                 NotifyPropertyChanged(nameof(ArgentIHM));
                 NotifyPropertyChanged(nameof(NomCompletIHM));
+                NotifyPropertyChanged(nameof(Email));
+                NotifyPropertyChanged(nameof(Role));
+                NotifyPropertyChanged(nameof(IsAdherentIHM));
             }
-            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+            MainWindowViewModel.Instance.AccountsViewModel.InitAccountsAdmins();
+            MainWindowViewModel.Instance.AccountsViewModel.DialogModifAccount = false;
+            MainWindowViewModel.Instance.AccountsViewModel.DialogModifAdmin = false;
+            MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = false;
         }
 
 
@@ -268,33 +308,49 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de reset les propriétés de l'acompte
         /// </summary>
-        public void ResetAcompte()
+        public void ResetAccount()
         {
-
             // Initialisation propriétés
             this.argentIHM = ConverterFormatArgent.ConvertToString(acompte.Argent);
             this.identifiantIHM = acompte.Identifiant;
             this.formationIHM = acompte.Formation;
             this.nomIHM = acompte.Nom;
             this.prenomIHM = acompte.Prenom;
-            this.isAdherentIHM = acompte.StillAdherent;
+            this.isAdherentIHM = acompte.IsMember;
+            this.email = acompte.Mail;
+            this.role = accountManager.GetRoles().Find(x => x.Id == acompte.RoleId);
 
             // Notifier la vue
             NotifyPropertyChanged(nameof(IdentifiantIHM));
             NotifyPropertyChanged(nameof(ArgentIHM));
             NotifyPropertyChanged(nameof(NomCompletIHM));
             NotifyPropertyChanged(nameof(NomIHM));
+            NotifyPropertyChanged(nameof(Email));
+            NotifyPropertyChanged(nameof(Role));
             NotifyPropertyChanged(nameof(PrenomIHM));
             NotifyPropertyChanged(nameof(FormationIHM));
             NotifyPropertyChanged(nameof(IsAdherentIHM));
+            MainWindowViewModel.Instance.AccountsViewModel.ShowModifButtons = false;
+        }
 
-            MainWindowViewModel.Instance.AdherentViewModel.DialogModifAdherent = false;
-            MainWindowViewModel.Instance.AdherentViewModel.ShowModifButtons = false;
+        /// <summary>
+        /// Permet de fermer les popup de modification de comptes
+        /// </summary>
+        public void HideAccountDetails()
+        {
+            MainWindowViewModel.Instance.AccountsViewModel.DialogModifAccount = false;
+            MainWindowViewModel.Instance.AccountsViewModel.DialogModifAdmin = false;
         }
 
         public override string? ToString()
         {
             return $"{acompte.Identifiant} {acompte.Nom} {acompte.Prenom}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is AccountViewModel model &&
+                   EqualityComparer<Account>.Default.Equals(acompte, model.acompte);
         }
 
 

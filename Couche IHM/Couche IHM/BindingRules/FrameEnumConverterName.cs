@@ -22,8 +22,8 @@ namespace Couche_IHM.BindingRules
                     case Frame.FRAMECAISSE:
                         retour = "Caisse";
                         break;
-                    case Frame.FRAMEACOMPTE:
-                        retour = "Acomptes";
+                    case Frame.FRAMEACCOUNT:
+                        retour = "Accounts";
                         break;
                     case Frame.FRAMESTOCK:
                         retour = "Produits";

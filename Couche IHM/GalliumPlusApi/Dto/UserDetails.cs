@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace GalliumPlusApi.Dto
 {
-    public class UserDetails
+    public class AccountDetails
     {
         public string Id { get; set; } = "";
         public string FirstName { get; set; } = "";
@@ -16,7 +16,7 @@ namespace GalliumPlusApi.Dto
         public bool IsMember { get; set; } = false;
 
         [JsonIgnore]
-        public UserSummary AsUserSummary => new()
+        public AccountSummary AsUserSummary => new()
         {
             Deposit = Deposit,
             Email = Email,
@@ -28,17 +28,18 @@ namespace GalliumPlusApi.Dto
             Year = Year,
         };
 
-        public class Mapper : Mapper<User, UserDetails>
+        public class Mapper : Mapper<Account, AccountDetails>
         {
-            public override User ToModel(UserDetails details)
+            public override Account ToModel(AccountDetails details)
             {
-                return new User(
+                return new Account(
                     UserIdMapper.Current.GetIdFor(details.Id),
                     details.LastName,
                     details.FirstName,
                     details.Email,
                     "",
-                    details.Role.Id
+                    details.Role.Id,
+                    details.Id
                 );
             }
         }

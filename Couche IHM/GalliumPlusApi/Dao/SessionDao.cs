@@ -7,10 +7,10 @@ namespace GalliumPlusApi.Dao
 {
     public class SessionDao
     {
-        private UserDetails.Mapper detailsMapper = new();
+        private AccountDetails.Mapper detailsMapper = new();
         private RoleDetails.Mapper roleMapper = new();
 
-        public (User, Role)? LogIn(string username, string password)
+        public (Account, Role)? LogIn(string username, string password)
         {
             using var client = new GalliumPlusHttpClient();
             client.JsonOptions.PropertyNamingPolicy = null; // pas de casse chameau en sortie

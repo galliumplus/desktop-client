@@ -94,6 +94,23 @@ namespace Couche_Data.Dao
             }
         }
 
+        public static string ConnectionStringDev
+        {
+            get
+            {
+                if (connectionString == null)
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
+                    using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
+                    using StreamReader reader = new StreamReader(stream);
+                    connectionString = reader.ReadToEnd();
+                    connectionString.Replace("c2_etismash", "c2_gallium");
+                }
+                return connectionString;
+            }
+        }
+
         /// <summary>
         /// Se connecte à la base de donnée
         /// </summary>

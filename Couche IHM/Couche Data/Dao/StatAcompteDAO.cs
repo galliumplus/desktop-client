@@ -5,13 +5,13 @@ using System.Diagnostics;
 
 namespace Couche_Data.Dao
 {
-    public class StatAcompteDAO : IStatAcompteDAO
+    public class StatAccountDAO : IStatAccountDAO
     {
 
-        public List<StatAcompte> GetStat()
+        public List<StatAccount> GetStat()
         {
             //Connection
-            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringDev);
             try
             {
                 sql.Open();
@@ -24,15 +24,15 @@ namespace Couche_Data.Dao
                 //lecture de la requette
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
-                List<StatAcompte> statAcompteList = new List<StatAcompte>();
+                List<StatAccount> statAccountList = new List<StatAccount>();
                 while (rdr.Read())
                 {
-                    statAcompteList.Add(new StatAcompte(0, DateTime.Now, rdr.GetFloat("argent"), rdr.GetInt32("acompte_id")));
+                    statAccountList.Add(new StatAccount(0, DateTime.Now, rdr.GetFloat("argent"), rdr.GetInt32("acompte_id")));
                 }
 
                 rdr.Close();
                 sql.Close();
-                return statAcompteList;
+                return statAccountList;
             }
             catch (Exception ex)
             {
@@ -41,10 +41,10 @@ namespace Couche_Data.Dao
             }
         }
 
-        public void CreateStat(StatAcompte stat)
+        public void CreateStat(StatAccount stat)
         {
             //Connection
-            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringDev);
             try
             {
                 sql.Open();
@@ -52,7 +52,7 @@ namespace Couche_Data.Dao
                 //Requette SQL
                 string formattedDate = stat.Date.ToString("yyyy-MM-dd");
                 string formattedAmountMoney = stat.Money.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Acompte_Id})";
+                string stm = $"INSERT INTO best_acomptes VALUES(0,{formattedAmountMoney},'{formattedDate}',{stat.Account_Id})";
                 MySqlCommand cmd = new MySqlCommand(stm, sql);
                 cmd.Prepare();
 

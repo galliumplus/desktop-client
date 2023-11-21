@@ -1,4 +1,6 @@
 ﻿using Couche_Data.Dao;
+using Couche_Data.Interfaces;
+using GalliumPlusApi.Dao;
 using Modeles;
 
 
@@ -10,7 +12,7 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Permet d'accéder aux données
         /// </summary>
-        private LogDAO logDao;
+        private ILogDAO logDao;
 
         /// <summary>
         /// Liste des logs
@@ -24,7 +26,17 @@ namespace Couche_Métier.Manager
         /// </summary>
         public LogManager()
         {
-            logDao = new LogDAO();
+            if (DevelopmentInfo.isDevelopment)
+            {
+
+                logDao = new LogDAO();
+            }
+            else
+            {
+                logDao = new LogDao();
+            }
+            
+            
             Task.Run(() =>
             {
                 int annee = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -37,16 +49,17 @@ namespace Couche_Métier.Manager
         #region methods
         public List<Log> GetLogs(int mois = 0,int annee=0)
         {
-            List<Log> logs = new List<Log>();
-            if (mois == 0 || annee == 0)
+            List<Log> logsList = new List<Log>();
+
+            if (mois == 0 && annee == 0)
             {
-                logs = this.logs;
+                logsList = this.logs;
             }
             else
             {
-                logs = this.logDao.GetLogs(mois, annee);
+                logsList = this.logDao.GetLogs(mois, annee);
             }
-            return logs;
+            return logsList;
         }
 
 

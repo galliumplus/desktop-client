@@ -9,30 +9,31 @@ namespace Couche_Data.Dao
 
         public void CreateLog(Log log)
         {
-            lock (dbsDAO.Instance.DatabaseLock)
-            {
-                //Connection
-                dbsDAO.Instance.OpenDataBase();
+            string connString = dbsDAO.ConnectionStringDev;
+            MySqlConnection sql = new MySqlConnection(connString);
 
-                //Requette SQL
-                string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
-                string stm = $"INSERT INTO logs VALUES(0,@message,'{formattedDate}',{log.Theme},'{log.Auteur}')";
-                MySqlCommand cmd = new MySqlCommand(stm, dbsDAO.Instance.Sql);
-                cmd.Parameters.AddWithValue("@message", log.Message);
-                cmd.Prepare();
+            //Connection
+            sql.Open();
 
-                //lecture de la requette
-                cmd.ExecuteNonQuery();
+            //Requette SQL
+            string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
+            string stm = $"INSERT INTO logs VALUES(0,@message,'{formattedDate}',{log.Theme},'{log.Auteur}')";
+            MySqlCommand cmd = new MySqlCommand(stm, sql);
+            cmd.Parameters.AddWithValue("@message", log.Message);
+            cmd.Prepare();
 
-                dbsDAO.Instance.CloseDatabase();
-            }
+            //lecture de la requette
+            cmd.ExecuteNonQuery();
+
+            sql.Close();
+            
         }
 
 
         public List<Log> GetLogs(int mois, int annee)
         {
             //Connection
-            string connString = dbsDAO.ConnectionString;
+            string connString = dbsDAO.ConnectionStringDev;
             MySqlConnection sql = new MySqlConnection(connString);
             sql.Open();
             //Requette SQL 

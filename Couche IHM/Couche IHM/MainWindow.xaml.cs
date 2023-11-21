@@ -6,6 +6,7 @@ using Couche_Métier.Manager;
 using Modeles;
 using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Couche_IHM
 {
@@ -18,12 +19,23 @@ namespace Couche_IHM
         /// <summary>
         /// Constructeur de la mainwindow
         /// </summary>
-        public MainWindow(User user)
+        public MainWindow(Account user)
         {
             InitializeComponent();
             var mwvm = MainWindowViewModel.GetInstanceFor(this);
-            mwvm.CompteConnected = new UserViewModel(user, mwvm.UserManager);
+            AccountManager accountManager = MainWindowViewModel.Instance.AccountManager;
+            mwvm.CompteConnected = new AccountViewModel(user, accountManager, null);
             DataContext = MainWindowViewModel.Instance;
+
+            if (DevelopmentInfo.isDevelopment)
+            {
+                Menu.Background = new SolidColorBrush(Colors.DarkRed);
+                buttonAccount.Background = new SolidColorBrush(Colors.DarkRed);
+                buttonAccueil.Background = new SolidColorBrush(Colors.DarkRed);
+                buttonCaisse.Background = new SolidColorBrush(Colors.DarkRed);
+                buttonComptes.Background = new SolidColorBrush(Colors.DarkRed);
+                buttonStock.Background = new SolidColorBrush(Colors.DarkRed);
+            }
         }
 
         /// <summary>
