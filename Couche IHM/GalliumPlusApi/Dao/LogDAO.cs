@@ -1,59 +1,40 @@
 ﻿using Couche_Data.Dao;
 using Couche_Data.Interfaces;
+using GalliumPlusApi.Dto;
 using Modeles;
-using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace GalliumPlusApi.Dao
 {
     public class LogDao : ILogDAO
     {
-        public void CreateLog(Log log)
-        {
-            string connString = dbsDAO.ConnectionString;
-            MySqlConnection sql = new MySqlConnection(connString);
+        private HistoryActionDetails.Mapper mapper = new();
 
-            //Connection
-            sql.Open();
-
-            //Requette SQL
-            string formattedDate = log.Date.ToString("yyyy-MM-dd HH:mm:ss");
-            string stm = $"INSERT INTO logs VALUES(0,@message,'{formattedDate}',{log.Theme},'{log.Auteur}')";
-            MySqlCommand cmd = new MySqlCommand(stm, sql);
-            cmd.Parameters.AddWithValue("@message", log.Message);
-            cmd.Prepare();
-
-            //lecture de la requette
-            cmd.ExecuteNonQuery();
-
-            sql.Close() ;
-            
-
-        }
+        public void CreateLog(Log log) { /* non */ }
 
         public List<Log> GetLogs(int mois, int annee)
         {
-            //Connection
-            string connString = dbsDAO.ConnectionString;
-            MySqlConnection sql = new MySqlConnection(connString);
-            sql.Open();
+            DateTime debutMois = new DateTime(annee, mois, 1);
+            DateTime finMois = new DateTime(annee, mois, DateTime.DaysInMonth(annee, mois));
 
-            //Requette SQL 
-            string stm = $"SELECT * FROM logs WHERE YEAR(date_at) =  {annee} AND MONTH(date_at) = {mois} ORDER BY date_at DESC";
-            MySqlCommand cmd = new MySqlCommand(stm, sql);
-            cmd.Prepare();
+            string search = $"?from={debutMois:s}&to={finMois:s}&pageSize=99999";
 
-            //lecture de la requette
-            MySqlDataReader rdr = cmd.ExecuteReader();
+            using var client = new GalliumPlusHttpClient();
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            List<Log> logs = new List<Log>();
-            while (rdr.Read())
+            try
             {
-                logs.Add(new Log(DateTime.Parse(rdr.GetString("date_at")), rdr.GetInt16("log_category_id"), rdr.GetString("text"), rdr.GetString("user")));
-            }
-            rdr.Close();
-            sql.Close();
+                var products = client.Get<List<HistoryActionDetails>>("v1/history" + search);
 
-            return logs;
+                List<Log> logList = mapper.ToModel(products).ToList();
+                logList.Sort((log1, log2) => log2.Date.CompareTo(log1.Date));
+                return logList;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Exception non gérée lors de la récupération des logs : {ex}");
+                return new List<Log>();
+            }
         }
     }
 }
