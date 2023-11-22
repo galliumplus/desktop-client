@@ -42,7 +42,7 @@ namespace Couche_Data.Dao
             cmd.Prepare();
 
             //lecture de la requette
-            MySqlDataReader rdr = cmd.ExecuteReader();
+             MySqlDataReader rdr = cmd.ExecuteReader();
 
             List<Log> logs = new List<Log>();
             while (rdr.Read())
@@ -56,7 +56,7 @@ namespace Couche_Data.Dao
 
         public IPaginatedLogReader GetLogsReader(int mois, int annee)
         {
-            throw new NotImplementedException();
+            return new CachedLogReader(20, this.GetLogs(mois, annee));
         }
     }
 }
