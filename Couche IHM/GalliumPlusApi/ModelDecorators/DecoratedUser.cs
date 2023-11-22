@@ -2,7 +2,7 @@
 
 namespace GalliumPlusApi.ModelDecorators
 {
-    internal class DecoratedUser : Account
+    public class DecoratedUser : Account
     {
         private string year;
         private decimal? deposit;

@@ -1,4 +1,5 @@
-﻿using Couche_Métier;
+﻿using Couche_Data.Interfaces;
+using Couche_Métier;
 using Couche_Métier.Manager;
 using Modeles;
 using System;
@@ -8,7 +9,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Couche_IHM.VueModeles
 {
@@ -44,6 +47,10 @@ namespace Couche_IHM.VueModeles
         private bool selectProduct;
         private bool selectAccount;
         private bool selectCompte;
+        private CancellationTokenSource reloadCTS;
+        private DateTime nextPageLoadTime;
+        private TimeSpan pageLoadCooldown;
+        private IPaginatedLogReader? logsReader;
         #endregion
 
         #region constructor
@@ -68,7 +75,8 @@ namespace Couche_IHM.VueModeles
             this.SelectConnexion = false;
             this.SelectProduct = false;
             this.SelectCompte = false;
-            InitLogs();
+            this.reloadCTS = new CancellationTokenSource();
+            this.pageLoadCooldown = TimeSpan.FromMilliseconds(100);
         }
         #endregion
 
@@ -82,6 +90,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 currentAuteur = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -105,27 +114,19 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Liste des logs
         /// </summary>
-        public ObservableCollection<LogViewModel> Logs 
+        public ObservableCollection<LogViewModel> Logs
         {
-            get 
-            {
-                List<LogViewModel> logsFiltres = logs.ToList().FindAll(x => themeLog.Contains(x.IdTheme));
-                if (currentAuteur != "Tout le monde")
-                {
-                    logsFiltres = logsFiltres.FindAll(x => x.Auteur == currentAuteur);
-                }
-                return new ObservableCollection<LogViewModel>(logsFiltres);
-            }
-            set => logs = value; 
+            get => this.logs;
+            set => logs = value;
         }
 
         /// <summary>
         /// Filtre afficher les ventes
         /// </summary>
-        public bool SelectVente 
-        { 
+        public bool SelectVente
+        {
             get => selectVente;
-            set 
+            set
             {
                 if (value)
                 {
@@ -136,6 +137,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(5);
                 }
                 selectVente = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -146,7 +148,7 @@ namespace Couche_IHM.VueModeles
         public bool SelectConnexion
         {
             get => selectConnexion;
-            set 
+            set
             {
                 if (value)
                 {
@@ -157,16 +159,17 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(1);
                 }
                 selectConnexion = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
-            } 
+            }
         }
         /// <summary>
         /// Filtre afficher les produits
         /// </summary>
-        public bool SelectProduct 
-        { 
+        public bool SelectProduct
+        {
             get => selectProduct;
-            set 
+            set
             {
                 if (value)
                 {
@@ -177,6 +180,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(3);
                 }
                 selectProduct = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -198,6 +202,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(2);
                 }
                 selectAccount = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -205,10 +210,10 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Filtre afficher les comptes
         /// </summary>
-        public bool SelectCompte 
-        { 
+        public bool SelectCompte
+        {
             get => selectCompte;
-            set 
+            set
             {
                 if (value)
                 {
@@ -219,6 +224,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(6);
                 }
                 selectCompte = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -235,14 +241,14 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Mois sélectionné
         /// </summary>
-        public string CurrentMois 
-        { 
+        public string CurrentMois
+        {
             get => currentMois;
             set
             {
                 currentMois = value;
-                this.logs.Clear();
-                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                this.ReloadInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -250,14 +256,14 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Annee selectionné
         /// </summary>
-        public int CurrentAnnee 
-        { 
+        public int CurrentAnnee
+        {
             get => currentAnnee;
             set
             {
                 currentAnnee = value;
-                this.logs.Clear();
-                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                this.ReloadInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -275,9 +281,9 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'initialiser la liste des logs
         /// </summary>
-        public void InitLogs(int mois=0,int annee=0)
+        public void InitLogs(int mois = 0, int annee = 0)
         {
-            List<Log> logs = this.logManager.GetLogs(mois,annee);
+            List<Log> logs = this.logManager.GetLogs(mois, annee);
             foreach (Log log in logs)
             {
                 this.logs.Add(new LogViewModel(log));
@@ -292,11 +298,123 @@ namespace Couche_IHM.VueModeles
         public void AddLog(LogViewModel log)
         {
 
-            if (mois.IndexOf(currentMois)+1 == Convert.ToInt16(log.DateTime.ToString("MM")) && currentAnnee == Convert.ToInt16(log.DateTime.ToString("yyyy")))
+            if (mois.IndexOf(currentMois) + 1 == Convert.ToInt16(log.DateTime.ToString("MM")) && currentAnnee == Convert.ToInt16(log.DateTime.ToString("yyyy")))
             {
                 this.logs.Insert(0, log);
             }
-            
+
+        }
+
+        /// <summary>
+        /// Indique si une entrée doit être affiché ou non.
+        /// </summary>
+        /// <param name="log">L'entrée à tester.</param>
+        /// <returns><see langword="true"/> si l'entrée peut être affichée.</returns>
+        private bool Filtrer(Log log)
+        {
+            if (!themeLog.Contains(log.Theme))
+            {
+                return false;
+            }
+            if (currentAuteur != "Tout le monde" && log.Auteur != currentAuteur)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Lance le chargement des logs en arrière-plan.
+        /// </summary>
+        public void ReloadInBackground()
+        {
+            this.StopLoading();
+            this.reloadCTS = new();
+            this.logsReader = this.logManager.GetLogsReader(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+            Task.Run(() => this.ReloadAsync(this.reloadCTS.Token));
+        }
+
+        /// <summary>
+        /// Recharge les logs en changeant uniquement les filtres.
+        /// </summary>
+        public void ReloadFiltersInBackground()
+        {
+            // rien gardé en mémoire, on recharge tout
+            if (this.logsReader == null)
+            {
+                this.ReloadInBackground();
+                return;
+            }
+
+            this.StopLoading();
+            this.reloadCTS = new();
+            this.logsReader.Reset();
+            Task.Run(() => this.ReloadAsync(this.reloadCTS.Token));
+
+        }
+
+        /// <summary>
+        /// Arrête le chargement des logs.
+        /// </summary>
+        public void StopLoading()
+        {
+            this.reloadCTS?.Cancel();
+        }
+
+        /// <summary>
+        /// Charge les logs suivants.
+        /// </summary>
+        public void LoadNextPage()
+        {
+            if (DateTime.Now > this.nextPageLoadTime)
+            {
+                this.logsReader?.LoadNextPage();
+                this.nextPageLoadTime = DateTime.Now + this.pageLoadCooldown;
+            }
+        }
+
+        /// <summary>
+        /// Charge les logs.
+        /// </summary>
+        /// <param name="ct">Un jeton d'annulation pour arrêter le chargement en cours.</param>
+        private async Task ReloadAsync(CancellationToken ct = default)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                this.logs.Clear();
+            });
+
+            if (this.logsReader == null) return;
+
+            int read = 0;
+            int added = 0;
+            await foreach (Log log in this.logsReader!.GetAsyncStream(ct))
+            {
+                read++;
+                if (this.Filtrer(log))
+                {
+                    added++;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        this.logs.Add(new LogViewModel(log));
+                    });
+                }
+
+                // on a traité une page entière
+                if (read == this.logsReader.PageSize)
+                {
+                    // si des éléments se sont fait filtrer, on charge la suivante
+                    if (added < this.logsReader.PageSize)
+                    {
+                        read = 0;
+                        this.logsReader!.LoadNextPage();
+                    }
+                    else
+                    {
+                        added = 0;
+                    }
+                }
+            }
         }
 
         #endregion

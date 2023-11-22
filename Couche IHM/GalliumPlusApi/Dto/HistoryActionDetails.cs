@@ -1,6 +1,7 @@
 ﻿using GalliumPlusApi.CompatibilityHelpers;
 using Modeles;
 using Org.BouncyCastle.Asn1.Crmf;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace GalliumPlusApi.Dto
@@ -24,9 +25,32 @@ namespace GalliumPlusApi.Dto
 
         public class Mapper : Mapper<Log?, HistoryActionDetails>
         {
+            private Dictionary<string, Account> knownUsers;
+
+            public Mapper(Dictionary<string, Account> knownUsers)
+            {
+                this.knownUsers = knownUsers;
+            }
+
             public override HistoryActionDetails FromModel(Log? model)
             {
                 throw new InvalidOperationException("Les données de l'historique ne peuvent pas sortir.");
+            }
+
+            private string GetUserFullName(string? userId)
+            {
+                if (userId == null)
+                {
+                    return "Personne";
+                }
+                if (this.knownUsers.TryGetValue(userId, out Account? user))
+                {
+                    return $"{user.Prenom} {user.Nom}";
+                }
+                else
+                {
+                    return userId;
+                }
             }
 
             public override Log? ToModel(HistoryActionDetails dto)
@@ -37,7 +61,7 @@ namespace GalliumPlusApi.Dto
                         date: dto.Time,
                         theme: theme,
                         message: dto.Text,
-                        auteur: dto.Actor ?? "Personne"
+                        auteur: this.GetUserFullName(dto.Actor)
                     );
                 }
                 else

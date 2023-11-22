@@ -3,7 +3,6 @@ using Couche_Data.Interfaces;
 using GalliumPlusApi.Dao;
 using Modeles;
 
-
 namespace Couche_Métier.Manager
 {
     public class LogManager
@@ -24,7 +23,7 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Constructeur du log Manager
         /// </summary>
-        public LogManager()
+        public LogManager(AccountManager users)
         {
             if (DevelopmentInfo.isDevelopment)
             {
@@ -33,7 +32,7 @@ namespace Couche_Métier.Manager
             }
             else
             {
-                logDao = new LogDao();
+                logDao = new LogDao(users.GetAdmins());
             }
             
             
@@ -49,9 +48,8 @@ namespace Couche_Métier.Manager
         #region methods
         public List<Log> GetLogs(int mois = 0,int annee=0)
         {
-            List<Log> logsList = new List<Log>();
-
-            if (mois == 0 && annee == 0)
+            List<Log> logsList;
+            if (mois == 0 || annee == 0)
             {
                 logsList = this.logs;
             }
@@ -68,6 +66,12 @@ namespace Couche_Métier.Manager
             this.logs.Insert(0, log);
             this.logDao.CreateLog(log);
         }
+
+        public IPaginatedLogReader GetLogsReader(int mois, int annee)
+        {
+            return this.logDao.GetLogsReader(mois, annee);
+        }
+
         #endregion
     }
 }

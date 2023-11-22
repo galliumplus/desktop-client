@@ -53,5 +53,10 @@ namespace Couche_Data.Dao
             sql.Close();
             return logs;
         }
+
+        public IPaginatedLogReader GetLogsReader(int mois, int annee)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

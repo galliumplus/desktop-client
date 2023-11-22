@@ -7,6 +7,7 @@ using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 
 
@@ -77,6 +78,14 @@ namespace Couche_IHM
             {
                 messageQueue?.Enqueue(ex.Message);
             }                
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.ConnectToAccount(sender, e);
+            }
         }
     }
 }

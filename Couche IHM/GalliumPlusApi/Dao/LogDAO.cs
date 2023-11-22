@@ -1,5 +1,6 @@
-﻿using Couche_Data.Dao;
-using Couche_Data.Interfaces;
+﻿using Couche_Data.Interfaces;
+using Couche_Data.Dao;
+using GalliumPlusApi.CompatibilityHelpers;
 using GalliumPlusApi.Dto;
 using Modeles;
 using System.Diagnostics;
@@ -8,7 +9,17 @@ namespace GalliumPlusApi.Dao
 {
     public class LogDao : ILogDAO
     {
-        private HistoryActionDetails.Mapper mapper = new();
+        private HistoryActionDetails.Mapper mapper;
+
+        public LogDao(IEnumerable<Account> users)
+        {
+            Dictionary<string, Account> knownUsers = new();
+            foreach (Account user in users)
+            {
+                knownUsers[UserIdMapper.Current.FindUsernameOf(user.Id)] = user;
+            }
+            this.mapper = new(knownUsers);
+        }
 
         public void CreateLog(Log log) { /* non */ }
 
@@ -35,6 +46,11 @@ namespace GalliumPlusApi.Dao
                 Debug.WriteLine($"Exception non gérée lors de la récupération des logs : {ex}");
                 return new List<Log>();
             }
+        }
+
+        public IPaginatedLogReader GetLogsReader(int mois, int annee)
+        {
+            return new CachedLogReader(20, this.GetLogs(mois, annee));
         }
     }
 }

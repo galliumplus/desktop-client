@@ -6,5 +6,6 @@ namespace Couche_Data.Interfaces
     {
         void CreateLog(Log log);
         List<Log> GetLogs(int mois, int annee);
+        IPaginatedLogReader GetLogsReader(int mois, int annee);
     }
 }
