@@ -121,8 +121,7 @@
                                 FontSize="16"/>
                             <Button 
                                 Style="{StaticResource buttonImage}"  
-                                Grid.Column="3" 
-                                
+                                Grid.Column="3"             
                                 Command="{Binding ShowUpdate}"
                                 >
                                 <materialDesign:PackIcon
@@ -139,7 +138,6 @@
         <Button
             BorderThickness="0"
             Command="{Binding AccountsViewModel.OpenModifAdmin}"
-            CommandParameter="NEW"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Grid.Row="1"

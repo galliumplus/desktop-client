@@ -43,18 +43,11 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+        /// <summary>
+        /// Liste des roles disponibles
+        /// </summary>
+        public List<Role> Roles { get => roles; }
 
-        public List<Role> Roles
-        {
-            get
-            {
-                return roles;
-            }
-            set
-            {
-                roles = value;
-            }
-        }
         /// <summary>
         /// Liste des accounts
         /// </summary>
@@ -76,7 +69,6 @@ namespace Couche_IHM.VueModeles
                 
                 return adhs;
             }
-            set => accounts = value; 
         }
 
         /// <summary>
@@ -88,7 +80,6 @@ namespace Couche_IHM.VueModeles
             {
                 return accountsAdmins;
             }
-            set => accounts = value;
         }
 
         /// <summary>
@@ -190,6 +181,9 @@ namespace Couche_IHM.VueModeles
 
         }
 
+        /// <summary>
+        /// Permet d'afficher la popup de modification de compte admin
+        /// </summary>
         public bool DialogModifAdmin 
         { 
             get => dialogModifAdmin; 
@@ -219,7 +213,7 @@ namespace Couche_IHM.VueModeles
 
             // Initialisation des events
             this.OpenModifAdh = new RelayCommand(x => this.OpenAccountDetails((string)x));
-            this.OpenModifAdmin = new RelayCommand(x => this.OpenUserDetails((string)x));
+            this.OpenModifAdmin = new RelayCommand(x => this.OpenUserDetails());
 
 
         }
@@ -265,16 +259,11 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'ouvrir les détails du compte
         /// </summary>
-        public void OpenUserDetails(string action)
+        public void OpenUserDetails()
         {
-            if (action == "NEW" || currentAccount == null || currentAccount.Action == "NEW")
+            if (currentAccount == null)
             {
-                ShowDeleteAccount = false;
                 CurrentAccount = new AccountViewModel(new Account(), this.accountManager,"NEW");
-            }
-            else
-            {
-                ShowDeleteAccount = true;
             }
 
             DialogModifAdmin = true;

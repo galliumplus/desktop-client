@@ -104,7 +104,7 @@ namespace Couche_Data.Dao
                     using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
                     using StreamReader reader = new StreamReader(stream);
                     connectionString = reader.ReadToEnd();
-                    connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
+                    connectionString = connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
                 }
                 return connectionString;
             }

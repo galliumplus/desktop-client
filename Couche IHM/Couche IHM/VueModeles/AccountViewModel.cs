@@ -184,7 +184,7 @@ namespace Couche_IHM.VueModeles
             this.ShowUpdate = new RelayCommand(x =>
             {
                 MainWindowViewModel.Instance.AccountsViewModel.CurrentAccount = this;
-                MainWindowViewModel.Instance.AccountsViewModel.OpenUserDetails("UPDATE");
+                MainWindowViewModel.Instance.AccountsViewModel.OpenUserDetails();
             });
             this.ModifyAdherent = new RelayCommand(x => this.UpdateAccount());
 
