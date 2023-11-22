@@ -145,8 +145,8 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private MainWindowViewModel(MainWindow mainWindow)
         {
-            this.logManager = new LogManager();
             this.userManager = new UserManager();
+            this.logManager = new LogManager(this.userManager);
             this.productManager = new ProductManager();
             this.acompteManager = new AcompteManager();
             this.statAcompteManager = new StatAcompteManager();

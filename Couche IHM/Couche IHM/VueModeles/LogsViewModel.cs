@@ -1,4 +1,5 @@
-﻿using Couche_Métier;
+﻿using Couche_Data.Interfaces;
+using Couche_Métier;
 using Couche_Métier.Manager;
 using Modeles;
 using System;
@@ -47,6 +48,9 @@ namespace Couche_IHM.VueModeles
         private bool selectAcompte;
         private bool selectCompte;
         private CancellationTokenSource reloadCTS;
+        private DateTime nextPageLoadTime;
+        private TimeSpan pageLoadCooldown;
+        private IPaginatedLogReader? logsReader;
         #endregion
 
         #region constructor
@@ -54,7 +58,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur du logs vue modele
         /// </summary>
-        public LogsViewModel(UserManager userManager,LogManager logManager)
+        public LogsViewModel(UserManager userManager, LogManager logManager)
         {
             // Initialisation des datas
             this.themeLog = new List<int>();
@@ -72,8 +76,7 @@ namespace Couche_IHM.VueModeles
             this.SelectProduct = false;
             this.SelectCompte = false;
             this.reloadCTS = new CancellationTokenSource();
-
-            this.PropertyChanged += this.SelfPropertyChanged;
+            this.pageLoadCooldown = TimeSpan.FromMilliseconds(100);
         }
         #endregion
 
@@ -87,6 +90,7 @@ namespace Couche_IHM.VueModeles
             set
             {
                 currentAuteur = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -110,27 +114,19 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Liste des logs
         /// </summary>
-        public ObservableCollection<LogViewModel> Logs 
+        public ObservableCollection<LogViewModel> Logs
         {
             get => this.logs;
-            /*{
-                List<LogViewModel> logsFiltres = logs.ToList().FindAll(x => themeLog.Contains(x.IdTheme));
-                if (currentAuteur != "Tout le monde")
-                {
-                    logsFiltres = logsFiltres.FindAll(x => x.Auteur == currentAuteur);
-                }
-                return new ObservableCollection<LogViewModel>(logsFiltres);
-            }*/
-            set => logs = value; 
+            set => logs = value;
         }
 
         /// <summary>
         /// Filtre afficher les ventes
         /// </summary>
-        public bool SelectVente 
-        { 
+        public bool SelectVente
+        {
             get => selectVente;
-            set 
+            set
             {
                 if (value)
                 {
@@ -141,6 +137,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(5);
                 }
                 selectVente = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -151,7 +148,7 @@ namespace Couche_IHM.VueModeles
         public bool SelectConnexion
         {
             get => selectConnexion;
-            set 
+            set
             {
                 if (value)
                 {
@@ -162,16 +159,17 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(1);
                 }
                 selectConnexion = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
-            } 
+            }
         }
         /// <summary>
         /// Filtre afficher les produits
         /// </summary>
-        public bool SelectProduct 
-        { 
+        public bool SelectProduct
+        {
             get => selectProduct;
-            set 
+            set
             {
                 if (value)
                 {
@@ -182,6 +180,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(3);
                 }
                 selectProduct = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -189,8 +188,8 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Filtre afficher les acomptes
         /// </summary>
-        public bool SelectAcompte 
-        { 
+        public bool SelectAcompte
+        {
             get => selectAcompte;
             set
             {
@@ -203,6 +202,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(2);
                 }
                 selectAcompte = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -210,10 +210,10 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Filtre afficher les comptes
         /// </summary>
-        public bool SelectCompte 
-        { 
+        public bool SelectCompte
+        {
             get => selectCompte;
-            set 
+            set
             {
                 if (value)
                 {
@@ -224,6 +224,7 @@ namespace Couche_IHM.VueModeles
                     this.themeLog.Remove(6);
                 }
                 selectCompte = value;
+                this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -240,14 +241,14 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Mois sélectionné
         /// </summary>
-        public string CurrentMois 
-        { 
+        public string CurrentMois
+        {
             get => currentMois;
             set
             {
                 currentMois = value;
-                this.logs.Clear();
-                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                this.ReloadInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -255,14 +256,14 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Annee selectionné
         /// </summary>
-        public int CurrentAnnee 
-        { 
+        public int CurrentAnnee
+        {
             get => currentAnnee;
             set
             {
                 currentAnnee = value;
-                this.logs.Clear();
-                InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
+                this.ReloadInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }
         }
@@ -280,9 +281,9 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'initialiser la liste des logs
         /// </summary>
-        public void InitLogs(int mois=0,int annee=0)
+        public void InitLogs(int mois = 0, int annee = 0)
         {
-            List<Log> logs = this.logManager.GetLogs(mois,annee);
+            List<Log> logs = this.logManager.GetLogs(mois, annee);
             foreach (Log log in logs)
             {
                 this.logs.Add(new LogViewModel(log));
@@ -297,7 +298,7 @@ namespace Couche_IHM.VueModeles
         public void AddLog(LogViewModel log)
         {
 
-            if (mois.IndexOf(currentMois)+1 == Convert.ToInt16(log.DateTime.ToString("MM")) && currentAnnee == Convert.ToInt16(log.DateTime.ToString("yyyy")))
+            if (mois.IndexOf(currentMois) + 1 == Convert.ToInt16(log.DateTime.ToString("MM")) && currentAnnee == Convert.ToInt16(log.DateTime.ToString("yyyy")))
             {
                 this.logs.Insert(0, log);
             }
@@ -305,14 +306,21 @@ namespace Couche_IHM.VueModeles
         }
 
         /// <summary>
-        /// Réagis aux propriétés changées au sein du viewmodel.
+        /// Indique si une entrée doit être affiché ou non.
         /// </summary>
-        private void SelfPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        /// <param name="log">L'entrée à tester.</param>
+        /// <returns><see langword="true"/> si l'entrée peut être affichée.</returns>
+        private bool Filtrer(Log log)
         {
-            if (e.PropertyName == nameof(Logs))
+            if (!themeLog.Contains(log.Theme))
             {
-                // this.ReloadInBackground();
+                return false;
             }
+            if (currentAuteur != "Tout le monde" && log.Auteur != currentAuteur)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -322,12 +330,47 @@ namespace Couche_IHM.VueModeles
         {
             this.StopLoading();
             this.reloadCTS = new();
+            this.logsReader = this.logManager.GetLogsReader(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
             Task.Run(() => this.ReloadAsync(this.reloadCTS.Token));
         }
 
+        /// <summary>
+        /// Recharge les logs en changeant uniquement les filtres.
+        /// </summary>
+        public void ReloadFiltersInBackground()
+        {
+            // rien gardé en mémoire, on recharge tout
+            if (this.logsReader == null)
+            {
+                this.ReloadInBackground();
+                return;
+            }
+
+            this.StopLoading();
+            this.reloadCTS = new();
+            this.logsReader.Reset();
+            Task.Run(() => this.ReloadAsync(this.reloadCTS.Token));
+
+        }
+
+        /// <summary>
+        /// Arrête le chargement des logs.
+        /// </summary>
         public void StopLoading()
         {
-            this.reloadCTS.Cancel();
+            this.reloadCTS?.Cancel();
+        }
+
+        /// <summary>
+        /// Charge les logs suivants.
+        /// </summary>
+        public void LoadNextPage()
+        {
+            if (DateTime.Now > this.nextPageLoadTime)
+            {
+                this.logsReader?.LoadNextPage();
+                this.nextPageLoadTime = DateTime.Now + this.pageLoadCooldown;
+            }
         }
 
         /// <summary>
@@ -336,20 +379,41 @@ namespace Couche_IHM.VueModeles
         /// <param name="ct">Un jeton d'annulation pour arrêter le chargement en cours.</param>
         private async Task ReloadAsync(CancellationToken ct = default)
         {
-            List<Log> logs = this.logManager.GetLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
-
-            int i = 0;
-            foreach (Log log in logs)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                // ajout par impulsions
-                if (i%20 == 0) await Task.Delay(100, ct);
+                this.logs.Clear();
+            });
 
-                Application.Current.Dispatcher.Invoke(() =>
+            if (this.logsReader == null) return;
+
+            int read = 0;
+            int added = 0;
+            await foreach (Log log in this.logsReader!.GetAsyncStream(ct))
+            {
+                read++;
+                if (this.Filtrer(log))
                 {
-                    this.logs.Add(new LogViewModel(log));
-                });
-                
-                i++;
+                    added++;
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        this.logs.Add(new LogViewModel(log));
+                    });
+                }
+
+                // on a traité une page entière
+                if (read == this.logsReader.PageSize)
+                {
+                    // si des éléments se sont fait filtrer, on charge la suivante
+                    if (added < this.logsReader.PageSize)
+                    {
+                        read = 0;
+                        this.logsReader!.LoadNextPage();
+                    }
+                    else
+                    {
+                        added = 0;
+                    }
+                }
             }
         }
 

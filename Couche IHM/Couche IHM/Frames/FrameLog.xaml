@@ -67,7 +67,7 @@
                 Margin="30,5,20,10"/>   
         </Grid>
         <!-- Liste des logs -->
-        <ScrollViewer Margin="0,0,50,19" Grid.Row="1" ClipToBounds="True">
+        <ScrollViewer Margin="0,0,50,19" Grid.Row="1" ClipToBounds="True" ScrollChanged="ScrollChanged" x:Name="scrollViewer">
             <ListView 
                 ItemsSource="{Binding LogsViewModel.Logs}"
                 HorizontalContentAlignment="Stretch"  
