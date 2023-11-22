@@ -11,12 +11,12 @@ namespace GalliumPlusApi.Dao
     {
         private HistoryActionDetails.Mapper mapper;
 
-        public LogDAO(IEnumerable<User> users)
+        public LogDao(IEnumerable<Account> users)
         {
-            Dictionary<string, User> knownUsers = new();
-            foreach (User user in users)
+            Dictionary<string, Account> knownUsers = new();
+            foreach (Account user in users)
             {
-                knownUsers[UserIdMapper.Current.FindUsernameOf(user.ID)] = user;
+                knownUsers[UserIdMapper.Current.FindUsernameOf(user.Id)] = user;
             }
             this.mapper = new(knownUsers);
         }

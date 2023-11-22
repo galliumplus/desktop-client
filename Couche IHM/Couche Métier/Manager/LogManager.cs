@@ -23,10 +23,8 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Constructeur du log Manager
         /// </summary>
-        public LogManager(UserManager users)
+        public LogManager(AccountManager users)
         {
-            logDao = new LogDAO(users.GetComptes());
-
             if (DevelopmentInfo.isDevelopment)
             {
 
@@ -34,7 +32,7 @@ namespace Couche_Métier.Manager
             }
             else
             {
-                logDao = new LogDao(users.GetComptes());
+                logDao = new LogDao(users.GetAdmins());
             }
             
             
@@ -50,7 +48,7 @@ namespace Couche_Métier.Manager
         #region methods
         public List<Log> GetLogs(int mois = 0,int annee=0)
         {
-            List<Log> logs;
+            List<Log> logsList;
             if (mois == 0 || annee == 0)
             {
                 logsList = this.logs;

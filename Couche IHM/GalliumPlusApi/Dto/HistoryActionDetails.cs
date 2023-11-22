@@ -25,9 +25,9 @@ namespace GalliumPlusApi.Dto
 
         public class Mapper : Mapper<Log?, HistoryActionDetails>
         {
-            private Dictionary<string, User> knownUsers;
+            private Dictionary<string, Account> knownUsers;
 
-            public Mapper(Dictionary<string, User> knownUsers)
+            public Mapper(Dictionary<string, Account> knownUsers)
             {
                 this.knownUsers = knownUsers;
             }
@@ -43,7 +43,7 @@ namespace GalliumPlusApi.Dto
                 {
                     return "Personne";
                 }
-                if (this.knownUsers.TryGetValue(userId, out User? user))
+                if (this.knownUsers.TryGetValue(userId, out Account? user))
                 {
                     return $"{user.Prenom} {user.Nom}";
                 }
