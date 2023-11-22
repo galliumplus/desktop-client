@@ -1,4 +1,5 @@
 ﻿using Couche_Data.Interfaces;
+using Couche_Data.Dao;
 using GalliumPlusApi.CompatibilityHelpers;
 using GalliumPlusApi.Dto;
 using Modeles;
@@ -6,7 +7,7 @@ using System.Diagnostics;
 
 namespace GalliumPlusApi.Dao
 {
-    public class LogDAO : ILogDAO
+    public class LogDao : ILogDAO
     {
         private HistoryActionDetails.Mapper mapper;
 

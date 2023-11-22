@@ -2,9 +2,9 @@
 
 namespace Couche_Data.Interfaces
 {
-    public interface IStatAcompteDAO
+    public interface IStatAccountDAO
     {
-        void CreateStat(StatAcompte stat);
-        List<StatAcompte> GetStat();
+        void CreateStat(StatAccount stat);
+        List<StatAccount> GetStat();
     }
 }

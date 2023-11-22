@@ -93,6 +93,25 @@ namespace Couche_Data.Dao
                 return connectionString;
             }
         }
+        public static string ConnectionStringV
+        {
+            get
+            {
+                if (connectionString == null)
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
+                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
+                    using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
+                    using StreamReader reader = new StreamReader(stream);
+                    connectionString = reader.ReadToEnd();
+                    connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
+                }
+                return connectionString;
+            }
+        }
+
+
+
 
         /// <summary>
         /// Se connecte à la base de donnée

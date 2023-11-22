@@ -175,7 +175,7 @@ namespace Couche_IHM.VueModeles
             get => showDeleteProduct;
             set
             {
-                if (MainWindowViewModel.Instance.CompteConnected.RoleIHM.Name != "Conseil d'administration")
+                if (MainWindowViewModel.Instance.CompteConnected.Role.Name != "Conseil d'administration")
                 {
                     showDeleteProduct = value;
                     NotifyPropertyChanged();

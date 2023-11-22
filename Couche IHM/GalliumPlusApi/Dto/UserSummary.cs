@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GalliumPlusApi.Dto
 {
-    public class UserSummary
+    public class AccountSummary
     {
         public string Id { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
@@ -17,9 +17,9 @@ namespace GalliumPlusApi.Dto
         public decimal? Deposit { get; set; } = null;
         public bool IsMember { get; set; } = false;
 
-        public class UserMapper : Mapper<User, UserSummary>
+        public class UserMapper : Mapper<Account, AccountSummary>
         {
-            public override UserSummary FromModel(User user)
+            public override AccountSummary FromModel(Account user)
             {
                 string year = "?";
                 decimal? deposit = null;
@@ -31,35 +31,35 @@ namespace GalliumPlusApi.Dto
                     isMember = deco.IsMember;
                 }
 
-                return new UserSummary
+                return new AccountSummary
                 {
-                    Id = UserIdMapper.Current.FindUsernameOf(user.ID),
+                    Id = user.Identifiant,
                     FirstName = user.Prenom,
                     LastName = user.Nom,
                     Email = user.Mail,
-                    Role = user.IdRole,
+                    Role = user.RoleId,
                     Year = year,
                     Deposit = deposit,
                     IsMember = isMember,
                 };
             }
 
-            public UserSummary PatchWithModel(UserDetails originialUser, User patch)
+            public AccountSummary PatchWithModel(AccountDetails originialUser, Account patch)
             {
-                return new UserSummary
+                return new AccountSummary
                 {
                     Id = originialUser.Id,
                     FirstName = patch.Prenom,
                     LastName = patch.Nom,
                     Email = patch.Mail,
-                    Role = patch.IdRole,
+                    Role = patch.RoleId,
                     Year = originialUser.Year,
                     Deposit = originialUser.Deposit,
                     IsMember = originialUser.IsMember,
                 };
             }
 
-            public override User ToModel(UserSummary summary)
+            public override Account ToModel(AccountSummary summary)
             {
                 return new DecoratedUser(
                     id: UserIdMapper.Current.GetIdFor(summary.Id),
@@ -70,54 +70,51 @@ namespace GalliumPlusApi.Dto
                     role: summary.Role,
                     year: summary.Year,
                     deposit: summary.Deposit,
-                    isMember: summary.IsMember
+                    isMember: summary.IsMember,
+                    identifiant: summary.Id
                 );
             }
         }
 
-        public class AcompteMapper : Mapper<Acompte, UserSummary>
+        public class AccountMapper : Mapper<Account, AccountSummary>
         {
-            public override UserSummary FromModel(Acompte model)
+            public override AccountSummary FromModel(Account model)
             {
                 string email = "UKN";
                 int roleId = SessionStorage.Current.Get<int>("adherentRoleId");
-                if (model is DecoratedAcompte deco)
-                {
-                    email = deco.Email;
-                    roleId = deco.RoleId;
-                }
 
-                return new UserSummary
+
+                return new AccountSummary
                 {
                     Deposit = Format.FloatToMonetary(model.Argent),
-                    Email = email,
+                    Email = model.Mail,
                     FirstName = model.Prenom,
                     Id = model.Identifiant,
-                    IsMember = model.StillAdherent,
+                    IsMember = model.IsMember,
                     LastName = model.Nom,
-                    Role = roleId,
+                    Role = model.RoleId,
                     Year = model.Formation,
                 };
             }
 
-            public UserSummary PatchWithModel(UserDetails originalUser, Acompte patch)
+            public AccountSummary PatchWithModel(AccountDetails originalUser, Account patch)
             {
-                return new UserSummary
+                return new AccountSummary
                 {
                     Deposit = Format.FloatToMonetary(patch.Argent),
                     Email = originalUser.Email,
                     FirstName = patch.Prenom,
                     Id = patch.Identifiant,
-                    IsMember = patch.StillAdherent,
+                    IsMember = patch.IsMember,
                     LastName = patch.Nom,
                     Role = originalUser.Role.Id,
                     Year = patch.Formation,
                 };
             }
 
-            public override Acompte ToModel(UserSummary dto)
+            public override Account ToModel(AccountSummary dto)
             {
-                return new DecoratedAcompte(
+                return new DecoratedAccount(
                     id: UserIdMapper.Current.GetIdFor(dto.Id),
                     identifiant: dto.Id,
                     nom: dto.LastName,

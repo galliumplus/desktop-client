@@ -32,21 +32,18 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region viewmodels
-        public AcomptesViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
+        public AccountsViewModel AccountsViewModel { get => accountsViewModel; set => accountsViewModel = value; }
         public ProductsViewModel ProductViewModel { get => productViewModel; set => productViewModel = value; }
         public PartenariatViewModel PartenariatViewModel { get => partenariatViewModel; set => partenariatViewModel = value; }
         public CaisseViewModel CaisseViewModel { get => caisseViewModel; set => caisseViewModel = value; }
         public LogsViewModel LogsViewModel { get => logsViewModel; set => logsViewModel = value; }
-
-        public UsersViewModel UserViewModel { get => userViewModel; set => userViewModel = value; }
         public StatistiqueViewModel StatViewModel { get => statViewModel; set => statViewModel = value; }
 
-        private AcomptesViewModel adherentViewModel;
+        private AccountsViewModel accountsViewModel;
         private ProductsViewModel productViewModel;
         private PartenariatViewModel partenariatViewModel;
         private CaisseViewModel caisseViewModel;
         private LogsViewModel logsViewModel;
-        private UsersViewModel userViewModel;
         private StatistiqueViewModel statViewModel;
         private MainWindow mainWindow;
         #endregion
@@ -61,13 +58,12 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region attributes
-        private UserViewModel compteConnected;
+        private AccountViewModel compteConnected;
         private Frame frame = Frame.FRAMEACCUEIL;
         private LogManager logManager;
-        private UserManager userManager;
-        private AcompteManager acompteManager;
+        private AccountManager accountManager;
         private ProductManager productManager;
-        private StatAcompteManager statAcompteManager;
+        private StatAccountManager statAccountManager;
         private StatProduitManager statProduitManager;
         private OrderManager orderManager;
         #endregion
@@ -84,7 +80,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Compte connecté à gallium
         /// </summary>
-        public UserViewModel CompteConnected
+        public AccountViewModel CompteConnected
         {
             get => compteConnected;
             set => compteConnected = value;
@@ -99,14 +95,7 @@ namespace Couche_IHM.VueModeles
             set => logManager = value;
         }
 
-        /// <summary>
-        /// Permet de gérer les comptes
-        /// </summary>
-        public UserManager UserManager
-        {
-            get => userManager;
-            set => userManager = value;
-        }
+        public AccountManager AccountManager { get => accountManager; set => accountManager = value; }
 
 
         /// <summary>
@@ -138,6 +127,8 @@ namespace Couche_IHM.VueModeles
 
         public MainWindow MainWindow => mainWindow;
 
+
+
         #endregion
 
         /// <summary>
@@ -145,19 +136,17 @@ namespace Couche_IHM.VueModeles
         /// </summary>
         private MainWindowViewModel(MainWindow mainWindow)
         {
-            this.userManager = new UserManager();
-            this.logManager = new LogManager(this.userManager);
             this.productManager = new ProductManager();
-            this.acompteManager = new AcompteManager();
-            this.statAcompteManager = new StatAcompteManager();
+            this.accountManager = new AccountManager();
+            this.logManager = new LogManager(this.accountManager);
+            this.statAccountManager = new StatAccountManager();
             this.statProduitManager = new StatProduitManager();
             this.orderManager = new OrderManager();
-            this.adherentViewModel = new AcomptesViewModel(acompteManager);
+            this.accountsViewModel = new AccountsViewModel(accountManager);
             this.productViewModel = new ProductsViewModel(productManager);
-            this.caisseViewModel = new CaisseViewModel(this.statAcompteManager, this.statProduitManager, this.orderManager);
-            this.statViewModel = new StatistiqueViewModel(productManager, acompteManager, statAcompteManager, statProduitManager);
-            this.logsViewModel = new LogsViewModel(userManager, logManager);
-            this.userViewModel = new UsersViewModel(this.userManager);
+            this.caisseViewModel = new CaisseViewModel(this.statAccountManager, this.statProduitManager, this.orderManager);
+            this.statViewModel = new StatistiqueViewModel(productManager, accountManager, statAccountManager, statProduitManager);
+            this.logsViewModel = new LogsViewModel(accountManager, logManager);
             this.partenariatViewModel = new PartenariatViewModel();
             this.mainWindow = mainWindow;
 
@@ -203,7 +192,7 @@ namespace Couche_IHM.VueModeles
             {
                 case Frame.FRAMECAISSE:
                     this.productViewModel.SearchFilter = "";
-                    this.adherentViewModel.SearchFilter = "";
+                    this.accountsViewModel.SearchFilter = "";
                     break;
 
                 case Frame.FRAMELOG:

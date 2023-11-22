@@ -1,4 +1,5 @@
-﻿using Couche_Data.Interfaces;
+﻿using Couche_Data.Dao;
+using Couche_Data.Interfaces;
 using GalliumPlusApi.Dao;
 using Modeles;
 
@@ -26,6 +27,17 @@ namespace Couche_Métier.Manager
         {
             logDao = new LogDAO(users.GetComptes());
 
+            if (DevelopmentInfo.isDevelopment)
+            {
+
+                logDao = new LogDAO();
+            }
+            else
+            {
+                logDao = new LogDao(users.GetComptes());
+            }
+            
+            
             Task.Run(() =>
             {
                 int annee = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
@@ -41,13 +53,13 @@ namespace Couche_Métier.Manager
             List<Log> logs;
             if (mois == 0 || annee == 0)
             {
-                logs = this.logs;
+                logsList = this.logs;
             }
             else
             {
-                logs = this.logDao.GetLogs(mois, annee);
+                logsList = this.logDao.GetLogs(mois, annee);
             }
-            return logs;
+            return logsList;
         }
 
 

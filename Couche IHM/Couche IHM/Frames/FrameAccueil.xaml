@@ -11,7 +11,7 @@
       Background="White">
     <Page.Resources>
         <rules:PositionPodiumProduit x:Key="PositionConverter" />
-        <rules:PositionPodiumAcompte x:Key="PositionConverter2" />
+        <rules:PositionPodiumAccount x:Key="PositionConverter2" />
     </Page.Resources>
 
     <Grid  Margin="50,50,0,25">
@@ -67,7 +67,7 @@
                 Kind="Podium"/>
         </StackPanel>
 
-        <!-- Acomptes -->
+        <!-- Accounts -->
         <TextBlock 
             Grid.Row="2"
             Grid.ColumnSpan="2"
@@ -82,7 +82,7 @@
             Grid.Row="3"
             Grid.RowSpan="5" 
             Orientation="Vertical">
-            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAcompte}">
+            <ItemsControl ItemsSource="{Binding StatViewModel.PodiumAccount}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,10,0,0">
@@ -108,10 +108,10 @@
                             <materialDesign:Chip  
                                 Grid.Row="0"
                                 Grid.Column="0"
-                                Command="{Binding DataContext.StatViewModel.FindAcompte, 
+                                Command="{Binding DataContext.StatViewModel.FindAccount, 
                                     RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
-                                CommandParameter="{Binding AdherentViewModel}"
-                                Content="{Binding AdherentViewModel.NomCompletIHM}">
+                                CommandParameter="{Binding AccountsViewModel}"
+                                Content="{Binding AccountsViewModel.NomCompletIHM}">
                                 <materialDesign:Chip.Style>
                                     <Style TargetType="materialDesign:Chip">
                                         <Style.Setters>
@@ -119,7 +119,7 @@
                                             <Setter Property="FontSize" Value="17"/>
                                         </Style.Setters>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
+                                            <DataTrigger Binding="{Binding AccountsViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
                                                 <Setter Property="IconBackground" Value="#EDEDED"/>
                                                 <Setter Property="FontSize" Value="16"/>
                                             </DataTrigger>
@@ -137,15 +137,15 @@
                                                     <Setter Property="Foreground" Value="Gold" />
                                                 </Style.Setters>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="2">
+                                                    <DataTrigger Binding="{Binding AccountsViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="2">
                                                         <Setter Property="Kind" Value="Numeric2" />
                                                         <Setter Property="Foreground" Value="Silver" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="3">
+                                                    <DataTrigger Binding="{Binding AccountsViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="3">
                                                         <Setter Property="Kind" Value="Numeric3" />
                                                         <Setter Property="Foreground" Value="#CD853F" />
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding AdherentViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
+                                                    <DataTrigger Binding="{Binding AccountsViewModel.IdentifiantIHM, Converter={StaticResource PositionConverter2}}" Value="4">
                                                         <Setter Property="Margin" Value="7,0,0,0"/>
                                                         <Setter Property="Kind" Value="Numeric4" />
                                                         <Setter Property="Foreground" Value="#4d5157"/>

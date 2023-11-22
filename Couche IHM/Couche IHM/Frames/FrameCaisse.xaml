@@ -10,7 +10,7 @@
       Title="FrameCaisse"
       Background="White">
     <Page.Resources>
-        <local:AcompteAndCheckboxConverter x:Key="AcompteAndCheckboxConverter" />
+        <local:AccountAndCheckboxConverter x:Key="AccountAndCheckboxConverter" />
     </Page.Resources>
     <Grid Margin="40,40,20,10">
         <!-- Definitions colonnes -->
@@ -188,7 +188,7 @@
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource MaterialDesignLightCheckBox}" TargetType="CheckBox">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Acompte">
+                                <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Account">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -209,8 +209,8 @@
 
         </StackPanel>
 
-        <!-- Paiement Acompte -->
-        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayAcompte}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+        <!-- Paiement Account -->
+        <materialDesign:DialogHost Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.ShowPayAccount}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent >
                 <StackPanel Margin="20"  Orientation="Vertical">
                     
@@ -218,14 +218,14 @@
                         HorizontalAlignment="Center"
                         FontWeight="Bold"
                         FontSize="28" 
-                        Text="Paiement par Acompte"
+                        Text="Paiement par Account"
                         Margin="20 0 20 30"/>
                     <Label 
                         Content="Identifiant de l'acompte" 
                         FontSize="16"
                          />
                     <ComboBox 
-                        ItemsSource="{Binding AdherentViewModel.Acomptes}"
+                        ItemsSource="{Binding AccountsViewModel.Accounts}"
                         SelectedItem="{Binding CaisseViewModel.AdherentPayer}"
                         FontSize="16"
                         IsTextSearchEnabled="True" 
@@ -262,7 +262,7 @@
                             Style="{StaticResource buttonBlack}"
                             Command="{Binding CaisseViewModel.Pay}">
                             <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource AcompteAndCheckboxConverter}">
+                                <MultiBinding Converter="{StaticResource AccountAndCheckboxConverter}">
                                     <Binding Path="CaisseViewModel.AdherentPayer" />
                                     <Binding Path="IsChecked" ElementName="AdherentCheckbox" />
                                 </MultiBinding>
@@ -382,8 +382,8 @@
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
-        <!-- Retour Acompte Argent -->
-        <materialDesign:DialogHost CloseOnClickAway="True" Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.RetourAcompteArgent}" OverlayBackground="Gray"  DialogTheme="Inherit" >
+        <!-- Retour Account Argent -->
+        <materialDesign:DialogHost CloseOnClickAway="True" Grid.RowSpan="2" Grid.ColumnSpan="2" IsOpen="{Binding CaisseViewModel.RetourAccountArgent}" OverlayBackground="Gray"  DialogTheme="Inherit" >
             <materialDesign:DialogHost.DialogContent>
                 <Grid Margin="30,30,30,20">
                     <StackPanel Orientation="Vertical">

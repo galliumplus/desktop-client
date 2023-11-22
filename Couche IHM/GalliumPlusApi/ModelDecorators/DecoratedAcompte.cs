@@ -2,16 +2,11 @@
 
 namespace GalliumPlusApi.ModelDecorators
 {
-    public class DecoratedAcompte : Acompte
+    public class DecoratedAccount : Account
     {
-        private string email;
-        private int roleId;
 
-        public string Email => email;
 
-        public int RoleId => roleId;
-
-        public DecoratedAcompte(
+        public DecoratedAccount(
             int id,
             string identifiant,
             string nom,
@@ -22,10 +17,9 @@ namespace GalliumPlusApi.ModelDecorators
             string email,
             int roleId
         )
-        : base(id, identifiant, nom, prenom, argent, formation, stillAdherent)
+        : base(id, identifiant, nom, prenom, email,argent, formation, stillAdherent,roleId)
         {
-            this.email = email;
-            this.roleId = roleId;
+
         }
     }
 }

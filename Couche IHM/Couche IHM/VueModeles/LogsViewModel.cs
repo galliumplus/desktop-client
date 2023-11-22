@@ -20,7 +20,7 @@ namespace Couche_IHM.VueModeles
 
         #region attributes 
         private ObservableCollection<LogViewModel> logs = new ObservableCollection<LogViewModel>();
-        private UserManager userManager;
+        private AccountManager userManager;
         private LogManager logManager;
         private string currentAuteur;
         private int currentAnnee;
@@ -45,7 +45,7 @@ namespace Couche_IHM.VueModeles
         private bool selectVente;
         private bool selectConnexion;
         private bool selectProduct;
-        private bool selectAcompte;
+        private bool selectAccount;
         private bool selectCompte;
         private CancellationTokenSource reloadCTS;
         private DateTime nextPageLoadTime;
@@ -58,7 +58,7 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Constructeur du logs vue modele
         /// </summary>
-        public LogsViewModel(UserManager userManager, LogManager logManager)
+        public LogsViewModel(AccountManager userManager,LogManager logManager)
         {
             // Initialisation des datas
             this.themeLog = new List<int>();
@@ -71,7 +71,7 @@ namespace Couche_IHM.VueModeles
             currentMois = currentDate.ToString("MMMM");
             currentAnnee = année;
             this.SelectVente = true;
-            this.SelectAcompte = false;
+            this.SelectAccount = false;
             this.SelectConnexion = false;
             this.SelectProduct = false;
             this.SelectCompte = false;
@@ -102,8 +102,8 @@ namespace Couche_IHM.VueModeles
             get
             {
                 List<string> auteurs = new List<string>() { "Tout le monde" };
-                List<User> users = this.userManager.GetComptes();
-                foreach (User u in users)
+                List<Account> users = this.userManager.GetAdhérents();
+                foreach (Account u in users)
                 {
                     auteurs.Add($"{u.Prenom} {u.Nom}");
                 }
@@ -188,9 +188,9 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Filtre afficher les acomptes
         /// </summary>
-        public bool SelectAcompte
-        {
-            get => selectAcompte;
+        public bool SelectAccount 
+        { 
+            get => selectAccount;
             set
             {
                 if (value)
@@ -201,7 +201,7 @@ namespace Couche_IHM.VueModeles
                 {
                     this.themeLog.Remove(2);
                 }
-                selectAcompte = value;
+                selectAccount = value;
                 this.ReloadFiltersInBackground();
                 NotifyPropertyChanged(nameof(Logs));
             }

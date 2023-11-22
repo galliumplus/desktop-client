@@ -17,12 +17,12 @@ namespace Couche_IHM.VueModeles
 
         #region attributes
         private StatProduitManager statProduitManager;
-        private AcompteManager acompteManager;
+        private AccountManager accountManager;
         private List<StatProduitViewModel> statsProduit = new List<StatProduitViewModel>();
 
-        private StatAcompteManager statAcompteManager;
+        private StatAccountManager statAccountManager;
         private ProductManager productManager;
-        private List<StatAcompteViewModel> statsAcompte = new List<StatAcompteViewModel>();
+        private List<StatAccountViewModel> statsAccount = new List<StatAccountViewModel>();
         #endregion
 
         #region inotify
@@ -49,39 +49,39 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Podium des trois meilleurs acomptes
         /// </summary>
-        public List<StatAcompteViewModel> PodiumAcompte
+        public List<StatAccountViewModel> PodiumAccount
         {
             get
             {
-                return statsAcompte.OrderByDescending(x => x.Argent).Take(4).ToList();
+                return statsAccount.OrderByDescending(x => x.Argent).Take(4).ToList();
             }
         }
 
         #endregion
 
         #region events
-        public RelayCommand FindAcompte { get; set;}
+        public RelayCommand FindAccount { get; set;}
         public RelayCommand FindProduct { get; set;}
         #endregion
         #region constructor
         /// <summary>
         /// Constructeur du statistique vue modele
         /// </summary>
-        public StatistiqueViewModel(ProductManager produtManager,AcompteManager acompteManager,StatAcompteManager statAcompte,StatProduitManager statProduit)
+        public StatistiqueViewModel(ProductManager produtManager,AccountManager accountManager,StatAccountManager statAccount,StatProduitManager statProduit)
         {
             // Initialisation des objets métiers
             this.statProduitManager = statProduit;
-            this.statAcompteManager = statAcompte;
+            this.statAccountManager = statAccount;
             this.productManager = produtManager;
-            this.acompteManager = acompteManager;
+            this.accountManager = accountManager;
 
             // Initialisation des events
             this.FindProduct = new RelayCommand(product => GoToProductDetails((ProductViewModel)product));
-            this.FindAcompte = new RelayCommand(acompte => GoToAcompteDetails((AcompteViewModel)acompte));
+            this.FindAccount = new RelayCommand(acompte => GoToAccountDetails((AccountViewModel)acompte));
 
             // Initialisation des datas
             InitStatsProduit();
-            InitStatsAcompte();
+            InitStatsAccount();
             
         }
         #endregion
@@ -91,10 +91,10 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de retrouver l'acompte en liant avec la stat et de redirigier sur ses détails
         /// </summary>
-        private void GoToAcompteDetails(AcompteViewModel acompte)
+        private void GoToAccountDetails(AccountViewModel acompte)
         {
-            MainWindowViewModel.Instance.Frame = Frame.FRAMEACOMPTE;
-            MainWindowViewModel.Instance.AdherentViewModel.CurrentAcompte = MainWindowViewModel.Instance.AdherentViewModel.Acomptes.ToList().Find(x => x.Id == acompte.Id);
+            MainWindowViewModel.Instance.Frame = Frame.FRAMEACCOUNT;
+            MainWindowViewModel.Instance.AccountsViewModel.CurrentAccount = MainWindowViewModel.Instance.AccountsViewModel.Accounts.ToList().Find(x => x.Id == acompte.Id);
         }
         /// <summary>
         /// Permet de retrouver le produit en liant avec la stat et de redirigier sur ses détails
@@ -125,18 +125,18 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'ajouter une stat d'acompte
         /// </summary>
-        public void AddStatAcompte(StatAcompte stat)
+        public void AddStatAccount(StatAccount stat)
         {
-            StatAcompteViewModel? acompteStat = this.statsAcompte.Find(x => x.AdherentViewModel.Id == stat.Acompte_Id);
+            StatAccountViewModel? acompteStat = this.statsAccount.Find(x => x.AccountsViewModel.Id == stat.Account_Id);
             if (acompteStat != null)
             {
                 acompteStat.Argent += stat.Money;
             }
             else
             {
-                this.statsAcompte.Add(new StatAcompteViewModel(stat, new AcompteViewModel(acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id),null)));
+                this.statsAccount.Add(new StatAccountViewModel(stat, new AccountViewModel(accountManager.GetAdhérents().Find(x => x.Id == stat.Account_Id),this.accountManager)));
             }
-            NotifyPropertyChanged(nameof(this.PodiumAcompte));
+            NotifyPropertyChanged(nameof(this.PodiumAccount));
         }
 
         /// <summary>
@@ -160,18 +160,18 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet d'initialiser les stats des acomptes
         /// </summary>
-        public void InitStatsAcompte()
+        public void InitStatsAccount()
         {
-            this.statsAcompte.Clear();
-            List<StatAcompte> statAcompte = this.statAcompteManager.GetStats();
-            foreach (StatAcompte stat in statAcompte)
+            this.statsAccount.Clear();
+            List<StatAccount> statAccount = this.statAccountManager.GetStats();
+            foreach (StatAccount stat in statAccount)
             {
-                if (acompteManager.GetAdhérents().Find(x => x.Id == stat.Acompte_Id) is Acompte acompte)
+                if (accountManager.GetAdhérents().Find(x => x.Id == stat.Account_Id) is Account acompte)
                 {
-                    this.statsAcompte.Add(new StatAcompteViewModel(stat, new AcompteViewModel(acompte, null)));
+                    this.statsAccount.Add(new StatAccountViewModel(stat, new AccountViewModel(acompte, this.accountManager)));
                 }
             }
-            NotifyPropertyChanged(nameof(this.PodiumAcompte));
+            NotifyPropertyChanged(nameof(this.PodiumAccount));
         }
         #endregion
     }

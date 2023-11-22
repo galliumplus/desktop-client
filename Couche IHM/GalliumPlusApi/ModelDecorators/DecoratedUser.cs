@@ -2,12 +2,14 @@
 
 namespace GalliumPlusApi.ModelDecorators
 {
-    public class DecoratedUser : User
+    public class DecoratedUser : Account
     {
         private string year;
         private decimal? deposit;
         private bool isMember;
+        private string identifiant;
 
+        public string Identifiant => identifiant;
         public string Year => year;
 
         public decimal? Deposit => deposit;
@@ -23,9 +25,10 @@ namespace GalliumPlusApi.ModelDecorators
             int role,
             string year,
             decimal? deposit,
-            bool isMember
+            bool isMember,
+            string identifiant
         )
-        : base(id, nom, prenom, mail, password, role)
+        : base(id, nom, prenom, mail, password, role,identifiant)
         {
             this.year = year;
             this.deposit = deposit;

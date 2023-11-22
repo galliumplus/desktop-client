@@ -198,12 +198,12 @@
                             Grid.Column="0"
                             Content="Produit"/>
                         <CheckBox 
-                            IsChecked="{Binding LogsViewModel.SelectAcompte}" 
+                            IsChecked="{Binding LogsViewModel.SelectAccount}" 
                             Grid.Row="1"
                              FontSize="15"
                             Grid.Column="0"
                             Background="Orange"
-                            Content="Acompte"/>
+                            Content="Account"/>
                         <CheckBox 
                             Grid.Row="2"
                              FontSize="15"
