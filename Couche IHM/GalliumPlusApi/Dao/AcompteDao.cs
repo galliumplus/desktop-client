@@ -5,14 +5,13 @@ using GalliumPlusApi.Exceptions;
 using GalliumPlusApi.ModelDecorators;
 using Modeles;
 using System.Diagnostics;
-using static GalliumPlusApi.Dto.AccountSummary;
 using System.Numerics;
 
 namespace GalliumPlusApi.Dao
 {
     public class AccountDao : IAccountDao
     {
-        private AccountSummary.AccountMapper mapper = new();
+        private UserSummary.AccountMapper mapper = new();
         private RoleDetails.Mapper roleMapper = new();
 
         public void CreateAdhérent(Account adhérent)
@@ -20,18 +19,8 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            try
-            {
-                var existingUser = client.Get<AccountDetails>($"v1/users/{adhérent.Identifiant}");
-                client.Put($"v1/users/{adhérent.Identifiant}", mapper.PatchWithModel(existingUser, adhérent));
-            }
-            catch (ItemNotFoundException)
-            {
-                client.Post("v1/users", mapper.FromModel(adhérent));
-            }
+            client.Post("v1/users", mapper.FromModel(adhérent));
         }
-
-
 
 
         public List<Role> GetRoles()
@@ -51,6 +40,7 @@ namespace GalliumPlusApi.Dao
                 return new List<Role>();
             }
         }
+
         public List<Account> GetAdhérents()
         {
             using var client = new GalliumPlusHttpClient();
@@ -58,7 +48,7 @@ namespace GalliumPlusApi.Dao
 
             try
             {
-                var users = client.Get<List<AccountSummary>>("v1/users")
+                var users = client.Get<List<UserSummary>>("v1/users")
                                   .Where(user => user.Deposit != null);
 
                 return mapper.ToModel(users).ToList();
@@ -75,7 +65,7 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            var existingUser = client.Get<AccountDetails>($"v1/users/{adhérent.Identifiant}");
+            var existingUser = client.Get<UserDetails>($"v1/users/{adhérent.Identifiant}");
             existingUser.Deposit = null;
 
             client.Put($"v1/users/{adhérent.Identifiant}", existingUser.AsUserSummary);
@@ -86,15 +76,7 @@ namespace GalliumPlusApi.Dao
             using var client = new GalliumPlusHttpClient();
             client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
-            if (adhérent is DecoratedAccount deco)
-            {
-                client.Put($"v1/users/{adhérent.Identifiant}", mapper.FromModel(deco));
-            }
-            else
-            {
-                var original = client.Get<AccountDetails>($"v1/users/{adhérent.Identifiant}");
-                client.Put($"v1/products/{adhérent.Identifiant}", mapper.PatchWithModel(original, adhérent));
-            }
+            client.Put($"v1/users/{adhérent.Identifiant}", mapper.FromModel(adhérent));
         }
     }
 }

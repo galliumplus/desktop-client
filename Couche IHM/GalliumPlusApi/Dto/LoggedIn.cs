@@ -4,7 +4,7 @@
     {
         public string Token { get; set; }
         public DateTime Expiration { get; set; }
-        public AccountDetails? User { get; set; }
+        public UserDetails? User { get; set; }
         public uint Permissions { get; set; }
 
         public LoggedIn()

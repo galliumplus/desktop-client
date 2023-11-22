@@ -29,8 +29,8 @@ namespace GalliumPlusApi.Dto
                     Id = model.ID,
                     Name = model.NomProduit,
                     Stock = model.Quantite,
-                    NonMemberPrice = Format.FloatToMonetary(model.PrixNonAdherent),
-                    MemberPrice = Format.FloatToMonetary(model.PrixAdherent),
+                    NonMemberPrice = Format.FloatToMonetary(model.PrixNonAdherent)!.Value,
+                    MemberPrice = Format.FloatToMonetary(model.PrixAdherent)!.Value,
                     Availability = availability,
                     Category = model.Categorie
                 };
@@ -43,8 +43,8 @@ namespace GalliumPlusApi.Dto
                     Id = patch.ID,
                     Name = patch.NomProduit,
                     Stock = patch.Quantite,
-                    NonMemberPrice = Format.FloatToMonetary(patch.PrixNonAdherent),
-                    MemberPrice = Format.FloatToMonetary(patch.PrixAdherent),
+                    NonMemberPrice = Format.FloatToMonetary(patch.PrixNonAdherent)!.Value,
+                    MemberPrice = Format.FloatToMonetary(patch.PrixAdherent)!.Value,
                     Availability = originalProduct.Availability,
                     Category = patch.Categorie
                 };

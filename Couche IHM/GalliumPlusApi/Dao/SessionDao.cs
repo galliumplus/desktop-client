@@ -7,7 +7,7 @@ namespace GalliumPlusApi.Dao
 {
     public class SessionDao
     {
-        private AccountDetails.Mapper detailsMapper = new();
+        private UserDetails.Mapper detailsMapper = new();
         private RoleDetails.Mapper roleMapper = new();
 
         public (Account, Role)? LogIn(string username, string password)
