@@ -113,8 +113,6 @@
                 <Button 
                     Style="{StaticResource buttonImage}" 
                     Command="{Binding ChangeFrame}"
-                    Opacity="0.5"
-                    IsEnabled="False"
                     CommandParameter="{x:Static vm:Frame.FRAMESTATISTIQUE}"
                     Grid.Row="0"
                     Grid.Column="0">

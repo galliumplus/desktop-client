@@ -48,6 +48,22 @@ namespace Couche_IHM.VueModeles
                 return PodiumAccount[0].Argent;
             }
         }
+
+        public List<StatAccountViewModel> BestAcomptes
+        {
+            get
+            {
+                return this.statsAccount.OrderByDescending(x => x.Argent).Reverse().ToList();
+            }
+        }
+
+        public List<StatProduitViewModel> BestProducts
+        {
+            get
+            {
+                return this.statsProduit.OrderByDescending(x => x.PurchaseCount).Reverse().ToList();
+            }
+        }
         /// <summary>
         /// Podium des trois meilleurs produits
         /// </summary>
