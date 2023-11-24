@@ -91,7 +91,6 @@ namespace Couche_IHM.VueModeles
             {
                 currentAuteur = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
         /// <summary>
@@ -102,7 +101,7 @@ namespace Couche_IHM.VueModeles
             get
             {
                 List<string> auteurs = new List<string>() { "Tout le monde" };
-                List<Account> users = this.userManager.GetAdhérents();
+                List<Account> users = this.userManager.GetAdmins();
                 foreach (Account u in users)
                 {
                     auteurs.Add($"{u.Prenom} {u.Nom}");
@@ -138,7 +137,6 @@ namespace Couche_IHM.VueModeles
                 }
                 selectVente = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
 
@@ -160,7 +158,6 @@ namespace Couche_IHM.VueModeles
                 }
                 selectConnexion = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
         /// <summary>
@@ -181,7 +178,6 @@ namespace Couche_IHM.VueModeles
                 }
                 selectProduct = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
 
@@ -203,7 +199,6 @@ namespace Couche_IHM.VueModeles
                 }
                 selectAccount = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
 
@@ -225,7 +220,6 @@ namespace Couche_IHM.VueModeles
                 }
                 selectCompte = value;
                 this.ReloadFiltersInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
         /// <summary>
@@ -249,7 +243,6 @@ namespace Couche_IHM.VueModeles
                 currentMois = value;
                 //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
                 this.ReloadInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
 
@@ -264,7 +257,6 @@ namespace Couche_IHM.VueModeles
                 currentAnnee = value;
                 //InitLogs(this.mois.IndexOf(currentMois) + 1, this.currentAnnee);
                 this.ReloadInBackground();
-                NotifyPropertyChanged(nameof(Logs));
             }
         }
         #endregion
