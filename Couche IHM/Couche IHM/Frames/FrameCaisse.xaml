@@ -188,7 +188,7 @@
                     <ToggleButton.Style>
                         <Style BasedOn="{StaticResource MaterialDesignLightCheckBox}" TargetType="CheckBox">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Account">
+                                <DataTrigger Binding="{Binding CaisseViewModel.CurrentPaiement}" Value="Acompte">
                                     <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
                             </Style.Triggers>

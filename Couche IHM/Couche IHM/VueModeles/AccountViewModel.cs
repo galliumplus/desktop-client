@@ -313,7 +313,6 @@ namespace Couche_IHM.VueModeles
         }
 
 
-
         /// <summary>
         /// Permet de reset les propriétés de l'acompte
         /// </summary>

@@ -34,7 +34,20 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
-
+        public int FirstPurchaseCount
+        {
+            get
+            {
+                return PodiumProduits[0].PurchaseCount;
+            }
+        }
+        public float FirstArgent
+        {
+            get
+            {
+                return PodiumAccount[0].Argent;
+            }
+        }
         /// <summary>
         /// Podium des trois meilleurs produits
         /// </summary>

@@ -163,7 +163,8 @@
                                 Foreground="LightGreen"
                                 Background="LightGray"
                                 BorderBrush="Transparent"
-                                Maximum="100" 
+                                Maximum="{Binding DataContext.StatViewModel.FirstArgent, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" 
                                 Height="12"
                                 Value="{Binding Argent}" />
                         </Grid>
@@ -272,7 +273,8 @@
                                 Foreground="#FFB366"
                                 Background="LightGray"
                                 BorderBrush="Transparent"
-                                Maximum="100" 
+                                Maximum="{Binding DataContext.StatViewModel.FirstPurchaseCount, 
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" 
                                 Height="12"
                                 Value="{Binding PurchaseCount}" />
                         </Grid>

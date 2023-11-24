@@ -245,12 +245,53 @@ namespace Couche_IHM.VueModeles
         }
 
         /// <summary>
+        /// Permet de mettre à jour l'image si elle a été changée
+        /// </summary>
+        private void ChangeImageIfNeeded()
+        {
+            // Changer l'image
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (image.UriSource.ToString() != image2)
+                {
+                    this.image2 = image.UriSource.ToString();
+                    byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
+                    ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
+                }
+            });
+
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour le produit en local
+        /// </summary>
+        public void UpdateLocalProduct()
+        {
+            // Changer la data
+            this.product.Quantite = this.quantiteIHM;
+            this.product.NomProduit = this.nomProduitIHM;
+            this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
+            this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
+            this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
+            ChangeImageIfNeeded();
+
+            // Notifier la vue
+            NotifyPropertyChanged(nameof(NomProduitIHM));
+            NotifyPropertyChanged(nameof(PrixAdherentIHM));
+            NotifyPropertyChanged(nameof(QuantiteIHM));
+            NotifyPropertyChanged(nameof(CategoryIHM));
+            NotifyPropertyChanged(nameof(isDisponible));
+
+        }
+        /// <summary>
         /// Permet de mettre à jour visuellement les modifications de l'adhérent
         /// </summary>
         public void UpdateProduct(bool doLog = true)
         {
             if (this.categoryIHM != null)
             {
+                UpdateLocalProduct();
+                MessageBoxErrorHandler.DoesntThrow(() => this.productManager.UpdateProduct(this.product));
 
                 // Log l'opération
                 if (doLog && product.Quantite != this.quantiteIHM)
@@ -269,36 +310,7 @@ namespace Couche_IHM.VueModeles
                     MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log2));
 
                 }
-
-                if (doLog)
-                {
-
-                    // Changer l'image
-                    if (image.UriSource.ToString() != image2)
-                    {
-                        this.image2 = image.UriSource.ToString();
-                        byte[] bitsImage = ImageManager.ConvertImageToBlob(image.UriSource.ToString());
-                        ImageManager.CreateImageFromBlob(this.nomProduitIHM, bitsImage);
-                    }
-                   
-                }
-
-                // Changer la data
-                this.product.Quantite = this.quantiteIHM;
-                this.product.NomProduit = this.nomProduitIHM;
-                this.product.Categorie = this.categoryManager.ListAllCategory().Find(x => x.NomCategory == categoryIHM.NomCat).IdCat;
-                this.product.PrixAdherent = ConverterFormatArgent.ConvertToDouble(this.prixAdherentIHM);
-                this.product.PrixNonAdherent = ConverterFormatArgent.ConvertToDouble(this.prixNonAdherentIHM);
-                if (MessageBoxErrorHandler.DoesntThrow(() => this.productManager.UpdateProduct(this.product)))
-                {
-
-                    // Notifier la vue
-                    NotifyPropertyChanged(nameof(NomProduitIHM));
-                    NotifyPropertyChanged(nameof(PrixAdherentIHM));
-                    NotifyPropertyChanged(nameof(QuantiteIHM));
-                    NotifyPropertyChanged(nameof(CategoryIHM));
-                    NotifyPropertyChanged(nameof(isDisponible));
-                }
+   
                 MainWindowViewModel.Instance.ProductViewModel.ShowProductDetail = false;
                 MainWindowViewModel.Instance.ProductViewModel.ShowModifButtons = false;
             }

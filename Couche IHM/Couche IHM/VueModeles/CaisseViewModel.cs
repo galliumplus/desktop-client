@@ -109,7 +109,7 @@ namespace Couche_IHM.VueModeles
             get
             {
                 return new List<string>()
-                { "Account", "Paypal", "Carte", "Liquide" };
+                { "Acompte", "Paypal", "Carte", "Liquide" };
             }
         }
 
@@ -265,14 +265,14 @@ namespace Couche_IHM.VueModeles
             }
         }
 
-        public string TextArgentAdherentRetour 
-        { 
+        public string TextArgentAdherentRetour
+        {
             get => textArgentAdherentRetour;
             set
             {
                 textArgentAdherentRetour = value;
                 NotifyPropertyChanged();
-            } 
+            }
         }
 
 
@@ -286,7 +286,7 @@ namespace Couche_IHM.VueModeles
         {
             return paymentName switch
             {
-                "Account" => "Deposit",
+                "Acompte" => "Deposit",
                 "Paypal" => "Paypal",
                 "Carte" => "CreditCard",
                 "Liquide" => "Cash",
@@ -304,7 +304,7 @@ namespace Couche_IHM.VueModeles
             try
             {
                 InfosPaiementAccount? paiementAccount = null;
-                
+
                 // Paiement par acompte
                 if (tuple is (AccountViewModel acompte, bool isAdherentCheckboxChecked))
                 {
@@ -312,16 +312,20 @@ namespace Couche_IHM.VueModeles
                     if (isAdherentCheckboxChecked)
                     {
                         prix = this.PriceAdher;
+                        messageLog += $"({acompte.IdentifiantIHM} : {this.PriceAdherIHM}) : ";
                     }
                     else
                     {
                         prix = this.PriceNanAdher;
+                        messageLog += $"{acompte.IdentifiantIHM} : {this.PriceNonAdherIHM} : ";
                     }
+
                     paiementAccount = new InfosPaiementAccount(
                         acompte,
                         argent: ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM),
                         prix
                     );
+
 
                     if (paiementAccount.argent - prix < 0)
                     {
@@ -355,7 +359,7 @@ namespace Couche_IHM.VueModeles
 
                 // Envoyer le paiement à l'API
                 orderManager.ProcessOrder();
-                
+
                 // Terminer le paiment par acompte
                 if (paiementAccount is InfosPaiementAccount infos)
                 {
@@ -368,8 +372,6 @@ namespace Couche_IHM.VueModeles
 
                     string prixFormatted = ConverterFormatArgent.ConvertToString(infos.prix);
                     infos.acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(infos.argent - infos.prix);
-                    messageLog += $"{infos.acompte.IdentifiantIHM} ";
-                    messageLog += $"({prixFormatted}) : ";
                     infos.acompte.UpdateAccount(false, false);
                     this.TextArgentAdherentRetour = $"Il vous reste {infos.acompte.ArgentIHM}";
                     this.RetourAccountArgent = true;
@@ -381,6 +383,8 @@ namespace Couche_IHM.VueModeles
                     {
                         foreach (ProductViewModel product in productOrder2.Keys)
                         {
+                            product.QuantiteIHM -= productOrder2[product];
+                            product.UpdateLocalProduct();
                             StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
                             MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
                             statProduitManager.CreateStat(stat);
@@ -407,8 +411,7 @@ namespace Couche_IHM.VueModeles
             this.ShowPayPaypal = false;
             this.ShowPayLiquide = false;
             this.ShowPayBanque = false;
-            
-            
+
 
         }
 
@@ -421,7 +424,7 @@ namespace Couche_IHM.VueModeles
             {
                 switch (currentPaiement)
                 {
-                    case "Account":
+                    case "Acompte":
                         this.ShowPayAccount = true;
                         break;
                     case "Paypal":
