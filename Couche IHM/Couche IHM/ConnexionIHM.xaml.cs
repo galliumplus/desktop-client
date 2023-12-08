@@ -31,6 +31,21 @@ namespace Couche_IHM
             DataContext = this;
             this.messageQueue = new SnackbarMessageQueue(new TimeSpan(0, 0, 2));
             ImageManager.VerifyFiles();
+            this.IsVisibleChanged += ConnexionIHM_IsVisibleChanged; ;
+        }
+
+        private void ConnexionIHM_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible == true)
+            {
+                foreach (var window in Application.Current.Windows)
+                {
+                    if (window is MainWindow mainWindow)
+                    {
+                        mainWindow.Close();
+                    }
+                }
+            }
         }
 
         #region properties

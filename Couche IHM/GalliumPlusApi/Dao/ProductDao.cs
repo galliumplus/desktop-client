@@ -47,7 +47,7 @@ namespace GalliumPlusApi.Dao
         public void UpdateProduct(Product product)
         {
             using var client = new GalliumPlusHttpClient();
-            client.UseSessionToken("ensoleille");// SessionStorage.Current.Get<string>("token"));
+            client.UseSessionToken(SessionStorage.Current.Get<string>("token"));
 
             if (product is DecoratedProduct deco)
             {

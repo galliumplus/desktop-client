@@ -237,6 +237,7 @@ namespace Couche_IHM.VueModeles
             this.acompte.Formation = this.formationIHM;
             this.acompte.Identifiant = this.identifiantIHM;
             this.acompte.IsMember = this.isAdherentIHM;
+            this.acompte.Mail = "UKN";
             this.action = "UPDATE";
             
             if (MessageBoxErrorHandler.DoesntThrow(() => accountManager.CreateAdhérent(this.acompte)))

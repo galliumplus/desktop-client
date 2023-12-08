@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using Xceed.Wpf.Toolkit;
 
 namespace Couche_IHM.VueModeles
 {
@@ -297,122 +298,117 @@ namespace Couche_IHM.VueModeles
         /// <summary>
         /// Permet de payer les articles
         /// </summary>
-        private async void PayArticles(object tuple = null)
+        private void PayArticles(object tuple = null)
+        {
+            if (MessageBoxErrorHandler.DoesntThrow(() => this.PayArticlesUnchecked(tuple)))
+            {
+                // Notifier la vue
+                this.ShowPayAccount = false;
+                this.ShowPayPaypal = false;
+                this.ShowPayLiquide = false;
+                this.ShowPayBanque = false;
+            }
+        }
+
+        private void PayArticlesUnchecked(object tuple = null)
         {
             string messageLog = $"Achat par {currentPaiement} ";
+            InfosPaiementAccount? paiementAccount = null;
 
-            try
+            // Paiement par acompte
+            if (tuple is (AccountViewModel acompte, bool isAdherentCheckboxChecked))
             {
-                InfosPaiementAccount? paiementAccount = null;
-
-                // Paiement par acompte
-                if (tuple is (AccountViewModel acompte, bool isAdherentCheckboxChecked))
+                float prix;
+                if (isAdherentCheckboxChecked)
                 {
-                    float prix;
-                    if (isAdherentCheckboxChecked)
-                    {
-                        prix = this.PriceAdher;
-                        messageLog += $"({acompte.IdentifiantIHM} : {this.PriceAdherIHM}) : ";
-                    }
-                    else
-                    {
-                        prix = this.PriceNanAdher;
-                        messageLog += $"{acompte.IdentifiantIHM} : {this.PriceNonAdherIHM} : ";
-                    }
-
-                    paiementAccount = new InfosPaiementAccount(
-                        acompte,
-                        argent: ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM),
-                        prix
-                    );
-
-
-                    if (paiementAccount.argent - prix < 0)
-                    {
-                        throw new Exception("Pas assez d'argent sur l'acompte");
-                    }
-
-                    orderManager.NewOrder("Deposit", acompte.IdentifiantIHM);
+                    prix = this.PriceAdher;
+                    messageLog += $"({acompte.IdentifiantIHM} : {this.PriceAdherIHM}) : ";
                 }
                 else
                 {
-                    if (isAdherent)
-                    {
-                        orderManager.NewOrder(
-                            FindPaymentCodeFor(currentPaiement),
-                            Order.ANONYMOUS_MEMBER // le client est un adhérent, juste on sait pas qui
-                        );
-                        messageLog += $"({this.PriceAdherIHM}) : ";
-                    }
-                    else
-                    {
-                        orderManager.NewOrder(FindPaymentCodeFor(currentPaiement));
-                        messageLog += $"{this.PriceNonAdherIHM} : ";
-                    }
+                    prix = this.PriceNanAdher;
+                    messageLog += $"{acompte.IdentifiantIHM} : {this.PriceNonAdherIHM} : ";
                 }
 
-                foreach (var kvp in productOrder)
+                paiementAccount = new InfosPaiementAccount(
+                    acompte,
+                    argent: ConverterFormatArgent.ConvertToDouble(acompte.ArgentIHM),
+                    prix
+                );
+
+
+                if (paiementAccount.argent - prix < 0)
                 {
-                    orderManager.CurrentOrder.AddProduct(kvp.Key.Id, kvp.Value);
-                    messageLog += kvp.Key.NomProduitIHM + ", ";
+                    throw new Exception("Pas assez d'argent sur l'acompte");
                 }
 
-                // Envoyer le paiement à l'API
-                orderManager.ProcessOrder();
-
-                // Terminer le paiment par acompte
-                if (paiementAccount is InfosPaiementAccount infos)
-                {
-                    _ = Task.Run(() =>
-                    {
-                        StatAccount stat = new StatAccount(0, DateTime.Now, infos.prix, infos.acompte.Id);
-                        MainWindowViewModel.Instance.StatViewModel.AddStatAccount(stat);
-                        statAccountManager.CreateStat(stat);
-                    });
-
-                    string prixFormatted = ConverterFormatArgent.ConvertToString(infos.prix);
-                    infos.acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(infos.argent - infos.prix);
-                    infos.acompte.UpdateAccount(false, false);
-                    this.TextArgentAdherentRetour = $"Il vous reste {infos.acompte.ArgentIHM}";
-                    this.RetourAccountArgent = true;
-                }
-
-                // Gérer les stats 
-                ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
-                _ = Task.Run(() =>
-                    {
-                        foreach (ProductViewModel product in productOrder2.Keys)
-                        {
-                            product.QuantiteIHM -= productOrder2[product];
-                            product.UpdateLocalProduct();
-                            StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
-                            MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
-                            statProduitManager.CreateStat(stat);
-                        }
-                    });
-
-                // Log l'action
-                Log log = new Log(DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
-                _ = Task.Run(() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
-                MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
-
-                this.ProductOrder.Clear();
-                NotifyPropertyChanged(nameof(PriceAdherIHM));
-                NotifyPropertyChanged(nameof(PriceNonAdherIHM));
+                orderManager.NewOrder("Deposit", acompte.IdentifiantIHM);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                if (isAdherent)
+                {
+                    orderManager.NewOrder(
+                        FindPaymentCodeFor(currentPaiement),
+                        Order.ANONYMOUS_MEMBER // le client est un adhérent, juste on sait pas qui
+                    );
+                    messageLog += $"({this.PriceAdherIHM}) : ";
+                }
+                else
+                {
+                    orderManager.NewOrder(FindPaymentCodeFor(currentPaiement));
+                    messageLog += $"{this.PriceNonAdherIHM} : ";
+                }
             }
 
+            foreach (var kvp in productOrder)
+            {
+                orderManager.CurrentOrder.AddProduct(kvp.Key.Id, kvp.Value);
+                messageLog += kvp.Key.NomProduitIHM + ", ";
+            }
 
-            // Notifier la vue
-            this.ShowPayAccount = false;
-            this.ShowPayPaypal = false;
-            this.ShowPayLiquide = false;
-            this.ShowPayBanque = false;
+            // Envoyer le paiement à l'API
+            orderManager.ProcessOrder();
 
+            // Terminer le paiment par acompte
+            if (paiementAccount is InfosPaiementAccount infos)
+            {
+                _ = Task.Run(() =>
+                {
+                    StatAccount stat = new StatAccount(0, DateTime.Now, infos.prix, infos.acompte.Id);
+                    MainWindowViewModel.Instance.StatViewModel.AddStatAccount(stat);
+                    statAccountManager.CreateStat(stat);
+                });
 
+                string prixFormatted = ConverterFormatArgent.ConvertToString(infos.prix);
+                infos.acompte.ArgentIHM = ConverterFormatArgent.ConvertToString(infos.argent - infos.prix);
+                infos.acompte.UpdateAccount(false, false);
+                this.TextArgentAdherentRetour = $"Il vous reste {infos.acompte.ArgentIHM}";
+                this.RetourAccountArgent = true;
+            }
+
+            // Gérer les stats 
+            ObservableDictionary<ProductViewModel, int> productOrder2 = new ObservableDictionary<ProductViewModel, int>(productOrder);
+            _ = Task.Run(() =>
+            {
+                foreach (ProductViewModel product in productOrder2.Keys)
+                {
+                    product.QuantiteIHM -= productOrder2[product];
+                    product.UpdateLocalProduct();
+                    StatProduit stat = new StatProduit(0, DateTime.Now, productOrder2[product], product.Id);
+                    MainWindowViewModel.Instance.StatViewModel.AddStatProduit(stat);
+                    statProduitManager.CreateStat(stat);
+                }
+            });
+
+            // Log l'action
+            Log log = new Log(DateTime.Now, 5, messageLog, MainWindowViewModel.Instance.CompteConnected.NomCompletIHM);
+            _ = Task.Run(() => MainWindowViewModel.Instance.LogManager.CreateLog(log));
+            MainWindowViewModel.Instance.LogsViewModel.AddLog(new LogViewModel(log));
+
+            this.ProductOrder.Clear();
+            NotifyPropertyChanged(nameof(PriceAdherIHM));
+            NotifyPropertyChanged(nameof(PriceNonAdherIHM));
         }
 
         /// <summary>
