@@ -469,9 +469,6 @@
                             <Binding 
                                         Path="AccountsViewModel.CurrentAccount.IdentifiantIHM"
                                         UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <rules:RuleIDFormat/>
-                                </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
