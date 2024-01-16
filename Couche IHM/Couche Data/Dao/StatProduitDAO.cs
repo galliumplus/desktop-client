@@ -7,7 +7,7 @@ namespace Couche_Data.Dao
 {
     public class StatProduitDAO : IStatProduitDAO
     {
-        public List<StatProduit> GetStat(int semaine = 0,int mois = 0,int annee = 0)
+        public List<StatProduit> GetStat(int semaine, int year)
         {
             MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
             try
@@ -15,7 +15,7 @@ namespace Couche_Data.Dao
                 sql.Open();
 
                 //Requette SQL
-                string stm = "SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE YEARWEEK(date_sale) = YEARWEEK(CURRENT_DATE) group by product_id order by nb desc";
+                string stm = $"SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE week(date_sale) = {semaine} AND YEAR(date_sale) = {year} group by product_id order by nb desc";
                 MySqlCommand cmd = new MySqlCommand(stm, sql);
                 cmd.Prepare();
 

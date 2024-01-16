@@ -28,6 +28,7 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button
+                Command="{Binding StatViewModel.PreviousWeek}"
                     Style="{StaticResource buttonImage}">
                 <materialDesign:PackIcon
                     Width="25"
@@ -39,10 +40,12 @@
             <TextBlock               
                  FontSize="25"
                  FontWeight="Medium"
-                 Text="Du 15 au 19 janvier"/>
+                 Text="{Binding StatViewModel.DateSemaine}"/>
             <Button
+                Command="{Binding StatViewModel.NextWeek}"
             Style="{StaticResource buttonImage}">
                 <materialDesign:PackIcon
+                    
                     Width="25"
                     Margin="5,3,0,0"
                     Height="25"
