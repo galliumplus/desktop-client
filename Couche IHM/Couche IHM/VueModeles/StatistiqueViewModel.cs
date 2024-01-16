@@ -39,20 +39,7 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
-        public int FirstPurchaseCount
-        {
-            get
-            {
-                return PodiumProduits[0].PurchaseCount;
-            }
-        }
-        public float FirstArgent
-        {
-            get
-            {
-                return PodiumAccount[0].Argent;
-            }
-        }
+
 
         /// <summary>
         /// Représente la date de recherche par semaine
@@ -61,10 +48,13 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-
                 return $"Du {date.Day} au {date.AddDays(6).Day} {date:MMMM} {date:yyyy}";
             }
         }
+
+        /// <summary>
+        /// Représente le top des acompts de la semaine choisie
+        /// </summary>
         public List<StatAccountViewModel> BestAcomptes
         {
             get
@@ -87,7 +77,9 @@ namespace Couche_IHM.VueModeles
                 return statAcomptesVM;
             }
         }
-
+        /// <summary>
+        /// Représente le top des produits de la semaine choisie
+        /// </summary>
         public List<StatProduitViewModel> BestProducts
         {
             get
@@ -162,7 +154,7 @@ namespace Couche_IHM.VueModeles
             int diff = date.DayOfWeek - firstDay;
             if (diff < 0)
             {
-                diff += 7; // Ajoute 7 jours pour revenir à la semaine précédente
+                diff += 7;
             }
             date = date.AddDays(-diff);
 

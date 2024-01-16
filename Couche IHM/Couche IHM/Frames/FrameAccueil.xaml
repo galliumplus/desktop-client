@@ -163,7 +163,7 @@
                                 Foreground="LightGreen"
                                 Background="LightGray"
                                 BorderBrush="Transparent"
-                                Maximum="{Binding DataContext.StatViewModel.FirstArgent, 
+                                Maximum="{Binding DataContext.StatViewModel.PodiumAccount[0].Argent, 
                                     RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" 
                                 Height="12"
                                 Value="{Binding Argent}" />
@@ -273,7 +273,7 @@
                                 Foreground="#FFB366"
                                 Background="LightGray"
                                 BorderBrush="Transparent"
-                                Maximum="{Binding DataContext.StatViewModel.FirstPurchaseCount, 
+                                Maximum="{Binding DataContext.StatViewModel.PodiumProduits[0].PurchaseCount, 
                                     RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}" 
                                 Height="12"
                                 Value="{Binding PurchaseCount}" />
