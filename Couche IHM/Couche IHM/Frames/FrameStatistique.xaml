@@ -32,61 +32,65 @@
                 <materialDesign:PackIcon
                     Width="25"
                     Margin="0,3,5,0"
-                    Foreground="DarkOrange"
+                    Foreground="Black"
                     Height="25"
-                    Kind="ArrowLeft"/>
+                    Kind="ArrowLeftThick"/>
             </Button>
             <TextBlock               
                  FontSize="25"
                  FontWeight="Medium"
-                 Text="Par semaine"/>
+                 Text="Du 15 au 19 janvier"/>
             <Button
             Style="{StaticResource buttonImage}">
                 <materialDesign:PackIcon
                     Width="25"
                     Margin="5,3,0,0"
                     Height="25"
-                    Foreground="DarkOrange"
-                    Kind="ArrowRight"/>
+                    Foreground="Black"
+                    Kind="ArrowRightThick"/>
             </Button>
         </StackPanel>
        
 
         <!-- Liste des acomptes -->
         <DVC:Chart
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Grid.Row="1"
             Margin="20"
             Grid.Column="0"            
             Background="Transparent">
             <DVC:Chart.Series>
-                <DVC:ColumnSeries  
-                    
+                <DVC:ColumnSeries
+
                     Title="Dépenses"  
                     ItemsSource="{Binding StatViewModel.BestAcomptes}"  
                     IndependentValueBinding="{Binding Path=AccountsViewModel.NomCompletIHM}"  
-                    
                     DependentValueBinding="{Binding Path=Argent}">
-                   
+                    
+                    <DVC:ColumnSeries.DataPointStyle >
+                        <Style TargetType="DVC:ColumnDataPoint" BasedOn="{StaticResource BarChartAcompte}"/>
+                    </DVC:ColumnSeries.DataPointStyle>
                 </DVC:ColumnSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
 
         <!-- Liste des produits -->
         <DVC:Chart
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Grid.Row="2"
           Margin="20"
-          Grid.Column="1"            
+            
           Background="Transparent">
-            <DVC:Chart.Series>
+            <DVC:Chart.Series >
                 <DVC:ColumnSeries   Title="Ventes"  
                                     
               ItemsSource="{Binding StatViewModel.BestProducts}"  
               IndependentValueBinding="{Binding Path=ProductViewModel.NomProduitIHM}"  
               
               DependentValueBinding="{Binding Path=PurchaseCount}">
-
+                    <DVC:ColumnSeries.DataPointStyle >
+                        <Style TargetType="DVC:ColumnDataPoint" BasedOn="{StaticResource BarChartProduct}"/>
+                    </DVC:ColumnSeries.DataPointStyle>
                 </DVC:ColumnSeries>
             </DVC:Chart.Series>
         </DVC:Chart>

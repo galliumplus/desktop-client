@@ -19,7 +19,7 @@ namespace GalliumPlusApi.Dao
 
                 //Requette SQL
                 string stm = $"SELECT acompte_id,sum(amount) as argent FROM best_acomptes WHERE WEEK(date) = WEEK(CURRENT_DATE) + {semaine} AND " +
-                  $"MONTH(date) = MONTH(CURRENT_DATE) + {mois} AND" +
+                  $"MONTH(date) = MONTH(CURRENT_DATE) + {mois} AND " +
                   $"YEAR(date) = YEAR(CURRENT_DATE) + {annee} group by acompte_id order by argent desc";
 
                 MySqlCommand cmd = new MySqlCommand(stm, sql);

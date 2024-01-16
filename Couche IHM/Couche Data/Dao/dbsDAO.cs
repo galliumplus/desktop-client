@@ -34,23 +34,7 @@ namespace Couche_Data.Dao
             }
         }
 
-        /// <summary>
-        /// Permet de faire des requêtes
-        /// </summary>
-        public MySqlCommand CMD
-        {
-            get => cmd;
-            set => cmd = value;
-        }
-
-        /// <summary>
-        /// permet de lire les données
-        /// </summary>
-        public MySqlDataReader Reader
-        {
-            get => reader;
-            set => reader = value;
-        }
+     
 
         /// <summary>
         /// Vérifie si la connexion à la bdd existe 
@@ -115,15 +99,7 @@ namespace Couche_Data.Dao
         /// </summary>
         private void ConnexionToBdd()
         {
-            try
-            {
-                sql = new MySqlConnection(ConnectionString);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating database connection: {ex.Message}");
-                // Vous pouvez également enregistrer l'exception dans un fichier de logs.
-            }
+            sql = new MySqlConnection(ConnectionString);
         }
 
         /// <summary>
