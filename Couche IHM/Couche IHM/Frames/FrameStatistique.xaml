@@ -5,45 +5,89 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
       xmlns:local="clr-namespace:Couche_IHM.Frames"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FrameStat">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
+
+        <StackPanel 
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Button
+                    Style="{StaticResource buttonImage}">
+                <materialDesign:PackIcon
+                    Width="25"
+                    Margin="0,3,5,0"
+                    Foreground="DarkOrange"
+                    Height="25"
+                    Kind="ArrowLeft"/>
+            </Button>
+            <TextBlock               
+                 FontSize="25"
+                 FontWeight="Medium"
+                 Text="Par semaine"/>
+            <Button
+            Style="{StaticResource buttonImage}">
+                <materialDesign:PackIcon
+                    Width="25"
+                    Margin="5,3,0,0"
+                    Height="25"
+                    Foreground="DarkOrange"
+                    Kind="ArrowRight"/>
+            </Button>
+        </StackPanel>
+       
+
         <!-- Liste des acomptes -->
         <DVC:Chart
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
             Margin="20"
             Grid.Column="0"            
-            Background="Orange">
+            Background="Transparent">
             <DVC:Chart.Series>
-                <DVC:BarSeries  Title="Dépenses"  
+                <DVC:ColumnSeries  
+                    
+                    Title="Dépenses"  
                     ItemsSource="{Binding StatViewModel.BestAcomptes}"  
                     IndependentValueBinding="{Binding Path=AccountsViewModel.NomCompletIHM}"  
                     
                     DependentValueBinding="{Binding Path=Argent}">
                    
-                </DVC:BarSeries>
+                </DVC:ColumnSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
 
         <!-- Liste des produits -->
         <DVC:Chart
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
           Margin="20"
           Grid.Column="1"            
-          Background="Orange">
+          Background="Transparent">
             <DVC:Chart.Series>
-                <DVC:BarSeries  Title="Ventes"  
+                <DVC:ColumnSeries   Title="Ventes"  
+                                    
               ItemsSource="{Binding StatViewModel.BestProducts}"  
               IndependentValueBinding="{Binding Path=ProductViewModel.NomProduitIHM}"  
               
               DependentValueBinding="{Binding Path=PurchaseCount}">
 
-                </DVC:BarSeries>
+                </DVC:ColumnSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
     </Grid>

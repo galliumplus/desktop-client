@@ -7,7 +7,7 @@ namespace Couche_Data.Dao
 {
     public class StatProduitDAO : IStatProduitDAO
     {
-        public List<StatProduit> GetStat()
+        public List<StatProduit> GetStat(int semaine = 0,int mois = 0,int annee = 0)
         {
             MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
             try

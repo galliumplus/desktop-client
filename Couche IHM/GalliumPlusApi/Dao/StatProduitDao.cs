@@ -9,7 +9,7 @@ namespace GalliumPlusApi.Dao
     public class StatProduitDao : IStatProduitDAO
     {
 
-        public List<StatProduit> GetStat()
+        public List<StatProduit> GetStat(int semaine = 0, int mois = 0, int annee = 0)
         {
             MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringV);
             try
@@ -17,7 +17,7 @@ namespace GalliumPlusApi.Dao
                 sql.Open();
 
                 //Requette SQL
-                string stm = "SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE YEARWEEK(date_sale) = YEARWEEK(CURRENT_DATE) group by product_id order by nb desc";
+                string stm = "SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE YEARWEEK(date_sale) = YEARWEEK(CURRENT_DATE)  group by product_id order by nb desc";
                 MySqlCommand cmd = new MySqlCommand(stm, sql);
                 cmd.Prepare();
 

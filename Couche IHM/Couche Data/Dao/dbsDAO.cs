@@ -82,14 +82,12 @@ namespace Couche_Data.Dao
         {
             get
             {
-                if (connectionString == null)
-                {
-                    var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
-                    using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
-                    using StreamReader reader = new StreamReader(stream);
-                    connectionString = reader.ReadToEnd();
-                }
+                var assembly = Assembly.GetExecutingAssembly();
+                string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
+                using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
+                using StreamReader reader = new StreamReader(stream);
+                connectionString = reader.ReadToEnd();
+                
                 return connectionString;
             }
         }
@@ -97,15 +95,14 @@ namespace Couche_Data.Dao
         {
             get
             {
-                if (connectionString == null)
-                {
-                    var assembly = Assembly.GetExecutingAssembly();
-                    string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
-                    using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
-                    using StreamReader reader = new StreamReader(stream);
-                    connectionString = reader.ReadToEnd();
-                    connectionString = connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
-                }
+
+                var assembly = Assembly.GetExecutingAssembly();
+                string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith("ConnectionString.txt"));
+                using Stream stream = assembly.GetManifestResourceStream(resourceName)!;
+                using StreamReader reader = new StreamReader(stream);
+                connectionString = reader.ReadToEnd();
+                connectionString = connectionString.Replace("database=c2_gallium", "database=c2_etismash"); // TODO enlever cette ligne quand stat avec api
+                
                 return connectionString;
             }
         }
@@ -118,7 +115,15 @@ namespace Couche_Data.Dao
         /// </summary>
         private void ConnexionToBdd()
         {
-            sql = new MySqlConnection(ConnectionString);
+            try
+            {
+                sql = new MySqlConnection(ConnectionString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating database connection: {ex.Message}");
+                // Vous pouvez également enregistrer l'exception dans un fichier de logs.
+            }
         }
 
         /// <summary>

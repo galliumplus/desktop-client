@@ -53,7 +53,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return this.statsAccount.OrderByDescending(x => x.Argent).Reverse().ToList();
+                return this.statsAccount.OrderByDescending(x => x.Argent).Take(10).ToList();
             }
         }
 
@@ -61,7 +61,7 @@ namespace Couche_IHM.VueModeles
         {
             get
             {
-                return this.statsProduit.OrderByDescending(x => x.PurchaseCount).Reverse().ToList();
+                return this.statsProduit.OrderByDescending(x => x.PurchaseCount).Take(10).ToList();
             }
         }
         /// <summary>
@@ -201,6 +201,11 @@ namespace Couche_IHM.VueModeles
                 }
             }
             NotifyPropertyChanged(nameof(this.PodiumAccount));
+        }
+
+        public void ReloadStats()
+        {
+
         }
         #endregion
     }
