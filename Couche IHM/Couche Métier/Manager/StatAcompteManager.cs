@@ -46,10 +46,24 @@ namespace Couche_Métier.Manager
             dao.CreateStat(stat);
         }
 
-        public List<StatAccount> GetStats(int semaine, int year )
+        public List<StatAccount> GetStatsByWeek(int semaine, int year )
         {
 
-            this.statAccountList = dao.GetStat(semaine,year);
+            this.statAccountList = dao.GetStatByWeek(semaine,year);
+            return this.statAccountList;
+        }
+
+        public List<StatAccount> GetStatsByMonth(int month, int year)
+        {
+
+            this.statAccountList = dao.GetStatByMonth(month, year);
+            return this.statAccountList;
+        }
+
+        public List<StatAccount> GetStatsByYear(int year)
+        {
+
+            this.statAccountList = dao.GetStatByYear(year);
             return this.statAccountList;
         }
         #endregion

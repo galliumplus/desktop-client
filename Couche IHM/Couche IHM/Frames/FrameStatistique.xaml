@@ -28,7 +28,7 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
             <Button
-                Command="{Binding StatViewModel.PreviousWeek}"
+                Command="{Binding StatViewModel.Previous}"
                     Style="{StaticResource buttonImage}">
                 <materialDesign:PackIcon
                     Width="25"
@@ -40,9 +40,9 @@
             <TextBlock               
                  FontSize="25"
                  FontWeight="Medium"
-                 Text="{Binding StatViewModel.DateSemaine}"/>
+                 Text="{Binding StatViewModel.DateIHM}"/>
             <Button
-                Command="{Binding StatViewModel.NextWeek}"
+                Command="{Binding StatViewModel.Next}"
             Style="{StaticResource buttonImage}">
                 <materialDesign:PackIcon
                     
@@ -53,10 +53,13 @@
                     Kind="ArrowRightThick"/>
             </Button>
         </StackPanel>
-       
+
+
+        <ComboBox FontSize="18" ItemsSource="{Binding StatViewModel.TypeRechercheList}" SelectedItem="{Binding StatViewModel.TypeRechercheStat}" HorizontalAlignment="Center" Grid.Column="2"/>
 
         <!-- Liste des acomptes -->
         <DVC:Chart
+            BorderThickness="0"
             Grid.ColumnSpan="3"
             Grid.Row="1"
             Margin="20"
@@ -82,7 +85,7 @@
             Grid.ColumnSpan="3"
             Grid.Row="2"
           Margin="20"
-            
+            BorderThickness="0"
           Background="Transparent">
             <DVC:Chart.Series >
                 <DVC:ColumnSeries   Title="Ventes"  

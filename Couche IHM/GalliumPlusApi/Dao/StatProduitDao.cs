@@ -9,7 +9,72 @@ namespace GalliumPlusApi.Dao
     public class StatProduitDao : IStatProduitDAO
     {
 
-        public List<StatProduit> GetStat(int semaine,int year)
+        public List<StatProduit> GetStatByMonth(int month, int year)
+        {
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringV);
+            try
+            {
+                sql.Open();
+
+                //Requette SQL
+                string stm = $"SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE month(date_sale) = {month} AND YEAR(date_sale) = {year} group by product_id order by nb desc";
+                MySqlCommand cmd = new MySqlCommand(stm, sql);
+                cmd.Prepare();
+
+                //lecture de la requette
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                List<StatProduit> statProduitList = new List<StatProduit>();
+                while (rdr.Read())
+                {
+                    statProduitList.Add(new StatProduit(0, DateTime.Now, rdr.GetInt16("nb"), rdr.GetInt16("product_id")));
+                }
+
+                rdr.Close();
+                sql.Close();
+                return statProduitList;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur pendant le chargement des stats produit : {ex.Message}");
+                return new();
+            }
+        }
+
+        public List<StatProduit> GetStatByYear(int year)
+        {
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringV);
+
+            try
+            {
+                sql.Open();
+
+                //Requette SQL
+                string stm = $"SELECT product_id,sum(number_sales) as nb FROM best_sales WHERE YEAR(date_sale) = {year} group by product_id order by nb desc";
+                MySqlCommand cmd = new MySqlCommand(stm, sql);
+                cmd.Prepare();
+
+                //lecture de la requette
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                List<StatProduit> statProduitList = new List<StatProduit>();
+                while (rdr.Read())
+                {
+                    statProduitList.Add(new StatProduit(0, DateTime.Now, rdr.GetInt16("nb"), rdr.GetInt16("product_id")));
+                }
+
+                rdr.Close();
+                sql.Close();
+                return statProduitList;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur pendant le chargement des stats produit : {ex.Message}");
+                return new();
+            }
+        }
+
+        public List<StatProduit> GetStatByWeek(int semaine,int year)
         {
             MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionStringV);
 
