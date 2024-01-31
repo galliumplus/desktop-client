@@ -81,6 +81,27 @@
                    Click="ConnectToAccount"/>
             </Grid>
         </Border>
+
+        <materialDesign:Card 
+            Padding="8"
+  Grid.Row="2"
+  Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <StackPanel>
+                <TextBlock
+         FontWeight="DemiBold"
+         HorizontalAlignment="Center"
+         FontStyle="Italic"
+         Text="Contacts"/>
+                <TextBlock
+         FontStyle="Italic"
+         Text="florian.marteau@iut-dijon.u-bourgogne.fr"/>
+                <TextBlock
+         FontStyle="Italic"
+         Text="louis.devie@iut-dijon.u-bourgogne.fr"/>
+            </StackPanel>
+        </materialDesign:Card>
+       
+       
         <materialDesign:Snackbar 
             Height="50"
             Grid.Row="2" 
