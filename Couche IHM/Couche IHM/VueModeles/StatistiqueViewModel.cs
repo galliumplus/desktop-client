@@ -5,6 +5,7 @@ using MaterialDesignThemes.Wpf;
 using Modeles;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -25,10 +26,15 @@ namespace Couche_IHM.VueModeles
         private StatAccountManager statAccountManager;
         private ProductManager productManager;
         private List<StatAccountViewModel> statsAccount = new List<StatAccountViewModel>();
-
+        private List<string> typeEvolutions;
+        private ProductViewModel currentEvolProduct;
+        private AccountViewModel currentEvolAcompte;
+        private string typeEvolutionChoisi;
         private string typeRechercheStat;
 
         private DateTime date = DateTime.Now;
+        private int anneeSelected;
+
        
         #endregion
 
@@ -41,6 +47,14 @@ namespace Couche_IHM.VueModeles
         #endregion
 
         #region properties
+
+        public List<int> AnneeList
+        {
+            get
+            {
+                return new List<int>() { DateTime.Now.Year, DateTime.Now.Year-1, DateTime.Now.Year - 2   };
+            }
+        }
 
         public List<String> TypeRechercheList
         {
@@ -150,6 +164,37 @@ namespace Couche_IHM.VueModeles
                 return statProductVM;
             }
         }
+
+
+        private ObservableCollection<StatProduitViewModel> evolProducts;
+        
+
+        /// <summary>
+        /// Représente le top des produits de la semaine choisie
+        /// </summary>
+        public ObservableCollection<StatProduitViewModel> EvolProducts
+        {
+            set => evolProducts = value;
+            get
+            {
+                return evolProducts;
+            }
+        }
+
+        private ObservableCollection<StatAccountViewModel> evolAcomptes;
+
+
+        /// <summary>
+        /// Représente le top des produits de la semaine choisie
+        /// </summary>
+        public ObservableCollection<StatAccountViewModel> EvolAcomptes
+        {
+            set => evolAcomptes = value;
+            get
+            {
+                return evolAcomptes;
+            }
+        }
         /// <summary>
         /// Podium des trois meilleurs produits
         /// </summary>
@@ -190,6 +235,94 @@ namespace Couche_IHM.VueModeles
                 NotifyPropertyChanged(nameof(this.BestAcomptes));
             }
         }
+
+
+        public string TitreEvolution
+        {
+            get
+            {
+                string titre = "";
+                if (typeEvolutionChoisi == "Produit")
+                {
+                    if (currentEvolProduct != null)
+                    {
+                        titre = $"Vente de {currentEvolProduct.NomProduitIHM} par mois";
+                    }
+                }
+                else
+                {
+                    if (currentEvolAcompte != null)
+                    {
+                        titre = $"Dépenses de {currentEvolAcompte.NomCompletIHM} par mois";
+                    }
+                }
+               
+                return titre;
+            }
+        }
+        /// <summary>
+        /// Représente les types d'évolutions disponibles
+        /// </summary>
+        public List<string> TypeEvolutions 
+        { 
+            get => typeEvolutions; 
+            set => typeEvolutions = value; 
+        }
+        /// <summary>
+        /// Représente le type d'évolution choisi
+        /// </summary>
+        public string TypeEvolutionChoisi
+        {
+            get => typeEvolutionChoisi;
+            set 
+            { 
+                typeEvolutionChoisi = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(this.TitreEvolution));
+            }
+        }
+
+        /// <summary>
+        /// Représente le produit dont on souhaite connaitre l'évolution
+        /// </summary>
+        public ProductViewModel CurrentEvolProduct
+        {
+            get => currentEvolProduct;
+            set {
+                currentEvolProduct = value;
+                InitStatOfProduct(currentEvolProduct.Id);
+                NotifyPropertyChanged(nameof(this.TitreEvolution));
+            }
+        }
+
+        public int AnneeSelected 
+        { 
+            get => anneeSelected;
+            set
+            {
+                anneeSelected = value;
+                if (typeEvolutionChoisi == "Produit")
+                {
+                    InitStatOfProduct(currentEvolProduct.Id);
+                }
+                else
+                {
+                    InitStatOfAcompte(currentEvolAcompte.Id);
+                }
+            }
+            
+        }
+
+        public AccountViewModel CurrentEvolAccount
+        {
+            get => currentEvolAcompte;
+            set
+            {
+                currentEvolAcompte = value;
+                InitStatOfAcompte(currentEvolAcompte.Id);
+                NotifyPropertyChanged(nameof(this.TitreEvolution));
+            }
+        }
         #endregion
         #region constructor
         /// <summary>
@@ -202,6 +335,8 @@ namespace Couche_IHM.VueModeles
             this.statAccountManager = statAccount;
             this.productManager = produtManager;
             this.accountManager = accountManager;
+            this.typeEvolutions = new List<string>() { "Produit", "Acompte" };
+            this.typeEvolutionChoisi = typeEvolutions[0];
             
 
             // Initialisation des events
@@ -223,7 +358,10 @@ namespace Couche_IHM.VueModeles
             // Initialisation des datas
             InitStatsProduit();
             InitStatsAccount();
+            this.evolProducts = new ObservableCollection<StatProduitViewModel>();
+            this.evolAcomptes = new ObservableCollection<StatAccountViewModel>();
             this.TypeRechercheStat = "Par semaine";
+            this.anneeSelected = this.AnneeList[0];
             
         }
         #endregion
@@ -246,7 +384,7 @@ namespace Couche_IHM.VueModeles
                     date = date.AddYears(1);
                     break;
                 }
-                NotifyPropertyChanged(nameof(this.BestAcomptes));
+            NotifyPropertyChanged(nameof(this.BestAcomptes));
             NotifyPropertyChanged(nameof(this.BestProducts));
             NotifyPropertyChanged(nameof(this.DateIHM));
         }
@@ -343,8 +481,44 @@ namespace Couche_IHM.VueModeles
                 }
             }
             NotifyPropertyChanged(nameof(this.PodiumProduits));
+            
         }
 
+        /// <summary>
+        /// Permet d'initialiser les statistiques d'un produit
+        /// </summary>
+        /// <param name="product_id">id du produit</param>
+        public void InitStatOfProduct(int product_id)
+        {
+            this.evolProducts.Clear();
+            List<StatProduit> statProduit = this.statProduitManager.GetStatBOfProductByMonth(anneeSelected,product_id);
+            foreach (StatProduit stat in statProduit)
+            {
+                if (productManager.GetProducts().Find(x => x.ID == stat.Product_id) is Product productLogic)
+                {
+                    this.evolProducts.Add(new StatProduitViewModel(stat, new ProductViewModel(productLogic, null, null, null)));
+                }
+            }
+            NotifyPropertyChanged(nameof(this.EvolProducts));
+        }
+
+        /// <summary>
+        /// Permet d'initialiser les statistiques d'un acompte
+        /// </summary>
+        /// <param name="acompte_id">id de l'acompte</param>
+        public void InitStatOfAcompte(int acompte_id)
+        {
+            this.evolAcomptes.Clear();
+            List<StatAccount> statAcomptes = this.statAccountManager.GetStatBOfAcompteByMonth(anneeSelected, acompte_id);
+            foreach (StatAccount stat in statAcomptes)
+            {
+                if (accountManager.GetAdhérents().Find(x => x.Id == stat.Account_Id) is Account acompte)
+                {
+                    this.evolAcomptes.Add(new StatAccountViewModel(stat, new AccountViewModel(acompte, this.accountManager)));
+                }
+            }
+            NotifyPropertyChanged(nameof(this.EvolAcomptes));
+        }
 
         /// <summary>
         /// Permet d'initialiser les stats des acomptes

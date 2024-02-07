@@ -127,5 +127,37 @@ namespace Couche_Data.Dao
                 return new();
             }
         }
+
+        public List<StatProduit> GetStatBOfProductByMonth(int year,int product_id)
+        {
+            MySqlConnection sql = new MySqlConnection(dbsDAO.ConnectionString);
+            try
+            {
+                sql.Open();
+
+                //Requette SQL
+                string stm = $"SELECT NVL(product_id,{product_id}) as product_id,lm.mois as date,NVL(SUM(bs.number_sales), 0) AS nb FROM ( SELECT 1 AS mois UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) lm LEFT JOIN best_sales bs ON MONTH(bs.date_sale) = lm.mois AND YEAR(bs.date_sale) = {year} AND bs.product_id = {product_id} GROUP BY lm.mois ORDER BY lm.mois;";
+                MySqlCommand cmd = new MySqlCommand(stm, sql);
+                cmd.Prepare();
+
+                //lecture de la requette
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                List<StatProduit> statProduitList = new List<StatProduit>();
+                while (rdr.Read())
+                {
+                    statProduitList.Add(new StatProduit(0, rdr.GetDateTime("date"), rdr.GetInt16("nb"), rdr.GetInt16("product_id")));
+                }
+
+                rdr.Close();
+                sql.Close();
+                return statProduitList;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Erreur pendant le chargement des stats produit : {ex.Message}");
+                return new();
+            }
+        }
     }
 }

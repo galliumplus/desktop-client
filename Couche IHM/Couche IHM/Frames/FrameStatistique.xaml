@@ -3,102 +3,92 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
+      xmlns:vm="clr-namespace:Couche_IHM.VueModeles"
       xmlns:local="clr-namespace:Couche_IHM.Frames"
-      
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="FrameStat">
+      Title="FrameChooseStat">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel 
-            Grid.ColumnSpan="3"
-            HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+
+        <materialDesign:Card
+            Grid.Row="4"
+            Grid.Column="1">
             <Button
-                Command="{Binding StatViewModel.Previous}"
-                    Style="{StaticResource buttonImage}">
-                <materialDesign:PackIcon
-                    Width="25"
-                    Margin="0,3,5,0"
-                    Foreground="Black"
-                    Height="25"
-                    Kind="ArrowLeftThick"/>
-            </Button>
-            <TextBlock               
-                 FontSize="25"
-                 FontWeight="Medium"
-                 Text="{Binding StatViewModel.DateIHM}"/>
-            <Button
-                Command="{Binding StatViewModel.Next}"
+            Command="{Binding ChangeFrame}"
+            CommandParameter="{x:Static vm:Frame.FRAMETOPSTAT}"
             Style="{StaticResource buttonImage}">
-                <materialDesign:PackIcon
-                    
-                    Width="25"
-                    Margin="5,3,0,0"
-                    Height="25"
-                    Foreground="Black"
-                    Kind="ArrowRightThick"/>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                         Margin="0,5,10,0"
+                         Width="20"
+                         Height="20"
+                         Foreground="Green"
+                         VerticalAlignment="Center"
+                         Kind="Podium"/>
+                    <TextBlock
+                        Foreground="Green"
+                         FontWeight="DemiBold"
+                         FontSize="25"
+                         Text="Top des produits et acomptes"/>
+                    <materialDesign:PackIcon
+                         Margin="10,5,0,0"
+                         Width="20"
+                         Height="20"
+                         Foreground="Green"
+                         VerticalAlignment="Center"
+                         Kind="Podium"/>
+                </StackPanel>
             </Button>
-        </StackPanel>
+        </materialDesign:Card>
 
 
-        <ComboBox FontSize="18" ItemsSource="{Binding StatViewModel.TypeRechercheList}" SelectedItem="{Binding StatViewModel.TypeRechercheStat}" HorizontalAlignment="Center" Grid.Column="2"/>
-
-        <!-- Liste des acomptes -->
-        <DVC:Chart
-            BorderThickness="0"
-            Grid.ColumnSpan="3"
-            Grid.Row="1"
-            Margin="20"
-            Grid.Column="0"            
-            Background="Transparent">
-            <DVC:Chart.Series>
-                <DVC:ColumnSeries
-
-                    Title="Dépenses"  
-                    ItemsSource="{Binding StatViewModel.BestAcomptes}"  
-                    IndependentValueBinding="{Binding Path=AccountsViewModel.NomCompletIHM}"  
-                    DependentValueBinding="{Binding Path=Argent}">
-                    
-                    <DVC:ColumnSeries.DataPointStyle >
-                        <Style TargetType="DVC:ColumnDataPoint" BasedOn="{StaticResource BarChartAcompte}"/>
-                    </DVC:ColumnSeries.DataPointStyle>
-                </DVC:ColumnSeries>
-            </DVC:Chart.Series>
-        </DVC:Chart>
-
-        <!-- Liste des produits -->
-        <DVC:Chart
-            Grid.ColumnSpan="3"
+        <materialDesign:Card
             Grid.Row="2"
-          Margin="20"
-            BorderThickness="0"
-          Background="Transparent">
-            <DVC:Chart.Series >
-                <DVC:ColumnSeries   Title="Ventes"  
-                                    
-              ItemsSource="{Binding StatViewModel.BestProducts}"  
-              IndependentValueBinding="{Binding Path=ProductViewModel.NomProduitIHM}"  
-              
-              DependentValueBinding="{Binding Path=PurchaseCount}">
-                    <DVC:ColumnSeries.DataPointStyle >
-                        <Style TargetType="DVC:ColumnDataPoint" BasedOn="{StaticResource BarChartProduct}"/>
-                    </DVC:ColumnSeries.DataPointStyle>
-                </DVC:ColumnSeries>
-            </DVC:Chart.Series>
-        </DVC:Chart>
+            Grid.Column="1">
+            <Button
+                Command="{Binding ChangeFrame}"
+                CommandParameter="{x:Static vm:Frame.FRAMEEVOLSTAT}"
+                Style="{StaticResource buttonImage}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,5,10,0"
+                        Width="20"
+                        Height="20"
+                        Foreground="DodgerBlue"
+                        VerticalAlignment="Center"
+                        Kind="ChartBellCurveCumulative"/>
+                    <TextBlock
+                        FontWeight="DemiBold"
+                        Foreground="DodgerBlue"
+                    FontSize="25"
+                    Text="Evolution des produits et acomptes"/>
+                    <materialDesign:PackIcon
+                        Margin="10,5,0,0"
+                        Width="20"
+                        Height="20"
+                        Foreground="DodgerBlue"
+                        VerticalAlignment="Center"
+                        Kind="ChartBellCurveCumulative"/>
+                </StackPanel>
+            </Button>
+        </materialDesign:Card>
+
     </Grid>
 </Page>

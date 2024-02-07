@@ -10,6 +10,8 @@ namespace Couche_IHM.VueModeles
         FRAMESTOCK,
         FRAMECOMPTES,
         FRAMELOG,
-        FRAMESTATISTIQUE
+        FRAMESTATISTIQUE,
+        FRAMETOPSTAT,
+        FRAMEEVOLSTAT
     }
 }

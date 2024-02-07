@@ -38,6 +38,8 @@ namespace Couche_IHM.BindingRules
                         retour = "Logs";
                         break;
                     case Frame.FRAMESTATISTIQUE:
+                    case Frame.FRAMEEVOLSTAT:
+                    case Frame.FRAMETOPSTAT:
                         retour = "Statistiques";
                         break;
                     default:

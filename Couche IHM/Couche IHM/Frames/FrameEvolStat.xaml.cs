@@ -17,14 +17,16 @@ using System.Windows.Shapes;
 namespace Couche_IHM.Frames
 {
     /// <summary>
-    /// Logique d'interaction pour FrameChooseStat.xaml
+    /// Logique d'interaction pour FrameEvolStat.xaml
     /// </summary>
-    public partial class FrameStatistique : Page
+    public partial class FrameEvolStat : Page
     {
-        public FrameStatistique()
+        public FrameEvolStat()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.Instance;
+
         }
+
     }
 }

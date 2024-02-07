@@ -56,6 +56,12 @@ namespace Couche_Métier.Manager
             return this.statProduitList;
         }
 
+        public List<StatProduit> GetStatBOfProductByMonth(int year,int product_id)
+        {
+            statProduitList = dao.GetStatBOfProductByMonth(year,product_id);
+            return this.statProduitList;
+        }
+
         public List<StatProduit> GetStatsByYear(int year)
         {
             statProduitList = dao.GetStatByYear(year);

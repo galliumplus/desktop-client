@@ -60,6 +60,12 @@ namespace Couche_Métier.Manager
             return this.statAccountList;
         }
 
+        public List<StatAccount> GetStatBOfAcompteByMonth(int year, int acompte_id)
+        {
+            statAccountList = dao.GetStatBOfAcompteByMonth(year, acompte_id);
+            return this.statAccountList;
+        }
+
         public List<StatAccount> GetStatsByYear(int year)
         {
 
