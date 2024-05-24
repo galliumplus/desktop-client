@@ -60,6 +60,10 @@ namespace Couche_IHM.VueModeles
             get => product.ID;
         }
 
+        public double test
+        {
+            get => Math.Round(product.PrixAdherent,2);
+        }
         public double Opacity
         {
             get
@@ -423,7 +427,12 @@ namespace Couche_IHM.VueModeles
                    nomProduitIHM == model.nomProduitIHM;
         }
 
-   
+        public override string? ToString()
+        {
+            return NomProduitIHM;
+        }
+
+
 
         #endregion
     }
