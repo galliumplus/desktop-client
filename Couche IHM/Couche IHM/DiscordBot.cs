@@ -130,28 +130,23 @@ namespace Couche_IHM
                         components.WithButton(button);
                         //embedBuilder.AddField($"Part {i} :", "```" + morceaux[i] + "```");
                     }
-
-
-
-                    arg.Channel.SendMessageAsync("", embed:embedBuilder.Build(),components:components.Build());
+                    
+                    arg.RespondAsync("", embed:embedBuilder.Build(),components:components.Build(), ephemeral:true);
 
                 break;
 
-
-
                 case "achetable":
                     double argent = Convert.ToDouble(arg.Data.Options.ToList()[0].Value);
-
-                    await arg.User.SendMessageAsync($"Voici ce que vous pouvez acheter pour {argent} euros : \n");
-                    await arg.User.SendMessageAsync(":beverage_box:  **Boissons**");
-                    string listeBoisson2 = string.Format("{0,-10}{1,-30}{2,-15}{3,-15}\n\n", "Quantité", " Nom du produit", " Prix A", " Prix NA");
+                    string listeBoisson2 = "";
                     List<ProductViewModel> boissons2 = products.FindAll(x => x.CategoryIHM.NomCat == "Boisson" && x.isDisponible == true && x.test <= argent).OrderBy(x => x.NomProduitIHM).ToList();
+                    EmbedBuilder finalEmbed = new EmbedBuilder();
                     foreach (ProductViewModel p in boissons2)
                     {
 
                         // Formate la chaîne avec les espaces appropriés
-                        string produit = string.Format("x{0,-10}{1,-30}{2,-15}{3,-15}", p.QuantiteIHM, p.NomProduitIHM, p.PrixAdherentIHM, p.PrixNonAdherentIHM);
+                        string produit = string.Format($"**{p.NomProduitIHM}** {p.PrixAdherentIHM}/u");
                         listeBoisson2 += produit + "\n";
+
                     }
 
                     List<string> morceaux4 = new List<string>();
@@ -164,20 +159,20 @@ namespace Couche_IHM
                         string morceau = listeBoisson2.Substring(i, longueur6);
                         morceaux4.Add(morceau);
                     }
+
+                    string messageBoissons = "";
                     foreach (string morceau in morceaux4)
                     {
-                        await arg.User.SendMessageAsync("```" + morceau + "```");
+                        messageBoissons += morceau;
                     }
-
-                    await arg.User.SendMessageAsync(":chocolate_bar:  **Snacks**");
-
+                    
                     string listeSnacks2 = "";
                     List<ProductViewModel> snacks2 = products.FindAll(x => x.CategoryIHM.NomCat == "Snack" && x.isDisponible == true && x.test <= argent).OrderBy(x => x.NomProduitIHM).ToList();
                     foreach (ProductViewModel p in snacks2)
                     {
 
                         // Formate la chaîne avec les espaces appropriés
-                        string produit = string.Format("x{0,-10}{1,-30}{2,-15}{3,-15}", p.QuantiteIHM, p.NomProduitIHM, p.PrixAdherentIHM, p.PrixNonAdherentIHM);
+                        string produit = string.Format($"**{p.NomProduitIHM}** : {p.PrixAdherentIHM}");
                         listeSnacks2 += produit + "\n";
                     }
 
@@ -185,6 +180,7 @@ namespace Couche_IHM
                     List<string> morceaux3 = new List<string>();
 
 
+                    string messageSnack = "";
                     int longueur = Math.Min(longueurMaximale, listeSnacks2.Length);
                     for (int i = 0; i < listeSnacks2.Length; i += longueur)
                     {
@@ -194,8 +190,17 @@ namespace Couche_IHM
                     }
                     foreach (string morceau in morceaux3)
                     {
-                        await arg.User.SendMessageAsync("```" + morceau + "```");
+                        messageSnack += morceau;
                     }
+
+                    finalEmbed.Title = $"Produit Achetable avec {argent}€ :";
+                    finalEmbed.Description =
+                        ":warning: Les prix affichés sont ceux pour les **adhérents**, sinon, c'est +0,20€ pour chaque consommations";
+                    finalEmbed.AddField(":beverage_box: Boissons", messageBoissons);
+                    finalEmbed.AddField(":chocolate_bar: Snacks", messageSnack);
+
+                    arg.RespondAsync(embed: finalEmbed.Build(), ephemeral: true);
+                    
                     break;
             }
         }
