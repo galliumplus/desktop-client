@@ -3,13 +3,92 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Couche_IHM.VueModeles"
       xmlns:local="clr-namespace:Couche_IHM.Frames"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="FrameStatistique"
-      Background="White">
+      Title="FrameChooseStat">
 
     <Grid>
-        <TextBlock Text="Statistique" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <materialDesign:Card
+            Grid.Row="4"
+            Grid.Column="1">
+            <Button
+            Command="{Binding ChangeFrame}"
+            CommandParameter="{x:Static vm:Frame.FRAMETOPSTAT}"
+            Style="{StaticResource buttonImage}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                         Margin="0,5,10,0"
+                         Width="20"
+                         Height="20"
+                         Foreground="Green"
+                         VerticalAlignment="Center"
+                         Kind="Podium"/>
+                    <TextBlock
+                        Foreground="Green"
+                         FontWeight="DemiBold"
+                         FontSize="25"
+                         Text="Top des produits et acomptes"/>
+                    <materialDesign:PackIcon
+                         Margin="10,5,0,0"
+                         Width="20"
+                         Height="20"
+                         Foreground="Green"
+                         VerticalAlignment="Center"
+                         Kind="Podium"/>
+                </StackPanel>
+            </Button>
+        </materialDesign:Card>
+
+
+        <materialDesign:Card
+            Grid.Row="2"
+            Grid.Column="1">
+            <Button
+                Command="{Binding ChangeFrame}"
+                CommandParameter="{x:Static vm:Frame.FRAMEEVOLSTAT}"
+                Style="{StaticResource buttonImage}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon
+                        Margin="0,5,10,0"
+                        Width="20"
+                        Height="20"
+                        Foreground="DodgerBlue"
+                        VerticalAlignment="Center"
+                        Kind="ChartBellCurveCumulative"/>
+                    <TextBlock
+                        FontWeight="DemiBold"
+                        Foreground="DodgerBlue"
+                    FontSize="25"
+                    Text="Evolution des produits et acomptes"/>
+                    <materialDesign:PackIcon
+                        Margin="10,5,0,0"
+                        Width="20"
+                        Height="20"
+                        Foreground="DodgerBlue"
+                        VerticalAlignment="Center"
+                        Kind="ChartBellCurveCumulative"/>
+                </StackPanel>
+            </Button>
+        </materialDesign:Card>
+
     </Grid>
 </Page>

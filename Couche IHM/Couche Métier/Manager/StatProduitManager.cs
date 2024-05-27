@@ -1,6 +1,7 @@
-﻿using Couche_Data;
-using Couche_Data.Dao;
+﻿using GalliumPlusApi.Dao;
+using Couche_Data.Interfaces;
 using Modeles;
+using Couche_Data.Dao;
 
 namespace Couche_Métier.Manager
 {
@@ -10,7 +11,7 @@ namespace Couche_Métier.Manager
         /// <summary>
         /// Dao permettant de gérer les données des stats produits
         /// </summary>
-        private StatProduitDAO dao;
+        private IStatProduitDAO dao;
 
         /// <summary>
         /// Liste des stats des produits
@@ -24,8 +25,16 @@ namespace Couche_Métier.Manager
         /// </summary>
         public StatProduitManager()
         {
-            dao = new StatProduitDAO();
-            Task.Run(()=> statProduitList = dao.GetStat());
+            if (DevelopmentInfo.isDevelopment)
+            {
+                dao = new StatProduitDAO();
+            }
+            else
+            {
+                dao = new StatProduitDao();
+            }
+           
+
         }
         #endregion
 
@@ -35,8 +44,27 @@ namespace Couche_Métier.Manager
             dao.CreateStat(stat);
         }
 
-        public List<StatProduit> GetStats()
+        public List<StatProduit> GetStatsByWeek(int semaine,int year)
         {
+            statProduitList = dao.GetStatByWeek(semaine,year);
+            return this.statProduitList;
+        }
+
+        public List<StatProduit> GetStatsByMonth(int month, int year)
+        {
+            statProduitList = dao.GetStatByMonth(month, year);
+            return this.statProduitList;
+        }
+
+        public List<StatProduit> GetStatBOfProductByMonth(int year,int product_id)
+        {
+            statProduitList = dao.GetStatBOfProductByMonth(year,product_id);
+            return this.statProduitList;
+        }
+
+        public List<StatProduit> GetStatsByYear(int year)
+        {
+            statProduitList = dao.GetStatByYear(year);
             return this.statProduitList;
         }
         #endregion
