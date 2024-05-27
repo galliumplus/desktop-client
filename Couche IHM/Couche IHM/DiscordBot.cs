@@ -38,6 +38,7 @@ namespace Couche_IHM
             _client = new DiscordSocketClient(config);
             _client.ButtonExecuted += _client_ButtonExecuted;
             _client.SlashCommandExecuted += _client_SlashCommandExecuted;
+            _client.Ready += _client_Ready;
 
 
             //  You can assign your bot token to a string, and pass that in to connect.
@@ -57,6 +58,22 @@ namespace Couche_IHM
             await Task.Delay(-1);
         }
 
+
+        private async Task _client_Ready()
+        {
+            #region SetSlashCommand
+            
+            SlashCommandBuilder produits = new SlashCommandBuilder().WithName("achetable").WithDescription("Permet de récupérer la liste des produits achetables avec l'argent disponible").AddOption("argent", type:ApplicationCommandOptionType.Integer, "Argent que vous possédez", isRequired:true);
+            SlashCommandBuilder achetable = new SlashCommandBuilder().WithName("produits").WithDescription("Permet de récupérer la liste des produits disponibles à l'ETIQ (actuellement)");
+            SlashCommandBuilder restock = new SlashCommandBuilder()
+                .WithDescription("Permet de retourner les articles ayant besoin d'un restock").WithName("restock");
+            await _client.CreateGlobalApplicationCommandAsync(produits.Build());
+            await _client.CreateGlobalApplicationCommandAsync(achetable.Build());
+            await _client.CreateGlobalApplicationCommandAsync(restock.Build());
+            
+            #endregion
+        }
+        
         private async Task _client_ButtonExecuted(SocketMessageComponent arg)
         {
 
@@ -77,6 +94,8 @@ namespace Couche_IHM
             int longueurMaximale = 995; // Nombre maximal de caractères par morceau
             switch (command)
             {
+                #region Produits
+                
                 case "produits":
                     EmbedBuilder embedBuilder = new EmbedBuilder();
                     embedBuilder.WithTitle("__:beverage_box: Les Boissons__");
@@ -134,6 +153,10 @@ namespace Couche_IHM
                     arg.RespondAsync("", embed:embedBuilder.Build(),components:components.Build(), ephemeral:true);
 
                 break;
+                
+                #endregion
+                
+                #region Achetable
 
                 case "achetable":
                     double argent = Convert.ToDouble(arg.Data.Options.ToList()[0].Value);
@@ -202,7 +225,36 @@ namespace Couche_IHM
                     arg.RespondAsync(embed: finalEmbed.Build(), ephemeral: true);
                     
                     break;
+                
+                #endregion
+                
+                #region Restock
+                
+                case "restock":
+
+                    List<ProductViewModel> produitsEnRuptureBoisson = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Boisson");
+                    string messageBoisson = "";
+                    foreach (ProductViewModel produits in produitsEnRuptureBoisson)
+                    {
+                        messageBoisson += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
+                    }
+                    
+                    List<ProductViewModel> produitsEnRuptureMiam = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Snack");
+                    string messageMiam = "";
+                    foreach (ProductViewModel produits in produitsEnRuptureBoisson)
+                    {
+                        messageMiam += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
+                    }
+
+                    EmbedBuilder embed = new EmbedBuilder().WithDescription("Voici les produits manquants à l'ETIQ :").WithTitle("Liste de courses :").AddField(":tropical_drink: Boissons", messageBoisson).AddField(":doughnut: Snack", messageMiam);
+                    arg.RespondAsync(text: "", embed: embed.Build(),ephemeral:true);
+                    
+                    break;
+                
+                #endregion
             }
+            
+                
         }
 
       
