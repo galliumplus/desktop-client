@@ -19,11 +19,13 @@ namespace Couche_IHM
     {
         private DiscordSocketClient _client;
         private List<ProductViewModel> products;
+        private List<Account> accomptes;
         private List<string> les_morceaux;
 
         public DiscordBot(MainWindowViewModel mvvm) 
         {
             this.products = mvvm.ProductViewModel.Products.ToList();
+            this.accomptes = mvvm.AccountManager.GetAdhérents();
             Connect();
         }
 
@@ -36,14 +38,13 @@ namespace Couche_IHM
                 GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.MessageContent | GatewayIntents.GuildMembers | GatewayIntents.GuildPresences
             };
             _client = new DiscordSocketClient(config);
-            _client.ButtonExecuted += _client_ButtonExecuted;
             _client.SlashCommandExecuted += _client_SlashCommandExecuted;
             _client.Ready += _client_Ready;
 
 
             //  You can assign your bot token to a string, and pass that in to connect.
             //  This is, however, insecure, particularly if you plan to have your code hosted in a public repository.
-            var token = "TOKEN";
+            var token = ID.TOKEN;
 
             // Some alternative options would be to keep your token in an Environment Variable or a standalone file.
             // var token = Environment.GetEnvironmentVariable("NameOfYourEnvironmentVariable");
@@ -62,29 +63,19 @@ namespace Couche_IHM
         private async Task _client_Ready()
         {
             #region SetSlashCommand
-            
             SlashCommandBuilder produits = new SlashCommandBuilder().WithName("achetable").WithDescription("Permet de récupérer la liste des produits achetables avec l'argent disponible").AddOption("argent", type:ApplicationCommandOptionType.Integer, "Argent que vous possédez", isRequired:true);
             SlashCommandBuilder achetable = new SlashCommandBuilder().WithName("produits").WithDescription("Permet de récupérer la liste des produits disponibles à l'ETIQ (actuellement)");
             SlashCommandBuilder restock = new SlashCommandBuilder()
                 .WithDescription("Permet de retourner les articles ayant besoin d'un restock").WithName("restock");
+            SlashCommandBuilder accompte = new SlashCommandBuilder()
+                .WithDescription("Consulter le solde de son accompte").WithName("accompte").AddOption("identifiant", type:ApplicationCommandOptionType.String, "Identifiant de votre accompte !", isRequired:true);
             await _client.CreateGlobalApplicationCommandAsync(produits.Build());
             await _client.CreateGlobalApplicationCommandAsync(achetable.Build());
             await _client.CreateGlobalApplicationCommandAsync(restock.Build());
+            await _client.CreateGlobalApplicationCommandAsync(accompte.Build());
+            
             
             #endregion
-        }
-        
-        private async Task _client_ButtonExecuted(SocketMessageComponent arg)
-        {
-
-            string part = les_morceaux[Convert.ToInt16(arg.Data.CustomId)-1];
-            EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.WithTitle("__:beverage_box: Les Boissons__");
-            embedBuilder.WithColor(Color.Red);
-            embedBuilder.WithCurrentTimestamp();
-
-            embedBuilder.AddField($"Page {arg.Data.CustomId}", "```" + part + "```");
-            await arg.UpdateAsync(x => x.Embed = embedBuilder.Build());
         }
 
         private async Task _client_SlashCommandExecuted(SocketSlashCommand arg)
@@ -97,62 +88,41 @@ namespace Couche_IHM
                 #region Produits
                 
                 case "produits":
-                    EmbedBuilder embedBuilder = new EmbedBuilder();
-                    embedBuilder.WithTitle("__:beverage_box: Les Boissons__");
-                    embedBuilder.WithColor(Color.Red);
-                    embedBuilder.WithCurrentTimestamp();
+                    EmbedBuilder embedF = new EmbedBuilder();
+                    embedF.WithTitle("Liste des produits");
+                    embedF.WithColor(Color.DarkOrange);
+                    embedF.WithCurrentTimestamp();
+                    embedF.WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
 
 
                     string listeBoisson = "";
                     List<ProductViewModel> boissons = products.FindAll(x => x.CategoryIHM.NomCat == "Boisson" && x.isDisponible == true).OrderBy(x => x.NomProduitIHM).ToList();
+                    string msgBoisson1 = "";
+                    string msgBoisson2 = "";
                     foreach (ProductViewModel p in boissons)
                     {
+                        if (Convert.ToDouble(p.PrixAdherentIHM.Split(' ')[0]) <= 1)
+                        {
+                            msgBoisson1 += $"x{p.QuantiteIHM} - **{p.NomProduitIHM}** : *{p.PrixAdherentIHM}*\n";  
+                        }
 
-                        // Formate la chaîne avec les espaces appropriés
-                        string produit = string.Format("x{0,-8}{1,-30}{2,-10}", p.QuantiteIHM, p.NomProduitIHM, p.PrixAdherentIHM);
-                        listeBoisson += produit + "\n";
-                    }
-
-
-                    List<string> morceaux = new List<string>();
-
-
-
-                    for (int i = 0; i < listeBoisson.Length; i += longueurMaximale)
-                    {
-                        int longueur4 = Math.Min(longueurMaximale, listeBoisson.Length - i);
-                        string morceau = listeBoisson.Substring(i, longueur4);
-                        morceaux.Add(morceau);
-                    }
-                    this.les_morceaux = morceaux;
-
-                    // Construire les composants de message avec les boutons
-                    var components = new ComponentBuilder();
-
-
-                    embedBuilder.AddField($"Page 1", "```" + morceaux[0] + "```");
-                    var button2 = new ButtonBuilder()
-                           .WithLabel("1")
-                           .WithCustomId("1")
-                           .WithDisabled(true)
-                           .WithStyle(ButtonStyle.Primary);
-
-                    components.WithButton(button2);
-                    for (int i = 1; i < morceaux.Count; i++)
-                    {
-                        
-                        var button = new ButtonBuilder()
-                           .WithLabel((i+1).ToString())
-                           .WithCustomId((i+1).ToString())
-                           .WithStyle(ButtonStyle.Primary);
-
-                        components.WithButton(button);
-                        //embedBuilder.AddField($"Part {i} :", "```" + morceaux[i] + "```");
+                        if (Convert.ToDouble(p.PrixAdherentIHM.Split(' ')[0]) > 1)
+                        {
+                            msgBoisson2 += $"x{p.QuantiteIHM} - **{p.NomProduitIHM}** : *{p.PrixAdherentIHM}*\n";
+                        }
                     }
                     
-                    arg.RespondAsync("", embed:embedBuilder.Build(),components:components.Build(), ephemeral:true);
-
-                break;
+                    List<ProductViewModel> snackis = products.FindAll(x => x.CategoryIHM.NomCat == "Snack" && x.isDisponible == true).OrderBy(x => x.NomProduitIHM).ToList();
+                    string msgSnack = "";
+                    foreach (ProductViewModel p in snackis)
+                    {
+                        msgSnack += $"x{p.QuantiteIHM} - **{p.NomProduitIHM}** : {p.PrixAdherentIHM}\n";
+                    }
+                    embedF.AddField(":beverage_box: Boissons petites économies", msgBoisson1);
+                    embedF.AddField(":beverage_box: Boissons de riche", msgBoisson2);
+                    embedF.AddField(":chocolate_bar: Snacks", msgSnack);
+                    arg.RespondAsync("", embed: embedF.Build(), ephemeral: true);
+                    break;
                 
                 #endregion
                 
@@ -221,6 +191,8 @@ namespace Couche_IHM
                         ":warning: Les prix affichés sont ceux pour les **adhérents**, sinon, c'est +0,20€ pour chaque consommations";
                     finalEmbed.AddField(":beverage_box: Boissons", messageBoissons);
                     finalEmbed.AddField(":chocolate_bar: Snacks", messageSnack);
+                    finalEmbed.WithColor(Color.DarkOrange);
+                    finalEmbed.WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
 
                     arg.RespondAsync(embed: finalEmbed.Build(), ephemeral: true);
                     
@@ -232,28 +204,80 @@ namespace Couche_IHM
                 
                 case "restock":
 
-                    List<ProductViewModel> produitsEnRuptureBoisson = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Boisson");
-                    string messageBoisson = "";
-                    foreach (ProductViewModel produits in produitsEnRuptureBoisson)
-                    {
-                        messageBoisson += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
-                    }
+                    var guildUser = (IGuildUser)arg.User;
+                    bool adminPermission = guildUser.GuildPermissions.Administrator;
                     
-                    List<ProductViewModel> produitsEnRuptureMiam = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Snack");
-                    string messageMiam = "";
-                    foreach (ProductViewModel produits in produitsEnRuptureBoisson)
+                    if(adminPermission)
                     {
-                        messageMiam += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
-                    }
+                        List<ProductViewModel> produitsEnRuptureBoisson = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Boisson");
+                        string messageBoisson = "";
+                        foreach (ProductViewModel produits in produitsEnRuptureBoisson)
+                        {
+                            messageBoisson += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
+                        }
+                        
+                        List<ProductViewModel> produitsEnRuptureMiam = this.products.FindAll(x => x.QuantiteIHM <= 30 && x.CategoryIHM.NomCat == "Snack");
+                        string messageMiam = "";
+                        foreach (ProductViewModel produits in produitsEnRuptureMiam)
+                        {
+                            messageMiam += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
+                        }
 
-                    EmbedBuilder embed = new EmbedBuilder().WithDescription("Voici les produits manquants à l'ETIQ :").WithTitle("Liste de courses :").AddField(":tropical_drink: Boissons", messageBoisson).AddField(":doughnut: Snack", messageMiam);
-                    arg.RespondAsync(text: "", embed: embed.Build(),ephemeral:true);
-                    
+                        EmbedBuilder embed = new EmbedBuilder().WithDescription("Voici les produits manquants à l'ETIQ :").WithTitle("Liste de courses :").AddField(":tropical_drink: Boissons", messageBoisson).AddField(":doughnut: Snack", messageMiam).WithCurrentTimestamp().WithColor(Color.DarkOrange).WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
+                        arg.RespondAsync(text: "", embed: embed.Build(),ephemeral:true);
+                    }
+                    else
+                    {
+                        EmbedBuilder embed =
+                            new EmbedBuilder().WithDescription(
+                                "Vous n'avez pas la permission nécessaire afin d'exécuter cette commande !").WithTitle("Erreur !").WithColor(Color.Red).WithCurrentTimestamp();
+                        arg.RespondAsync(embed: embed.Build(), ephemeral:true);
+                    }
                     break;
                 
                 #endregion
+
+                #region Acompte
+
+                case "accompte":
+                    
+                    var userG = (IGuildUser)arg.User;
+                    bool adminP = userG.GuildPermissions.Administrator;
+
+                    if (adminP)
+                    {
+                        string identifiant = Convert.ToString(arg.Data.Options.First().Value);
+                        float money = 0;
+                        bool find = false;
+                        Account finalAccount = accomptes.First();
+                        foreach (Account accompte in this.accomptes)
+                        {
+                            if (accompte.Identifiant == identifiant)
+                            {
+                                money = accompte.Argent;
+                                find = true;
+                                finalAccount = accompte;
+                            }
+                        }
+                        if (find)
+                        {
+                            EmbedBuilder embed = new EmbedBuilder().WithTitle($"Argent de : {identifiant}")
+                                .WithDescription($"Montant de l'accompte : {finalAccount.Argent}€").WithColor(Color.Orange)
+                                .WithCurrentTimestamp();
+                            arg.RespondAsync(embed:embed.Build(),ephemeral:true);
+                        }
+                        else
+                        {
+                            EmbedBuilder embed =
+                                new EmbedBuilder().WithDescription(
+                                    "Identifiant introuvable dans la base de donnée !").WithTitle("Erreur !").WithColor(Color.Red).WithCurrentTimestamp();
+                            arg.RespondAsync(embed: embed.Build(), ephemeral:true);
+                        }
+                    }    
+                    break;
+
+                #endregion
             }
-            
                 
         }
 
