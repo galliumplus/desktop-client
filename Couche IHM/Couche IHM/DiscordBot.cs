@@ -92,7 +92,7 @@ namespace Couche_IHM
                     embedF.WithTitle("Liste des produits");
                     embedF.WithColor(Color.DarkOrange);
                     embedF.WithCurrentTimestamp();
-                    embedF.WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
+                    embedF.WithFooter("\u26a0 Attention : Il peut y avoir des erreurs dans les stocks !");
 
 
                     string listeBoisson = "";
@@ -192,7 +192,7 @@ namespace Couche_IHM
                     finalEmbed.AddField(":beverage_box: Boissons", messageBoissons);
                     finalEmbed.AddField(":chocolate_bar: Snacks", messageSnack);
                     finalEmbed.WithColor(Color.DarkOrange);
-                    finalEmbed.WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
+                    finalEmbed.WithFooter("\u26a0 Attention : Il peut y avoir des erreurs dans les stocks !");
 
                     arg.RespondAsync(embed: finalEmbed.Build(), ephemeral: true);
                     
@@ -223,7 +223,7 @@ namespace Couche_IHM
                             messageMiam += $"**{produits.NomProduitIHM}** : x{produits.QuantiteIHM}\n";
                         }
 
-                        EmbedBuilder embed = new EmbedBuilder().WithDescription("Voici les produits manquants à l'ETIQ :").WithTitle("Liste de courses :").AddField(":tropical_drink: Boissons", messageBoisson).AddField(":doughnut: Snack", messageMiam).WithCurrentTimestamp().WithColor(Color.DarkOrange).WithFooter(":warning: Attention : Il peut y avoir des erreurs dans les stocks !");
+                        EmbedBuilder embed = new EmbedBuilder().WithDescription("Voici les produits manquants à l'ETIQ :").WithTitle("Liste de courses :").AddField(":tropical_drink: Boissons", messageBoisson).AddField(":doughnut: Snack", messageMiam).WithCurrentTimestamp().WithColor(Color.DarkOrange).WithFooter("\u26a0 Attention : Il peut y avoir des erreurs dans les stocks !");
                         arg.RespondAsync(text: "", embed: embed.Build(),ephemeral:true);
                     }
                     else

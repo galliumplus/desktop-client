@@ -25,7 +25,6 @@ namespace Couche_IHM
     {
         private static DiscordSocketClient _client;
         private static List<ProductViewModel> products;
-        private static SocketUser god;
 
 
         /// <summary>
