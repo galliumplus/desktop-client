@@ -22,7 +22,7 @@ namespace Couche_IHM.BindingRules
                     case Frame.FRAMECAISSE:
                         retour = "Caisse";
                         break;
-                    case Frame.FRAMEACOMPTE:
+                    case Frame.FRAMEACCOUNT:
                         retour = "Acomptes";
                         break;
                     case Frame.FRAMESTOCK:
@@ -38,6 +38,8 @@ namespace Couche_IHM.BindingRules
                         retour = "Logs";
                         break;
                     case Frame.FRAMESTATISTIQUE:
+                    case Frame.FRAMEEVOLSTAT:
+                    case Frame.FRAMETOPSTAT:
                         retour = "Statistiques";
                         break;
                     default:

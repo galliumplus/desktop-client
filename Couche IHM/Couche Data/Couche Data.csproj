@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Dao\ConnectionString.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Dao\ConnectionString.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net.Core" Version="3.14.1" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="3.14.1" />
     <PackageReference Include="MySql.Data" Version="8.0.32" />
   </ItemGroup>
 
