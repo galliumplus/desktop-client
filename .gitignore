@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+ConnectionString.txt
+
 # User-specific files
 *.rsuser
 *.suo
@@ -365,3 +367,5 @@ FodyWeavers.xsd
 .csproj
 /Gallium v1/Data/ConnexionDAO.cs
 /Gallium v1/Data/InformatioConnexion.cs
+
+.idea

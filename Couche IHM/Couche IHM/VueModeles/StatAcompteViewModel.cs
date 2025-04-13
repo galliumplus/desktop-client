@@ -1,21 +1,24 @@
 ﻿using Couche_Métier.Utilitaire;
 using Modeles;
+using System.Globalization;
 
 namespace Couche_IHM.VueModeles
 {
-    public class StatAcompteViewModel
+    public class StatAccountViewModel
     {
         #region attributes
-        private AcompteViewModel adherentViewModel;
+        private AccountViewModel adherentViewModel;
         private float argent;
+        private StatAccount stat;
         #endregion
 
         #region constructor
         /// <summary>
         /// Constructeur du stat acompte vue modele
         /// </summary>
-        public StatAcompteViewModel(StatAcompte stat,AcompteViewModel adherentViewModel)
+        public StatAccountViewModel(StatAccount stat,AccountViewModel adherentViewModel)
         {
+            this.stat = stat;
             this.adherentViewModel = adherentViewModel;
             this.argent = stat.Money;
         }
@@ -23,9 +26,9 @@ namespace Couche_IHM.VueModeles
 
         #region properties
         /// <summary>
-        /// Acompte de la stat
+        /// Account de la stat
         /// </summary>
-        public AcompteViewModel AdherentViewModel { get => adherentViewModel; set => adherentViewModel = value; }
+        public AccountViewModel AccountsViewModel { get => adherentViewModel; set => adherentViewModel = value; }
         /// <summary>
         /// Argent dépensé formatté
         /// </summary>
@@ -37,6 +40,12 @@ namespace Couche_IHM.VueModeles
             }
             
         }
+
+        public string Date
+        {
+            get => stat.Date.ToString("MMMM", new CultureInfo("fr-FR"));
+        }
+
         /// <summary>
         /// Argent dépensé par l'acompte
         /// </summary>
