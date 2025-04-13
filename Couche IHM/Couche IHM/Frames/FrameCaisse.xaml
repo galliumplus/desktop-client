@@ -196,12 +196,12 @@
                     </ToggleButton.Style>
                 </CheckBox>
             </StackPanel>
+            <Label Foreground="Red" FontSize="14" Visibility="{Binding CaisseViewModel.CreditCardPaymentVisibility}" >Paiement impossible en dessous de 1€</Label>
 
             <!-- Bouton Payer-->
             <Button 
                 Style="{StaticResource buttonBlack}" 
                 Command="{Binding CaisseViewModel.ShowPay}"
-                Margin="0,25,0,0"
                 FontSize="15"
                 Width="150" 
                 Height="40"

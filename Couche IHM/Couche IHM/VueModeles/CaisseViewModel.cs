@@ -60,7 +60,7 @@ namespace Couche_IHM.VueModeles
             {
                 this.ProductOrder.Clear();
                 this.NotifyPropertyChanged(nameof(this.PriceAdherIHM));
-
+                this.NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
                 this.NotifyPropertyChanged(nameof(this.PriceNonAdherIHM));
             });
             this.CurrentPaiement = Paiements[0];
@@ -163,7 +163,6 @@ namespace Couche_IHM.VueModeles
                 }
                 return prixTotal;
             }
-
         }
 
         /// <summary>
@@ -185,7 +184,18 @@ namespace Couche_IHM.VueModeles
             {
                 currentPaiement = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
             }
+        }
+
+        public bool CreditCardPayment
+        {
+            get => (this.isAdherent ? this.PriceAdher : this.PriceNanAdher) >= 1;
+        }
+
+        public Visibility CreditCardPaymentVisibility
+        {
+            get => (this.CreditCardPayment || this.CurrentPaiement != "Carte" ? Visibility.Hidden : Visibility.Visible);
         }
 
         /// <summary>
@@ -223,6 +233,7 @@ namespace Couche_IHM.VueModeles
             {
                 isAdherent = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
             }
         }
 
@@ -408,6 +419,7 @@ namespace Couche_IHM.VueModeles
 
             this.ProductOrder.Clear();
             NotifyPropertyChanged(nameof(PriceAdherIHM));
+            NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
         }
 
@@ -428,8 +440,11 @@ namespace Couche_IHM.VueModeles
                         this.ShowPayPaypal = true;
                         break;
                     case "Carte":
-                        PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
-                        this.ShowPayBanque = true;
+                        if (CreditCardPayment)
+                        {
+                            PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
+                            this.ShowPayBanque = true;
+                        }
                         break;
                     case "Liquide":
                         PrixIHM = "Montant : " + (this.isAdherent ? this.PriceAdherIHM : this.PriceNonAdherIHM);
@@ -463,6 +478,7 @@ namespace Couche_IHM.VueModeles
             }
 
             NotifyPropertyChanged(nameof(PriceAdherIHM));
+            NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
         }
 
@@ -483,6 +499,7 @@ namespace Couche_IHM.VueModeles
 
             NotifyPropertyChanged(nameof(PriceAdherIHM));
             NotifyPropertyChanged(nameof(PriceNonAdherIHM));
+            NotifyPropertyChanged(nameof(CreditCardPaymentVisibility));
         }
 
 
